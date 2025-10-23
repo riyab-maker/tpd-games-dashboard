@@ -41,12 +41,17 @@ if missing_vars:
     st.info("""
     **For Streamlit Community Cloud:**
     1. Go to your app settings at share.streamlit.io
-    2. Add these secrets in the "Secrets" section:
-       - DB_HOST
-       - DB_NAME  
-       - DB_USER
-       - DB_PASSWORD
-       - DB_PORT (optional, defaults to 3310)
+    2. Click on "Secrets" in the left sidebar
+    3. Add this TOML configuration:
+    ```toml
+    [secrets]
+    DB_HOST = "a9c3c220991da47c895500da385432b6-1807075149.ap-south-1.elb.amazonaws.com"
+    DB_PORT = 3310
+    DB_NAME = "live"
+    DB_USER = "techadmin"
+    DB_PASSWORD = "Rl@ece@1234"
+    ```
+    4. Save and wait for redeployment
     
     **For local development:**
     1. Create a .env file with the database credentials
@@ -168,7 +173,7 @@ and `matomo_log_action`.`name` Like '%action_level%'
 """
 
 # Optimized database connection with error handling
-@st.cache_data(show_spinner=False, ttl=300)  # Cache for 5 minutes to reduce DB calls
+@st.cache_data(show_spinner=False, ttl=600, max_entries=1)  # Cache for 10 minutes, limit entries
 def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe with error handling and memory optimization"""
     try:
@@ -817,11 +822,15 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
 
 def main() -> None:
     """Main dashboard function optimized for Streamlit Community Cloud"""
-    st.set_page_config(
-        page_title="Matomo Events Dashboard - Cloud", 
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
+    try:
+        st.set_page_config(
+            page_title="Matomo Events Dashboard - Cloud", 
+            layout="wide",
+            initial_sidebar_state="expanded"
+        )
+    except Exception:
+        # Page config already set, continue
+        pass
     
     st.title("🎮 Matomo Events Dashboard")
     st.caption("📊 All data (server_time adjusted by +5h30m) | ☁️ Streamlit Community Cloud")
