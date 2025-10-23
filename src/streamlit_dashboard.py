@@ -5,6 +5,10 @@ from typing import List, Tuple
 import pymysql
 import pandas as pd
 import streamlit as st
+from dotenv import load_dotenv
+
+# Load environment variables from .env file for local development
+load_dotenv()
 
 
 # Database connection settings using environment variables
