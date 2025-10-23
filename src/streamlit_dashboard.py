@@ -7,12 +7,18 @@ import pandas as pd
 import streamlit as st
 
 
-# Database connection settings (reuse the same settings as in hybrid_data.py)
-HOST = 'a9c3c220991da47c895500da385432b6-1807075149.ap-south-1.elb.amazonaws.com'
-PORT = 3310
-DBNAME = 'live'
-USER = 'techadmin'
-PASSWORD = 'Rl@ece@1234'
+# Database connection settings using environment variables
+HOST = os.getenv("DB_HOST")
+PORT = int(os.getenv("DB_PORT", "3310"))
+DBNAME = os.getenv("DB_NAME")
+USER = os.getenv("DB_USER")
+PASSWORD = os.getenv("DB_PASSWORD")
+
+# Validate that all required environment variables are set
+required_vars = ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]
+missing_vars = [var for var in required_vars if not os.getenv(var)]
+if missing_vars:
+    raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
 
 SQL_QUERY = (
