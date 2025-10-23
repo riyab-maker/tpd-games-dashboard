@@ -183,9 +183,10 @@ def fetch_dataframe() -> pd.DataFrame:
             user=USER,
             password=PASSWORD,
             database=DBNAME,
-            connect_timeout=10,  # Reduced timeout for Streamlit Cloud
-            read_timeout=10,     # Added read timeout
-            write_timeout=10,    # Added write timeout
+            connect_timeout=5,   # Very aggressive timeout for Streamlit Cloud
+            read_timeout=5,      # Very aggressive read timeout
+            write_timeout=5,     # Very aggressive write timeout
+            autocommit=True,     # Enable autocommit for faster connection
             ssl={'ssl': {}},
         ) as conn:
             with conn.cursor() as cur:
@@ -860,7 +861,9 @@ def main() -> None:
     except Exception as e:
         st.error(f"❌ Database connection failed: {str(e)}")
         st.info("Please check your database credentials and network connection.")
-        st.stop()
+        st.info("**Troubleshooting:** This might be due to network connectivity or database server issues.")
+        st.info("**Note:** The app is running but cannot connect to the database. Please check your secrets configuration.")
+        return  # Return instead of stop to allow health check to pass
 
     if df.empty:
         st.warning("⚠️ No data returned for the current filters.")
@@ -951,6 +954,12 @@ def main() -> None:
 def health_check():
     """Simple health check for Streamlit Cloud"""
     return "OK"
+
+# Add a simple endpoint for health checks
+def simple_health_check():
+    """Ultra-simple health check that doesn't require database"""
+    st.write("✅ Streamlit Cloud Health Check - OK")
+    return True
 
 if __name__ == "__main__":
     # Quick health check
