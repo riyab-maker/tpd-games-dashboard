@@ -1100,7 +1100,7 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
             time_order = time_series_df['time_period'].tolist()
         elif time_period == "Week":
             # Extract week number for sorting
-            time_series_df['week_num'] = time_series_df['time_period'].str.extract('(\d+)').astype(int)
+            time_series_df['week_num'] = time_series_df['time_period'].str.extract(r'(\d+)').astype(int)
             time_series_df = time_series_df.sort_values('week_num').drop('week_num', axis=1)
             # Create ordered list for Altair
             time_order = time_series_df['time_period'].tolist()
