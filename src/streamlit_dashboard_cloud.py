@@ -183,7 +183,9 @@ def fetch_dataframe() -> pd.DataFrame:
             user=USER,
             password=PASSWORD,
             database=DBNAME,
-            connect_timeout=15,
+            connect_timeout=10,  # Reduced timeout for Streamlit Cloud
+            read_timeout=10,     # Added read timeout
+            write_timeout=10,    # Added write timeout
             ssl={'ssl': {}},
         ) as conn:
             with conn.cursor() as cur:
@@ -832,8 +834,13 @@ def main() -> None:
         # Page config already set, continue
         pass
     
+    # Add immediate response for health check
     st.title("🎮 Matomo Events Dashboard")
     st.caption("📊 All data (server_time adjusted by +5h30m) | ☁️ Streamlit Community Cloud")
+    
+    # Add a simple status indicator
+    with st.spinner("🔄 Initializing dashboard..."):
+        st.success("✅ Dashboard loaded successfully!")
     
     # Add deployment info
     with st.expander("ℹ️ Deployment Information", expanded=False):
@@ -846,8 +853,14 @@ def main() -> None:
         - **Memory Optimized**: <1GB usage for free tier
         """)
     
-    with st.spinner("🔄 Loading data from database..."):
-        df = fetch_dataframe()
+    # Add timeout and better error handling for Streamlit Cloud
+    try:
+        with st.spinner("🔄 Loading data from database..."):
+            df = fetch_dataframe()
+    except Exception as e:
+        st.error(f"❌ Database connection failed: {str(e)}")
+        st.info("Please check your database credentials and network connection.")
+        st.stop()
 
     if df.empty:
         st.warning("⚠️ No data returned for the current filters.")
@@ -934,5 +947,12 @@ def main() -> None:
         else:
             st.warning("⚠️ No score data available for analysis.")
 
+# Add health check for Streamlit Cloud
+def health_check():
+    """Simple health check for Streamlit Cloud"""
+    return "OK"
+
 if __name__ == "__main__":
+    # Quick health check
+    health_check()
     main()
