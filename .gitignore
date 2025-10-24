@@ -78,5 +78,9 @@ Thumbs.db
 .cursor/
 
 # Processed data files (generated locally, not committed to repository)
-data/
+# Note: data/ directory is needed for Render deployment
+# Only ignore large raw data files, not processed files
 *.csv
+!data/*.csv
+# Exclude large processed_data.csv (too big for GitHub)
+data/processed_data.csv
