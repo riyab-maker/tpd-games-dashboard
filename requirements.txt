@@ -3,4 +3,5 @@
 streamlit>=1.50.0
 pandas>=2.2.2
 altair>=5.0.0
+python-dotenv>=1.0.0
 
