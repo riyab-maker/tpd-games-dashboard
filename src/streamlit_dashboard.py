@@ -11,6 +11,7 @@ from typing import List, Tuple
 # Check if processed data exists
 DATA_DIR = "data"
 REQUIRED_FILES = [
+    "dashboard_data.csv",
     "summary_data.csv", 
     "score_distribution_data.csv",
     "time_series_data.csv",
@@ -38,9 +39,14 @@ def check_processed_data():
 def load_processed_data():
     """Load all preprocessed data files"""
     try:
-        # Load main data (use time series data as fallback if processed_data.csv is not available)
+        # Load main data (use minimal dashboard_data.csv for filters and functionality)
         df_main = pd.DataFrame()
-        if os.path.exists(os.path.join(DATA_DIR, "processed_data.csv")):
+        if os.path.exists(os.path.join(DATA_DIR, "dashboard_data.csv")):
+            df_main = pd.read_csv(os.path.join(DATA_DIR, "dashboard_data.csv"))
+            df_main['server_time'] = pd.to_datetime(df_main['server_time'])
+            df_main['date'] = pd.to_datetime(df_main['date'])
+        elif os.path.exists(os.path.join(DATA_DIR, "processed_data.csv")):
+            # Fallback to full data if available
             df_main = pd.read_csv(os.path.join(DATA_DIR, "processed_data.csv"))
             df_main['server_time'] = pd.to_datetime(df_main['server_time'])
             df_main['date'] = pd.to_datetime(df_main['date'])
