@@ -84,3 +84,8 @@ Thumbs.db
 !data/*.csv
 # Exclude large processed_data.csv (too big for GitHub)
 data/processed_data.csv
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
