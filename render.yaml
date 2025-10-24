@@ -3,7 +3,7 @@ services:
     name: streamlit-dashboard
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install pandas pymysql python-dotenv streamlit altair
     startCommand: streamlit run src/streamlit_dashboard.py --server.port=$PORT --server.address=0.0.0.0
     envVars:
       - key: PYTHON_VERSION

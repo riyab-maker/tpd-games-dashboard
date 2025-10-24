@@ -37,13 +37,10 @@ This project uses a **preprocessing architecture** to handle large datasets effi
    pip install pandas pymysql python-dotenv streamlit altair
    ```
 
-2. **Set up environment variables** (create `.env` file):
-   ```env
-   DB_HOST=your_database_host
-   DB_PORT=3310
-   DB_NAME=your_database_name
-   DB_USER=your_database_user
-   DB_PASSWORD=your_database_password
+2. **Set up environment variables** (create `.env` file from `env.template`):
+   ```bash
+   cp env.template .env
+   # Edit .env with your database credentials
    ```
 
 3. **Run preprocessing** (required before deployment):
