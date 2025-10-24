@@ -53,6 +53,19 @@ This project uses a **preprocessing architecture** to handle large datasets effi
    streamlit run src/streamlit_dashboard.py
    ```
 
+### **Pre-Deployment Setup**
+
+Before deploying to Render, run the setup script to ensure everything is ready:
+
+```bash
+python setup_deployment.py
+```
+
+This script will:
+- ✅ Check environment variables
+- ✅ Generate data files if missing
+- ✅ Verify all required files are present
+
 ### 2. Render Deployment
 
 1. **Connect your GitHub repository to Render**
