@@ -963,43 +963,9 @@ def main() -> None:
     
     st.info(f"📊 Showing data for {len(selected_games)} selected game(s): {', '.join(selected_games)} | Date range: {date_summary}")
 
-    # Build summary table and chart with filtered data
-    # For filtered data, we need to recalculate summary
-    def _distinct_count_ignore_blank(series: pd.Series) -> int:
-        """Power BI DISTINCTCOUNTNOBLANK logic: ignore NULLs and empty strings"""
-        if series.dtype == object:
-            # For string columns: drop NULLs and empty strings
-            cleaned = series.dropna()
-            cleaned = cleaned[cleaned.astype(str).str.strip() != ""]
-        else:
-            # For numeric columns: just drop NULLs
-            cleaned = series.dropna()
-        return int(cleaned.nunique())
-    
-    # Group by event and compute distinct counts
-    grouped = df_filtered.groupby('event').agg({
-        'idvisitor_converted': _distinct_count_ignore_blank,
-        'idvisit': _distinct_count_ignore_blank, 
-        'idlink_va': _distinct_count_ignore_blank,
-    })
-    
-    # Rename columns to match Power BI
-    grouped.columns = ['Users', 'Visits', 'Instances']
-    grouped = grouped.reset_index()
-    grouped.rename(columns={'event': 'Event'}, inplace=True)
-    
-    # Ensure both Started and Completed exist (fill missing with 0)
-    all_events = pd.DataFrame({'Event': ['Started', 'Completed']})
-    grouped = all_events.merge(grouped, on='Event', how='left').fillna(0)
-    
-    # Convert to int and sort
-    for col in ['Users', 'Visits', 'Instances']:
-        grouped[col] = grouped[col].astype(int)
-    
-    grouped['Event'] = pd.Categorical(grouped['Event'], categories=['Started', 'Completed'], ordered=True)
-    grouped = grouped.sort_values('Event')
-
-    render_modern_dashboard(grouped, df_filtered)
+    # Use the original summary data for conversion funnel (not recalculated from filtered data)
+    # The summary_data.csv contains the correct total numbers for the entire dataset
+    render_modern_dashboard(summary_df, df_filtered)
     
     # Add Score Distribution Analysis
     st.markdown("---")
