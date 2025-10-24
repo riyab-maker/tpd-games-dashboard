@@ -76,3 +76,7 @@ Thumbs.db
 
 # Cursor/VS Code
 .cursor/
+
+# Processed data files (generated locally, not committed to repository)
+data/
+*.csv
