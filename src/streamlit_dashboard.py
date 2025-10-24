@@ -35,7 +35,6 @@ def check_processed_data():
     
     return True
 
-@st.cache_data(show_spinner=False, ttl=60)  # Cache for 1 minute only
 def load_processed_data():
     """Load all preprocessed data files"""
     try:
@@ -297,6 +296,9 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
 def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None:
     """Render score distribution chart"""
     import altair as alt
+    
+    # Debug message
+    st.info("🔧 Score Distribution Function Called - Version 1.3")
     
     if score_distribution_df.empty:
         st.warning("No score distribution data available.")
@@ -811,7 +813,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.2")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.3")
     
     # Check if processed data exists
     check_processed_data()
