@@ -81,20 +81,23 @@ This script will:
 - **Reliability**: No database connection timeouts
 - **Cost**: Runs efficiently on Render's free tier
 
-## 🔄 Daily Data Updates
+## 🔄 Data Updates
 
-The project includes automated daily data preprocessing:
+To update the dashboard data:
 
-- **GitHub Action**: Runs daily at 2 AM UTC
-- **Automatic Updates**: Fetches latest data, processes it, and pushes to repository
-- **Auto-Deploy**: Render automatically redeploys with updated data
+1. **Run preprocessing locally**:
+   ```bash
+   python preprocess_data.py
+   ```
 
-### Manual Trigger
+2. **Commit and push changes**:
+   ```bash
+   git add data/
+   git commit -m "Update processed data"
+   git push origin main
+   ```
 
-You can also trigger preprocessing manually:
-1. Go to your repository → Actions
-2. Select "Daily Data Preprocessing"
-3. Click "Run workflow"
+3. **Render will automatically redeploy** with the latest data
 
 ## 📊 Data Processing
 
