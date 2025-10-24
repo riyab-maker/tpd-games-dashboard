@@ -70,23 +70,16 @@ This script will:
 
 1. **Connect your GitHub repository to Render**
 
-2. **Set up environment variables in Render**:
-   - `DB_HOST`: Your database host
-   - `DB_PORT`: 3310
-   - `DB_NAME`: Your database name
-   - `DB_USER`: Your database user
-   - `DB_PASSWORD`: Your database password
+2. **Deploy**: Render will automatically deploy when you push to your repository
 
-3. **Configure GitHub Secrets** (for automated updates):
-   - Go to your repository → Settings → Secrets and variables → Actions
-   - Add the same database credentials as secrets:
-     - `DB_HOST`
-     - `DB_PORT`
-     - `DB_NAME`
-     - `DB_USER`
-     - `DB_PASSWORD`
+**Important**: No database credentials or environment variables are needed on Render! The dashboard only loads preprocessed CSV files, making it completely secure and memory-efficient.
 
-4. **Deploy**: Render will automatically deploy when you push to your repository
+### 🏗️ Architecture Benefits
+- **Security**: No database credentials exposed on Render
+- **Memory**: Uses <100MB (vs 512MB+ with database queries)
+- **Speed**: Instant loading (no database connections)
+- **Reliability**: No database connection timeouts
+- **Cost**: Runs efficiently on Render's free tier
 
 ## 🔄 Daily Data Updates
 
