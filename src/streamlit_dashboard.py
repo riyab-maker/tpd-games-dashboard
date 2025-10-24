@@ -329,43 +329,6 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     st.markdown("### 📊 Score Distribution")
     st.markdown("This chart shows how many users achieved each total score for the selected games.")
     
-    # Add summary statistics
-    st.markdown("#### 📈 Summary Statistics")
-    
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        total_users = filtered_df['user_count'].sum()
-        st.metric(
-            label="👥 Total Users",
-            value=f"{total_users:,}",
-            help="Total number of users across all games and scores"
-        )
-    
-    with col2:
-        avg_score = (filtered_df['total_score'] * filtered_df['user_count']).sum() / filtered_df['user_count'].sum()
-        st.metric(
-            label="🎯 Average Score",
-            value=f"{avg_score:.1f}",
-            help="Weighted average score across all users"
-        )
-    
-    with col3:
-        max_score = filtered_df['total_score'].max()
-        st.metric(
-            label="🏆 Highest Score",
-            value=f"{max_score}",
-            help="Maximum total score achieved"
-        )
-    
-    with col4:
-        unique_games_count = filtered_df['game_name'].nunique()
-        st.metric(
-            label="🎮 Games Analyzed",
-            value=f"{unique_games_count}",
-            help="Number of games included in the analysis"
-        )
-    
     # Add combined score distribution (all games together)
     st.markdown("#### 🎯 Score Distribution")
     
@@ -424,6 +387,43 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         )
         
         st.altair_chart(combined_chart, use_container_width=True)
+    
+    # Add summary statistics after the chart
+    st.markdown("#### 📈 Summary Statistics")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        total_users = filtered_df['user_count'].sum()
+        st.metric(
+            label="👥 Total Users",
+            value=f"{total_users:,}",
+            help="Total number of users across all games and scores"
+        )
+    
+    with col2:
+        avg_score = (filtered_df['total_score'] * filtered_df['user_count']).sum() / filtered_df['user_count'].sum()
+        st.metric(
+            label="🎯 Average Score",
+            value=f"{avg_score:.1f}",
+            help="Weighted average score across all users"
+        )
+    
+    with col3:
+        max_score = filtered_df['total_score'].max()
+        st.metric(
+            label="🏆 Highest Score",
+            value=f"{max_score}",
+            help="Maximum total score achieved"
+        )
+    
+    with col4:
+        unique_games_count = filtered_df['game_name'].nunique()
+        st.metric(
+            label="🎮 Games Analyzed",
+            value=f"{unique_games_count}",
+            help="Number of games included in the analysis"
+        )
 
 def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     """Render game repeatability analysis"""
