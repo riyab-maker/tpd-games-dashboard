@@ -35,7 +35,6 @@ def check_processed_data():
     
     return True
 
-@st.cache_data(show_spinner=False)
 def load_processed_data():
     """Load all preprocessed data files"""
     try:
