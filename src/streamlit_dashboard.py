@@ -301,12 +301,30 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         st.warning("No score distribution data available.")
         return
     
-    # Use all data for combined analysis
-    filtered_df = score_distribution_df
+    # Get unique games for filter
+    unique_games = sorted(score_distribution_df['game_name'].unique())
+    
+    # Add game filter
+    selected_games = st.multiselect(
+        "Select Games for Score Distribution:",
+        options=unique_games,
+        default=unique_games,
+        help="Select one or more games to show score distribution. Leave empty to show all games."
+    )
+    
+    # Filter data based on selected games
+    if selected_games:
+        filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
+    else:
+        filtered_df = score_distribution_df
+    
+    if filtered_df.empty:
+        st.warning("No data available for the selected games.")
+        return
     
     # Create the score distribution chart
     st.markdown("### 📊 Score Distribution")
-    st.markdown("This chart shows how many users achieved each total score across all games.")
+    st.markdown("This chart shows how many users achieved each total score for the selected games.")
     
     # Add summary statistics
     st.markdown("#### 📈 Summary Statistics")
