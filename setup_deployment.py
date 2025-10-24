@@ -14,7 +14,7 @@ def check_environment():
     """Check if .env file exists and has required variables"""
     env_file = Path('.env')
     if not env_file.exists():
-        print("❌ ERROR: .env file not found!")
+        print("ERROR: .env file not found!")
         print("Please create .env file from env.template:")
         print("  cp env.template .env")
         print("  # Edit .env with your database credentials")
@@ -28,11 +28,11 @@ def check_environment():
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     
     if missing_vars:
-        print(f"❌ ERROR: Missing environment variables: {', '.join(missing_vars)}")
+        print(f"ERROR: Missing environment variables: {', '.join(missing_vars)}")
         print("Please update your .env file with the required database credentials.")
         return False
     
-    print("✅ Environment variables configured")
+    print("SUCCESS: Environment variables configured")
     return True
 
 def check_data_files():
@@ -48,7 +48,7 @@ def check_data_files():
     ]
     
     if not data_dir.exists():
-        print("❌ ERROR: data/ directory not found!")
+        print("ERROR: data/ directory not found!")
         return False
     
     missing_files = []
@@ -57,34 +57,34 @@ def check_data_files():
             missing_files.append(file)
     
     if missing_files:
-        print(f"❌ ERROR: Missing data files: {', '.join(missing_files)}")
+        print(f"ERROR: Missing data files: {', '.join(missing_files)}")
         return False
     
-    print("✅ All data files present")
+    print("SUCCESS: All data files present")
     return True
 
 def generate_data():
     """Generate data files using preprocessing script"""
-    print("🔄 Generating data files...")
+    print("Generating data files...")
     try:
         import subprocess
         result = subprocess.run([sys.executable, 'preprocess_data.py'], 
                               capture_output=True, text=True)
         
         if result.returncode != 0:
-            print(f"❌ ERROR: Preprocessing failed!")
+            print(f"ERROR: Preprocessing failed!")
             print(f"Error: {result.stderr}")
             return False
         
-        print("✅ Data files generated successfully")
+        print("SUCCESS: Data files generated successfully")
         return True
     except Exception as e:
-        print(f"❌ ERROR: Failed to run preprocessing: {e}")
+        print(f"ERROR: Failed to run preprocessing: {e}")
         return False
 
 def main():
     """Main setup function"""
-    print("🚀 Setting up deployment for Render...")
+    print("Setting up deployment for Render...")
     print("=" * 50)
     
     # Check environment
@@ -93,11 +93,11 @@ def main():
     
     # Check if data files exist
     if not check_data_files():
-        print("\n🔄 Generating data files...")
+        print("\nGenerating data files...")
         if not generate_data():
             return False
     
-    print("\n✅ Setup complete! Ready for deployment.")
+    print("\nSUCCESS: Setup complete! Ready for deployment.")
     print("\nNext steps:")
     print("1. Commit and push changes to GitHub")
     print("2. Deploy to Render")
