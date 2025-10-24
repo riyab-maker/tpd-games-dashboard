@@ -306,6 +306,8 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     unique_games = sorted(score_distribution_df['game_name'].unique())
     
     # Add game filter
+    st.markdown("**🎮 Game Filter:**")
+    st.info(f"Available games: {len(unique_games)} games")
     selected_games = st.multiselect(
         "Select Games for Score Distribution:",
         options=unique_games,
