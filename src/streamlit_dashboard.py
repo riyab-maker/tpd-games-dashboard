@@ -301,89 +301,12 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         st.warning("No score distribution data available.")
         return
     
-    # Get unique games for filter
-    unique_games = sorted(score_distribution_df['game_name'].unique())
-    
-    # Add game filter
-    selected_games = st.multiselect(
-        "Select Games for Score Distribution:",
-        options=unique_games,
-        default=unique_games,
-        help="Select one or more games to show score distribution. Leave empty to show all games."
-    )
-    
-    # Filter data based on selected games
-    if selected_games:
-        filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
-    else:
-        filtered_df = score_distribution_df
-    
-    if filtered_df.empty:
-        st.warning("No data available for the selected games.")
-        return
+    # Use all data for combined analysis
+    filtered_df = score_distribution_df
     
     # Create the score distribution chart
-    st.markdown("### 📊 Score Distribution Analysis")
-    st.markdown("This chart shows how many users achieved each total score for each game.")
-    
-    # Create bar chart with proper formatting
-    bars = alt.Chart(filtered_df).mark_bar(
-        cornerRadius=6,
-        stroke='white',
-        strokeWidth=2,
-        color='#4A90E2'
-    ).encode(
-        x=alt.X('total_score:O', 
-                title='Total Score', 
-                axis=alt.Axis(
-                    labelAngle=0,
-                    labelFontSize=14,
-                    titleFontSize=16,
-                    labelLimit=100
-                )),
-        y=alt.Y('user_count:Q', 
-                title='Number of Users', 
-                axis=alt.Axis(format='~s')),
-        color=alt.Color('game_name:N', 
-                       scale=alt.Scale(scheme='category20'),
-                       legend=alt.Legend(title="Game Name", 
-                                       labelFontSize=12,
-                                       titleFontSize=14)),
-        tooltip=['game_name:N', 'total_score:O', 'user_count:Q']
-    ).properties(
-        width=900,
-        height=500,
-        title='Score Distribution by Game'
-    )
-    
-    # Add data labels on top of bars
-    labels = alt.Chart(filtered_df).mark_text(
-        align='center',
-        baseline='bottom',
-        color='#2E8B57',
-        fontSize=12,
-        fontWeight='bold',
-        dy=-5
-    ).encode(
-        x=alt.X('total_score:O'),
-        y=alt.Y('user_count:Q'),
-        text=alt.Text('user_count:Q', format='.0f')
-    )
-    
-    # Combine bars and labels
-    score_chart = (bars + labels).configure_axis(
-        labelFontSize=16,
-        titleFontSize=18,
-        grid=True
-    ).configure_title(
-        fontSize=24,
-        fontWeight='bold'
-    ).configure_legend(
-        labelFontSize=12,
-        titleFontSize=14
-    )
-    
-    st.altair_chart(score_chart, use_container_width=True)
+    st.markdown("### 📊 Score Distribution")
+    st.markdown("This chart shows how many users achieved each total score across all games.")
     
     # Add summary statistics
     st.markdown("#### 📈 Summary Statistics")
@@ -422,21 +345,8 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
             help="Number of games included in the analysis"
         )
     
-    # Show detailed table
-    st.markdown("#### 📋 Detailed Score Distribution")
-    
-    # Create a pivot table for better visualization
-    pivot_df = filtered_df.pivot(index='total_score', columns='game_name', values='user_count').fillna(0)
-    pivot_df = pivot_df.astype(int)
-    
-    st.dataframe(
-        pivot_df,
-        use_container_width=True,
-        height=400
-    )
-    
     # Add combined score distribution (all games together)
-    st.markdown("#### 🎯 Combined Score Distribution (All Games)")
+    st.markdown("#### 🎯 Score Distribution")
     
     # Create combined data by summing user counts across all games for each score
     combined_df = filtered_df.groupby('total_score')['user_count'].sum().reset_index()
@@ -465,7 +375,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         ).properties(
             width=900,
             height=400,
-            title='Combined Score Distribution (All Games)'
+            title='Score Distribution'
         )
         
         # Add data labels for combined chart
