@@ -35,6 +35,7 @@ def check_processed_data():
     
     return True
 
+@st.cache_data(show_spinner=False, ttl=60)  # Cache for 1 minute only
 def load_processed_data():
     """Load all preprocessed data files"""
     try:
@@ -808,7 +809,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m)")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.2")
     
     # Check if processed data exists
     check_processed_data()
