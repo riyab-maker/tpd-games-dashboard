@@ -509,6 +509,98 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
             help="Maximum number of games completed by a single user"
         )
 
+def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -> pd.DataFrame:
+    """Recalculate time series data for selected games"""
+    if df_main.empty:
+        return pd.DataFrame()
+    
+    # Convert server_time to datetime
+    df_main['datetime'] = pd.to_datetime(df_main['server_time'])
+    
+    time_series_data = []
+    
+    if time_period == "Day":
+        # Day-level data (last 2 weeks)
+        cutoff_date = df_main['datetime'].max() - pd.Timedelta(days=14)
+        df_filtered = df_main[df_main['datetime'] >= cutoff_date].copy()
+        df_filtered['time_group'] = df_filtered['datetime'].dt.date
+        
+        for time_group in df_filtered['time_group'].unique():
+            group_data = df_filtered[df_filtered['time_group'] == time_group]
+            
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': str(time_group),
+                'period_type': 'Day',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances
+            })
+    
+    elif time_period == "Week":
+        # Week-level data
+        july_2_2025 = pd.Timestamp('2025-07-02')
+        df_main['days_since_july_2'] = (df_main['datetime'] - july_2_2025).dt.days
+        df_main['week_number'] = (df_main['days_since_july_2'] // 7) + 1
+        df_main['time_group_week'] = 'Week ' + df_main['week_number'].astype(str)
+        
+        for time_group in df_main['time_group_week'].unique():
+            group_data = df_main[df_main['time_group_week'] == time_group]
+            
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': time_group,
+                'period_type': 'Week',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances
+            })
+    
+    elif time_period == "Month":
+        # Month-level data
+        df_main['time_group_month'] = df_main['datetime'].dt.strftime('%B %Y')
+        
+        for time_group in df_main['time_group_month'].unique():
+            group_data = df_main[df_main['time_group_month'] == time_group]
+            
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': time_group,
+                'period_type': 'Month',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances
+            })
+    
+    return pd.DataFrame(time_series_data)
+
 def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
     """Render time series analysis"""
     import altair as alt
@@ -521,7 +613,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
     st.info("📅 Time series data shows activity from July 2nd, 2025 onwards")
     
     # Create columns for filters
-    ts_filter_col1, ts_filter_col2 = st.columns(2)
+    ts_filter_col1, ts_filter_col2, ts_filter_col3 = st.columns(3)
     
     with ts_filter_col1:
         # Time period filter
@@ -532,6 +624,18 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
         )
     
     with ts_filter_col2:
+        # Game filter for time series
+        # Load main data to get game names for filtering
+        df_main, _, _, _, _, _ = load_processed_data()
+        unique_games_ts = sorted(df_main['game_name'].unique())
+        selected_games_ts = st.multiselect(
+            "Select Games:",
+            options=unique_games_ts,
+            default=unique_games_ts,
+            help="Select games to include in time series analysis"
+        )
+    
+    with ts_filter_col3:
         # Show data info
         st.info(f"📊 Showing {len(time_series_df)} time periods")
     
@@ -544,6 +648,20 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
         return
+    
+    # Apply game filtering by recalculating metrics from main data
+    if selected_games_ts and 'All Games' not in selected_games_ts:
+        st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
+        
+        # Get filtered main data for the selected games
+        df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
+        
+        # Recalculate time series data for selected games
+        filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
+        
+        if filtered_ts_df.empty:
+            st.warning("No data available for the selected games and time period.")
+            return
     
     # Sort the dataframe based on time period
     if time_period == "Month":

@@ -507,8 +507,9 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
     # Prepare time series data for different periods
     time_series_data = []
     
-    # Day-level data (all data from July 2nd, 2025 onwards)
-    df_daily = df.copy()
+    # Day-level data (last 2 weeks from July 2nd, 2025 onwards)
+    cutoff_date = df['datetime'].max() - pd.Timedelta(days=14)
+    df_daily = df[df['datetime'] >= cutoff_date].copy()
     df_daily['time_group'] = df_daily['datetime'].dt.date
     
     for time_group in df_daily['time_group'].unique():
@@ -534,7 +535,8 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
             'started_visits': started_visits,
             'completed_visits': completed_visits,
             'started_instances': started_instances,
-            'completed_instances': completed_instances
+            'completed_instances': completed_instances,
+            'game_name': 'All Games'  # For compatibility with filtering
         })
     
     # Week-level data
@@ -566,7 +568,8 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
             'started_visits': started_visits,
             'completed_visits': completed_visits,
             'started_instances': started_instances,
-            'completed_instances': completed_instances
+            'completed_instances': completed_instances,
+            'game_name': 'All Games'  # For compatibility with filtering
         })
     
     # Month-level data
@@ -595,7 +598,8 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
             'started_visits': started_visits,
             'completed_visits': completed_visits,
             'started_instances': started_instances,
-            'completed_instances': completed_instances
+            'completed_instances': completed_instances,
+            'game_name': 'All Games'  # For compatibility with filtering
         })
     
     time_series_df = pd.DataFrame(time_series_data)
