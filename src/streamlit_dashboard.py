@@ -547,16 +547,14 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
             })
     
     elif time_period == "Week":
-        # Week-level data (last 2 weeks only)
-        cutoff_date = df_main['datetime'].max() - pd.Timedelta(days=14)
-        df_filtered = df_main[df_main['datetime'] >= cutoff_date].copy()
+        # Week-level data (all weeks from July 2nd, 2025 onwards)
         july_2_2025 = pd.Timestamp('2025-07-02')
-        df_filtered['days_since_july_2'] = (df_filtered['datetime'] - july_2_2025).dt.days
-        df_filtered['week_number'] = (df_filtered['days_since_july_2'] // 7) + 1
-        df_filtered['time_group_week'] = 'Week ' + df_filtered['week_number'].astype(str)
+        df_main['days_since_july_2'] = (df_main['datetime'] - july_2_2025).dt.days
+        df_main['week_number'] = (df_main['days_since_july_2'] // 7) + 1
+        df_main['time_group_week'] = 'Week ' + df_main['week_number'].astype(str)
         
-        for time_group in df_filtered['time_group_week'].unique():
-            group_data = df_filtered[df_filtered['time_group_week'] == time_group]
+        for time_group in df_main['time_group_week'].unique():
+            group_data = df_main[df_main['time_group_week'] == time_group]
             
             started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
             completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
@@ -667,30 +665,21 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
         # Show data info
         st.info(f"📊 Showing {len(time_series_df)} time periods")
     
-    # Filter data based on selected time period
-    if time_period == "All time":
-        # For "All time", show all available data (which is already filtered to July 2nd, 2025 onwards)
-        filtered_ts_df = time_series_df
+    # Always recalculate time series data dynamically instead of using preprocessed data
+    # This ensures we get the correct date ranges for each time period
+    if selected_games_ts and 'All Games' not in selected_games_ts:
+        st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
+        # Get filtered main data for the selected games
+        df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
     else:
-        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period]
+        df_main_filtered = df_main
+    
+    # Recalculate time series data for the selected time period
+    filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
         return
-    
-    # Apply game filtering by recalculating metrics from main data
-    if selected_games_ts and 'All Games' not in selected_games_ts:
-        st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
-        
-        # Get filtered main data for the selected games
-        df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
-        
-        # Recalculate time series data for selected games
-        filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
-        
-        if filtered_ts_df.empty:
-            st.warning("No data available for the selected games and time period.")
-            return
     
     # Sort the dataframe based on time period
     if time_period == "Month" or time_period == "All time":
