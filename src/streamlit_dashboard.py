@@ -627,7 +627,7 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
     
     return pd.DataFrame(time_series_data)
 
-def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
+def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFrame) -> None:
     """Render time series analysis"""
     import altair as alt
     
@@ -651,8 +651,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
     
     with ts_filter_col2:
         # Game filter for time series
-        # Load main data to get game names for filtering
-        df_main, _, _, _, _, _ = load_processed_data()
         unique_games_ts = sorted(df_main['game_name'].unique())
         selected_games_ts = st.multiselect(
             "Select Games:",
@@ -1059,7 +1057,7 @@ def main() -> None:
     st.markdown("## 📈 Time-Series Analysis")
     
     if not time_series_df.empty:
-        render_time_series_analysis(time_series_df)
+        render_time_series_analysis(time_series_df, df_main)
     else:
         st.warning("No time series data available.")
 
