@@ -607,14 +607,16 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
             })
     
     elif time_period == "Week":
-        # Week-level data (all data from July 2nd, 2025 onwards)
+        # Week-level data (last 2 weeks only)
+        cutoff_date = df_main['datetime'].max() - pd.Timedelta(days=14)
+        df_filtered = df_main[df_main['datetime'] >= cutoff_date].copy()
         july_2_2025 = pd.Timestamp('2025-07-02')
-        df_main['days_since_july_2'] = (df_main['datetime'] - july_2_2025).dt.days
-        df_main['week_number'] = (df_main['days_since_july_2'] // 7) + 1
-        df_main['time_group_week'] = 'Week ' + df_main['week_number'].astype(str)
+        df_filtered['days_since_july_2'] = (df_filtered['datetime'] - july_2_2025).dt.days
+        df_filtered['week_number'] = (df_filtered['days_since_july_2'] // 7) + 1
+        df_filtered['time_group_week'] = 'Week ' + df_filtered['week_number'].astype(str)
         
-        for time_group in df_main['time_group_week'].unique():
-            group_data = df_main[df_main['time_group_week'] == time_group]
+        for time_group in df_filtered['time_group_week'].unique():
+            group_data = df_filtered[df_filtered['time_group_week'] == time_group]
             
             started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
             completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
@@ -651,6 +653,32 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
             time_series_data.append({
                 'time_period': time_group,
                 'period_type': 'Month',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances
+            })
+    
+    elif time_period == "All time":
+        # All time data (all data from July 2nd, 2025 onwards)
+        # Use the same logic as Month but with different period_type
+        df_main['time_group_month'] = df_main['datetime'].dt.strftime('%B %Y')
+        
+        for time_group in df_main['time_group_month'].unique():
+            group_data = df_main[df_main['time_group_month'] == time_group]
+            
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': time_group,
+                'period_type': 'All time',
                 'started_users': started_users,
                 'completed_users': completed_users,
                 'started_visits': started_visits,
@@ -700,10 +728,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
         st.info(f"📊 Showing {len(time_series_df)} time periods")
     
     # Filter data based on selected time period
-    if time_period != "All time":
-        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period]
-    else:
+    if time_period == "All time":
+        # For "All time", show all available data (which is already filtered to July 2nd, 2025 onwards)
         filtered_ts_df = time_series_df
+    else:
+        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period]
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
@@ -724,7 +753,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
             return
     
     # Sort the dataframe based on time period
-    if time_period == "Month":
+    if time_period == "Month" or time_period == "All time":
         # Convert month names to datetime for proper sorting
         filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
         filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
