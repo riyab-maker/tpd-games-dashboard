@@ -499,12 +499,16 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
     df['datetime'] = pd.to_datetime(df['server_time'])
     df['date'] = df['datetime'].dt.date
     
+    # Filter data to only include records from July 2nd, 2025 onwards
+    july_2_2025 = pd.Timestamp('2025-07-02')
+    df = df[df['datetime'] >= july_2_2025].copy()
+    print(f"Filtered time series data to July 2nd, 2025 onwards: {len(df)} records")
+    
     # Prepare time series data for different periods
     time_series_data = []
     
-    # Day-level data (last 2 weeks)
-    cutoff_date = df['datetime'].max() - pd.Timedelta(days=14)
-    df_daily = df[df['datetime'] >= cutoff_date].copy()
+    # Day-level data (all data from July 2nd, 2025 onwards)
+    df_daily = df.copy()
     df_daily['time_group'] = df_daily['datetime'].dt.date
     
     for time_group in df_daily['time_group'].unique():

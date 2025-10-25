@@ -518,6 +518,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame) -> None:
         return
     
     st.markdown("### 📈 Time-Series Analysis")
+    st.info("📅 Time series data shows activity from July 2nd, 2025 onwards")
     
     # Create columns for filters
     ts_filter_col1, ts_filter_col2 = st.columns(2)
