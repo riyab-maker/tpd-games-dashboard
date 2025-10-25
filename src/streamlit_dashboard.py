@@ -640,13 +640,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         return
     
     st.markdown("### 📈 Time-Series Analysis")
-    # Show actual data range
-    if not df_main.empty:
-        min_date = df_main['datetime'].min().strftime('%B %d, %Y')
-        max_date = df_main['datetime'].max().strftime('%B %d, %Y')
-        st.info(f"📅 Time series data shows activity from {min_date} to {max_date}")
-    else:
-        st.info("📅 Time series data shows activity from available data")
+    st.info("📅 Time series data shows activity from July 2nd, 2025 onwards")
     
     # Create columns for filters
     ts_filter_col1, ts_filter_col2, ts_filter_col3 = st.columns(3)
@@ -673,17 +667,39 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         # Show data info
         st.info(f"📊 Showing {len(time_series_df)} time periods")
     
-    # Always recalculate time series data dynamically instead of using preprocessed data
-    # This ensures we get the correct date ranges for each time period
-    if selected_games_ts and 'All Games' not in selected_games_ts:
-        st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
-        # Get filtered main data for the selected games
-        df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
-    else:
-        df_main_filtered = df_main
+    # Check if preprocessed time series data has the correct date range (July 2nd, 2025 onwards)
+    july_2_2025 = pd.Timestamp('2025-07-02')
+    has_july_data = False
     
-    # Recalculate time series data for the selected time period
-    filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
+    if not time_series_df.empty:
+        # Check if we have data from July 2nd, 2025 onwards
+        day_data = time_series_df[time_series_df['period_type'] == 'Day']
+        if not day_data.empty:
+            # Check if any day data is from July 2nd, 2025 onwards
+            day_data['date'] = pd.to_datetime(day_data['time_period'])
+            has_july_data = (day_data['date'] >= july_2_2025).any()
+    
+    if has_july_data:
+        # Use the preprocessed time series data and filter by selected time period
+        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
+        
+        # Apply game filtering if specific games are selected
+        if selected_games_ts and 'All Games' not in selected_games_ts:
+            st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
+            # Note: The preprocessed time series data doesn't have game-level breakdown
+            # For now, we'll show all data. In a full implementation, we'd need game-specific time series data
+            st.warning("⚠️ Game filtering for time series requires game-specific preprocessed data")
+    else:
+        # Fallback to dynamic calculation if preprocessed data doesn't have July 2nd data
+        st.info("🔄 Using dynamic calculation for time series data")
+        if selected_games_ts and 'All Games' not in selected_games_ts:
+            st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
+            df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
+        else:
+            df_main_filtered = df_main
+        
+        # Recalculate time series data for the selected time period
+        filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
