@@ -520,7 +520,7 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
     time_series_data = []
     
     if time_period == "Day":
-        # Day-level data (last 2 weeks from July 2nd, 2025 onwards)
+        # Day-level data (last 2 weeks from available data)
         cutoff_date = df_main['datetime'].max() - pd.Timedelta(days=14)
         df_filtered = df_main[df_main['datetime'] >= cutoff_date].copy()
         df_filtered['time_group'] = df_filtered['datetime'].dt.date
@@ -547,14 +547,16 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
             })
     
     elif time_period == "Week":
-        # Week-level data (all weeks from July 2nd, 2025 onwards)
-        july_2_2025 = pd.Timestamp('2025-07-02')
-        df_main['days_since_july_2'] = (df_main['datetime'] - july_2_2025).dt.days
-        df_main['week_number'] = (df_main['days_since_july_2'] // 7) + 1
-        df_main['time_group_week'] = 'Week ' + df_main['week_number'].astype(str)
+        # Week-level data (all available data grouped by weeks)
+        # Use the earliest date in the data as the reference point
+        start_date = df_main['datetime'].min()
+        df_filtered = df_main.copy()
+        df_filtered['days_since_start'] = (df_filtered['datetime'] - start_date).dt.days
+        df_filtered['week_number'] = (df_filtered['days_since_start'] // 7) + 1
+        df_filtered['time_group_week'] = 'Week ' + df_filtered['week_number'].astype(str)
         
-        for time_group in df_main['time_group_week'].unique():
-            group_data = df_main[df_main['time_group_week'] == time_group]
+        for time_group in df_filtered['time_group_week'].unique():
+            group_data = df_filtered[df_filtered['time_group_week'] == time_group]
             
             started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
             completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
@@ -575,11 +577,12 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
             })
     
     elif time_period == "Month":
-        # Month-level data (all data from July 2nd, 2025 onwards)
-        df_main['time_group_month'] = df_main['datetime'].dt.strftime('%B %Y')
+        # Month-level data (all available data grouped by months)
+        df_filtered = df_main.copy()
+        df_filtered['time_group_month'] = df_filtered['datetime'].dt.strftime('%B %Y')
         
-        for time_group in df_main['time_group_month'].unique():
-            group_data = df_main[df_main['time_group_month'] == time_group]
+        for time_group in df_filtered['time_group_month'].unique():
+            group_data = df_filtered[df_filtered['time_group_month'] == time_group]
             
             started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
             completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
@@ -600,12 +603,13 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
             })
     
     elif time_period == "All time":
-        # All time data (all data from July 2nd, 2025 onwards)
+        # All time data (all available data grouped by months)
         # Use the same logic as Month but with different period_type
-        df_main['time_group_month'] = df_main['datetime'].dt.strftime('%B %Y')
+        df_filtered = df_main.copy()
+        df_filtered['time_group_month'] = df_filtered['datetime'].dt.strftime('%B %Y')
         
-        for time_group in df_main['time_group_month'].unique():
-            group_data = df_main[df_main['time_group_month'] == time_group]
+        for time_group in df_filtered['time_group_month'].unique():
+            group_data = df_filtered[df_filtered['time_group_month'] == time_group]
             
             started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
             completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
@@ -636,7 +640,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         return
     
     st.markdown("### 📈 Time-Series Analysis")
-    st.info("📅 Time series data shows activity from July 2nd, 2025 onwards")
+    # Show actual data range
+    if not df_main.empty:
+        min_date = df_main['datetime'].min().strftime('%B %d, %Y')
+        max_date = df_main['datetime'].max().strftime('%B %d, %Y')
+        st.info(f"📅 Time series data shows activity from {min_date} to {max_date}")
+    else:
+        st.info("📅 Time series data shows activity from available data")
     
     # Create columns for filters
     ts_filter_col1, ts_filter_col2, ts_filter_col3 = st.columns(3)
