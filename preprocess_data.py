@@ -539,7 +539,7 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
             'game_name': 'All Games'  # For compatibility with filtering
         })
     
-    # Week-level data
+    # Week-level data (all data from July 2nd, 2025 onwards)
     july_2_2025 = pd.Timestamp('2025-07-02')
     df['days_since_july_2'] = (df['datetime'] - july_2_2025).dt.days
     df['week_number'] = (df['days_since_july_2'] // 7) + 1
@@ -572,7 +572,7 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
             'game_name': 'All Games'  # For compatibility with filtering
         })
     
-    # Month-level data
+    # Month-level data (all data from July 2nd, 2025 onwards)
     df['time_group_month'] = df['datetime'].dt.strftime('%B %Y')
     
     for time_group in df['time_group_month'].unique():
