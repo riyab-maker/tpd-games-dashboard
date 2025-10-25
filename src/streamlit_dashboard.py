@@ -98,38 +98,16 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     """Render a modern, professional dashboard with multiple chart types"""
     import altair as alt
     
-    # Add game filter for conversion funnels
-    st.markdown("### 🎮 Game Filter for Conversion Analysis")
-    unique_games_funnel = sorted(df_filtered['game_name'].unique())
-    selected_games_funnel = st.multiselect(
-        "Select Games for Conversion Analysis:",
-        options=unique_games_funnel,
-        default=unique_games_funnel,
-        help="Select games to include in conversion funnel analysis"
-    )
-    
-    # Filter data based on selected games
-    if selected_games_funnel:
-        df_funnel_filtered = df_filtered[df_filtered['game_name'].isin(selected_games_funnel)]
-    else:
-        df_funnel_filtered = df_filtered
-    
-    # Recalculate summary for selected games
-    if not df_funnel_filtered.empty:
-        # Calculate metrics for selected games
-        started_users = df_funnel_filtered[df_funnel_filtered['event'] == 'Started']['idvisitor_converted'].nunique()
-        completed_users = df_funnel_filtered[df_funnel_filtered['event'] == 'Completed']['idvisitor_converted'].nunique()
-        started_visits = df_funnel_filtered[df_funnel_filtered['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = df_funnel_filtered[df_funnel_filtered['event'] == 'Completed']['idvisit'].nunique()
-        started_instances = len(df_funnel_filtered[df_funnel_filtered['event'] == 'Started'])
-        completed_instances = len(df_funnel_filtered[df_funnel_filtered['event'] == 'Completed'])
-    else:
-        started_users = completed_users = started_visits = completed_visits = started_instances = completed_instances = 0
-    
     # Add separate conversion funnels
     st.markdown("### 🔄 Conversion Funnels")
     
-    # Use the recalculated metrics for selected games
+    # Get data for each funnel
+    started_users = summary_df[summary_df['Event'] == 'Started']['Users'].iloc[0]
+    completed_users = summary_df[summary_df['Event'] == 'Completed']['Users'].iloc[0]
+    started_visits = summary_df[summary_df['Event'] == 'Started']['Visits'].iloc[0]
+    completed_visits = summary_df[summary_df['Event'] == 'Completed']['Visits'].iloc[0]
+    started_instances = summary_df[summary_df['Event'] == 'Started']['Instances'].iloc[0]
+    completed_instances = summary_df[summary_df['Event'] == 'Completed']['Instances'].iloc[0]
     
     # Create three separate funnels
     col1, col2, col3 = st.columns(3)
@@ -330,7 +308,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     unique_games = sorted(score_distribution_df['game_name'].unique())
     
     # Add game filter
-    st.markdown("### 🎮 Game Filter for Score Distribution")
+    st.markdown("**🎮 Game Filter:**")
     st.info(f"Available games: {len(unique_games)} games")
     selected_games = st.multiselect(
         "Select Games for Score Distribution:",
@@ -449,7 +427,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
             help="Number of games included in the analysis"
         )
 
-def render_repeatability_analysis(repeatability_df: pd.DataFrame, df_main: pd.DataFrame) -> None:
+def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     """Render game repeatability analysis"""
     import altair as alt
     
@@ -457,48 +435,10 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame, df_main: pd.Da
         st.warning("No repeatability data available.")
         return
     
-    st.markdown("### 🎮 Game Filter for Repeatability Analysis")
-    unique_games_repeat = sorted(df_main['game_name'].unique())
-    selected_games_repeat = st.multiselect(
-        "Select Games for Repeatability Analysis:",
-        options=unique_games_repeat,
-        default=unique_games_repeat,
-        help="Select games to include in repeatability analysis"
-    )
-    
-    # Filter main data for selected games
-    if selected_games_repeat:
-        df_repeat_filtered = df_main[df_main['game_name'].isin(selected_games_repeat)]
-    else:
-        df_repeat_filtered = df_main
-    
-    # Recalculate repeatability data for selected games
-    if not df_repeat_filtered.empty:
-        # Filter for completed events only
-        completed_events = df_repeat_filtered[df_repeat_filtered['event'] == 'Completed']
-        
-        if not completed_events.empty:
-            # Count games played per user
-            user_game_counts = completed_events.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
-            user_game_counts.columns = ['user_id', 'games_played']
-            
-            # Count how many users played each number of games
-            repeatability_data = user_game_counts.groupby('games_played').size().reset_index()
-            repeatability_data.columns = ['games_played', 'user_count']
-            
-            # Create complete range from 1 to 27 games
-            complete_range = pd.DataFrame({'games_played': range(1, 28)})
-            repeatability_data = complete_range.merge(repeatability_data, on='games_played', how='left').fillna(0)
-            repeatability_data['user_count'] = repeatability_data['user_count'].astype(int)
-        else:
-            repeatability_data = pd.DataFrame({'games_played': range(1, 28), 'user_count': [0] * 27})
-    else:
-        repeatability_data = pd.DataFrame({'games_played': range(1, 28), 'user_count': [0] * 27})
-    
     st.markdown("### 🎮 Game Repeatability Analysis")
     
     # Create the repeatability chart
-    bars = alt.Chart(repeatability_data).mark_bar(
+    bars = alt.Chart(repeatability_df).mark_bar(
         cornerRadius=6,
         stroke='white',
         strokeWidth=2,
@@ -514,7 +454,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame, df_main: pd.Da
     )
     
     # Add data labels on top of bars
-    labels = alt.Chart(repeatability_data).mark_text(
+    labels = alt.Chart(repeatability_df).mark_text(
         align='center',
         baseline='bottom',
         color='#2E8B57',
@@ -543,7 +483,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame, df_main: pd.Da
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        total_users = repeatability_data['user_count'].sum()
+        total_users = repeatability_df['user_count'].sum()
         st.metric(
             label="👥 Total Users (Completed)",
             value=f"{total_users:,}",
@@ -552,8 +492,8 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame, df_main: pd.Da
     
     with col2:
         # Calculate weighted average
-        weighted_sum = (repeatability_data['games_played'] * repeatability_data['user_count']).sum()
-        total_users = repeatability_data['user_count'].sum()
+        weighted_sum = (repeatability_df['games_played'] * repeatability_df['user_count']).sum()
+        total_users = repeatability_df['user_count'].sum()
         avg_games_per_user = weighted_sum / total_users if total_users > 0 else 0
         st.metric(
             label="🎯 Avg Games per User",
@@ -562,7 +502,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame, df_main: pd.Da
         )
     
     with col3:
-        max_games_played = repeatability_data['games_played'].max()
+        max_games_played = repeatability_df['games_played'].max()
         st.metric(
             label="🏆 Max Games Played",
             value=f"{max_games_played}",
@@ -1121,7 +1061,7 @@ def main() -> None:
     st.markdown("## 🎮 Game Repeatability Analysis")
     
     if not repeatability_df.empty:
-        render_repeatability_analysis(repeatability_df, df_main)
+        render_repeatability_analysis(repeatability_df)
     else:
         st.warning("No repeatability data available.")
     
