@@ -504,103 +504,121 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df[df['datetime'] >= july_2_2025].copy()
     print(f"Filtered time series data to July 2nd, 2025 onwards: {len(df)} records")
     
+    # Get unique games for individual game processing
+    unique_games = df['game_name'].unique()
+    print(f"Processing time series for {len(unique_games)} games: {unique_games[:5]}...")
+    
     # Prepare time series data for different periods
     time_series_data = []
     
-    # Day-level data (last 2 weeks from July 2nd, 2025 onwards)
-    cutoff_date = df['datetime'].max() - pd.Timedelta(days=14)
-    df_daily = df[df['datetime'] >= cutoff_date].copy()
-    df_daily['time_group'] = df_daily['datetime'].dt.date
+    # Process each game individually + "All Games" combined
+    games_to_process = list(unique_games) + ['All Games']
     
-    for time_group in df_daily['time_group'].unique():
-        group_data = df_daily[df_daily['time_group'] == time_group]
+    for game_name in games_to_process:
+        if game_name == 'All Games':
+            game_df = df.copy()
+        else:
+            game_df = df[df['game_name'] == game_name].copy()
         
-        # Users (distinct count)
-        started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
-        completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-        
-        # Visits (distinct count)
-        started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
-        
-        # Instances (total count)
-        started_instances = len(group_data[group_data['event'] == 'Started'])
-        completed_instances = len(group_data[group_data['event'] == 'Completed'])
-        
-        time_series_data.append({
-            'time_period': str(time_group),
-            'period_type': 'Day',
-            'started_users': started_users,
-            'completed_users': completed_users,
-            'started_visits': started_visits,
-            'completed_visits': completed_visits,
-            'started_instances': started_instances,
-            'completed_instances': completed_instances,
-            'game_name': 'All Games'  # For compatibility with filtering
-        })
+        if game_df.empty:
+            continue
+            
+        print(f"Processing time series for: {game_name}")
     
-    # Week-level data (all data from July 2nd, 2025 onwards)
-    july_2_2025 = pd.Timestamp('2025-07-02')
-    df['days_since_july_2'] = (df['datetime'] - july_2_2025).dt.days
-    df['week_number'] = (df['days_since_july_2'] // 7) + 1
-    df['time_group_week'] = 'Week ' + df['week_number'].astype(str)
-    
-    for time_group in df['time_group_week'].unique():
-        group_data = df[df['time_group_week'] == time_group]
+        # Day-level data (last 2 weeks from July 2nd, 2025 onwards)
+        cutoff_date = game_df['datetime'].max() - pd.Timedelta(days=14)
+        df_daily = game_df[game_df['datetime'] >= cutoff_date].copy()
+        df_daily['time_group'] = df_daily['datetime'].dt.date
         
-        # Users (distinct count)
-        started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
-        completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+        for time_group in df_daily['time_group'].unique():
+            group_data = df_daily[df_daily['time_group'] == time_group]
+            
+            # Users (distinct count)
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            
+            # Visits (distinct count)
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            
+            # Instances (total count)
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': str(time_group),
+                'period_type': 'Day',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances,
+                'game_name': game_name
+            })
         
-        # Visits (distinct count)
-        started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+        # Week-level data (all data from July 2nd, 2025 onwards)
+        july_2_2025 = pd.Timestamp('2025-07-02')
+        game_df['days_since_july_2'] = (game_df['datetime'] - july_2_2025).dt.days
+        game_df['week_number'] = (game_df['days_since_july_2'] // 7) + 1
+        game_df['time_group_week'] = 'Week ' + game_df['week_number'].astype(str)
         
-        # Instances (total count)
-        started_instances = len(group_data[group_data['event'] == 'Started'])
-        completed_instances = len(group_data[group_data['event'] == 'Completed'])
+        for time_group in game_df['time_group_week'].unique():
+            group_data = game_df[game_df['time_group_week'] == time_group]
+            
+            # Users (distinct count)
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            
+            # Visits (distinct count)
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            
+            # Instances (total count)
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': time_group,
+                'period_type': 'Week',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances,
+                'game_name': game_name
+            })
         
-        time_series_data.append({
-            'time_period': time_group,
-            'period_type': 'Week',
-            'started_users': started_users,
-            'completed_users': completed_users,
-            'started_visits': started_visits,
-            'completed_visits': completed_visits,
-            'started_instances': started_instances,
-            'completed_instances': completed_instances,
-            'game_name': 'All Games'  # For compatibility with filtering
-        })
-    
-    # Month-level data (all data from July 2nd, 2025 onwards)
-    df['time_group_month'] = df['datetime'].dt.strftime('%B %Y')
-    
-    for time_group in df['time_group_month'].unique():
-        group_data = df[df['time_group_month'] == time_group]
+        # Month-level data (all data from July 2nd, 2025 onwards)
+        game_df['time_group_month'] = game_df['datetime'].dt.strftime('%B %Y')
         
-        # Users (distinct count)
-        started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
-        completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-        
-        # Visits (distinct count)
-        started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
-        
-        # Instances (total count)
-        started_instances = len(group_data[group_data['event'] == 'Started'])
-        completed_instances = len(group_data[group_data['event'] == 'Completed'])
-        
-        time_series_data.append({
-            'time_period': time_group,
-            'period_type': 'Month',
-            'started_users': started_users,
-            'completed_users': completed_users,
-            'started_visits': started_visits,
-            'completed_visits': completed_visits,
-            'started_instances': started_instances,
-            'completed_instances': completed_instances,
-            'game_name': 'All Games'  # For compatibility with filtering
-        })
+        for time_group in game_df['time_group_month'].unique():
+            group_data = game_df[game_df['time_group_month'] == time_group]
+            
+            # Users (distinct count)
+            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            
+            # Visits (distinct count)
+            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
+            
+            # Instances (total count)
+            started_instances = len(group_data[group_data['event'] == 'Started'])
+            completed_instances = len(group_data[group_data['event'] == 'Completed'])
+            
+            time_series_data.append({
+                'time_period': time_group,
+                'period_type': 'Month',
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances,
+                'game_name': game_name
+            })
     
     time_series_df = pd.DataFrame(time_series_data)
     print(f"SUCCESS: Time series data: {len(time_series_df)} records")

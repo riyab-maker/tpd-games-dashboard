@@ -689,60 +689,27 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         # Show data info
         st.info(f"📊 Showing {len(time_series_df)} time periods")
     
-    # Check if preprocessed time series data is available and no game filtering
-    has_valid_data = not time_series_df.empty
-    use_dynamic_calculation = False
+    # Use only preprocessed data (like all other graphs)
+    if time_series_df.empty:
+        st.warning("No time series data available.")
+        return
     
-    # Determine if we need dynamic calculation
-    # Check if specific games are selected (not all games)
-    all_games_selected = len(selected_games_ts) == len(unique_games_ts)
+    # Filter by selected time period
+    filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
     
-    if selected_games_ts and not all_games_selected:
-        use_dynamic_calculation = True
+    # Apply July filter for Month and All time views
+    if time_period == "Month" or time_period == "All time":
+        july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
+        filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
+    
+    # Apply game filtering if specific games are selected
+    if selected_games_ts and len(selected_games_ts) < len(unique_games_ts):
+        # Filter by selected games
+        filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
         st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
-        st.info("🔄 Using dynamic calculation for game-filtered time series data")
-    elif not has_valid_data:
-        use_dynamic_calculation = True
-        st.info("🔄 Using dynamic calculation for time series data")
-    else:
-        st.info("📊 Using preprocessed time series data")
     
-    if use_dynamic_calculation:
-        # Use dynamic calculation
-        if selected_games_ts and not all_games_selected:
-            df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
-        else:
-            df_main_filtered = df_main
-        
-        # Debug: Show data being used
-        st.write("**DEBUG: Data being used for dynamic calculation:**")
-        st.write(f"Total records: {len(df_main_filtered)}")
-        st.write(f"Date range: {df_main_filtered['date'].min()} to {df_main_filtered['date'].max()}")
-        st.write(f"Events: {df_main_filtered['event'].value_counts().to_dict()}")
-        st.write(f"Games: {df_main_filtered['game_name'].unique()[:5]}...")  # Show first 5 games
-        
-        # Recalculate time series data for the selected time period
-        filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
-        
-        # Debug: Show calculated results
-        st.write("**DEBUG: Calculated time series data:**")
-        st.dataframe(filtered_ts_df.head(10))
-    else:
-        # Use preprocessed data
-        st.write("**DEBUG: Using preprocessed time series data:**")
-        st.write(f"Available period types: {time_series_df['period_type'].unique()}")
-        st.write(f"Selected period: {time_period}")
-        
-        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
-        
-        # Apply July filter for Month and All time views
-        if time_period == "Month" or time_period == "All time":
-            july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
-            st.write(f"Filtering to July onwards: {july_onwards}")
-            filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
-        
-        st.write("**DEBUG: Filtered preprocessed data:**")
-        st.dataframe(filtered_ts_df.head(10))
+    # Show data info
+    st.info(f"📊 Showing {len(filtered_ts_df)} time periods for {time_period} view")
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
