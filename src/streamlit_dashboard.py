@@ -709,16 +709,35 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         else:
             df_main_filtered = df_main
         
+        # Debug: Show data being used
+        st.write("**DEBUG: Data being used for dynamic calculation:**")
+        st.write(f"Total records: {len(df_main_filtered)}")
+        st.write(f"Date range: {df_main_filtered['date'].min()} to {df_main_filtered['date'].max()}")
+        st.write(f"Events: {df_main_filtered['event'].value_counts().to_dict()}")
+        st.write(f"Games: {df_main_filtered['game_name'].unique()[:5]}...")  # Show first 5 games
+        
         # Recalculate time series data for the selected time period
         filtered_ts_df = recalculate_time_series_for_games(df_main_filtered, time_period)
+        
+        # Debug: Show calculated results
+        st.write("**DEBUG: Calculated time series data:**")
+        st.dataframe(filtered_ts_df.head(10))
     else:
         # Use preprocessed data
+        st.write("**DEBUG: Using preprocessed time series data:**")
+        st.write(f"Available period types: {time_series_df['period_type'].unique()}")
+        st.write(f"Selected period: {time_period}")
+        
         filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
         
         # Apply July filter for Month and All time views
         if time_period == "Month" or time_period == "All time":
             july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
+            st.write(f"Filtering to July onwards: {july_onwards}")
             filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
+        
+        st.write("**DEBUG: Filtered preprocessed data:**")
+        st.dataframe(filtered_ts_df.head(10))
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
