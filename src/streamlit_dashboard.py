@@ -103,6 +103,11 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     
     # Get data for each funnel from filtered data
     # Calculate unique users, visits, and instances from filtered data
+    st.info(f"🔍 CONVERSION FUNNEL DEBUG: df_filtered has {len(df_filtered)} events")
+    st.info(f"🔍 Available events: {df_filtered['event'].unique()}")
+    st.info(f"🔍 Started events: {len(df_filtered[df_filtered['event'] == 'Started'])}")
+    st.info(f"🔍 Completed events: {len(df_filtered[df_filtered['event'] == 'Completed'])}")
+    
     started_users = df_filtered[df_filtered['event'] == 'Started']['idlink_va'].nunique()
     completed_users = df_filtered[df_filtered['event'] == 'Completed']['idlink_va'].nunique()
     started_visits = df_filtered[df_filtered['event'] == 'Started']['idvisit'].nunique()
@@ -929,6 +934,9 @@ def main() -> None:
     # Apply game filter
     if selected_games:
         df_filtered = df_filtered[df_filtered['game_name'].isin(selected_games)]
+        st.info(f"🎮 GAME FILTER APPLIED: {len(selected_games)} games selected, {len(df_filtered)} events remaining")
+    else:
+        st.info(f"🎮 NO GAME FILTER: Showing all {len(df_filtered)} events from {df_filtered['game_name'].nunique()} games")
     # If no games selected, show all games (no filtering needed)
     
     # Apply date filter
@@ -968,6 +976,7 @@ def main() -> None:
     st.info(f"📊 Showing data for {game_count} selected game(s): {game_summary} | Date range: {date_summary}")
 
     # Use filtered data for conversion funnel to respect game filter
+    st.info(f"🔄 PASSING TO CONVERSION FUNNEL: {len(df_filtered)} events, games: {sorted(df_filtered['game_name'].unique())}")
     render_modern_dashboard(summary_df, df_filtered)
     
     # Add Score Distribution Analysis
