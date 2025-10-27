@@ -80,6 +80,12 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     # Add separate conversion funnels
     st.markdown("### 🔄 Conversion Funnels")
     
+    # Debug: Show what data we're working with
+    st.info(f"🔍 DEBUG: conversion_df columns: {list(conversion_df.columns)}")
+    st.info(f"🔍 DEBUG: conversion_df shape: {conversion_df.shape}")
+    if not conversion_df.empty:
+        st.info(f"🔍 DEBUG: First few rows:\n{conversion_df.head()}")
+    
     # Get data for each funnel from conversion data
     if 'game_name' in conversion_df.columns:
         # Game-specific data - aggregate across selected games
