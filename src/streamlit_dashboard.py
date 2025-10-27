@@ -103,13 +103,6 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     
     # Get data for each funnel from filtered data
     # Calculate unique users, visits, and instances from filtered data
-    if 'Event' in df_filtered.columns:
-        st.info(f"🔍 CONVERSION FUNNEL DEBUG: Using original summary data")
-    else:
-        st.info(f"🔍 CONVERSION FUNNEL DEBUG: df_filtered has {len(df_filtered)} events")
-        st.info(f"🔍 Available events: {df_filtered['event'].unique()}")
-        st.info(f"🔍 Started events: {len(df_filtered[df_filtered['event'] == 'Started'])}")
-        st.info(f"🔍 Completed events: {len(df_filtered[df_filtered['event'] == 'Completed'])}")
     
     # Check if we're using summary data (original) or filtered data
     if 'Event' in df_filtered.columns:
@@ -134,12 +127,6 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
             st.error(f"Available columns: {df_filtered.columns.tolist()}")
             st.stop()
     
-    # Debug: Show data info
-    if 'Event' in df_filtered.columns:
-        st.info(f"🔄 Conversion Funnel - Using original summary data")
-    else:
-        st.info(f"🔄 Conversion Funnel - Filtered data: {len(df_filtered)} events, {len(df_filtered['game_name'].unique())} games")
-    st.info(f"📊 Numbers: Started Users={started_users}, Completed Users={completed_users}, Started Visits={started_visits}, Completed Visits={completed_visits}")
     
     # Create three separate funnels
     col1, col2, col3 = st.columns(3)
@@ -341,7 +328,6 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     
     # Add game filter
     st.markdown("**🎮 Game Filter:**")
-    st.info(f"Available games: {len(unique_games)} games")
     selected_games = st.multiselect(
         "Select Games for Score Distribution:",
         options=unique_games,
@@ -352,15 +338,9 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     # Filter data based on selected games
     if selected_games:
         filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
-        # Show filter status
-        if len(selected_games) == len(unique_games):
-            st.info("🎮 Showing data for: **All Games**")
-        else:
-            st.info(f"🎮 Showing data for: {', '.join(selected_games)}")
     else:
         # Empty selection means all games
         filtered_df = score_distribution_df
-        st.info("🎮 Showing data for: **All Games**")
     
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
@@ -487,7 +467,6 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
         return
     
     st.markdown("### 🎮 Game Repeatability Analysis")
-    st.info("📊 Analysis based on SQL query: JOIN hybrid_games → hybrid_games_links → hybrid_game_completions → hybrid_profiles → hybrid_users")
     
     # Create the repeatability chart with explicit axis configuration
     chart = alt.Chart(repeatability_df).mark_bar(
@@ -742,13 +721,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     if selected_games_ts:
         # Filter by selected games
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
-        if len(selected_games_ts) == len(unique_games_ts):
-            st.info("🎮 Filtering time series for: **All Games**")
-        else:
-            st.info(f"🎮 Filtering time series for: {', '.join(selected_games_ts)}")
-    else:
-        # Empty selection means all games
-        st.info("🎮 Filtering time series for: **All Games**")
     
     # Aggregate data by time period to prevent overlapping points
     # Group by time_period and sum the metrics
@@ -761,8 +733,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         'completed_instances': 'sum'
     }).reset_index()
     
-    # Show data info
-    st.info(f"📊 Showing {len(aggregated_df)} time periods for {time_period} view")
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
@@ -899,11 +869,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.3 - NUMBERS FIXED")
+    st.caption("All data (server_time adjusted by +5h30m)")
     
-    # Force deployment check
-    st.success("🚀 CONVERSION FUNNEL NOW FILTERS BY GAME! Test by selecting different games.")
-    st.warning("⚠️ If you still see old numbers, hard refresh your browser (Ctrl+F5)")
     
     # Check if processed data exists
     check_processed_data()
@@ -956,9 +923,6 @@ def main() -> None:
     # Apply game filter
     if selected_games:
         df_filtered = df_filtered[df_filtered['game_name'].isin(selected_games)]
-        st.info(f"🎮 GAME FILTER APPLIED: {len(selected_games)} games selected, {len(df_filtered)} events remaining")
-    else:
-        st.info(f"🎮 NO GAME FILTER: Showing all {len(df_filtered)} events from {df_filtered['game_name'].nunique()} games")
     # If no games selected, show all games (no filtering needed)
     
     # Apply date filter
@@ -995,17 +959,10 @@ def main() -> None:
         game_summary = f"{', '.join(selected_games)}"
         game_count = len(selected_games)
     
-    st.info(f"📊 Showing data for {game_count} selected game(s): {game_summary} | Date range: {date_summary}")
-
-    # Use filtered data for conversion funnel to respect game filter
-    st.info(f"🔄 PASSING TO CONVERSION FUNNEL: {len(df_filtered)} events, games: {sorted(df_filtered['game_name'].unique())}")
-    
     # If no games selected, use original summary data; if games selected, use filtered data
     if not selected_games:
-        st.info("🔄 Using ORIGINAL SUMMARY DATA for conversion funnel")
         render_modern_dashboard(summary_df, summary_df)  # Use original totals
     else:
-        st.info("🔄 Using FILTERED DATA for conversion funnel")
         render_modern_dashboard(summary_df, df_filtered)  # Use filtered data
     
     # Add Score Distribution Analysis
