@@ -9,7 +9,11 @@ from datetime import datetime
 from typing import List, Tuple
 
 # Check if processed data exists
-DATA_DIR = "processed_data"
+# Get the directory where this script is located
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# Go up one level to the project root
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+DATA_DIR = os.path.join(PROJECT_ROOT, "processed_data")
 REQUIRED_FILES = [
     "conversion_funnel_total.csv",
     "conversion_funnel_games.csv",
@@ -21,6 +25,16 @@ REQUIRED_FILES = [
 
 def check_processed_data():
     """Check if all required processed data files exist"""
+    # Debug information
+    st.info(f"Looking for data in: {DATA_DIR}")
+    st.info(f"Current working directory: {os.getcwd()}")
+    
+    # Check if DATA_DIR exists
+    if not os.path.exists(DATA_DIR):
+        st.error(f"ERROR: Data directory does not exist: {DATA_DIR}")
+        st.error("Please ensure processed_data folder is uploaded to GitHub.")
+        st.stop()
+    
     missing_files = []
     for file in REQUIRED_FILES:
         file_path = os.path.join(DATA_DIR, file)
@@ -29,6 +43,7 @@ def check_processed_data():
     
     if missing_files:
         st.error(f"ERROR: Missing processed data files: {', '.join(missing_files)}")
+        st.error(f"Looking in directory: {DATA_DIR}")
         st.error("WARNING: Please run 'python master_processor.py' locally to generate the required data files.")
         st.error("This dashboard requires preprocessed data to run efficiently on Render.")
         st.stop()
