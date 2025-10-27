@@ -667,21 +667,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         # Show data info
         st.info(f"📊 Showing {len(time_series_df)} time periods")
     
-    # Check if preprocessed time series data has the correct date range (July 2nd, 2025 onwards)
-    july_2_2025 = pd.Timestamp('2025-07-02')
-    has_july_data = False
+    # Check if preprocessed time series data is available
+    has_valid_data = not time_series_df.empty
     
-    if not time_series_df.empty:
-        # Check if we have data from July 2nd, 2025 onwards
-        day_data = time_series_df[time_series_df['period_type'] == 'Day']
-        if not day_data.empty:
-            # Check if any day data is from July 2nd, 2025 onwards
-            day_data['date'] = pd.to_datetime(day_data['time_period'])
-            has_july_data = (day_data['date'] >= july_2_2025).any()
-    
-    if has_july_data:
+    if has_valid_data:
         # Use the preprocessed time series data and filter by selected time period
         filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
+        
+        # Apply July filter for Month and All time views
+        if time_period == "Month" or time_period == "All time":
+            july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
+            filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
         
         # Apply game filtering if specific games are selected
         if selected_games_ts and 'All Games' not in selected_games_ts:
