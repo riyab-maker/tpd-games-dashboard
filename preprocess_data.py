@@ -607,9 +607,71 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
     return time_series_df
 
 
+def fetch_hybrid_repeatability_data() -> pd.DataFrame:
+    """Fetch repeatability data using the exact SQL query from hybrid database tables"""
+    print("Fetching repeatability data from hybrid database...")
+    
+    try:
+        # Connect to database
+        connection = pymysql.connect(
+            host=HOST,
+            port=PORT,
+            user=USER,
+            password=PASSWORD,
+            database=DBNAME,
+            charset='utf8mb4'
+        )
+        
+        # Your exact SQL query
+        hybrid_query = """
+        SELECT 
+            COUNT(DISTINCT game_name) as CountDistinctNonNull_game_name,
+            COUNT(DISTINCT hybrid_profile_id) as CountDistinct_hybrid_profile_id
+        FROM `hybrid_games`
+        INNER JOIN `hybrid_games_links` ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id`
+        INNER JOIN `hybrid_game_completions` ON `hybrid_games_links`.`activity_id` = `hybrid_game_completions`.`activity_id`
+        INNER JOIN `hybrid_profiles` ON `hybrid_game_completions`.`hybrid_profile_id` = `hybrid_profiles`.`id`
+        INNER JOIN `hybrid_users` ON `hybrid_profiles`.`hybrid_user_id` = `hybrid_users`.`id`
+        GROUP BY hybrid_profile_id
+        ORDER BY CountDistinctNonNull_game_name
+        """
+        
+        # Execute query
+        hybrid_df = pd.read_sql(hybrid_query, connection)
+        connection.close()
+        
+        print(f"SUCCESS: Fetched {len(hybrid_df)} records from hybrid database")
+        print("Sample data:")
+        print(hybrid_df.head(10))
+        
+        # Group by the count of distinct non-null game_name
+        # Calculate CountDistinct_hybrid_profile_id for each distinct count value
+        repeatability_data = hybrid_df.groupby('CountDistinctNonNull_game_name').size().reset_index()
+        repeatability_data.columns = ['games_played', 'user_count']
+        
+        print("Final repeatability data:")
+        print(repeatability_data.head(10))
+        
+        return repeatability_data
+        
+    except Exception as e:
+        print(f"ERROR: Failed to fetch hybrid data: {str(e)}")
+        print("Falling back to Matomo data...")
+        return pd.DataFrame()
+
 def preprocess_repeatability_data(df: pd.DataFrame) -> pd.DataFrame:
-    """Preprocess game repeatability data"""
-    print("Preprocessing repeatability data...")
+    """
+    Preprocess game repeatability data based on EXACT SQL query logic:
+    
+    The correct numbers should be:
+    1 game: 15,846 users
+    2 games: 10,776 users
+    3 games: 6,009 users
+    etc.
+    
+    This suggests the current logic is wrong. Let me implement the correct SQL query logic.
+    """
+    print("Preprocessing repeatability data using CORRECT SQL query logic...")
     
     # Filter for completed events only
     completed_events = df[df['event'] == 'Completed']
@@ -618,20 +680,44 @@ def preprocess_repeatability_data(df: pd.DataFrame) -> pd.DataFrame:
         print("WARNING: No completed events found")
         return pd.DataFrame()
     
-    # Count games played per user
-    user_game_counts = completed_events.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
-    user_game_counts.columns = ['user_id', 'games_played']
+    print(f"DEBUG: Total completed events: {len(completed_events)}")
+    print(f"DEBUG: Unique users in completed events: {completed_events['idvisitor_converted'].nunique()}")
+    print(f"DEBUG: Unique games in completed events: {completed_events['game_name'].nunique()}")
     
-    # Count how many users played each number of games
+    # The issue might be that we need to filter the data differently
+    # Let me check what the actual data looks like
+    print("DEBUG: Sample of completed events:")
+    print(completed_events[['idvisitor_converted', 'game_name', 'event']].head(10))
+    
+    # Group by hybrid_profile_id (using idvisitor_converted as proxy)
+    # Count distinct non-null values of game_name for each hybrid_profile_id
+    user_game_counts = completed_events.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
+    user_game_counts.columns = ['hybrid_profile_id', 'games_played']
+    
+    print(f"DEBUG: User game counts sample:")
+    print(user_game_counts.head(10))
+    print(f"DEBUG: Games played distribution:")
+    print(user_game_counts['games_played'].value_counts().sort_index().head(10))
+    
+    # Group by the count of distinct non-null game_name
+    # Calculate CountDistinct_hybrid_profile_id for each distinct count value
     repeatability_data = user_game_counts.groupby('games_played').size().reset_index()
     repeatability_data.columns = ['games_played', 'user_count']
     
-    # Create complete range from 1 to 27 games
-    complete_range = pd.DataFrame({'games_played': range(1, 28)})
+    print(f"DEBUG: Repeatability data before range completion:")
+    print(repeatability_data.head(10))
+    
+    # Create complete range from 1 to max games played
+    max_games = user_game_counts['games_played'].max()
+    complete_range = pd.DataFrame({'games_played': range(1, max_games + 1)})
     repeatability_data = complete_range.merge(repeatability_data, on='games_played', how='left').fillna(0)
     repeatability_data['user_count'] = repeatability_data['user_count'].astype(int)
     
-    print(f"SUCCESS: Repeatability data: {len(repeatability_data)} records")
+    print(f"SUCCESS: Repeatability data (SQL logic): {len(repeatability_data)} records")
+    print(f"Max distinct games played: {max_games}")
+    print(f"Total unique hybrid_profile_id: {user_game_counts['hybrid_profile_id'].nunique()}")
+    print(f"FINAL DATA:")
+    print(repeatability_data.head(10))
     return repeatability_data
 
 
@@ -675,8 +761,13 @@ def main():
         # Process time series data
         time_series_df = preprocess_time_series_data(df_main)
         
-        # Process repeatability data
-        repeatability_df = preprocess_repeatability_data(df_main)
+        # Process repeatability data using hybrid database
+        repeatability_df = fetch_hybrid_repeatability_data()
+        
+        # Fallback to Matomo data if hybrid data fails
+        if repeatability_df.empty:
+            print("Using Matomo data as fallback...")
+            repeatability_df = preprocess_repeatability_data(df_main)
         
         print("\nSAVING PROCESSED DATA")
         print("-" * 30)
