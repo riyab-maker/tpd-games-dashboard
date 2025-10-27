@@ -715,10 +715,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     # Sort the dataframe based on time period
     if time_period == "Month":
         # Convert month names to datetime for proper sorting
-        filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
-        filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
-        # Create ordered list for Altair
-        time_order = filtered_ts_df['time_period'].tolist()
+        try:
+            filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
+            filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
+            # Create ordered list for Altair
+            time_order = filtered_ts_df['time_period'].tolist()
+        except Exception as e:
+            # If datetime parsing fails, use original order
+            st.warning(f"Could not parse dates for sorting: {e}")
+            time_order = filtered_ts_df['time_period'].tolist()
     elif time_period == "Week":
         # Extract week number for sorting
         filtered_ts_df['week_num'] = filtered_ts_df['time_period'].str.extract(r'(\d+)').astype(int)
@@ -727,10 +732,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         time_order = filtered_ts_df['time_period'].tolist()
     elif time_period == "Day":
         # Sort by date
-        filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
-        filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
-        # Create ordered list for Altair
-        time_order = filtered_ts_df['time_period'].astype(str).tolist()
+        try:
+            filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
+            filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
+            # Create ordered list for Altair
+            time_order = filtered_ts_df['time_period'].astype(str).tolist()
+        except Exception as e:
+            # If datetime parsing fails, use original order
+            st.warning(f"Could not parse dates for sorting: {e}")
+            time_order = filtered_ts_df['time_period'].astype(str).tolist()
     else:
         time_order = None
     
