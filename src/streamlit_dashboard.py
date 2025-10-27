@@ -1001,7 +1001,7 @@ def main() -> None:
     st.info(f"🔄 PASSING TO CONVERSION FUNNEL: {len(df_filtered)} events, games: {sorted(df_filtered['game_name'].unique())}")
     
     # If no games selected, use original summary data; if games selected, use filtered data
-    if not selected_games or len(selected_games) == len(unique_games):
+    if not selected_games:
         render_modern_dashboard(summary_df, summary_df)  # Use original totals
     else:
         render_modern_dashboard(summary_df, df_filtered)  # Use filtered data
