@@ -91,6 +91,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     # Add separate conversion funnels
     st.markdown("### 🔄 Conversion Funnels")
+    
+    # Display date range for conversion funnel
+    st.caption(f"📅 Data range: July 2nd, 2025 onwards (Total: {conversion_df[conversion_df['Event'] == 'Started']['Users'].iloc[0]:,} users started, {conversion_df[conversion_df['Event'] == 'Completed']['Users'].iloc[0]:,} users completed)")
 
     # Get data for each funnel from conversion data
     if 'Event' in conversion_df.columns:
