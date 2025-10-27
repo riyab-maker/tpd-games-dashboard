@@ -1,0 +1,5 @@
+period_type,time_period,game_name,started_users,completed_users,started_visits,completed_visits,started_instances,completed_instances
+Month,2025-07-01,Shape Circle,1000,0,1200,0,1500,0
+Month,2025-07-01,Color Red,500,400,600,500,700,600
+Month,2025-08-01,Shape Circle,1100,0,1300,0,1600,0
+Month,2025-08-01,Color Red,550,450,650,550,750,650
