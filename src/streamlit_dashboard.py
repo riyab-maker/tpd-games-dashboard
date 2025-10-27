@@ -698,9 +698,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
             help="Select games to include in time series analysis. Leave empty to show all games."
         )
     
-    with ts_filter_col3:
-        # Show data info
-        pass
+    # ts_filter_col3 reserved for future use
     
     # Use only preprocessed data (like all other graphs)
     if time_series_df.empty:
