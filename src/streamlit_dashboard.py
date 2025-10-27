@@ -450,9 +450,6 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     st.markdown("### 🎮 Game Repeatability Analysis")
     st.info("📊 Analysis based on SQL query: JOIN hybrid_games → hybrid_games_links → hybrid_game_completions → hybrid_profiles → hybrid_users")
     
-    # TEST: Show current version to verify deployment
-    st.success("✅ CHART VERSION: Updated with correct axis labels - X: 'No of games played', Y: 'Number of Users'")
-    
     # Create the repeatability chart with explicit axis configuration
     chart = alt.Chart(repeatability_df).mark_bar(
         cornerRadius=6,
@@ -696,15 +693,38 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     
     # Filter by selected time period
     if time_period == "All time":
-        # For "All time", use Month data
-        filtered_ts_df = time_series_df[time_series_df['period_type'] == 'Month'].copy()
+        # For "All time", calculate totals from July 2nd, 2025 onwards
+        month_data = time_series_df[time_series_df['period_type'] == 'Month'].copy()
+        july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
+        month_data = month_data[month_data['time_period'].isin(july_onwards)]
+        
+        # Calculate totals
+        total_started_users = month_data['started_users'].sum()
+        total_completed_users = month_data['completed_users'].sum()
+        total_started_visits = month_data['started_visits'].sum()
+        total_completed_visits = month_data['completed_visits'].sum()
+        total_started_instances = month_data['started_instances'].sum()
+        total_completed_instances = month_data['completed_instances'].sum()
+        
+        # Create a single row with totals
+        filtered_ts_df = pd.DataFrame([{
+            'time_period': 'All Time (July 2025 onwards)',
+            'period_type': 'All time',
+            'started_users': total_started_users,
+            'completed_users': total_completed_users,
+            'started_visits': total_started_visits,
+            'completed_visits': total_completed_visits,
+            'started_instances': total_started_instances,
+            'completed_instances': total_completed_instances,
+            'game_name': 'All Games'
+        }])
     else:
         filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
-    
-    # Apply July filter for Month and All time views
-    if time_period == "Month" or time_period == "All time":
-        july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
-        filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
+        
+        # Apply July filter for Month view
+        if time_period == "Month":
+            july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
+            filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
     
     # Apply game filtering if specific games are selected
     if selected_games_ts and len(selected_games_ts) < len(unique_games_ts):
@@ -755,73 +775,114 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         ])
     users_chart_df = pd.DataFrame(users_data)
     
-    # Create line chart for users with data labels
-    users_lines = alt.Chart(users_chart_df).mark_line(
-        strokeWidth=4,
-        point=alt.OverlayMarkDef(
-            filled=True,
-            size=100,
+    # For All time view, show as bar chart instead of line chart
+    if time_period == "All time":
+        users_chart = alt.Chart(users_chart_df).mark_bar(
+            cornerRadius=6,
             stroke='white',
             strokeWidth=2
+        ).encode(
+            x=alt.X('Event:N', title='Event Type', axis=alt.Axis(labelAngle=0)),
+            y=alt.Y('Count:Q', title='Number of Users', axis=alt.Axis(format='~s')),
+            color=alt.Color('Event:N', 
+                          scale=alt.Scale(domain=['Started', 'Completed'], 
+                                        range=['#FF6B6B', '#4ECDC4']),
+                          legend=alt.Legend(title="Event Type")),
+            tooltip=['Event:N', 'Count:Q']
+        ).properties(
+            width=600,
+            height=400,
+            title='Total Users: Started vs Completed (July 2025 onwards)'
         )
-    ).encode(
-        x=alt.X('Time:N', title='Time Period', 
-               sort=time_order if time_order else None,
-               axis=alt.Axis(
-                   labelAngle=0,
-                   labelFontSize=14,
-                   labelLimit=200,
-                   titleFontSize=16
-               )),
-        y=alt.Y('Count:Q', title='Number of Users', axis=alt.Axis(format='~s')),
-        color=alt.Color('Event:N', 
-                      scale=alt.Scale(domain=['Started', 'Completed'], 
-                                    range=['#FF6B6B', '#4ECDC4']),
-                      legend=alt.Legend(title="Event Type")),
-        tooltip=['Time:N', 'Event:N', 'Count:Q']
-    ).properties(
-        width=900,
-        height=400,
-        title='Users: Started vs Completed'
-    )
-    
-    # Add data labels for line chart with proper positioning
-    users_started_labels = alt.Chart(users_chart_df[users_chart_df['Event'] == 'Started']).mark_text(
-        align='center',
-        baseline='bottom',
-        color='#FF6B6B',
-        fontSize=14,
-        fontWeight='bold',
-        dy=-15
-    ).encode(
-        x=alt.X('Time:N', sort=time_order if time_order else None),
-        y=alt.Y('Count:Q'),
-        text=alt.Text('Count:Q', format='.0f')
-    )
-    
-    users_completed_labels = alt.Chart(users_chart_df[users_chart_df['Event'] == 'Completed']).mark_text(
-        align='center',
-        baseline='top',
-        color='#4ECDC4',
-        fontSize=14,
-        fontWeight='bold',
-        dy=15
-    ).encode(
-        x=alt.X('Time:N', sort=time_order if time_order else None),
-        y=alt.Y('Count:Q'),
-        text=alt.Text('Count:Q', format='.0f')
-    )
-    
-    users_chart = (users_lines + users_started_labels + users_completed_labels)
-    
-    users_chart = users_chart.configure_axis(
-        labelFontSize=18,
-        titleFontSize=20,
-        grid=True
-    ).configure_title(
-        fontSize=24,
-        fontWeight='bold'
-    )
+        
+        # Add data labels
+        users_labels = alt.Chart(users_chart_df).mark_text(
+            align='center',
+            baseline='bottom',
+            color='white',
+            fontSize=20,
+            fontWeight='bold',
+            dy=-10
+        ).encode(
+            x=alt.X('Event:N'),
+            y=alt.Y('Count:Q'),
+            text=alt.Text('Count:Q', format='.0f')
+        )
+        
+        users_chart = (users_chart + users_labels).configure_axis(
+            labelFontSize=18,
+            titleFontSize=20,
+            grid=True
+        ).configure_title(
+            fontSize=24,
+            fontWeight='bold'
+        )
+    else:
+        # Create line chart for users with data labels
+        users_lines = alt.Chart(users_chart_df).mark_line(
+            strokeWidth=4,
+            point=alt.OverlayMarkDef(
+                filled=True,
+                size=100,
+                stroke='white',
+                strokeWidth=2
+            )
+        ).encode(
+            x=alt.X('Time:N', title='Time Period', 
+                   sort=time_order if time_order else None,
+                   axis=alt.Axis(
+                       labelAngle=0,
+                       labelFontSize=14,
+                       labelLimit=200,
+                       titleFontSize=16
+                   )),
+            y=alt.Y('Count:Q', title='Number of Users', axis=alt.Axis(format='~s')),
+            color=alt.Color('Event:N', 
+                          scale=alt.Scale(domain=['Started', 'Completed'], 
+                                        range=['#FF6B6B', '#4ECDC4']),
+                          legend=alt.Legend(title="Event Type")),
+            tooltip=['Time:N', 'Event:N', 'Count:Q']
+        ).properties(
+            width=900,
+            height=400,
+            title='Users: Started vs Completed'
+        )
+        
+        # Add data labels for line chart with proper positioning
+        users_started_labels = alt.Chart(users_chart_df[users_chart_df['Event'] == 'Started']).mark_text(
+            align='center',
+            baseline='bottom',
+            color='#FF6B6B',
+            fontSize=14,
+            fontWeight='bold',
+            dy=-15
+        ).encode(
+            x=alt.X('Time:N', sort=time_order if time_order else None),
+            y=alt.Y('Count:Q'),
+            text=alt.Text('Count:Q', format='.0f')
+        )
+        
+        users_completed_labels = alt.Chart(users_chart_df[users_chart_df['Event'] == 'Completed']).mark_text(
+            align='center',
+            baseline='top',
+            color='#4ECDC4',
+            fontSize=14,
+            fontWeight='bold',
+            dy=15
+        ).encode(
+            x=alt.X('Time:N', sort=time_order if time_order else None),
+            y=alt.Y('Count:Q'),
+            text=alt.Text('Count:Q', format='.0f')
+        )
+        
+        users_chart = (users_lines + users_started_labels + users_completed_labels).configure_axis(
+            labelFontSize=18,
+            titleFontSize=20,
+            grid=True
+        ).configure_title(
+            fontSize=24,
+            fontWeight='bold'
+        )
     
     st.altair_chart(users_chart, use_container_width=True)
     
