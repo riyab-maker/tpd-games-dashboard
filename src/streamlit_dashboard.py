@@ -884,7 +884,8 @@ def main() -> None:
             max_date = time_series_df['date'].max().date()
         else:
             min_date = pd.to_datetime('2025-07-02').date()
-            max_date = pd.to_datetime('2025-10-24').date()
+            # Use current date as max date
+            max_date = datetime.now().date()
         
         # Create date range picker
         date_range = st.date_input(
