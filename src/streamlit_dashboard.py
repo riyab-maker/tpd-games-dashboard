@@ -740,12 +740,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         return
     
     # Sort the dataframe based on time period
-    if time_period == "Month" or time_period == "All time":
+    if time_period == "Month":
         # Convert month names to datetime for proper sorting
         filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
         filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
         # Create ordered list for Altair
         time_order = filtered_ts_df['time_period'].tolist()
+    elif time_period == "All time":
+        # For All time view, no sorting needed as it's a single bar chart
+        time_order = None
     elif time_period == "Week":
         # Extract week number for sorting
         filtered_ts_df['week_num'] = filtered_ts_df['time_period'].str.extract(r'(\d+)').astype(int)
