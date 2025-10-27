@@ -450,12 +450,6 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     st.markdown("### 🎮 Game Repeatability Analysis")
     st.info("📊 Analysis based on SQL query: JOIN hybrid_games → hybrid_games_links → hybrid_game_completions → hybrid_profiles → hybrid_users")
     
-    # Debug: Show the data being used
-    st.write("**DEBUG: Data being used for repeatability analysis:**")
-    st.dataframe(repeatability_df.head(10))
-    st.write(f"**Total records:** {len(repeatability_df)}")
-    st.write(f"**Sample values:** 1 game: {repeatability_df[repeatability_df['games_played']==1]['user_count'].iloc[0] if not repeatability_df[repeatability_df['games_played']==1].empty else 'N/A'}")
-    
     # Create the repeatability chart
     bars = alt.Chart(repeatability_df).mark_bar(
         cornerRadius=6,
@@ -464,10 +458,10 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
         color='#50C878'
     ).encode(
         x=alt.X('games_played:O', 
-                title='Number of Distinct Games Played (Repeat Count)', 
+                title='No of games played', 
                 axis=alt.Axis(labelAngle=0)),
         y=alt.Y('user_count:Q', 
-                title='Number of Unique Users (hybrid_profile_id)', 
+                title='Number of Users', 
                 axis=alt.Axis(format='~s')),
         tooltip=['games_played:O', 'user_count:Q']
     ).properties(
