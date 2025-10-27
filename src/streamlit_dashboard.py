@@ -317,6 +317,11 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         help="Select one or more games to show score distribution. Leave empty to show all games."
     )
     
+    # Debug: Show what's selected
+    st.write(f"DEBUG: selected_games = {selected_games}")
+    st.write(f"DEBUG: len(selected_games) = {len(selected_games)}")
+    st.write(f"DEBUG: len(unique_games) = {len(unique_games)}")
+    
     # Filter data based on selected games
     if selected_games:
         filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
@@ -867,7 +872,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.5 - GAME FILTER UPDATE")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.6 - DEBUG GAME FILTER")
     
     # Check if processed data exists
     check_processed_data()
