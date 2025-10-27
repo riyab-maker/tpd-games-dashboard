@@ -899,7 +899,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.2 - COMPLETE REWRITE")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.3 - NUMBERS FIXED")
     
     # Force deployment check
     st.success("🚀 CONVERSION FUNNEL NOW FILTERS BY GAME! Test by selecting different games.")
@@ -1002,8 +1002,10 @@ def main() -> None:
     
     # If no games selected, use original summary data; if games selected, use filtered data
     if not selected_games:
+        st.info("🔄 Using ORIGINAL SUMMARY DATA for conversion funnel")
         render_modern_dashboard(summary_df, summary_df)  # Use original totals
     else:
+        st.info("🔄 Using FILTERED DATA for conversion funnel")
         render_modern_dashboard(summary_df, df_filtered)  # Use filtered data
     
     # Add Score Distribution Analysis
