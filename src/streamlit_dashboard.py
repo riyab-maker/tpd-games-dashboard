@@ -877,7 +877,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.0 - CONVERSION FUNNEL FIXED")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.1 - FIXED EVENT COLUMN ERROR")
     
     # Force deployment check
     st.success("🚀 CONVERSION FUNNEL NOW FILTERS BY GAME! Test by selecting different games.")
