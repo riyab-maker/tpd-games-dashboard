@@ -700,6 +700,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     
     with ts_filter_col3:
         # Show data info
+        pass
     
     # Use only preprocessed data (like all other graphs)
     if time_series_df.empty:
