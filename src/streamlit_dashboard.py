@@ -694,17 +694,22 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     use_dynamic_calculation = False
     
     # Determine if we need dynamic calculation
-    if selected_games_ts and 'All Games' not in selected_games_ts:
+    # Check if specific games are selected (not all games)
+    all_games_selected = len(selected_games_ts) == len(unique_games_ts)
+    
+    if selected_games_ts and not all_games_selected:
         use_dynamic_calculation = True
         st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
         st.info("🔄 Using dynamic calculation for game-filtered time series data")
     elif not has_valid_data:
         use_dynamic_calculation = True
         st.info("🔄 Using dynamic calculation for time series data")
+    else:
+        st.info("📊 Using preprocessed time series data")
     
     if use_dynamic_calculation:
         # Use dynamic calculation
-        if selected_games_ts and 'All Games' not in selected_games_ts:
+        if selected_games_ts and not all_games_selected:
             df_main_filtered = df_main[df_main['game_name'].isin(selected_games_ts)]
         else:
             df_main_filtered = df_main
