@@ -879,12 +879,10 @@ def main() -> None:
         )
     
     with filter_col2:
-        # Date filter - use time series data for date range
-        if not time_series_df.empty:
-            # Extract dates from time_period column
-            time_series_df['date'] = pd.to_datetime(time_series_df['time_period'], errors='coerce')
-            min_date = time_series_df['date'].min().date()
-            max_date = time_series_df['date'].max().date()
+        # Date filter - use metadata for correct date range
+        if metadata and 'data_date_range' in metadata:
+            min_date = pd.to_datetime(metadata['data_date_range']['start']).date()
+            max_date = pd.to_datetime(metadata['data_date_range']['end']).date()
         else:
             min_date = pd.to_datetime('2025-07-02').date()
             # Use current date as max date
