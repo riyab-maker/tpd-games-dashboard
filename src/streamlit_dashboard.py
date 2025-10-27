@@ -116,10 +116,11 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     else:
         # Using filtered data - calculate from filtered events
         try:
-            started_users = df_filtered[df_filtered['event'] == 'Started']['idlink_va'].nunique()
-            completed_users = df_filtered[df_filtered['event'] == 'Completed']['idlink_va'].nunique()
-            started_visits = df_filtered[df_filtered['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = df_filtered[df_filtered['event'] == 'Completed']['idvisit'].nunique()
+            # For individual games, use total event counts (not unique counts)
+            started_users = len(df_filtered[df_filtered['event'] == 'Started'])
+            completed_users = len(df_filtered[df_filtered['event'] == 'Completed'])
+            started_visits = len(df_filtered[df_filtered['event'] == 'Started'])
+            completed_visits = len(df_filtered[df_filtered['event'] == 'Completed'])
             started_instances = len(df_filtered[df_filtered['event'] == 'Started'])
             completed_instances = len(df_filtered[df_filtered['event'] == 'Completed'])
         except KeyError as e:
