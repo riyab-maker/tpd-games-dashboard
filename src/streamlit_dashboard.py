@@ -313,7 +313,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     selected_games = st.multiselect(
         "Select Games for Score Distribution:",
         options=unique_games,
-        default=unique_games,
+        default=[],  # Empty by default - shows all games
         help="Select one or more games to show score distribution. Leave empty to show all games."
     )
     
@@ -326,6 +326,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         else:
             st.info(f"🎮 Showing data for: {', '.join(selected_games)}")
     else:
+        # Empty selection means all games
         filtered_df = score_distribution_df
         st.info("🎮 Showing data for: **All Games**")
     
@@ -684,8 +685,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         selected_games_ts = st.multiselect(
             "Select Games:",
             options=unique_games_ts,
-            default=unique_games_ts,
-            help="Select games to include in time series analysis"
+            default=[],  # Empty by default - shows all games
+            help="Select games to include in time series analysis. Leave empty to show all games."
         )
     
     with ts_filter_col3:
@@ -706,13 +707,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
     
     # Apply game filtering if specific games are selected
-    if selected_games_ts and len(selected_games_ts) < len(unique_games_ts):
+    if selected_games_ts:
         # Filter by selected games
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
-        st.info(f"🎮 Filtering time series for: {', '.join(selected_games_ts)}")
-    elif selected_games_ts and len(selected_games_ts) == len(unique_games_ts):
-        st.info("🎮 Filtering time series for: **All Games**")
+        if len(selected_games_ts) == len(unique_games_ts):
+            st.info("🎮 Filtering time series for: **All Games**")
+        else:
+            st.info(f"🎮 Filtering time series for: {', '.join(selected_games_ts)}")
     else:
+        # Empty selection means all games
         st.info("🎮 Filtering time series for: **All Games**")
     
     # Aggregate data by time period to prevent overlapping points
@@ -892,7 +895,7 @@ def main() -> None:
         selected_games = st.multiselect(
             "Select Game Names to filter by:",
             options=unique_games,
-            default=unique_games,  # Show all games by default
+            default=[],  # Empty by default - shows all games
             help="Select one or more games to filter the dashboard data. Leave empty to show all games."
         )
     
@@ -917,6 +920,7 @@ def main() -> None:
     # Apply game filter
     if selected_games:
         df_filtered = df_filtered[df_filtered['game_name'].isin(selected_games)]
+    # If no games selected, show all games (no filtering needed)
     
     # Apply date filter
     if len(date_range) == 2:  # Both start and end date selected
@@ -945,12 +949,14 @@ def main() -> None:
         date_summary = "for all dates"
     
     # Show filter summary
-    if len(selected_games) == len(unique_games):
+    if not selected_games or len(selected_games) == len(unique_games):
         game_summary = "**All Games**"
+        game_count = len(unique_games)
     else:
         game_summary = f"{', '.join(selected_games)}"
+        game_count = len(selected_games)
     
-    st.info(f"📊 Showing data for {len(selected_games)} selected game(s): {game_summary} | Date range: {date_summary}")
+    st.info(f"📊 Showing data for {game_count} selected game(s): {game_summary} | Date range: {date_summary}")
 
     # Use the original summary data for conversion funnel (not recalculated from filtered data)
     # The summary_data.csv contains the correct total numbers for the entire dataset
