@@ -11,7 +11,7 @@ from typing import List, Tuple
 # Use preprocess_data.py directly instead of processed CSV files
 DATA_DIR = "data"
 REQUIRED_FILES = [
-    "dashboard_data.csv",
+    "processed_data.csv",
     "summary_data.csv",
     "time_series_data.csv",
     "repeatability_data.csv",
@@ -44,7 +44,7 @@ def load_processed_data():
     """Load all data files from data/ directory"""
     try:
         # Load main dashboard data
-        df_main = pd.read_csv(os.path.join(DATA_DIR, "dashboard_data.csv"))
+        df_main = pd.read_csv(os.path.join(DATA_DIR, "processed_data.csv"))
         
         # Load summary data for conversion funnels
         summary_df = pd.read_csv(os.path.join(DATA_DIR, "summary_data.csv"))
@@ -79,40 +79,24 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     # Add separate conversion funnels
     st.markdown("### 🔄 Conversion Funnels")
-    
-    # Debug: Show what data we're working with
-    st.info(f"🔍 DEBUG: conversion_df columns: {list(conversion_df.columns)}")
-    st.info(f"🔍 DEBUG: conversion_df shape: {conversion_df.shape}")
-    if not conversion_df.empty:
-        st.info(f"🔍 DEBUG: First few rows:\n{conversion_df.head()}")
-    
+
     # Get data for each funnel from conversion data
-    if 'game_name' in conversion_df.columns:
-        # Game-specific data - aggregate across selected games
-        if 'Event' in conversion_df.columns:
-            # Summary data format
-            started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].sum()
-            completed_users = conversion_df[conversion_df['Event'] == 'Completed']['Users'].sum()
-            started_visits = conversion_df[conversion_df['Event'] == 'Started']['Visits'].sum()
-            completed_visits = conversion_df[conversion_df['Event'] == 'Completed']['Visits'].sum()
-            started_instances = conversion_df[conversion_df['Event'] == 'Started']['Instances'].sum()
-            completed_instances = conversion_df[conversion_df['Event'] == 'Completed']['Instances'].sum()
-        else:
-            # Dashboard data format - calculate from raw data
-            started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
-            started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
-            started_instances = len(conversion_df[conversion_df['event'] == 'Started'])
-            completed_instances = len(conversion_df[conversion_df['event'] == 'Completed'])
-    else:
-        # Total data - get direct values
+    if 'Event' in conversion_df.columns:
+        # Summary data format (total data)
         started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].iloc[0]
         completed_users = conversion_df[conversion_df['Event'] == 'Completed']['Users'].iloc[0]
         started_visits = conversion_df[conversion_df['Event'] == 'Started']['Visits'].iloc[0]
         completed_visits = conversion_df[conversion_df['Event'] == 'Completed']['Visits'].iloc[0]
         started_instances = conversion_df[conversion_df['Event'] == 'Started']['Instances'].iloc[0]
         completed_instances = conversion_df[conversion_df['Event'] == 'Completed']['Instances'].iloc[0]
+    else:
+        # Filtered data format - calculate from raw data
+        started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
+        completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
+        started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
+        completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
+        started_instances = len(conversion_df[conversion_df['event'] == 'Started'])
+        completed_instances = len(conversion_df[conversion_df['event'] == 'Completed'])
     
     
     # Create three separate funnels
@@ -921,7 +905,7 @@ def main() -> None:
         # Show total conversion funnel
         render_modern_dashboard(summary_df, summary_df)
     else:
-        # Show filtered conversion funnel
+        # Show filtered conversion funnel - use full data
         df_filtered = df_main[df_main['game_name'].isin(selected_games)]
         render_modern_dashboard(df_filtered, df_filtered)
     

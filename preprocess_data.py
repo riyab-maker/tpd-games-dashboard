@@ -96,6 +96,7 @@ SQL_QUERY = (
         "58","66","68","60","62","64","78","80","82","84",
         "83","76","74","88","86","94","96"
     )
+    AND DATE_ADD(`matomo_log_link_visit_action`.`server_time`, INTERVAL 330 MINUTE) >= '2025-07-02'
     """
 )
 
