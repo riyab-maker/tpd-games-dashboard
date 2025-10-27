@@ -101,13 +101,14 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     # Add separate conversion funnels
     st.markdown("### 🔄 Conversion Funnels")
     
-    # Get data for each funnel
-    started_users = summary_df[summary_df['Event'] == 'Started']['Users'].iloc[0]
-    completed_users = summary_df[summary_df['Event'] == 'Completed']['Users'].iloc[0]
-    started_visits = summary_df[summary_df['Event'] == 'Started']['Visits'].iloc[0]
-    completed_visits = summary_df[summary_df['Event'] == 'Completed']['Visits'].iloc[0]
-    started_instances = summary_df[summary_df['Event'] == 'Started']['Instances'].iloc[0]
-    completed_instances = summary_df[summary_df['Event'] == 'Completed']['Instances'].iloc[0]
+    # Get data for each funnel from filtered data
+    # Calculate unique users, visits, and instances from filtered data
+    started_users = df_filtered[df_filtered['Event'] == 'Started']['idlink_va'].nunique()
+    completed_users = df_filtered[df_filtered['Event'] == 'Completed']['idlink_va'].nunique()
+    started_visits = df_filtered[df_filtered['Event'] == 'Started']['idvisit'].nunique()
+    completed_visits = df_filtered[df_filtered['Event'] == 'Completed']['idvisit'].nunique()
+    started_instances = len(df_filtered[df_filtered['Event'] == 'Started'])
+    completed_instances = len(df_filtered[df_filtered['Event'] == 'Completed'])
     
     # Create three separate funnels
     col1, col2, col3 = st.columns(3)
@@ -958,8 +959,7 @@ def main() -> None:
     
     st.info(f"📊 Showing data for {game_count} selected game(s): {game_summary} | Date range: {date_summary}")
 
-    # Use the original summary data for conversion funnel (not recalculated from filtered data)
-    # The summary_data.csv contains the correct total numbers for the entire dataset
+    # Use filtered data for conversion funnel to respect game filter
     render_modern_dashboard(summary_df, df_filtered)
     
     # Add Score Distribution Analysis
