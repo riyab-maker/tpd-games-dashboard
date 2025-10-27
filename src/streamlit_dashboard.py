@@ -843,7 +843,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
     st.title("Hybrid Dashboard")
-    st.caption("Performance Optimized - Using Preprocessed Data")
+    st.caption("Performance Optimized - Using Preprocessed Data v2.1")
     
     
     # Check if processed data exists
