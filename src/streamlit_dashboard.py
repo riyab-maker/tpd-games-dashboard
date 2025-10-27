@@ -11,7 +11,6 @@ from typing import List, Tuple
 # Use preprocess_data.py directly instead of processed CSV files
 DATA_DIR = "data"
 REQUIRED_FILES = [
-    "dashboard_data.csv",
     "summary_data.csv",
     "time_series_data.csv",
     "repeatability_data.csv",
@@ -56,9 +55,6 @@ def check_processed_data():
 def load_processed_data():
     """Load all data files from data/ directory"""
     try:
-        # Load main dashboard data (limited data for UI)
-        df_main = pd.read_csv(os.path.join(DATA_DIR, "dashboard_data.csv"))
-        
         # Load game-specific conversion numbers (final numbers for individual games)
         game_conversion_df = pd.read_csv(os.path.join(DATA_DIR, "game_conversion_numbers.csv"))
         
@@ -81,7 +77,7 @@ def load_processed_data():
             'version': '2.0'
         }
         
-        return (df_main, summary_df, game_conversion_df, time_series_df, 
+        return (summary_df, game_conversion_df, time_series_df, 
                 repeatability_df, score_distribution_df, metadata)
     
     except Exception as e:
@@ -651,7 +647,7 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
     
     return pd.DataFrame(time_series_data)
 
-def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFrame) -> None:
+def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
     """Render time series analysis"""
     import altair as alt
     
@@ -674,7 +670,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     
     with ts_filter_col2:
         # Game filter for time series
-        unique_games_ts = sorted(df_main['game_name'].unique())
+        unique_games_ts = sorted(game_conversion_df['game_name'].unique())
         selected_games_ts = st.multiselect(
             "Select Games:",
             options=unique_games_ts,
@@ -856,10 +852,10 @@ def main() -> None:
     check_processed_data()
     
     with st.spinner("Loading data..."):
-        (df_main, summary_df, game_conversion_df, time_series_df, 
+        (summary_df, game_conversion_df, time_series_df, 
          repeatability_df, score_distribution_df, metadata) = load_processed_data()
     
-    if df_main.empty:
+    if summary_df.empty:
         st.warning("No data available.")
         return
     
@@ -870,8 +866,8 @@ def main() -> None:
     filter_col1, filter_col2 = st.columns(2)
     
     with filter_col1:
-        # Game Name filter - get unique games from df_main
-        unique_games = sorted(df_main['game_name'].unique()) if 'game_name' in df_main.columns else ['Sample Game']
+        # Game Name filter - get unique games from game_conversion_df
+        unique_games = sorted(game_conversion_df['game_name'].unique())
         selected_games = st.multiselect(
             "Select Game Names to filter by:",
             options=unique_games,
@@ -964,7 +960,7 @@ def main() -> None:
     st.markdown("## 📈 Time-Series Analysis")
     
     if not time_series_df.empty:
-        render_time_series_analysis(time_series_df, df_main)
+        render_time_series_analysis(time_series_df, game_conversion_df)
     else:
         st.warning("No time series data available.")
 
