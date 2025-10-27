@@ -320,8 +320,14 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     # Filter data based on selected games
     if selected_games:
         filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
+        # Show filter status
+        if len(selected_games) == len(unique_games):
+            st.info("🎮 Showing data for: **All Games**")
+        else:
+            st.info(f"🎮 Showing data for: {', '.join(selected_games)}")
     else:
         filtered_df = score_distribution_df
+        st.info("🎮 Showing data for: **All Games**")
     
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
@@ -703,7 +709,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     if selected_games_ts and len(selected_games_ts) < len(unique_games_ts):
         # Filter by selected games
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
-        st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
+        st.info(f"🎮 Filtering time series for: {', '.join(selected_games_ts)}")
+    elif selected_games_ts and len(selected_games_ts) == len(unique_games_ts):
+        st.info("🎮 Filtering time series for: **All Games**")
+    else:
+        st.info("🎮 Filtering time series for: **All Games**")
     
     # Aggregate data by time period to prevent overlapping points
     # Group by time_period and sum the metrics
@@ -934,7 +944,13 @@ def main() -> None:
     else:
         date_summary = "for all dates"
     
-    st.info(f"📊 Showing data for {len(selected_games)} selected game(s): {', '.join(selected_games)} | Date range: {date_summary}")
+    # Show filter summary
+    if len(selected_games) == len(unique_games):
+        game_summary = "**All Games**"
+    else:
+        game_summary = f"{', '.join(selected_games)}"
+    
+    st.info(f"📊 Showing data for {len(selected_games)} selected game(s): {game_summary} | Date range: {date_summary}")
 
     # Use the original summary data for conversion funnel (not recalculated from filtered data)
     # The summary_data.csv contains the correct total numbers for the entire dataset
