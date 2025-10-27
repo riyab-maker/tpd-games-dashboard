@@ -864,12 +864,12 @@ def main() -> None:
         )
     
     with filter_col2:
-        # Date filter - use timeseries data for date range
-        if not timeseries_total_df.empty:
+        # Date filter - use time series data for date range
+        if not time_series_df.empty:
             # Extract dates from time_period column
-            timeseries_total_df['date'] = pd.to_datetime(timeseries_total_df['time_period'], errors='coerce')
-            min_date = timeseries_total_df['date'].min().date()
-            max_date = timeseries_total_df['date'].max().date()
+            time_series_df['date'] = pd.to_datetime(time_series_df['time_period'], errors='coerce')
+            min_date = time_series_df['date'].min().date()
+            max_date = time_series_df['date'].max().date()
         else:
             min_date = pd.to_datetime('2025-07-02').date()
             max_date = pd.to_datetime('2025-10-24').date()
