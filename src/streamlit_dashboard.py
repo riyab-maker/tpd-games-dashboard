@@ -705,42 +705,53 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
         st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
     
+    # Aggregate data by time period to prevent overlapping points
+    # Group by time_period and sum the metrics
+    aggregated_df = filtered_ts_df.groupby('time_period').agg({
+        'started_users': 'sum',
+        'completed_users': 'sum',
+        'started_visits': 'sum',
+        'completed_visits': 'sum',
+        'started_instances': 'sum',
+        'completed_instances': 'sum'
+    }).reset_index()
+    
     # Show data info
-    st.info(f"📊 Showing {len(filtered_ts_df)} time periods for {time_period} view")
+    st.info(f"📊 Showing {len(aggregated_df)} time periods for {time_period} view")
     
     if filtered_ts_df.empty:
         st.warning("No data available for the selected time period.")
         return
     
-    # Sort the dataframe based on time period
+    # Sort the aggregated dataframe based on time period
     if time_period == "Month":
         # Convert month names to datetime for proper sorting
         try:
-            filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
-            filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
+            aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
+            aggregated_df = aggregated_df.sort_values('sort_date').drop('sort_date', axis=1)
             # Create ordered list for Altair
-            time_order = filtered_ts_df['time_period'].tolist()
+            time_order = aggregated_df['time_period'].tolist()
         except Exception as e:
             # If datetime parsing fails, use original order
             st.warning(f"Could not parse dates for sorting: {e}")
-            time_order = filtered_ts_df['time_period'].tolist()
+            time_order = aggregated_df['time_period'].tolist()
     elif time_period == "Week":
         # Extract week number for sorting
-        filtered_ts_df['week_num'] = filtered_ts_df['time_period'].str.extract(r'(\d+)').astype(int)
-        filtered_ts_df = filtered_ts_df.sort_values('week_num').drop('week_num', axis=1)
+        aggregated_df['week_num'] = aggregated_df['time_period'].str.extract(r'(\d+)').astype(int)
+        aggregated_df = aggregated_df.sort_values('week_num').drop('week_num', axis=1)
         # Create ordered list for Altair
-        time_order = filtered_ts_df['time_period'].tolist()
+        time_order = aggregated_df['time_period'].tolist()
     elif time_period == "Day":
         # Sort by date
         try:
-            filtered_ts_df['sort_date'] = pd.to_datetime(filtered_ts_df['time_period'])
-            filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
+            aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
+            aggregated_df = aggregated_df.sort_values('sort_date').drop('sort_date', axis=1)
             # Create ordered list for Altair
-            time_order = filtered_ts_df['time_period'].astype(str).tolist()
+            time_order = aggregated_df['time_period'].astype(str).tolist()
         except Exception as e:
             # If datetime parsing fails, use original order
             st.warning(f"Could not parse dates for sorting: {e}")
-            time_order = filtered_ts_df['time_period'].astype(str).tolist()
+            time_order = aggregated_df['time_period'].astype(str).tolist()
     else:
         time_order = None
     
@@ -757,21 +768,21 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         
         # Line chart for time periods
         lines = alt.Chart(chart_df).mark_line(
-            strokeWidth=4,
+            strokeWidth=3,
             point=alt.OverlayMarkDef(
                 filled=True,
-                size=100,
+                size=60,
                 stroke='white',
-                strokeWidth=2
+                strokeWidth=1.5
             )
         ).encode(
             x=alt.X('Time:N', title='Time Period', 
                    sort=time_order if time_order else None,
                    axis=alt.Axis(
                        labelAngle=0,
-                       labelFontSize=14,
-                       labelLimit=200,
-                       titleFontSize=16
+                       labelFontSize=12,
+                       labelLimit=150,
+                       titleFontSize=14
                    )),
             y=alt.Y('Count:Q', title=f'Number of {metric_name}', axis=alt.Axis(format='~s')),
             color=alt.Color('Event:N', 
@@ -785,27 +796,31 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
             title=f'{metric_name}: Started vs Completed'
         )
         
-        # Add data labels
-        started_labels = alt.Chart(chart_df[chart_df['Event'] == 'Started']).mark_text(
+        # Add data labels only for every other point to reduce clutter
+        started_data = chart_df[chart_df['Event'] == 'Started']
+        completed_data = chart_df[chart_df['Event'] == 'Completed']
+        
+        # Show labels only for every other point to reduce clutter
+        started_labels = alt.Chart(started_data[::2]).mark_text(
             align='center',
             baseline='bottom',
             color=color_scheme[0],
-            fontSize=14,
+            fontSize=11,
             fontWeight='bold',
-            dy=-15
+            dy=-12
         ).encode(
             x=alt.X('Time:N', sort=time_order if time_order else None),
             y=alt.Y('Count:Q'),
             text=alt.Text('Count:Q', format='.0f')
         )
         
-        completed_labels = alt.Chart(chart_df[chart_df['Event'] == 'Completed']).mark_text(
+        completed_labels = alt.Chart(completed_data[::2]).mark_text(
             align='center',
             baseline='top',
             color=color_scheme[1],
-            fontSize=14,
+            fontSize=11,
             fontWeight='bold',
-            dy=15
+            dy=12
         ).encode(
             x=alt.X('Time:N', sort=time_order if time_order else None),
             y=alt.Y('Count:Q'),
@@ -823,17 +838,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     
     # Users Section
     st.markdown("### 👥 Users Analysis")
-    users_chart = create_metric_chart(filtered_ts_df, "Users", "users", ['#FF6B6B', '#4ECDC4'])
+    users_chart = create_metric_chart(aggregated_df, "Users", "users", ['#FF6B6B', '#4ECDC4'])
     st.altair_chart(users_chart, use_container_width=True)
     
     # Visits Section
     st.markdown("### 🔄 Visits Analysis")
-    visits_chart = create_metric_chart(filtered_ts_df, "Visits", "visits", ['#FF6B6B', '#4ECDC4'])
+    visits_chart = create_metric_chart(aggregated_df, "Visits", "visits", ['#FF6B6B', '#4ECDC4'])
     st.altair_chart(visits_chart, use_container_width=True)
     
     # Instances Section
     st.markdown("### ⚡ Instances Analysis")
-    instances_chart = create_metric_chart(filtered_ts_df, "Instances", "instances", ['#FF6B6B', '#4ECDC4'])
+    instances_chart = create_metric_chart(aggregated_df, "Instances", "instances", ['#FF6B6B', '#4ECDC4'])
     st.altair_chart(instances_chart, use_container_width=True)
 
 def main() -> None:
