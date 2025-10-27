@@ -36,16 +36,10 @@ REQUIRED_FILES = [
 
 def check_processed_data():
     """Check if all required processed data files exist"""
-    # Debug information
-    st.info(f"Looking for data in: {DATA_DIR}")
-    st.info(f"Current working directory: {os.getcwd()}")
-    st.info(f"Script directory: {os.path.dirname(os.path.abspath(__file__))}")
-    
     # Check if DATA_DIR exists
     if not os.path.exists(DATA_DIR):
         st.error(f"ERROR: Data directory does not exist: {DATA_DIR}")
         st.error("Please ensure processed_data folder is uploaded to GitHub.")
-        st.error(f"Tried paths: {possible_paths}")
         st.stop()
     
     missing_files = []
@@ -302,8 +296,6 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         )
     
     with analysis_col2:
-        started_visits = summary_df[summary_df['Event'] == 'Started']['Visits'].iloc[0]
-        completed_visits = summary_df[summary_df['Event'] == 'Completed']['Visits'].iloc[0]
         visit_conversion = (completed_visits / started_visits * 100) if started_visits > 0 else 0
         st.metric(
             label="🔄 Visit Conversion",
