@@ -9,11 +9,22 @@ from datetime import datetime
 from typing import List, Tuple
 
 # Check if processed data exists
-# Get the directory where this script is located
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# Go up one level to the project root
-PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-DATA_DIR = os.path.join(PROJECT_ROOT, "processed_data")
+# Try multiple possible locations for the processed_data folder
+possible_paths = [
+    "processed_data",  # Current directory
+    "../processed_data",  # One level up
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "processed_data"),  # Relative to script
+    os.path.join(os.getcwd(), "processed_data"),  # Relative to working directory
+]
+
+DATA_DIR = None
+for path in possible_paths:
+    if os.path.exists(path):
+        DATA_DIR = path
+        break
+
+if DATA_DIR is None:
+    DATA_DIR = "processed_data"  # Default fallback
 REQUIRED_FILES = [
     "conversion_funnel_total.csv",
     "conversion_funnel_games.csv",
@@ -28,11 +39,13 @@ def check_processed_data():
     # Debug information
     st.info(f"Looking for data in: {DATA_DIR}")
     st.info(f"Current working directory: {os.getcwd()}")
+    st.info(f"Script directory: {os.path.dirname(os.path.abspath(__file__))}")
     
     # Check if DATA_DIR exists
     if not os.path.exists(DATA_DIR):
         st.error(f"ERROR: Data directory does not exist: {DATA_DIR}")
         st.error("Please ensure processed_data folder is uploaded to GitHub.")
+        st.error(f"Tried paths: {possible_paths}")
         st.stop()
     
     missing_files = []
