@@ -317,8 +317,6 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     """Render score distribution chart"""
     import altair as alt
     
-    # Debug message
-    st.info("🔧 Score Distribution Function Called - Version 1.3")
     
     if score_distribution_df.empty:
         st.warning("No score distribution data available.")
@@ -678,7 +676,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         return
     
     st.markdown("### 📈 Time-Series Analysis")
-    st.info("📅 Time series data shows activity from July 2nd, 2025 onwards")
     
     # Create columns for filters
     ts_filter_col1, ts_filter_col2, ts_filter_col3 = st.columns(3)
@@ -703,7 +700,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     
     with ts_filter_col3:
         # Show data info
-        st.info(f"📊 Showing {len(time_series_df)} time periods")
     
     # Use only preprocessed data (like all other graphs)
     if time_series_df.empty:
@@ -885,7 +881,6 @@ def main() -> None:
     
     # Show data info
     if metadata:
-        st.info(f"📊 Data last updated: {metadata.get('preprocessing_date', 'Unknown')} | Records: {metadata.get('main_data_records', 'Unknown')}")
     
     # Add filters
     st.markdown("### 🎮 Filters")
