@@ -1,9 +1,9 @@
 game_name,total_score,user_count
-Beginning Sound Ma Ka La Hindi,1,352
-Beginning Sound Ma Ka La Hindi,2,484
+Beginning Sound Ma Ka La Hindi,1,353
+Beginning Sound Ma Ka La Hindi,2,485
 Beginning Sound Ma Ka La Hindi,3,793
-Beginning Sound Ma Ka La Hindi,4,895
-Beginning Sound Ma Ka La Hindi,5,753
+Beginning Sound Ma Ka La Hindi,4,897
+Beginning Sound Ma Ka La Hindi,5,754
 Beginning Sound Ma Ka La Hindi,6,447
 Beginning Sound Ma Ka La Hindi,7,261
 Beginning Sound Ma Ka La Hindi,8,89
@@ -11,47 +11,47 @@ Beginning Sound Ma Ka La Hindi,9,39
 Beginning Sound Ma Ka La Hindi,10,24
 Beginning Sound Ma Ka La Hindi,11,7
 Beginning Sound Ma Ka La Hindi,12,13
-Beginning Sound Ma Ka La Marathi,1,650
+Beginning Sound Ma Ka La Marathi,1,651
 Beginning Sound Ma Ka La Marathi,2,870
 Beginning Sound Ma Ka La Marathi,3,1190
-Beginning Sound Ma Ka La Marathi,4,1355
-Beginning Sound Ma Ka La Marathi,5,1203
-Beginning Sound Ma Ka La Marathi,6,761
+Beginning Sound Ma Ka La Marathi,4,1357
+Beginning Sound Ma Ka La Marathi,5,1206
+Beginning Sound Ma Ka La Marathi,6,762
 Beginning Sound Ma Ka La Marathi,7,371
 Beginning Sound Ma Ka La Marathi,8,130
 Beginning Sound Ma Ka La Marathi,9,49
 Beginning Sound Ma Ka La Marathi,10,24
 Beginning Sound Ma Ka La Marathi,11,11
 Beginning Sound Ma Ka La Marathi,12,18
-Color Blue,1,2767
-Color Blue,2,3775
-Color Blue,3,3883
-Color Blue,4,2688
-Color Blue,5,1434
-Color Blue,6,565
+Color Blue,1,2769
+Color Blue,2,3776
+Color Blue,3,3888
+Color Blue,4,2691
+Color Blue,5,1435
+Color Blue,6,567
 Color Blue,7,174
 Color Blue,8,47
 Color Blue,9,16
 Color Blue,10,13
 Color Blue,11,9
 Color Blue,12,10
-Color Red,1,6664
-Color Red,2,8711
-Color Red,3,9363
-Color Red,4,7963
-Color Red,5,5094
-Color Red,6,2553
-Color Red,7,1103
-Color Red,8,467
-Color Red,9,261
+Color Red,1,6675
+Color Red,2,8730
+Color Red,3,9388
+Color Red,4,7980
+Color Red,5,5108
+Color Red,6,2563
+Color Red,7,1107
+Color Red,8,469
+Color Red,9,263
 Color Red,10,135
 Color Red,11,71
 Color Red,12,147
-Color Yellow,1,2985
-Color Yellow,2,3857
-Color Yellow,3,4239
-Color Yellow,4,3606
-Color Yellow,5,2218
+Color Yellow,1,2993
+Color Yellow,2,3863
+Color Yellow,3,4244
+Color Yellow,4,3608
+Color Yellow,5,2219
 Color Yellow,6,1070
 Color Yellow,7,409
 Color Yellow,8,134
@@ -59,47 +59,47 @@ Color Yellow,9,56
 Color Yellow,10,30
 Color Yellow,11,17
 Color Yellow,12,27
-Number Comparison,1,11
+Number Comparison,1,12
 Number Comparison,2,26
 Number Comparison,3,68
 Number Comparison,4,148
 Number Comparison,5,200
 Number Comparison,6,263
-Number Comparison,7,300
-Number Comparison,8,435
-Number Comparison,9,723
+Number Comparison,7,301
+Number Comparison,8,436
+Number Comparison,9,724
 Number Comparison,10,1453
-Number Comparison,11,3251
-Number Comparison,12,7301
-Numeracy I,1,3834
-Numeracy I,2,5445
-Numeracy I,3,6608
-Numeracy I,4,6051
-Numeracy I,5,4066
-Numeracy I,6,1872
-Numeracy I,7,705
+Number Comparison,11,3254
+Number Comparison,12,7304
+Numeracy I,1,3838
+Numeracy I,2,5451
+Numeracy I,3,6623
+Numeracy I,4,6064
+Numeracy I,5,4068
+Numeracy I,6,1874
+Numeracy I,7,706
 Numeracy I,8,245
 Numeracy I,9,129
-Numeracy I,10,74
+Numeracy I,10,75
 Numeracy I,11,41
 Numeracy I,12,60
-Numeracy II,1,2416
-Numeracy II,2,3506
-Numeracy II,3,4941
-Numeracy II,4,5044
-Numeracy II,5,3573
-Numeracy II,6,1865
-Numeracy II,7,730
+Numeracy II,1,2418
+Numeracy II,2,3511
+Numeracy II,3,4950
+Numeracy II,4,5050
+Numeracy II,5,3576
+Numeracy II,6,1868
+Numeracy II,7,733
 Numeracy II,8,269
 Numeracy II,9,148
-Numeracy II,10,90
+Numeracy II,10,91
 Numeracy II,11,43
 Numeracy II,12,71
-Numerals 1-10,1,861
-Numerals 1-10,2,1560
-Numerals 1-10,3,2118
-Numerals 1-10,4,2129
-Numerals 1-10,5,1483
+Numerals 1-10,1,862
+Numerals 1-10,2,1561
+Numerals 1-10,3,2120
+Numerals 1-10,4,2132
+Numerals 1-10,5,1485
 Numerals 1-10,6,652
 Numerals 1-10,7,214
 Numerals 1-10,8,47
@@ -123,14 +123,14 @@ Quantity Comparison,1,2
 Quantity Comparison,2,13
 Quantity Comparison,3,50
 Quantity Comparison,4,92
-Quantity Comparison,5,174
+Quantity Comparison,5,175
 Quantity Comparison,6,241
-Quantity Comparison,7,387
+Quantity Comparison,7,388
 Quantity Comparison,8,633
-Quantity Comparison,9,1144
-Quantity Comparison,10,2338
-Quantity Comparison,11,5190
-Quantity Comparison,12,10503
+Quantity Comparison,9,1145
+Quantity Comparison,10,2340
+Quantity Comparison,11,5192
+Quantity Comparison,12,10508
 Relational Comparison,1,5
 Relational Comparison,2,27
 Relational Comparison,3,57
@@ -139,23 +139,23 @@ Relational Comparison,5,142
 Relational Comparison,6,203
 Relational Comparison,7,254
 Relational Comparison,8,402
-Relational Comparison,9,742
-Relational Comparison,10,1611
-Relational Comparison,11,3718
-Relational Comparison,12,7055
+Relational Comparison,9,743
+Relational Comparison,10,1612
+Relational Comparison,11,3721
+Relational Comparison,12,7056
 Relational Comparison II,1,11
 Relational Comparison II,2,27
 Relational Comparison II,3,58
 Relational Comparison II,4,101
 Relational Comparison II,5,153
 Relational Comparison II,6,197
-Relational Comparison II,7,303
+Relational Comparison II,7,305
 Relational Comparison II,8,491
 Relational Comparison II,9,927
-Relational Comparison II,10,2150
-Relational Comparison II,11,4722
-Relational Comparison II,12,8839
-Revision Primary Colors,1,11
+Relational Comparison II,10,2151
+Relational Comparison II,11,4724
+Relational Comparison II,12,8843
+Revision Primary Colors,1,12
 Revision Primary Colors,2,15
 Revision Primary Colors,3,17
 Revision Primary Colors,4,26
@@ -164,9 +164,9 @@ Revision Primary Colors,6,72
 Revision Primary Colors,7,96
 Revision Primary Colors,8,186
 Revision Primary Colors,9,439
-Revision Primary Colors,10,1046
-Revision Primary Colors,11,2597
-Revision Primary Colors,12,5837
+Revision Primary Colors,10,1047
+Revision Primary Colors,11,2601
+Revision Primary Colors,12,5846
 Revision Primary Shapes,1,8
 Revision Primary Shapes,2,7
 Revision Primary Shapes,3,16
@@ -174,77 +174,77 @@ Revision Primary Shapes,4,31
 Revision Primary Shapes,5,56
 Revision Primary Shapes,6,117
 Revision Primary Shapes,7,192
-Revision Primary Shapes,8,354
-Revision Primary Shapes,9,568
-Revision Primary Shapes,10,975
-Revision Primary Shapes,11,1840
-Revision Primary Shapes,12,2974
+Revision Primary Shapes,8,355
+Revision Primary Shapes,9,570
+Revision Primary Shapes,10,976
+Revision Primary Shapes,11,1841
+Revision Primary Shapes,12,2975
 Rhyming Words Hindi,1,36
 Rhyming Words Hindi,2,91
 Rhyming Words Hindi,3,234
 Rhyming Words Hindi,4,460
 Rhyming Words Hindi,5,584
 Rhyming Words Hindi,6,643
-Rhyming Words Hindi,7,791
-Rhyming Words Hindi,8,911
-Rhyming Words Hindi,9,905
-Rhyming Words Hindi,10,897
+Rhyming Words Hindi,7,792
+Rhyming Words Hindi,8,912
+Rhyming Words Hindi,9,907
+Rhyming Words Hindi,10,899
 Rhyming Words Hindi,11,749
 Rhyming Words Marathi,1,86
-Rhyming Words Marathi,2,255
+Rhyming Words Marathi,2,256
 Rhyming Words Marathi,3,524
 Rhyming Words Marathi,4,748
 Rhyming Words Marathi,5,1008
 Rhyming Words Marathi,6,1069
-Rhyming Words Marathi,7,1164
-Rhyming Words Marathi,8,1398
-Rhyming Words Marathi,9,1569
-Rhyming Words Marathi,10,1280
+Rhyming Words Marathi,7,1166
+Rhyming Words Marathi,8,1399
+Rhyming Words Marathi,9,1570
+Rhyming Words Marathi,10,1284
 Rhyming Words Marathi,11,1
-Shape Circle,1,10513
-Shape Circle,2,13492
-Shape Circle,3,14977
-Shape Circle,4,12843
-Shape Circle,5,8743
-Shape Circle,6,4874
-Shape Circle,7,2640
-Shape Circle,8,1380
-Shape Circle,9,787
+Shape Circle,1,10533
+Shape Circle,2,13530
+Shape Circle,3,15027
+Shape Circle,4,12879
+Shape Circle,5,8771
+Shape Circle,6,4888
+Shape Circle,7,2645
+Shape Circle,8,1388
+Shape Circle,9,788
 Shape Circle,10,453
-Shape Circle,11,319
-Shape Circle,12,542
-Shape Rectangle,1,1093
-Shape Rectangle,2,1815
+Shape Circle,11,321
+Shape Circle,12,543
+Shape Rectangle,1,1094
+Shape Rectangle,2,1819
 Shape Rectangle,3,2375
-Shape Rectangle,4,2349
-Shape Rectangle,5,1588
-Shape Rectangle,6,817
+Shape Rectangle,4,2350
+Shape Rectangle,5,1589
+Shape Rectangle,6,819
 Shape Rectangle,7,315
 Shape Rectangle,8,96
-Shape Rectangle,9,30
+Shape Rectangle,9,31
 Shape Rectangle,10,20
 Shape Rectangle,11,5
 Shape Rectangle,12,8
-Shape Square,1,1751
-Shape Square,2,2538
-Shape Square,3,3499
-Shape Square,4,3466
-Shape Square,5,2430
-Shape Square,6,1381
+Shape Square,1,1752
+Shape Square,2,2541
+Shape Square,3,3504
+Shape Square,4,3469
+Shape Square,5,2431
+Shape Square,6,1382
 Shape Square,7,526
 Shape Square,8,172
 Shape Square,9,65
 Shape Square,10,17
 Shape Square,11,16
 Shape Square,12,20
-Shape Triangle,1,3893
-Shape Triangle,2,5355
-Shape Triangle,3,5912
-Shape Triangle,4,4889
-Shape Triangle,5,3071
-Shape Triangle,6,1547
+Shape Triangle,1,3897
+Shape Triangle,2,5364
+Shape Triangle,3,5921
+Shape Triangle,4,4892
+Shape Triangle,5,3077
+Shape Triangle,6,1549
 Shape Triangle,7,567
-Shape Triangle,8,220
+Shape Triangle,8,222
 Shape Triangle,9,100
 Shape Triangle,10,45
 Shape Triangle,11,36

@@ -1,5 +1,5 @@
 time_period,period_type,started_users,completed_users,started_visits,completed_visits,started_instances,completed_instances,game_name
-2025-10-13,Day,177,0,178,0,200,0,Shape Circle
+2025-10-13,Day,36,0,36,0,39,0,Shape Circle
 2025-10-14,Day,290,0,298,0,336,0,Shape Circle
 2025-10-15,Day,770,0,782,0,914,0,Shape Circle
 2025-10-16,Day,519,0,535,0,646,0,Shape Circle
@@ -13,7 +13,7 @@ time_period,period_type,started_users,completed_users,started_visits,completed_v
 2025-10-24,Day,834,0,856,0,1023,0,Shape Circle
 2025-10-25,Day,708,0,730,0,884,0,Shape Circle
 2025-10-26,Day,356,0,366,0,431,0,Shape Circle
-2025-10-27,Day,96,0,98,0,119,0,Shape Circle
+2025-10-27,Day,478,0,488,0,582,0,Shape Circle
 Week 1,Week,8251,0,9734,0,14043,0,Shape Circle
 Week 2,Week,5485,0,8981,0,13506,0,Shape Circle
 Week 3,Week,4959,0,7174,0,10247,0,Shape Circle
@@ -30,12 +30,12 @@ Week 13,Week,4603,0,6770,0,8096,0,Shape Circle
 Week 14,Week,1173,0,1416,0,1637,0,Shape Circle
 Week 15,Week,1322,0,1539,0,1721,0,Shape Circle
 Week 16,Week,3385,0,4814,0,5731,0,Shape Circle
-Week 17,Week,2450,0,3199,0,3819,0,Shape Circle
+Week 17,Week,2658,0,3589,0,4282,0,Shape Circle
 July 2025,Month,17639,0,33359,0,52877,0,Shape Circle
 August 2025,Month,16472,0,29820,0,41415,0,Shape Circle
 September 2025,Month,16346,0,35220,0,42213,0,Shape Circle
-October 2025,Month,6527,0,10968,0,12908,0,Shape Circle
-2025-10-13,Day,81,55,82,55,85,55,Color Red
+October 2025,Month,6665,0,11358,0,13371,0,Shape Circle
+2025-10-13,Day,17,12,17,12,18,12,Color Red
 2025-10-14,Day,138,105,142,107,155,116,Color Red
 2025-10-15,Day,399,320,407,322,465,348,Color Red
 2025-10-16,Day,283,225,288,226,331,249,Color Red
@@ -49,7 +49,7 @@ October 2025,Month,6527,0,10968,0,12908,0,Shape Circle
 2025-10-24,Day,341,285,346,285,386,303,Color Red
 2025-10-25,Day,298,236,300,237,338,260,Color Red
 2025-10-26,Day,191,152,192,152,218,165,Color Red
-2025-10-27,Day,48,43,48,43,65,55,Color Red
+2025-10-27,Day,194,160,195,161,242,192,Color Red
 Week 1,Week,10545,5199,10470,5728,12989,6925,Color Red
 Week 2,Week,3713,3032,5090,4027,6553,4893,Color Red
 Week 3,Week,2917,2485,4060,3317,5065,4003,Color Red
@@ -66,12 +66,12 @@ Week 13,Week,2215,1845,2781,2214,3152,2408,Color Red
 Week 14,Week,566,437,645,482,727,525,Color Red
 Week 15,Week,697,542,792,591,856,618,Color Red
 Week 16,Week,1840,1483,2270,1793,2556,1954,Color Red
-Week 17,Week,1212,982,1420,1136,1619,1239,Color Red
+Week 17,Week,1319,1070,1567,1254,1796,1376,Color Red
 July 2025,Month,17317,10802,24137,16654,32474,21777,Color Red
 August 2025,Month,11044,9569,17854,14426,22138,17009,Color Red
 September 2025,Month,9322,7923,14976,12032,16961,13086,Color Red
-October 2025,Month,3665,2978,5127,4002,5758,4336,Color Red
-2025-10-13,Day,16,12,16,12,17,13,Color Yellow
+October 2025,Month,3746,3045,5274,4120,5935,4473,Color Red
+2025-10-13,Day,4,4,4,4,4,4,Color Yellow
 2025-10-14,Day,41,36,41,36,45,37,Color Yellow
 2025-10-15,Day,92,72,93,72,99,78,Color Yellow
 2025-10-16,Day,69,52,69,52,76,55,Color Yellow
@@ -85,7 +85,7 @@ October 2025,Month,3665,2978,5127,4002,5758,4336,Color Red
 2025-10-24,Day,73,57,73,57,78,59,Color Yellow
 2025-10-25,Day,63,46,63,46,70,48,Color Yellow
 2025-10-26,Day,40,25,40,25,43,28,Color Yellow
-2025-10-27,Day,10,8,10,8,10,8,Color Yellow
+2025-10-27,Day,41,32,41,32,41,32,Color Yellow
 Week 1,Week,1078,867,1401,1062,1909,1388,Color Yellow
 Week 2,Week,9617,5801,11570,7340,14060,8536,Color Yellow
 Week 3,Week,1869,1365,2227,1641,2530,1798,Color Yellow
@@ -102,12 +102,12 @@ Week 13,Week,559,447,620,489,687,523,Color Yellow
 Week 14,Week,201,139,219,150,234,159,Color Yellow
 Week 15,Week,230,187,248,198,275,214,Color Yellow
 Week 16,Week,435,349,476,367,518,391,Color Yellow
-Week 17,Week,285,216,306,229,326,238,Color Yellow
+Week 17,Week,308,235,337,253,357,262,Color Yellow
 July 2025,Month,12300,7893,17151,11561,21479,13983,Color Yellow
 August 2025,Month,4781,4065,6788,5531,7584,5956,Color Yellow
 September 2025,Month,2630,2168,3243,2600,3542,2771,Color Yellow
-October 2025,Month,1056,828,1249,944,1353,1002,Color Yellow
-2025-10-13,Day,26,20,26,20,28,21,Shape Triangle
+October 2025,Month,1076,844,1280,968,1384,1026,Color Yellow
+2025-10-13,Day,7,6,7,6,8,7,Shape Triangle
 2025-10-14,Day,65,42,66,42,70,45,Shape Triangle
 2025-10-15,Day,109,89,110,89,121,95,Shape Triangle
 2025-10-16,Day,113,88,114,89,118,92,Shape Triangle
@@ -121,7 +121,7 @@ October 2025,Month,1056,828,1249,944,1353,1002,Color Yellow
 2025-10-24,Day,91,80,93,80,96,82,Shape Triangle
 2025-10-25,Day,93,81,94,81,104,85,Shape Triangle
 2025-10-26,Day,53,41,53,41,55,42,Shape Triangle
-2025-10-27,Day,15,12,15,12,16,13,Shape Triangle
+2025-10-27,Day,62,53,62,53,66,54,Shape Triangle
 Week 1,Week,1846,1589,2461,2051,3433,2723,Shape Triangle
 Week 2,Week,11300,5867,12307,6924,14434,7818,Shape Triangle
 Week 3,Week,1841,1518,2388,1909,2718,2096,Shape Triangle
@@ -138,12 +138,12 @@ Week 13,Week,879,700,977,766,1068,810,Shape Triangle
 Week 14,Week,268,209,292,224,317,235,Shape Triangle
 Week 15,Week,280,210,316,226,336,234,Shape Triangle
 Week 16,Week,657,529,700,554,755,586,Shape Triangle
-Week 17,Week,413,339,430,350,454,364,Shape Triangle
+Week 17,Week,457,377,477,391,504,405,Shape Triangle
 July 2025,Month,14970,8994,20010,13136,25184,16054,Shape Triangle
 August 2025,Month,6706,5676,9681,7813,10853,8457,Shape Triangle
 September 2025,Month,4125,3375,5182,4086,5648,4334,Shape Triangle
-October 2025,Month,1484,1188,1738,1354,1862,1419,Shape Triangle
-2025-10-13,Day,32,24,32,24,37,26,Quantity Comparison
+October 2025,Month,1518,1216,1785,1395,1912,1460,Shape Triangle
+2025-10-13,Day,9,7,9,7,11,7,Quantity Comparison
 2025-10-14,Day,60,48,60,48,67,51,Quantity Comparison
 2025-10-15,Day,74,51,74,51,79,52,Quantity Comparison
 2025-10-16,Day,34,30,35,31,39,31,Quantity Comparison
@@ -157,7 +157,7 @@ October 2025,Month,1484,1188,1738,1354,1862,1419,Shape Triangle
 2025-10-24,Day,49,36,48,35,51,36,Quantity Comparison
 2025-10-25,Day,51,39,51,39,58,44,Quantity Comparison
 2025-10-26,Day,33,28,33,28,37,30,Quantity Comparison
-2025-10-27,Day,15,12,15,12,17,14,Quantity Comparison
+2025-10-27,Day,34,28,34,28,38,32,Quantity Comparison
 Week 1,Week,4,2,4,2,6,3,Quantity Comparison
 Week 2,Week,18,9,20,9,28,10,Quantity Comparison
 Week 3,Week,119,88,170,126,221,156,Quantity Comparison
@@ -174,12 +174,12 @@ Week 13,Week,567,436,612,466,700,504,Quantity Comparison
 Week 14,Week,293,230,311,239,355,262,Quantity Comparison
 Week 15,Week,324,252,345,264,384,276,Quantity Comparison
 Week 16,Week,340,266,369,288,409,306,Quantity Comparison
-Week 17,Week,214,175,233,183,255,194,Quantity Comparison
+Week 17,Week,231,189,252,199,276,212,Quantity Comparison
 July 2025,Month,14632,9076,20908,12054,29103,15069,Quantity Comparison
 August 2025,Month,4421,3372,5648,4233,6364,4573,Quantity Comparison
 September 2025,Month,10666,7443,11890,8135,13481,8407,Quantity Comparison
-October 2025,Month,1072,853,1258,974,1403,1038,Quantity Comparison
-2025-10-13,Day,16,14,16,14,21,17,Relational Comparison
+October 2025,Month,1086,864,1277,990,1424,1056,Quantity Comparison
+2025-10-13,Day,5,4,5,4,7,5,Relational Comparison
 2025-10-14,Day,41,29,41,29,47,30,Relational Comparison
 2025-10-15,Day,43,35,43,35,49,39,Relational Comparison
 2025-10-16,Day,42,31,42,31,45,34,Relational Comparison
@@ -193,7 +193,7 @@ October 2025,Month,1072,853,1258,974,1403,1038,Quantity Comparison
 2025-10-24,Day,37,31,37,31,43,36,Relational Comparison
 2025-10-25,Day,39,30,39,30,41,30,Relational Comparison
 2025-10-26,Day,23,17,23,17,25,19,Relational Comparison
-2025-10-27,Day,7,6,7,6,8,6,Relational Comparison
+2025-10-27,Day,21,17,21,17,22,17,Relational Comparison
 Week 2,Week,22,12,25,14,38,19,Relational Comparison
 Week 3,Week,141,106,210,158,271,193,Relational Comparison
 Week 4,Week,13765,8029,18882,10200,27721,12973,Relational Comparison
@@ -209,11 +209,11 @@ Week 13,Week,415,335,459,368,518,394,Relational Comparison
 Week 14,Week,173,134,185,140,209,154,Relational Comparison
 Week 15,Week,200,160,217,168,247,181,Relational Comparison
 Week 16,Week,233,186,258,205,285,221,Relational Comparison
-Week 17,Week,163,130,169,135,186,145,Relational Comparison
+Week 17,Week,177,141,183,146,200,156,Relational Comparison
 July 2025,Month,14259,8428,19819,10862,28852,13738,Relational Comparison
 August 2025,Month,3520,2968,4665,3822,5343,4218,Relational Comparison
 September 2025,Month,1624,1330,1933,1560,2158,1667,Relational Comparison
-October 2025,Month,715,567,829,648,927,701,Relational Comparison
+October 2025,Month,727,577,843,659,941,712,Relational Comparison
 2025-08-19,Day,7,7,7,7,7,7,Numeracy I
 2025-08-20,Day,311,260,319,267,361,295,Numeracy I
 2025-08-21,Day,201,169,214,182,249,206,Numeracy I
@@ -312,7 +312,7 @@ Week 9,Week,337,263,381,296,404,306,Shape Square
 July 2025,Month,1379,1102,1996,1529,2797,2057,Shape Square
 August 2025,Month,15816,10032,16938,11330,19675,12092,Shape Square
 September 2025,Month,103,82,109,85,119,89,Shape Square
-2025-10-13,Day,37,29,37,29,41,30,Revision Primary Colors
+2025-10-13,Day,9,7,9,7,9,7,Revision Primary Colors
 2025-10-14,Day,59,46,66,47,100,55,Revision Primary Colors
 2025-10-15,Day,72,45,75,46,102,50,Revision Primary Colors
 2025-10-16,Day,42,26,44,26,49,28,Revision Primary Colors
@@ -326,7 +326,7 @@ September 2025,Month,103,82,109,85,119,89,Shape Square
 2025-10-24,Day,33,24,34,25,41,28,Revision Primary Colors
 2025-10-25,Day,22,19,23,20,26,20,Revision Primary Colors
 2025-10-26,Day,22,14,22,14,24,16,Revision Primary Colors
-2025-10-27,Day,11,7,11,7,11,7,Revision Primary Colors
+2025-10-27,Day,36,28,36,28,38,30,Revision Primary Colors
 Week 5,Week,16,8,14,8,21,8,Revision Primary Colors
 Week 6,Week,12370,7805,13500,8594,15882,9058,Revision Primary Colors
 Week 7,Week,1528,899,1712,999,1934,1053,Revision Primary Colors
@@ -339,11 +339,11 @@ Week 13,Week,351,265,392,293,443,313,Revision Primary Colors
 Week 14,Week,256,183,296,206,330,226,Revision Primary Colors
 Week 15,Week,338,259,401,291,488,320,Revision Primary Colors
 Week 16,Week,257,193,307,219,374,243,Revision Primary Colors
-Week 17,Week,143,112,156,118,182,132,Revision Primary Colors
+Week 17,Week,164,129,181,139,209,155,Revision Primary Colors
 August 2025,Month,14219,8934,16237,10286,18958,10848,Revision Primary Colors
 September 2025,Month,1182,869,1414,1000,1600,1067,Revision Primary Colors
-October 2025,Month,871,667,1160,834,1374,921,Revision Primary Colors
-2025-10-13,Day,25,21,25,21,27,22,Revision Primary Shapes
+October 2025,Month,888,682,1185,855,1401,944,Revision Primary Colors
+2025-10-13,Day,4,5,4,5,5,6,Revision Primary Shapes
 2025-10-14,Day,31,21,33,21,35,23,Revision Primary Shapes
 2025-10-15,Day,40,33,41,34,45,37,Revision Primary Shapes
 2025-10-16,Day,26,18,27,18,29,19,Revision Primary Shapes
@@ -357,7 +357,7 @@ October 2025,Month,871,667,1160,834,1374,921,Revision Primary Colors
 2025-10-24,Day,23,16,23,16,25,17,Revision Primary Shapes
 2025-10-25,Day,13,12,14,12,15,12,Revision Primary Shapes
 2025-10-26,Day,13,9,13,9,15,10,Revision Primary Shapes
-2025-10-27,Day,3,3,3,3,4,3,Revision Primary Shapes
+2025-10-27,Day,14,10,14,10,16,10,Revision Primary Shapes
 Week 5,Week,6,3,4,2,6,3,Revision Primary Shapes
 Week 6,Week,7022,4705,8210,5469,9768,6055,Revision Primary Shapes
 Week 7,Week,1274,890,1462,1009,1669,1093,Revision Primary Shapes
@@ -370,11 +370,11 @@ Week 13,Week,411,328,452,362,520,393,Revision Primary Shapes
 Week 14,Week,213,174,232,182,269,208,Revision Primary Shapes
 Week 15,Week,234,179,262,197,292,211,Revision Primary Shapes
 Week 16,Week,172,138,194,147,219,162,Revision Primary Shapes
-Week 17,Week,83,64,89,67,99,72,Revision Primary Shapes
+Week 17,Week,92,69,100,74,111,79,Revision Primary Shapes
 August 2025,Month,8311,5678,10347,6998,12183,7709,Revision Primary Shapes
 September 2025,Month,934,765,1081,873,1198,934,Revision Primary Shapes
-October 2025,Month,651,518,777,593,879,653,Revision Primary Shapes
-2025-10-13,Day,12,8,12,8,13,9,Rhyming Words Hindi
+October 2025,Month,660,523,788,600,891,660,Revision Primary Shapes
+2025-10-13,Day,2,2,2,2,2,2,Rhyming Words Hindi
 2025-10-14,Day,29,18,29,18,30,18,Rhyming Words Hindi
 2025-10-15,Day,32,21,32,21,37,22,Rhyming Words Hindi
 2025-10-16,Day,22,15,22,15,25,17,Rhyming Words Hindi
@@ -388,7 +388,7 @@ October 2025,Month,651,518,777,593,879,653,Revision Primary Shapes
 2025-10-24,Day,23,17,23,17,26,18,Rhyming Words Hindi
 2025-10-25,Day,24,15,24,15,24,15,Rhyming Words Hindi
 2025-10-26,Day,15,10,15,10,18,13,Rhyming Words Hindi
-2025-10-27,Day,5,4,5,4,5,4,Rhyming Words Hindi
+2025-10-27,Day,22,12,23,12,24,13,Rhyming Words Hindi
 Week 6,Week,10,7,10,7,11,7,Rhyming Words Hindi
 Week 7,Week,4642,2598,5232,2907,6536,3179,Rhyming Words Hindi
 Week 8,Week,482,363,556,417,627,453,Rhyming Words Hindi
@@ -400,11 +400,11 @@ Week 13,Week,3899,2176,4555,2542,5655,2914,Rhyming Words Hindi
 Week 14,Week,706,369,762,394,922,447,Rhyming Words Hindi
 Week 15,Week,178,126,188,132,200,139,Rhyming Words Hindi
 Week 16,Week,159,113,169,120,187,127,Rhyming Words Hindi
-Week 17,Week,112,80,117,83,130,88,Rhyming Words Hindi
+Week 17,Week,128,88,135,91,149,97,Rhyming Words Hindi
 August 2025,Month,5141,2996,6099,3557,7505,3884,Rhyming Words Hindi
 September 2025,Month,4375,2573,5383,3195,6579,3625,Rhyming Words Hindi
-October 2025,Month,1081,640,1236,729,1439,801,Rhyming Words Hindi
-2025-10-13,Day,28,16,28,16,35,18,Rhyming Words Marathi
+October 2025,Month,1094,648,1254,737,1458,810,Rhyming Words Hindi
+2025-10-13,Day,4,4,4,4,5,5,Rhyming Words Marathi
 2025-10-14,Day,54,32,54,32,60,35,Rhyming Words Marathi
 2025-10-15,Day,60,40,61,40,69,45,Rhyming Words Marathi
 2025-10-16,Day,44,24,44,24,51,29,Rhyming Words Marathi
@@ -418,7 +418,7 @@ October 2025,Month,1081,640,1236,729,1439,801,Rhyming Words Hindi
 2025-10-24,Day,31,17,31,17,32,18,Rhyming Words Marathi
 2025-10-25,Day,37,24,38,24,43,24,Rhyming Words Marathi
 2025-10-26,Day,28,16,28,16,29,16,Rhyming Words Marathi
-2025-10-27,Day,6,4,6,4,6,4,Rhyming Words Marathi
+2025-10-27,Day,21,14,21,14,22,14,Rhyming Words Marathi
 Week 6,Week,8,2,7,2,12,2,Rhyming Words Marathi
 Week 7,Week,8471,4324,9836,5040,12849,5608,Rhyming Words Marathi
 Week 8,Week,873,669,1043,776,1255,876,Rhyming Words Marathi
@@ -430,10 +430,10 @@ Week 13,Week,6012,2959,6849,3291,8665,3521,Rhyming Words Marathi
 Week 14,Week,1256,577,1366,622,1631,695,Rhyming Words Marathi
 Week 15,Week,351,224,374,233,424,250,Rhyming Words Marathi
 Week 16,Week,257,175,274,182,311,201,Rhyming Words Marathi
-Week 17,Week,172,109,180,114,196,119,Rhyming Words Marathi
+Week 17,Week,187,119,195,124,212,129,Rhyming Words Marathi
 August 2025,Month,9177,4899,11156,6023,14426,6714,Rhyming Words Marathi
 September 2025,Month,6945,3717,8205,4318,10150,4611,Rhyming Words Marathi
-October 2025,Month,1920,1021,2194,1151,2562,1265,Rhyming Words Marathi
+October 2025,Month,1934,1031,2209,1161,2578,1275,Rhyming Words Marathi
 2025-08-20,Day,1678,954,1762,996,2129,1067,Relational Comparison II
 2025-08-21,Day,657,374,692,387,843,409,Relational Comparison II
 2025-08-22,Day,496,281,510,292,591,308,Relational Comparison II
@@ -455,7 +455,7 @@ Week 9,Week,709,422,846,507,985,545,Relational Comparison II
 Week 10,Week,2,2,2,2,4,4,Relational Comparison II
 August 2025,Month,15084,9306,20567,12001,24940,12680,Relational Comparison II
 September 2025,Month,210,129,234,142,284,159,Relational Comparison II
-2025-10-13,Day,153,92,149,91,173,100,Number Comparison
+2025-10-13,Day,42,27,41,27,50,32,Number Comparison
 2025-10-14,Day,165,107,164,107,196,120,Number Comparison
 2025-10-15,Day,138,84,138,85,171,96,Number Comparison
 2025-10-16,Day,73,40,73,40,84,43,Number Comparison
@@ -469,7 +469,7 @@ September 2025,Month,210,129,234,142,284,159,Relational Comparison II
 2025-10-24,Day,26,20,26,20,26,20,Number Comparison
 2025-10-25,Day,25,20,25,20,31,21,Number Comparison
 2025-10-26,Day,15,11,15,11,16,12,Number Comparison
-2025-10-27,Day,10,6,13,6,14,7,Number Comparison
+2025-10-27,Day,24,20,28,20,32,24,Number Comparison
 Week 7,Week,562,452,623,487,763,572,Number Comparison
 Week 8,Week,11501,7073,12976,7826,15252,8268,Number Comparison
 Week 9,Week,564,398,628,446,695,464,Number Comparison
@@ -480,11 +480,10 @@ Week 13,Week,416,338,444,358,482,380,Number Comparison
 Week 14,Week,271,208,291,221,318,238,Number Comparison
 Week 15,Week,9499,5927,10968,6775,13274,7538,Number Comparison
 Week 16,Week,348,216,366,233,439,256,Number Comparison
-Week 17,Week,121,92,131,99,143,103,Number Comparison
+Week 17,Week,134,105,146,113,161,120,Number Comparison
 August 2025,Month,12078,7537,14085,8651,16551,9191,Number Comparison
 September 2025,Month,1198,961,1360,1067,1471,1114,Number Comparison
-October 2025,Month,10006,6292,11756,7328,14174,8135,Number Comparison
-2025-10-13,Day,11,8,11,8,12,8,Beginning Sound Ma Ka La Hindi
+October 2025,Month,10015,6301,11771,7342,14192,8152,Number Comparison
 2025-10-14,Day,16,13,16,13,17,14,Beginning Sound Ma Ka La Hindi
 2025-10-15,Day,17,13,17,13,17,13,Beginning Sound Ma Ka La Hindi
 2025-10-16,Day,14,11,14,11,16,12,Beginning Sound Ma Ka La Hindi
@@ -498,7 +497,7 @@ October 2025,Month,10006,6292,11756,7328,14174,8135,Number Comparison
 2025-10-24,Day,17,12,17,12,19,12,Beginning Sound Ma Ka La Hindi
 2025-10-25,Day,9,7,9,7,10,7,Beginning Sound Ma Ka La Hindi
 2025-10-26,Day,4,2,4,2,4,2,Beginning Sound Ma Ka La Hindi
-2025-10-27,Day,1,0,1,0,1,0,Beginning Sound Ma Ka La Hindi
+2025-10-27,Day,10,5,10,5,11,5,Beginning Sound Ma Ka La Hindi
 Week 8,Week,2853,1845,3069,1988,3520,2125,Beginning Sound Ma Ka La Hindi
 Week 9,Week,511,361,588,417,643,441,Beginning Sound Ma Ka La Hindi
 Week 10,Week,118,96,121,99,131,101,Beginning Sound Ma Ka La Hindi
@@ -508,11 +507,11 @@ Week 13,Week,174,132,187,139,206,152,Beginning Sound Ma Ka La Hindi
 Week 14,Week,78,59,81,61,88,65,Beginning Sound Ma Ka La Hindi
 Week 15,Week,431,369,471,395,514,417,Beginning Sound Ma Ka La Hindi
 Week 16,Week,97,79,99,80,108,82,Beginning Sound Ma Ka La Hindi
-Week 17,Week,50,38,53,39,56,39,Beginning Sound Ma Ka La Hindi
+Week 17,Week,59,43,62,44,66,44,Beginning Sound Ma Ka La Hindi
 August 2025,Month,3148,2050,3518,2300,4013,2455,Beginning Sound Ma Ka La Hindi
 September 2025,Month,726,580,861,681,940,723,Beginning Sound Ma Ka La Hindi
-October 2025,Month,617,516,704,575,766,603,Beginning Sound Ma Ka La Hindi
-2025-10-13,Day,15,11,15,11,15,11,Beginning Sound Ma Ka La Marathi
+October 2025,Month,625,521,713,580,776,608,Beginning Sound Ma Ka La Hindi
+2025-10-13,Day,1,1,1,1,1,1,Beginning Sound Ma Ka La Marathi
 2025-10-14,Day,54,46,54,46,59,48,Beginning Sound Ma Ka La Marathi
 2025-10-15,Day,34,24,35,24,37,24,Beginning Sound Ma Ka La Marathi
 2025-10-16,Day,11,9,11,9,13,11,Beginning Sound Ma Ka La Marathi
@@ -526,7 +525,7 @@ October 2025,Month,617,516,704,575,766,603,Beginning Sound Ma Ka La Hindi
 2025-10-24,Day,15,11,15,11,15,11,Beginning Sound Ma Ka La Marathi
 2025-10-25,Day,16,10,16,10,16,10,Beginning Sound Ma Ka La Marathi
 2025-10-26,Day,10,7,10,7,10,7,Beginning Sound Ma Ka La Marathi
-2025-10-27,Day,1,1,1,1,1,1,Beginning Sound Ma Ka La Marathi
+2025-10-27,Day,15,9,15,9,17,10,Beginning Sound Ma Ka La Marathi
 Week 8,Week,4648,2878,5109,3151,6064,3391,Beginning Sound Ma Ka La Marathi
 Week 9,Week,677,463,746,504,830,533,Beginning Sound Ma Ka La Marathi
 Week 10,Week,229,187,243,195,271,204,Beginning Sound Ma Ka La Marathi
@@ -536,10 +535,10 @@ Week 13,Week,237,182,261,201,286,211,Beginning Sound Ma Ka La Marathi
 Week 14,Week,132,102,133,102,142,105,Beginning Sound Ma Ka La Marathi
 Week 15,Week,855,682,940,737,1019,771,Beginning Sound Ma Ka La Marathi
 Week 16,Week,127,95,131,97,144,103,Beginning Sound Ma Ka La Marathi
-Week 17,Week,61,44,62,45,65,48,Beginning Sound Ma Ka La Marathi
+Week 17,Week,75,52,76,53,81,57,Beginning Sound Ma Ka La Marathi
 August 2025,Month,5047,3156,5704,3539,6732,3801,Beginning Sound Ma Ka La Marathi
 September 2025,Month,1245,993,1480,1161,1595,1212,Beginning Sound Ma Ka La Marathi
-October 2025,Month,1133,895,1266,981,1370,1027,Beginning Sound Ma Ka La Marathi
+October 2025,Month,1145,902,1280,989,1386,1036,Beginning Sound Ma Ka La Marathi
 2025-08-26,Day,65,48,62,48,95,68,Primary Emotion I
 2025-08-27,Day,3773,2404,3782,2417,4730,2578,Primary Emotion I
 2025-08-28,Day,2197,1412,2351,1486,2905,1579,Primary Emotion I
@@ -568,7 +567,7 @@ Week 9,Week,8676,5643,10391,6590,12509,7057,Primary Emotion II
 Week 10,Week,17,18,15,16,40,41,Primary Emotion II
 August 2025,Month,3322,2267,3737,2525,4487,2771,Primary Emotion II
 September 2025,Month,6275,3929,6728,4140,8150,4415,Primary Emotion II
-2025-10-13,Day,70,52,73,55,89,67,Numerals 1-10
+2025-10-13,Day,23,18,23,18,31,24,Numerals 1-10
 2025-10-14,Day,134,101,139,101,157,111,Numerals 1-10
 2025-10-15,Day,101,76,113,85,144,103,Numerals 1-10
 2025-10-16,Day,62,43,64,44,72,51,Numerals 1-10
@@ -582,7 +581,7 @@ September 2025,Month,6275,3929,6728,4140,8150,4415,Primary Emotion II
 2025-10-24,Day,25,16,23,16,29,17,Numerals 1-10
 2025-10-25,Day,26,21,27,22,33,24,Numerals 1-10
 2025-10-26,Day,12,8,12,8,13,8,Numerals 1-10
-2025-10-27,Day,7,1,7,1,10,1,Numerals 1-10
+2025-10-27,Day,18,13,19,13,23,13,Numerals 1-10
 Week 9,Week,37,28,38,29,50,34,Numerals 1-10
 Week 10,Week,6770,4503,7219,4800,8025,4940,Numerals 1-10
 Week 11,Week,2264,1337,2399,1411,2627,1449,Numerals 1-10
@@ -591,10 +590,10 @@ Week 13,Week,361,253,401,277,459,295,Numerals 1-10
 Week 14,Week,764,588,849,644,966,688,Numerals 1-10
 Week 15,Week,548,429,611,471,699,517,Numerals 1-10
 Week 16,Week,309,245,351,280,412,317,Numerals 1-10
-Week 17,Week,119,91,123,96,152,106,Numerals 1-10
+Week 17,Week,129,102,135,108,165,118,Numerals 1-10
 September 2025,Month,9500,6186,10630,6893,11785,7116,Numerals 1-10
-October 2025,Month,1630,1278,1934,1491,2229,1628,Numerals 1-10
-2025-10-13,Day,48,30,51,30,54,31,Shape Rectangle
+October 2025,Month,1637,1286,1946,1503,2242,1640,Numerals 1-10
+2025-10-13,Day,14,8,14,8,16,9,Shape Rectangle
 2025-10-14,Day,61,46,62,46,65,48,Shape Rectangle
 2025-10-15,Day,79,58,84,59,94,63,Shape Rectangle
 2025-10-16,Day,32,25,33,26,37,28,Shape Rectangle
@@ -608,7 +607,7 @@ October 2025,Month,1630,1278,1934,1491,2229,1628,Numerals 1-10
 2025-10-24,Day,24,19,25,20,29,21,Shape Rectangle
 2025-10-25,Day,29,24,29,24,34,27,Shape Rectangle
 2025-10-26,Day,11,9,11,9,12,10,Shape Rectangle
-2025-10-27,Day,1,1,1,1,1,1,Shape Rectangle
+2025-10-27,Day,13,12,14,12,17,12,Shape Rectangle
 Week 9,Week,80,67,78,68,94,77,Shape Rectangle
 Week 10,Week,10527,6997,11506,7564,12849,7810,Shape Rectangle
 Week 11,Week,499,367,535,392,587,406,Shape Rectangle
@@ -617,9 +616,9 @@ Week 13,Week,261,208,283,217,320,231,Shape Rectangle
 Week 14,Week,472,387,530,414,614,449,Shape Rectangle
 Week 15,Week,332,248,377,263,431,285,Shape Rectangle
 Week 16,Week,245,192,268,204,304,223,Shape Rectangle
-Week 17,Week,100,84,104,86,117,92,Shape Rectangle
+Week 17,Week,112,95,117,97,133,103,Shape Rectangle
 September 2025,Month,11344,7637,12708,8482,14195,8781,Shape Rectangle
-October 2025,Month,1066,853,1279,967,1466,1049,Shape Rectangle
+October 2025,Month,1076,862,1292,978,1482,1060,Shape Rectangle
 2025-10-09,Day,23,9,17,9,34,9,Numerals 1-10 Child
 2025-10-10,Day,6,2,5,2,11,2,Numerals 1-10 Child
 2025-10-11,Day,1,0,1,0,1,0,Numerals 1-10 Child
@@ -641,8 +640,7 @@ Week 16,Week,21,12,15,9,38,14,Numerals 1-10 Child
 Week 17,Week,12,8,9,6,19,8,Numerals 1-10 Child
 September 2025,Month,7241,5429,7525,5586,8312,5718,Numerals 1-10 Child
 October 2025,Month,117,49,84,46,188,57,Numerals 1-10 Child
-2025-10-12,Day,7,6,9,7,11,8,Beginning Sound Pa Cha Sa Hindi
-2025-10-13,Day,11,8,11,8,14,9,Beginning Sound Pa Cha Sa Hindi
+2025-10-13,Day,1,1,1,1,1,1,Beginning Sound Pa Cha Sa Hindi
 2025-10-14,Day,23,18,23,18,25,19,Beginning Sound Pa Cha Sa Hindi
 2025-10-15,Day,15,10,15,10,16,10,Beginning Sound Pa Cha Sa Hindi
 2025-10-16,Day,10,6,11,6,11,6,Beginning Sound Pa Cha Sa Hindi
@@ -656,6 +654,7 @@ October 2025,Month,117,49,84,46,188,57,Numerals 1-10 Child
 2025-10-24,Day,4,4,4,4,6,5,Beginning Sound Pa Cha Sa Hindi
 2025-10-25,Day,5,5,5,5,6,5,Beginning Sound Pa Cha Sa Hindi
 2025-10-26,Day,4,2,4,2,4,2,Beginning Sound Pa Cha Sa Hindi
+2025-10-27,Day,2,2,2,2,3,2,Beginning Sound Pa Cha Sa Hindi
 Week 10,Week,129,111,137,118,167,133,Beginning Sound Pa Cha Sa Hindi
 Week 11,Week,4975,3014,5513,3266,6522,3387,Beginning Sound Pa Cha Sa Hindi
 Week 12,Week,140,103,149,108,166,110,Beginning Sound Pa Cha Sa Hindi
@@ -663,11 +662,10 @@ Week 13,Week,132,103,137,106,158,119,Beginning Sound Pa Cha Sa Hindi
 Week 14,Week,112,86,123,90,132,93,Beginning Sound Pa Cha Sa Hindi
 Week 15,Week,93,69,107,77,125,84,Beginning Sound Pa Cha Sa Hindi
 Week 16,Week,65,43,70,45,74,46,Beginning Sound Pa Cha Sa Hindi
-Week 17,Week,24,17,25,17,30,20,Beginning Sound Pa Cha Sa Hindi
+Week 17,Week,26,19,27,19,33,22,Beginning Sound Pa Cha Sa Hindi
 September 2025,Month,5209,3214,5936,3598,7013,3749,Beginning Sound Pa Cha Sa Hindi
-October 2025,Month,277,208,325,229,361,243,Beginning Sound Pa Cha Sa Hindi
-2025-10-12,Day,1,1,1,1,1,1,Beginning Sound Pa Cha Sa Marathi
-2025-10-13,Day,38,31,40,31,44,34,Beginning Sound Pa Cha Sa Marathi
+October 2025,Month,278,209,327,231,364,245,Beginning Sound Pa Cha Sa Hindi
+2025-10-13,Day,13,10,13,10,13,10,Beginning Sound Pa Cha Sa Marathi
 2025-10-14,Day,75,45,75,45,79,48,Beginning Sound Pa Cha Sa Marathi
 2025-10-15,Day,55,37,55,37,62,42,Beginning Sound Pa Cha Sa Marathi
 2025-10-16,Day,28,17,28,17,32,18,Beginning Sound Pa Cha Sa Marathi
@@ -681,6 +679,7 @@ October 2025,Month,277,208,325,229,361,243,Beginning Sound Pa Cha Sa Hindi
 2025-10-24,Day,16,9,16,9,18,9,Beginning Sound Pa Cha Sa Marathi
 2025-10-25,Day,7,7,7,7,7,7,Beginning Sound Pa Cha Sa Marathi
 2025-10-26,Day,5,3,5,3,5,3,Beginning Sound Pa Cha Sa Marathi
+2025-10-27,Day,13,9,13,9,14,9,Beginning Sound Pa Cha Sa Marathi
 Week 10,Week,6,1,6,1,8,1,Beginning Sound Pa Cha Sa Marathi
 Week 11,Week,9087,5026,10097,5462,12412,5637,Beginning Sound Pa Cha Sa Marathi
 Week 12,Week,292,195,306,207,345,216,Beginning Sound Pa Cha Sa Marathi
@@ -688,10 +687,10 @@ Week 13,Week,224,173,246,184,274,197,Beginning Sound Pa Cha Sa Marathi
 Week 14,Week,219,143,247,160,276,172,Beginning Sound Pa Cha Sa Marathi
 Week 15,Week,239,170,253,178,279,191,Beginning Sound Pa Cha Sa Marathi
 Week 16,Week,152,96,156,98,175,106,Beginning Sound Pa Cha Sa Marathi
-Week 17,Week,44,31,46,33,50,34,Beginning Sound Pa Cha Sa Marathi
+Week 17,Week,56,39,59,42,64,43,Beginning Sound Pa Cha Sa Marathi
 September 2025,Month,9416,5259,10655,5854,13039,6051,Beginning Sound Pa Cha Sa Marathi
-October 2025,Month,624,422,702,469,780,503,Beginning Sound Pa Cha Sa Marathi
-2025-10-13,Day,53,35,56,36,66,40,Common Shapes
+October 2025,Month,634,428,715,478,794,512,Beginning Sound Pa Cha Sa Marathi
+2025-10-13,Day,21,15,20,15,24,16,Common Shapes
 2025-10-14,Day,143,95,146,97,161,107,Common Shapes
 2025-10-15,Day,107,75,110,76,124,84,Common Shapes
 2025-10-16,Day,67,43,71,43,83,47,Common Shapes
@@ -705,17 +704,17 @@ October 2025,Month,624,422,702,469,780,503,Beginning Sound Pa Cha Sa Marathi
 2025-10-24,Day,19,9,19,9,19,9,Common Shapes
 2025-10-25,Day,14,14,15,15,17,15,Common Shapes
 2025-10-26,Day,11,8,11,8,11,8,Common Shapes
-2025-10-27,Day,4,1,4,1,4,1,Common Shapes
+2025-10-27,Day,6,2,6,2,6,2,Common Shapes
 Week 11,Week,693,511,936,663,1145,763,Common Shapes
 Week 12,Week,1078,886,1349,1076,1632,1175,Common Shapes
 Week 13,Week,242,184,283,212,329,229,Common Shapes
 Week 14,Week,660,504,781,578,928,636,Common Shapes
 Week 15,Week,452,328,493,355,552,386,Common Shapes
 Week 16,Week,285,198,325,218,370,238,Common Shapes
-Week 17,Week,74,56,82,62,88,62,Common Shapes
+Week 17,Week,76,57,84,63,90,63,Common Shapes
 September 2025,Month,1735,1384,2568,1951,3106,2167,Common Shapes
-October 2025,Month,1359,1008,1681,1213,1938,1322,Common Shapes
-2025-10-13,Day,110,88,113,88,131,99,Primary Colors
+October 2025,Month,1360,1008,1683,1214,1940,1323,Common Shapes
+2025-10-13,Day,33,26,33,26,35,27,Primary Colors
 2025-10-14,Day,232,179,239,183,275,197,Primary Colors
 2025-10-15,Day,214,156,220,158,254,172,Primary Colors
 2025-10-16,Day,108,83,113,85,132,95,Primary Colors
@@ -729,17 +728,17 @@ October 2025,Month,1359,1008,1681,1213,1938,1322,Common Shapes
 2025-10-24,Day,78,63,80,64,97,74,Primary Colors
 2025-10-25,Day,52,41,53,42,60,44,Primary Colors
 2025-10-26,Day,47,34,50,36,59,39,Primary Colors
-2025-10-27,Day,20,13,20,13,24,16,Primary Colors
+2025-10-27,Day,47,31,48,32,55,37,Primary Colors
 Week 11,Week,367,264,451,317,518,344,Primary Colors
 Week 12,Week,11500,7816,13351,8963,15575,9381,Primary Colors
 Week 13,Week,1763,1236,2129,1507,2535,1655,Primary Colors
 Week 14,Week,1490,1206,1955,1531,2281,1668,Primary Colors
 Week 15,Week,906,716,1181,900,1393,999,Primary Colors
 Week 16,Week,571,448,775,581,930,653,Primary Colors
-Week 17,Week,272,219,356,269,419,293,Primary Colors
+Week 17,Week,287,231,384,288,450,314,Primary Colors
 September 2025,Month,12872,8794,15931,10787,18628,11380,Primary Colors
-October 2025,Month,2616,2093,4267,3281,5023,3613,Primary Colors
-2025-10-13,Day,815,479,819,483,1101,590,All Games
+October 2025,Month,2627,2101,4295,3300,5054,3634,Primary Colors
+2025-10-13,Day,203,128,194,128,258,153,All Games
 2025-10-14,Day,1338,824,1395,850,2009,1130,All Games
 2025-10-15,Day,1954,1032,2056,1067,2911,1376,All Games
 2025-10-16,Day,1240,660,1318,677,1898,866,All Games
@@ -753,7 +752,7 @@ October 2025,Month,2616,2093,4267,3281,5023,3613,Primary Colors
 2025-10-24,Day,1419,636,1472,640,2059,775,All Games
 2025-10-25,Day,1280,573,1334,581,1817,698,All Games
 2025-10-26,Day,732,359,761,360,1029,430,All Games
-2025-10-27,Day,203,107,211,108,316,141,All Games
+2025-10-27,Day,867,402,908,408,1269,508,All Games
 Week 1,Week,16413,5558,17702,6624,32380,11039,All Games
 Week 2,Week,19978,9841,25887,13722,48619,21276,All Games
 Week 3,Week,22994,13117,32447,18588,60138,29571,All Games
@@ -770,8 +769,8 @@ Week 13,Week,15215,8253,23891,12144,34564,15259,All Games
 Week 14,Week,5938,3800,8954,5545,12386,7032,All Games
 Week 15,Week,12590,8023,17005,10664,23630,13659,All Games
 Week 16,Week,6153,3406,10121,4927,14339,6229,All Games
-Week 17,Week,4154,2124,6100,2788,8405,3396,All Games
+Week 17,Week,4443,2284,6797,3088,9358,3763,All Games
 July 2025,Month,63494,33108,128347,68707,253732,118183,All Games
 August 2025,Month,69910,40111,135403,80481,267258,142707,All Games
 September 2025,Month,55074,33647,135815,77186,193854,94349,All Games
-October 2025,Month,20677,12804,42180,23924,58760,30316,All Games
+October 2025,Month,20825,12891,42877,24224,59713,30683,All Games
