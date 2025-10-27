@@ -492,6 +492,10 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     ).configure_title(
         fontSize=28,
         fontWeight='bold'
+    ).configure_axisX(
+        title='No of games played'
+    ).configure_axisY(
+        title='Number of Users'
     )
     
     st.altair_chart(repeatability_chart, use_container_width=True)
