@@ -1,4 +1,4 @@
-# ⚠️ All data used in this dashboard must be preprocessed using preprocess_data.py before deployment.
+# ⚠️ All data used in this dashboard must be preprocessed using master_processor.py before deployment.
 # This dashboard only handles visualization of preprocessed data to stay within Render's 512MB memory limit.
 
 import os
@@ -9,14 +9,14 @@ from datetime import datetime
 from typing import List, Tuple
 
 # Check if processed data exists
-DATA_DIR = "data"
+DATA_DIR = "processed_data"
 REQUIRED_FILES = [
-    "dashboard_data.csv",
-    "summary_data.csv", 
-    "score_distribution_data.csv",
-    "time_series_data.csv",
+    "conversion_funnel_total.csv",
+    "conversion_funnel_games.csv",
+    "timeseries_total.csv",
+    "timeseries_games.csv",
     "repeatability_data.csv",
-    "metadata.json"
+    "score_distribution.csv"
 ]
 
 def check_processed_data():
@@ -29,104 +29,82 @@ def check_processed_data():
     
     if missing_files:
         st.error(f"ERROR: Missing processed data files: {', '.join(missing_files)}")
-        st.error("WARNING: Please run 'python preprocess_data.py' locally to generate the required data files.")
+        st.error("WARNING: Please run 'python master_processor.py' locally to generate the required data files.")
         st.error("This dashboard requires preprocessed data to run efficiently on Render.")
         st.stop()
     
     return True
 
 def load_processed_data():
-    """Load all preprocessed data files"""
+    """Load all preprocessed data files from processed_data/ directory"""
     try:
-        # Load main data (use minimal dashboard_data.csv for filters and functionality)
-        df_main = pd.DataFrame()
-        if os.path.exists(os.path.join(DATA_DIR, "dashboard_data.csv")):
-            df_main = pd.read_csv(os.path.join(DATA_DIR, "dashboard_data.csv"))
-            df_main['server_time'] = pd.to_datetime(df_main['server_time'])
-            df_main['date'] = pd.to_datetime(df_main['date'])
-        elif os.path.exists(os.path.join(DATA_DIR, "processed_data.csv")):
-            # Fallback to full data if available
-            df_main = pd.read_csv(os.path.join(DATA_DIR, "processed_data.csv"))
-            df_main['server_time'] = pd.to_datetime(df_main['server_time'])
-            df_main['date'] = pd.to_datetime(df_main['date'])
-        else:
-            # Create a minimal dataframe for dashboard functionality
-            df_main = pd.DataFrame({
-                'idlink_va': [1],
-                'idvisitor_converted': [1],
-                'idvisit': [1],
-                'server_time': [pd.Timestamp.now()],
-                'idaction_name': [1],
-                'custom_dimension_2': [1],
-                'game_name': ['Sample Game'],
-                'event': ['Started'],
-                'date': [pd.Timestamp.now().date()]
-            })
-        
-        # Load summary data
-        summary_df = pd.read_csv(os.path.join(DATA_DIR, "summary_data.csv"))
-        
-        # Load score distribution data
-        score_distribution_df = pd.DataFrame()
-        if os.path.exists(os.path.join(DATA_DIR, "score_distribution_data.csv")):
-            score_distribution_df = pd.read_csv(os.path.join(DATA_DIR, "score_distribution_data.csv"))
+        # Load conversion funnel data
+        conversion_total_df = pd.read_csv(os.path.join(DATA_DIR, "conversion_funnel_total.csv"))
+        conversion_games_df = pd.read_csv(os.path.join(DATA_DIR, "conversion_funnel_games.csv"))
         
         # Load time series data
-        time_series_df = pd.DataFrame()
-        if os.path.exists(os.path.join(DATA_DIR, "time_series_data.csv")):
-            time_series_df = pd.read_csv(os.path.join(DATA_DIR, "time_series_data.csv"))
+        timeseries_total_df = pd.read_csv(os.path.join(DATA_DIR, "timeseries_total.csv"))
+        timeseries_games_df = pd.read_csv(os.path.join(DATA_DIR, "timeseries_games.csv"))
         
         # Load repeatability data
-        repeatability_df = pd.DataFrame()
-        if os.path.exists(os.path.join(DATA_DIR, "repeatability_data.csv")):
-            repeatability_df = pd.read_csv(os.path.join(DATA_DIR, "repeatability_data.csv"))
+        repeatability_df = pd.read_csv(os.path.join(DATA_DIR, "repeatability_data.csv"))
         
-        # Load metadata
-        metadata = {}
-        if os.path.exists(os.path.join(DATA_DIR, "metadata.json")):
-            with open(os.path.join(DATA_DIR, "metadata.json"), 'r') as f:
-                metadata = json.load(f)
+        # Load score distribution data
+        score_distribution_df = pd.read_csv(os.path.join(DATA_DIR, "score_distribution.csv"))
         
-        return df_main, summary_df, score_distribution_df, time_series_df, repeatability_df, metadata
+        # Create a minimal dataframe for dashboard functionality (for filters)
+        df_main = pd.DataFrame({
+            'idlink_va': [1],
+            'idvisitor_converted': [1],
+            'idvisit': [1],
+            'server_time': [pd.Timestamp.now()],
+            'idaction_name': [1],
+            'custom_dimension_2': [1],
+            'game_name': ['Sample Game'],
+            'event': ['Started'],
+            'date': [pd.Timestamp.now().date()]
+        })
+        
+        # Create metadata
+        metadata = {
+            'last_updated': datetime.now().isoformat(),
+            'data_source': 'processed_data',
+            'version': '2.0'
+        }
+        
+        return (df_main, conversion_total_df, conversion_games_df, 
+                timeseries_total_df, timeseries_games_df, 
+                repeatability_df, score_distribution_df, metadata)
     
     except Exception as e:
         st.error(f"❌ Error loading processed data: {str(e)}")
-        st.error("Please ensure all data files are properly generated by running preprocess_data.py")
+        st.error("Please ensure all data files are properly generated by running master_processor.py")
         st.stop()
 
-def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame) -> None:
+def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame) -> None:
     """Render a modern, professional dashboard with multiple chart types"""
     import altair as alt
     
     # Add separate conversion funnels
     st.markdown("### 🔄 Conversion Funnels")
     
-    # Get data for each funnel from filtered data
-    # Calculate unique users, visits, and instances from filtered data
-    
-    # Check if we're using summary data (original) or filtered data
-    if 'Event' in df_filtered.columns:
-        # Using summary data - get original totals
-        started_users = df_filtered[df_filtered['Event'] == 'Started']['Users'].iloc[0]
-        completed_users = df_filtered[df_filtered['Event'] == 'Completed']['Users'].iloc[0]
-        started_visits = df_filtered[df_filtered['Event'] == 'Started']['Visits'].iloc[0]
-        completed_visits = df_filtered[df_filtered['Event'] == 'Completed']['Visits'].iloc[0]
-        started_instances = df_filtered[df_filtered['Event'] == 'Started']['Instances'].iloc[0]
-        completed_instances = df_filtered[df_filtered['Event'] == 'Completed']['Instances'].iloc[0]
+    # Get data for each funnel from conversion data
+    if 'game_name' in conversion_df.columns:
+        # Game-specific data - aggregate across selected games
+        started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].sum()
+        completed_users = conversion_df[conversion_df['Event'] == 'Completed']['Users'].sum()
+        started_visits = conversion_df[conversion_df['Event'] == 'Started']['Visits'].sum()
+        completed_visits = conversion_df[conversion_df['Event'] == 'Completed']['Visits'].sum()
+        started_instances = conversion_df[conversion_df['Event'] == 'Started']['Instances'].sum()
+        completed_instances = conversion_df[conversion_df['Event'] == 'Completed']['Instances'].sum()
     else:
-        # Using filtered data - calculate from filtered events
-        try:
-            # For individual games, use total event counts (not unique counts)
-            started_users = len(df_filtered[df_filtered['event'] == 'Started'])
-            completed_users = len(df_filtered[df_filtered['event'] == 'Completed'])
-            started_visits = len(df_filtered[df_filtered['event'] == 'Started'])
-            completed_visits = len(df_filtered[df_filtered['event'] == 'Completed'])
-            started_instances = len(df_filtered[df_filtered['event'] == 'Started'])
-            completed_instances = len(df_filtered[df_filtered['event'] == 'Completed'])
-        except KeyError as e:
-            st.error(f"❌ Column error: {e}")
-            st.error(f"Available columns: {df_filtered.columns.tolist()}")
-            st.stop()
+        # Total data - get direct values
+        started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].iloc[0]
+        completed_users = conversion_df[conversion_df['Event'] == 'Completed']['Users'].iloc[0]
+        started_visits = conversion_df[conversion_df['Event'] == 'Started']['Visits'].iloc[0]
+        completed_visits = conversion_df[conversion_df['Event'] == 'Completed']['Visits'].iloc[0]
+        started_instances = conversion_df[conversion_df['Event'] == 'Started']['Instances'].iloc[0]
+        completed_instances = conversion_df[conversion_df['Event'] == 'Completed']['Instances'].iloc[0]
     
     
     # Create three separate funnels
@@ -865,14 +843,16 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
     st.title("Hybrid Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Fixed Indentation")
+    st.caption("Performance Optimized - Using Preprocessed Data")
     
     
     # Check if processed data exists
     check_processed_data()
     
     with st.spinner("Loading preprocessed data..."):
-        df_main, summary_df, score_distribution_df, time_series_df, repeatability_df, metadata = load_processed_data()
+        (df_main, conversion_total_df, conversion_games_df, 
+         timeseries_total_df, timeseries_games_df, 
+         repeatability_df, score_distribution_df, metadata) = load_processed_data()
     
     if df_main.empty:
         st.warning("No data available.")
@@ -885,8 +865,8 @@ def main() -> None:
     filter_col1, filter_col2 = st.columns(2)
     
     with filter_col1:
-        # Game Name filter
-        unique_games = sorted(df_main['game_name'].unique())
+        # Game Name filter - get unique games from conversion_games_df
+        unique_games = sorted(conversion_games_df['game_name'].unique()) if not conversion_games_df.empty else ['Sample Game']
         selected_games = st.multiselect(
             "Select Game Names to filter by:",
             options=unique_games,
@@ -895,10 +875,15 @@ def main() -> None:
         )
     
     with filter_col2:
-        # Date filter
-        # Set minimum date to July 2nd, 2025
-        min_date = pd.to_datetime('2025-07-02').date()
-        max_date = df_main['date'].max()
+        # Date filter - use timeseries data for date range
+        if not timeseries_total_df.empty:
+            # Extract dates from time_period column
+            timeseries_total_df['date'] = pd.to_datetime(timeseries_total_df['time_period'], errors='coerce')
+            min_date = timeseries_total_df['date'].min().date()
+            max_date = timeseries_total_df['date'].max().date()
+        else:
+            min_date = pd.to_datetime('2025-07-02').date()
+            max_date = pd.to_datetime('2025-10-24').date()
         
         # Create date range picker
         date_range = st.date_input(
@@ -906,34 +891,8 @@ def main() -> None:
             value=(min_date, max_date),
             min_value=min_date,
             max_value=max_date,
-            help="Select a date range to filter the data. The server_time is already adjusted by +5h30m. Data is available from July 2nd, 2025 onwards."
+            help="Select a date range to filter the data. Data is available from July 2nd, 2025 onwards."
         )
-    
-    # Apply filters
-    df_filtered = df_main.copy()
-    
-    # Apply game filter
-    if selected_games:
-        df_filtered = df_filtered[df_filtered['game_name'].isin(selected_games)]
-    # If no games selected, show all games (no filtering needed)
-    
-    # Apply date filter
-    if len(date_range) == 2:  # Both start and end date selected
-        start_date, end_date = date_range
-        # Convert date column to datetime for proper comparison
-        df_filtered['date'] = pd.to_datetime(df_filtered['date']).dt.date
-        df_filtered = df_filtered[
-            (df_filtered['date'] >= start_date) & 
-            (df_filtered['date'] <= end_date)
-        ]
-    elif len(date_range) == 1:  # Only one date selected
-        # Convert date column to datetime for proper comparison
-        df_filtered['date'] = pd.to_datetime(df_filtered['date']).dt.date
-        df_filtered = df_filtered[df_filtered['date'] == date_range[0]]
-    
-    if df_filtered.empty:
-        st.warning("No data available for the selected filters.")
-        return
     
     # Show filter summary
     if len(date_range) == 2:
@@ -951,9 +910,14 @@ def main() -> None:
         game_summary = f"{', '.join(selected_games)}"
         game_count = len(selected_games)
     
-    # Always use original summary data for conversion funnel
-    # Individual game filtering is not meaningful for conversion funnels
-    render_modern_dashboard(summary_df, summary_df)
+    # Render conversion funnel based on game selection
+    if not selected_games or len(selected_games) == len(unique_games):
+        # Show total conversion funnel
+        render_modern_dashboard(conversion_total_df, conversion_total_df)
+    else:
+        # Show filtered conversion funnel
+        filtered_conversion = conversion_games_df[conversion_games_df['game_name'].isin(selected_games)]
+        render_modern_dashboard(filtered_conversion, filtered_conversion)
     
     # Add Score Distribution Analysis
     st.markdown("---")
@@ -977,8 +941,8 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## 📈 Time-Series Analysis")
     
-    if not time_series_df.empty:
-        render_time_series_analysis(time_series_df, df_main)
+    if not timeseries_total_df.empty:
+        render_time_series_analysis(timeseries_total_df, timeseries_games_df)
     else:
         st.warning("No time series data available.")
 
