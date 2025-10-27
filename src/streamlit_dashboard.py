@@ -682,11 +682,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         # Apply game filtering if specific games are selected
         if selected_games_ts and 'All Games' not in selected_games_ts:
             st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
-            # Note: The preprocessed time series data doesn't have game-level breakdown
-            # For now, we'll show all data. In a full implementation, we'd need game-specific time series data
             st.warning("⚠️ Game filtering for time series requires game-specific preprocessed data")
     else:
-        # Fallback to dynamic calculation if preprocessed data doesn't have July 2nd data
+        # Fallback to dynamic calculation
         st.info("🔄 Using dynamic calculation for time series data")
         if selected_games_ts and 'All Games' not in selected_games_ts:
             st.info(f"🎮 Filtering time series for selected games: {', '.join(selected_games_ts)}")
