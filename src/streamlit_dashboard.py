@@ -428,7 +428,19 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         )
 
 def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
-    """Render game repeatability analysis"""
+    """Render game repeatability analysis based on SQL query logic:
+    
+    SQL Query Logic:
+    1. JOIN hybrid_games, hybrid_games_links, hybrid_game_completions, hybrid_profiles, hybrid_users
+    2. Group by hybrid_profile_id
+    3. Count distinct non-null values of game_name for each hybrid_profile_id
+    4. Group by the count of distinct non-null game_name
+    5. Calculate CountDistinct_hybrid_profile_id for each distinct count value
+    
+    Visualization:
+    X-axis → number of distinct games played (repeat count)
+    Y-axis → number of unique users (hybrid_profile_id) corresponding to each repeat count
+    """
     import altair as alt
     
     if repeatability_df.empty:
@@ -436,6 +448,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
         return
     
     st.markdown("### 🎮 Game Repeatability Analysis")
+    st.info("📊 Analysis based on SQL query: JOIN hybrid_games → hybrid_games_links → hybrid_game_completions → hybrid_profiles → hybrid_users")
     
     # Create the repeatability chart
     bars = alt.Chart(repeatability_df).mark_bar(
@@ -444,13 +457,17 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
         strokeWidth=2,
         color='#50C878'
     ).encode(
-        x=alt.X('games_played:O', title='Number of Games Played', axis=alt.Axis(labelAngle=0)),
-        y=alt.Y('user_count:Q', title='Number of Users', axis=alt.Axis(format='~s')),
+        x=alt.X('games_played:O', 
+                title='Number of Distinct Games Played (Repeat Count)', 
+                axis=alt.Axis(labelAngle=0)),
+        y=alt.Y('user_count:Q', 
+                title='Number of Unique Users (hybrid_profile_id)', 
+                axis=alt.Axis(format='~s')),
         tooltip=['games_played:O', 'user_count:Q']
     ).properties(
         width=800,
         height=400,
-        title='User Distribution by Number of Games Completed'
+        title='User Distribution by Number of Distinct Games Completed'
     )
     
     # Add data labels on top of bars
@@ -479,34 +496,34 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     
     st.altair_chart(repeatability_chart, use_container_width=True)
     
-    # Add summary statistics
+    # Add summary statistics based on SQL query logic
     col1, col2, col3 = st.columns(3)
     
     with col1:
         total_users = repeatability_df['user_count'].sum()
         st.metric(
-            label="👥 Total Users (Completed)",
+            label="👥 Total Unique Users",
             value=f"{total_users:,}",
-            help="Total number of users who completed at least one game"
+            help="Total number of unique hybrid_profile_id who completed at least one distinct game"
         )
     
     with col2:
-        # Calculate weighted average
+        # Calculate weighted average of distinct games per user
         weighted_sum = (repeatability_df['games_played'] * repeatability_df['user_count']).sum()
         total_users = repeatability_df['user_count'].sum()
-        avg_games_per_user = weighted_sum / total_users if total_users > 0 else 0
+        avg_distinct_games_per_user = weighted_sum / total_users if total_users > 0 else 0
         st.metric(
-            label="🎯 Avg Games per User",
-            value=f"{avg_games_per_user:.1f}",
-            help="Average number of games completed per user"
+            label="🎯 Avg Distinct Games per User",
+            value=f"{avg_distinct_games_per_user:.1f}",
+            help="Average number of distinct games completed per hybrid_profile_id"
         )
     
     with col3:
-        max_games_played = repeatability_df['games_played'].max()
+        max_distinct_games = repeatability_df['games_played'].max()
         st.metric(
-            label="🏆 Max Games Played",
-            value=f"{max_games_played}",
-            help="Maximum number of games completed by a single user"
+            label="🏆 Max Distinct Games",
+            value=f"{max_distinct_games}",
+            help="Maximum number of distinct games completed by a single hybrid_profile_id"
         )
 
 def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -> pd.DataFrame:
