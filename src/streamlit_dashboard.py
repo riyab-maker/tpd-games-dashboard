@@ -668,7 +668,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         # Time period filter
         time_period = st.selectbox(
             "Select Time Period:",
-            options=["All time", "Month", "Week", "Day"],
+            options=["Month", "Week", "Day"],
             help="Choose the time aggregation for the time-series graphs"
         )
     
@@ -692,39 +692,12 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         return
     
     # Filter by selected time period
-    if time_period == "All time":
-        # For "All time", calculate totals from July 2nd, 2025 onwards
-        month_data = time_series_df[time_series_df['period_type'] == 'Month'].copy()
+    filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
+    
+    # Apply July filter for Month view
+    if time_period == "Month":
         july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
-        month_data = month_data[month_data['time_period'].isin(july_onwards)]
-        
-        # Calculate totals
-        total_started_users = month_data['started_users'].sum()
-        total_completed_users = month_data['completed_users'].sum()
-        total_started_visits = month_data['started_visits'].sum()
-        total_completed_visits = month_data['completed_visits'].sum()
-        total_started_instances = month_data['started_instances'].sum()
-        total_completed_instances = month_data['completed_instances'].sum()
-        
-        # Create a single row with totals
-        filtered_ts_df = pd.DataFrame([{
-            'time_period': 'All Time (July 2025 onwards)',
-            'period_type': 'All time',
-            'started_users': total_started_users,
-            'completed_users': total_completed_users,
-            'started_visits': total_started_visits,
-            'completed_visits': total_completed_visits,
-            'started_instances': total_started_instances,
-            'completed_instances': total_completed_instances,
-            'game_name': 'All Games'
-        }])
-    else:
-        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
-        
-        # Apply July filter for Month view
-        if time_period == "Month":
-            july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
-            filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
+        filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
     
     # Apply game filtering if specific games are selected
     if selected_games_ts and len(selected_games_ts) < len(unique_games_ts):
@@ -746,9 +719,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         filtered_ts_df = filtered_ts_df.sort_values('sort_date').drop('sort_date', axis=1)
         # Create ordered list for Altair
         time_order = filtered_ts_df['time_period'].tolist()
-    elif time_period == "All time":
-        # For All time view, no sorting needed as it's a single bar chart
-        time_order = None
     elif time_period == "Week":
         # Extract week number for sorting
         filtered_ts_df['week_num'] = filtered_ts_df['time_period'].str.extract(r'(\d+)').astype(int)
@@ -775,114 +745,71 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
             ])
         chart_df = pd.DataFrame(chart_data)
         
-        if time_period == "All time":
-            # Bar chart for All time view
-            chart = alt.Chart(chart_df).mark_bar(
-                cornerRadius=6,
+        # Line chart for time periods
+        lines = alt.Chart(chart_df).mark_line(
+            strokeWidth=4,
+            point=alt.OverlayMarkDef(
+                filled=True,
+                size=100,
                 stroke='white',
                 strokeWidth=2
-            ).encode(
-                x=alt.X('Event:N', title='Event Type', axis=alt.Axis(labelAngle=0)),
-                y=alt.Y('Count:Q', title=f'Number of {metric_name}', axis=alt.Axis(format='~s')),
-                color=alt.Color('Event:N', 
-                              scale=alt.Scale(domain=['Started', 'Completed'], 
-                                            range=color_scheme),
-                              legend=alt.Legend(title="Event Type")),
-                tooltip=['Event:N', 'Count:Q']
-            ).properties(
-                width=600,
-                height=400,
-                title=f'Total {metric_name}: Started vs Completed (July 2025 onwards)'
             )
-            
-            # Add data labels
-            labels = alt.Chart(chart_df).mark_text(
-                align='center',
-                baseline='bottom',
-                color='white',
-                fontSize=20,
-                fontWeight='bold',
-                dy=-10
-            ).encode(
-                x=alt.X('Event:N'),
-                y=alt.Y('Count:Q'),
-                text=alt.Text('Count:Q', format='.0f')
-            )
-            
-            return (chart + labels).configure_axis(
-                labelFontSize=18,
-                titleFontSize=20,
-                grid=True
-            ).configure_title(
-                fontSize=24,
-                fontWeight='bold'
-            )
-        else:
-            # Line chart for other time periods
-            lines = alt.Chart(chart_df).mark_line(
-                strokeWidth=4,
-                point=alt.OverlayMarkDef(
-                    filled=True,
-                    size=100,
-                    stroke='white',
-                    strokeWidth=2
-                )
-            ).encode(
-                x=alt.X('Time:N', title='Time Period', 
-                       sort=time_order if time_order else None,
-                       axis=alt.Axis(
-                           labelAngle=0,
-                           labelFontSize=14,
-                           labelLimit=200,
-                           titleFontSize=16
-                       )),
-                y=alt.Y('Count:Q', title=f'Number of {metric_name}', axis=alt.Axis(format='~s')),
-                color=alt.Color('Event:N', 
-                              scale=alt.Scale(domain=['Started', 'Completed'], 
-                                            range=color_scheme),
-                              legend=alt.Legend(title="Event Type")),
-                tooltip=['Time:N', 'Event:N', 'Count:Q']
-            ).properties(
-                width=900,
-                height=400,
-                title=f'{metric_name}: Started vs Completed'
-            )
-            
-            # Add data labels
-            started_labels = alt.Chart(chart_df[chart_df['Event'] == 'Started']).mark_text(
-                align='center',
-                baseline='bottom',
-                color=color_scheme[0],
-                fontSize=14,
-                fontWeight='bold',
-                dy=-15
-            ).encode(
-                x=alt.X('Time:N', sort=time_order if time_order else None),
-                y=alt.Y('Count:Q'),
-                text=alt.Text('Count:Q', format='.0f')
-            )
-            
-            completed_labels = alt.Chart(chart_df[chart_df['Event'] == 'Completed']).mark_text(
-                align='center',
-                baseline='top',
-                color=color_scheme[1],
-                fontSize=14,
-                fontWeight='bold',
-                dy=15
-            ).encode(
-                x=alt.X('Time:N', sort=time_order if time_order else None),
-                y=alt.Y('Count:Q'),
-                text=alt.Text('Count:Q', format='.0f')
-            )
-            
-            return (lines + started_labels + completed_labels).configure_axis(
-                labelFontSize=18,
-                titleFontSize=20,
-                grid=True
-            ).configure_title(
-                fontSize=24,
-                fontWeight='bold'
-            )
+        ).encode(
+            x=alt.X('Time:N', title='Time Period', 
+                   sort=time_order if time_order else None,
+                   axis=alt.Axis(
+                       labelAngle=0,
+                       labelFontSize=14,
+                       labelLimit=200,
+                       titleFontSize=16
+                   )),
+            y=alt.Y('Count:Q', title=f'Number of {metric_name}', axis=alt.Axis(format='~s')),
+            color=alt.Color('Event:N', 
+                          scale=alt.Scale(domain=['Started', 'Completed'], 
+                                        range=color_scheme),
+                          legend=alt.Legend(title="Event Type")),
+            tooltip=['Time:N', 'Event:N', 'Count:Q']
+        ).properties(
+            width=900,
+            height=400,
+            title=f'{metric_name}: Started vs Completed'
+        )
+        
+        # Add data labels
+        started_labels = alt.Chart(chart_df[chart_df['Event'] == 'Started']).mark_text(
+            align='center',
+            baseline='bottom',
+            color=color_scheme[0],
+            fontSize=14,
+            fontWeight='bold',
+            dy=-15
+        ).encode(
+            x=alt.X('Time:N', sort=time_order if time_order else None),
+            y=alt.Y('Count:Q'),
+            text=alt.Text('Count:Q', format='.0f')
+        )
+        
+        completed_labels = alt.Chart(chart_df[chart_df['Event'] == 'Completed']).mark_text(
+            align='center',
+            baseline='top',
+            color=color_scheme[1],
+            fontSize=14,
+            fontWeight='bold',
+            dy=15
+        ).encode(
+            x=alt.X('Time:N', sort=time_order if time_order else None),
+            y=alt.Y('Count:Q'),
+            text=alt.Text('Count:Q', format='.0f')
+        )
+        
+        return (lines + started_labels + completed_labels).configure_axis(
+            labelFontSize=18,
+            titleFontSize=20,
+            grid=True
+        ).configure_title(
+            fontSize=24,
+            fontWeight='bold'
+        )
     
     # Users Section
     st.markdown("### 👥 Users Analysis")
