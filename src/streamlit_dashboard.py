@@ -110,6 +110,9 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     started_instances = len(df_filtered[df_filtered['Event'] == 'Started'])
     completed_instances = len(df_filtered[df_filtered['Event'] == 'Completed'])
     
+    # Debug: Show filtered data info
+    st.info(f"🔄 Conversion Funnel - Filtered data: {len(df_filtered)} events, {len(df_filtered['game_name'].unique())} games")
+    
     # Create three separate funnels
     col1, col2, col3 = st.columns(3)
     
@@ -868,7 +871,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.8 - CONVERSION FUNNEL FILTERED")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.9 - FORCE DEPLOYMENT")
+    
+    # Force deployment check
+    st.success("✅ Dashboard updated - Game filters now work with conversion funnels!")
     
     # Check if processed data exists
     check_processed_data()
