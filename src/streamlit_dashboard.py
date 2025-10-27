@@ -11,11 +11,12 @@ from typing import List, Tuple
 # Use preprocess_data.py directly instead of processed CSV files
 DATA_DIR = "data"
 REQUIRED_FILES = [
-    "processed_data.csv",
+    "dashboard_data.csv",
     "summary_data.csv",
     "time_series_data.csv",
     "repeatability_data.csv",
-    "score_distribution_data.csv"
+    "score_distribution_data.csv",
+    "game_conversion_numbers.csv"
 ]
 
 def check_processed_data():
@@ -33,18 +34,33 @@ def check_processed_data():
             missing_files.append(file)
     
     if missing_files:
-        st.error(f"ERROR: Missing processed data files: {', '.join(missing_files)}")
-        st.error(f"Looking in directory: {DATA_DIR}")
-        st.error("WARNING: Please run 'python preprocess_data.py' locally to generate the required data files.")
-        st.stop()
+        st.warning(f"Missing processed data files: {', '.join(missing_files)}")
+        st.info("Generating data on Render... This may take a few minutes.")
+        
+        # Try to generate the missing data
+        try:
+            import subprocess
+            result = subprocess.run(['python', 'preprocess_data.py'], 
+                                  capture_output=True, text=True, timeout=300)
+            if result.returncode == 0:
+                st.success("Data generated successfully!")
+            else:
+                st.error(f"Failed to generate data: {result.stderr}")
+                st.stop()
+        except Exception as e:
+            st.error(f"Error generating data: {str(e)}")
+            st.stop()
     
     return True
 
 def load_processed_data():
     """Load all data files from data/ directory"""
     try:
-        # Load main dashboard data
-        df_main = pd.read_csv(os.path.join(DATA_DIR, "processed_data.csv"))
+        # Load main dashboard data (limited data for UI)
+        df_main = pd.read_csv(os.path.join(DATA_DIR, "dashboard_data.csv"))
+        
+        # Load game-specific conversion numbers (final numbers for individual games)
+        game_conversion_df = pd.read_csv(os.path.join(DATA_DIR, "game_conversion_numbers.csv"))
         
         # Load summary data for conversion funnels
         summary_df = pd.read_csv(os.path.join(DATA_DIR, "summary_data.csv"))
@@ -65,7 +81,7 @@ def load_processed_data():
             'version': '2.0'
         }
         
-        return (df_main, summary_df, time_series_df, 
+        return (df_main, summary_df, game_conversion_df, time_series_df, 
                 repeatability_df, score_distribution_df, metadata)
     
     except Exception as e:
@@ -840,7 +856,7 @@ def main() -> None:
     check_processed_data()
     
     with st.spinner("Loading data..."):
-        (df_main, summary_df, time_series_df, 
+        (df_main, summary_df, game_conversion_df, time_series_df, 
          repeatability_df, score_distribution_df, metadata) = load_processed_data()
     
     if df_main.empty:
@@ -904,9 +920,26 @@ def main() -> None:
         # Show total conversion funnel
         render_modern_dashboard(summary_df, summary_df)
     else:
-        # Show filtered conversion funnel - use full data
-        df_filtered = df_main[df_main['game_name'].isin(selected_games)]
-        render_modern_dashboard(df_filtered, df_filtered)
+        # Show filtered conversion funnel - use game-specific numbers
+        selected_games_data = game_conversion_df[game_conversion_df['game_name'].isin(selected_games)]
+        if not selected_games_data.empty:
+            # Aggregate the selected games
+            total_started_users = selected_games_data['started_users'].sum()
+            total_completed_users = selected_games_data['completed_users'].sum()
+            total_started_visits = selected_games_data['started_visits'].sum()
+            total_completed_visits = selected_games_data['completed_visits'].sum()
+            total_started_instances = selected_games_data['started_instances'].sum()
+            total_completed_instances = selected_games_data['completed_instances'].sum()
+            
+            # Create summary data for selected games
+            selected_games_summary = pd.DataFrame([
+                {'Event': 'Started', 'Users': total_started_users, 'Visits': total_started_visits, 'Instances': total_started_instances},
+                {'Event': 'Completed', 'Users': total_completed_users, 'Visits': total_completed_visits, 'Instances': total_completed_instances}
+            ])
+            
+            render_modern_dashboard(selected_games_summary, selected_games_summary)
+        else:
+            st.warning("No data found for selected games.")
     
     # Add Score Distribution Analysis
     st.markdown("---")

@@ -795,6 +795,33 @@ def main():
         df_main.to_csv('data/processed_data.csv', index=False)
         print("SUCCESS: Saved data/processed_data.csv")
         
+        # Create and save game-specific conversion numbers for dashboard
+        game_conversion_data = []
+        for game in df_main['game_name'].unique():
+            if game != 'Unknown Game':
+                game_data = df_main[df_main['game_name'] == game]
+                started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
+                completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+                started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
+                completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
+                started_instances = len(game_data[game_data['event'] == 'Started'])
+                completed_instances = len(game_data[game_data['event'] == 'Completed'])
+                
+                game_conversion_data.append({
+                    'game_name': game,
+                    'started_users': started_users,
+                    'completed_users': completed_users,
+                    'started_visits': started_visits,
+                    'completed_visits': completed_visits,
+                    'started_instances': started_instances,
+                    'completed_instances': completed_instances
+                })
+        
+        # Save game-specific conversion numbers (small file for GitHub)
+        game_conversion_df = pd.DataFrame(game_conversion_data)
+        game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
+        print("SUCCESS: Saved data/game_conversion_numbers.csv")
+        
         summary_df.to_csv('data/summary_data.csv', index=False)
         print("SUCCESS: Saved data/summary_data.csv")
         
