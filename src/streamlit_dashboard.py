@@ -843,13 +843,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
     st.title("Hybrid Dashboard")
-    st.caption("Performance Optimized - Using Preprocessed Data v2.1")
+    st.caption("Performance Optimized - Using Preprocessed Data v2.2 - FIXED")
     
     
     # Check if processed data exists
     check_processed_data()
     
     with st.spinner("Loading data..."):
+        st.info("🔄 Loading data with v2.2 - All timeseries_total_df references fixed!")
         (df_main, summary_df, time_series_df, 
          repeatability_df, score_distribution_df, metadata) = load_processed_data()
     
