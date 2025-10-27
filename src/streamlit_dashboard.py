@@ -450,8 +450,11 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     st.markdown("### 🎮 Game Repeatability Analysis")
     st.info("📊 Analysis based on SQL query: JOIN hybrid_games → hybrid_games_links → hybrid_game_completions → hybrid_profiles → hybrid_users")
     
-    # Create the repeatability chart
-    repeatability_chart = alt.Chart(repeatability_df).mark_bar(
+    # TEST: Show current version to verify deployment
+    st.success("✅ CHART VERSION: Updated with correct axis labels - X: 'No of games played', Y: 'Number of Users'")
+    
+    # Create the repeatability chart with explicit axis configuration
+    chart = alt.Chart(repeatability_df).mark_bar(
         cornerRadius=6,
         stroke='white',
         strokeWidth=2,
@@ -459,33 +462,33 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     ).encode(
         x=alt.X('games_played:O', 
                 title='No of games played', 
-                axis=alt.Axis(labelAngle=0)),
+                axis=alt.Axis(labelAngle=0, titleFontSize=24, labelFontSize=22)),
         y=alt.Y('user_count:Q', 
                 title='Number of Users', 
-                axis=alt.Axis(format='~s')),
+                axis=alt.Axis(format='~s', titleFontSize=24, labelFontSize=22)),
         tooltip=['games_played:O', 'user_count:Q']
     ).properties(
         width=800,
         height=400,
         title='User Distribution by Number of Distinct Games Completed'
-    ).add_selection(
-        alt.selection_interval()
-    ).add_layer(
-        alt.Chart(repeatability_df).mark_text(
-            align='center',
-            baseline='bottom',
-            color='#2E8B57',
-            fontSize=20,
-            fontWeight='bold',
-            dy=-10
-        ).encode(
-            x=alt.X('games_played:O'),
-            y=alt.Y('user_count:Q'),
-            text=alt.Text('user_count:Q', format='.0f')
-        )
-    ).configure_axis(
-        labelFontSize=22,
-        titleFontSize=24,
+    )
+    
+    # Add text labels
+    text = alt.Chart(repeatability_df).mark_text(
+        align='center',
+        baseline='bottom',
+        color='#2E8B57',
+        fontSize=20,
+        fontWeight='bold',
+        dy=-10
+    ).encode(
+        x=alt.X('games_played:O'),
+        y=alt.Y('user_count:Q'),
+        text=alt.Text('user_count:Q', format='.0f')
+    )
+    
+    # Combine chart and text
+    repeatability_chart = (chart + text).configure_axis(
         grid=True
     ).configure_title(
         fontSize=28,
