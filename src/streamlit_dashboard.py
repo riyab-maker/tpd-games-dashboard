@@ -695,7 +695,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
         return
     
     # Filter by selected time period
-    filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
+    if time_period == "All time":
+        # For "All time", use Month data
+        filtered_ts_df = time_series_df[time_series_df['period_type'] == 'Month'].copy()
+    else:
+        filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
     
     # Apply July filter for Month and All time views
     if time_period == "Month" or time_period == "All time":
