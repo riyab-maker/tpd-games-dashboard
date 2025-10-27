@@ -878,9 +878,6 @@ def main() -> None:
         st.warning("No data available.")
         return
     
-    # Show data info
-    if metadata:
-    
     # Add filters
     st.markdown("### 🎮 Filters")
     
