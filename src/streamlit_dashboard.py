@@ -863,8 +863,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
     st.altair_chart(instances_chart, use_container_width=True)
 
 def main() -> None:
-    st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
-    st.title("Matomo Events Dashboard")
+    st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
+    st.title("Hybrid Dashboard")
     st.caption("All data (server_time adjusted by +5h30m) | Fixed Indentation")
     
     
