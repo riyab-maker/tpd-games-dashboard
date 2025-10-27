@@ -956,11 +956,9 @@ def main() -> None:
         game_summary = f"{', '.join(selected_games)}"
         game_count = len(selected_games)
     
-    # If no games selected, use original summary data; if games selected, use filtered data
-    if not selected_games:
-        render_modern_dashboard(summary_df, summary_df)  # Use original totals
-    else:
-        render_modern_dashboard(summary_df, df_filtered)  # Use filtered data
+    # Always use original summary data for conversion funnel
+    # Individual game filtering is not meaningful for conversion funnels
+    render_modern_dashboard(summary_df, summary_df)
     
     # Add Score Distribution Analysis
     st.markdown("---")
