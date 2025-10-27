@@ -986,7 +986,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.3")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 1.4 - FORCE DEPLOY")
     
     # Check if processed data exists
     check_processed_data()
