@@ -83,12 +83,22 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     # Get data for each funnel from conversion data
     if 'game_name' in conversion_df.columns:
         # Game-specific data - aggregate across selected games
-        started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].sum()
-        completed_users = conversion_df[conversion_df['Event'] == 'Completed']['Users'].sum()
-        started_visits = conversion_df[conversion_df['Event'] == 'Started']['Visits'].sum()
-        completed_visits = conversion_df[conversion_df['Event'] == 'Completed']['Visits'].sum()
-        started_instances = conversion_df[conversion_df['Event'] == 'Started']['Instances'].sum()
-        completed_instances = conversion_df[conversion_df['Event'] == 'Completed']['Instances'].sum()
+        if 'Event' in conversion_df.columns:
+            # Summary data format
+            started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].sum()
+            completed_users = conversion_df[conversion_df['Event'] == 'Completed']['Users'].sum()
+            started_visits = conversion_df[conversion_df['Event'] == 'Started']['Visits'].sum()
+            completed_visits = conversion_df[conversion_df['Event'] == 'Completed']['Visits'].sum()
+            started_instances = conversion_df[conversion_df['Event'] == 'Started']['Instances'].sum()
+            completed_instances = conversion_df[conversion_df['Event'] == 'Completed']['Instances'].sum()
+        else:
+            # Dashboard data format - calculate from raw data
+            started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(conversion_df[conversion_df['event'] == 'Started'])
+            completed_instances = len(conversion_df[conversion_df['event'] == 'Completed'])
     else:
         # Total data - get direct values
         started_users = conversion_df[conversion_df['Event'] == 'Started']['Users'].iloc[0]
