@@ -108,12 +108,18 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     st.info(f"🔍 Started events: {len(df_filtered[df_filtered['event'] == 'Started'])}")
     st.info(f"🔍 Completed events: {len(df_filtered[df_filtered['event'] == 'Completed'])}")
     
-    started_users = df_filtered[df_filtered['event'] == 'Started']['idlink_va'].nunique()
-    completed_users = df_filtered[df_filtered['event'] == 'Completed']['idlink_va'].nunique()
-    started_visits = df_filtered[df_filtered['event'] == 'Started']['idvisit'].nunique()
-    completed_visits = df_filtered[df_filtered['event'] == 'Completed']['idvisit'].nunique()
-    started_instances = len(df_filtered[df_filtered['event'] == 'Started'])
-    completed_instances = len(df_filtered[df_filtered['event'] == 'Completed'])
+    # FIXED: Use lowercase 'event' for df_filtered
+    try:
+        started_users = df_filtered[df_filtered['event'] == 'Started']['idlink_va'].nunique()
+        completed_users = df_filtered[df_filtered['event'] == 'Completed']['idlink_va'].nunique()
+        started_visits = df_filtered[df_filtered['event'] == 'Started']['idvisit'].nunique()
+        completed_visits = df_filtered[df_filtered['event'] == 'Completed']['idvisit'].nunique()
+        started_instances = len(df_filtered[df_filtered['event'] == 'Started'])
+        completed_instances = len(df_filtered[df_filtered['event'] == 'Completed'])
+    except KeyError as e:
+        st.error(f"❌ Column error: {e}")
+        st.error(f"Available columns: {df_filtered.columns.tolist()}")
+        st.stop()
     
     # Debug: Show filtered data info
     st.info(f"🔄 Conversion Funnel - Filtered data: {len(df_filtered)} events, {len(df_filtered['game_name'].unique())} games")
@@ -877,7 +883,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, df_main: pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Matomo Events Dashboard", layout="wide")
     st.title("Matomo Events Dashboard")
-    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.1 - FIXED EVENT COLUMN ERROR")
+    st.caption("All data (server_time adjusted by +5h30m) | Version: 2.2 - COMPLETE REWRITE")
     
     # Force deployment check
     st.success("🚀 CONVERSION FUNNEL NOW FILTERS BY GAME! Test by selecting different games.")
