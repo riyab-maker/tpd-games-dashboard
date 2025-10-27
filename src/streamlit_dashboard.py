@@ -451,7 +451,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     st.info("📊 Analysis based on SQL query: JOIN hybrid_games → hybrid_games_links → hybrid_game_completions → hybrid_profiles → hybrid_users")
     
     # Create the repeatability chart
-    bars = alt.Chart(repeatability_df).mark_bar(
+    repeatability_chart = alt.Chart(repeatability_df).mark_bar(
         cornerRadius=6,
         stroke='white',
         strokeWidth=2,
@@ -468,34 +468,28 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
         width=800,
         height=400,
         title='User Distribution by Number of Distinct Games Completed'
-    )
-    
-    # Add data labels on top of bars
-    labels = alt.Chart(repeatability_df).mark_text(
-        align='center',
-        baseline='bottom',
-        color='#2E8B57',
-        fontSize=20,
-        fontWeight='bold',
-        dy=-10
-    ).encode(
-        x=alt.X('games_played:O'),
-        y=alt.Y('user_count:Q'),
-        text=alt.Text('user_count:Q', format='.0f')
-    )
-    
-    # Combine bars and labels
-    repeatability_chart = (bars + labels).configure_axis(
+    ).add_selection(
+        alt.selection_interval()
+    ).add_layer(
+        alt.Chart(repeatability_df).mark_text(
+            align='center',
+            baseline='bottom',
+            color='#2E8B57',
+            fontSize=20,
+            fontWeight='bold',
+            dy=-10
+        ).encode(
+            x=alt.X('games_played:O'),
+            y=alt.Y('user_count:Q'),
+            text=alt.Text('user_count:Q', format='.0f')
+        )
+    ).configure_axis(
         labelFontSize=22,
         titleFontSize=24,
         grid=True
     ).configure_title(
         fontSize=28,
         fontWeight='bold'
-    ).configure_axisX(
-        title='No of games played'
-    ).configure_axisY(
-        title='Number of Users'
     )
     
     st.altair_chart(repeatability_chart, use_container_width=True)
