@@ -103,26 +103,42 @@ def render_modern_dashboard(summary_df: pd.DataFrame, df_filtered: pd.DataFrame)
     
     # Get data for each funnel from filtered data
     # Calculate unique users, visits, and instances from filtered data
-    st.info(f"🔍 CONVERSION FUNNEL DEBUG: df_filtered has {len(df_filtered)} events")
-    st.info(f"🔍 Available events: {df_filtered['event'].unique()}")
-    st.info(f"🔍 Started events: {len(df_filtered[df_filtered['event'] == 'Started'])}")
-    st.info(f"🔍 Completed events: {len(df_filtered[df_filtered['event'] == 'Completed'])}")
+    if 'Event' in df_filtered.columns:
+        st.info(f"🔍 CONVERSION FUNNEL DEBUG: Using original summary data")
+    else:
+        st.info(f"🔍 CONVERSION FUNNEL DEBUG: df_filtered has {len(df_filtered)} events")
+        st.info(f"🔍 Available events: {df_filtered['event'].unique()}")
+        st.info(f"🔍 Started events: {len(df_filtered[df_filtered['event'] == 'Started'])}")
+        st.info(f"🔍 Completed events: {len(df_filtered[df_filtered['event'] == 'Completed'])}")
     
-    # FIXED: Use lowercase 'event' for df_filtered
-    try:
-        started_users = df_filtered[df_filtered['event'] == 'Started']['idlink_va'].nunique()
-        completed_users = df_filtered[df_filtered['event'] == 'Completed']['idlink_va'].nunique()
-        started_visits = df_filtered[df_filtered['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = df_filtered[df_filtered['event'] == 'Completed']['idvisit'].nunique()
-        started_instances = len(df_filtered[df_filtered['event'] == 'Started'])
-        completed_instances = len(df_filtered[df_filtered['event'] == 'Completed'])
-    except KeyError as e:
-        st.error(f"❌ Column error: {e}")
-        st.error(f"Available columns: {df_filtered.columns.tolist()}")
-        st.stop()
+    # Check if we're using summary data (original) or filtered data
+    if 'Event' in df_filtered.columns:
+        # Using summary data - get original totals
+        started_users = df_filtered[df_filtered['Event'] == 'Started']['Users'].iloc[0]
+        completed_users = df_filtered[df_filtered['Event'] == 'Completed']['Users'].iloc[0]
+        started_visits = df_filtered[df_filtered['Event'] == 'Started']['Visits'].iloc[0]
+        completed_visits = df_filtered[df_filtered['Event'] == 'Completed']['Visits'].iloc[0]
+        started_instances = df_filtered[df_filtered['Event'] == 'Started']['Instances'].iloc[0]
+        completed_instances = df_filtered[df_filtered['Event'] == 'Completed']['Instances'].iloc[0]
+    else:
+        # Using filtered data - calculate from filtered events
+        try:
+            started_users = df_filtered[df_filtered['event'] == 'Started']['idlink_va'].nunique()
+            completed_users = df_filtered[df_filtered['event'] == 'Completed']['idlink_va'].nunique()
+            started_visits = df_filtered[df_filtered['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = df_filtered[df_filtered['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(df_filtered[df_filtered['event'] == 'Started'])
+            completed_instances = len(df_filtered[df_filtered['event'] == 'Completed'])
+        except KeyError as e:
+            st.error(f"❌ Column error: {e}")
+            st.error(f"Available columns: {df_filtered.columns.tolist()}")
+            st.stop()
     
-    # Debug: Show filtered data info
-    st.info(f"🔄 Conversion Funnel - Filtered data: {len(df_filtered)} events, {len(df_filtered['game_name'].unique())} games")
+    # Debug: Show data info
+    if 'Event' in df_filtered.columns:
+        st.info(f"🔄 Conversion Funnel - Using original summary data")
+    else:
+        st.info(f"🔄 Conversion Funnel - Filtered data: {len(df_filtered)} events, {len(df_filtered['game_name'].unique())} games")
     st.info(f"📊 Numbers: Started Users={started_users}, Completed Users={completed_users}, Started Visits={started_visits}, Completed Visits={completed_visits}")
     
     # Create three separate funnels
@@ -983,7 +999,12 @@ def main() -> None:
 
     # Use filtered data for conversion funnel to respect game filter
     st.info(f"🔄 PASSING TO CONVERSION FUNNEL: {len(df_filtered)} events, games: {sorted(df_filtered['game_name'].unique())}")
-    render_modern_dashboard(summary_df, df_filtered)
+    
+    # If no games selected, use original summary data; if games selected, use filtered data
+    if not selected_games or len(selected_games) == len(unique_games):
+        render_modern_dashboard(summary_df, summary_df)  # Use original totals
+    else:
+        render_modern_dashboard(summary_df, df_filtered)  # Use filtered data
     
     # Add Score Distribution Analysis
     st.markdown("---")
