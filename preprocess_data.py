@@ -100,51 +100,29 @@ SQL_QUERY = (
     """
 )
 
-# Score distribution queries
-SCORE_DISTRIBUTION_QUERY_1 = """
+# Score distribution query - Updated to use hybrid_games and hybrid_games_links tables
+SCORE_DISTRIBUTION_QUERY = """
 SELECT 
-  `matomo_log_link_visit_action`.`custom_dimension_2`, 
-  `matomo_log_link_visit_action`.`idvisit`, 
-  `matomo_log_action`.`name`, 
-  `matomo_log_link_visit_action`.`custom_dimension_1`, 
-  CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted
-FROM `matomo_log_link_visit_action` 
-INNER JOIN `matomo_log_action` 
-  ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction` 
-WHERE `matomo_log_link_visit_action`.`custom_dimension_2` IN ("50", "52", "70", "72")
-  AND `matomo_log_action`.`name` LIKE '%game_completed%';
-"""
-
-SCORE_DISTRIBUTION_QUERY_2 = """
-SELECT 
-  matomo_log_link_visit_action.custom_dimension_2,
-  matomo_log_link_visit_action.idvisit,
-  matomo_log_action.name,
-  matomo_log_link_visit_action.custom_dimension_1,
-  CONV(HEX(matomo_log_link_visit_action.idvisitor), 16, 10) AS idvisitor_converted
-FROM matomo_log_link_visit_action
-INNER JOIN matomo_log_action
-  ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
-WHERE matomo_log_link_visit_action.custom_dimension_2 IN ("62", "64", "66", "68")
-  AND matomo_log_action.name LIKE '%game_completed%';
-"""
-
-SCORE_DISTRIBUTION_QUERY_3 = """
-SELECT `matomo_log_link_visit_action`.`idlink_va`, 
-CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted, 
-`matomo_log_link_visit_action`.`idvisit`, 
-`matomo_log_link_visit_action`.`server_time`, 
-`matomo_log_link_visit_action`.`idaction_name`, 
-`matomo_log_link_visit_action`.`custom_dimension_1`, 
-`matomo_log_link_visit_action`.`custom_dimension_2`, 
-`matomo_log_action`.`idaction`, 
-`matomo_log_action`.`name`, 
-`matomo_log_action`.`type` 
-FROM `matomo_log_link_visit_action` 
-inner join `matomo_log_action` on `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction` 
-where `matomo_log_link_visit_action`.`server_time` >= '2025-07-01' 
-and `matomo_log_link_visit_action`.`custom_dimension_2` in ("12", "28", "24", "40", "54", "56", "50", "52", "70", "72", "58", "66", "68", "60", "62", "64","78","80","82","84","83","76","74","88","86") 
-and `matomo_log_action`.`name` Like '%action_level%'
+  hg.game_name AS game_name,
+  mllva.idvisit,
+  mla.name AS action_name,
+  mllva.custom_dimension_1,
+  CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+  mllva.server_time,
+  mllva.idaction_name,
+  mllva.custom_dimension_2,
+  mla.idaction,
+  mla.type
+FROM hybrid_games hg
+INNER JOIN hybrid_games_links hgl ON hg.id = hgl.game_id
+INNER JOIN matomo_log_link_visit_action mllva ON hgl.activity_id = mllva.custom_dimension_2
+INNER JOIN matomo_log_action mla ON mllva.idaction_name = mla.idaction
+WHERE mllva.server_time >= '2025-07-01'
+  AND hgl.activity_id IS NOT NULL
+  AND (
+    mla.name LIKE '%game_completed%' 
+    OR mla.name LIKE '%action_level%'
+  )
 """
 
 
@@ -169,9 +147,9 @@ def fetch_dataframe() -> pd.DataFrame:
     return df
 
 
-def fetch_score_dataframe_1() -> pd.DataFrame:
-    """Fetch data for score distribution analysis (correctSelections games)"""
-    print("Fetching score data (correctSelections games)...")
+def fetch_score_dataframe() -> pd.DataFrame:
+    """Fetch data for score distribution analysis using hybrid_games and hybrid_games_links tables"""
+    print("Fetching score data using hybrid_games and hybrid_games_links tables...")
     with pymysql.connect(
         host=HOST,
         port=PORT,
@@ -182,53 +160,11 @@ def fetch_score_dataframe_1() -> pd.DataFrame:
         ssl={'ssl': {}},
     ) as conn:
         with conn.cursor() as cur:
-            cur.execute(SCORE_DISTRIBUTION_QUERY_1)
+            cur.execute(SCORE_DISTRIBUTION_QUERY)
             rows = cur.fetchall()
             columns = [d[0] for d in cur.description]
     df = pd.DataFrame(rows, columns=columns)
-    print(f"SUCCESS: Fetched {len(df)} records from score query 1")
-    return df
-
-
-def fetch_score_dataframe_2() -> pd.DataFrame:
-    """Fetch data for score distribution analysis (jsonData games)"""
-    print("Fetching score data (jsonData games)...")
-    with pymysql.connect(
-        host=HOST,
-        port=PORT,
-        user=USER,
-        password=PASSWORD,
-        database=DBNAME,
-        connect_timeout=15,
-        ssl={'ssl': {}},
-    ) as conn:
-        with conn.cursor() as cur:
-            cur.execute(SCORE_DISTRIBUTION_QUERY_2)
-            rows = cur.fetchall()
-            columns = [d[0] for d in cur.description]
-    df = pd.DataFrame(rows, columns=columns)
-    print(f"SUCCESS: Fetched {len(df)} records from score query 2")
-    return df
-
-
-def fetch_score_dataframe_3() -> pd.DataFrame:
-    """Fetch data for score distribution analysis (action_level games)"""
-    print("Fetching score data (action_level games)...")
-    with pymysql.connect(
-        host=HOST,
-        port=PORT,
-        user=USER,
-        password=PASSWORD,
-        database=DBNAME,
-        connect_timeout=15,
-        ssl={'ssl': {}},
-    ) as conn:
-        with conn.cursor() as cur:
-            cur.execute(SCORE_DISTRIBUTION_QUERY_3)
-            rows = cur.fetchall()
-            columns = [d[0] for d in cur.description]
-    df = pd.DataFrame(rows, columns=columns)
-    print(f"SUCCESS: Fetched {len(df)} records from score query 3")
+    print(f"SUCCESS: Fetched {len(df)} records from score distribution query")
     return df
 
 
@@ -362,38 +298,66 @@ def get_game_name_from_custom_dimension_2(custom_dim_2):
     return game_mapping.get(custom_dim_2, f'Game {custom_dim_2}')
 
 
-def calculate_score_distribution_combined(df_score_1, df_score_2, df_score_3):
-    """Calculate combined score distribution for all three query datasets"""
+def calculate_score_distribution_combined(df_score):
+    """Calculate score distribution using the new unified query with hybrid_games table"""
     print("Processing score distribution data...")
+    
+    if df_score.empty:
+        print("WARNING: No score distribution data found")
+        return pd.DataFrame()
+    
+    # The game_name is now directly available from the hybrid_games table
+    # We need to determine the score calculation method based on the action_name
     combined_df = pd.DataFrame()
     
-    # Process first dataset (correctSelections games)
-    if not df_score_1.empty:
-        print("  - Processing correctSelections games...")
-        df_score_1['total_score'] = df_score_1['custom_dimension_1'].apply(parse_custom_dimension_1_correct_selections)
-        df_score_1['game_name'] = df_score_1['custom_dimension_2'].apply(get_game_name_from_custom_dimension_2)
-        df_score_1 = df_score_1[df_score_1['total_score'] > 0]
-        combined_df = pd.concat([combined_df, df_score_1], ignore_index=True)
+    # Separate data based on action type for different score calculation methods
+    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)]
+    action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)]
     
-    # Process second dataset (jsonData games)
-    if not df_score_2.empty:
-        print("  - Processing jsonData games...")
-        df_score_2['total_score'] = df_score_2['custom_dimension_1'].apply(parse_custom_dimension_1_json_data)
-        df_score_2['game_name'] = df_score_2['custom_dimension_2'].apply(get_game_name_from_custom_dimension_2)
-        df_score_2 = df_score_2[df_score_2['total_score'] > 0]
-        combined_df = pd.concat([combined_df, df_score_2], ignore_index=True)
+    # Process game_completed data (correctSelections and jsonData games)
+    if not game_completed_data.empty:
+        print("  - Processing game_completed data...")
+        
+        # Process each game individually to determine the correct score calculation method
+        for game_name in game_completed_data['game_name'].unique():
+            game_data = game_completed_data[game_completed_data['game_name'] == game_name].copy()
+            
+            # Try different score calculation methods and use the one that produces valid results
+            # Method 1: correctSelections (for Relational Comparison, Quantity Comparison, etc.)
+            game_data['total_score_correct'] = game_data['custom_dimension_1'].apply(parse_custom_dimension_1_correct_selections)
+            correct_count = (game_data['total_score_correct'] > 0).sum()
+            
+            # Method 2: jsonData (for Revision games, Rhyming Words, etc.)
+            game_data['total_score_json'] = game_data['custom_dimension_1'].apply(parse_custom_dimension_1_json_data)
+            json_count = (game_data['total_score_json'] > 0).sum()
+            
+            # Choose the method that produces more valid scores
+            if correct_count >= json_count and correct_count > 0:
+                print(f"    - {game_name}: Using correctSelections method ({correct_count} valid scores)")
+                game_data['total_score'] = game_data['total_score_correct']
+            elif json_count > 0:
+                print(f"    - {game_name}: Using jsonData method ({json_count} valid scores)")
+                game_data['total_score'] = game_data['total_score_json']
+            else:
+                print(f"    - {game_name}: No valid scores found, skipping")
+                continue
+            
+            # Filter out zero scores and add to combined data
+            game_data = game_data[game_data['total_score'] > 0]
+            if not game_data.empty:
+                combined_df = pd.concat([combined_df, game_data], ignore_index=True)
     
-    # Process third dataset (action games) - HANDLE MULTIPLE GAME SESSIONS PER VISIT
-    if not df_score_3.empty:
-        print("  - Processing action games...")
+    # Process action_level data (action games) - HANDLE MULTIPLE GAME SESSIONS PER VISIT
+    if not action_level_data.empty:
+        print("  - Processing action_level games...")
         
         # Parse each record to get individual question scores (0 or 1)
-        df_score_3['question_score'] = df_score_3['custom_dimension_1'].apply(parse_custom_dimension_1_action_games)
-        df_score_3['game_name'] = df_score_3['custom_dimension_2'].apply(get_game_name_from_custom_dimension_2)
+        action_level_data = action_level_data.copy()
+        action_level_data['question_score'] = action_level_data['custom_dimension_1'].apply(parse_custom_dimension_1_action_games)
         
         # CRITICAL: Handle multiple game sessions per user+game+visit
         # Sort by user, game, visit, then by server_time to track session order
-        df_score_3 = df_score_3.sort_values(['idvisitor_converted', 'custom_dimension_2', 'idvisit', 'server_time'])
+        action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
         
         # Create session_instance to handle multiple plays of same game
         session_instances = []
@@ -403,9 +367,9 @@ def calculate_score_distribution_combined(df_score_1, df_score_2, df_score_3):
         prev_visit = None
         prev_time = None
         
-        for _, row in df_score_3.iterrows():
+        for _, row in action_level_data.iterrows():
             user = row['idvisitor_converted']
-            game = row['custom_dimension_2']
+            game = row['game_name']  # Use game_name instead of custom_dimension_2
             visit = row['idvisit']
             time = row['server_time']
             
@@ -422,19 +386,18 @@ def calculate_score_distribution_combined(df_score_1, df_score_2, df_score_3):
             prev_visit = visit
             prev_time = time
         
-        df_score_3['session_instance'] = session_instances
+        action_level_data['session_instance'] = session_instances
         
         # Group by user, game, visit, and session_instance
-        df_score_3_grouped = df_score_3.groupby(['idvisitor_converted', 'custom_dimension_2', 'idvisit', 'session_instance'])['question_score'].sum().reset_index()
-        df_score_3_grouped.columns = ['idvisitor_converted', 'custom_dimension_2', 'idvisit', 'session_instance', 'total_score']
-        df_score_3_grouped['game_name'] = df_score_3_grouped['custom_dimension_2'].apply(get_game_name_from_custom_dimension_2)
+        action_level_grouped = action_level_data.groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])['question_score'].sum().reset_index()
+        action_level_grouped.columns = ['idvisitor_converted', 'game_name', 'idvisit', 'session_instance', 'total_score']
         
         # CRITICAL: Cap the total_score at 12 (max possible for one game session)
-        df_score_3_grouped['total_score'] = df_score_3_grouped['total_score'].clip(upper=12)
+        action_level_grouped['total_score'] = action_level_grouped['total_score'].clip(upper=12)
         
         # Only include sessions with total_score > 0
-        df_score_3_grouped = df_score_3_grouped[df_score_3_grouped['total_score'] > 0]
-        combined_df = pd.concat([combined_df, df_score_3_grouped], ignore_index=True)
+        action_level_grouped = action_level_grouped[action_level_grouped['total_score'] > 0]
+        combined_df = pd.concat([combined_df, action_level_grouped], ignore_index=True)
     
     if combined_df.empty:
         print("WARNING: No score distribution data found")
@@ -760,9 +723,7 @@ def main():
             return
         
         # Score distribution data
-        df_score_1 = fetch_score_dataframe_1()
-        df_score_2 = fetch_score_dataframe_2()
-        df_score_3 = fetch_score_dataframe_3()
+        df_score = fetch_score_dataframe()
         
         print("\nPROCESSING DATA")
         print("-" * 30)
@@ -775,7 +736,7 @@ def main():
         summary_df = build_summary(df_main)
         
         # Process score distribution
-        score_distribution_df = calculate_score_distribution_combined(df_score_1, df_score_2, df_score_3)
+        score_distribution_df = calculate_score_distribution_combined(df_score)
         
         # Process time series data
         time_series_df = preprocess_time_series_data(df_main)

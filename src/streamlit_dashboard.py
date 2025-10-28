@@ -313,16 +313,16 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     selected_games = st.multiselect(
         "Select Games for Score Distribution:",
         options=unique_games,
-        default=[],  # Empty by default - shows all games
-        help="Select one or more games to show score distribution. Leave empty to show all games."
+        default=[unique_games[0]] if unique_games else [],  # Show first game by default
+        help="Select one or more games to show score distribution. First game is selected by default."
     )
     
     # Filter data based on selected games
     if selected_games:
         filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
     else:
-        # Empty selection means all games
-        filtered_df = score_distribution_df
+        # If no games selected, show first game
+        filtered_df = score_distribution_df[score_distribution_df['game_name'] == unique_games[0]] if unique_games else score_distribution_df
     
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
@@ -330,9 +330,12 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     
     # Create the score distribution chart
     st.markdown("### 📊 Score Distribution")
-    st.markdown("This chart shows how many users achieved each total score for the selected games.")
+    if len(selected_games) == 1:
+        st.markdown(f"This chart shows how many users achieved each total score for **{selected_games[0]}**.")
+    else:
+        st.markdown(f"This chart shows how many users achieved each total score for the selected games ({len(selected_games)} games).")
     
-    # Add combined score distribution (all games together)
+    # Add score distribution chart
     st.markdown("#### 🎯 Score Distribution")
     
     # Create combined data by summing user counts across all games for each score
