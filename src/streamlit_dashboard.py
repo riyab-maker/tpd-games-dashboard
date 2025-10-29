@@ -688,7 +688,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     
     # Apply July filter for Month view
     if time_period == "Month":
-        july_onwards = ['July 2025', 'August 2025', 'September 2025', 'October 2025']
+        # Filter for dates from July 2025 onwards (data has dates like '2025-07-01')
+        july_onwards = ['2025-07-01', '2025-08-01', '2025-09-01', '2025-10-01', '2025-11-01', '2025-12-01']
         filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
     
     # Apply game filtering if specific games are selected
