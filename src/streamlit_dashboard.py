@@ -15,7 +15,8 @@ REQUIRED_FILES = [
     "time_series_data.csv",
     "repeatability_data.csv",
     "score_distribution_data.csv",
-    "game_conversion_numbers.csv"
+    "game_conversion_numbers.csv",
+    "poll_responses_data.csv"
 ]
 
 def check_processed_data():
@@ -70,6 +71,9 @@ def load_processed_data():
         # Load score distribution data
         score_distribution_df = pd.read_csv(os.path.join(DATA_DIR, "score_distribution_data.csv"))
         
+        # Load poll responses data
+        poll_responses_df = pd.read_csv(os.path.join(DATA_DIR, "poll_responses_data.csv"))
+        
         # Create metadata
         metadata = {
             'last_updated': datetime.now().isoformat(),
@@ -78,7 +82,7 @@ def load_processed_data():
         }
         
         return (summary_df, game_conversion_df, time_series_df, 
-                repeatability_df, score_distribution_df, metadata)
+                repeatability_df, score_distribution_df, poll_responses_df, metadata)
     
     except Exception as e:
         st.error(f"❌ Error loading processed data: {str(e)}")
@@ -707,10 +711,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     # Aggregate data by time period to prevent overlapping points
     # Group by time_period and sum the metrics
     aggregated_df = filtered_ts_df.groupby('time_period').agg({
-        'started_users': 'sum',
-        'completed_users': 'sum',
+        'visits': 'sum',
+        'users': 'sum',
+        'instances': 'sum',
         'started_visits': 'sum',
         'completed_visits': 'sum',
+        'started_users': 'sum',
+        'completed_users': 'sum',
         'started_instances': 'sum',
         'completed_instances': 'sum'
     }).reset_index()
@@ -757,11 +764,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         """Create combined chart showing Visits, Instances, and Users together (Completed events only)"""
         chart_data = []
         for _, row in data.iterrows():
-            # Add data for each metric - Completed events only
+            # Add data for each metric - Using new column names
             chart_data.extend([
-                {'Time': str(row['time_period']), 'Metric': 'Visits', 'Count': row['completed_visits']},
-                {'Time': str(row['time_period']), 'Metric': 'Instances', 'Count': row['completed_instances']},
-                {'Time': str(row['time_period']), 'Metric': 'Users', 'Count': row['completed_users']}
+                {'Time': str(row['time_period']), 'Metric': 'Visits', 'Count': row['visits']},
+                {'Time': str(row['time_period']), 'Metric': 'Instances', 'Count': row['instances']},
+                {'Time': str(row['time_period']), 'Metric': 'Users', 'Count': row['users']}
             ])
         chart_df = pd.DataFrame(chart_data)
         
@@ -828,40 +835,181 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         )
     
     # Combined Analysis Section
-    st.markdown("### 📊 Combined Time Series Analysis")
-    st.markdown("This chart displays **Visits**, **Instances**, and **Users** for **Completed Events** only to show trends across all metrics.")
+    st.markdown("### 📊 Time Series Analysis: Visits, Instances, and Users")
+    st.markdown("This chart displays **Visits**, **Instances**, and **Users** together to show trends across all metrics using the updated calculation logic.")
     
     combined_chart = create_combined_chart(aggregated_df)
     st.altair_chart(combined_chart, use_container_width=True)
     
     # Add summary statistics
-    st.markdown("#### 📈 Summary Statistics (Completed Events)")
+    st.markdown("#### 📈 Summary Statistics")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        total_visits = aggregated_df['completed_visits'].sum()
+        total_visits = aggregated_df['visits'].sum()
         st.metric(
-            label="🔄 Total Completed Visits",
+            label="🔄 Total Visits",
             value=f"{total_visits:,}",
-            help="Sum of completed visits across the selected time period"
+            help="Sum of visits across the selected time period"
         )
     
     with col2:
-        total_instances = aggregated_df['completed_instances'].sum()
+        total_instances = aggregated_df['instances'].sum()
         st.metric(
-            label="⚡ Total Completed Instances", 
+            label="⚡ Total Instances", 
             value=f"{total_instances:,}",
-            help="Sum of completed instances across the selected time period"
+            help="Sum of instances across the selected time period"
         )
     
     with col3:
-        total_users = aggregated_df['completed_users'].sum()
+        total_users = aggregated_df['users'].sum()
         st.metric(
-            label="👥 Total Completed Users",
+            label="👥 Total Users",
             value=f"{total_users:,}",
             help="Sum of users who completed events across the selected time period"
         )
+
+def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
+    """Render parent poll responses visualization"""
+    import altair as alt
+    
+    if poll_responses_df.empty:
+        st.warning("No parent poll responses data available.")
+        return
+    
+    st.markdown("### 📊 Parent Poll Responses")
+    
+    # Get unique games for filter
+    unique_games = sorted(game_conversion_df['game_name'].unique())
+    
+    # Add game filter
+    st.markdown("**🎮 Game Filter:**")
+    selected_games = st.multiselect(
+        "Select Games for Parent Poll Analysis:",
+        options=unique_games,
+        default=[],  # Empty by default - shows all games
+        help="Select one or more games to show parent poll responses. Leave empty to show all games."
+    )
+    
+    # Filter data based on selected games
+    if selected_games:
+        # Check if game_name column exists in poll data
+        if 'game_name' in poll_responses_df.columns:
+            filtered_df = poll_responses_df[poll_responses_df['game_name'].isin(selected_games)]
+            if filtered_df.empty:
+                st.warning(f"No poll data found for selected games: {', '.join(selected_games)}")
+                return
+        else:
+            # Fallback for data without game_name column
+            filtered_df = poll_responses_df.copy()
+            st.info(f"🎮 Game filter selected: {', '.join(selected_games)} (Note: Poll data doesn't include game filtering yet)")
+    else:
+        filtered_df = poll_responses_df.copy()
+    
+    if filtered_df.empty:
+        st.warning("No data available for the selected games.")
+        return
+    
+    # Get unique questions
+    unique_questions = filtered_df['question'].unique()
+    
+    if len(unique_questions) == 0:
+        st.warning("No poll questions found in the data.")
+        return
+    
+    # Create charts for each question
+    for i, question in enumerate(unique_questions):
+        st.markdown(f"#### {question}")
+        
+        # Filter data for this question
+        question_data = filtered_df[filtered_df['question'] == question].copy()
+        
+        if question_data.empty:
+            st.warning(f"No data available for {question}")
+            continue
+        
+        # Create bar chart
+        chart = alt.Chart(question_data).mark_bar(
+            cornerRadius=6,
+            stroke='white',
+            strokeWidth=2,
+            color='#4A90E2'
+        ).encode(
+            x=alt.X('option:N', 
+                    title='Response Option', 
+                    axis=alt.Axis(
+                        labelAngle=0,
+                        labelFontSize=14,
+                        titleFontSize=16
+                    )),
+            y=alt.Y('count:Q', 
+                    title='Number of Responses', 
+                    axis=alt.Axis(format='~s')),
+            tooltip=['option:N', 'count:Q']
+        ).properties(
+            width=600,
+            height=400,
+            title=f'Responses for {question}'
+        )
+        
+        # Add data labels
+        labels = alt.Chart(question_data).mark_text(
+            align='center',
+            baseline='bottom',
+            color='#2E8B57',
+            fontSize=16,
+            fontWeight='bold',
+            dy=-10
+        ).encode(
+            x=alt.X('option:N'),
+            y=alt.Y('count:Q'),
+            text=alt.Text('count:Q', format='.0f')
+        )
+        
+        # Combine chart and labels
+        final_chart = (chart + labels).configure_axis(
+            labelFontSize=16,
+            titleFontSize=18,
+            grid=True
+        ).configure_title(
+            fontSize=20,
+            fontWeight='bold'
+        )
+        
+        st.altair_chart(final_chart, use_container_width=True)
+        
+        # Add summary statistics for this question
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            total_responses = question_data['count'].sum()
+            st.metric(
+                label="📊 Total Responses",
+                value=f"{total_responses:,}",
+                help=f"Total number of responses for {question}"
+            )
+        
+        with col2:
+            most_popular = question_data.loc[question_data['count'].idxmax(), 'option']
+            most_popular_count = question_data['count'].max()
+            st.metric(
+                label="🏆 Most Popular",
+                value=f"{most_popular} ({most_popular_count:,})",
+                help=f"Most selected option for {question}"
+            )
+        
+        with col3:
+            unique_options = len(question_data)
+            st.metric(
+                label="📝 Options Available",
+                value=f"{unique_options}",
+                help=f"Number of response options for {question}"
+            )
+        
+        # Add separator between questions
+        if i < len(unique_questions) - 1:
+            st.markdown("---")
 
 def main() -> None:
     st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
@@ -874,7 +1022,7 @@ def main() -> None:
     
     with st.spinner("Loading data..."):
         (summary_df, game_conversion_df, time_series_df, 
-         repeatability_df, score_distribution_df, metadata) = load_processed_data()
+         repeatability_df, score_distribution_df, poll_responses_df, metadata) = load_processed_data()
     
     if summary_df.empty:
         st.warning("No data available.")
@@ -965,6 +1113,15 @@ def main() -> None:
         render_score_distribution_chart(score_distribution_df)
     else:
         st.warning("No score distribution data available.")
+    
+    # Add Parent Poll Responses Analysis
+    st.markdown("---")
+    st.markdown("## 📊 Parent Poll Responses Analysis")
+    
+    if not poll_responses_df.empty:
+        render_parent_poll_responses(poll_responses_df, game_conversion_df)
+    else:
+        st.warning("No parent poll responses data available.")
     
     # Add Repeatability Analysis
     st.markdown("---")
