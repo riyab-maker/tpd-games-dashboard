@@ -752,27 +752,21 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         time_order = None
     
-    # Create separate sections for each metric with tabs for different time periods
-    def create_metric_chart(data, metric_name, metric_key, color_scheme):
-        """Create chart for a specific metric"""
+    # Create combined chart for all metrics (Completed events only)
+    def create_combined_chart(data):
+        """Create combined chart showing Visits, Instances, and Users together (Completed events only)"""
         chart_data = []
         for _, row in data.iterrows():
+            # Add data for each metric - Completed events only
             chart_data.extend([
-                {'Time': str(row['time_period']), 'Event': 'Started', 'Count': row[f'started_{metric_key}']},
-                {'Time': str(row['time_period']), 'Event': 'Completed', 'Count': row[f'completed_{metric_key}']}
+                {'Time': str(row['time_period']), 'Metric': 'Visits', 'Count': row['completed_visits']},
+                {'Time': str(row['time_period']), 'Metric': 'Instances', 'Count': row['completed_instances']},
+                {'Time': str(row['time_period']), 'Metric': 'Users', 'Count': row['completed_users']}
             ])
         chart_df = pd.DataFrame(chart_data)
         
-        # Line chart for time periods
-        lines = alt.Chart(chart_df).mark_line(
-            strokeWidth=3,
-            point=alt.OverlayMarkDef(
-                filled=True,
-                size=60,
-                stroke='white',
-                strokeWidth=1.5
-            )
-        ).encode(
+        # Create the base chart
+        base = alt.Chart(chart_df).encode(
             x=alt.X('Time:N', title='Time Period', 
                    sort=time_order if time_order else None,
                    axis=alt.Axis(
@@ -781,72 +775,93 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelLimit=150,
                        titleFontSize=14
                    )),
-            y=alt.Y('Count:Q', title=f'Number of {metric_name}', axis=alt.Axis(format='~s')),
-            color=alt.Color('Event:N', 
-                          scale=alt.Scale(domain=['Started', 'Completed'], 
-                                        range=color_scheme),
-                          legend=alt.Legend(title="Event Type")),
-            tooltip=['Time:N', 'Event:N', 'Count:Q']
+            y=alt.Y('Count:Q', title='Count', axis=alt.Axis(format='~s')),
+            tooltip=['Time:N', 'Metric:N', 'Count:Q']
+        )
+        
+        # Create lines for each metric
+        lines = base.mark_line(
+            strokeWidth=3,
+            point=alt.OverlayMarkDef(
+                filled=True,
+                size=50,
+                stroke='white',
+                strokeWidth=1.5
+            )
+        ).encode(
+            color=alt.Color('Metric:N', 
+                          scale=alt.Scale(domain=['Visits', 'Instances', 'Users'],
+                                        range=['#FF6B6B', '#FFA726', '#AB47BC']),
+                          legend=alt.Legend(title="Metric Type", 
+                                          labelFontSize=14,
+                                          titleFontSize=16))
         ).properties(
             width=900,
-            height=400,
-            title=f'{metric_name}: Started vs Completed'
+            height=500,
+            title='Time Series Analysis: Visits, Instances, and Users (Completed Events)'
         )
         
-        # Add data labels only for every other point to reduce clutter
-        started_data = chart_df[chart_df['Event'] == 'Started']
-        completed_data = chart_df[chart_df['Event'] == 'Completed']
-        
-        # Show labels only for every other point to reduce clutter
-        started_labels = alt.Chart(started_data[::2]).mark_text(
+        # Add data labels for every other point to reduce clutter
+        labels = base.mark_text(
             align='center',
             baseline='bottom',
-            color=color_scheme[0],
-            fontSize=11,
+            fontSize=10,
             fontWeight='bold',
-            dy=-12
+            dy=-8
         ).encode(
-            x=alt.X('Time:N', sort=time_order if time_order else None),
-            y=alt.Y('Count:Q'),
-            text=alt.Text('Count:Q', format='.0f')
+            text=alt.Text('Count:Q', format='.0f'),
+            color=alt.Color('Metric:N', 
+                          scale=alt.Scale(domain=['Visits', 'Instances', 'Users'],
+                                        range=['#FF6B6B', '#FFA726', '#AB47BC']),
+                          legend=None)
+        ).transform_filter(
+            alt.datum.Time % 2 == 0  # Show labels only for every other time point
         )
         
-        completed_labels = alt.Chart(completed_data[::2]).mark_text(
-            align='center',
-            baseline='top',
-            color=color_scheme[1],
-            fontSize=11,
-            fontWeight='bold',
-            dy=12
-        ).encode(
-            x=alt.X('Time:N', sort=time_order if time_order else None),
-            y=alt.Y('Count:Q'),
-            text=alt.Text('Count:Q', format='.0f')
-        )
-        
-        return (lines + started_labels + completed_labels).configure_axis(
-            labelFontSize=18,
-            titleFontSize=20,
+        return (lines + labels).configure_axis(
+            labelFontSize=16,
+            titleFontSize=18,
             grid=True
         ).configure_title(
             fontSize=24,
             fontWeight='bold'
         )
     
-    # Users Section
-    st.markdown("### 👥 Users Analysis")
-    users_chart = create_metric_chart(aggregated_df, "Users", "users", ['#FF6B6B', '#4ECDC4'])
-    st.altair_chart(users_chart, use_container_width=True)
+    # Combined Analysis Section
+    st.markdown("### 📊 Combined Time Series Analysis")
+    st.markdown("This chart displays **Visits**, **Instances**, and **Users** for **Completed Events** only to show trends across all metrics.")
     
-    # Visits Section
-    st.markdown("### 🔄 Visits Analysis")
-    visits_chart = create_metric_chart(aggregated_df, "Visits", "visits", ['#FF6B6B', '#4ECDC4'])
-    st.altair_chart(visits_chart, use_container_width=True)
+    combined_chart = create_combined_chart(aggregated_df)
+    st.altair_chart(combined_chart, use_container_width=True)
     
-    # Instances Section
-    st.markdown("### ⚡ Instances Analysis")
-    instances_chart = create_metric_chart(aggregated_df, "Instances", "instances", ['#FF6B6B', '#4ECDC4'])
-    st.altair_chart(instances_chart, use_container_width=True)
+    # Add summary statistics
+    st.markdown("#### 📈 Summary Statistics (Completed Events)")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        total_visits = aggregated_df['completed_visits'].sum()
+        st.metric(
+            label="🔄 Total Completed Visits",
+            value=f"{total_visits:,}",
+            help="Sum of completed visits across the selected time period"
+        )
+    
+    with col2:
+        total_instances = aggregated_df['completed_instances'].sum()
+        st.metric(
+            label="⚡ Total Completed Instances", 
+            value=f"{total_instances:,}",
+            help="Sum of completed instances across the selected time period"
+        )
+    
+    with col3:
+        total_users = aggregated_df['completed_users'].sum()
+        st.metric(
+            label="👥 Total Completed Users",
+            value=f"{total_users:,}",
+            help="Sum of users who completed events across the selected time period"
+        )
 
 def main() -> None:
     st.set_page_config(page_title="Hybrid Dashboard", layout="wide")

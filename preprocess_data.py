@@ -33,56 +33,29 @@ missing_vars = [var for var in required_vars if not os.getenv(var)]
 if missing_vars:
     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
-# SQL Queries (same as in original dashboard)
+# SQL Queries - Updated to join with hybrid_games and hybrid_games_links tables
 SQL_QUERY = (
     """
     SELECT 
-      `matomo_log_link_visit_action`.`idlink_va`,
-      CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
-      `matomo_log_link_visit_action`.`idvisit`,
-      DATE_ADD(`matomo_log_link_visit_action`.`server_time`, INTERVAL 330 MINUTE) AS server_time,
-      `matomo_log_link_visit_action`.`idaction_name`,
-      `matomo_log_link_visit_action`.`custom_dimension_2`,
+      mllva.idlink_va,
+      CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+      mllva.idvisit,
+      DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
+      mllva.idaction_name,
+      mllva.custom_dimension_2,
+      hg.game_name,
       CASE 
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "12" THEN 'Shape Circle'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "24" THEN 'Color Red'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "28" THEN 'Shape Triangle'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "40" THEN 'Color Yellow'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "54" THEN 'Numeracy I'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "56" THEN 'Numeracy II'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "50" THEN 'Relational Comparison'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "52" THEN 'Quantity Comparison'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "60" THEN 'Shape Square'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "62" THEN 'Revision Primary Colors'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "58" THEN 'Color Blue'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "70" THEN 'Relational Comparison II'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "66" THEN 'Rhyming Words Hindi'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "68" THEN 'Rhyming Words Marathi'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "64" THEN 'Revision Primary Shapes'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "72" THEN 'Number Comparison'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "78" THEN 'Primary Emotion I'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "80" THEN 'Primary Emotion II'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "82" THEN 'Shape Rectangle'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "84" THEN 'Numerals 1-10'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "83" THEN 'Numerals 1-10 Child'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "76" THEN 'Beginning Sound Ma Ka La Marathi'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "74" THEN 'Beginning Sound Ma Ka La Hindi'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "88" THEN 'Beginning Sound Pa Cha Sa Marathi'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "86" THEN 'Beginning Sound Pa Cha Sa Hindi'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "94" THEN 'Common Shapes'
-        WHEN `matomo_log_link_visit_action`.`custom_dimension_2` = "96" THEN 'Primary Colors'
-        ELSE 'Unknown Game'
-      END AS game_name,
-      CASE 
-        WHEN `matomo_log_link_visit_action`.`idaction_name` IN (
+        WHEN mllva.idaction_name IN (
           7228,16088,23560,34234,47426,47479,47066,46997,47994,48428,
           47910,49078,48834,48883,48573,49214,49663,49719,49995,49976,
           50099,49525,49395,51134,50812,51603,51627
         ) THEN 'Started'
         ELSE 'Completed'
       END AS event
-    FROM `matomo_log_link_visit_action`
-    WHERE `matomo_log_link_visit_action`.`idaction_name` IN (
+    FROM matomo_log_link_visit_action mllva
+    INNER JOIN hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
+    INNER JOIN hybrid_games hg ON hgl.game_id = hg.id
+    WHERE mllva.idaction_name IN (
         7228,16088,16204,23560,23592,34234,34299,
         47426,47472,47479,47524,47066,47099,46997,47001,
         47994,47998,48428,48440,47910,47908,49078,49113,
@@ -91,12 +64,12 @@ SQL_QUERY = (
         50099,50125,49525,49583,49395,49470,51134,51209,
         50812,50846,51603,51607,51627,51635
     )
-    AND `matomo_log_link_visit_action`.`custom_dimension_2` IN (
+    AND mllva.custom_dimension_2 IN (
         "12","28","24","40","54","56","50","52","70","72",
         "58","66","68","60","62","64","78","80","82","84",
         "83","76","74","88","86","94","96"
     )
-    AND DATE_ADD(`matomo_log_link_visit_action`.`server_time`, INTERVAL 330 MINUTE) >= '2025-07-02'
+    AND DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
     """
 )
 
