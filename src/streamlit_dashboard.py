@@ -697,6 +697,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Filter by selected games
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
     
+    # Check if we have data after filtering
+    if filtered_ts_df.empty:
+        st.warning("No data available for the selected time period.")
+        return
+    
     # Aggregate data by time period to prevent overlapping points
     # Group by time_period and sum the metrics
     aggregated_df = filtered_ts_df.groupby('time_period').agg({
