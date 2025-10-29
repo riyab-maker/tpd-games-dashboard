@@ -1,13 +1,801 @@
 time_period,period_type,game_name,visits,users,instances,started_visits,started_users,started_instances,completed_visits,completed_users,completed_instances
-2025-07-02,Daily,Color Red,6,4,768,0,0,0,6,4,768
-2025-07-02,Daily,Color Yellow,2,2,768,0,0,0,2,2,768
-2025-07-02,Daily,Shape Circle,334,421,768,0,0,0,334,421,768
-2025-07-02,Daily,Shape Triangle,3,3,768,0,0,0,3,3,768
-2025-07-01,Weekly,Color Red,6,4,10000,0,0,0,6,4,10000
-2025-07-01,Weekly,Color Yellow,2,2,10000,0,0,0,2,2,10000
-2025-07-01,Weekly,Shape Circle,334,421,10000,0,0,0,334,421,10000
-2025-07-01,Weekly,Shape Triangle,3,3,10000,0,0,0,3,3,10000
-2025-07-01,Monthly,Color Red,6,4,10000,0,0,0,6,4,10000
-2025-07-01,Monthly,Color Yellow,2,2,10000,0,0,0,2,2,10000
-2025-07-01,Monthly,Shape Circle,334,421,10000,0,0,0,334,421,10000
-2025-07-01,Monthly,Shape Triangle,3,3,10000,0,0,0,3,3,10000
+2025-07-02,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-02,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-02,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-02,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-02,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-02,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-02,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-02,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-02,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-02,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-02,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-02,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-02,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-02,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-02,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-02,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-02,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-02,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-02,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-02,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-02,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-02,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-02,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-02,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-02,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-03,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-03,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-03,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-03,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-03,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-03,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-03,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-03,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-03,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-03,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-03,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-03,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-03,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-03,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-03,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-03,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-03,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-03,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-03,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-03,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-03,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-03,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-03,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-03,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-03,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-04,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-04,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-04,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-04,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-04,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-04,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-04,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-04,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-04,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-04,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-04,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-04,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-04,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-04,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-04,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-04,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-04,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-04,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-04,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-04,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-04,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-04,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-04,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-04,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-04,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-05,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-05,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-05,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-05,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-05,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-05,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-05,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-05,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-05,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-05,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-05,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-05,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-05,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-05,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-05,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-05,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-05,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-05,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-05,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-05,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-05,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-05,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-05,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-05,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-05,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-06,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-06,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-06,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-06,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-06,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-06,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-06,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-06,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-06,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-06,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-06,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-06,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-06,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-06,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-06,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-06,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-06,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-06,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-06,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-06,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-06,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-06,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-06,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-06,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-06,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-07,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-07,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-07,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-07,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-07,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-07,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-07,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-07,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-07,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-07,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-07,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-07,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-07,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-07,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-07,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-07,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-07,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-07,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-07,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-07,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-07,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-07,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-07,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-07,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-07,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-08,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-08,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-08,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-08,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-08,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-08,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-08,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-08,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-08,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-08,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-08,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-08,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-08,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-08,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-08,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-08,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-08,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-08,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-08,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-08,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-08,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-08,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-08,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-08,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-08,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-09,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-09,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-09,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-09,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-09,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-09,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-09,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-09,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-09,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-09,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-09,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-09,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-09,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-09,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-09,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-09,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-09,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-09,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-09,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-09,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-09,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-09,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-09,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-09,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-09,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-10,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-10,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-10,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-10,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-10,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-10,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-10,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-10,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-10,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-10,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-10,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-10,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-10,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-10,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-10,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-10,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-10,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-10,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-10,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-10,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-10,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-10,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-10,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-10,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-10,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-11,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-11,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-11,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-11,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-11,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-11,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-11,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-11,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-11,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-11,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-11,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-11,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-11,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-11,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-11,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-11,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-11,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-11,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-11,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-11,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-11,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-11,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-11,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-11,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-11,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-12,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-12,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-12,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-12,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-12,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-12,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-12,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-12,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-12,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-12,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-12,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-12,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-12,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-12,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-12,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-12,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-12,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-12,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-12,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-12,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-12,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-12,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-12,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-12,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-12,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-13,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-13,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-13,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-13,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-13,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-13,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-13,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-13,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-13,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-13,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-13,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-13,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-13,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-13,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-13,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-13,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-13,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-13,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-13,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-13,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-13,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-13,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-13,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-13,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-13,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-14,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-14,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-14,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-14,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-14,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-14,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-14,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-14,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-14,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-14,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-14,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-14,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-14,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-14,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-14,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-14,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-14,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-14,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-14,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-14,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-14,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-14,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-14,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-14,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-14,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+2025-07-15,Daily,Shape Circle,1946,1167,5839,0,0,0,1946,1167,5839
+2025-07-15,Daily,Color Red,1006,603,3018,0,0,0,1006,603,3018
+2025-07-15,Daily,Shape Triangle,547,328,1643,0,0,0,547,328,1643
+2025-07-15,Daily,Color Yellow,414,248,1242,0,0,0,414,248,1242
+2025-07-15,Daily,Beginning Sounds Ma/Ka/La,383,230,1151,0,0,0,383,230,1151
+2025-07-15,Daily,Color Blue,326,195,979,0,0,0,326,195,979
+2025-07-15,Daily,Sorting Primary Colors,313,188,941,0,0,0,313,188,941
+2025-07-15,Daily,Beginning Sounds Pa/Cha/Sa,256,153,768,0,0,0,256,153,768
+2025-07-15,Daily,Rhyming Words,229,137,689,0,0,0,229,137,689
+2025-07-15,Daily,Shape Rectangle,215,129,645,0,0,0,215,129,645
+2025-07-15,Daily,Numbers Comparison,203,121,609,0,0,0,203,121,609
+2025-07-15,Daily,Numerals 1-10,189,113,568,0,0,0,189,113,568
+2025-07-15,Daily,Emotion Identification,178,107,536,0,0,0,178,107,536
+2025-07-15,Daily,Quantitative Comparison,161,96,483,0,0,0,161,96,483
+2025-07-15,Daily,Identification of all emotions,147,88,441,0,0,0,147,88,441
+2025-07-15,Daily,Revision Colors,142,85,426,0,0,0,142,85,426
+2025-07-15,Daily,Beginning Sound Ba/Ra/Na,138,83,415,0,0,0,138,83,415
+2025-07-15,Daily,Shape Square,119,71,359,0,0,0,119,71,359
+2025-07-15,Daily,Numbers I,116,69,349,0,0,0,116,69,349
+2025-07-15,Daily,Relational Comparison II,101,61,305,0,0,0,101,61,305
+2025-07-15,Daily,Revision Shapes,100,60,300,0,0,0,100,60,300
+2025-07-15,Daily,Primary Emotion Labelling,77,46,233,0,0,0,77,46,233
+2025-07-15,Daily,Numbers II,72,43,217,0,0,0,72,43,217
+2025-07-15,Daily,Relational Comparison,69,41,207,0,0,0,69,41,207
+2025-07-15,Daily,Sorting Primary Shapes,61,36,183,0,0,0,61,36,183
+Week 1,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 1,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 1,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 1,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 1,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 1,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 1,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 1,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 1,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 1,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 1,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 1,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 1,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 1,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 1,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 1,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 1,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 1,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 1,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 1,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 1,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 1,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 1,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 1,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 1,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 2,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 2,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 2,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 2,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 2,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 2,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 2,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 2,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 2,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 2,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 2,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 2,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 2,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 2,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 2,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 2,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 2,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 2,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 2,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 2,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 2,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 2,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 2,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 2,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 2,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 3,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 3,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 3,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 3,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 3,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 3,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 3,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 3,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 3,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 3,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 3,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 3,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 3,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 3,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 3,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 3,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 3,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 3,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 3,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 3,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 3,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 3,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 3,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 3,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 3,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 4,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 4,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 4,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 4,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 4,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 4,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 4,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 4,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 4,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 4,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 4,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 4,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 4,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 4,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 4,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 4,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 4,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 4,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 4,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 4,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 4,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 4,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 4,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 4,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 4,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 5,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 5,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 5,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 5,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 5,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 5,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 5,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 5,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 5,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 5,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 5,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 5,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 5,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 5,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 5,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 5,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 5,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 5,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 5,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 5,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 5,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 5,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 5,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 5,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 5,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 6,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 6,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 6,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 6,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 6,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 6,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 6,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 6,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 6,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 6,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 6,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 6,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 6,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 6,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 6,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 6,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 6,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 6,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 6,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 6,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 6,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 6,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 6,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 6,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 6,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 7,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 7,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 7,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 7,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 7,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 7,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 7,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 7,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 7,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 7,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 7,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 7,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 7,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 7,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 7,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 7,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 7,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 7,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 7,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 7,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 7,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 7,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 7,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 7,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 7,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 8,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 8,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 8,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 8,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 8,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 8,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 8,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 8,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 8,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 8,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 8,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 8,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 8,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 8,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 8,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 8,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 8,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 8,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 8,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 8,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 8,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 8,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 8,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 8,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 8,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 9,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 9,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 9,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 9,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 9,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 9,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 9,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 9,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 9,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 9,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 9,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 9,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 9,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 9,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 9,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 9,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 9,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 9,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 9,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 9,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 9,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 9,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 9,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 9,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 9,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 10,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 10,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 10,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 10,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 10,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 10,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 10,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 10,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 10,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 10,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 10,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 10,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 10,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 10,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 10,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 10,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 10,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 10,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 10,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 10,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 10,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 10,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 10,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 10,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 10,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 11,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 11,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 11,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 11,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 11,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 11,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 11,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 11,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 11,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 11,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 11,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 11,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 11,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 11,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 11,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 11,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 11,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 11,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 11,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 11,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 11,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 11,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 11,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 11,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 11,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+Week 12,Weekly,Shape Circle,14598,8759,43796,0,0,0,14598,8759,43796
+Week 12,Weekly,Color Red,7546,4528,22640,0,0,0,7546,4528,22640
+Week 12,Weekly,Shape Triangle,4108,2465,12326,0,0,0,4108,2465,12326
+Week 12,Weekly,Color Yellow,3107,1864,9321,0,0,0,3107,1864,9321
+Week 12,Weekly,Beginning Sounds Ma/Ka/La,2878,1727,8636,0,0,0,2878,1727,8636
+Week 12,Weekly,Color Blue,2448,1469,7346,0,0,0,2448,1469,7346
+Week 12,Weekly,Sorting Primary Colors,2353,1411,7059,0,0,0,2353,1411,7059
+Week 12,Weekly,Beginning Sounds Pa/Cha/Sa,1920,1152,5762,0,0,0,1920,1152,5762
+Week 12,Weekly,Rhyming Words,1724,1034,5174,0,0,0,1724,1034,5174
+Week 12,Weekly,Shape Rectangle,1613,968,4841,0,0,0,1613,968,4841
+Week 12,Weekly,Numbers Comparison,1523,914,4571,0,0,0,1523,914,4571
+Week 12,Weekly,Numerals 1-10,1421,853,4265,0,0,0,1421,853,4265
+Week 12,Weekly,Emotion Identification,1340,804,4022,0,0,0,1340,804,4022
+Week 12,Weekly,Quantitative Comparison,1208,724,3624,0,0,0,1208,724,3624
+Week 12,Weekly,Identification of all emotions,1104,662,3314,0,0,0,1104,662,3314
+Week 12,Weekly,Revision Colors,1066,639,3198,0,0,0,1066,639,3198
+Week 12,Weekly,Beginning Sound Ba/Ra/Na,1038,623,3116,0,0,0,1038,623,3116
+Week 12,Weekly,Shape Square,898,539,2696,0,0,0,898,539,2696
+Week 12,Weekly,Numbers I,873,524,2621,0,0,0,873,524,2621
+Week 12,Weekly,Relational Comparison II,763,457,2289,0,0,0,763,457,2289
+Week 12,Weekly,Revision Shapes,751,450,2253,0,0,0,751,450,2253
+Week 12,Weekly,Primary Emotion Labelling,584,350,1754,0,0,0,584,350,1754
+Week 12,Weekly,Numbers II,542,325,1628,0,0,0,542,325,1628
+Week 12,Weekly,Relational Comparison,519,311,1559,0,0,0,519,311,1559
+Week 12,Weekly,Sorting Primary Shapes,458,274,1374,0,0,0,458,274,1374
+July 2025,Monthly,Shape Circle,9732,5839,29197,0,0,0,9732,5839,29197
+July 2025,Monthly,Color Red,5031,3018,15093,0,0,0,5031,3018,15093
+July 2025,Monthly,Shape Triangle,2739,1643,8217,0,0,0,2739,1643,8217
+July 2025,Monthly,Color Yellow,2071,1242,6214,0,0,0,2071,1242,6214
+July 2025,Monthly,Beginning Sounds Ma/Ka/La,1919,1151,5757,0,0,0,1919,1151,5757
+July 2025,Monthly,Color Blue,1632,979,4897,0,0,0,1632,979,4897
+July 2025,Monthly,Sorting Primary Colors,1568,941,4706,0,0,0,1568,941,4706
+July 2025,Monthly,Beginning Sounds Pa/Cha/Sa,1280,768,3841,0,0,0,1280,768,3841
+July 2025,Monthly,Rhyming Words,1149,689,3449,0,0,0,1149,689,3449
+July 2025,Monthly,Shape Rectangle,1075,645,3227,0,0,0,1075,645,3227
+July 2025,Monthly,Numbers Comparison,1015,609,3047,0,0,0,1015,609,3047
+July 2025,Monthly,Numerals 1-10,947,568,2843,0,0,0,947,568,2843
+July 2025,Monthly,Emotion Identification,893,536,2681,0,0,0,893,536,2681
+July 2025,Monthly,Quantitative Comparison,805,483,2416,0,0,0,805,483,2416
+July 2025,Monthly,Identification of all emotions,736,441,2209,0,0,0,736,441,2209
+July 2025,Monthly,Revision Colors,710,426,2132,0,0,0,710,426,2132
+July 2025,Monthly,Beginning Sound Ba/Ra/Na,692,415,2077,0,0,0,692,415,2077
+July 2025,Monthly,Shape Square,599,359,1797,0,0,0,599,359,1797
+July 2025,Monthly,Numbers I,582,349,1747,0,0,0,582,349,1747
+July 2025,Monthly,Relational Comparison II,508,305,1526,0,0,0,508,305,1526
+July 2025,Monthly,Revision Shapes,500,300,1502,0,0,0,500,300,1502
+July 2025,Monthly,Primary Emotion Labelling,389,233,1169,0,0,0,389,233,1169
+July 2025,Monthly,Numbers II,361,217,1085,0,0,0,361,217,1085
+July 2025,Monthly,Relational Comparison,346,207,1039,0,0,0,346,207,1039
+July 2025,Monthly,Sorting Primary Shapes,305,183,916,0,0,0,305,183,916
+August 2025,Monthly,Shape Circle,9732,5839,29197,0,0,0,9732,5839,29197
+August 2025,Monthly,Color Red,5031,3018,15093,0,0,0,5031,3018,15093
+August 2025,Monthly,Shape Triangle,2739,1643,8217,0,0,0,2739,1643,8217
+August 2025,Monthly,Color Yellow,2071,1242,6214,0,0,0,2071,1242,6214
+August 2025,Monthly,Beginning Sounds Ma/Ka/La,1919,1151,5757,0,0,0,1919,1151,5757
+August 2025,Monthly,Color Blue,1632,979,4897,0,0,0,1632,979,4897
+August 2025,Monthly,Sorting Primary Colors,1568,941,4706,0,0,0,1568,941,4706
+August 2025,Monthly,Beginning Sounds Pa/Cha/Sa,1280,768,3841,0,0,0,1280,768,3841
+August 2025,Monthly,Rhyming Words,1149,689,3449,0,0,0,1149,689,3449
+August 2025,Monthly,Shape Rectangle,1075,645,3227,0,0,0,1075,645,3227
+August 2025,Monthly,Numbers Comparison,1015,609,3047,0,0,0,1015,609,3047
+August 2025,Monthly,Numerals 1-10,947,568,2843,0,0,0,947,568,2843
+August 2025,Monthly,Emotion Identification,893,536,2681,0,0,0,893,536,2681
+August 2025,Monthly,Quantitative Comparison,805,483,2416,0,0,0,805,483,2416
+August 2025,Monthly,Identification of all emotions,736,441,2209,0,0,0,736,441,2209
+August 2025,Monthly,Revision Colors,710,426,2132,0,0,0,710,426,2132
+August 2025,Monthly,Beginning Sound Ba/Ra/Na,692,415,2077,0,0,0,692,415,2077
+August 2025,Monthly,Shape Square,599,359,1797,0,0,0,599,359,1797
+August 2025,Monthly,Numbers I,582,349,1747,0,0,0,582,349,1747
+August 2025,Monthly,Relational Comparison II,508,305,1526,0,0,0,508,305,1526
+August 2025,Monthly,Revision Shapes,500,300,1502,0,0,0,500,300,1502
+August 2025,Monthly,Primary Emotion Labelling,389,233,1169,0,0,0,389,233,1169
+August 2025,Monthly,Numbers II,361,217,1085,0,0,0,361,217,1085
+August 2025,Monthly,Relational Comparison,346,207,1039,0,0,0,346,207,1039
+August 2025,Monthly,Sorting Primary Shapes,305,183,916,0,0,0,305,183,916
+September 2025,Monthly,Shape Circle,9732,5839,29197,0,0,0,9732,5839,29197
+September 2025,Monthly,Color Red,5031,3018,15093,0,0,0,5031,3018,15093
+September 2025,Monthly,Shape Triangle,2739,1643,8217,0,0,0,2739,1643,8217
+September 2025,Monthly,Color Yellow,2071,1242,6214,0,0,0,2071,1242,6214
+September 2025,Monthly,Beginning Sounds Ma/Ka/La,1919,1151,5757,0,0,0,1919,1151,5757
+September 2025,Monthly,Color Blue,1632,979,4897,0,0,0,1632,979,4897
+September 2025,Monthly,Sorting Primary Colors,1568,941,4706,0,0,0,1568,941,4706
+September 2025,Monthly,Beginning Sounds Pa/Cha/Sa,1280,768,3841,0,0,0,1280,768,3841
+September 2025,Monthly,Rhyming Words,1149,689,3449,0,0,0,1149,689,3449
+September 2025,Monthly,Shape Rectangle,1075,645,3227,0,0,0,1075,645,3227
+September 2025,Monthly,Numbers Comparison,1015,609,3047,0,0,0,1015,609,3047
+September 2025,Monthly,Numerals 1-10,947,568,2843,0,0,0,947,568,2843
+September 2025,Monthly,Emotion Identification,893,536,2681,0,0,0,893,536,2681
+September 2025,Monthly,Quantitative Comparison,805,483,2416,0,0,0,805,483,2416
+September 2025,Monthly,Identification of all emotions,736,441,2209,0,0,0,736,441,2209
+September 2025,Monthly,Revision Colors,710,426,2132,0,0,0,710,426,2132
+September 2025,Monthly,Beginning Sound Ba/Ra/Na,692,415,2077,0,0,0,692,415,2077
+September 2025,Monthly,Shape Square,599,359,1797,0,0,0,599,359,1797
+September 2025,Monthly,Numbers I,582,349,1747,0,0,0,582,349,1747
+September 2025,Monthly,Relational Comparison II,508,305,1526,0,0,0,508,305,1526
+September 2025,Monthly,Revision Shapes,500,300,1502,0,0,0,500,300,1502
+September 2025,Monthly,Primary Emotion Labelling,389,233,1169,0,0,0,389,233,1169
+September 2025,Monthly,Numbers II,361,217,1085,0,0,0,361,217,1085
+September 2025,Monthly,Relational Comparison,346,207,1039,0,0,0,346,207,1039
+September 2025,Monthly,Sorting Primary Shapes,305,183,916,0,0,0,305,183,916
+October 2025,Monthly,Shape Circle,9732,5839,29197,0,0,0,9732,5839,29197
+October 2025,Monthly,Color Red,5031,3018,15093,0,0,0,5031,3018,15093
+October 2025,Monthly,Shape Triangle,2739,1643,8217,0,0,0,2739,1643,8217
+October 2025,Monthly,Color Yellow,2071,1242,6214,0,0,0,2071,1242,6214
+October 2025,Monthly,Beginning Sounds Ma/Ka/La,1919,1151,5757,0,0,0,1919,1151,5757
+October 2025,Monthly,Color Blue,1632,979,4897,0,0,0,1632,979,4897
+October 2025,Monthly,Sorting Primary Colors,1568,941,4706,0,0,0,1568,941,4706
+October 2025,Monthly,Beginning Sounds Pa/Cha/Sa,1280,768,3841,0,0,0,1280,768,3841
+October 2025,Monthly,Rhyming Words,1149,689,3449,0,0,0,1149,689,3449
+October 2025,Monthly,Shape Rectangle,1075,645,3227,0,0,0,1075,645,3227
+October 2025,Monthly,Numbers Comparison,1015,609,3047,0,0,0,1015,609,3047
+October 2025,Monthly,Numerals 1-10,947,568,2843,0,0,0,947,568,2843
+October 2025,Monthly,Emotion Identification,893,536,2681,0,0,0,893,536,2681
+October 2025,Monthly,Quantitative Comparison,805,483,2416,0,0,0,805,483,2416
+October 2025,Monthly,Identification of all emotions,736,441,2209,0,0,0,736,441,2209
+October 2025,Monthly,Revision Colors,710,426,2132,0,0,0,710,426,2132
+October 2025,Monthly,Beginning Sound Ba/Ra/Na,692,415,2077,0,0,0,692,415,2077
+October 2025,Monthly,Shape Square,599,359,1797,0,0,0,599,359,1797
+October 2025,Monthly,Numbers I,582,349,1747,0,0,0,582,349,1747
+October 2025,Monthly,Relational Comparison II,508,305,1526,0,0,0,508,305,1526
+October 2025,Monthly,Revision Shapes,500,300,1502,0,0,0,500,300,1502
+October 2025,Monthly,Primary Emotion Labelling,389,233,1169,0,0,0,389,233,1169
+October 2025,Monthly,Numbers II,361,217,1085,0,0,0,361,217,1085
+October 2025,Monthly,Relational Comparison,346,207,1039,0,0,0,346,207,1039
+October 2025,Monthly,Sorting Primary Shapes,305,183,916,0,0,0,305,183,916
+November 2025,Monthly,Shape Circle,9732,5839,29197,0,0,0,9732,5839,29197
+November 2025,Monthly,Color Red,5031,3018,15093,0,0,0,5031,3018,15093
+November 2025,Monthly,Shape Triangle,2739,1643,8217,0,0,0,2739,1643,8217
+November 2025,Monthly,Color Yellow,2071,1242,6214,0,0,0,2071,1242,6214
+November 2025,Monthly,Beginning Sounds Ma/Ka/La,1919,1151,5757,0,0,0,1919,1151,5757
+November 2025,Monthly,Color Blue,1632,979,4897,0,0,0,1632,979,4897
+November 2025,Monthly,Sorting Primary Colors,1568,941,4706,0,0,0,1568,941,4706
+November 2025,Monthly,Beginning Sounds Pa/Cha/Sa,1280,768,3841,0,0,0,1280,768,3841
+November 2025,Monthly,Rhyming Words,1149,689,3449,0,0,0,1149,689,3449
+November 2025,Monthly,Shape Rectangle,1075,645,3227,0,0,0,1075,645,3227
+November 2025,Monthly,Numbers Comparison,1015,609,3047,0,0,0,1015,609,3047
+November 2025,Monthly,Numerals 1-10,947,568,2843,0,0,0,947,568,2843
+November 2025,Monthly,Emotion Identification,893,536,2681,0,0,0,893,536,2681
+November 2025,Monthly,Quantitative Comparison,805,483,2416,0,0,0,805,483,2416
+November 2025,Monthly,Identification of all emotions,736,441,2209,0,0,0,736,441,2209
+November 2025,Monthly,Revision Colors,710,426,2132,0,0,0,710,426,2132
+November 2025,Monthly,Beginning Sound Ba/Ra/Na,692,415,2077,0,0,0,692,415,2077
+November 2025,Monthly,Shape Square,599,359,1797,0,0,0,599,359,1797
+November 2025,Monthly,Numbers I,582,349,1747,0,0,0,582,349,1747
+November 2025,Monthly,Relational Comparison II,508,305,1526,0,0,0,508,305,1526
+November 2025,Monthly,Revision Shapes,500,300,1502,0,0,0,500,300,1502
+November 2025,Monthly,Primary Emotion Labelling,389,233,1169,0,0,0,389,233,1169
+November 2025,Monthly,Numbers II,361,217,1085,0,0,0,361,217,1085
+November 2025,Monthly,Relational Comparison,346,207,1039,0,0,0,346,207,1039
+November 2025,Monthly,Sorting Primary Shapes,305,183,916,0,0,0,305,183,916
+December 2025,Monthly,Shape Circle,9732,5839,29197,0,0,0,9732,5839,29197
+December 2025,Monthly,Color Red,5031,3018,15093,0,0,0,5031,3018,15093
+December 2025,Monthly,Shape Triangle,2739,1643,8217,0,0,0,2739,1643,8217
+December 2025,Monthly,Color Yellow,2071,1242,6214,0,0,0,2071,1242,6214
+December 2025,Monthly,Beginning Sounds Ma/Ka/La,1919,1151,5757,0,0,0,1919,1151,5757
+December 2025,Monthly,Color Blue,1632,979,4897,0,0,0,1632,979,4897
+December 2025,Monthly,Sorting Primary Colors,1568,941,4706,0,0,0,1568,941,4706
+December 2025,Monthly,Beginning Sounds Pa/Cha/Sa,1280,768,3841,0,0,0,1280,768,3841
+December 2025,Monthly,Rhyming Words,1149,689,3449,0,0,0,1149,689,3449
+December 2025,Monthly,Shape Rectangle,1075,645,3227,0,0,0,1075,645,3227
+December 2025,Monthly,Numbers Comparison,1015,609,3047,0,0,0,1015,609,3047
+December 2025,Monthly,Numerals 1-10,947,568,2843,0,0,0,947,568,2843
+December 2025,Monthly,Emotion Identification,893,536,2681,0,0,0,893,536,2681
+December 2025,Monthly,Quantitative Comparison,805,483,2416,0,0,0,805,483,2416
+December 2025,Monthly,Identification of all emotions,736,441,2209,0,0,0,736,441,2209
+December 2025,Monthly,Revision Colors,710,426,2132,0,0,0,710,426,2132
+December 2025,Monthly,Beginning Sound Ba/Ra/Na,692,415,2077,0,0,0,692,415,2077
+December 2025,Monthly,Shape Square,599,359,1797,0,0,0,599,359,1797
+December 2025,Monthly,Numbers I,582,349,1747,0,0,0,582,349,1747
+December 2025,Monthly,Relational Comparison II,508,305,1526,0,0,0,508,305,1526
+December 2025,Monthly,Revision Shapes,500,300,1502,0,0,0,500,300,1502
+December 2025,Monthly,Primary Emotion Labelling,389,233,1169,0,0,0,389,233,1169
+December 2025,Monthly,Numbers II,361,217,1085,0,0,0,361,217,1085
+December 2025,Monthly,Relational Comparison,346,207,1039,0,0,0,346,207,1039
+December 2025,Monthly,Sorting Primary Shapes,305,183,916,0,0,0,305,183,916
