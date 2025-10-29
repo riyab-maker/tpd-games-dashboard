@@ -34,22 +34,10 @@ def check_processed_data():
             missing_files.append(file)
     
     if missing_files:
-        st.warning(f"Missing processed data files: {', '.join(missing_files)}")
-        st.info("Generating data on Render... This may take a few minutes.")
-        
-        # Try to generate the missing data
-        try:
-            import subprocess
-            result = subprocess.run(['python', 'preprocess_data.py'], 
-                                  capture_output=True, text=True, timeout=300)
-            if result.returncode == 0:
-                st.success("Data generated successfully!")
-            else:
-                st.error(f"Failed to generate data: {result.stderr}")
-                st.stop()
-        except Exception as e:
-            st.error(f"Error generating data: {str(e)}")
-            st.stop()
+        st.error(f"Missing processed data files: {', '.join(missing_files)}")
+        st.error("Please ensure all data files are uploaded to GitHub before deployment.")
+        st.error("This dashboard only works with preprocessed data files.")
+        st.stop()
     
     return True
 
@@ -723,7 +711,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     }).reset_index()
     
     
-    if filtered_ts_df.empty:
+    if aggregated_df.empty:
         st.warning("No data available for the selected time period.")
         return
     
