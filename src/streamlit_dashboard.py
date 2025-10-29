@@ -662,7 +662,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Time period filter
         time_period = st.selectbox(
             "Select Time Period:",
-            options=["Month", "Week", "Day"],
+            options=["Monthly", "Weekly", "Daily"],
             help="Choose the time aggregation for the time-series graphs"
         )
     
@@ -686,8 +686,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     # Filter by selected time period
     filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
     
-    # Apply July filter for Month view
-    if time_period == "Month":
+    # Apply July filter for Monthly view
+    if time_period == "Monthly":
         # Filter for dates from July 2025 onwards (data has dates like '2025-07-01')
         july_onwards = ['2025-07-01', '2025-08-01', '2025-09-01', '2025-10-01', '2025-11-01', '2025-12-01']
         filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
@@ -717,7 +717,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         return
     
     # Sort the aggregated dataframe based on time period
-    if time_period == "Month":
+    if time_period == "Monthly":
         # Convert month names to datetime for proper sorting
         try:
             aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
@@ -728,13 +728,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             # If datetime parsing fails, use original order
             st.warning(f"Could not parse dates for sorting: {e}")
             time_order = aggregated_df['time_period'].tolist()
-    elif time_period == "Week":
+    elif time_period == "Weekly":
         # Extract week number for sorting
         aggregated_df['week_num'] = aggregated_df['time_period'].str.extract(r'(\d+)').astype(int)
         aggregated_df = aggregated_df.sort_values('week_num').drop('week_num', axis=1)
         # Create ordered list for Altair
         time_order = aggregated_df['time_period'].tolist()
-    elif time_period == "Day":
+    elif time_period == "Daily":
         # Sort by date
         try:
             aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
