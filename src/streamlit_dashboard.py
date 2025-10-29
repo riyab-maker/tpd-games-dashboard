@@ -721,14 +721,21 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         st.warning("No data available for the selected time period.")
         return
     
-    # Sort the aggregated dataframe based on time period
+    # Sort the aggregated dataframe based on time period and create formatted labels
     if time_period == "Monthly":
         # Convert month names to datetime for proper sorting
         try:
             aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
             aggregated_df = aggregated_df.sort_values('sort_date').drop('sort_date', axis=1)
-            # Create ordered list for Altair
-            time_order = aggregated_df['time_period'].tolist()
+            # Create formatted labels for display
+            from datetime import datetime
+            time_order = []
+            for period in aggregated_df['time_period']:
+                try:
+                    date_obj = datetime.strptime(period, '%Y-%m-%d')
+                    time_order.append(date_obj.strftime('%B %Y'))
+                except:
+                    time_order.append(str(period))
         except Exception as e:
             # If datetime parsing fails, use original order
             st.warning(f"Could not parse dates for sorting: {e}")
@@ -737,8 +744,19 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Extract week number for sorting
         aggregated_df['week_num'] = aggregated_df['time_period'].str.extract(r'(\d+)').astype(int)
         aggregated_df = aggregated_df.sort_values('week_num').drop('week_num', axis=1)
-        # Create ordered list for Altair
-        time_order = aggregated_df['time_period'].tolist()
+        # Create formatted labels for display
+        time_order = []
+        for period in aggregated_df['time_period']:
+            if 'Week' in str(period):
+                time_order.append(str(period))
+            else:
+                try:
+                    from datetime import datetime
+                    date_obj = datetime.strptime(period, '%Y-%m-%d')
+                    week_num = date_obj.isocalendar()[1]
+                    time_order.append(f"Week {week_num}")
+                except:
+                    time_order.append(str(period))
     elif time_period == "Daily":
         # Sort by date
         try:
@@ -758,11 +776,35 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         """Create combined chart showing Visits, Instances, and Users together (Completed events only)"""
         chart_data = []
         for _, row in data.iterrows():
+            # Format time period for display
+            time_display = str(row['time_period'])
+            if time_period == "Monthly":
+                # Convert 2025-07-01 to "July 2025"
+                try:
+                    from datetime import datetime
+                    date_obj = datetime.strptime(row['time_period'], '%Y-%m-%d')
+                    time_display = date_obj.strftime('%B %Y')
+                except:
+                    time_display = str(row['time_period'])
+            elif time_period == "Weekly":
+                # Convert "Week 1" to "Week 1", "Week 2" to "Week 2", etc.
+                if 'Week' in str(row['time_period']):
+                    time_display = str(row['time_period'])
+                else:
+                    # If it's a date, extract week number
+                    try:
+                        from datetime import datetime
+                        date_obj = datetime.strptime(row['time_period'], '%Y-%m-%d')
+                        week_num = date_obj.isocalendar()[1]
+                        time_display = f"Week {week_num}"
+                    except:
+                        time_display = str(row['time_period'])
+            
             # Add data for each metric - Using new column names
             chart_data.extend([
-                {'Time': str(row['time_period']), 'Metric': 'Visits', 'Count': row['visits']},
-                {'Time': str(row['time_period']), 'Metric': 'Instances', 'Count': row['instances']},
-                {'Time': str(row['time_period']), 'Metric': 'Users', 'Count': row['users']}
+                {'Time': time_display, 'Metric': 'Visits', 'Count': row['visits']},
+                {'Time': time_display, 'Metric': 'Instances', 'Count': row['instances']},
+                {'Time': time_display, 'Metric': 'Users', 'Count': row['users']}
             ])
         chart_df = pd.DataFrame(chart_data)
         
