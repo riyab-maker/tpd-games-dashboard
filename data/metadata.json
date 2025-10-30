@@ -1,12 +1,12 @@
 {
-  "preprocessing_date": "2025-10-28T22:52:51.291120",
-  "main_data_records": 1162859,
+  "preprocessing_date": "2025-10-30T16:40:55.746830",
+  "main_data_records": 2182426,
   "summary_records": 2,
   "score_distribution_records": 217,
-  "time_series_records": 776,
+  "time_series_records": 689,
   "repeatability_records": 25,
   "data_date_range": {
     "start": "2025-07-02 00:22:50",
-    "end": "2025-10-28 22:03:48"
+    "end": "2025-10-30 14:48:43"
   }
 }

@@ -271,6 +271,182 @@ def get_game_name_from_custom_dimension_2(custom_dim_2):
     return game_mapping.get(custom_dim_2, f'Game {custom_dim_2}')
 
 
+def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
+    """Extract per-question correctness across games using the unified score query dataset.
+
+    Output columns:
+    - game_name: str
+    - idvisitor_converted: str/int
+    - idvisit: int
+    - session_instance: int (for action-level; 1 for others)
+    - question_number: int (1-based)
+    - is_correct: int (1 correct, 0 incorrect)
+    """
+    if df_score.empty:
+        return pd.DataFrame(columns=[
+            'game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct'
+        ])
+
+    # Ensure expected columns exist
+    cols_needed = ['game_name', 'idvisit', 'action_name', 'custom_dimension_1', 'idvisitor_converted', 'server_time']
+    for c in cols_needed:
+        if c not in df_score.columns:
+            return pd.DataFrame(columns=[
+                'game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct'
+            ])
+
+    # Parse timestamps
+    df_score = df_score.copy()
+    try:
+        df_score['server_time'] = pd.to_datetime(df_score['server_time'])
+    except Exception:
+        pass
+
+    # Split by action types
+    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
+    action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
+
+    per_question_rows: list[dict] = []
+
+    # 1) Handle game_completed with correctSelections / roundDetails schema
+    if not game_completed_data.empty:
+        for _, row in game_completed_data.iterrows():
+            raw = row.get('custom_dimension_1')
+            if pd.isna(raw) or raw in (None, '', 'null'):
+                continue
+            try:
+                obj = json.loads(raw)
+            except Exception:
+                continue
+
+            # Prefer roundDetails for per-question
+            round_details = obj.get('roundDetails') if isinstance(obj, dict) else None
+            if isinstance(round_details, list) and len(round_details) > 0:
+                for rd in round_details:
+                    try:
+                        # Determine correct card index
+                        correct_index = None
+                        cards = rd.get('cards', [])
+                        if isinstance(cards, list):
+                            for idx, card in enumerate(cards):
+                                if isinstance(card, dict) and card.get('status') is True:
+                                    correct_index = idx
+                                    break
+
+                        # Determine selected card index (use first selection if available)
+                        selections = rd.get('selections', [])
+                        selected_index = None
+                        if isinstance(selections, list) and len(selections) > 0:
+                            sel = selections[0]
+                            if isinstance(sel, dict) and 'card' in sel:
+                                selected_index = sel.get('card')
+
+                        # Compute correctness
+                        is_correct = 1 if (correct_index is not None and selected_index is not None and int(selected_index) == int(correct_index)) else 0
+
+                        # Question number from roundNumber, fallback to sequence
+                        qn = rd.get('roundNumber')
+                        if isinstance(qn, int):
+                            question_number = qn
+                        else:
+                            # Fallback to 1-based index
+                            question_number = 1
+
+                        per_question_rows.append({
+                            'game_name': row['game_name'],
+                            'idvisitor_converted': row['idvisitor_converted'],
+                            'idvisit': row['idvisit'],
+                            'session_instance': 1,
+                            'question_number': int(question_number),
+                            'is_correct': int(is_correct)
+                        })
+                    except Exception:
+                        continue
+            else:
+                # Try jsonData structure with userResponse[].isCorrect per level
+                try:
+                    game_data = obj.get('gameData') if isinstance(obj, dict) else None
+                    if isinstance(game_data, list):
+                        question_idx = 0
+                        for gd in game_data:
+                            if isinstance(gd, dict) and gd.get('section') == 'Action' and isinstance(gd.get('jsonData'), list):
+                                for level in gd['jsonData']:
+                                    if isinstance(level, dict) and isinstance(level.get('userResponse'), list):
+                                        for resp in level['userResponse']:
+                                            if isinstance(resp, dict) and 'isCorrect' in resp:
+                                                question_idx += 1
+                                                per_question_rows.append({
+                                                    'game_name': row['game_name'],
+                                                    'idvisitor_converted': row['idvisitor_converted'],
+                                                    'idvisit': row['idvisit'],
+                                                    'session_instance': 1,
+                                                    'question_number': int(question_idx),
+                                                    'is_correct': 1 if bool(resp.get('isCorrect')) else 0
+                                                })
+                except Exception:
+                    pass
+
+    # 2) Handle action_level records (single-question per record)
+    if not action_level_data.empty:
+        # Sort and assign session_instance per (user, game, visit) based on time gaps
+        action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
+
+        session_instances = []
+        current_session = 1
+        prev_user = prev_game = prev_visit = None
+        prev_time = None
+        for _, r in action_level_data.iterrows():
+            user = r['idvisitor_converted']
+            game = r['game_name']
+            visit = r['idvisit']
+            t = r['server_time']
+            if user != prev_user or game != prev_game or visit != prev_visit:
+                current_session = 1
+            elif prev_time is not None:
+                try:
+                    gap = (t - prev_time).total_seconds()
+                    if gap > 300:
+                        current_session += 1
+                except Exception:
+                    pass
+            session_instances.append(current_session)
+            prev_user, prev_game, prev_visit, prev_time = user, game, visit, t
+        action_level_data['session_instance'] = session_instances
+
+        # Question number within each session: cumulative count order by time
+        action_level_data['question_number'] = (
+            action_level_data
+            .groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])
+            .cumcount() + 1
+        )
+
+        # Compute correctness per record
+        def _safe_action_score(x: str) -> int:
+            try:
+                return int(parse_custom_dimension_1_action_games(x))
+            except Exception:
+                return 0
+
+        action_level_data['is_correct'] = action_level_data['custom_dimension_1'].apply(_safe_action_score)
+
+        for _, r in action_level_data.iterrows():
+            per_question_rows.append({
+                'game_name': r['game_name'],
+                'idvisitor_converted': r['idvisitor_converted'],
+                'idvisit': r['idvisit'],
+                'session_instance': int(r['session_instance']),
+                'question_number': int(r['question_number']),
+                'is_correct': int(r['is_correct'])
+            })
+
+    if not per_question_rows:
+        return pd.DataFrame(columns=[
+            'game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct'
+        ])
+
+    return pd.DataFrame.from_records(per_question_rows)
+
+
 def calculate_score_distribution_combined(df_score):
     """Calculate score distribution using the new unified query with hybrid_games table"""
     print("Processing score distribution data...")
@@ -722,6 +898,32 @@ def main():
             print("Using Matomo data as fallback...")
             repeatability_df = preprocess_repeatability_data(df_main)
         
+        # Build per-question correctness and aggregate to percentages
+        question_level_df = extract_per_question_correctness(df_score)
+        if not question_level_df.empty:
+            # Aggregate by game and question: distinct users per correctness
+            # Distinct users answering that question
+            total_by_q = (
+                question_level_df
+                .groupby(['game_name', 'question_number'])['idvisitor_converted']
+                .nunique()
+                .reset_index(name='total_users')
+            )
+            # Correct and incorrect distinct users
+            agg = (
+                question_level_df
+                .groupby(['game_name', 'question_number', 'is_correct'])['idvisitor_converted']
+                .nunique()
+                .reset_index(name='user_count')
+            )
+            agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
+            agg['percent'] = (agg['user_count'] / agg['total_users'].where(agg['total_users'] > 0, 1) * 100).round(2)
+            agg['correctness'] = agg['is_correct'].map({1: 'Correct', 0: 'Incorrect'})
+            question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']]
+        else:
+            # Create empty dataframe with expected headers
+            question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+
         print("\nSAVING PROCESSED DATA")
         print("-" * 30)
         
@@ -776,6 +978,10 @@ def main():
             print("SUCCESS: Saved data/repeatability_data.csv")
         else:
             print("WARNING: No repeatability data to save")
+
+        # Always write the CSV (even if empty) so the dashboard can load gracefully
+        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        print(f"SUCCESS: Saved data/question_correctness_data.csv (rows: {len(question_correctness_df)})")
         
         # Save metadata
         metadata = {

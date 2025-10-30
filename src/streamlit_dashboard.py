@@ -234,6 +234,13 @@ def load_processed_data():
         
         # Load poll responses data
         poll_responses_df = pd.read_csv(os.path.join(DATA_DIR, "poll_responses_data.csv"))
+
+        # Load per-question correctness data (optional)
+        qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
+        if os.path.exists(qpath):
+            question_correctness_df = pd.read_csv(qpath)
+        else:
+            question_correctness_df = pd.DataFrame()
         
         # Create metadata
         metadata = {
@@ -243,7 +250,7 @@ def load_processed_data():
         }
         
         return (summary_df, game_conversion_df, time_series_df, 
-                repeatability_df, score_distribution_df, poll_responses_df, metadata)
+                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, metadata)
     
     except Exception as e:
         st.error(f"❌ Error loading processed data: {str(e)}")
@@ -1220,6 +1227,49 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
         if i < len(unique_questions) - 1:
             st.markdown("---")
 
+
+def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> None:
+    """Render stacked percent bar chart of Correct vs Incorrect per question for a selected game."""
+    import altair as alt
+
+    if question_correctness_df.empty:
+        st.warning("No per-question correctness data available.")
+        return
+
+    st.markdown("### ✅ Question Correctness by Question Number")
+
+    # Game selector (single-select)
+    games = sorted(question_correctness_df['game_name'].dropna().unique())
+    if not games:
+        st.warning("No games found in correctness data.")
+        return
+
+    selected_game = st.selectbox(
+        "Select a Game:",
+        options=games,
+        index=0,
+        help="Choose a game to view per-question correctness."
+    )
+
+    df_game = question_correctness_df[question_correctness_df['game_name'] == selected_game].copy()
+    if df_game.empty:
+        st.warning("No data available for the selected game.")
+        return
+
+    # Ensure ordering by question number
+    df_game['question_number'] = pd.to_numeric(df_game['question_number'], errors='coerce')
+    df_game = df_game.dropna(subset=['question_number']).sort_values('question_number')
+
+    # Build stacked percent chart (use precomputed percent)
+    chart = alt.Chart(df_game).mark_bar().encode(
+        x=alt.X('question_number:O', title='Question Number', axis=alt.Axis(labelAngle=0, labelFontSize=14, titleFontSize=16)),
+        y=alt.Y('percent:Q', title='% of Users', stack='normalize'),
+        color=alt.Color('correctness:N', scale=alt.Scale(domain=['Correct', 'Incorrect'], range=['#2ECC71', '#E74C3C']), legend=alt.Legend(title='Response')),
+        tooltip=['question_number:O', 'correctness:N', alt.Tooltip('percent:Q', format='.1f'), 'user_count:Q', 'total_users:Q']
+    ).properties(width=900, height=400, title=f'Correct vs Incorrect by Question — {selected_game}')
+
+    st.altair_chart(chart, use_container_width=True)
+
 def main() -> None:
     st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
     st.title("Hybrid Dashboard")
@@ -1234,7 +1284,7 @@ def main() -> None:
 
     with st.spinner("Loading data..."):
         (summary_df, game_conversion_df, time_series_df, 
-         repeatability_df, score_distribution_df, poll_responses_df, metadata) = load_processed_data()
+         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, metadata) = load_processed_data()
     
     if summary_df.empty:
         st.warning("No data available.")
@@ -1334,6 +1384,15 @@ def main() -> None:
         render_parent_poll_responses(poll_responses_df, game_conversion_df)
     else:
         st.warning("No parent poll responses data available.")
+    
+    # Add Question Correctness Analysis
+    st.markdown("---")
+    st.markdown("## ✅ Question Correctness by Question Number")
+    
+    if 'question_correctness_df' in locals() and not question_correctness_df.empty:
+        render_question_correctness_chart(question_correctness_df)
+    else:
+        st.warning("No per-question correctness data available.")
     
     # Add Repeatability Analysis
     st.markdown("---")
