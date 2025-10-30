@@ -302,6 +302,14 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     except Exception:
         pass
 
+    # Exclude specific games
+    EXCLUDED_GAMES = set([
+        'Sorting Primary Colors',
+        'Sorting Primary Shapes'
+    ])
+
+    df_score = df_score[~df_score['game_name'].isin(EXCLUDED_GAMES)].copy()
+
     # Split by action types
     game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
     action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
@@ -319,7 +327,7 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
             except Exception:
                 continue
 
-            # Prefer roundDetails for per-question
+            # Prefer roundDetails for per-question ("This or That" mechanic)
             round_details = obj.get('roundDetails') if isinstance(obj, dict) else None
             if isinstance(round_details, list) and len(round_details) > 0:
                 for rd in round_details:
@@ -333,11 +341,11 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                                     correct_index = idx
                                     break
 
-                        # Determine selected card index (use first selection if available)
+                        # Determine selected card index (use last selection if multiple)
                         selections = rd.get('selections', [])
                         selected_index = None
                         if isinstance(selections, list) and len(selections) > 0:
-                            sel = selections[0]
+                            sel = selections[-1]
                             if isinstance(sel, dict) and 'card' in sel:
                                 selected_index = sel.get('card')
 
@@ -363,7 +371,7 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                     except Exception:
                         continue
             else:
-                # Try jsonData structure with userResponse[].isCorrect per level
+                # Try jsonData structure with userResponse[].isCorrect per level ("Flow Stop & Go" mechanic)
                 try:
                     game_data = obj.get('gameData') if isinstance(obj, dict) else None
                     if isinstance(game_data, list):
@@ -371,22 +379,30 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                         for gd in game_data:
                             if isinstance(gd, dict) and gd.get('section') == 'Action' and isinstance(gd.get('jsonData'), list):
                                 for level in gd['jsonData']:
-                                    if isinstance(level, dict) and isinstance(level.get('userResponse'), list):
-                                        for resp in level['userResponse']:
-                                            if isinstance(resp, dict) and 'isCorrect' in resp:
-                                                question_idx += 1
-                                                per_question_rows.append({
-                                                    'game_name': row['game_name'],
-                                                    'idvisitor_converted': row['idvisitor_converted'],
-                                                    'idvisit': row['idvisit'],
-                                                    'session_instance': 1,
-                                                    'question_number': int(question_idx),
-                                                    'is_correct': 1 if bool(resp.get('isCorrect')) else 0
-                                                })
+                                    if not isinstance(level, dict):
+                                        continue
+                                    # Only consider stop&Go flow where applicable
+                                    flow_val = level.get('flow')
+                                    # If flow is present, require stop&Go; if flow absent, still process as single question
+                                    if flow_val is not None and str(flow_val).lower() != 'stop&go':
+                                        continue
+                                    # Use first userResponse if list exists
+                                    user_resp = level.get('userResponse')
+                                    if isinstance(user_resp, list) and len(user_resp) > 0 and isinstance(user_resp[0], dict):
+                                        is_corr = 1 if bool(user_resp[0].get('isCorrect')) else 0
+                                        question_idx += 1
+                                        per_question_rows.append({
+                                            'game_name': row['game_name'],
+                                            'idvisitor_converted': row['idvisitor_converted'],
+                                            'idvisit': row['idvisit'],
+                                            'session_instance': 1,
+                                            'question_number': int(question_idx),
+                                            'is_correct': is_corr
+                                        })
                 except Exception:
                     pass
 
-    # 2) Handle action_level records (single-question per record)
+    # 2) Handle action_level records (single-question per record) — "Action Level" mechanic
     if not action_level_data.empty:
         # Sort and assign session_instance per (user, game, visit) based on time gaps
         action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
@@ -413,12 +429,27 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
             prev_user, prev_game, prev_visit, prev_time = user, game, visit, t
         action_level_data['session_instance'] = session_instances
 
-        # Question number within each session: cumulative count order by time
-        action_level_data['question_number'] = (
-            action_level_data
-            .groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])
-            .cumcount() + 1
-        )
+        # Prefer explicit level from action_name like "action_level_3"; fallback to sequence per session
+        import re
+        def _extract_level(action_name: str):
+            try:
+                m = re.search(r'action_level[_\- ]?(\d+)', str(action_name))
+                if m:
+                    return int(m.group(1))
+            except Exception:
+                pass
+            return None
+
+        levels = action_level_data['action_name'].apply(_extract_level)
+        action_level_data['question_number'] = levels
+        # Fallback numbering where level not found
+        mask_missing = action_level_data['question_number'].isna()
+        if mask_missing.any():
+            action_level_data.loc[mask_missing, 'question_number'] = (
+                action_level_data[mask_missing]
+                .groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])
+                .cumcount() + 1
+            )
 
         # Compute correctness per record
         def _safe_action_score(x: str) -> int:
