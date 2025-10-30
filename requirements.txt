@@ -1,7 +1,8 @@
 # Core dependencies for lightweight Streamlit dashboard
-# Note: This dashboard only loads preprocessed CSV files - no database connections needed
+# Note: This dashboard loads preprocessed CSV files and can refresh poll data from database
 streamlit>=1.50.0
 pandas>=2.2.2
 altair>=5.0.0
 python-dotenv>=1.0.0
+pymysql>=1.1.0
 
