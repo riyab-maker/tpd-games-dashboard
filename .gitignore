@@ -82,6 +82,8 @@ Thumbs.db
 # Only ignore large raw data files, not processed files
 *.csv
 !data/*.csv
+# Exclude very large poll responses CSV from git; generated at runtime on Render
+data/poll_responses_data.csv
 !processed_data/*.csv
 # Exclude large processed_data.csv (too big for GitHub)
 data/processed_data.csv
