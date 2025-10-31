@@ -302,13 +302,38 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     except Exception:
         pass
 
-    # Exclude specific games
-    EXCLUDED_GAMES = set([
-        'Sorting Primary Colors',
-        'Sorting Primary Shapes'
-    ])
+    # Target games and mechanics mapping
+    MECHANIC_BY_GAME = {
+        'Beginning Sound Ba/Ra/Na': 'action_level',
+        'Beginning Sounds Ma/Ka/La': 'action_level',
+        'Beginning Sounds Pa/Cha/Sa': 'correct_selections',
+        'Color Blue': 'action_level',
+        'Color Red': 'action_level',
+        'Color Yellow': 'action_level',
+        'Emotion Identification': 'correct_selections',
+        'Identification of all emotions': 'correct_selections',
+        'Numbers Comparison': 'correct_selections',
+        'Numbers I': 'action_level',
+        'Numbers II': 'action_level',
+        'Numerals 1-10': 'action_level',
+        'Primary Emotion Labelling': 'correct_selections',
+        'Quantitative Comparison': 'correct_selections',
+        'Relational Comparison': 'correct_selections',
+        'Relational Comparison II': 'correct_selections',
+        'Revision Colors': 'flow',
+        'Revision Shapes': 'flow',
+        'Rhyming Words': 'flow',
+        'Shape Circle': 'action_level',
+        'Shape Rectangle': 'action_level',
+        'Shape Square': 'action_level',
+        'Shape Triangle': 'action_level',
+    }
 
-    df_score = df_score[~df_score['game_name'].isin(EXCLUDED_GAMES)].copy()
+    # Exclude any sorting games, robustly by name match
+    df_score = df_score[~df_score['game_name'].astype(str).str.contains('sorting', case=False, na=False)].copy()
+
+    # Filter to only target games (case-sensitive match); leave others out
+    df_score = df_score[df_score['game_name'].isin(list(MECHANIC_BY_GAME.keys()))].copy()
 
     # Split by action types
     game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
@@ -316,9 +341,13 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
 
     per_question_rows: list[dict] = []
 
-    # 1) Handle game_completed with correctSelections / roundDetails schema
+    # 1) Handle game_completed with correctSelections / roundDetails schema OR flow
     if not game_completed_data.empty:
         for _, row in game_completed_data.iterrows():
+            # Only process this record using the intended mechanic for the game
+            mech = MECHANIC_BY_GAME.get(str(row['game_name']))
+            if mech not in ('correct_selections', 'flow'):
+                continue
             raw = row.get('custom_dimension_1')
             if pd.isna(raw) or raw in (None, '', 'null'):
                 continue
@@ -327,9 +356,9 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
             except Exception:
                 continue
 
-            # Prefer roundDetails for per-question ("This or That" mechanic)
+            # Prefer roundDetails for per-question ("This or That" mechanic) when mapped
             round_details = obj.get('roundDetails') if isinstance(obj, dict) else None
-            if isinstance(round_details, list) and len(round_details) > 0:
+            if mech == 'correct_selections' and isinstance(round_details, list) and len(round_details) > 0:
                 for rd in round_details:
                     try:
                         # Determine correct card index
@@ -370,7 +399,7 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                         })
                     except Exception:
                         continue
-            else:
+            elif mech == 'flow':
                 # Try jsonData structure with userResponse[].isCorrect per level ("Flow Stop & Go" mechanic)
                 try:
                     game_data = obj.get('gameData') if isinstance(obj, dict) else None
@@ -401,9 +430,16 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                                         })
                 except Exception:
                     pass
+            else:
+                # If mapping says correct_selections but roundDetails absent, skip
+                # If mapping says flow but flow data absent, skip
+                continue
 
     # 2) Handle action_level records (single-question per record) — "Action Level" mechanic
     if not action_level_data.empty:
+        # Filter to only games that are action_level
+        action_level_games = {g for g, m in MECHANIC_BY_GAME.items() if m == 'action_level'}
+        action_level_data = action_level_data[action_level_data['game_name'].isin(action_level_games)].copy()
         # Sort and assign session_instance per (user, game, visit) based on time gaps
         action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
 
