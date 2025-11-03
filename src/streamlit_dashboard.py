@@ -603,6 +603,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
             help="Number of games included in the analysis"
         )
 
+
 def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     """Render game repeatability analysis based on SQL query logic:
     
@@ -1128,104 +1129,102 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
         return
     
     # Get unique questions
-    unique_questions = filtered_df['question'].unique()
+    unique_questions = sorted(filtered_df['question'].unique())
     
     if len(unique_questions) == 0:
         st.warning("No poll questions found in the data.")
         return
     
-    # Create charts for each question
-    for i, question in enumerate(unique_questions):
-        st.markdown(f"#### {question}")
+    # Display up to 3 questions side by side
+    num_questions = min(len(unique_questions), 3)
+    
+    # Create columns for side-by-side display
+    if num_questions == 3:
+        chart_cols = st.columns(3)
+    elif num_questions == 2:
+        chart_cols = st.columns(2)
+    else:
+        chart_cols = st.columns(1)
+    
+    # Create charts for each question (up to 3)
+    for i in range(num_questions):
+        question = unique_questions[i]
         
-        # Filter data for this question
-        question_data = filtered_df[filtered_df['question'] == question].copy()
-        
-        if question_data.empty:
-            st.warning(f"No data available for {question}")
-            continue
-        
-        # Create bar chart
-        chart = alt.Chart(question_data).mark_bar(
-            cornerRadius=6,
-            stroke='white',
-            strokeWidth=2,
-            color='#4A90E2'
-        ).encode(
-            x=alt.X('option:N', 
-                    title='Response Option', 
-                    axis=alt.Axis(
-                        labelAngle=0,
-                        labelFontSize=14,
-                        titleFontSize=16
-                    )),
-            y=alt.Y('count:Q', 
-                    title='Number of Responses', 
-                    axis=alt.Axis(format='~s')),
-            tooltip=['option:N', 'count:Q']
-        ).properties(
-            width=600,
-            height=400,
-            title=f'Responses for {question}'
-        )
-        
-        # Add data labels
-        labels = alt.Chart(question_data).mark_text(
-            align='center',
-            baseline='bottom',
-            color='#2E8B57',
-            fontSize=16,
-            fontWeight='bold',
-            dy=-10
-        ).encode(
-            x=alt.X('option:N'),
-            y=alt.Y('count:Q'),
-            text=alt.Text('count:Q', format='.0f')
-        )
-        
-        # Combine chart and labels
-        final_chart = (chart + labels).configure_axis(
-            labelFontSize=16,
-            titleFontSize=18,
-            grid=True
-        ).configure_title(
-            fontSize=20,
-            fontWeight='bold'
-        )
-        
-        st.altair_chart(final_chart, use_container_width=True)
-        
-        # Add summary statistics for this question
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
+        with chart_cols[i]:
+            st.markdown(f"#### {question}")
+            
+            # Filter data for this question
+            question_data = filtered_df[filtered_df['question'] == question].copy()
+            
+            if question_data.empty:
+                st.warning(f"No data available for {question}")
+                continue
+            
+            # Create bar chart
+            chart = alt.Chart(question_data).mark_bar(
+                cornerRadius=6,
+                stroke='white',
+                strokeWidth=2,
+                color='#4A90E2'
+            ).encode(
+                x=alt.X('option:N', 
+                        title='Response Option', 
+                        axis=alt.Axis(
+                            labelAngle=-45,
+                            labelFontSize=10,
+                            titleFontSize=12
+                        )),
+                y=alt.Y('count:Q', 
+                        title='Responses', 
+                        axis=alt.Axis(format='~s')),
+                tooltip=['option:N', 'count:Q']
+            ).properties(
+                width=350,
+                height=300,
+                title=f'{question}'
+            )
+            
+            # Add data labels
+            labels = alt.Chart(question_data).mark_text(
+                align='center',
+                baseline='bottom',
+                color='#2E8B57',
+                fontSize=12,
+                fontWeight='bold',
+                dy=-10
+            ).encode(
+                x=alt.X('option:N'),
+                y=alt.Y('count:Q'),
+                text=alt.Text('count:Q', format='.0f')
+            )
+            
+            # Combine chart and labels
+            final_chart = (chart + labels).configure_axis(
+                labelFontSize=12,
+                titleFontSize=14,
+                grid=True
+            ).configure_title(
+                fontSize=14,
+                fontWeight='bold'
+            )
+            
+            st.altair_chart(final_chart, use_container_width=True)
+            
+            # Add summary statistics for this question
             total_responses = question_data['count'].sum()
+            most_popular = question_data.loc[question_data['count'].idxmax(), 'option']
+            most_popular_count = question_data['count'].max()
+            
             st.metric(
-                label="📊 Total Responses",
+                label="Total Responses",
                 value=f"{total_responses:,}",
                 help=f"Total number of responses for {question}"
             )
-        
-        with col2:
-            most_popular = question_data.loc[question_data['count'].idxmax(), 'option']
-            most_popular_count = question_data['count'].max()
-            st.metric(
-                label="🏆 Most Popular",
-                value=f"{most_popular} ({most_popular_count:,})",
-                help=f"Most selected option for {question}"
-            )
-        
-        with col3:
-            unique_options = len(question_data)
-            st.metric(
-                label="📝 Options Available",
-                value=f"{unique_options}",
-                help=f"Number of response options for {question}"
-            )
-        
-        # Add separator between questions
-        if i < len(unique_questions) - 1:
-            st.markdown("---")
+            st.caption(f"Most popular: {most_popular} ({most_popular_count:,})")
+    
+    # If there are more than 3 questions, show a message
+    if len(unique_questions) > 3:
+        st.info(f"Note: Showing first 3 of {len(unique_questions)} questions. Filter by game to see specific questions.")
 
 
 def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> None:
@@ -1385,14 +1384,14 @@ def main() -> None:
     else:
         st.warning("No parent poll responses data available.")
     
-    # Add Question Correctness Analysis
+    # Add Question Correctness by Question Number Analysis
     st.markdown("---")
     st.markdown("## ✅ Question Correctness by Question Number")
     
-    if 'question_correctness_df' in locals() and not question_correctness_df.empty:
+    if not question_correctness_df.empty:
         render_question_correctness_chart(question_correctness_df)
     else:
-        st.warning("No per-question correctness data available.")
+        st.warning("No question correctness data available. Please run preprocess_data.py to generate the data.")
     
     # Add Repeatability Analysis
     st.markdown("---")

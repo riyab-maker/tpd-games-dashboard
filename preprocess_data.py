@@ -189,6 +189,29 @@ WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01'
   );
 """
 
+# Parent Poll Query
+PARENT_POLL_QUERY = """
+SELECT 
+  `matomo_log_link_visit_action`.`custom_dimension_1`,
+  `matomo_log_link_visit_action`.`custom_dimension_2`,
+  CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted,
+  `matomo_log_link_visit_action`.`idvisit`,
+  `matomo_log_link_visit_action`.`server_time`,
+  `hybrid_games`.`game_name`
+FROM `matomo_log_link_visit_action` 
+INNER JOIN `matomo_log_action` 
+    ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
+INNER JOIN `hybrid_games_links` 
+    ON `hybrid_games_links`.`activity_id` = `matomo_log_link_visit_action`.`custom_dimension_2`
+INNER JOIN `hybrid_games` 
+    ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id`
+WHERE `matomo_log_action`.`name` LIKE "%_completed%" 
+  AND `matomo_log_link_visit_action`.`custom_dimension_1` IS NOT NULL
+  AND `matomo_log_link_visit_action`.`custom_dimension_1` LIKE "%poll%"
+  AND `matomo_log_link_visit_action`.`server_time` > '2025-07-01'
+  AND `hybrid_games_links`.`activity_id` IS NOT NULL;
+"""
+
 
 def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe from database"""
@@ -1512,6 +1535,156 @@ def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFram
     return repeatability_df
 
 
+def process_parent_poll() -> pd.DataFrame:
+    """Process parent poll responses data"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Parent Poll Responses")
+    print("=" * 60)
+    
+    # Fetch poll data
+    print("Fetching parent poll data from database...")
+    try:
+        with pymysql.connect(
+            host=HOST,
+            port=PORT,
+            user=USER,
+            password=PASSWORD,
+            database=DBNAME,
+            connect_timeout=30,
+            read_timeout=300,
+            write_timeout=300,
+            ssl={'ssl': {}},
+        ) as conn:
+            with conn.cursor() as cur:
+                print("  Executing parent poll query...")
+                cur.execute(PARENT_POLL_QUERY)
+                rows = cur.fetchall()
+                cols = [d[0] for d in cur.description]
+                df_poll = pd.DataFrame(rows, columns=cols)
+                print(f"  Query returned {len(df_poll)} records")
+    except Exception as e:
+        print(f"  ERROR: Failed to fetch parent poll data: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+    
+    if df_poll.empty:
+        print("WARNING: No parent poll data found")
+        # Create empty dataframe with expected headers
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df.to_csv('data/poll_responses_data.csv', index=False)
+        return poll_df
+    
+    print(f"  Processing {len(df_poll)} poll records...")
+    
+    # Process each record
+    processed_records = []
+    
+    for _, row in df_poll.iterrows():
+        try:
+            custom_dim_1 = row['custom_dimension_1']
+            game_name = row['game_name']
+            
+            # Parse JSON from custom_dimension_1
+            if not custom_dim_1 or pd.isna(custom_dim_1):
+                continue
+            
+            try:
+                poll_data = json.loads(custom_dim_1)
+            except json.JSONDecodeError:
+                # Skip non-JSON records
+                continue
+            
+            if not isinstance(poll_data, dict):
+                continue
+            
+            # Extract options and chosenOption
+            options = poll_data.get('options', [])
+            chosen_option = poll_data.get('chosenOption')
+            
+            # Skip if no chosen option or options list is empty
+            if chosen_option is None or not isinstance(options, list) or len(options) == 0:
+                continue
+            
+            # Get the selected option's message
+            try:
+                chosen_option_idx = int(chosen_option)
+                if 0 <= chosen_option_idx < len(options):
+                    selected_option = options[chosen_option_idx]
+                    option_message = selected_option.get('message', '')
+                    
+                    if not option_message:
+                        continue
+                    
+                    # Determine question based on options structure
+                    # We'll identify questions by the unique set of option messages
+                    option_messages = sorted([opt.get('message', '') for opt in options if opt.get('message')])
+                    option_signature = tuple(option_messages)
+                    
+                    processed_records.append({
+                        'game_name': game_name,
+                        'question_signature': str(option_signature),  # Use signature to identify questions
+                        'option_message': option_message,
+                        'idvisitor_converted': row['idvisitor_converted'],
+                        'idvisit': row['idvisit']
+                    })
+            except (ValueError, IndexError, TypeError) as e:
+                # Skip invalid option indices
+                continue
+                
+        except Exception as e:
+            print(f"  WARNING: Error processing poll record: {str(e)}")
+            continue
+    
+    if not processed_records:
+        print("WARNING: No valid poll responses found after processing")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df.to_csv('data/poll_responses_data.csv', index=False)
+        return poll_df
+    
+    # Convert to DataFrame
+    results_df = pd.DataFrame(processed_records)
+    print(f"  Processed {len(results_df)} valid poll responses")
+    
+    # Map question signatures to sequential question IDs
+    # Group by question_signature to assign sequential IDs (1, 2, 3)
+    unique_questions = results_df['question_signature'].unique()
+    question_mapping = {sig: idx + 1 for idx, sig in enumerate(sorted(unique_questions))}
+    results_df['question_id'] = results_df['question_signature'].map(question_mapping)
+    
+    # Aggregate: count distinct users per game, question_id, and option
+    agg_df = (
+        results_df
+        .groupby(['game_name', 'question_id', 'option_message'])['idvisitor_converted']
+        .nunique()
+        .reset_index(name='user_count')
+    )
+    
+    # Also create dashboard-compatible format with question as string
+    # Map question_id to readable question string
+    agg_df['question'] = 'Question ' + agg_df['question_id'].astype(str)
+    agg_df['option'] = agg_df['option_message']
+    agg_df['count'] = agg_df['user_count']
+    
+    # Create final output with both formats (for backward compatibility)
+    final_df = agg_df[['game_name', 'question_id', 'option_message', 'user_count', 'question', 'option', 'count']].copy()
+    
+    # Sort for consistent output
+    final_df = final_df.sort_values(['game_name', 'question_id', 'option_message'])
+    
+    print(f"SUCCESS: Final parent poll data: {len(final_df)} records")
+    print(f"  Games: {final_df['game_name'].nunique()}")
+    print(f"  Questions: {final_df['question_id'].nunique()}")
+    print(f"  Total responses: {final_df['user_count'].sum():,}")
+    
+    # Save to CSV - save with dashboard-compatible columns
+    output_df = final_df[['game_name', 'question', 'option', 'count']].copy()
+    output_df.to_csv('data/poll_responses_data.csv', index=False)
+    print(f"SUCCESS: Saved data/poll_responses_data.csv ({len(output_df)} records)")
+    
+    return final_df
+
+
 def process_question_correctness() -> pd.DataFrame:
     """Process question correctness data"""
     print("\n" + "=" * 60)
@@ -1573,6 +1746,7 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
         ('data/time_series_data.csv', 'time_series_records'),
         ('data/repeatability_data.csv', 'repeatability_records'),
         ('data/question_correctness_data.csv', 'question_correctness_records'),
+        ('data/poll_responses_data.csv', 'poll_responses_records'),
     ]:
         if os.path.exists(csv_file):
             df_check = pd.read_csv(csv_file)
@@ -1607,6 +1781,9 @@ Examples:
   # Process only question correctness
   python preprocess_data.py --question-correctness
 
+  # Process only parent poll responses
+  python preprocess_data.py --parent-poll
+
   # Process multiple visuals
   python preprocess_data.py --time-series --repeatability
 
@@ -1617,6 +1794,7 @@ Available visuals:
   --time-series        Time series data
   --repeatability      Repeatability data
   --question-correctness Question correctness data
+  --parent-poll        Parent poll responses data
   --all                Process all visuals (default if no flags provided)
   --metadata           Update metadata file
         """
@@ -1628,6 +1806,7 @@ Available visuals:
     parser.add_argument('--time-series', action='store_true', help='Process time series data')
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
     parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
+    parser.add_argument('--parent-poll', action='store_true', help='Process parent poll responses data')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
     
@@ -1639,7 +1818,7 @@ Available visuals:
     # Determine what to process
     process_all = args.all or not any([
         args.main, args.summary, args.score_distribution,
-        args.time_series, args.repeatability, args.question_correctness
+        args.time_series, args.repeatability, args.question_correctness, args.parent_poll
     ])
     
     if process_all:
@@ -1677,6 +1856,10 @@ Available visuals:
         # Process question correctness if requested or if processing all
         if args.question_correctness or process_all:
             process_question_correctness()
+        
+        # Process parent poll if requested or if processing all
+        if args.parent_poll or process_all:
+            process_parent_poll()
         
         # Update metadata if requested or if processing all
         if args.metadata or process_all:
