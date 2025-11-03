@@ -871,23 +871,20 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     filtered_ts_df = time_series_df[time_series_df['period_type'] == period_filter].copy()
     
     # Apply game filtering if specific games are selected
-    if selected_games_ts:
-        # Filter by selected games
-        filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
-    
-    # Check if we have data after filtering
-    if filtered_ts_df.empty:
-        st.warning("No data available for the selected time period.")
-        return
-    
-    # Aggregate data by time period and game
-    # For instances, we sum instance_count by period_label and game_name
     if selected_games_ts and len(selected_games_ts) > 0:
+        # Filter by selected games (exclude "All Games" rows when specific games are selected)
+        filtered_ts_df = filtered_ts_df[
+            filtered_ts_df['game_name'].isin(selected_games_ts) & 
+            (filtered_ts_df['game_name'] != 'All Games')
+        ]
         # Show data per game if games are selected
         aggregated_df = filtered_ts_df.groupby(['period_label', 'game_name'])['instance_count'].sum().reset_index()
     else:
-        # Show aggregated data across all games
-        aggregated_df = filtered_ts_df.groupby('period_label')['instance_count'].sum().reset_index()
+        # When no games selected, use "All Games" rows directly (don't aggregate individual games)
+        # This prevents double-counting
+        filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'] == 'All Games']
+        # Use the pre-aggregated "All Games" data directly
+        aggregated_df = filtered_ts_df[['period_label', 'instance_count']].copy()
         aggregated_df['game_name'] = 'All Games'
     
     # Rename period_label to time_period for compatibility with existing chart code
