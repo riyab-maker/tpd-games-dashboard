@@ -1550,43 +1550,43 @@ def process_main_data() -> pd.DataFrame:
     print("PROCESSING: Main Dashboard Data")
     print("=" * 60)
     
-        df_main = fetch_dataframe()
-        if df_main.empty:
+    df_main = fetch_dataframe()
+    if df_main.empty:
         print("ERROR: No main data found.")
         return pd.DataFrame()
         
     print(f"SUCCESS: Fetched {len(df_main)} records from main query")
-        df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
-        
+    df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
+    
     # Save main data
-        df_main.to_csv('data/processed_data.csv', index=False)
-        print("SUCCESS: Saved data/processed_data.csv")
-        
+    df_main.to_csv('data/processed_data.csv', index=False)
+    print("SUCCESS: Saved data/processed_data.csv")
+    
     # Create and save game-specific conversion numbers
-        game_conversion_data = []
-        for game in df_main['game_name'].unique():
-            if game != 'Unknown Game':
-                game_data = df_main[df_main['game_name'] == game]
-                started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
-                completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-                started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
-                completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
-                started_instances = len(game_data[game_data['event'] == 'Started'])
-                completed_instances = len(game_data[game_data['event'] == 'Completed'])
-                
-                game_conversion_data.append({
-                    'game_name': game,
-                    'started_users': started_users,
-                    'completed_users': completed_users,
-                    'started_visits': started_visits,
-                    'completed_visits': completed_visits,
-                    'started_instances': started_instances,
-                    'completed_instances': completed_instances
-                })
-        
-        game_conversion_df = pd.DataFrame(game_conversion_data)
-        game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
-        print("SUCCESS: Saved data/game_conversion_numbers.csv")
+    game_conversion_data = []
+    for game in df_main['game_name'].unique():
+        if game != 'Unknown Game':
+            game_data = df_main[df_main['game_name'] == game]
+            started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(game_data[game_data['event'] == 'Started'])
+            completed_instances = len(game_data[game_data['event'] == 'Completed'])
+            
+            game_conversion_data.append({
+                'game_name': game,
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances
+            })
+    
+    game_conversion_df = pd.DataFrame(game_conversion_data)
+    game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
+    print("SUCCESS: Saved data/game_conversion_numbers.csv")
         
     return df_main
 
@@ -1604,7 +1604,7 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
         df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
     summary_df = build_summary(df_main)
-        summary_df.to_csv('data/summary_data.csv', index=False)
+    summary_df.to_csv('data/summary_data.csv', index=False)
     print(f"SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
     
     return summary_df
@@ -1618,12 +1618,12 @@ def process_score_distribution() -> pd.DataFrame:
     
     df_score = fetch_score_dataframe()
     score_distribution_df = calculate_score_distribution_combined(df_score)
-        
-        if not score_distribution_df.empty:
-            score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+    
+    if not score_distribution_df.empty:
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
         print(f"SUCCESS: Saved data/score_distribution_data.csv ({len(score_distribution_df)} records)")
-        else:
-            print("WARNING: No score distribution data to save")
+    else:
+        print("WARNING: No score distribution data to save")
         
     return score_distribution_df
 
@@ -1739,13 +1739,13 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     time_series_df = time_series_df.sort_values(['period_type', 'game_name', 'period_label'])
     
     # Save to CSV
-        if not time_series_df.empty:
-            time_series_df.to_csv('data/time_series_data.csv', index=False)
+    if not time_series_df.empty:
+        time_series_df.to_csv('data/time_series_data.csv', index=False)
         print(f"SUCCESS: Saved data/time_series_data.csv ({len(time_series_df)} records)")
         print(f"  Columns: {list(time_series_df.columns)}")
         print(f"  Sample row: {time_series_df.iloc[0].to_dict() if len(time_series_df) > 0 else 'N/A'}")
-        else:
-            print("WARNING: No time series data to save")
+    else:
+        print("WARNING: No time series data to save")
         empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instances', 'visits', 'users', 'period_type'])
         empty_df.to_csv('data/time_series_data.csv', index=False)
     
@@ -2140,8 +2140,8 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     })
     
     with open(metadata_file, 'w') as f:
-            json.dump(metadata, f, indent=2)
-        print("SUCCESS: Saved data/metadata.json")
+        json.dump(metadata, f, indent=2)
+    print("SUCCESS: Saved data/metadata.json")
         
 
 def main():
