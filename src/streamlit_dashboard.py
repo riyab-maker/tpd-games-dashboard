@@ -277,14 +277,28 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     st.markdown("### 🔄 Conversion Funnels")
     
     # Display date range for conversion funnel - safe access
-    if 'Event' in conversion_df.columns:
-        started_row = conversion_df[conversion_df['Event'] == 'Started']
-        completed_row = conversion_df[conversion_df['Event'] == 'Completed']
-        started_count = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce')) if not started_row.empty and 'Users' in started_row.columns and len(started_row) > 0 else 0
-        completed_count = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce')) if not completed_row.empty and 'Users' in completed_row.columns and len(completed_row) > 0 else 0
-    else:
-        started_count = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique() if 'event' in conversion_df.columns else 0
-        completed_count = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique() if 'event' in conversion_df.columns else 0
+    try:
+        if 'Event' in conversion_df.columns:
+            started_row = conversion_df[conversion_df['Event'] == 'Started']
+            completed_row = conversion_df[conversion_df['Event'] == 'Completed']
+            if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
+                started_count = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce').fillna(0))
+            else:
+                started_count = 0
+            if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
+                completed_count = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce').fillna(0))
+            else:
+                completed_count = 0
+        else:
+            if 'event' in conversion_df.columns:
+                started_count = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
+                completed_count = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
+            else:
+                started_count = 0
+                completed_count = 0
+    except (IndexError, KeyError, ValueError, TypeError):
+        started_count = 0
+        completed_count = 0
     st.caption(f"📅 Data range: July 2nd, 2025 onwards (Total: {started_count:,} users started, {completed_count:,} users completed)")
 
     # Get data for each funnel from conversion data
@@ -294,31 +308,33 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         completed_row = conversion_df[conversion_df['Event'] == 'Completed']
         
         # Safely extract values with defaults
-        if not started_row.empty and 'Users' in started_row.columns:
-            started_users = pd.to_numeric(started_row['Users'].iloc[0], errors='coerce') if len(started_row) > 0 else 0
-            started_visits = pd.to_numeric(started_row['Visits'].iloc[0], errors='coerce') if len(started_row) > 0 else 0
-            started_instances = pd.to_numeric(started_row['Instances'].iloc[0], errors='coerce') if len(started_row) > 0 else 0
-        else:
+        try:
+            if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
+                started_users = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce').fillna(0))
+                started_visits = int(pd.to_numeric(started_row['Visits'].iloc[0], errors='coerce').fillna(0))
+                started_instances = int(pd.to_numeric(started_row['Instances'].iloc[0], errors='coerce').fillna(0))
+            else:
+                started_users = 0
+                started_visits = 0
+                started_instances = 0
+        except (IndexError, KeyError, ValueError, TypeError) as e:
             started_users = 0
             started_visits = 0
             started_instances = 0
             
-        if not completed_row.empty and 'Users' in completed_row.columns:
-            completed_users = pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce') if len(completed_row) > 0 else 0
-            completed_visits = pd.to_numeric(completed_row['Visits'].iloc[0], errors='coerce') if len(completed_row) > 0 else 0
-            completed_instances = pd.to_numeric(completed_row['Instances'].iloc[0], errors='coerce') if len(completed_row) > 0 else 0
-        else:
+        try:
+            if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
+                completed_users = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce').fillna(0))
+                completed_visits = int(pd.to_numeric(completed_row['Visits'].iloc[0], errors='coerce').fillna(0))
+                completed_instances = int(pd.to_numeric(completed_row['Instances'].iloc[0], errors='coerce').fillna(0))
+            else:
+                completed_users = 0
+                completed_visits = 0
+                completed_instances = 0
+        except (IndexError, KeyError, ValueError, TypeError) as e:
             completed_users = 0
             completed_visits = 0
             completed_instances = 0
-            
-        # Convert to int
-        started_users = int(started_users) if not pd.isna(started_users) else 0
-        started_visits = int(started_visits) if not pd.isna(started_visits) else 0
-        started_instances = int(started_instances) if not pd.isna(started_instances) else 0
-        completed_users = int(completed_users) if not pd.isna(completed_users) else 0
-        completed_visits = int(completed_visits) if not pd.isna(completed_visits) else 0
-        completed_instances = int(completed_instances) if not pd.isna(completed_instances) else 0
     else:
         # Filtered data format - calculate from raw data
         started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
@@ -1417,6 +1433,14 @@ def main() -> None:
         # Show filtered conversion funnel - use game-specific numbers
         selected_games_data = game_conversion_df[game_conversion_df['game_name'].isin(selected_games)]
         if not selected_games_data.empty:
+            # Ensure all required columns exist
+            required_cols = ['started_users', 'completed_users', 'started_visits', 'completed_visits', 'started_instances', 'completed_instances']
+            for col in required_cols:
+                if col not in selected_games_data.columns:
+                    st.error(f"Missing required column: {col}")
+                    render_modern_dashboard(summary_df, summary_df)
+                    return
+            
             # Aggregate the selected games - ensure numeric types
             total_started_users = pd.to_numeric(selected_games_data['started_users'], errors='coerce').fillna(0).sum()
             total_completed_users = pd.to_numeric(selected_games_data['completed_users'], errors='coerce').fillna(0).sum()
@@ -1426,18 +1450,22 @@ def main() -> None:
             total_completed_instances = pd.to_numeric(selected_games_data['completed_instances'], errors='coerce').fillna(0).sum()
             
             # Convert to int to avoid float display issues
-            total_started_users = int(total_started_users)
-            total_completed_users = int(total_completed_users)
-            total_started_visits = int(total_started_visits)
-            total_completed_visits = int(total_completed_visits)
-            total_started_instances = int(total_started_instances)
-            total_completed_instances = int(total_completed_instances)
+            total_started_users = int(total_started_users) if not pd.isna(total_started_users) else 0
+            total_completed_users = int(total_completed_users) if not pd.isna(total_completed_users) else 0
+            total_started_visits = int(total_started_visits) if not pd.isna(total_started_visits) else 0
+            total_completed_visits = int(total_completed_visits) if not pd.isna(total_completed_visits) else 0
+            total_started_instances = int(total_started_instances) if not pd.isna(total_started_instances) else 0
+            total_completed_instances = int(total_completed_instances) if not pd.isna(total_completed_instances) else 0
             
-            # Create summary data for selected games
+            # Create summary data for selected games with explicit dtype
             selected_games_summary = pd.DataFrame([
                 {'Event': 'Started', 'Users': total_started_users, 'Visits': total_started_visits, 'Instances': total_started_instances},
                 {'Event': 'Completed', 'Users': total_completed_users, 'Visits': total_completed_visits, 'Instances': total_completed_instances}
             ])
+            # Ensure numeric columns are properly typed
+            selected_games_summary['Users'] = pd.to_numeric(selected_games_summary['Users'], errors='coerce').fillna(0).astype(int)
+            selected_games_summary['Visits'] = pd.to_numeric(selected_games_summary['Visits'], errors='coerce').fillna(0).astype(int)
+            selected_games_summary['Instances'] = pd.to_numeric(selected_games_summary['Instances'], errors='coerce').fillna(0).astype(int)
             
             render_modern_dashboard(selected_games_summary, selected_games_summary)
         else:
