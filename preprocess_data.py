@@ -1257,10 +1257,17 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
         time_series_data.extend(monthly_agg.to_dict('records'))
         
         # Weekly aggregation - starts from Wednesday, format: YYYY_WW
+        # Reset game_df to original for weekly processing
+        if game_name == 'All Games':
+            game_df = df_instances.copy()
+        else:
+            game_df = df_instances[df_instances['game_name'] == game_name].copy()
         # Shift date by -2 days before calculating week number (so Wednesday becomes Monday)
         game_df['shifted_date'] = game_df['created_at'] - pd.Timedelta(days=2)
         game_df['year'] = game_df['shifted_date'].dt.year
-        game_df['week'] = game_df['shifted_date'].dt.isocalendar().week
+        # Use strftime('%W') which calculates week number with Monday as first day of week
+        # This matches MySQL's WEEK() function behavior
+        game_df['week'] = game_df['shifted_date'].dt.strftime('%W').astype(int)
         game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['week'].astype(str).str.zfill(2)
         
         if game_name == 'All Games':
@@ -1389,7 +1396,9 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
         # Shift date by -2 days before calculating week number (so Wednesday becomes Monday)
         game_df['shifted_date'] = game_df['server_time'] - pd.Timedelta(days=2)
         game_df['year'] = game_df['shifted_date'].dt.year
-        game_df['week'] = game_df['shifted_date'].dt.isocalendar().week
+        # Use strftime('%W') which calculates week number with Monday as first day of week
+        # This matches MySQL's WEEK() function behavior
+        game_df['week'] = game_df['shifted_date'].dt.strftime('%W').astype(int)
         game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['week'].astype(str).str.zfill(2)
         
         if game_name == 'All Games':
@@ -1687,7 +1696,14 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     # Process visits/users data
     visits_users_df = pd.DataFrame()
     if not df_visits_users.empty:
-        visits_users_df = preprocess_time_series_data_visits_users(df_visits_users)
+        try:
+            visits_users_df = preprocess_time_series_data_visits_users(df_visits_users)
+        except Exception as e:
+            print(f"WARNING: Failed to process visits/users data: {str(e)}")
+            print("  Continuing with instances data only...")
+            import traceback
+            traceback.print_exc()
+            visits_users_df = pd.DataFrame()
     else:
         print("WARNING: No visits/users data to process")
     
