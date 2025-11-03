@@ -1550,44 +1550,44 @@ def process_main_data() -> pd.DataFrame:
     print("PROCESSING: Main Dashboard Data")
     print("=" * 60)
     
-    df_main = fetch_dataframe()
-    if df_main.empty:
+        df_main = fetch_dataframe()
+        if df_main.empty:
         print("ERROR: No main data found.")
         return pd.DataFrame()
         
     print(f"SUCCESS: Fetched {len(df_main)} records from main query")
-    df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
-    
+        df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
+        
     # Save main data
-    df_main.to_csv('data/processed_data.csv', index=False)
-    print("SUCCESS: Saved data/processed_data.csv")
-    
+        df_main.to_csv('data/processed_data.csv', index=False)
+        print("SUCCESS: Saved data/processed_data.csv")
+        
     # Create and save game-specific conversion numbers
-    game_conversion_data = []
-    for game in df_main['game_name'].unique():
-        if game != 'Unknown Game':
-            game_data = df_main[df_main['game_name'] == game]
-            started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-            started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
-            started_instances = len(game_data[game_data['event'] == 'Started'])
-            completed_instances = len(game_data[game_data['event'] == 'Completed'])
-            
-            game_conversion_data.append({
-                'game_name': game,
-                'started_users': started_users,
-                'completed_users': completed_users,
-                'started_visits': started_visits,
-                'completed_visits': completed_visits,
-                'started_instances': started_instances,
-                'completed_instances': completed_instances
-            })
-    
-    game_conversion_df = pd.DataFrame(game_conversion_data)
-    game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
-    print("SUCCESS: Saved data/game_conversion_numbers.csv")
-    
+        game_conversion_data = []
+        for game in df_main['game_name'].unique():
+            if game != 'Unknown Game':
+                game_data = df_main[df_main['game_name'] == game]
+                started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
+                completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+                started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
+                completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
+                started_instances = len(game_data[game_data['event'] == 'Started'])
+                completed_instances = len(game_data[game_data['event'] == 'Completed'])
+                
+                game_conversion_data.append({
+                    'game_name': game,
+                    'started_users': started_users,
+                    'completed_users': completed_users,
+                    'started_visits': started_visits,
+                    'completed_visits': completed_visits,
+                    'started_instances': started_instances,
+                    'completed_instances': completed_instances
+                })
+        
+        game_conversion_df = pd.DataFrame(game_conversion_data)
+        game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
+        print("SUCCESS: Saved data/game_conversion_numbers.csv")
+        
     return df_main
 
 
@@ -1604,7 +1604,7 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
         df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
     summary_df = build_summary(df_main)
-    summary_df.to_csv('data/summary_data.csv', index=False)
+        summary_df.to_csv('data/summary_data.csv', index=False)
     print(f"SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
     
     return summary_df
@@ -1618,12 +1618,12 @@ def process_score_distribution() -> pd.DataFrame:
     
     df_score = fetch_score_dataframe()
     score_distribution_df = calculate_score_distribution_combined(df_score)
-    
-    if not score_distribution_df.empty:
-        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        
+        if not score_distribution_df.empty:
+            score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
         print(f"SUCCESS: Saved data/score_distribution_data.csv ({len(score_distribution_df)} records)")
-    else:
-        print("WARNING: No score distribution data to save")
+        else:
+            print("WARNING: No score distribution data to save")
         
     return score_distribution_df
 
@@ -1739,13 +1739,13 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     time_series_df = time_series_df.sort_values(['period_type', 'game_name', 'period_label'])
     
     # Save to CSV
-    if not time_series_df.empty:
-        time_series_df.to_csv('data/time_series_data.csv', index=False)
+        if not time_series_df.empty:
+            time_series_df.to_csv('data/time_series_data.csv', index=False)
         print(f"SUCCESS: Saved data/time_series_data.csv ({len(time_series_df)} records)")
         print(f"  Columns: {list(time_series_df.columns)}")
         print(f"  Sample row: {time_series_df.iloc[0].to_dict() if len(time_series_df) > 0 else 'N/A'}")
-    else:
-        print("WARNING: No time series data to save")
+        else:
+            print("WARNING: No time series data to save")
         empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instances', 'visits', 'users', 'period_type'])
         empty_df.to_csv('data/time_series_data.csv', index=False)
     
@@ -1803,32 +1803,97 @@ def process_parent_poll() -> pd.DataFrame:
     print("PROCESSING: Parent Poll Responses")
     print("=" * 60)
     
-    # Fetch poll data
+    # Fetch poll data using server-side cursor for large result sets
     print("Fetching parent poll data from database...")
-    try:
-        with pymysql.connect(
-            host=HOST,
-            port=PORT,
-            user=USER,
-            password=PASSWORD,
-            database=DBNAME,
-            connect_timeout=30,
-            read_timeout=300,
-            write_timeout=300,
-            ssl={'ssl': {}},
-        ) as conn:
-            with conn.cursor() as cur:
-                print("  Executing parent poll query...")
-                cur.execute(PARENT_POLL_QUERY)
-                rows = cur.fetchall()
-                cols = [d[0] for d in cur.description]
-                df_poll = pd.DataFrame(rows, columns=cols)
+    max_retries = 3
+    retry_delay = 5  # seconds
+    
+    for attempt in range(max_retries):
+        try:
+            print(f"  Attempt {attempt + 1} of {max_retries}...")
+            conn = pymysql.connect(
+                host=HOST,
+                port=PORT,
+                user=USER,
+                password=PASSWORD,
+                database=DBNAME,
+                connect_timeout=60,
+                read_timeout=0,  # 0 means no timeout - connection stays open
+                write_timeout=0,
+                init_command="SET SESSION wait_timeout=600, interactive_timeout=600, max_execution_time=600000",
+                ssl={'ssl': {}},
+            )
+            
+            try:
+                # Set MySQL session variables to prevent timeout
+                with conn.cursor() as cur:
+                    cur.execute("SET SESSION wait_timeout=600")
+                    cur.execute("SET SESSION interactive_timeout=600")
+                    cur.execute("SET SESSION max_execution_time=600000")  # milliseconds
+                
+                # Use server-side cursor to fetch results incrementally
+                from pymysql.cursors import SSCursor
+                print("  Executing parent poll query using server-side cursor...")
+                import time
+                start_time = time.time()
+                
+                with conn.cursor(SSCursor) as cur:
+                    cur.execute(PARENT_POLL_QUERY)
+                    elapsed = time.time() - start_time
+                    print(f"  Query executed in {elapsed:.2f} seconds")
+                    
+                    # Get column names first
+                    cols = [d[0] for d in cur.description]
+                    print(f"  Fetching results in batches...")
+                    
+                    # Fetch results in batches to avoid memory issues
+                    batch_size = 10000
+                    all_rows = []
+                    batch_num = 0
+                    start_time = time.time()
+                    
+                    while True:
+                        batch = cur.fetchmany(batch_size)
+                        if not batch:
+                            break
+                        all_rows.extend(batch)
+                        batch_num += 1
+                        if batch_num % 10 == 0:
+                            print(f"    Fetched {len(all_rows):,} records so far...")
+                    
+                    elapsed = time.time() - start_time
+                    print(f"  Fetched all {len(all_rows):,} results in {elapsed:.2f} seconds")
+                
+                df_poll = pd.DataFrame(all_rows, columns=cols)
                 print(f"  Query returned {len(df_poll)} records")
-    except Exception as e:
-        print(f"  ERROR: Failed to fetch parent poll data: {str(e)}")
-        import traceback
-        traceback.print_exc()
-        return pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
+                conn.close()
+                break  # Success, exit retry loop
+                
+            except Exception as e:
+                conn.close()
+                raise
+                    
+        except pymysql.err.OperationalError as e:
+            error_code = e.args[0] if e.args else 0
+            if error_code == 2013:  # Lost connection
+                if attempt < max_retries - 1:
+                    print(f"  Connection lost, retrying in {retry_delay} seconds...")
+                    import time
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
+                else:
+                    print(f"  ERROR: Failed after {max_retries} attempts: {str(e)}")
+                    print("  The query may be too large. Consider running during off-peak hours.")
+                    import traceback
+                    traceback.print_exc()
+                    return pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
+            else:
+                raise  # Re-raise if it's a different error
+        except Exception as e:
+            print(f"  ERROR: Failed to fetch parent poll data: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
     
     if df_poll.empty:
         print("WARNING: No parent poll data found")
@@ -2011,7 +2076,7 @@ def process_question_correctness() -> pd.DataFrame:
         # Create empty dataframe with expected headers
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         print("WARNING: No question correctness data found")
-    
+
         # Always write the CSV (even if empty) so the dashboard can load gracefully
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
     print(f"SUCCESS: Saved data/question_correctness_data.csv ({len(question_correctness_df)} records)")
@@ -2075,8 +2140,8 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     })
     
     with open(metadata_file, 'w') as f:
-        json.dump(metadata, f, indent=2)
-    print("SUCCESS: Saved data/metadata.json")
+            json.dump(metadata, f, indent=2)
+        print("SUCCESS: Saved data/metadata.json")
         
 
 def main():
