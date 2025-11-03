@@ -11,11 +11,13 @@ The dashboard on Render only handles visualization of preprocessed data.
 
 import os
 import json
+import sys
+import argparse
 import pandas as pd
 import pymysql
 from datetime import datetime
 from dotenv import load_dotenv
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 # Load environment variables
 load_dotenv()
@@ -98,6 +100,95 @@ WHERE mllva.server_time >= '2025-07-01'
   )
 """
 
+# Question Correctness Queries - Three separate queries for different game types
+QUESTION_CORRECTNESS_QUERY_1 = """
+SELECT 
+  `matomo_log_link_visit_action`.`custom_dimension_2`, 
+  `matomo_log_link_visit_action`.`idvisit`, 
+  `matomo_log_action`.`name`, 
+  `matomo_log_link_visit_action`.`custom_dimension_1`, 
+  CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted,
+  `hybrid_games`.`game_name`
+FROM `matomo_log_link_visit_action` 
+INNER JOIN `matomo_log_action` 
+  ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
+INNER JOIN `hybrid_games_links`
+  ON `matomo_log_link_visit_action`.`custom_dimension_2` = `hybrid_games_links`.`activity_id`
+INNER JOIN `hybrid_games`
+  ON `hybrid_games_links`.`game_id` = `hybrid_games`.`id`
+WHERE `matomo_log_action`.`name` LIKE '%game_completed%'
+  AND `hybrid_games`.`game_name` IN (
+    'Relational Comparison',
+    'Quantitative Comparison',
+    'Relational Comparison II',
+    'Number Comparison',
+    'Primary Emotion Labelling',
+    'Emotion Identification',
+    'Identification of all emotions',
+    'Beginning Sound Pa Cha Sa'
+  );
+"""
+
+QUESTION_CORRECTNESS_QUERY_2 = """
+SELECT 
+  matomo_log_link_visit_action.custom_dimension_2,
+  matomo_log_link_visit_action.idvisit,
+  matomo_log_action.name,
+  matomo_log_link_visit_action.custom_dimension_1,
+  CONV(HEX(matomo_log_link_visit_action.idvisitor), 16, 10) AS idvisitor_converted,
+  hybrid_games.game_name
+FROM matomo_log_link_visit_action
+INNER JOIN matomo_log_action
+  ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
+INNER JOIN hybrid_games_links
+  ON matomo_log_link_visit_action.custom_dimension_2 = hybrid_games_links.activity_id
+INNER JOIN hybrid_games
+  ON hybrid_games_links.game_id = hybrid_games.id
+WHERE matomo_log_action.name LIKE '%game_completed%'
+  AND hybrid_games.game_name IN (
+    'Revision Primary Colors',
+    'Revision Primary Shapes',
+    'Rhyming Words'
+  );
+"""
+
+QUESTION_CORRECTNESS_QUERY_3 = """
+SELECT `matomo_log_link_visit_action`.`idlink_va`, 
+CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted, 
+`matomo_log_link_visit_action`.`idvisit`, 
+`matomo_log_link_visit_action`.`server_time`, 
+`matomo_log_link_visit_action`.`idaction_name`, 
+`matomo_log_link_visit_action`.`custom_dimension_1`, 
+`matomo_log_link_visit_action`.`custom_dimension_2`, 
+`matomo_log_action`.`idaction`, 
+`matomo_log_action`.`name`, 
+`matomo_log_action`.`type`,
+`hybrid_games`.`game_name`
+FROM `matomo_log_link_visit_action` 
+INNER JOIN `matomo_log_action` 
+  ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
+INNER JOIN `hybrid_games_links`
+  ON `matomo_log_link_visit_action`.`custom_dimension_2` = `hybrid_games_links`.`activity_id`
+INNER JOIN `hybrid_games`
+  ON `hybrid_games_links`.`game_id` = `hybrid_games`.`id`
+WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01' 
+  AND `matomo_log_action`.`name` LIKE '%action_level%'
+  AND `hybrid_games`.`game_name` IN (
+    'Shape Circle',
+    'Shape Triangle',
+    'Shape Square',
+    'Shape Rectangle',
+    'Color Red',
+    'Color Yellow',
+    'Color Blue',
+    'Numbers I',
+    'Numbers II',
+    'Numerals 1-10',
+    'Beginning Sound Ma Ka La',
+    'Beginning Sound Ba Ra Na'
+  );
+"""
+
 
 def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe from database"""
@@ -139,6 +230,336 @@ def fetch_score_dataframe() -> pd.DataFrame:
     df = pd.DataFrame(rows, columns=columns)
     print(f"SUCCESS: Fetched {len(df)} records from score distribution query")
     return df
+
+
+def parse_correct_selections_questions(custom_dim_1, game_name):
+    """Parse correctSelections structure to extract question correctness (for "This or That" games)"""
+    results = []
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return results
+        
+        data = json.loads(custom_dim_1)
+        
+        # Check for roundDetails structure
+        if 'roundDetails' in data and isinstance(data['roundDetails'], list):
+            for round_detail in data['roundDetails']:
+                if 'roundNumber' in round_detail:
+                    question_num = round_detail['roundNumber']
+                    cards = round_detail.get('cards', [])
+                    selections = round_detail.get('selections', [])
+                    
+                    if cards and selections:
+                        # Find the correct card (status = true)
+                        correct_card_index = None
+                        for idx, card in enumerate(cards):
+                            if card.get('status') is True:
+                                correct_card_index = idx
+                                break
+                        
+                        # Get selected card
+                        selected_card_index = None
+                        if selections and len(selections) > 0:
+                            selected_card_index = selections[0].get('card')
+                        
+                        # Determine correctness
+                        is_correct = (selected_card_index is not None and 
+                                    correct_card_index is not None and 
+                                    selected_card_index == correct_card_index)
+                        
+                        results.append({
+                            'question_number': question_num,
+                            'is_correct': 1 if is_correct else 0,
+                            'game_name': game_name
+                        })
+        
+        return results
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError) as e:
+        return results
+
+
+def parse_flow_stop_go_questions(custom_dim_1, game_name):
+    """Parse flow stop&go structure to extract question correctness (for "Flow Stop & Go" games)"""
+    results = []
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return results
+        
+        data = json.loads(custom_dim_1)
+        
+        # Check for gameData structure with Action section
+        if 'gameData' in data and isinstance(data['gameData'], list):
+            for game_data in data['gameData']:
+                if game_data.get('section') == 'Action' and 'jsonData' in game_data:
+                    json_data = game_data['jsonData']
+                    
+                    if isinstance(json_data, list):
+                        for level_data in json_data:
+                            if 'level' in level_data and 'flow' in level_data and level_data.get('flow') == 'stop&Go':
+                                question_num = level_data.get('level', 1)
+                                user_responses = level_data.get('userResponse', [])
+                                
+                                if user_responses and isinstance(user_responses, list):
+                                    # Get the first response
+                                    response = user_responses[0] if len(user_responses) > 0 else {}
+                                    is_correct = response.get('isCorrect', False)
+                                    
+                                    results.append({
+                                        'question_number': question_num,
+                                        'is_correct': 1 if is_correct else 0,
+                                        'game_name': game_name
+                                    })
+        
+        return results
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError) as e:
+        return results
+
+
+def parse_action_level_questions(custom_dim_1, game_name, level_number):
+    """Parse action_level structure to extract question correctness (for "Action Level" games)"""
+    results = []
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return results
+        
+        data = json.loads(custom_dim_1)
+        
+        # Check for options and chosenOption structure
+        if 'options' in data and 'chosenOption' in data:
+            chosen_option = data.get('chosenOption')
+            
+            if chosen_option is None:
+                is_correct = 0
+            else:
+                options = data.get('options', [])
+                if isinstance(options, list) and 0 <= chosen_option < len(options):
+                    chosen_option_data = options[chosen_option]
+                    if isinstance(chosen_option_data, dict):
+                        is_correct = 1 if chosen_option_data.get('isCorrect', False) else 0
+                    else:
+                        is_correct = 0
+                else:
+                    is_correct = 0
+            
+            results.append({
+                'question_number': level_number,
+                'is_correct': is_correct,
+                'game_name': game_name
+            })
+        
+        return results
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError) as e:
+        return results
+
+
+def get_game_type(game_name):
+    """Map game name to its processing type"""
+    game_type_mapping = {
+        # correctSelections games
+        'Relational Comparison': 'correctSelections',
+        'Quantitative Comparison': 'correctSelections',
+        'Relational Comparison II': 'correctSelections',
+        'Number Comparison': 'correctSelections',
+        'Primary Emotion Labelling': 'correctSelections',
+        'Emotion Identification': 'correctSelections',
+        'Identification of all emotions': 'correctSelections',
+        'Beginning Sound Pa Cha Sa': 'correctSelections',
+        
+        # flow games
+        'Revision Primary Colors': 'flow',
+        'Revision Primary Shapes': 'flow',
+        'Rhyming Words': 'flow',
+        
+        # action level games
+        'Shape Circle': 'action_level',
+        'Shape Triangle': 'action_level',
+        'Shape Square': 'action_level',
+        'Shape Rectangle': 'action_level',
+        'Color Red': 'action_level',
+        'Color Yellow': 'action_level',
+        'Color Blue': 'action_level',
+        'Numbers I': 'action_level',
+        'Numbers II': 'action_level',
+        'Numerals 1-10': 'action_level',
+        'Beginning Sound Ma Ka La': 'action_level',
+        'Beginning Sound Ba Ra Na': 'action_level',
+    }
+    return game_type_mapping.get(game_name, None)
+
+
+def fetch_question_correctness_data() -> pd.DataFrame:
+    """Fetch question correctness data using three separate queries"""
+    print("Fetching question correctness data from three queries...")
+    all_results = []
+    
+    # Helper function to execute a single query
+    def execute_query(query, query_name):
+        """Execute a single query and return DataFrame, handling errors gracefully"""
+        try:
+            with pymysql.connect(
+                host=HOST,
+                port=PORT,
+                user=USER,
+                password=PASSWORD,
+                database=DBNAME,
+                connect_timeout=30,  # Increased timeout
+                read_timeout=300,     # 5 minutes for large queries
+                write_timeout=300,
+                ssl={'ssl': {}},
+            ) as conn:
+                with conn.cursor() as cur:
+                    print(f"  Executing {query_name}...")
+                    cur.execute(query)
+                    rows = cur.fetchall()
+                    cols = [d[0] for d in cur.description]
+                    df = pd.DataFrame(rows, columns=cols)
+                    print(f"  {query_name} returned {len(df)} records")
+                    return df
+        except Exception as e:
+            print(f"  ERROR: {query_name} failed: {str(e)}")
+            print(f"  Continuing with other queries...")
+            return pd.DataFrame()
+    
+    # Execute each query separately with error handling
+    df_score_1 = execute_query(QUESTION_CORRECTNESS_QUERY_1, "Query 1 (correctSelections games)")
+    df_score_2 = execute_query(QUESTION_CORRECTNESS_QUERY_2, "Query 2 (flow games)")
+    df_score_3 = execute_query(QUESTION_CORRECTNESS_QUERY_3, "Query 3 (action_level games)")
+    
+    # Process Query 1: correctSelections games
+    if not df_score_1.empty:
+        print("  Processing Query 1 results...")
+        if 'game_name' not in df_score_1.columns:
+            print("  WARNING: game_name column missing from Query 1 results")
+        else:
+            processed_count = 0
+            for _, row in df_score_1.iterrows():
+                try:
+                    game_name = row['game_name']
+                    custom_dim_1 = row['custom_dimension_1']
+                    game_type = get_game_type(game_name)
+                    
+                    if game_type == 'correctSelections':
+                        questions = parse_correct_selections_questions(custom_dim_1, game_name)
+                        for q in questions:
+                            all_results.append({
+                                'game_name': q['game_name'],
+                                'question_number': q['question_number'],
+                                'is_correct': q['is_correct'],
+                                'idvisitor_converted': row['idvisitor_converted'],
+                                'idvisit': row['idvisit']
+                            })
+                            processed_count += 1
+                except Exception as e:
+                    print(f"  WARNING: Error processing row in Query 1: {str(e)}")
+                    continue
+            print(f"  Processed {processed_count} question records from Query 1")
+    
+    # Process Query 2: flow games
+    if not df_score_2.empty:
+        print("  Processing Query 2 results...")
+        if 'game_name' not in df_score_2.columns:
+            print("  WARNING: game_name column missing from Query 2 results")
+        else:
+            processed_count = 0
+            for _, row in df_score_2.iterrows():
+                try:
+                    game_name = row['game_name']
+                    custom_dim_1 = row['custom_dimension_1']
+                    game_type = get_game_type(game_name)
+                    
+                    if game_type == 'flow':
+                        questions = parse_flow_stop_go_questions(custom_dim_1, game_name)
+                        for q in questions:
+                            all_results.append({
+                                'game_name': q['game_name'],
+                                'question_number': q['question_number'],
+                                'is_correct': q['is_correct'],
+                                'idvisitor_converted': row['idvisitor_converted'],
+                                'idvisit': row['idvisit']
+                            })
+                            processed_count += 1
+                except Exception as e:
+                    print(f"  WARNING: Error processing row in Query 2: {str(e)}")
+                    continue
+            print(f"  Processed {processed_count} question records from Query 2")
+    
+    # Process Query 3: action_level games
+    if not df_score_3.empty:
+        print("  Processing Query 3 results...")
+        if 'game_name' not in df_score_3.columns:
+            print("  WARNING: game_name column missing from Query 3 results")
+        else:
+            # Filter only action_level_* records
+            df_score_3_filtered = df_score_3[df_score_3['name'].str.contains('action_level_', na=False)].copy()
+            
+            # Extract level number from name
+            def extract_level_number(name):
+                try:
+                    if 'action_level_' in str(name):
+                        return int(str(name).split('action_level_')[1])
+                    return None
+                except:
+                    return None
+            
+            df_score_3_filtered['level_number'] = df_score_3_filtered['name'].apply(extract_level_number)
+            
+            processed_count = 0
+            for _, row in df_score_3_filtered.iterrows():
+                try:
+                    game_name = row['game_name']
+                    custom_dim_1 = row['custom_dimension_1']
+                    level_number = row['level_number']
+                    
+                    if level_number is not None:
+                        questions = parse_action_level_questions(custom_dim_1, game_name, level_number)
+                        for q in questions:
+                            all_results.append({
+                                'game_name': q['game_name'],
+                                'question_number': q['question_number'],
+                                'is_correct': q['is_correct'],
+                                'idvisitor_converted': row['idvisitor_converted'],
+                                'idvisit': row['idvisit']
+                            })
+                            processed_count += 1
+                except Exception as e:
+                    print(f"  WARNING: Error processing row in Query 3: {str(e)}")
+                    continue
+            print(f"  Processed {processed_count} question records from Query 3")
+    
+    if not all_results:
+        print("WARNING: No question correctness data found after processing all queries")
+        return pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+    
+    # Convert to DataFrame
+    print(f"\nAggregating {len(all_results)} question records...")
+    results_df = pd.DataFrame(all_results)
+    print(f"SUCCESS: Processed {len(results_df)} question correctness records")
+    
+    # Transform to expected format (with correctness, percent, user_count, total_users)
+    # Aggregate by game and question: distinct users per correctness
+    total_by_q = (
+        results_df
+        .groupby(['game_name', 'question_number'])['idvisitor_converted']
+        .nunique()
+        .reset_index(name='total_users')
+    )
+    
+    # Correct and incorrect distinct users
+    agg = (
+        results_df
+        .groupby(['game_name', 'question_number', 'is_correct'])['idvisitor_converted']
+        .nunique()
+        .reset_index(name='user_count')
+    )
+    agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
+    agg['percent'] = (agg['user_count'] / agg['total_users'].where(agg['total_users'] > 0, 1) * 100).round(2)
+    agg['correctness'] = agg['is_correct'].map({1: 'Correct', 0: 'Incorrect'})
+    question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']]
+    
+    print(f"SUCCESS: Final question correctness data: {len(question_correctness_df)} records")
+    print(f"  Games: {question_correctness_df['game_name'].nunique()}")
+    print(f"  Questions: {question_correctness_df['question_number'].nunique()}")
+    return question_correctness_df
 
 
 def parse_custom_dimension_1_correct_selections(custom_dim_1):
@@ -329,11 +750,49 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
         'Shape Triangle': 'action_level',
     }
 
+    # Debug: Show all unique game names in the data
+    print("\nDEBUG: All unique game names in df_score:")
+    unique_games = sorted(df_score['game_name'].unique().tolist())
+    for g in unique_games:
+        print(f"  - '{g}'")
+    print(f"Total unique games: {len(unique_games)}")
+
     # Exclude any sorting games, robustly by name match
     df_score = df_score[~df_score['game_name'].astype(str).str.contains('sorting', case=False, na=False)].copy()
 
-    # Filter to only target games (case-sensitive match); leave others out
-    df_score = df_score[df_score['game_name'].isin(list(MECHANIC_BY_GAME.keys()))].copy()
+    # Create a more flexible matching: case-insensitive and handle variations
+    def _find_matching_game(actual_name: str, target_map: dict) -> tuple:
+        """Find matching game name from target map, case-insensitive and flexible"""
+        actual_lower = str(actual_name).lower().strip()
+        for target_name, mech in target_map.items():
+            target_lower = str(target_name).lower().strip()
+            # Exact match
+            if actual_lower == target_lower:
+                return (target_name, mech)
+            # Partial match (contains)
+            if target_lower in actual_lower or actual_lower in target_lower:
+                return (target_name, mech)
+        return (None, None)
+    
+    # Create a mapping from actual game names to canonical names
+    game_mapping = {}
+    for actual_name in df_score['game_name'].unique():
+        canonical, mech = _find_matching_game(actual_name, MECHANIC_BY_GAME)
+        if canonical:
+            game_mapping[actual_name] = (canonical, mech)
+            print(f"DEBUG: Mapped '{actual_name}' -> '{canonical}' ({mech})")
+    
+    print(f"\nDEBUG: Successfully matched {len(game_mapping)} games out of {len(MECHANIC_BY_GAME)} target games")
+    unmatched_targets = set(MECHANIC_BY_GAME.keys()) - {v[0] for v in game_mapping.values()}
+    if unmatched_targets:
+        print(f"DEBUG: Unmatched target games: {sorted(unmatched_targets)}")
+    
+    # Filter and normalize game names
+    df_score = df_score[df_score['game_name'].isin(game_mapping.keys())].copy()
+    df_score['game_name_canonical'] = df_score['game_name'].map(lambda x: game_mapping.get(x, (None, None))[0])
+    df_score = df_score[df_score['game_name_canonical'].notna()].copy()
+    df_score['game_name'] = df_score['game_name_canonical']
+    df_score = df_score.drop(columns=['game_name_canonical'])
 
     # Split by action types
     game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
@@ -345,6 +804,7 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     if not game_completed_data.empty:
         for _, row in game_completed_data.iterrows():
             # Only process this record using the intended mechanic for the game
+            # Game name is already canonicalized above
             mech = MECHANIC_BY_GAME.get(str(row['game_name']))
             if mech not in ('correct_selections', 'flow'):
                 continue
@@ -919,169 +1379,324 @@ def preprocess_repeatability_data(df: pd.DataFrame) -> pd.DataFrame:
     return repeatability_data
 
 
-def main():
-    """Main preprocessing function"""
-    print("Starting data preprocessing for Matomo Events Dashboard")
+def process_main_data() -> pd.DataFrame:
+    """Process main dashboard data and game conversion numbers"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Main Dashboard Data")
     print("=" * 60)
     
-    try:
-        # Create data directory if it doesn't exist
-        os.makedirs('data', exist_ok=True)
-        
-        # Fetch all data
-        print("\nFETCHING DATA")
-        print("-" * 30)
-        
-        # Main dashboard data
-        df_main = fetch_dataframe()
-        if df_main.empty:
-            print("ERROR: No main data found. Exiting.")
-            return
-        
-        # Score distribution data
-        df_score = fetch_score_dataframe()
-        
-        print("\nPROCESSING DATA")
-        print("-" * 30)
-        
-        # Process main data
-        print("Processing main dashboard data...")
+    df_main = fetch_dataframe()
+    if df_main.empty:
+        print("ERROR: No main data found.")
+        return pd.DataFrame()
+    
+    print(f"SUCCESS: Fetched {len(df_main)} records from main query")
+    df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
+    
+    # Save main data
+    df_main.to_csv('data/processed_data.csv', index=False)
+    print("SUCCESS: Saved data/processed_data.csv")
+    
+    # Create and save game-specific conversion numbers
+    game_conversion_data = []
+    for game in df_main['game_name'].unique():
+        if game != 'Unknown Game':
+            game_data = df_main[df_main['game_name'] == game]
+            started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(game_data[game_data['event'] == 'Started'])
+            completed_instances = len(game_data[game_data['event'] == 'Completed'])
+            
+            game_conversion_data.append({
+                'game_name': game,
+                'started_users': started_users,
+                'completed_users': completed_users,
+                'started_visits': started_visits,
+                'completed_visits': completed_visits,
+                'started_instances': started_instances,
+                'completed_instances': completed_instances
+            })
+    
+    game_conversion_df = pd.DataFrame(game_conversion_data)
+    game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
+    print("SUCCESS: Saved data/game_conversion_numbers.csv")
+    
+    return df_main
+
+
+def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
+    """Process summary statistics"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Summary Statistics")
+    print("=" * 60)
+    
+    if df_main is None:
+        print("Loading main data from CSV...")
+        df_main = pd.read_csv('data/processed_data.csv')
+        df_main['server_time'] = pd.to_datetime(df_main['server_time'])
         df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
-        
-        # Build summary statistics
-        summary_df = build_summary(df_main)
-        
-        # Process score distribution
-        score_distribution_df = calculate_score_distribution_combined(df_score)
-        
-        # Process time series data
-        time_series_df = preprocess_time_series_data(df_main)
-        
-        # Process repeatability data using hybrid database
-        repeatability_df = fetch_hybrid_repeatability_data()
-        
-        # Fallback to Matomo data if hybrid data fails
-        if repeatability_df.empty:
-            print("Using Matomo data as fallback...")
-            repeatability_df = preprocess_repeatability_data(df_main)
-        
-        # Build per-question correctness and aggregate to percentages
-        question_level_df = extract_per_question_correctness(df_score)
-        if not question_level_df.empty:
-            # Aggregate by game and question: distinct users per correctness
-            # Distinct users answering that question
-            total_by_q = (
-                question_level_df
-                .groupby(['game_name', 'question_number'])['idvisitor_converted']
-                .nunique()
-                .reset_index(name='total_users')
-            )
-            # Correct and incorrect distinct users
-            agg = (
-                question_level_df
-                .groupby(['game_name', 'question_number', 'is_correct'])['idvisitor_converted']
-                .nunique()
-                .reset_index(name='user_count')
-            )
-            agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
-            agg['percent'] = (agg['user_count'] / agg['total_users'].where(agg['total_users'] > 0, 1) * 100).round(2)
-            agg['correctness'] = agg['is_correct'].map({1: 'Correct', 0: 'Incorrect'})
-            question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']]
-        else:
-            # Create empty dataframe with expected headers
-            question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+    
+    summary_df = build_summary(df_main)
+    summary_df.to_csv('data/summary_data.csv', index=False)
+    print(f"SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
+    
+    return summary_df
 
-        print("\nSAVING PROCESSED DATA")
-        print("-" * 30)
-        
-        # Save all processed data
-        df_main.to_csv('data/processed_data.csv', index=False)
-        print("SUCCESS: Saved data/processed_data.csv")
-        
-        # Create and save game-specific conversion numbers for dashboard
-        game_conversion_data = []
-        for game in df_main['game_name'].unique():
-            if game != 'Unknown Game':
-                game_data = df_main[df_main['game_name'] == game]
-                started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
-                completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-                started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
-                completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
-                started_instances = len(game_data[game_data['event'] == 'Started'])
-                completed_instances = len(game_data[game_data['event'] == 'Completed'])
-                
-                game_conversion_data.append({
-                    'game_name': game,
-                    'started_users': started_users,
-                    'completed_users': completed_users,
-                    'started_visits': started_visits,
-                    'completed_visits': completed_visits,
-                    'started_instances': started_instances,
-                    'completed_instances': completed_instances
-                })
-        
-        # Save game-specific conversion numbers (small file for GitHub)
-        game_conversion_df = pd.DataFrame(game_conversion_data)
-        game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
-        print("SUCCESS: Saved data/game_conversion_numbers.csv")
-        
-        summary_df.to_csv('data/summary_data.csv', index=False)
-        print("SUCCESS: Saved data/summary_data.csv")
-        
-        if not score_distribution_df.empty:
-            score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
-            print("SUCCESS: Saved data/score_distribution_data.csv")
-        else:
-            print("WARNING: No score distribution data to save")
-        
-        if not time_series_df.empty:
-            time_series_df.to_csv('data/time_series_data.csv', index=False)
-            print("SUCCESS: Saved data/time_series_data.csv")
-        else:
-            print("WARNING: No time series data to save")
-        
-        if not repeatability_df.empty:
-            repeatability_df.to_csv('data/repeatability_data.csv', index=False)
-            print("SUCCESS: Saved data/repeatability_data.csv")
-        else:
-            print("WARNING: No repeatability data to save")
 
-        # Always write the CSV (even if empty) so the dashboard can load gracefully
-        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
-        print(f"SUCCESS: Saved data/question_correctness_data.csv (rows: {len(question_correctness_df)})")
-        
-        # Save metadata
-        metadata = {
-            'preprocessing_date': datetime.now().isoformat(),
-            'main_data_records': len(df_main),
-            'summary_records': len(summary_df),
-            'score_distribution_records': len(score_distribution_df),
-            'time_series_records': len(time_series_df),
-            'repeatability_records': len(repeatability_df),
-            'data_date_range': {
-                'start': str(df_main['server_time'].min()),
-                'end': str(df_main['server_time'].max())
-            }
+def process_score_distribution() -> pd.DataFrame:
+    """Process score distribution data"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Score Distribution")
+    print("=" * 60)
+    
+    df_score = fetch_score_dataframe()
+    score_distribution_df = calculate_score_distribution_combined(df_score)
+    
+    if not score_distribution_df.empty:
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        print(f"SUCCESS: Saved data/score_distribution_data.csv ({len(score_distribution_df)} records)")
+    else:
+        print("WARNING: No score distribution data to save")
+    
+    return score_distribution_df
+
+
+def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
+    """Process time series data"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Time Series Data")
+    print("=" * 60)
+    
+    if df_main is None:
+        print("Loading main data from CSV...")
+        df_main = pd.read_csv('data/processed_data.csv')
+        df_main['server_time'] = pd.to_datetime(df_main['server_time'])
+        df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
+    
+    time_series_df = preprocess_time_series_data(df_main)
+    
+    if not time_series_df.empty:
+        time_series_df.to_csv('data/time_series_data.csv', index=False)
+        print(f"SUCCESS: Saved data/time_series_data.csv ({len(time_series_df)} records)")
+    else:
+        print("WARNING: No time series data to save")
+    
+    return time_series_df
+
+
+def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
+    """Process repeatability data"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Repeatability Data")
+    print("=" * 60)
+    
+    repeatability_df = fetch_hybrid_repeatability_data()
+    
+    # Fallback to Matomo data if hybrid data fails
+    if repeatability_df.empty:
+        print("Using Matomo data as fallback...")
+        if df_main is None:
+            print("Loading main data from CSV...")
+            df_main = pd.read_csv('data/processed_data.csv')
+            df_main['server_time'] = pd.to_datetime(df_main['server_time'])
+        repeatability_df = preprocess_repeatability_data(df_main)
+    
+    if not repeatability_df.empty:
+        repeatability_df.to_csv('data/repeatability_data.csv', index=False)
+        print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
+    else:
+        print("WARNING: No repeatability data to save")
+    
+    return repeatability_df
+
+
+def process_question_correctness() -> pd.DataFrame:
+    """Process question correctness data"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Question Correctness Data")
+    print("=" * 60)
+    
+    question_correctness_df = fetch_question_correctness_data()
+    
+    if question_correctness_df.empty:
+        # Create empty dataframe with expected headers
+        question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+        print("WARNING: No question correctness data found")
+    
+    # Always write the CSV (even if empty) so the dashboard can load gracefully
+    question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+    print(f"SUCCESS: Saved data/question_correctness_data.csv ({len(question_correctness_df)} records)")
+    
+    return question_correctness_df
+
+
+def update_metadata(df_main: Optional[pd.DataFrame] = None):
+    """Update metadata JSON file"""
+    print("\n" + "=" * 60)
+    print("UPDATING: Metadata")
+    print("=" * 60)
+    
+    # Try to load existing metadata or create new one
+    metadata_file = 'data/metadata.json'
+    metadata = {}
+    
+    if os.path.exists(metadata_file):
+        with open(metadata_file, 'r') as f:
+            metadata = json.load(f)
+    
+    # Load data files to get current record counts
+    record_counts = {}
+    
+    if df_main is not None:
+        record_counts['main_data_records'] = len(df_main)
+        record_counts['data_date_range'] = {
+            'start': str(df_main['server_time'].min()),
+            'end': str(df_main['server_time'].max())
         }
+    else:
+        if os.path.exists('data/processed_data.csv'):
+            df_check = pd.read_csv('data/processed_data.csv')
+            record_counts['main_data_records'] = len(df_check)
+            if 'server_time' in df_check.columns:
+                df_check['server_time'] = pd.to_datetime(df_check['server_time'])
+                record_counts['data_date_range'] = {
+                    'start': str(df_check['server_time'].min()),
+                    'end': str(df_check['server_time'].max())
+                }
+    
+    # Update record counts for each CSV
+    for csv_file, key in [
+        ('data/summary_data.csv', 'summary_records'),
+        ('data/score_distribution_data.csv', 'score_distribution_records'),
+        ('data/time_series_data.csv', 'time_series_records'),
+        ('data/repeatability_data.csv', 'repeatability_records'),
+        ('data/question_correctness_data.csv', 'question_correctness_records'),
+    ]:
+        if os.path.exists(csv_file):
+            df_check = pd.read_csv(csv_file)
+            record_counts[key] = len(df_check)
+        else:
+            record_counts[key] = 0
+    
+    # Update metadata
+    metadata.update({
+        'preprocessing_date': datetime.now().isoformat(),
+        **record_counts
+    })
+    
+    with open(metadata_file, 'w') as f:
+        json.dump(metadata, f, indent=2)
+    print("SUCCESS: Saved data/metadata.json")
+
+
+def main():
+    """Main preprocessing function with modular processing options"""
+    parser = argparse.ArgumentParser(
+        description='Preprocess data for Matomo Events Dashboard',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Process all visuals (default behavior)
+  python preprocess_data.py --all
+
+  # Process only score distribution
+  python preprocess_data.py --score-distribution
+
+  # Process only question correctness
+  python preprocess_data.py --question-correctness
+
+  # Process multiple visuals
+  python preprocess_data.py --time-series --repeatability
+
+Available visuals:
+  --main               Main dashboard data and game conversion numbers
+  --summary            Summary statistics
+  --score-distribution Score distribution
+  --time-series        Time series data
+  --repeatability      Repeatability data
+  --question-correctness Question correctness data
+  --all                Process all visuals (default if no flags provided)
+  --metadata           Update metadata file
+        """
+    )
+    
+    parser.add_argument('--main', action='store_true', help='Process main dashboard data')
+    parser.add_argument('--summary', action='store_true', help='Process summary statistics')
+    parser.add_argument('--score-distribution', action='store_true', help='Process score distribution')
+    parser.add_argument('--time-series', action='store_true', help='Process time series data')
+    parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
+    parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
+    parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
+    parser.add_argument('--metadata', action='store_true', help='Update metadata file')
+    
+    args = parser.parse_args()
+    
+    # Create data directory if it doesn't exist
+    os.makedirs('data', exist_ok=True)
+    
+    # Determine what to process
+    process_all = args.all or not any([
+        args.main, args.summary, args.score_distribution,
+        args.time_series, args.repeatability, args.question_correctness
+    ])
+    
+    if process_all:
+        print("=" * 60)
+        print("PROCESSING ALL VISUALS")
+        print("=" * 60)
+        print("\nNote: Use specific flags to process individual visuals:")
+        print("  python preprocess_data.py --question-correctness")
+        print("  python preprocess_data.py --score-distribution --time-series")
+        print("  See --help for more options.\n")
+    
+    try:
+        df_main = None
         
-        import json
-        with open('data/metadata.json', 'w') as f:
-            json.dump(metadata, f, indent=2)
-        print("SUCCESS: Saved data/metadata.json")
+        # Process main data if requested or if processing all
+        if args.main or process_all:
+            df_main = process_main_data()
         
-        print("\nPREPROCESSING COMPLETED SUCCESSFULLY!")
+        # Process summary if requested or if processing all
+        if args.summary or process_all:
+            process_summary_data(df_main)
+        
+        # Process score distribution if requested or if processing all
+        if args.score_distribution or process_all:
+            process_score_distribution()
+        
+        # Process time series if requested or if processing all
+        if args.time_series or process_all:
+            process_time_series(df_main)
+        
+        # Process repeatability if requested or if processing all
+        if args.repeatability or process_all:
+            process_repeatability(df_main)
+        
+        # Process question correctness if requested or if processing all
+        if args.question_correctness or process_all:
+            process_question_correctness()
+        
+        # Update metadata if requested or if processing all
+        if args.metadata or process_all:
+            update_metadata(df_main)
+        
+        print("\n" + "=" * 60)
+        print("PREPROCESSING COMPLETED SUCCESSFULLY!")
         print("=" * 60)
         print("All processed data saved to 'data/' directory")
         print("Ready for deployment to Render!")
         print("\nNext steps:")
         print("1. Commit and push the updated data/ directory to GitHub")
         print("2. Render will automatically redeploy with the latest data")
-        print("3. The dashboard will now run efficiently on Render's 512MB limit")
         
     except Exception as e:
         print(f"\nERROR during preprocessing: {str(e)}")
+        import traceback
+        traceback.print_exc()
         print("Please check your database connection and try again.")
-        raise
+        sys.exit(1)
 
 
 if __name__ == "__main__":
