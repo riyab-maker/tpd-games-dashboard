@@ -190,7 +190,7 @@ WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01'
 """
 
 # Parent Poll Query - fetch poll data from matomo_log_link_visit_action.custom_dimension_1
-# Join with hybrid_games_links to get activity_id, then join with hybrid_games for game_name
+# Join with matomo_log_action, hybrid_games_links, and hybrid_games to get game_name
 PARENT_POLL_QUERY = """
 SELECT 
   mlla.custom_dimension_1,
@@ -200,13 +200,17 @@ SELECT
   mlla.server_time,
   hg.game_name
 FROM matomo_log_link_visit_action mlla
+INNER JOIN matomo_log_action mla 
+  ON mlla.idaction_name = mla.idaction
 INNER JOIN hybrid_games_links hgl 
   ON hgl.activity_id = mlla.custom_dimension_2
 INNER JOIN hybrid_games hg 
   ON hg.id = hgl.game_id
-WHERE mlla.custom_dimension_1 IS NOT NULL
-  AND mlla.custom_dimension_1 != ''
+WHERE mla.name LIKE "%_completed%"
+  AND mlla.custom_dimension_1 IS NOT NULL
+  AND mlla.custom_dimension_1 LIKE "%poll%"
   AND mlla.server_time > '2025-07-01'
+  AND hgl.activity_id IS NOT NULL
 ORDER BY mlla.server_time DESC;
 """
 
