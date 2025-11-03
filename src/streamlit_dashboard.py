@@ -110,8 +110,8 @@ def try_refresh_poll_responses_data() -> None:
 	"""
 	conn = _get_db_connection()
 	if conn is None:
-		return
-
+        return
+    
 	SQL = (
 		"select * "
 		"\n\n\n\nfrom `matomo_log_link_visit_action` "
@@ -136,8 +136,8 @@ def try_refresh_poll_responses_data() -> None:
 			pass
 
 	if not rows:
-		return
-
+        return
+    
 	# Build poll response aggregates with expected columns
 	records = []
 	for r in rows:
@@ -239,7 +239,7 @@ def load_processed_data():
         qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
         if os.path.exists(qpath):
             question_correctness_df = pd.read_csv(qpath)
-        else:
+    else:
             question_correctness_df = pd.DataFrame()
         
         # Create metadata
@@ -467,7 +467,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             value=f"{instance_conversion:.1f}%",
             help=f"{completed_instances:,} out of {started_instances:,} instances completed"
         )
-
+    
 def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None:
     """Render score distribution chart"""
     import altair as alt
@@ -628,73 +628,73 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     
     # Create the repeatability chart with explicit axis configuration
     chart = alt.Chart(repeatability_df).mark_bar(
-        cornerRadius=6,
-        stroke='white',
-        strokeWidth=2,
-        color='#50C878'
-    ).encode(
+            cornerRadius=6,
+            stroke='white',
+            strokeWidth=2,
+            color='#50C878'
+        ).encode(
         x=alt.X('games_played:O', 
                 title='No of games played', 
                 axis=alt.Axis(labelAngle=0, titleFontSize=24, labelFontSize=22)),
         y=alt.Y('user_count:Q', 
                 title='Number of Users', 
                 axis=alt.Axis(format='~s', titleFontSize=24, labelFontSize=22)),
-        tooltip=['games_played:O', 'user_count:Q']
-    ).properties(
-        width=800,
-        height=400,
+            tooltip=['games_played:O', 'user_count:Q']
+        ).properties(
+            width=800,
+            height=400,
         title='User Distribution by Number of Distinct Games Completed'
-    )
-    
+        )
+        
     # Add text labels
     text = alt.Chart(repeatability_df).mark_text(
-        align='center',
-        baseline='bottom',
-        color='#2E8B57',
-        fontSize=20,
-        fontWeight='bold',
-        dy=-10
-    ).encode(
-        x=alt.X('games_played:O'),
-        y=alt.Y('user_count:Q'),
-        text=alt.Text('user_count:Q', format='.0f')
-    )
-    
+            align='center',
+            baseline='bottom',
+            color='#2E8B57',
+            fontSize=20,
+            fontWeight='bold',
+            dy=-10
+        ).encode(
+            x=alt.X('games_played:O'),
+            y=alt.Y('user_count:Q'),
+            text=alt.Text('user_count:Q', format='.0f')
+        )
+        
     # Combine chart and text
     repeatability_chart = (chart + text).configure_axis(
-        grid=True
-    ).configure_title(
-        fontSize=28,
-        fontWeight='bold'
-    )
-    
-    st.altair_chart(repeatability_chart, use_container_width=True)
-    
-    # Add summary statistics based on SQL query logic
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        total_users = repeatability_df['user_count'].sum()
-        st.metric(
-            label="👥 Total Unique Users",
-            value=f"{total_users:,}",
-            help="Total number of unique hybrid_profile_id who completed at least one distinct game"
+            grid=True
+        ).configure_title(
+            fontSize=28,
+            fontWeight='bold'
         )
-    
-    with col2:
+        
+        st.altair_chart(repeatability_chart, use_container_width=True)
+        
+    # Add summary statistics based on SQL query logic
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+        total_users = repeatability_df['user_count'].sum()
+            st.metric(
+            label="👥 Total Unique Users",
+                value=f"{total_users:,}",
+            help="Total number of unique hybrid_profile_id who completed at least one distinct game"
+            )
+        
+        with col2:
         # Calculate weighted average of distinct games per user
         weighted_sum = (repeatability_df['games_played'] * repeatability_df['user_count']).sum()
         total_users = repeatability_df['user_count'].sum()
         avg_distinct_games_per_user = weighted_sum / total_users if total_users > 0 else 0
-        st.metric(
+            st.metric(
             label="🎯 Avg Distinct Games per User",
             value=f"{avg_distinct_games_per_user:.1f}",
             help="Average number of distinct games completed per hybrid_profile_id"
-        )
-    
-    with col3:
+            )
+        
+        with col3:
         max_distinct_games = repeatability_df['games_played'].max()
-        st.metric(
+            st.metric(
             label="🏆 Max Distinct Games",
             value=f"{max_distinct_games}",
             help="Maximum number of distinct games completed by a single hybrid_profile_id"
@@ -823,7 +823,7 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
                 'started_instances': started_instances,
                 'completed_instances': completed_instances
             })
-    
+        
     return pd.DataFrame(time_series_data)
 
 def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
@@ -864,14 +864,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         st.warning("No time series data available.")
         return
     
-    # Filter by selected time period
-    filtered_ts_df = time_series_df[time_series_df['period_type'] == time_period].copy()
-    
-    # Apply July filter for Monthly view
-    if time_period == "Monthly":
-        # Filter for dates from July 2025 onwards (data has dates like '2025-07-01')
-        july_onwards = ['2025-07-01', '2025-08-01', '2025-09-01', '2025-10-01', '2025-11-01', '2025-12-01']
-        filtered_ts_df = filtered_ts_df[filtered_ts_df['time_period'].isin(july_onwards)]
+    # Filter by selected time period - using period_type column
+    # Map period type names: "Day" -> "Daily", "Week" -> "Weekly", "Month" -> "Monthly"
+    period_type_map = {"Daily": "Day", "Weekly": "Week", "Monthly": "Month"}
+    period_filter = period_type_map.get(time_period, time_period)
+    filtered_ts_df = time_series_df[time_series_df['period_type'] == period_filter].copy()
     
     # Apply game filtering if specific games are selected
     if selected_games_ts:
@@ -883,19 +880,19 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         st.warning("No data available for the selected time period.")
         return
     
-    # Aggregate data by time period to prevent overlapping points
-    # Group by time_period and sum the metrics
-    aggregated_df = filtered_ts_df.groupby('time_period').agg({
-        'visits': 'sum',
-        'users': 'sum',
-        'instances': 'sum',
-        'started_visits': 'sum',
-        'completed_visits': 'sum',
-        'started_users': 'sum',
-        'completed_users': 'sum',
-        'started_instances': 'sum',
-        'completed_instances': 'sum'
-    }).reset_index()
+    # Aggregate data by time period and game
+    # For instances, we sum instance_count by period_label and game_name
+    if selected_games_ts and len(selected_games_ts) > 0:
+        # Show data per game if games are selected
+        aggregated_df = filtered_ts_df.groupby(['period_label', 'game_name'])['instance_count'].sum().reset_index()
+    else:
+        # Show aggregated data across all games
+        aggregated_df = filtered_ts_df.groupby('period_label')['instance_count'].sum().reset_index()
+        aggregated_df['game_name'] = 'All Games'
+    
+    # Rename period_label to time_period for compatibility with existing chart code
+    aggregated_df['time_period'] = aggregated_df['period_label']
+    aggregated_df['instances'] = aggregated_df['instance_count']
     
     
     if aggregated_df.empty:
@@ -904,89 +901,94 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     
     # Sort the aggregated dataframe based on time period and create formatted labels
     if time_period == "Monthly":
-        # Convert month names to datetime for proper sorting
+        # Format is YYYY_MM (e.g., "2025_07") with underscore
         try:
-            aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
+            # Replace underscore with hyphen for datetime parsing
+            aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['period_label'].str.replace('_', '-') + '-01')
             aggregated_df = aggregated_df.sort_values('sort_date').drop('sort_date', axis=1)
             # Create formatted labels for display
             from datetime import datetime
             time_order = []
-            for period in aggregated_df['time_period']:
+            for period in aggregated_df['period_label']:
                 try:
-                    date_obj = datetime.strptime(period, '%Y-%m-%d')
+                    # Parse YYYY_MM format
+                    date_obj = datetime.strptime(period.replace('_', '-') + '-01', '%Y-%m-%d')
                     time_order.append(date_obj.strftime('%B %Y'))
                 except:
                     time_order.append(str(period))
         except Exception as e:
-            # If datetime parsing fails, use original order
             st.warning(f"Could not parse dates for sorting: {e}")
-            time_order = aggregated_df['time_period'].tolist()
+            time_order = aggregated_df['period_label'].tolist()
     elif time_period == "Weekly":
-        # Extract week number for sorting
-        aggregated_df['week_num'] = aggregated_df['time_period'].str.extract(r'(\d+)').astype(int)
-        aggregated_df = aggregated_df.sort_values('week_num').drop('week_num', axis=1)
-        # Create formatted labels for display
-        time_order = []
-        for period in aggregated_df['time_period']:
-            if 'Week' in str(period):
-                time_order.append(str(period))
-            else:
-                try:
-                    from datetime import datetime
-                    date_obj = datetime.strptime(period, '%Y-%m-%d')
-                    week_num = date_obj.isocalendar()[1]
-                    time_order.append(f"Week {week_num}")
-                except:
-                    time_order.append(str(period))
-    elif time_period == "Daily":
-        # Sort by date
+        # Format is YYYY_WW (e.g., "2025_42")
         try:
-            aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['time_period'])
+            # Extract year and week for sorting
+            parts = aggregated_df['period_label'].str.split('_', expand=True)
+            aggregated_df['year'] = parts[0].astype(int)
+            aggregated_df['week'] = parts[1].astype(int)
+            aggregated_df = aggregated_df.sort_values(['year', 'week']).drop(['year', 'week'], axis=1)
+            # Create formatted labels for display
+            time_order = []
+            for period in aggregated_df['period_label']:
+                parts = period.split('_')
+                if len(parts) == 2:
+                    time_order.append(f"Week {parts[1]} ({parts[0]})")
+                else:
+                    time_order.append(str(period))
+        except Exception as e:
+            st.warning(f"Could not parse week for sorting: {e}")
+            time_order = aggregated_df['period_label'].tolist()
+    elif time_period == "Daily":
+        # Format is YYYY-MM-DD (e.g., "2025-10-30")
+        try:
+            aggregated_df['sort_date'] = pd.to_datetime(aggregated_df['period_label'])
             aggregated_df = aggregated_df.sort_values('sort_date').drop('sort_date', axis=1)
             # Create ordered list for Altair
-            time_order = aggregated_df['time_period'].astype(str).tolist()
+            time_order = aggregated_df['period_label'].astype(str).tolist()
         except Exception as e:
-            # If datetime parsing fails, use original order
             st.warning(f"Could not parse dates for sorting: {e}")
-            time_order = aggregated_df['time_period'].astype(str).tolist()
+            time_order = aggregated_df['period_label'].astype(str).tolist()
     else:
         time_order = None
-    
-    # Create combined chart for all metrics (Completed events only)
-    def create_combined_chart(data):
-        """Create combined chart showing Visits, Instances, and Users together (Completed events only)"""
+        
+    # Create chart for instances only
+    def create_instances_chart(data):
+        """Create chart showing Instances only"""
         chart_data = []
         for _, row in data.iterrows():
             # Format time period for display
-            time_display = str(row['time_period'])
+            time_display = str(row['period_label'])
             if time_period == "Monthly":
-                # Convert 2025-07-01 to "July 2025"
+                # Convert 2025_07 to "July 2025"
                 try:
                     from datetime import datetime
-                    date_obj = datetime.strptime(row['time_period'], '%Y-%m-%d')
+                    date_obj = datetime.strptime(row['period_label'].replace('_', '-') + '-01', '%Y-%m-%d')
                     time_display = date_obj.strftime('%B %Y')
                 except:
-                    time_display = str(row['time_period'])
+                    time_display = str(row['period_label'])
             elif time_period == "Weekly":
-                # Convert "Week 1" to "Week 1", "Week 2" to "Week 2", etc.
-                if 'Week' in str(row['time_period']):
-                    time_display = str(row['time_period'])
+                # Convert "2025_42" to "Week 42 (2025)"
+                parts = str(row['period_label']).split('_')
+                if len(parts) == 2:
+                    time_display = f"Week {parts[1]} ({parts[0]})"
                 else:
-                    # If it's a date, extract week number
-                    try:
-                        from datetime import datetime
-                        date_obj = datetime.strptime(row['time_period'], '%Y-%m-%d')
-                        week_num = date_obj.isocalendar()[1]
-                        time_display = f"Week {week_num}"
-                    except:
-                        time_display = str(row['time_period'])
+                    time_display = str(row['period_label'])
+            elif time_period == "Daily":
+                # Format date for display (keep as is or format nicely)
+                try:
+                    from datetime import datetime
+                    date_obj = datetime.strptime(row['period_label'], '%Y-%m-%d')
+                    time_display = date_obj.strftime('%b %d, %Y')
+                except:
+                    time_display = str(row['period_label'])
             
-            # Add data for each metric - Using new column names
-            chart_data.extend([
-                {'Time': time_display, 'Metric': 'Visits', 'Count': row['visits']},
-                {'Time': time_display, 'Metric': 'Instances', 'Count': row['instances']},
-                {'Time': time_display, 'Metric': 'Users', 'Count': row['users']}
-            ])
+            # Add data for instances
+            chart_data.append({
+                'Time': time_display,
+                'Game': row.get('game_name', 'All Games'),
+                'Instances': row['instances']
+            })
+        
         chart_df = pd.DataFrame(chart_data)
         
         # Create the base chart
@@ -994,16 +996,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             x=alt.X('Time:N', title='Time Period', 
                    sort=time_order if time_order else None,
                    axis=alt.Axis(
-                       labelAngle=0,
+                       labelAngle=-45,
                        labelFontSize=12,
                        labelLimit=150,
                        titleFontSize=14
                    )),
-            y=alt.Y('Count:Q', title='Count', axis=alt.Axis(format='~s')),
-            tooltip=['Time:N', 'Metric:N', 'Count:Q']
+            y=alt.Y('Instances:Q', title='Instance Count', axis=alt.Axis(format='~s')),
+            color=alt.Color('Game:N', legend=alt.Legend(title="Game", labelFontSize=12, titleFontSize=14)),
+            tooltip=['Time:N', 'Game:N', 'Instances:Q']
         )
         
-        # Create lines for each metric
+        # Create lines
         lines = base.mark_line(
             strokeWidth=3,
             point=alt.OverlayMarkDef(
@@ -1012,20 +1015,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                 stroke='white',
                 strokeWidth=1.5
             )
-        ).encode(
-            color=alt.Color('Metric:N', 
-                          scale=alt.Scale(domain=['Visits', 'Instances', 'Users'],
-                                        range=['#FF6B6B', '#FFA726', '#AB47BC']),
-                          legend=alt.Legend(title="Metric Type", 
-                                          labelFontSize=14,
-                                          titleFontSize=16))
         ).properties(
             width=900,
             height=500,
-            title='Time Series Analysis: Visits, Instances, and Users (Completed Events)'
+            title='Time Series Analysis: Instances Over Time'
         )
-        
-        # Add data labels for every other point to reduce clutter
+            
+        # Add data labels
         labels = base.mark_text(
             align='center',
             baseline='bottom',
@@ -1033,11 +1029,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             fontWeight='bold',
             dy=-8
         ).encode(
-            text=alt.Text('Count:Q', format='.0f'),
-            color=alt.Color('Metric:N', 
-                          scale=alt.Scale(domain=['Visits', 'Instances', 'Users'],
-                                        range=['#FF6B6B', '#FFA726', '#AB47BC']),
-                          legend=None)
+            text=alt.Text('Instances:Q', format='.0f')
         ).transform_filter(
             alt.datum.Time % 2 == 0  # Show labels only for every other time point
         )
@@ -1045,46 +1037,38 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         return (lines + labels).configure_axis(
             labelFontSize=16,
             titleFontSize=18,
-            grid=True
-        ).configure_title(
-            fontSize=24,
-            fontWeight='bold'
-        )
-    
+                grid=True
+            ).configure_title(
+                fontSize=24,
+                fontWeight='bold'
+            )
+            
     # Combined Analysis Section
-    st.markdown("### 📊 Time Series Analysis: Visits, Instances, and Users")
-    st.markdown("This chart displays **Visits**, **Instances**, and **Users** together to show trends across all metrics using the updated calculation logic.")
+    st.markdown("### 📊 Time Series Analysis: Instances")
+    st.markdown("This chart displays **Instances** over time using the updated calculation logic.")
     
-    combined_chart = create_combined_chart(aggregated_df)
-    st.altair_chart(combined_chart, use_container_width=True)
+    instances_chart = create_instances_chart(aggregated_df)
+    st.altair_chart(instances_chart, use_container_width=True)
     
     # Add summary statistics
     st.markdown("#### 📈 Summary Statistics")
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     
     with col1:
-        total_visits = aggregated_df['visits'].sum()
-        st.metric(
-            label="🔄 Total Visits",
-            value=f"{total_visits:,}",
-            help="Sum of visits across the selected time period"
-        )
-    
-    with col2:
         total_instances = aggregated_df['instances'].sum()
         st.metric(
             label="⚡ Total Instances", 
             value=f"{total_instances:,}",
-            help="Sum of instances across the selected time period"
+            help="Sum of distinct instances across the selected time period"
         )
     
-    with col3:
-        total_users = aggregated_df['users'].sum()
+    with col2:
+        avg_instances = aggregated_df['instances'].mean()
         st.metric(
-            label="👥 Total Users",
-            value=f"{total_users:,}",
-            help="Sum of users who completed events across the selected time period"
+            label="📊 Average Instances per Period",
+            value=f"{avg_instances:,.0f}",
+            help="Average number of instances per time period"
         )
 
 def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
@@ -1163,13 +1147,13 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
             # Create bar chart
             chart = alt.Chart(question_data).mark_bar(
                 cornerRadius=6,
-                stroke='white',
+                    stroke='white',
                 strokeWidth=2,
                 color='#4A90E2'
             ).encode(
                 x=alt.X('option:N', 
                         title='Response Option', 
-                        axis=alt.Axis(
+                       axis=alt.Axis(
                             labelAngle=-45,
                             labelFontSize=10,
                             titleFontSize=12
@@ -1284,11 +1268,11 @@ def main() -> None:
     with st.spinner("Loading data..."):
         (summary_df, game_conversion_df, time_series_df, 
          repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, metadata) = load_processed_data()
-    
+
     if summary_df.empty:
         st.warning("No data available.")
         return
-    
+
     # Add filters
     st.markdown("### 🎮 Filters")
     
@@ -1311,7 +1295,7 @@ def main() -> None:
             min_date = pd.to_datetime(metadata['data_date_range']['start']).date()
             max_date = pd.to_datetime(metadata['data_date_range']['end']).date()
         else:
-            min_date = pd.to_datetime('2025-07-02').date()
+        min_date = pd.to_datetime('2025-07-02').date()
             # Use current date as max date
             max_date = datetime.now().date()
         
@@ -1369,10 +1353,10 @@ def main() -> None:
     # Add Score Distribution Analysis
     st.markdown("---")
     st.markdown("## 🎯 Score Distribution Analysis")
-    
-    if not score_distribution_df.empty:
-        render_score_distribution_chart(score_distribution_df)
-    else:
+            
+            if not score_distribution_df.empty:
+                render_score_distribution_chart(score_distribution_df)
+            else:
         st.warning("No score distribution data available.")
     
     # Add Parent Poll Responses Analysis
@@ -1381,7 +1365,7 @@ def main() -> None:
     
     if not poll_responses_df.empty:
         render_parent_poll_responses(poll_responses_df, game_conversion_df)
-    else:
+        else:
         st.warning("No parent poll responses data available.")
     
     # Add Question Correctness by Question Number Analysis

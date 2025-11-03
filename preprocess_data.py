@@ -212,6 +212,20 @@ WHERE `matomo_log_action`.`name` LIKE "%_completed%"
   AND `hybrid_games_links`.`activity_id` IS NOT NULL;
 """
 
+# Instances query for Time Series Analysis
+INSTANCES_QUERY = """
+SELECT 
+  hybrid_games.game_name,
+  hybrid_game_completions.created_at,
+  hybrid_game_completions.id
+FROM hybrid_games
+INNER JOIN hybrid_games_links 
+  ON hybrid_games.id = hybrid_games_links.game_id
+INNER JOIN hybrid_game_completions 
+  ON hybrid_game_completions.activity_id = hybrid_games_links.activity_id
+WHERE hybrid_game_completions.created_at > '2025-07-02'
+"""
+
 
 def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe from database"""
@@ -1154,22 +1168,29 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     return grouped
 
 
-def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
-    """Preprocess time series data for different time periods"""
-    print("Preprocessing time series data...")
+def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.DataFrame:
+    """Preprocess time series data for instances only - using created_at and distinct id counts"""
+    print("Preprocessing time series data for instances...")
     
-    # Convert server_time to datetime and extract date
-    df['datetime'] = pd.to_datetime(df['server_time'])
-    df['date'] = df['datetime'].dt.date
+    if df_instances.empty:
+        print("WARNING: No instances data to process")
+        return pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+    
+    # Convert created_at to datetime
+    df_instances['created_at'] = pd.to_datetime(df_instances['created_at'])
     
     # Filter data to only include records from July 2nd, 2025 onwards
     july_2_2025 = pd.Timestamp('2025-07-02')
-    df = df[df['datetime'] >= july_2_2025].copy()
-    print(f"Filtered time series data to July 2nd, 2025 onwards: {len(df)} records")
+    df_instances = df_instances[df_instances['created_at'] >= july_2_2025].copy()
+    print(f"Filtered instances data to July 2nd, 2025 onwards: {len(df_instances)} records")
     
-    # Get unique games for individual game processing
-    unique_games = df['game_name'].unique()
-    print(f"Processing time series for {len(unique_games)} games: {unique_games[:5]}...")
+    if df_instances.empty:
+        print("WARNING: No instances data after filtering")
+        return pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+    
+    # Get unique games
+    unique_games = df_instances['game_name'].unique()
+    print(f"Processing time series for {len(unique_games)} games")
     
     # Prepare time series data for different periods
     time_series_data = []
@@ -1179,112 +1200,72 @@ def preprocess_time_series_data(df: pd.DataFrame) -> pd.DataFrame:
     
     for game_name in games_to_process:
         if game_name == 'All Games':
-            game_df = df.copy()
+            game_df = df_instances.copy()
         else:
-            game_df = df[df['game_name'] == game_name].copy()
+            game_df = df_instances[df_instances['game_name'] == game_name].copy()
         
         if game_df.empty:
             continue
             
-        print(f"Processing time series for: {game_name}")
+        print(f"  Processing time series for: {game_name}")
     
-        # Day-level data (last 2 weeks from July 2nd, 2025 onwards)
-        cutoff_date = game_df['datetime'].max() - pd.Timedelta(days=14)
-        df_daily = game_df[game_df['datetime'] >= cutoff_date].copy()
-        df_daily['time_group'] = df_daily['datetime'].dt.date
+        # Daily aggregation - format: YYYY-MM-DD
+        game_df['date'] = game_df['created_at'].dt.date
+        if game_name == 'All Games':
+            # For "All Games", aggregate across all games (don't group by game_name)
+            daily_agg = game_df.groupby('date')['id'].nunique().reset_index()
+            daily_agg.columns = ['period_label', 'instance_count']
+            daily_agg['period_label'] = daily_agg['period_label'].astype(str)
+            daily_agg['game_name'] = 'All Games'
+        else:
+            # For individual games, group by date and game_name
+            daily_agg = game_df.groupby(['date', 'game_name'])['id'].nunique().reset_index()
+            daily_agg.columns = ['period_label', 'game_name', 'instance_count']
+            daily_agg['period_label'] = daily_agg['period_label'].astype(str)
+        daily_agg['period_type'] = 'Day'
+        time_series_data.extend(daily_agg.to_dict('records'))
         
-        for time_group in df_daily['time_group'].unique():
-            group_data = df_daily[df_daily['time_group'] == time_group]
-            
-            # Users (distinct count)
-            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-            
-            # Visits (distinct count)
-            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
-            
-            # Instances (total count)
-            started_instances = len(group_data[group_data['event'] == 'Started'])
-            completed_instances = len(group_data[group_data['event'] == 'Completed'])
-            
-            time_series_data.append({
-                'time_period': str(time_group),
-                'period_type': 'Day',
-                'started_users': started_users,
-                'completed_users': completed_users,
-                'started_visits': started_visits,
-                'completed_visits': completed_visits,
-                'started_instances': started_instances,
-                'completed_instances': completed_instances,
-                'game_name': game_name
-            })
+        # Monthly aggregation - format: YYYY_MM (underscore, not hyphen)
+        game_df['year'] = game_df['created_at'].dt.year
+        game_df['month'] = game_df['created_at'].dt.month
+        game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['month'].astype(str).str.zfill(2)
+        if game_name == 'All Games':
+            # For "All Games", aggregate across all games
+            monthly_agg = game_df.groupby('period_label')['id'].nunique().reset_index()
+            monthly_agg.columns = ['period_label', 'instance_count']
+            monthly_agg['game_name'] = 'All Games'
+        else:
+            # For individual games, group by period_label and game_name
+            monthly_agg = game_df.groupby(['period_label', 'game_name'])['id'].nunique().reset_index()
+            monthly_agg.columns = ['period_label', 'game_name', 'instance_count']
+        monthly_agg['period_type'] = 'Month'
+        time_series_data.extend(monthly_agg.to_dict('records'))
         
-        # Week-level data (all data from July 2nd, 2025 onwards)
-        july_2_2025 = pd.Timestamp('2025-07-02')
-        game_df['days_since_july_2'] = (game_df['datetime'] - july_2_2025).dt.days
-        game_df['week_number'] = (game_df['days_since_july_2'] // 7) + 1
-        game_df['time_group_week'] = 'Week ' + game_df['week_number'].astype(str)
+        # Weekly aggregation - starts from Wednesday, format: YYYY_WW
+        # Shift date by -2 days before calculating week number (so Wednesday becomes Monday)
+        game_df['shifted_date'] = game_df['created_at'] - pd.Timedelta(days=2)
+        game_df['year'] = game_df['shifted_date'].dt.year
+        game_df['week'] = game_df['shifted_date'].dt.isocalendar().week
+        game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['week'].astype(str).str.zfill(2)
         
-        for time_group in game_df['time_group_week'].unique():
-            group_data = game_df[game_df['time_group_week'] == time_group]
-            
-            # Users (distinct count)
-            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-            
-            # Visits (distinct count)
-            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
-            
-            # Instances (total count)
-            started_instances = len(group_data[group_data['event'] == 'Started'])
-            completed_instances = len(group_data[group_data['event'] == 'Completed'])
-            
-            time_series_data.append({
-                'time_period': time_group,
-                'period_type': 'Week',
-                'started_users': started_users,
-                'completed_users': completed_users,
-                'started_visits': started_visits,
-                'completed_visits': completed_visits,
-                'started_instances': started_instances,
-                'completed_instances': completed_instances,
-                'game_name': game_name
-            })
-        
-        # Month-level data (all data from July 2nd, 2025 onwards)
-        game_df['time_group_month'] = game_df['datetime'].dt.strftime('%B %Y')
-        
-        for time_group in game_df['time_group_month'].unique():
-            group_data = game_df[game_df['time_group_month'] == time_group]
-            
-            # Users (distinct count)
-            started_users = group_data[group_data['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = group_data[group_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-            
-            # Visits (distinct count)
-            started_visits = group_data[group_data['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = group_data[group_data['event'] == 'Completed']['idvisit'].nunique()
-            
-            # Instances (total count)
-            started_instances = len(group_data[group_data['event'] == 'Started'])
-            completed_instances = len(group_data[group_data['event'] == 'Completed'])
-            
-            time_series_data.append({
-                'time_period': time_group,
-                'period_type': 'Month',
-                'started_users': started_users,
-                'completed_users': completed_users,
-                'started_visits': started_visits,
-                'completed_visits': completed_visits,
-                'started_instances': started_instances,
-                'completed_instances': completed_instances,
-                'game_name': game_name
-            })
+        if game_name == 'All Games':
+            # For "All Games", aggregate across all games
+            weekly_agg = game_df.groupby('period_label')['id'].nunique().reset_index()
+            weekly_agg.columns = ['period_label', 'instance_count']
+            weekly_agg['game_name'] = 'All Games'
+        else:
+            # For individual games, group by period_label and game_name
+            weekly_agg = game_df.groupby(['period_label', 'game_name'])['id'].nunique().reset_index()
+            weekly_agg.columns = ['period_label', 'game_name', 'instance_count']
+        weekly_agg['period_type'] = 'Week'
+        time_series_data.extend(weekly_agg.to_dict('records'))
     
     time_series_df = pd.DataFrame(time_series_data)
-    print(f"SUCCESS: Time series data: {len(time_series_df)} records")
+    print(f"SUCCESS: Time series instances data: {len(time_series_df)} records")
+    print(f"  Daily records: {len(time_series_df[time_series_df['period_type'] == 'Day'])}")
+    print(f"  Weekly records: {len(time_series_df[time_series_df['period_type'] == 'Week'])}")
+    print(f"  Monthly records: {len(time_series_df[time_series_df['period_type'] == 'Month'])}")
+    
     return time_series_df
 
 
@@ -1487,24 +1468,54 @@ def process_score_distribution() -> pd.DataFrame:
 
 
 def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
-    """Process time series data"""
+    """Process time series data for instances only"""
     print("\n" + "=" * 60)
-    print("PROCESSING: Time Series Data")
+    print("PROCESSING: Time Series Data (Instances)")
     print("=" * 60)
     
-    if df_main is None:
-        print("Loading main data from CSV...")
-        df_main = pd.read_csv('data/processed_data.csv')
-        df_main['server_time'] = pd.to_datetime(df_main['server_time'])
-        df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
+    # Fetch instances data from database
+    print("Fetching instances data from database...")
+    try:
+        with pymysql.connect(
+            host=HOST,
+            port=PORT,
+            user=USER,
+            password=PASSWORD,
+            database=DBNAME,
+            connect_timeout=30,
+            read_timeout=300,
+            write_timeout=300,
+            ssl={'ssl': {}},
+        ) as conn:
+            with conn.cursor() as cur:
+                print("  Executing instances query...")
+                cur.execute(INSTANCES_QUERY)
+                rows = cur.fetchall()
+                cols = [d[0] for d in cur.description]
+                df_instances = pd.DataFrame(rows, columns=cols)
+                print(f"  Query returned {len(df_instances)} records")
+    except Exception as e:
+        print(f"  ERROR: Failed to fetch instances data: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
     
-    time_series_df = preprocess_time_series_data(df_main)
+    if df_instances.empty:
+        print("WARNING: No instances data found")
+        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+        empty_df.to_csv('data/time_series_data.csv', index=False)
+        return empty_df
+    
+    # Process instances data
+    time_series_df = preprocess_time_series_data_instances(df_instances)
     
     if not time_series_df.empty:
         time_series_df.to_csv('data/time_series_data.csv', index=False)
         print(f"SUCCESS: Saved data/time_series_data.csv ({len(time_series_df)} records)")
     else:
         print("WARNING: No time series data to save")
+        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+        empty_df.to_csv('data/time_series_data.csv', index=False)
     
     return time_series_df
 
@@ -1579,31 +1590,64 @@ def process_parent_poll() -> pd.DataFrame:
     
     # Process each record
     processed_records = []
+    debug_count = 0
+    skipped_no_json = 0
+    skipped_no_structure = 0
     
-    for _, row in df_poll.iterrows():
+    for idx, row in df_poll.iterrows():
         try:
             custom_dim_1 = row['custom_dimension_1']
             game_name = row['game_name']
             
             # Parse JSON from custom_dimension_1
             if not custom_dim_1 or pd.isna(custom_dim_1):
+                skipped_no_json += 1
                 continue
             
             try:
                 poll_data = json.loads(custom_dim_1)
             except json.JSONDecodeError:
-                # Skip non-JSON records
+                skipped_no_json += 1
                 continue
             
             if not isinstance(poll_data, dict):
+                skipped_no_structure += 1
                 continue
             
-            # Extract options and chosenOption
+            # Try to extract poll data from root level first
             options = poll_data.get('options', [])
             chosen_option = poll_data.get('chosenOption')
             
-            # Skip if no chosen option or options list is empty
+            # If not at root level, check inside gameData array
             if chosen_option is None or not isinstance(options, list) or len(options) == 0:
+                # Check gameData array for poll data
+                game_data = poll_data.get('gameData', [])
+                if isinstance(game_data, list):
+                    for game_item in game_data:
+                        if not isinstance(game_item, dict):
+                            continue
+                        # Check jsonData array
+                        json_data = game_item.get('jsonData', [])
+                        if isinstance(json_data, list):
+                            for json_item in json_data:
+                                if not isinstance(json_item, dict):
+                                    continue
+                                # Check if this json_item has poll structure
+                                item_options = json_item.get('options', [])
+                                item_chosen = json_item.get('chosenOption')
+                                if item_chosen is not None and isinstance(item_options, list) and len(item_options) > 0:
+                                    options = item_options
+                                    chosen_option = item_chosen
+                                    break
+                            if options and chosen_option is not None:
+                                break
+            
+            # Skip if still no chosen option or options list is empty
+            if chosen_option is None or not isinstance(options, list) or len(options) == 0:
+                skipped_no_structure += 1
+                if debug_count < 5:
+                    print(f"  DEBUG: Record {idx+1} - No poll structure found. Root keys: {list(poll_data.keys())[:10]}")
+                    debug_count += 1
                 continue
             
             # Get the selected option's message
@@ -1614,6 +1658,7 @@ def process_parent_poll() -> pd.DataFrame:
                     option_message = selected_option.get('message', '')
                     
                     if not option_message:
+                        skipped_no_structure += 1
                         continue
                     
                     # Determine question based on options structure
@@ -1629,12 +1674,21 @@ def process_parent_poll() -> pd.DataFrame:
                         'idvisit': row['idvisit']
                     })
             except (ValueError, IndexError, TypeError) as e:
-                # Skip invalid option indices
+                skipped_no_structure += 1
+                if debug_count < 5:
+                    print(f"  DEBUG: Record {idx+1} - Error extracting option: {str(e)}")
+                    debug_count += 1
                 continue
                 
         except Exception as e:
-            print(f"  WARNING: Error processing poll record: {str(e)}")
+            print(f"  WARNING: Error processing poll record {idx+1}: {str(e)}")
+            if debug_count < 3:
+                import traceback
+                traceback.print_exc()
+                debug_count += 1
             continue
+    
+    print(f"  Skipped records: {skipped_no_json} (no JSON), {skipped_no_structure} (no poll structure)")
     
     if not processed_records:
         print("WARNING: No valid poll responses found after processing")
