@@ -10,176 +10,176 @@ from typing import List, Tuple
 import re
 
 def _get_db_connection():
-	"""Return a DB connection using previously used credentials.
+    """Return a DB connection using previously used credentials.
 
-	Tries Streamlit secrets first (st.secrets["db"]) then environment variables.
-	Supports MySQL/MariaDB via pymysql. Returns None if not available.
-	"""
-	# Prefer st.secrets if available
-	try:
-		secrets_db = st.secrets.get("db", None) if hasattr(st, "secrets") else None
-	except Exception:
-		secrets_db = None
+    Tries Streamlit secrets first (st.secrets["db"]) then environment variables.
+    Supports MySQL/MariaDB via pymysql. Returns None if not available.
+    """
+    # Prefer st.secrets if available
+    try:
+        secrets_db = st.secrets.get("db", None) if hasattr(st, "secrets") else None
+    except Exception:
+        secrets_db = None
 
-	config = None
-	if isinstance(secrets_db, dict) and secrets_db:
-		config = {
-			"host": secrets_db.get("host"),
-			"port": int(secrets_db.get("port", 3306)),
-			"user": secrets_db.get("user") or secrets_db.get("username"),
-			"password": secrets_db.get("password"),
-			"database": secrets_db.get("database") or secrets_db.get("db")
-		}
-	else:
-		# Fallback to environment variables
-		config = {
-			"host": os.getenv("DB_HOST") or os.getenv("MYSQL_HOST"),
-			"port": int(os.getenv("DB_PORT") or os.getenv("MYSQL_PORT") or 3306),
-			"user": os.getenv("DB_USER") or os.getenv("MYSQL_USER") or os.getenv("DB_USERNAME"),
-			"password": os.getenv("DB_PASSWORD") or os.getenv("MYSQL_PASSWORD"),
-			"database": os.getenv("DB_NAME") or os.getenv("MYSQL_DATABASE") or os.getenv("MYSQL_DB")
-		}
+    config = None
+    if isinstance(secrets_db, dict) and secrets_db:
+        config = {
+            "host": secrets_db.get("host"),
+            "port": int(secrets_db.get("port", 3306)),
+            "user": secrets_db.get("user") or secrets_db.get("username"),
+            "password": secrets_db.get("password"),
+            "database": secrets_db.get("database") or secrets_db.get("db")
+        }
+    else:
+        # Fallback to environment variables
+        config = {
+            "host": os.getenv("DB_HOST") or os.getenv("MYSQL_HOST"),
+            "port": int(os.getenv("DB_PORT") or os.getenv("MYSQL_PORT") or 3306),
+            "user": os.getenv("DB_USER") or os.getenv("MYSQL_USER") or os.getenv("DB_USERNAME"),
+            "password": os.getenv("DB_PASSWORD") or os.getenv("MYSQL_PASSWORD"),
+            "database": os.getenv("DB_NAME") or os.getenv("MYSQL_DATABASE") or os.getenv("MYSQL_DB")
+        }
 
-	# Validate minimal config
-	if not config or not config.get("host") or not config.get("user") or not config.get("database"):
-		return None
+    # Validate minimal config
+    if not config or not config.get("host") or not config.get("user") or not config.get("database"):
+        return None
 
-	try:
-		import pymysql  # type: ignore
-		conn = pymysql.connect(
-			host=config["host"],
-			port=config["port"],
-			user=config["user"],
-			password=config["password"],
-			database=config["database"],
-			cursorclass=pymysql.cursors.DictCursor,
-			read_timeout=30,
-			write_timeout=30,
-			charset="utf8mb4"
-		)
-		return conn
-	except Exception as e:
-		st.info(f"Skipping live poll data refresh (DB connection unavailable): {e}")
-		return None
+    try:
+        import pymysql  # type: ignore
+        conn = pymysql.connect(
+            host=config["host"],
+            port=config["port"],
+            user=config["user"],
+    password=config["password"],
+            database=config["database"],
+            cursorclass=pymysql.cursors.DictCursor,
+            read_timeout=30,
+            write_timeout=30,
+            charset="utf8mb4"
+        )
+        return conn
+    except Exception as e:
+        st.info(f"Skipping live poll data refresh (DB connection unavailable): {e}")
+        return None
 
 def _parse_poll_fields(custom_dimension_1: str) -> Tuple[str, str]:
-	"""Best-effort parsing of question and option from custom_dimension_1.
+    """Best-effort parsing of question and option from custom_dimension_1.
 
-	Returns (question, option). If parsing fails, returns ("Parent Poll", cleaned_string).
-	"""
-	if not isinstance(custom_dimension_1, str) or not custom_dimension_1.strip():
-		return ("Parent Poll", "Unknown")
+    Returns (question, option). If parsing fails, returns ("Parent Poll", cleaned_string).
+    """
+    if not isinstance(custom_dimension_1, str) or not custom_dimension_1.strip():
+        return ("Parent Poll", "Unknown")
 
-	val = custom_dimension_1.strip()
+    val = custom_dimension_1.strip()
 
-	# Try JSON payload first
-	try:
-		obj = json.loads(val)
-		if isinstance(obj, dict):
-			q = obj.get("question") or obj.get("q") or obj.get("poll_question")
-			o = obj.get("option") or obj.get("answer") or obj.get("value")
-			if q and o:
-				return (str(q), str(o))
-	except Exception:
-		pass
+    # Try JSON payload first
+    try:
+        obj = json.loads(val)
+        if isinstance(obj, dict):
+            q = obj.get("question") or obj.get("q") or obj.get("poll_question")
+            o = obj.get("option") or obj.get("answer") or obj.get("value")
+            if q and o:
+                return (str(q), str(o))
+    except Exception:
+        pass
 
-	# Common patterns: "poll:Question|Option", "poll_Question_Option", "Question: Option"
-	patterns = [
-		re.compile(r"poll[:_\-\s]+([^|:_\-]+)[|:_\-\s]+(.+)$", re.IGNORECASE),
-		re.compile(r"([^|:]+)[|:]+\s*(.+)$"),
-	]
-	for pat in patterns:
-		m = pat.search(val)
-		if m:
-			q = m.group(1).strip()
-			o = m.group(2).strip()
-			if q and o:
-				return (q, o)
+    # Common patterns: "poll:Question|Option", "poll_Question_Option", "Question: Option"
+    patterns = [
+        re.compile(r"poll[:_\-\s]+([^|:_\-]+)[|:_\-\s]+(.+)$", re.IGNORECASE),
+        re.compile(r"([^|:]+)[|:]+\s*(.+)$"),
+    ]
+    for pat in patterns:
+        m = pat.search(val)
+        if m:
+            q = m.group(1).strip()
+            o = m.group(2).strip()
+            if q and o:
+                return (q, o)
 
-	# Fallback: single question, option as entire string after 'poll'
-	# Remove leading 'poll' tokens
-	val_clean = re.sub(r"^poll[:_\-\s]*", "", val, flags=re.IGNORECASE).strip()
-	if not val_clean:
-		val_clean = val
-	return ("Parent Poll", val_clean)
+    # Fallback: single question, option as entire string after 'poll'
+    # Remove leading 'poll' tokens
+    val_clean = re.sub(r"^poll[:_\-\s]*", "", val, flags=re.IGNORECASE).strip()
+    if not val_clean:
+        val_clean = val
+    return ("Parent Poll", val_clean)
 
 def try_refresh_poll_responses_data() -> None:
-	"""Attempt to refresh poll_responses_data.csv from the live DB using provided SQL.
+    """Attempt to refresh poll_responses_data.csv from the live DB using provided SQL.
 
-	Silently no-ops if DB is not available. Keeps existing structure/visuals intact.
-	"""
-	conn = _get_db_connection()
-	if conn is None:
+    Silently no-ops if DB is not available. Keeps existing structure/visuals intact.
+    """
+    conn = _get_db_connection()
+    if conn is None:
         return
     
-	SQL = (
-		"select * "
-		"\n\n\n\nfrom `matomo_log_link_visit_action` "
-		"\n\tinner join `matomo_log_action` on `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction` "
-		"\n\tinner join `hybrid_games_links` on `hybrid_games_links`.`activity_id` = `matomo_log_link_visit_action`.`custom_dimension_2` "
-		"\n\tinner join `hybrid_games` on `hybrid_games`.`id` = `hybrid_games_links`.`game_id` "
-		"\n\nwhere `matomo_log_action`.`name` like \"%_completed%\" "
-		"\n\tand `matomo_log_link_visit_action`.`custom_dimension_1` is not null "
-		"\n\tand `matomo_log_link_visit_action`.`custom_dimension_1` like \"%poll%\" "
-		"\n\tand `matomo_log_link_visit_action`.`server_time` > '2025-07-01' "
-		"\n\tand `hybrid_games_links`.`activity_id` is not null;"
-	)
+    SQL = (
+        "select * "
+        "\n\n\n\nfrom `matomo_log_link_visit_action` "
+        "\n\tinner join `matomo_log_action` on `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction` "
+        "\n\tinner join `hybrid_games_links` on `hybrid_games_links`.`activity_id` = `matomo_log_link_visit_action`.`custom_dimension_2` "
+        "\n\tinner join `hybrid_games` on `hybrid_games`.`id` = `hybrid_games_links`.`game_id` "
+        "\n\nwhere `matomo_log_action`.`name` like \"%_completed%\" "
+        "\n\tand `matomo_log_link_visit_action`.`custom_dimension_1` is not null "
+        "\n\tand `matomo_log_link_visit_action`.`custom_dimension_1` like \"%poll%\" "
+        "\n\tand `matomo_log_link_visit_action`.`server_time` > '2025-07-01' "
+        "\n\tand `hybrid_games_links`.`activity_id` is not null;"
+    )
 
-	try:
-		with conn.cursor() as cur:
-			cur.execute(SQL)
-			rows = cur.fetchall() or []
-	finally:
-		try:
-			conn.close()
-		except Exception:
-			pass
+    try:
+        with conn.cursor() as cur:
+            cur.execute(SQL)
+            rows = cur.fetchall() or []
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
 
-	if not rows:
+    if not rows:
         return
     
-	# Build poll response aggregates with expected columns
-	records = []
-	for r in rows:
-		cd1 = r.get("custom_dimension_1")
-		q, o = _parse_poll_fields(cd1)
-		# Try different possible game name columns
-		game_name = (
-			r.get("game_name")
-			or r.get("name")
-			or r.get("title")
-			or r.get("hybrid_games.name")
-		)
-		# Avoid collision with matomo_log_action.name; prefer hybrid_games column
-		if isinstance(game_name, str) and r.get("name") == game_name:
-			pass
-		elif not isinstance(game_name, str):
-			# If not found, and there is a separate games table alias, leave as Unknown
-			game_name = "Unknown"
-		records.append({"question": q, "option": o, "game_name": game_name})
+    # Build poll response aggregates with expected columns
+    records = []
+    for r in rows:
+        cd1 = r.get("custom_dimension_1")
+        q, o = _parse_poll_fields(cd1)
+        # Try different possible game name columns
+        game_name = (
+            r.get("game_name")
+            or r.get("name")
+            or r.get("title")
+            or r.get("hybrid_games.name")
+        )
+        # Avoid collision with matomo_log_action.name; prefer hybrid_games column
+        if isinstance(game_name, str) and r.get("name") == game_name:
+            pass
+        elif not isinstance(game_name, str):
+            # If not found, and there is a separate games table alias, leave as Unknown
+            game_name = "Unknown"
+        records.append({"question": q, "option": o, "game_name": game_name})
 
-	df = pd.DataFrame.from_records(records)
-	if df.empty:
-		return
+    df = pd.DataFrame.from_records(records)
+    if df.empty:
+        return
 
-	# Aggregate counts
-	agg_cols = ["question", "option", "game_name"] if "game_name" in df.columns else ["question", "option"]
-	agg = df.groupby(agg_cols).size().reset_index(name="count")
+    # Aggregate counts
+    agg_cols = ["question", "option", "game_name"] if "game_name" in df.columns else ["question", "option"]
+    agg = df.groupby(agg_cols).size().reset_index(name="count")
 
-	# Ensure stable column order
-	final_cols = ["question", "option", "count"]
-	if "game_name" in agg.columns:
-		final_cols.insert(2, "game_name")
-	result_df = agg[final_cols]
+    # Ensure stable column order
+    final_cols = ["question", "option", "count"]
+    if "game_name" in agg.columns:
+        final_cols.insert(2, "game_name")
+    result_df = agg[final_cols]
 
-	# Write to CSV
-	os.makedirs(DATA_DIR, exist_ok=True)
-	output_path = os.path.join(DATA_DIR, "poll_responses_data.csv")
-	try:
-		result_df.to_csv(output_path, index=False)
-		st.info("Parent Poll Responses data refreshed from database.")
-	except Exception as e:
-		st.warning(f"Could not write refreshed poll data: {e}")
+    # Write to CSV
+    os.makedirs(DATA_DIR, exist_ok=True)
+    output_path = os.path.join(DATA_DIR, "poll_responses_data.csv")
+    try:
+        result_df.to_csv(output_path, index=False)
+        st.info("Parent Poll Responses data refreshed from database.")
+    except Exception as e:
+        st.warning(f"Could not write refreshed poll data: {e}")
 
 # Use preprocess_data.py directly instead of processed CSV files
 DATA_DIR = "data"
@@ -239,7 +239,7 @@ def load_processed_data():
         qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
         if os.path.exists(qpath):
             question_correctness_df = pd.read_csv(qpath)
-    else:
+        else:
             question_correctness_df = pd.DataFrame()
         
         # Create metadata
@@ -667,34 +667,34 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
             fontSize=28,
             fontWeight='bold'
         )
-        
-        st.altair_chart(repeatability_chart, use_container_width=True)
-        
+    
+    st.altair_chart(repeatability_chart, use_container_width=True)
+    
     # Add summary statistics based on SQL query logic
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
         total_users = repeatability_df['user_count'].sum()
-            st.metric(
+        st.metric(
             label="👥 Total Unique Users",
-                value=f"{total_users:,}",
+            value=f"{total_users:,}",
             help="Total number of unique hybrid_profile_id who completed at least one distinct game"
-            )
+        )
         
-        with col2:
+    with col2:
         # Calculate weighted average of distinct games per user
         weighted_sum = (repeatability_df['games_played'] * repeatability_df['user_count']).sum()
         total_users = repeatability_df['user_count'].sum()
         avg_distinct_games_per_user = weighted_sum / total_users if total_users > 0 else 0
-            st.metric(
+        st.metric(
             label="🎯 Avg Distinct Games per User",
             value=f"{avg_distinct_games_per_user:.1f}",
             help="Average number of distinct games completed per hybrid_profile_id"
-            )
-        
-        with col3:
+        )
+    
+    with col3:
         max_distinct_games = repeatability_df['games_played'].max()
-            st.metric(
+        st.metric(
             label="🏆 Max Distinct Games",
             value=f"{max_distinct_games}",
             help="Maximum number of distinct games completed by a single hybrid_profile_id"
@@ -1292,7 +1292,7 @@ def main() -> None:
             min_date = pd.to_datetime(metadata['data_date_range']['start']).date()
             max_date = pd.to_datetime(metadata['data_date_range']['end']).date()
         else:
-        min_date = pd.to_datetime('2025-07-02').date()
+            min_date = pd.to_datetime('2025-07-02').date()
             # Use current date as max date
             max_date = datetime.now().date()
         
@@ -1350,10 +1350,10 @@ def main() -> None:
     # Add Score Distribution Analysis
     st.markdown("---")
     st.markdown("## 🎯 Score Distribution Analysis")
-            
-            if not score_distribution_df.empty:
-                render_score_distribution_chart(score_distribution_df)
-            else:
+    
+    if not score_distribution_df.empty:
+        render_score_distribution_chart(score_distribution_df)
+    else:
         st.warning("No score distribution data available.")
     
     # Add Parent Poll Responses Analysis
@@ -1362,7 +1362,7 @@ def main() -> None:
     
     if not poll_responses_df.empty:
         render_parent_poll_responses(poll_responses_df, game_conversion_df)
-        else:
+    else:
         st.warning("No parent poll responses data available.")
     
     # Add Question Correctness by Question Number Analysis
