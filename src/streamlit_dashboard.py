@@ -747,7 +747,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
             value=f"{total_users:,}",
             help="Total number of unique hybrid_profile_id who completed at least one distinct game"
         )
-        
+    
     with col2:
         # Calculate weighted average of distinct games per user
         weighted_sum = (repeatability_df['games_played'] * repeatability_df['user_count']).sum()
@@ -1037,8 +1037,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         except Exception as e:
             st.warning(f"Could not parse dates for sorting: {e}")
             time_order = aggregated_df['period_label'].astype(str).tolist()
-    else:
-        time_order = None
+        else:
+            time_order = None
         
     # Create combined chart for Instances, Visits, and Users
     def create_combined_chart(data):
@@ -1097,33 +1097,33 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Create lines for each metric
         lines = base.mark_line(
             strokeWidth=3,
-            point=alt.OverlayMarkDef(
-                filled=True,
+                point=alt.OverlayMarkDef(
+                    filled=True,
                 size=50,
-                stroke='white',
+                    stroke='white',
                 strokeWidth=1.5
-            )
-        ).encode(
+                )
+            ).encode(
             color=alt.Color('Metric:N', 
                           scale=alt.Scale(domain=['Instances', 'Visits', 'Users'],
                                         range=['#FF6B6B', '#FFA726', '#AB47BC']),
                           legend=alt.Legend(title="Metric Type", 
                            labelFontSize=14,
                                           titleFontSize=16))
-        ).properties(
-            width=900,
+            ).properties(
+                width=900,
             height=500,
             title='Time Series Analysis: Instances, Visits, and Users'
-        )
+            )
             
         # Add data labels for every other point to reduce clutter
         labels = base.mark_text(
-            align='center',
-            baseline='bottom',
+                align='center',
+                baseline='bottom',
             fontSize=10,
-            fontWeight='bold',
+                fontWeight='bold',
             dy=-8
-        ).encode(
+            ).encode(
             text=alt.Text('Count:Q', format='.0f'),
             color=alt.Color('Metric:N', 
                           scale=alt.Scale(domain=['Instances', 'Visits', 'Users'],
@@ -1136,11 +1136,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         return (lines + labels).configure_axis(
             labelFontSize=16,
             titleFontSize=18,
-            grid=True
-        ).configure_title(
-            fontSize=24,
-            fontWeight='bold'
-        )
+                grid=True
+            ).configure_title(
+                fontSize=24,
+                fontWeight='bold'
+            )
             
     # Combined Analysis Section
     st.markdown("### 📊 Time Series Analysis: Instances, Visits, and Users")
@@ -1439,31 +1439,40 @@ def main() -> None:
         render_modern_dashboard(summary_df, summary_df)
     else:
         # Show filtered conversion funnel - use game-specific numbers
-        selected_games_data = game_conversion_df[game_conversion_df['game_name'].isin(selected_games)]
+        # Normalize game names to handle potential whitespace/case issues
+        selected_games_normalized = [g.strip() for g in selected_games]
+        game_conversion_df_normalized = game_conversion_df.copy()
+        game_conversion_df_normalized['game_name_normalized'] = game_conversion_df_normalized['game_name'].str.strip()
+        
+        selected_games_data = game_conversion_df_normalized[
+            game_conversion_df_normalized['game_name_normalized'].isin(selected_games_normalized)
+        ]
+        
         if not selected_games_data.empty:
             # Ensure all required columns exist
             required_cols = ['started_users', 'completed_users', 'started_visits', 'completed_visits', 'started_instances', 'completed_instances']
-            for col in required_cols:
-                if col not in selected_games_data.columns:
-                    st.error(f"Missing required column: {col}")
-                    render_modern_dashboard(summary_df, summary_df)
-                    return
+            missing_cols = [col for col in required_cols if col not in selected_games_data.columns]
+            if missing_cols:
+                st.error(f"Missing required columns: {missing_cols}")
+                render_modern_dashboard(summary_df, summary_df)
+                return
             
-            # Aggregate the selected games - ensure numeric types
-            total_started_users = pd.to_numeric(selected_games_data['started_users'], errors='coerce').fillna(0).sum()
-            total_completed_users = pd.to_numeric(selected_games_data['completed_users'], errors='coerce').fillna(0).sum()
-            total_started_visits = pd.to_numeric(selected_games_data['started_visits'], errors='coerce').fillna(0).sum()
-            total_completed_visits = pd.to_numeric(selected_games_data['completed_visits'], errors='coerce').fillna(0).sum()
-            total_started_instances = pd.to_numeric(selected_games_data['started_instances'], errors='coerce').fillna(0).sum()
-            total_completed_instances = pd.to_numeric(selected_games_data['completed_instances'], errors='coerce').fillna(0).sum()
+            # Aggregate the selected games - ensure numeric types and handle NaN properly
+            # Convert columns to numeric if needed, then sum directly
+            started_users_series = pd.to_numeric(selected_games_data['started_users'], errors='coerce').fillna(0)
+            completed_users_series = pd.to_numeric(selected_games_data['completed_users'], errors='coerce').fillna(0)
+            started_visits_series = pd.to_numeric(selected_games_data['started_visits'], errors='coerce').fillna(0)
+            completed_visits_series = pd.to_numeric(selected_games_data['completed_visits'], errors='coerce').fillna(0)
+            started_instances_series = pd.to_numeric(selected_games_data['started_instances'], errors='coerce').fillna(0)
+            completed_instances_series = pd.to_numeric(selected_games_data['completed_instances'], errors='coerce').fillna(0)
             
-            # Convert to int to avoid float display issues
-            total_started_users = int(total_started_users) if not pd.isna(total_started_users) else 0
-            total_completed_users = int(total_completed_users) if not pd.isna(total_completed_users) else 0
-            total_started_visits = int(total_started_visits) if not pd.isna(total_started_visits) else 0
-            total_completed_visits = int(total_completed_visits) if not pd.isna(total_completed_visits) else 0
-            total_started_instances = int(total_started_instances) if not pd.isna(total_started_instances) else 0
-            total_completed_instances = int(total_completed_instances) if not pd.isna(total_completed_instances) else 0
+            # Sum and convert to int
+            total_started_users = int(started_users_series.sum())
+            total_completed_users = int(completed_users_series.sum())
+            total_started_visits = int(started_visits_series.sum())
+            total_completed_visits = int(completed_visits_series.sum())
+            total_started_instances = int(started_instances_series.sum())
+            total_completed_instances = int(completed_instances_series.sum())
             
             # Create summary data for selected games with explicit dtype and column order
             selected_games_summary = pd.DataFrame({
@@ -1472,19 +1481,25 @@ def main() -> None:
                 'Visits': [total_started_visits, total_completed_visits],
                 'Instances': [total_started_instances, total_completed_instances]
             })
-            # Ensure numeric columns are properly typed
-            selected_games_summary['Users'] = pd.to_numeric(selected_games_summary['Users'], errors='coerce').fillna(0).astype(int)
-            selected_games_summary['Visits'] = pd.to_numeric(selected_games_summary['Visits'], errors='coerce').fillna(0).astype(int)
-            selected_games_summary['Instances'] = pd.to_numeric(selected_games_summary['Instances'], errors='coerce').fillna(0).astype(int)
+            # Ensure numeric columns are properly typed - using direct astype since we already converted
+            selected_games_summary['Users'] = selected_games_summary['Users'].astype(int)
+            selected_games_summary['Visits'] = selected_games_summary['Visits'].astype(int)
+            selected_games_summary['Instances'] = selected_games_summary['Instances'].astype(int)
             
             # Verify the DataFrame structure before rendering
             if selected_games_summary.empty or 'Event' not in selected_games_summary.columns:
                 st.error("Error creating filtered conversion data. Showing all games instead.")
                 render_modern_dashboard(summary_df, summary_df)
             else:
+                # Pass the summary twice (as conversion_df and df_filtered) to maintain compatibility
                 render_modern_dashboard(selected_games_summary, selected_games_summary)
         else:
-            st.warning("No data found for selected games.")
+            # Debug: show what games are available vs selected
+            available_games = game_conversion_df_normalized['game_name_normalized'].unique().tolist()
+            st.warning(f"No data found for selected games: {selected_games_normalized}")
+            st.info(f"Available games: {available_games[:5]}..." if len(available_games) > 5 else f"Available games: {available_games}")
+            # Fallback to summary
+            render_modern_dashboard(summary_df, summary_df)
     
     # Add Score Distribution Analysis
     st.markdown("---")
