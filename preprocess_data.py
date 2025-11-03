@@ -189,27 +189,25 @@ WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01'
   );
 """
 
-# Parent Poll Query
+# Parent Poll Query - fetch poll data from matomo_log_link_visit_action.custom_dimension_1
+# Join with hybrid_games_links to get activity_id, then join with hybrid_games for game_name
 PARENT_POLL_QUERY = """
 SELECT 
-  `matomo_log_link_visit_action`.`custom_dimension_1`,
-  `matomo_log_link_visit_action`.`custom_dimension_2`,
-  CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted,
-  `matomo_log_link_visit_action`.`idvisit`,
-  `matomo_log_link_visit_action`.`server_time`,
-  `hybrid_games`.`game_name`
-FROM `matomo_log_link_visit_action` 
-INNER JOIN `matomo_log_action` 
-    ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
-INNER JOIN `hybrid_games_links` 
-    ON `hybrid_games_links`.`activity_id` = `matomo_log_link_visit_action`.`custom_dimension_2`
-INNER JOIN `hybrid_games` 
-    ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id`
-WHERE `matomo_log_action`.`name` LIKE "%_completed%" 
-  AND `matomo_log_link_visit_action`.`custom_dimension_1` IS NOT NULL
-  AND `matomo_log_link_visit_action`.`custom_dimension_1` LIKE "%poll%"
-  AND `matomo_log_link_visit_action`.`server_time` > '2025-07-01'
-  AND `hybrid_games_links`.`activity_id` IS NOT NULL;
+  mlla.custom_dimension_1,
+  mlla.custom_dimension_2 AS activity_id,
+  CONV(HEX(mlla.idvisitor), 16, 10) AS idvisitor_converted,
+  mlla.idvisit,
+  mlla.server_time,
+  hg.game_name
+FROM matomo_log_link_visit_action mlla
+INNER JOIN hybrid_games_links hgl 
+  ON hgl.activity_id = mlla.custom_dimension_2
+INNER JOIN hybrid_games hg 
+  ON hg.id = hgl.game_id
+WHERE mlla.custom_dimension_1 IS NOT NULL
+  AND mlla.custom_dimension_1 != ''
+  AND mlla.server_time > '2025-07-01'
+ORDER BY mlla.server_time DESC;
 """
 
 # Instances query for Time Series Analysis
@@ -1255,7 +1253,7 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
             monthly_agg.columns = ['period_label', 'game_name', 'instances']
         monthly_agg['period_type'] = 'Month'
         time_series_data.extend(monthly_agg.to_dict('records'))
-        
+            
         # Weekly aggregation - starts from Wednesday, format: YYYY_WW
         # Reset game_df to original for weekly processing
         if game_name == 'All Games':
@@ -1281,7 +1279,7 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
             weekly_agg.columns = ['period_label', 'game_name', 'instances']
         weekly_agg['period_type'] = 'Week'
         time_series_data.extend(weekly_agg.to_dict('records'))
-    
+            
     time_series_df = pd.DataFrame(time_series_data)
     print(f"SUCCESS: Time series instances data: {len(time_series_df)} records")
     print(f"  Daily records: {len(time_series_df[time_series_df['period_type'] == 'Day'])}")
@@ -1319,7 +1317,7 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
             pass
     
     # Filter data to only include records from July 2nd, 2025 onwards
-    july_2_2025 = pd.Timestamp('2025-07-02')
+        july_2_2025 = pd.Timestamp('2025-07-02')
     df_visits_users = df_visits_users[df_visits_users['server_time'] >= july_2_2025].copy()
     print(f"Filtered visits/users data to July 2nd, 2025 onwards: {len(df_visits_users)} records")
     
@@ -1552,7 +1550,7 @@ def process_main_data() -> pd.DataFrame:
     if df_main.empty:
         print("ERROR: No main data found.")
         return pd.DataFrame()
-    
+        
     print(f"SUCCESS: Fetched {len(df_main)} records from main query")
     df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
@@ -1622,7 +1620,7 @@ def process_score_distribution() -> pd.DataFrame:
         print(f"SUCCESS: Saved data/score_distribution_data.csv ({len(score_distribution_df)} records)")
     else:
         print("WARNING: No score distribution data to save")
-    
+        
     return score_distribution_df
 
 
@@ -1766,18 +1764,37 @@ def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFram
             df_main = pd.read_csv('data/processed_data.csv')
             df_main['server_time'] = pd.to_datetime(df_main['server_time'])
         repeatability_df = preprocess_repeatability_data(df_main)
-    
-    if not repeatability_df.empty:
-        repeatability_df.to_csv('data/repeatability_data.csv', index=False)
-        print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
-    else:
-        print("WARNING: No repeatability data to save")
-    
+        
+        if not repeatability_df.empty:
+            repeatability_df.to_csv('data/repeatability_data.csv', index=False)
+            print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
+        else:
+            print("WARNING: No repeatability data to save")
+
     return repeatability_df
 
 
 def process_parent_poll() -> pd.DataFrame:
-    """Process parent poll responses data"""
+    """Process parent poll responses data from hybrid_games_links.custom_dimension_1
+    
+    Expected JSON structure:
+    {
+      "section": "Poll",
+      "learning_object": "shape-circle",
+      "type": "hybrid",
+      "gameData": [
+        {
+          "options": [
+            {"id": 1, "message": "ख़ुद से", "status": 0, "image": "1.png"},
+            {"id": 2, "message": "भाई बहन", "status": 1, "image": "2.png"}
+          ],
+          "chosenOption": 0,  # 0-based index
+          "time": 1740575876851
+        },
+        ...
+      ]
+    }
+    """
     print("\n" + "=" * 60)
     print("PROCESSING: Parent Poll Responses")
     print("=" * 60)
@@ -1807,12 +1824,12 @@ def process_parent_poll() -> pd.DataFrame:
         print(f"  ERROR: Failed to fetch parent poll data: {str(e)}")
         import traceback
         traceback.print_exc()
-        return pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        return pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
     
     if df_poll.empty:
         print("WARNING: No parent poll data found")
         # Create empty dataframe with expected headers
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df = pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
@@ -1820,153 +1837,162 @@ def process_parent_poll() -> pd.DataFrame:
     
     # Process each record
     processed_records = []
-    debug_count = 0
     skipped_no_json = 0
-    skipped_no_structure = 0
+    skipped_no_poll_section = 0
+    skipped_no_gamedata = 0
+    skipped_invalid_chosen = 0
+    total_questions_processed = 0
     
     for idx, row in df_poll.iterrows():
         try:
             custom_dim_1 = row['custom_dimension_1']
             game_name = row['game_name']
+            idvisitor_converted = row['idvisitor_converted'] if pd.notna(row.get('idvisitor_converted')) else None
             
             # Parse JSON from custom_dimension_1
-            if not custom_dim_1 or pd.isna(custom_dim_1):
+            if not custom_dim_1 or pd.isna(custom_dim_1) or not isinstance(custom_dim_1, str):
                 skipped_no_json += 1
                 continue
             
             try:
-                poll_data = json.loads(custom_dim_1)
-            except json.JSONDecodeError:
+                json_data = json.loads(custom_dim_1)
+            except (json.JSONDecodeError, TypeError) as e:
+                skipped_no_json += 1
+                if idx < 3:  # Debug first few failures
+                    print(f"  DEBUG: JSON parse error at record {idx+1}: {str(e)}")
+                continue
+            
+            if not isinstance(json_data, dict):
                 skipped_no_json += 1
                 continue
             
-            if not isinstance(poll_data, dict):
-                skipped_no_structure += 1
+            # Check if section is "Poll"
+            section = json_data.get('section', '')
+            if section != 'Poll':
+                skipped_no_poll_section += 1
                 continue
             
-            # Try to extract poll data from root level first
-            options = poll_data.get('options', [])
-            chosen_option = poll_data.get('chosenOption')
-            
-            # If not at root level, check inside gameData array
-            if chosen_option is None or not isinstance(options, list) or len(options) == 0:
-                # Check gameData array for poll data
-                game_data = poll_data.get('gameData', [])
-                if isinstance(game_data, list):
-                    for game_item in game_data:
-                        if not isinstance(game_item, dict):
-                            continue
-                        # Check jsonData array
-                        json_data = game_item.get('jsonData', [])
-                        if isinstance(json_data, list):
-                            for json_item in json_data:
-                                if not isinstance(json_item, dict):
-                                    continue
-                                # Check if this json_item has poll structure
-                                item_options = json_item.get('options', [])
-                                item_chosen = json_item.get('chosenOption')
-                                if item_chosen is not None and isinstance(item_options, list) and len(item_options) > 0:
-                                    options = item_options
-                                    chosen_option = item_chosen
-                                    break
-                            if options and chosen_option is not None:
-                                break
-            
-            # Skip if still no chosen option or options list is empty
-            if chosen_option is None or not isinstance(options, list) or len(options) == 0:
-                skipped_no_structure += 1
-                if debug_count < 5:
-                    print(f"  DEBUG: Record {idx+1} - No poll structure found. Root keys: {list(poll_data.keys())[:10]}")
-                    debug_count += 1
+            # Extract gameData array
+            game_data = json_data.get('gameData', [])
+            if not isinstance(game_data, list) or len(game_data) == 0:
+                skipped_no_gamedata += 1
                 continue
             
-            # Get the selected option's message
-            try:
-                chosen_option_idx = int(chosen_option)
-                if 0 <= chosen_option_idx < len(options):
-                    selected_option = options[chosen_option_idx]
-                    option_message = selected_option.get('message', '')
-                    
-                    if not option_message:
-                        skipped_no_structure += 1
-                        continue
-                    
-                    # Determine question based on options structure
-                    # We'll identify questions by the unique set of option messages
-                    option_messages = sorted([opt.get('message', '') for opt in options if opt.get('message')])
-                    option_signature = tuple(option_messages)
-                    
-                    processed_records.append({
-                        'game_name': game_name,
-                        'question_signature': str(option_signature),  # Use signature to identify questions
-                        'option_message': option_message,
-                        'idvisitor_converted': row['idvisitor_converted'],
-                        'idvisit': row['idvisit']
-                    })
-            except (ValueError, IndexError, TypeError) as e:
-                skipped_no_structure += 1
-                if debug_count < 5:
-                    print(f"  DEBUG: Record {idx+1} - Error extracting option: {str(e)}")
-                    debug_count += 1
-                continue
+            # Process each poll question in gameData
+            # poll_question_index is 1-based (1, 2, 3, ...)
+            for poll_question_index, game_item in enumerate(game_data, start=1):
+                if not isinstance(game_item, dict):
+                    continue
+                
+                # Get options array and chosenOption
+                options = game_item.get('options', [])
+                chosen_option_idx = game_item.get('chosenOption')
+                
+                # Skip if no options or chosenOption is missing/null
+                if not isinstance(options, list) or len(options) == 0:
+                    skipped_invalid_chosen += 1
+                    continue
+                
+                if chosen_option_idx is None or pd.isna(chosen_option_idx):
+                    skipped_invalid_chosen += 1
+                    continue
+                
+                # Convert chosenOption to integer (it's 0-based index)
+                try:
+                    chosen_option_idx = int(chosen_option_idx)
+                except (ValueError, TypeError):
+                    skipped_invalid_chosen += 1
+                    continue
+                
+                # Validate index is within bounds
+                if chosen_option_idx < 0 or chosen_option_idx >= len(options):
+                    skipped_invalid_chosen += 1
+                    if idx < 3:  # Debug first few failures
+                        print(f"  DEBUG: Invalid chosenOption index {chosen_option_idx} for {len(options)} options")
+                    continue
+                
+                # Get the selected option message
+                selected_option = options[chosen_option_idx]
+                if not isinstance(selected_option, dict):
+                    skipped_invalid_chosen += 1
+                    continue
+                
+                option_message = selected_option.get('message', '')
+                if not option_message or not isinstance(option_message, str):
+                    skipped_invalid_chosen += 1
+                    continue
+                
+                # Record this poll response
+                processed_records.append({
+                    'game_name': game_name,
+                    'poll_question_index': poll_question_index,
+                    'option_message': option_message,
+                    'idvisitor_converted': idvisitor_converted
+                })
+                total_questions_processed += 1
                 
         except Exception as e:
             print(f"  WARNING: Error processing poll record {idx+1}: {str(e)}")
-            if debug_count < 3:
+            if idx < 3:
                 import traceback
                 traceback.print_exc()
-                debug_count += 1
             continue
     
-    print(f"  Skipped records: {skipped_no_json} (no JSON), {skipped_no_structure} (no poll structure)")
+    print(f"  Skipped records: {skipped_no_json} (no/invalid JSON), {skipped_no_poll_section} (not Poll section), {skipped_no_gamedata} (no gameData), {skipped_invalid_chosen} (invalid chosenOption)")
+    print(f"  Total poll questions processed: {total_questions_processed}")
     
     if not processed_records:
         print("WARNING: No valid poll responses found after processing")
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df = pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
     # Convert to DataFrame
     results_df = pd.DataFrame(processed_records)
-    print(f"  Processed {len(results_df)} valid poll responses")
+    print(f"  Processed {len(results_df)} valid poll question responses")
     
-    # Map question signatures to sequential question IDs
-    # Group by question_signature to assign sequential IDs (1, 2, 3)
-    unique_questions = results_df['question_signature'].unique()
-    question_mapping = {sig: idx + 1 for idx, sig in enumerate(sorted(unique_questions))}
-    results_df['question_id'] = results_df['question_signature'].map(question_mapping)
-    
-    # Aggregate: count distinct users per game, question_id, and option
-    agg_df = (
-        results_df
-        .groupby(['game_name', 'question_id', 'option_message'])['idvisitor_converted']
-        .nunique()
-        .reset_index(name='user_count')
-    )
-    
-    # Also create dashboard-compatible format with question as string
-    # Map question_id to readable question string
-    agg_df['question'] = 'Question ' + agg_df['question_id'].astype(str)
-    agg_df['option'] = agg_df['option_message']
-    agg_df['count'] = agg_df['user_count']
-    
-    # Create final output with both formats (for backward compatibility)
-    final_df = agg_df[['game_name', 'question_id', 'option_message', 'user_count', 'question', 'option', 'count']].copy()
+    # Aggregate: count distinct users per game, poll_question_index, and option_message
+    # Use idvisitor_converted for counting distinct users
+    if 'idvisitor_converted' in results_df.columns:
+        agg_df = (
+            results_df
+            .groupby(['game_name', 'poll_question_index', 'option_message'])['idvisitor_converted']
+            .agg(['count', 'nunique'])  # Count total responses and unique users
+            .reset_index()
+        )
+        agg_df.columns = ['game_name', 'poll_question_index', 'option_message', 'total_responses', 'selected_count']
+        # Use unique users (selected_count) as the main metric
+        agg_df = agg_df[['game_name', 'poll_question_index', 'option_message', 'selected_count']]
+    else:
+        # Fallback: just count occurrences
+        agg_df = (
+            results_df
+            .groupby(['game_name', 'poll_question_index', 'option_message'])
+            .size()
+            .reset_index(name='selected_count')
+        )
     
     # Sort for consistent output
-    final_df = final_df.sort_values(['game_name', 'question_id', 'option_message'])
+    agg_df = agg_df.sort_values(['game_name', 'poll_question_index', 'option_message'])
     
-    print(f"SUCCESS: Final parent poll data: {len(final_df)} records")
-    print(f"  Games: {final_df['game_name'].nunique()}")
-    print(f"  Questions: {final_df['question_id'].nunique()}")
-    print(f"  Total responses: {final_df['user_count'].sum():,}")
+    print(f"SUCCESS: Final parent poll data: {len(agg_df)} records")
+    print(f"  Games: {agg_df['game_name'].nunique()}")
+    print(f"  Questions: {agg_df['poll_question_index'].nunique()}")
+    print(f"  Total responses: {agg_df['selected_count'].sum():,}")
     
-    # Save to CSV - save with dashboard-compatible columns
-    output_df = final_df[['game_name', 'question', 'option', 'count']].copy()
-    output_df.to_csv('data/poll_responses_data.csv', index=False)
-    print(f"SUCCESS: Saved data/poll_responses_data.csv ({len(output_df)} records)")
+    # For dashboard compatibility, create format with 'question' and 'option' columns
+    # Map poll_question_index to 'Question 1', 'Question 2', etc.
+    dashboard_df = agg_df.copy()
+    dashboard_df['question'] = 'Question ' + dashboard_df['poll_question_index'].astype(str)
+    dashboard_df['option'] = dashboard_df['option_message']
+    dashboard_df['count'] = dashboard_df['selected_count']
     
-    return final_df
+    # Save dashboard-compatible format (game_name, question, option, count)
+    dashboard_output = dashboard_df[['game_name', 'question', 'option', 'count']].copy()
+    dashboard_output.to_csv('data/poll_responses_data.csv', index=False)
+    print(f"SUCCESS: Saved data/poll_responses_data.csv ({len(dashboard_output)} records)")
+    
+    return agg_df
 
 
 def process_question_correctness() -> pd.DataFrame:
@@ -1982,8 +2008,8 @@ def process_question_correctness() -> pd.DataFrame:
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         print("WARNING: No question correctness data found")
     
-    # Always write the CSV (even if empty) so the dashboard can load gracefully
-    question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        # Always write the CSV (even if empty) so the dashboard can load gracefully
+        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
     print(f"SUCCESS: Saved data/question_correctness_data.csv ({len(question_correctness_df)} records)")
     
     return question_correctness_df
@@ -2009,9 +2035,9 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     if df_main is not None:
         record_counts['main_data_records'] = len(df_main)
         record_counts['data_date_range'] = {
-            'start': str(df_main['server_time'].min()),
-            'end': str(df_main['server_time'].max())
-        }
+                'start': str(df_main['server_time'].min()),
+                'end': str(df_main['server_time'].max())
+            }
     else:
         if os.path.exists('data/processed_data.csv'):
             df_check = pd.read_csv('data/processed_data.csv')
@@ -2047,7 +2073,7 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     with open(metadata_file, 'w') as f:
         json.dump(metadata, f, indent=2)
     print("SUCCESS: Saved data/metadata.json")
-
+        
 
 def main():
     """Main preprocessing function with modular processing options"""
@@ -2067,6 +2093,7 @@ Examples:
 
   # Process only parent poll responses
   python preprocess_data.py --parent-poll
+  python preprocess_data.py --poll-responses
 
   # Process multiple visuals
   python preprocess_data.py --time-series --repeatability
@@ -2090,7 +2117,7 @@ Available visuals:
     parser.add_argument('--time-series', action='store_true', help='Process time series data')
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
     parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
-    parser.add_argument('--parent-poll', action='store_true', help='Process parent poll responses data')
+    parser.add_argument('--parent-poll', '--poll-responses', action='store_true', dest='parent_poll', help='Process parent poll responses data')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
     
