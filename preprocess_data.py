@@ -226,6 +226,21 @@ INNER JOIN hybrid_game_completions
 WHERE hybrid_game_completions.created_at > '2025-07-02'
 """
 
+# Visits and Users query for Time Series Analysis
+VISITS_USERS_QUERY = """
+SELECT 
+  hybrid_games.game_name,
+  matomo_log_link_visit_action.server_time,
+  matomo_log_link_visit_action.idvisit,
+  matomo_log_link_visit_action.idvisitor
+FROM hybrid_games
+INNER JOIN hybrid_games_links 
+  ON hybrid_games.id = hybrid_games_links.game_id
+INNER JOIN matomo_log_link_visit_action 
+  ON hybrid_games_links.activity_id = matomo_log_link_visit_action.custom_dimension_2
+WHERE matomo_log_link_visit_action.server_time > '2025-07-02'
+"""
+
 
 def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe from database"""
@@ -1174,7 +1189,7 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
     
     if df_instances.empty:
         print("WARNING: No instances data to process")
-        return pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+        return pd.DataFrame(columns=['period_label', 'game_name', 'instances', 'period_type'])
     
     # Convert created_at to datetime
     df_instances['created_at'] = pd.to_datetime(df_instances['created_at'])
@@ -1186,7 +1201,7 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
     
     if df_instances.empty:
         print("WARNING: No instances data after filtering")
-        return pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+        return pd.DataFrame(columns=['period_label', 'game_name', 'instances', 'period_type'])
     
     # Get unique games
     unique_games = df_instances['game_name'].unique()
@@ -1214,13 +1229,13 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
         if game_name == 'All Games':
             # For "All Games", aggregate across all games (don't group by game_name)
             daily_agg = game_df.groupby('date')['id'].nunique().reset_index()
-            daily_agg.columns = ['period_label', 'instance_count']
+            daily_agg.columns = ['period_label', 'instances']
             daily_agg['period_label'] = daily_agg['period_label'].astype(str)
             daily_agg['game_name'] = 'All Games'
         else:
             # For individual games, group by date and game_name
             daily_agg = game_df.groupby(['date', 'game_name'])['id'].nunique().reset_index()
-            daily_agg.columns = ['period_label', 'game_name', 'instance_count']
+            daily_agg.columns = ['period_label', 'game_name', 'instances']
             daily_agg['period_label'] = daily_agg['period_label'].astype(str)
         daily_agg['period_type'] = 'Day'
         time_series_data.extend(daily_agg.to_dict('records'))
@@ -1232,12 +1247,12 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
         if game_name == 'All Games':
             # For "All Games", aggregate across all games
             monthly_agg = game_df.groupby('period_label')['id'].nunique().reset_index()
-            monthly_agg.columns = ['period_label', 'instance_count']
+            monthly_agg.columns = ['period_label', 'instances']
             monthly_agg['game_name'] = 'All Games'
         else:
             # For individual games, group by period_label and game_name
             monthly_agg = game_df.groupby(['period_label', 'game_name'])['id'].nunique().reset_index()
-            monthly_agg.columns = ['period_label', 'game_name', 'instance_count']
+            monthly_agg.columns = ['period_label', 'game_name', 'instances']
         monthly_agg['period_type'] = 'Month'
         time_series_data.extend(monthly_agg.to_dict('records'))
         
@@ -1251,17 +1266,152 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
         if game_name == 'All Games':
             # For "All Games", aggregate across all games
             weekly_agg = game_df.groupby('period_label')['id'].nunique().reset_index()
-            weekly_agg.columns = ['period_label', 'instance_count']
+            weekly_agg.columns = ['period_label', 'instances']
             weekly_agg['game_name'] = 'All Games'
         else:
             # For individual games, group by period_label and game_name
             weekly_agg = game_df.groupby(['period_label', 'game_name'])['id'].nunique().reset_index()
-            weekly_agg.columns = ['period_label', 'game_name', 'instance_count']
+            weekly_agg.columns = ['period_label', 'game_name', 'instances']
         weekly_agg['period_type'] = 'Week'
         time_series_data.extend(weekly_agg.to_dict('records'))
     
     time_series_df = pd.DataFrame(time_series_data)
     print(f"SUCCESS: Time series instances data: {len(time_series_df)} records")
+    print(f"  Daily records: {len(time_series_df[time_series_df['period_type'] == 'Day'])}")
+    print(f"  Weekly records: {len(time_series_df[time_series_df['period_type'] == 'Week'])}")
+    print(f"  Monthly records: {len(time_series_df[time_series_df['period_type'] == 'Month'])}")
+    
+    return time_series_df
+
+
+def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> pd.DataFrame:
+    """Preprocess time series data for visits and users - using server_time"""
+    print("Preprocessing time series data for visits and users...")
+    
+    if df_visits_users.empty:
+        print("WARNING: No visits/users data to process")
+        return pd.DataFrame(columns=['period_label', 'game_name', 'visits', 'users', 'period_type'])
+    
+    # Convert server_time to datetime
+    df_visits_users['server_time'] = pd.to_datetime(df_visits_users['server_time'])
+    
+    # Convert idvisitor from hex to decimal if needed (it should already be in the correct format from the query)
+    # But if it's stored as hex string, convert it
+    if df_visits_users['idvisitor'].dtype == object:
+        # Try to detect if it's hex and convert
+        try:
+            # If idvisitor is hex string, convert to decimal
+            sample_val = str(df_visits_users['idvisitor'].iloc[0])
+            if len(sample_val) > 10:  # Hex strings are typically longer
+                # Try to convert hex to decimal
+                df_visits_users['idvisitor'] = df_visits_users['idvisitor'].apply(
+                    lambda x: int(str(x), 16) if isinstance(x, str) and len(str(x)) > 10 else x
+                )
+        except:
+            # If conversion fails, leave as is
+            pass
+    
+    # Filter data to only include records from July 2nd, 2025 onwards
+    july_2_2025 = pd.Timestamp('2025-07-02')
+    df_visits_users = df_visits_users[df_visits_users['server_time'] >= july_2_2025].copy()
+    print(f"Filtered visits/users data to July 2nd, 2025 onwards: {len(df_visits_users)} records")
+    
+    if df_visits_users.empty:
+        print("WARNING: No visits/users data after filtering")
+        return pd.DataFrame(columns=['period_label', 'game_name', 'visits', 'users', 'period_type'])
+    
+    # Get unique games
+    unique_games = df_visits_users['game_name'].unique()
+    print(f"Processing time series for {len(unique_games)} games")
+    
+    # Prepare time series data for different periods
+    time_series_data = []
+    
+    # Process each game individually + "All Games" combined
+    games_to_process = list(unique_games) + ['All Games']
+    
+    for game_name in games_to_process:
+        if game_name == 'All Games':
+            game_df = df_visits_users.copy()
+        else:
+            game_df = df_visits_users[df_visits_users['game_name'] == game_name].copy()
+        
+        if game_df.empty:
+            continue
+            
+        print(f"  Processing time series for: {game_name}")
+    
+        # Daily aggregation - format: YYYY-MM-DD
+        game_df['date'] = game_df['server_time'].dt.date
+        if game_name == 'All Games':
+            # For "All Games", aggregate across all games
+            daily_agg = game_df.groupby('date').agg({
+                'idvisit': 'nunique',
+                'idvisitor': 'nunique'
+            }).reset_index()
+            daily_agg.columns = ['period_label', 'visits', 'users']
+            daily_agg['period_label'] = daily_agg['period_label'].astype(str)
+            daily_agg['game_name'] = 'All Games'
+        else:
+            # For individual games, group by date and game_name
+            daily_agg = game_df.groupby(['date', 'game_name']).agg({
+                'idvisit': 'nunique',
+                'idvisitor': 'nunique'
+            }).reset_index()
+            daily_agg.columns = ['period_label', 'game_name', 'visits', 'users']
+            daily_agg['period_label'] = daily_agg['period_label'].astype(str)
+        daily_agg['period_type'] = 'Day'
+        time_series_data.extend(daily_agg.to_dict('records'))
+        
+        # Monthly aggregation - format: YYYY_MM (underscore, not hyphen)
+        game_df['year'] = game_df['server_time'].dt.year
+        game_df['month'] = game_df['server_time'].dt.month
+        game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['month'].astype(str).str.zfill(2)
+        if game_name == 'All Games':
+            # For "All Games", aggregate across all games
+            monthly_agg = game_df.groupby('period_label').agg({
+                'idvisit': 'nunique',
+                'idvisitor': 'nunique'
+            }).reset_index()
+            monthly_agg.columns = ['period_label', 'visits', 'users']
+            monthly_agg['game_name'] = 'All Games'
+        else:
+            # For individual games, group by period_label and game_name
+            monthly_agg = game_df.groupby(['period_label', 'game_name']).agg({
+                'idvisit': 'nunique',
+                'idvisitor': 'nunique'
+            }).reset_index()
+            monthly_agg.columns = ['period_label', 'game_name', 'visits', 'users']
+        monthly_agg['period_type'] = 'Month'
+        time_series_data.extend(monthly_agg.to_dict('records'))
+        
+        # Weekly aggregation - starts from Wednesday, format: YYYY_WW
+        # Shift date by -2 days before calculating week number (so Wednesday becomes Monday)
+        game_df['shifted_date'] = game_df['server_time'] - pd.Timedelta(days=2)
+        game_df['year'] = game_df['shifted_date'].dt.year
+        game_df['week'] = game_df['shifted_date'].dt.isocalendar().week
+        game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['week'].astype(str).str.zfill(2)
+        
+        if game_name == 'All Games':
+            # For "All Games", aggregate across all games
+            weekly_agg = game_df.groupby('period_label').agg({
+                'idvisit': 'nunique',
+                'idvisitor': 'nunique'
+            }).reset_index()
+            weekly_agg.columns = ['period_label', 'visits', 'users']
+            weekly_agg['game_name'] = 'All Games'
+        else:
+            # For individual games, group by period_label and game_name
+            weekly_agg = game_df.groupby(['period_label', 'game_name']).agg({
+                'idvisit': 'nunique',
+                'idvisitor': 'nunique'
+            }).reset_index()
+            weekly_agg.columns = ['period_label', 'game_name', 'visits', 'users']
+        weekly_agg['period_type'] = 'Week'
+        time_series_data.extend(weekly_agg.to_dict('records'))
+    
+    time_series_df = pd.DataFrame(time_series_data)
+    print(f"SUCCESS: Time series visits/users data: {len(time_series_df)} records")
     print(f"  Daily records: {len(time_series_df[time_series_df['period_type'] == 'Day'])}")
     print(f"  Weekly records: {len(time_series_df[time_series_df['period_type'] == 'Week'])}")
     print(f"  Monthly records: {len(time_series_df[time_series_df['period_type'] == 'Month'])}")
@@ -1468,13 +1618,14 @@ def process_score_distribution() -> pd.DataFrame:
 
 
 def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
-    """Process time series data for instances only"""
+    """Process time series data for instances, visits, and users"""
     print("\n" + "=" * 60)
-    print("PROCESSING: Time Series Data (Instances)")
+    print("PROCESSING: Time Series Data (Instances, Visits, Users)")
     print("=" * 60)
     
     # Fetch instances data from database
     print("Fetching instances data from database...")
+    df_instances = pd.DataFrame()
     try:
         with pymysql.connect(
             host=HOST,
@@ -1493,28 +1644,91 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
                 rows = cur.fetchall()
                 cols = [d[0] for d in cur.description]
                 df_instances = pd.DataFrame(rows, columns=cols)
-                print(f"  Query returned {len(df_instances)} records")
+                print(f"  Instances query returned {len(df_instances)} records")
     except Exception as e:
         print(f"  ERROR: Failed to fetch instances data: {str(e)}")
         import traceback
         traceback.print_exc()
-        return pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
     
-    if df_instances.empty:
-        print("WARNING: No instances data found")
-        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
-        empty_df.to_csv('data/time_series_data.csv', index=False)
-        return empty_df
+    # Fetch visits and users data from database
+    print("Fetching visits and users data from database...")
+    df_visits_users = pd.DataFrame()
+    try:
+        with pymysql.connect(
+            host=HOST,
+            port=PORT,
+            user=USER,
+            password=PASSWORD,
+            database=DBNAME,
+            connect_timeout=30,
+            read_timeout=300,
+            write_timeout=300,
+            ssl={'ssl': {}},
+        ) as conn:
+            with conn.cursor() as cur:
+                print("  Executing visits/users query...")
+                cur.execute(VISITS_USERS_QUERY)
+                rows = cur.fetchall()
+                cols = [d[0] for d in cur.description]
+                df_visits_users = pd.DataFrame(rows, columns=cols)
+                print(f"  Visits/users query returned {len(df_visits_users)} records")
+    except Exception as e:
+        print(f"  ERROR: Failed to fetch visits/users data: {str(e)}")
+        import traceback
+        traceback.print_exc()
     
     # Process instances data
-    time_series_df = preprocess_time_series_data_instances(df_instances)
+    instances_df = pd.DataFrame()
+    if not df_instances.empty:
+        instances_df = preprocess_time_series_data_instances(df_instances)
+    else:
+        print("WARNING: No instances data to process")
     
+    # Process visits/users data
+    visits_users_df = pd.DataFrame()
+    if not df_visits_users.empty:
+        visits_users_df = preprocess_time_series_data_visits_users(df_visits_users)
+    else:
+        print("WARNING: No visits/users data to process")
+    
+    # Merge instances and visits/users data on game_name, period_label, and period_type
+    if not instances_df.empty and not visits_users_df.empty:
+        # Merge on game_name, period_label, and period_type
+        time_series_df = instances_df.merge(
+            visits_users_df,
+            on=['game_name', 'period_label', 'period_type'],
+            how='outer'
+        )
+        # Fill missing values with 0
+        time_series_df['instances'] = time_series_df['instances'].fillna(0).astype(int)
+        time_series_df['visits'] = time_series_df['visits'].fillna(0).astype(int)
+        time_series_df['users'] = time_series_df['users'].fillna(0).astype(int)
+    elif not instances_df.empty:
+        # Only instances data available
+        time_series_df = instances_df.copy()
+        time_series_df['visits'] = 0
+        time_series_df['users'] = 0
+    elif not visits_users_df.empty:
+        # Only visits/users data available
+        time_series_df = visits_users_df.copy()
+        time_series_df['instances'] = 0
+    else:
+        # No data available
+        print("WARNING: No time series data available")
+        time_series_df = pd.DataFrame(columns=['period_label', 'game_name', 'instances', 'visits', 'users', 'period_type'])
+    
+    # Sort by period_type, game_name, and period_label
+    time_series_df = time_series_df.sort_values(['period_type', 'game_name', 'period_label'])
+    
+    # Save to CSV
     if not time_series_df.empty:
         time_series_df.to_csv('data/time_series_data.csv', index=False)
         print(f"SUCCESS: Saved data/time_series_data.csv ({len(time_series_df)} records)")
+        print(f"  Columns: {list(time_series_df.columns)}")
+        print(f"  Sample row: {time_series_df.iloc[0].to_dict() if len(time_series_df) > 0 else 'N/A'}")
     else:
         print("WARNING: No time series data to save")
-        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instance_count', 'period_type'])
+        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'instances', 'visits', 'users', 'period_type'])
         empty_df.to_csv('data/time_series_data.csv', index=False)
     
     return time_series_df

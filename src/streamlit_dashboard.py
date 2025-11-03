@@ -878,18 +878,43 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             (filtered_ts_df['game_name'] != 'All Games')
         ]
         # Show data per game if games are selected
-        aggregated_df = filtered_ts_df.groupby(['period_label', 'game_name'])['instance_count'].sum().reset_index()
+        # Sum all metrics if they exist
+        agg_cols = {}
+        if 'instances' in filtered_ts_df.columns:
+            agg_cols['instances'] = 'sum'
+        if 'visits' in filtered_ts_df.columns:
+            agg_cols['visits'] = 'sum'
+        if 'users' in filtered_ts_df.columns:
+            agg_cols['users'] = 'sum'
+        
+        if agg_cols:
+            aggregated_df = filtered_ts_df.groupby(['period_label', 'game_name']).agg(agg_cols).reset_index()
+        else:
+            # Fallback if columns don't exist
+            aggregated_df = filtered_ts_df.groupby(['period_label', 'game_name']).first().reset_index()
     else:
         # When no games selected, use "All Games" rows directly (don't aggregate individual games)
         # This prevents double-counting
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'] == 'All Games']
         # Use the pre-aggregated "All Games" data directly
-        aggregated_df = filtered_ts_df[['period_label', 'instance_count']].copy()
+        cols_to_copy = ['period_label']
+        if 'instances' in filtered_ts_df.columns:
+            cols_to_copy.append('instances')
+        if 'visits' in filtered_ts_df.columns:
+            cols_to_copy.append('visits')
+        if 'users' in filtered_ts_df.columns:
+            cols_to_copy.append('users')
+        
+        aggregated_df = filtered_ts_df[cols_to_copy].copy()
         aggregated_df['game_name'] = 'All Games'
+    
+    # Ensure all required columns exist and fill missing ones with 0
+    for col in ['instances', 'visits', 'users']:
+        if col not in aggregated_df.columns:
+            aggregated_df[col] = 0
     
     # Rename period_label to time_period for compatibility with existing chart code
     aggregated_df['time_period'] = aggregated_df['period_label']
-    aggregated_df['instances'] = aggregated_df['instance_count']
     
     
     if aggregated_df.empty:
@@ -948,9 +973,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         time_order = None
         
-    # Create chart for instances only
-    def create_instances_chart(data):
-        """Create chart showing Instances only"""
+    # Create combined chart for Instances, Visits, and Users
+    def create_combined_chart(data):
+        """Create chart showing Instances, Visits, and Users together"""
         chart_data = []
         for _, row in data.iterrows():
             # Format time period for display
@@ -971,7 +996,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                 else:
                     time_display = str(row['period_label'])
             elif time_period == "Daily":
-                # Format date for display (keep as is or format nicely)
+                # Format date for display
                 try:
                     from datetime import datetime
                     date_obj = datetime.strptime(row['period_label'], '%Y-%m-%d')
@@ -979,12 +1004,12 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                 except:
                     time_display = str(row['period_label'])
             
-            # Add data for instances
-            chart_data.append({
-                'Time': time_display,
-                'Game': row.get('game_name', 'All Games'),
-                'Instances': row['instances']
-            })
+            # Add data for each metric
+            chart_data.extend([
+                {'Time': time_display, 'Metric': 'Instances', 'Count': row.get('instances', 0)},
+                {'Time': time_display, 'Metric': 'Visits', 'Count': row.get('visits', 0)},
+                {'Time': time_display, 'Metric': 'Users', 'Count': row.get('users', 0)}
+            ])
         
         chart_df = pd.DataFrame(chart_data)
         
@@ -998,12 +1023,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelLimit=150,
                        titleFontSize=14
                    )),
-            y=alt.Y('Instances:Q', title='Instance Count', axis=alt.Axis(format='~s')),
-            color=alt.Color('Game:N', legend=alt.Legend(title="Game", labelFontSize=12, titleFontSize=14)),
-            tooltip=['Time:N', 'Game:N', 'Instances:Q']
+            y=alt.Y('Count:Q', title='Count', axis=alt.Axis(format='~s')),
+            tooltip=['Time:N', 'Metric:N', 'Count:Q']
         )
         
-        # Create lines
+        # Create lines for each metric
         lines = base.mark_line(
             strokeWidth=3,
             point=alt.OverlayMarkDef(
@@ -1012,13 +1036,20 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                 stroke='white',
                 strokeWidth=1.5
             )
+        ).encode(
+            color=alt.Color('Metric:N', 
+                          scale=alt.Scale(domain=['Instances', 'Visits', 'Users'],
+                                        range=['#FF6B6B', '#FFA726', '#AB47BC']),
+                          legend=alt.Legend(title="Metric Type", 
+                           labelFontSize=14,
+                                          titleFontSize=16))
         ).properties(
             width=900,
             height=500,
-            title='Time Series Analysis: Instances Over Time'
+            title='Time Series Analysis: Instances, Visits, and Users'
         )
             
-        # Add data labels
+        # Add data labels for every other point to reduce clutter
         labels = base.mark_text(
             align='center',
             baseline='bottom',
@@ -1026,7 +1057,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             fontWeight='bold',
             dy=-8
         ).encode(
-            text=alt.Text('Instances:Q', format='.0f')
+            text=alt.Text('Count:Q', format='.0f'),
+            color=alt.Color('Metric:N', 
+                          scale=alt.Scale(domain=['Instances', 'Visits', 'Users'],
+                                        range=['#FF6B6B', '#FFA726', '#AB47BC']),
+                          legend=None)
         ).transform_filter(
             alt.datum.Time % 2 == 0  # Show labels only for every other time point
         )
@@ -1034,26 +1069,26 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         return (lines + labels).configure_axis(
             labelFontSize=16,
             titleFontSize=18,
-                grid=True
-            ).configure_title(
-                fontSize=24,
-                fontWeight='bold'
-            )
+            grid=True
+        ).configure_title(
+            fontSize=24,
+            fontWeight='bold'
+        )
             
     # Combined Analysis Section
-    st.markdown("### 📊 Time Series Analysis: Instances")
-    st.markdown("This chart displays **Instances** over time using the updated calculation logic.")
+    st.markdown("### 📊 Time Series Analysis: Instances, Visits, and Users")
+    st.markdown("This chart displays **Instances**, **Visits**, and **Users** over time.")
     
-    instances_chart = create_instances_chart(aggregated_df)
-    st.altair_chart(instances_chart, use_container_width=True)
+    combined_chart = create_combined_chart(aggregated_df)
+    st.altair_chart(combined_chart, use_container_width=True)
     
     # Add summary statistics
     st.markdown("#### 📈 Summary Statistics")
     
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
-        total_instances = aggregated_df['instances'].sum()
+        total_instances = aggregated_df.get('instances', pd.Series([0])).sum()
         st.metric(
             label="⚡ Total Instances", 
             value=f"{total_instances:,}",
@@ -1061,11 +1096,19 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         )
     
     with col2:
-        avg_instances = aggregated_df['instances'].mean()
+        total_visits = aggregated_df.get('visits', pd.Series([0])).sum()
         st.metric(
-            label="📊 Average Instances per Period",
-            value=f"{avg_instances:,.0f}",
-            help="Average number of instances per time period"
+            label="🔄 Total Visits",
+            value=f"{total_visits:,}",
+            help="Sum of distinct visits across the selected time period"
+        )
+    
+    with col3:
+        total_users = aggregated_df.get('users', pd.Series([0])).sum()
+        st.metric(
+            label="👥 Total Users",
+            value=f"{total_users:,}",
+            help="Sum of distinct users across the selected time period"
         )
 
 def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
