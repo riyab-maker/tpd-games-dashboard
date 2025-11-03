@@ -1818,8 +1818,8 @@ def process_parent_poll() -> pd.DataFrame:
                 password=PASSWORD,
                 database=DBNAME,
                 connect_timeout=60,
-                read_timeout=0,  # 0 means no timeout - connection stays open
-                write_timeout=0,
+                read_timeout=600,  # 10 minutes - large enough for long queries
+                write_timeout=600,
                 init_command="SET SESSION wait_timeout=600, interactive_timeout=600, max_execution_time=600000",
                 ssl={'ssl': {}},
             )
