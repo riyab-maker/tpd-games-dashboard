@@ -1250,8 +1250,10 @@ def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> 
 
     st.altair_chart(chart, use_container_width=True)
 
+# Streamlit page config must be called before any other Streamlit command
+st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
+
 def main() -> None:
-    st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
     st.title("Hybrid Dashboard")
     st.caption("Performance Optimized - Using Preprocessed Data")
     
@@ -1393,5 +1395,5 @@ def main() -> None:
         st.warning("No time series data available.")
 
 
-if __name__ == "__main__":
-    main()
+# Streamlit automatically runs the script, so call main() directly
+main()
