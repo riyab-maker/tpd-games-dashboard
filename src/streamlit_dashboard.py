@@ -1457,17 +1457,24 @@ def main() -> None:
             total_started_instances = int(total_started_instances) if not pd.isna(total_started_instances) else 0
             total_completed_instances = int(total_completed_instances) if not pd.isna(total_completed_instances) else 0
             
-            # Create summary data for selected games with explicit dtype
-            selected_games_summary = pd.DataFrame([
-                {'Event': 'Started', 'Users': total_started_users, 'Visits': total_started_visits, 'Instances': total_started_instances},
-                {'Event': 'Completed', 'Users': total_completed_users, 'Visits': total_completed_visits, 'Instances': total_completed_instances}
-            ])
+            # Create summary data for selected games with explicit dtype and column order
+            selected_games_summary = pd.DataFrame({
+                'Event': ['Started', 'Completed'],
+                'Users': [total_started_users, total_completed_users],
+                'Visits': [total_started_visits, total_completed_visits],
+                'Instances': [total_started_instances, total_completed_instances]
+            })
             # Ensure numeric columns are properly typed
             selected_games_summary['Users'] = pd.to_numeric(selected_games_summary['Users'], errors='coerce').fillna(0).astype(int)
             selected_games_summary['Visits'] = pd.to_numeric(selected_games_summary['Visits'], errors='coerce').fillna(0).astype(int)
             selected_games_summary['Instances'] = pd.to_numeric(selected_games_summary['Instances'], errors='coerce').fillna(0).astype(int)
             
-            render_modern_dashboard(selected_games_summary, selected_games_summary)
+            # Verify the DataFrame structure before rendering
+            if selected_games_summary.empty or 'Event' not in selected_games_summary.columns:
+                st.error("Error creating filtered conversion data. Showing all games instead.")
+                render_modern_dashboard(summary_df, summary_df)
+            else:
+                render_modern_dashboard(selected_games_summary, selected_games_summary)
         else:
             st.warning("No data found for selected games.")
     
