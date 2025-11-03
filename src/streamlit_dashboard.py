@@ -282,11 +282,13 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             started_row = conversion_df[conversion_df['Event'] == 'Started']
             completed_row = conversion_df[conversion_df['Event'] == 'Completed']
             if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
-                started_count = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce').fillna(0))
+                val = pd.to_numeric(started_row['Users'].iloc[0], errors='coerce')
+                started_count = int(val) if not pd.isna(val) else 0
             else:
                 started_count = 0
             if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
-                completed_count = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce').fillna(0))
+                val = pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce')
+                completed_count = int(val) if not pd.isna(val) else 0
             else:
                 completed_count = 0
         else:
@@ -310,9 +312,12 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         # Safely extract values with defaults
         try:
             if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
-                started_users = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce').fillna(0))
-                started_visits = int(pd.to_numeric(started_row['Visits'].iloc[0], errors='coerce').fillna(0))
-                started_instances = int(pd.to_numeric(started_row['Instances'].iloc[0], errors='coerce').fillna(0))
+                val_users = pd.to_numeric(started_row['Users'].iloc[0], errors='coerce')
+                val_visits = pd.to_numeric(started_row['Visits'].iloc[0], errors='coerce')
+                val_instances = pd.to_numeric(started_row['Instances'].iloc[0], errors='coerce')
+                started_users = int(val_users) if not pd.isna(val_users) else 0
+                started_visits = int(val_visits) if not pd.isna(val_visits) else 0
+                started_instances = int(val_instances) if not pd.isna(val_instances) else 0
             else:
                 started_users = 0
                 started_visits = 0
@@ -324,9 +329,12 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             
         try:
             if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
-                completed_users = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce').fillna(0))
-                completed_visits = int(pd.to_numeric(completed_row['Visits'].iloc[0], errors='coerce').fillna(0))
-                completed_instances = int(pd.to_numeric(completed_row['Instances'].iloc[0], errors='coerce').fillna(0))
+                val_users = pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce')
+                val_visits = pd.to_numeric(completed_row['Visits'].iloc[0], errors='coerce')
+                val_instances = pd.to_numeric(completed_row['Instances'].iloc[0], errors='coerce')
+                completed_users = int(val_users) if not pd.isna(val_users) else 0
+                completed_visits = int(val_visits) if not pd.isna(val_visits) else 0
+                completed_instances = int(val_instances) if not pd.isna(val_instances) else 0
             else:
                 completed_users = 0
                 completed_visits = 0
