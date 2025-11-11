@@ -1,7 +1,22 @@
 game_name,question,option,count
-Shape Circle,Question 1,ख़ुद से,120
-Shape Circle,Question 1,भाई बहन,45
-Shape Circle,Question 1,माता-पिता,30
-Shape Circle,Question 2,आधे से कम,15
-Shape Circle,Question 2,आधे,25
-Shape Circle,Question 2,सभी,60
+Color Red,Question 1,भाई बहन,2
+Color Red,Question 2,आधे,2
+Color Red,Question 3,मदद से,2
+Color Yellow,Question 1,भाई बहन,2
+Color Yellow,Question 2,आधे,2
+Color Yellow,Question 3,मदद से,2
+Shape Circle,Question 1,ख़ुद से,87
+Shape Circle,Question 1,भाई बहन,51
+Shape Circle,Question 1,माता-पिता,317
+Shape Circle,Question 2,आधे,133
+Shape Circle,Question 2,आधे से कम,23
+Shape Circle,Question 2,सभी,295
+Shape Circle,Question 3,नहीं,6
+Shape Circle,Question 3,मदद से,70
+Shape Circle,Question 3,हाँ,375
+Shape Triangle,Question 1,ख़ुद से,2
+Shape Triangle,Question 1,भाई बहन,1
+Shape Triangle,Question 2,आधे,1
+Shape Triangle,Question 2,सभी,2
+Shape Triangle,Question 3,नहीं,1
+Shape Triangle,Question 3,हाँ,2

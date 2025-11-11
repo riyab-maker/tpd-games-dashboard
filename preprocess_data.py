@@ -1833,46 +1833,80 @@ def process_parent_poll(test_mode: bool = False) -> pd.DataFrame:
                     cur.execute("SET SESSION interactive_timeout=600")
                     cur.execute("SET SESSION max_execution_time=600000")  # milliseconds
                 
-                # Use server-side cursor to fetch results incrementally
-                from pymysql.cursors import SSCursor
-                print("  Executing parent poll query using server-side cursor...")
+                # Try regular cursor first (like other queries) - more reliable on Windows
+                # If that fails due to memory, fall back to server-side cursor
                 import time
+                import sys
+                
+                query = PARENT_POLL_QUERY.strip()
+                if test_mode:
+                    # Remove trailing semicolon and whitespace, then add LIMIT
+                    query = query.rstrip().rstrip(';').strip() + ' LIMIT 1000'
+                    print("  TEST MODE: Limiting query to 1000 records")
+                    sys.stdout.flush()
+                
+                print("  Executing parent poll query...")
+                sys.stdout.flush()
                 start_time = time.time()
                 
-                with conn.cursor(SSCursor) as cur:
-                    query = PARENT_POLL_QUERY.strip()
-                    if test_mode:
-                        # Remove trailing semicolon and whitespace, then add LIMIT
-                        query = query.rstrip().rstrip(';').strip() + ' LIMIT 1000'
-                        print("  TEST MODE: Limiting query to 1000 records")
-                    cur.execute(query)
-                    elapsed = time.time() - start_time
-                    print(f"  Query executed in {elapsed:.2f} seconds")
+                try:
+                    # Try regular cursor first (works better on Windows)
+                    with conn.cursor() as cur:
+                        cur.execute(query)
+                        elapsed = time.time() - start_time
+                        print(f"  Query executed in {elapsed:.2f} seconds")
+                        sys.stdout.flush()
+                        
+                        # Get column names
+                        cols = [d[0] for d in cur.description]
+                        print(f"  Fetching all results...")
+                        sys.stdout.flush()
+                        
+                        # Fetch all results at once (like other queries)
+                        fetch_start = time.time()
+                        all_rows = cur.fetchall()
+                        fetch_elapsed = time.time() - fetch_start
+                        print(f"  Fetched {len(all_rows):,} results in {fetch_elapsed:.2f} seconds")
+                        sys.stdout.flush()
+                        
+                except MemoryError:
+                    # If memory error, fall back to server-side cursor
+                    print("  Regular cursor failed (memory), using server-side cursor...")
+                    sys.stdout.flush()
+                    from pymysql.cursors import SSCursor
                     
-                    # Get column names first
-                    cols = [d[0] for d in cur.description]
-                    print(f"  Fetching results in batches...")
-                    
-                    # Fetch results in batches to avoid memory issues
-                    batch_size = 10000
-                    all_rows = []
-                    batch_num = 0
-                    start_time = time.time()
-                    
-                    while True:
-                        batch = cur.fetchmany(batch_size)
-                        if not batch:
-                            break
-                        all_rows.extend(batch)
-                        batch_num += 1
-                        if batch_num % 10 == 0:
-                            print(f"    Fetched {len(all_rows):,} records so far...")
-                    
-                    elapsed = time.time() - start_time
-                    print(f"  Fetched all {len(all_rows):,} results in {elapsed:.2f} seconds")
+                    with conn.cursor(SSCursor) as cur:
+                        cur.execute(query)
+                        elapsed = time.time() - start_time
+                        print(f"  Query executed in {elapsed:.2f} seconds")
+                        sys.stdout.flush()
+                        
+                        cols = [d[0] for d in cur.description]
+                        print(f"  Fetching results in batches...")
+                        sys.stdout.flush()
+                        
+                        batch_size = 10000
+                        all_rows = []
+                        batch_num = 0
+                        fetch_start = time.time()
+                        
+                        while True:
+                            batch = cur.fetchmany(batch_size)
+                            if not batch:
+                                break
+                            all_rows.extend(batch)
+                            batch_num += 1
+                            if batch_num % 10 == 0:
+                                print(f"    Fetched {len(all_rows):,} records so far...")
+                                sys.stdout.flush()
+                        
+                        fetch_elapsed = time.time() - fetch_start
+                        print(f"  Fetched all {len(all_rows):,} results in {fetch_elapsed:.2f} seconds")
+                        sys.stdout.flush()
                 
                 df_poll = pd.DataFrame(all_rows, columns=cols)
                 print(f"  Query returned {len(df_poll)} records")
+                sys.stdout.flush()
                 conn.close()
                 break  # Success, exit retry loop
                 
@@ -1942,21 +1976,32 @@ def process_parent_poll(test_mode: bool = False) -> pd.DataFrame:
                 skipped_no_json += 1
                 continue
             
-            # Check if section is "Poll"
-            section = json_data.get('section', '')
-            if section != 'Poll':
-                skipped_no_poll_section += 1
-                continue
-            
-            # Extract gameData array
+            # Extract gameData array (top-level array of sections)
             game_data = json_data.get('gameData', [])
             if not isinstance(game_data, list) or len(game_data) == 0:
                 skipped_no_gamedata += 1
                 continue
             
-            # Process each poll question in gameData
+            # Find the "Poll" section in gameData array
+            poll_section = None
+            for section_item in game_data:
+                if isinstance(section_item, dict) and section_item.get('section') == 'Poll':
+                    poll_section = section_item
+                    break
+            
+            if poll_section is None:
+                skipped_no_poll_section += 1
+                continue
+            
+            # Extract poll questions from the Poll section's gameData array
+            poll_game_data = poll_section.get('gameData', [])
+            if not isinstance(poll_game_data, list) or len(poll_game_data) == 0:
+                skipped_no_gamedata += 1
+                continue
+            
+            # Process each poll question in the Poll section's gameData
             # poll_question_index is 1-based (1, 2, 3, ...)
-            for poll_question_index, game_item in enumerate(game_data, start=1):
+            for poll_question_index, game_item in enumerate(poll_game_data, start=1):
                 if not isinstance(game_item, dict):
                     continue
                 
