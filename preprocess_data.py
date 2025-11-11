@@ -1778,8 +1778,11 @@ def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFram
     return repeatability_df
 
 
-def process_parent_poll() -> pd.DataFrame:
+def process_parent_poll(test_mode: bool = False) -> pd.DataFrame:
     """Process parent poll responses data from hybrid_games_links.custom_dimension_1
+    
+    Args:
+        test_mode: If True, limits query to 1000 records for testing
     
     Expected JSON structure:
     {
@@ -1838,7 +1841,12 @@ def process_parent_poll() -> pd.DataFrame:
                 start_time = time.time()
                 
                 with conn.cursor(SSCursor) as cur:
-                    cur.execute(PARENT_POLL_QUERY)
+                    query = PARENT_POLL_QUERY.strip()
+                    if test_mode:
+                        # Remove trailing semicolon and whitespace, then add LIMIT
+                        query = query.rstrip().rstrip(';').strip() + ' LIMIT 1000'
+                        print("  TEST MODE: Limiting query to 1000 records")
+                    cur.execute(query)
                     elapsed = time.time() - start_time
                     print(f"  Query executed in {elapsed:.2f} seconds")
                     
@@ -2187,6 +2195,7 @@ Available visuals:
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
     parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
     parser.add_argument('--parent-poll', '--poll-responses', action='store_true', dest='parent_poll', help='Process parent poll responses data')
+    parser.add_argument('--test', action='store_true', help='Test mode: limit queries to 1000 records')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
     
@@ -2239,7 +2248,8 @@ Available visuals:
         
         # Process parent poll if requested or if processing all
         if args.parent_poll or process_all:
-            process_parent_poll()
+            test_mode = getattr(args, 'test', False)
+            process_parent_poll(test_mode=test_mode)
         
         # Update metadata if requested or if processing all
         if args.metadata or process_all:
