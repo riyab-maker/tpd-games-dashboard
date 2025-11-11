@@ -191,6 +191,7 @@ WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01'
 
 # Parent Poll Query - fetch poll data from matomo_log_link_visit_action.custom_dimension_1
 # Join with matomo_log_action, hybrid_games_links, and hybrid_games to get game_name
+# Updated to include both game_completed and action_level patterns (like score distribution query)
 PARENT_POLL_QUERY = """
 SELECT 
   mlla.custom_dimension_1,
@@ -206,7 +207,11 @@ INNER JOIN hybrid_games_links hgl
   ON hgl.activity_id = mlla.custom_dimension_2
 INNER JOIN hybrid_games hg 
   ON hg.id = hgl.game_id
-WHERE mla.name LIKE "%_completed%"
+WHERE (
+    mla.name LIKE '%game_completed%' 
+    OR mla.name LIKE '%action_level%'
+    OR mla.name LIKE '%_completed%'
+  )
   AND mlla.custom_dimension_1 IS NOT NULL
   AND mlla.custom_dimension_1 LIKE "%poll%"
   AND mlla.server_time > '2025-07-01'
@@ -1907,6 +1912,13 @@ def process_parent_poll(test_mode: bool = False) -> pd.DataFrame:
                 df_poll = pd.DataFrame(all_rows, columns=cols)
                 print(f"  Query returned {len(df_poll)} records")
                 sys.stdout.flush()
+                
+                # Debug: Show unique games in query results
+                if 'game_name' in df_poll.columns:
+                    unique_games = df_poll['game_name'].unique()
+                    print(f"  Games in query results: {len(unique_games)}")
+                    print(f"  Game names: {sorted(unique_games)}")
+                    sys.stdout.flush()
                 conn.close()
                 break  # Success, exit retry loop
                 
@@ -2098,6 +2110,7 @@ def process_parent_poll(test_mode: bool = False) -> pd.DataFrame:
     
     print(f"SUCCESS: Final parent poll data: {len(agg_df)} records")
     print(f"  Games: {agg_df['game_name'].nunique()}")
+    print(f"  Game names: {sorted(agg_df['game_name'].unique())}")
     print(f"  Questions: {agg_df['poll_question_index'].nunique()}")
     print(f"  Total responses: {agg_df['selected_count'].sum():,}")
     
