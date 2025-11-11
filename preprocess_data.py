@@ -1452,7 +1452,8 @@ def fetch_repeatability_data() -> pd.DataFrame:
             write_timeout=300
         )
         
-        # Updated SQL query as specified
+        # Updated SQL query - filter for completed games only
+        # Join with matomo_log_action to filter by action name (game_completed or action_level)
         repeatability_query = """
         SELECT 
           matomo_log_link_visit_action.idlink_va,
@@ -1465,11 +1466,17 @@ def fetch_repeatability_data() -> pd.DataFrame:
         FROM matomo_log_link_visit_action
         INNER JOIN matomo_log_visit 
           ON matomo_log_link_visit_action.idvisit = matomo_log_visit.idvisit
+        INNER JOIN matomo_log_action 
+          ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
         INNER JOIN hybrid_games_links 
           ON hybrid_games_links.activity_id = matomo_log_link_visit_action.custom_dimension_2
         INNER JOIN hybrid_games 
           ON hybrid_games.id = hybrid_games_links.game_id
-        WHERE matomo_log_link_visit_action.server_time >= '2025-07-01';
+        WHERE matomo_log_link_visit_action.server_time >= '2025-07-01'
+          AND (
+            matomo_log_action.name LIKE '%game_completed%' 
+            OR matomo_log_action.name LIKE '%action_level%'
+          );
         """
         
         # Execute query using cursor (consistent with other queries)
