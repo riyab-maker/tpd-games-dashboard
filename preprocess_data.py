@@ -210,8 +210,7 @@ WHERE mla.name LIKE "%_completed%"
   AND mlla.custom_dimension_1 IS NOT NULL
   AND mlla.custom_dimension_1 LIKE "%poll%"
   AND mlla.server_time > '2025-07-01'
-  AND hgl.activity_id IS NOT NULL
-ORDER BY mlla.server_time DESC;
+  AND hgl.activity_id IS NOT NULL;
 """
 
 # Instances query for Time Series Analysis
