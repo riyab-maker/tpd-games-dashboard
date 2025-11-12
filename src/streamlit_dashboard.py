@@ -270,7 +270,9 @@ def load_processed_data():
         st.stop()
 
 def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame) -> None:
-    """Render a modern, professional dashboard with multiple chart types"""
+    """Render a modern, professional dashboard with multiple chart types
+    Updated: Instances Funnel now matches Users/Visits exactly - no custom scaling
+    """
     import altair as alt
     
     # Add separate conversion funnels
