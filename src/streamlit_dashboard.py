@@ -251,7 +251,7 @@ def load_processed_data():
         qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
         if os.path.exists(qpath):
             question_correctness_df = pd.read_csv(qpath)
-    else:
+        else:
             question_correctness_df = pd.DataFrame()
         
         # Create metadata
@@ -755,34 +755,34 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
             fontSize=28,
             fontWeight='bold'
         )
-        
-        st.altair_chart(repeatability_chart, use_container_width=True)
-        
+    
+    st.altair_chart(repeatability_chart, use_container_width=True)
+    
     # Add summary statistics based on SQL query logic
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
         total_users = repeatability_df['user_count'].sum()
-            st.metric(
+        st.metric(
             label="👥 Total Unique Users",
-                value=f"{total_users:,}",
+            value=f"{total_users:,}",
             help="Total number of unique hybrid_profile_id who completed at least one distinct game"
-            )
-        
-        with col2:
+        )
+    
+    with col2:
         # Calculate weighted average of distinct games per user
         weighted_sum = (repeatability_df['games_played'] * repeatability_df['user_count']).sum()
         total_users = repeatability_df['user_count'].sum()
         avg_distinct_games_per_user = weighted_sum / total_users if total_users > 0 else 0
-            st.metric(
+        st.metric(
             label="🎯 Avg Distinct Games per User",
             value=f"{avg_distinct_games_per_user:.1f}",
             help="Average number of distinct games completed per hybrid_profile_id"
-            )
-        
-        with col3:
+        )
+    
+    with col3:
         max_distinct_games = repeatability_df['games_played'].max()
-            st.metric(
+        st.metric(
             label="🏆 Max Distinct Games",
             value=f"{max_distinct_games}",
             help="Maximum number of distinct games completed by a single hybrid_profile_id"
@@ -1425,7 +1425,7 @@ def main() -> None:
             min_date = pd.to_datetime(metadata['data_date_range']['start']).date()
             max_date = pd.to_datetime(metadata['data_date_range']['end']).date()
         else:
-        min_date = pd.to_datetime('2025-07-02').date()
+            min_date = pd.to_datetime('2025-07-02').date()
             # Use current date as max date
             max_date = datetime.now().date()
         
@@ -1525,10 +1525,10 @@ def main() -> None:
     # Add Score Distribution Analysis
     st.markdown("---")
     st.markdown("## 🎯 Score Distribution Analysis")
-            
-            if not score_distribution_df.empty:
-                render_score_distribution_chart(score_distribution_df)
-            else:
+    
+    if not score_distribution_df.empty:
+        render_score_distribution_chart(score_distribution_df)
+    else:
         st.warning("No score distribution data available.")
     
     # Add Parent Poll Responses Analysis
@@ -1537,7 +1537,7 @@ def main() -> None:
     
     if not poll_responses_df.empty:
         render_parent_poll_responses(poll_responses_df, game_conversion_df)
-        else:
+    else:
         st.warning("No parent poll responses data available.")
     
     # Add Question Correctness by Question Number Analysis
