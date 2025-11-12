@@ -35,7 +35,8 @@ missing_vars = [var for var in required_vars if not os.getenv(var)]
 if missing_vars:
     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
-# SQL Queries - Updated to join with hybrid_games and hybrid_games_links tables
+# SQL Queries - Updated for Conversion Funnel Analysis
+# Uses matomo_log_action to determine event type (Started vs Completed)
 SQL_QUERY = (
     """
     SELECT 
@@ -47,31 +48,15 @@ SQL_QUERY = (
       mllva.custom_dimension_2,
       hg.game_name,
       CASE 
-        WHEN mllva.idaction_name IN (
-          7228,16088,23560,34234,47426,47479,47066,46997,47994,48428,
-          47910,49078,48834,48883,48573,49214,49663,49719,49995,49976,
-          50099,49525,49395,51134,50812,51603,51627
-        ) THEN 'Started'
-        ELSE 'Completed'
+        WHEN mla.name LIKE '%game_completed%' OR mla.name LIKE '%mcq_completed%' THEN 'Completed'
+        ELSE 'Started'
       END AS event
     FROM matomo_log_link_visit_action mllva
+    INNER JOIN matomo_log_action mla ON mllva.idaction_name = mla.idaction
     INNER JOIN hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
     INNER JOIN hybrid_games hg ON hgl.game_id = hg.id
-    WHERE mllva.idaction_name IN (
-        7228,16088,16204,23560,23592,34234,34299,
-        47426,47472,47479,47524,47066,47099,46997,47001,
-        47994,47998,48428,48440,47910,47908,49078,49113,
-        48834,48835,48883,48919,48573,48607,49214,49256,
-        49663,49698,49719,49721,49995,50051,49976,49978,
-        50099,50125,49525,49583,49395,49470,51134,51209,
-        50812,50846,51603,51607,51627,51635
-    )
-    AND mllva.custom_dimension_2 IN (
-        "12","28","24","40","54","56","50","52","70","72",
-        "58","66","68","60","62","64","78","80","82","84",
-        "83","76","74","88","86","94","96"
-    )
-    AND DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
+    WHERE DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
+      AND hgl.activity_id IS NOT NULL
     """
 )
 
@@ -1617,6 +1602,27 @@ def process_main_data() -> pd.DataFrame:
     return df_main
 
 
+def process_conversion_funnel() -> None:
+    """Process conversion funnel data (main data, game conversion numbers, and summary)"""
+    print("\n" + "=" * 60)
+    print("PROCESSING: Conversion Funnel Analysis")
+    print("=" * 60)
+    
+    # Process main data (creates processed_data.csv and game_conversion_numbers.csv)
+    df_main = process_main_data()
+    
+    # Process summary data (creates summary_data.csv)
+    process_summary_data(df_main)
+    
+    print("\n" + "=" * 60)
+    print("SUCCESS: Conversion Funnel Analysis Complete")
+    print("=" * 60)
+    print("Generated files:")
+    print("  - data/processed_data.csv")
+    print("  - data/game_conversion_numbers.csv")
+    print("  - data/summary_data.csv")
+
+
 def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     """Process summary statistics"""
     print("\n" + "=" * 60)
@@ -2250,6 +2256,9 @@ Examples:
   python preprocess_data.py --parent-poll
   python preprocess_data.py --poll-responses
 
+  # Process conversion funnel analysis
+  python preprocess_data.py --conversion-funnel
+
   # Process multiple visuals
   python preprocess_data.py --time-series --repeatability
 
@@ -2261,6 +2270,7 @@ Available visuals:
   --repeatability      Repeatability data
   --question-correctness Question correctness data
   --parent-poll        Parent poll responses data
+  --conversion-funnel  Conversion funnel data (main data, game conversion numbers, and summary)
   --all                Process all visuals (default if no flags provided)
   --metadata           Update metadata file
         """
@@ -2273,6 +2283,7 @@ Available visuals:
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
     parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
     parser.add_argument('--parent-poll', '--poll-responses', action='store_true', dest='parent_poll', help='Process parent poll responses data')
+    parser.add_argument('--conversion-funnel', action='store_true', help='Process conversion funnel data (main data, game conversion numbers, and summary)')
     parser.add_argument('--test', action='store_true', help='Test mode: limit queries to 1000 records')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
@@ -2285,7 +2296,7 @@ Available visuals:
     # Determine what to process
     process_all = args.all or not any([
         args.main, args.summary, args.score_distribution,
-        args.time_series, args.repeatability, args.question_correctness, args.parent_poll
+        args.time_series, args.repeatability, args.question_correctness, args.parent_poll, args.conversion_funnel
     ])
     
     if process_all:
@@ -2328,6 +2339,10 @@ Available visuals:
         if args.parent_poll or process_all:
             test_mode = getattr(args, 'test', False)
             process_parent_poll(test_mode=test_mode)
+        
+        # Process conversion funnel if requested
+        if args.conversion_funnel:
+            process_conversion_funnel()
         
         # Update metadata if requested or if processing all
         if args.metadata or process_all:
