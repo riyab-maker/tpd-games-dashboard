@@ -460,18 +460,10 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     with col3:
         st.markdown("#### ⚡ Instances Funnel")
-        # Debug: Verify values are correct
-        # Ensure values are integers and not NaN
-        started_instances_clean = int(started_instances) if pd.notna(started_instances) else 0
-        completed_instances_clean = int(completed_instances) if pd.notna(completed_instances) else 0
-        
         instances_data = pd.DataFrame([
-            {'Stage': 'Started', 'Count': started_instances_clean, 'Order': 0},
-            {'Stage': 'Completed', 'Count': completed_instances_clean, 'Order': 1}
+            {'Stage': 'Started', 'Count': started_instances, 'Order': 0},
+            {'Stage': 'Completed', 'Count': completed_instances, 'Order': 1}
         ])
-        
-        # Ensure Count column is integer type
-        instances_data['Count'] = instances_data['Count'].astype(int)
         
         instances_chart = alt.Chart(instances_data).mark_bar(
             cornerRadius=6,
@@ -538,14 +530,11 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         )
     
     with analysis_col3:
-        # Ensure proper calculation with clean values
-        started_instances_for_calc = int(started_instances) if pd.notna(started_instances) else 0
-        completed_instances_for_calc = int(completed_instances) if pd.notna(completed_instances) else 0
-        instance_conversion = (float(completed_instances_for_calc) / float(started_instances_for_calc) * 100) if started_instances_for_calc > 0 else 0.0
+        instance_conversion = (completed_instances / started_instances * 100) if started_instances > 0 else 0
         st.metric(
             label="⚡ Instance Conversion",
             value=f"{instance_conversion:.1f}%",
-            help=f"{completed_instances_for_calc:,} out of {started_instances_for_calc:,} instances completed"
+            help=f"{completed_instances:,} out of {started_instances:,} instances completed"
         )
     
 def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None:
