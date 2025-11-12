@@ -458,17 +458,10 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     with col3:
         st.markdown("#### ⚡ Instances Funnel")
-        # Ensure values are properly typed as integers
-        started_instances_val = int(float(started_instances)) if pd.notna(started_instances) and started_instances != 0 else 0
-        completed_instances_val = int(float(completed_instances)) if pd.notna(completed_instances) and completed_instances != 0 else 0
-        
         instances_data = pd.DataFrame([
-            {'Stage': 'Started', 'Count': started_instances_val, 'Order': 0},
-            {'Stage': 'Completed', 'Count': completed_instances_val, 'Order': 1}
+            {'Stage': 'Started', 'Count': started_instances, 'Order': 0},
+            {'Stage': 'Completed', 'Count': completed_instances, 'Order': 1}
         ])
-        
-        # Verify data types in DataFrame
-        instances_data['Count'] = instances_data['Count'].astype(int)
         
         instances_chart = alt.Chart(instances_data).mark_bar(
             cornerRadius=6,
@@ -535,7 +528,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         )
     
     with analysis_col3:
-        instance_conversion = (completed_instances / started_instances * 100) if started_instances > 0 else 0
+        instance_conversion = (float(completed_instances) / float(started_instances) * 100) if started_instances > 0 else 0.0
         st.metric(
             label="⚡ Instance Conversion",
             value=f"{instance_conversion:.1f}%",
