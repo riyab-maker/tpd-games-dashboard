@@ -464,18 +464,23 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         ])
         
         # Calculate scale to ensure completed bar is visible
-        # When there's a huge difference, use padding to ensure minimum bar visibility
+        # When there's a huge difference, ensure the smaller bar has minimum visual width
         max_count = max(started_instances, completed_instances)
         min_count = min(started_instances, completed_instances)
         
-        # If the ratio is very large (>10x), add padding to the scale domain
-        # This ensures the smaller bar has better visual representation
+        # If the ratio is very large (>10x), use a scale that ensures minimum bar visibility
+        # For huge ratios, we'll cap the domain to ensure the smaller bar is at least 25% visible
         if max_count > 0 and min_count > 0:
             ratio = max_count / min_count
             if ratio > 10:
-                # Add padding to make the smaller bar more visible
-                # Use a domain that's slightly larger than max to add visual space
-                scale_domain = [0, max_count * 1.1]  # 10% padding
+                # Calculate domain to ensure smaller bar is at least 25% of chart width
+                # Domain max = min_count * 4 ensures smaller bar is 25% of width
+                # For very large ratios, we'll use this to make the smaller bar more visible
+                # The larger bar will extend beyond, but will still be visible (just longer)
+                min_visible_domain_max = min_count * 4  # Ensures smaller bar is 25% of width
+                # For instances, we want to ensure visibility, so use the calculated minimum
+                # This makes the smaller bar more prominent while still showing the larger bar
+                scale_domain = [0, min_visible_domain_max]
             else:
                 scale_domain = [0, max_count]
         else:
@@ -490,7 +495,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             x=alt.X('Count:Q', 
                    title='Count', 
                    axis=alt.Axis(format='~s'),
-                   scale=alt.Scale(domain=scale_domain, nice=False, padding=20)),
+                   scale=alt.Scale(domain=scale_domain, nice=False)),
             y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
             opacity=alt.condition(
                 alt.datum.Stage == 'Started',
