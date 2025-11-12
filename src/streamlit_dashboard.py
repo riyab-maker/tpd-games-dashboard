@@ -458,22 +458,17 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     with col3:
         st.markdown("#### ⚡ Instances Funnel")
-        # Ensure values are numeric integers
-        started_instances_int = int(started_instances) if pd.notna(started_instances) else 0
-        completed_instances_int = int(completed_instances) if pd.notna(completed_instances) else 0
+        # Ensure values are properly typed as integers
+        started_instances_val = int(float(started_instances)) if pd.notna(started_instances) and started_instances != 0 else 0
+        completed_instances_val = int(float(completed_instances)) if pd.notna(completed_instances) and completed_instances != 0 else 0
         
         instances_data = pd.DataFrame([
-            {'Stage': 'Started', 'Count': started_instances_int, 'Order': 0},
-            {'Stage': 'Completed', 'Count': completed_instances_int, 'Order': 1}
+            {'Stage': 'Started', 'Count': started_instances_val, 'Order': 0},
+            {'Stage': 'Completed', 'Count': completed_instances_val, 'Order': 1}
         ])
         
-        # Calculate domain explicitly from instances data only
-        # Ensure the scale uses the max value from instances data
-        instances_max = max(started_instances_int, completed_instances_int)
-        instances_min = min(started_instances_int, completed_instances_int)
-        
-        # Set explicit domain to ensure proper scaling within instances data range
-        instances_domain = [0, instances_max] if instances_max > 0 else [0, 1]
+        # Verify data types in DataFrame
+        instances_data['Count'] = instances_data['Count'].astype(int)
         
         instances_chart = alt.Chart(instances_data).mark_bar(
             cornerRadius=6,
@@ -481,10 +476,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             strokeWidth=2,
             color='#F5A623'
         ).encode(
-            x=alt.X('Count:Q', 
-                   title='Count', 
-                   axis=alt.Axis(format='~s'),
-                   scale=alt.Scale(domain=instances_domain, nice=False)),
+            x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
             y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
             opacity=alt.condition(
                 alt.datum.Stage == 'Started',
