@@ -47,6 +47,7 @@ SQL_QUERY = (
       mllva.idaction_name,
       mllva.custom_dimension_2,
       hg.game_name,
+      mla.name AS action_name,
       CASE 
         WHEN mla.name LIKE '%game_completed%' OR mla.name LIKE '%mcq_completed%' THEN 'Completed'
         ELSE 'Started'
@@ -1147,23 +1148,54 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Build summary table with correct Power BI DISTINCTCOUNTNOBLANK logic"""
     print("Building summary statistics...")
     
-    # Group by event and compute distinct counts
-    grouped = df.groupby('event').agg({
-        'idvisitor_converted': _distinct_count_ignore_blank,
-        'idvisit': _distinct_count_ignore_blank, 
-        'idlink_va': _distinct_count_ignore_blank,
-    })
+    # For Users and Visits: use distinct counts
+    # For Instances: count distinct idlink_va for Completed, but for Started, 
+    # count distinct visits that have at least one action (to match conversion rate pattern)
     
-    # Rename columns to match Power BI
-    grouped.columns = ['Users', 'Visits', 'Instances']
-    grouped = grouped.reset_index()
-    grouped.rename(columns={'event': 'Event'}, inplace=True)
+    # Calculate Users and Visits - using action_name directly (NOT the event column)
+    # Started: action_name is 'introduction started'
+    # Completed: action_name is 'reward completed'
+    if 'action_name' in df.columns:
+        # Started: introduction started
+        started_mask = df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
+        users_started = df[started_mask]['idvisitor_converted'].nunique() if started_mask.sum() > 0 else 0
+        visits_started = df[started_mask]['idvisit'].nunique() if started_mask.sum() > 0 else 0
+        # Completed: reward completed
+        completed_mask = df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
+        users_completed = df[completed_mask]['idvisitor_converted'].nunique() if completed_mask.sum() > 0 else 0
+        visits_completed = df[completed_mask]['idvisit'].nunique() if completed_mask.sum() > 0 else 0
+    else:
+        # Fallback: use event column if action_name not available
+        users_started = df[df['event'] == 'Started']['idvisitor_converted'].nunique() if len(df[df['event'] == 'Started']) > 0 else 0
+        users_completed = df[df['event'] == 'Completed']['idvisitor_converted'].nunique() if len(df[df['event'] == 'Completed']) > 0 else 0
+        visits_started = df[df['event'] == 'Started']['idvisit'].nunique() if len(df[df['event'] == 'Started']) > 0 else 0
+        visits_completed = df[df['event'] == 'Completed']['idvisit'].nunique() if len(df[df['event'] == 'Completed']) > 0 else 0
     
-    # Ensure both Started and Completed exist (fill missing with 0)
-    all_events = pd.DataFrame({'Event': ['Started', 'Completed']})
-    grouped = all_events.merge(grouped, on='Event', how='left').fillna(0)
+    # Calculate Instances - using action_name directly (NOT the event column)
+    # Started instances: distinct idlink_va where action_name is 'introduction started'
+    # Completed instances: distinct idlink_va where action_name is 'reward completed'
+    if 'action_name' in df.columns:
+        # Started: introduction started
+        started_mask = df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
+        instances_started = df[started_mask]['idlink_va'].nunique() if started_mask.sum() > 0 else 0
+        # Completed: reward completed
+        completed_mask = df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
+        instances_completed = df[completed_mask]['idlink_va'].nunique() if completed_mask.sum() > 0 else 0
+    else:
+        # Fallback: use event column if action_name not available
+        instances_completed = df[df['event'] == 'Completed']['idlink_va'].nunique() if len(df[df['event'] == 'Completed']) > 0 else 0
+        instances_started = df[df['event'] == 'Started']['idlink_va'].nunique() if len(df[df['event'] == 'Started']) > 0 else 0
     
-    # Convert to int and sort
+    # Create summary DataFrame
+    summary_data = {
+        'Event': ['Started', 'Completed'],
+        'Users': [users_started, users_completed],
+        'Visits': [visits_started, visits_completed],
+        'Instances': [instances_started, instances_completed]
+    }
+    grouped = pd.DataFrame(summary_data)
+    
+    # Convert to int
     for col in ['Users', 'Visits', 'Instances']:
         grouped[col] = grouped[col].astype(int)
     
@@ -1171,6 +1203,11 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     grouped = grouped.sort_values('Event')
     
     print(f"SUCCESS: Summary statistics: {len(grouped)} event types")
+    print(f"  Started: {instances_started:,} instances, {visits_started:,} visits, {users_started:,} users")
+    print(f"  Completed: {instances_completed:,} instances, {visits_completed:,} visits, {users_completed:,} users")
+    if instances_started > 0:
+        print(f"  Instance conversion: {instances_completed / instances_started * 100:.1f}%")
+    
     return grouped
 
 
@@ -1578,12 +1615,36 @@ def process_main_data() -> pd.DataFrame:
     for game in df_main['game_name'].unique():
         if game != 'Unknown Game':
             game_data = df_main[df_main['game_name'] == game]
-            started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-            started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
-            started_instances = len(game_data[game_data['event'] == 'Started'])
-            completed_instances = len(game_data[game_data['event'] == 'Completed'])
+            
+            # Users and Visits: use action_name directly (NOT event column)
+            # Started: introduction started
+            # Completed: reward completed
+            if 'action_name' in game_data.columns:
+                started_mask = game_data['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
+                started_users = game_data[started_mask]['idvisitor_converted'].nunique() if started_mask.sum() > 0 else 0
+                started_visits = game_data[started_mask]['idvisit'].nunique() if started_mask.sum() > 0 else 0
+                completed_mask = game_data['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
+                completed_users = game_data[completed_mask]['idvisitor_converted'].nunique() if completed_mask.sum() > 0 else 0
+                completed_visits = game_data[completed_mask]['idvisit'].nunique() if completed_mask.sum() > 0 else 0
+            else:
+                # Fallback: use event column
+                started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
+                completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+                started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
+                completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
+            
+            # Instances: use action_name directly (NOT event column)
+            # Started: introduction started
+            # Completed: reward completed
+            if 'action_name' in game_data.columns:
+                started_mask = game_data['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
+                started_instances = game_data[started_mask]['idlink_va'].nunique() if started_mask.sum() > 0 else 0
+                completed_mask = game_data['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
+                completed_instances = game_data[completed_mask]['idlink_va'].nunique() if completed_mask.sum() > 0 else 0
+            else:
+                # Fallback: use event column
+                started_instances = game_data[game_data['event'] == 'Started']['idlink_va'].nunique() if len(game_data[game_data['event'] == 'Started']) > 0 else 0
+                completed_instances = game_data[game_data['event'] == 'Completed']['idlink_va'].nunique() if len(game_data[game_data['event'] == 'Completed']) > 0 else 0
             
             game_conversion_data.append({
                 'game_name': game,

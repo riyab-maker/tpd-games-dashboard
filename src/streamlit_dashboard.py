@@ -346,13 +346,35 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             completed_visits = 0
             completed_instances = 0
     else:
-        # Filtered data format - calculate from raw data
-        started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
-        completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
-        started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
-        started_instances = len(conversion_df[conversion_df['event'] == 'Started'])
-        completed_instances = len(conversion_df[conversion_df['event'] == 'Completed'])
+        # Filtered data format - calculate from raw data using action_name directly (NOT event column)
+        # Started: introduction started
+        # Completed: reward completed
+        if 'action_name' in conversion_df.columns:
+            started_mask = conversion_df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
+            started_users = conversion_df[started_mask]['idvisitor_converted'].nunique() if started_mask.sum() > 0 else 0
+            started_visits = conversion_df[started_mask]['idvisit'].nunique() if started_mask.sum() > 0 else 0
+            completed_mask = conversion_df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
+            completed_users = conversion_df[completed_mask]['idvisitor_converted'].nunique() if completed_mask.sum() > 0 else 0
+            completed_visits = conversion_df[completed_mask]['idvisit'].nunique() if completed_mask.sum() > 0 else 0
+        else:
+            # Fallback: use event column if action_name not available
+            started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
+        
+        # Instances calculation - using action_name directly (NOT event column)
+        # Started: introduction started
+        # Completed: reward completed
+        if 'action_name' in conversion_df.columns:
+            started_mask = conversion_df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
+            started_instances = conversion_df[started_mask]['idlink_va'].nunique() if started_mask.sum() > 0 else 0
+            completed_mask = conversion_df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
+            completed_instances = conversion_df[completed_mask]['idlink_va'].nunique() if completed_mask.sum() > 0 else 0
+        else:
+            # Fallback: use event column if action_name not available
+            completed_instances = conversion_df[conversion_df['event'] == 'Completed']['idlink_va'].nunique() if len(conversion_df[conversion_df['event'] == 'Completed']) > 0 else 0
+            started_instances = conversion_df[conversion_df['event'] == 'Started']['idlink_va'].nunique() if len(conversion_df[conversion_df['event'] == 'Started']) > 0 else 0
     
     
     # Create three separate funnels
