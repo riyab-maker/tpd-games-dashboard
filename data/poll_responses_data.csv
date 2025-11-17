@@ -1,302 +1,271 @@
 game_name,question,option,count
-Beginning Sound Ba/Ra/Na,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",627
-Beginning Sound Ba/Ra/Na,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",1516
-Beginning Sound Ba/Ra/Na,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",2776
-Beginning Sound Ba/Ra/Na,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",212
-Beginning Sound Ba/Ra/Na,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",3635
-Beginning Sound Ba/Ra/Na,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1072
-Beginning Sound Ba/Ra/Na,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1232
-Beginning Sound Ba/Ra/Na,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",3540
-Beginning Sound Ba/Ra/Na,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",146
-Beginning Sounds Ka/Na/Ta,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",342
-Beginning Sounds Ka/Na/Ta,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",748
-Beginning Sounds Ka/Na/Ta,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",1253
-Beginning Sounds Ka/Na/Ta,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",132
-Beginning Sounds Ka/Na/Ta,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",1647
-Beginning Sounds Ka/Na/Ta,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",564
-Beginning Sounds Ka/Na/Ta,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",630
-Beginning Sounds Ka/Na/Ta,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",1642
-Beginning Sounds Ka/Na/Ta,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",71
-Beginning Sounds Ma/Cha/Ba,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",490
-Beginning Sounds Ma/Cha/Ba,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",1046
-Beginning Sounds Ma/Cha/Ba,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",2123
-Beginning Sounds Ma/Cha/Ba,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",226
-Beginning Sounds Ma/Cha/Ba,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",2456
-Beginning Sounds Ma/Cha/Ba,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",977
-Beginning Sounds Ma/Cha/Ba,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1004
-Beginning Sounds Ma/Cha/Ba,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",2554
-Beginning Sounds Ma/Cha/Ba,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",100
-Beginning Sounds Ma/Ka/La,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1504
-Beginning Sounds Ma/Ka/La,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",3268
-Beginning Sounds Ma/Ka/La,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",7133
-Beginning Sounds Ma/Ka/La,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",766
-Beginning Sounds Ma/Ka/La,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",7844
-Beginning Sounds Ma/Ka/La,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",3293
-Beginning Sounds Ma/Ka/La,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",3133
-Beginning Sounds Ma/Ka/La,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",8301
-Beginning Sounds Ma/Ka/La,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",466
-Beginning Sounds Pa/Cha/Sa,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1077
-Beginning Sounds Pa/Cha/Sa,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",2515
-Beginning Sounds Pa/Cha/Sa,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",5510
-Beginning Sounds Pa/Cha/Sa,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",469
-Beginning Sounds Pa/Cha/Sa,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",6162
-Beginning Sounds Pa/Cha/Sa,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2470
-Beginning Sounds Pa/Cha/Sa,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2624
-Beginning Sounds Pa/Cha/Sa,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",6166
-Beginning Sounds Pa/Cha/Sa,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",311
-Beginning Sounds Sa/La/Va,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",284
-Beginning Sounds Sa/La/Va,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",597
-Beginning Sounds Sa/La/Va,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",1282
-Beginning Sounds Sa/La/Va,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",99
-Beginning Sounds Sa/La/Va,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",1515
-Beginning Sounds Sa/La/Va,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",549
-Beginning Sounds Sa/La/Va,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",618
-Beginning Sounds Sa/La/Va,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",1475
-Beginning Sounds Sa/La/Va,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",70
-Beginning Sounds Ta/Va/Ga,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",142
-Beginning Sounds Ta/Va/Ga,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",406
-Beginning Sounds Ta/Va/Ga,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",552
-Beginning Sounds Ta/Va/Ga,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",82
-Beginning Sounds Ta/Va/Ga,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",756
-Beginning Sounds Ta/Va/Ga,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",262
-Beginning Sounds Ta/Va/Ga,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",287
-Beginning Sounds Ta/Va/Ga,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",778
-Beginning Sounds Ta/Va/Ga,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",35
-Color Blue,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1544
-Color Blue,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",5150
-Color Blue,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",7848
-Color Blue,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",392
-Color Blue,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",12446
-Color Blue,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1704
-Color Blue,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1522
-Color Blue,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",12730
-Color Blue,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",286
-Color Red,Question 1,??? ???,60
-Color Red,Question 1,???? ??,122
-Color Red,Question 1,????-????,364
-Color Red,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",4556
-Color Red,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",13546
-Color Red,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",21420
-Color Red,Question 2,???,518
-Color Red,Question 2,??? ?? ??,28
-Color Red,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",1094
-Color Red,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",33336
-Color Red,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",5098
-Color Red,Question 3,???,472
-Color Red,Question 3,??? ??,50
-Color Red,Question 3,????,24
-Color Red,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",3216
-Color Red,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",35242
-Color Red,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",1058
-Color Yellow,Question 1,??? ???,14
-Color Yellow,Question 1,???? ??,34
-Color Yellow,Question 1,????-????,70
-Color Yellow,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1842
-Color Yellow,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",6088
-Color Yellow,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",9568
-Color Yellow,Question 2,???,118
-Color Yellow,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",348
-Color Yellow,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",15054
-Color Yellow,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2098
-Color Yellow,Question 3,???,110
-Color Yellow,Question 3,??? ??,6
-Color Yellow,Question 3,????,2
-Color Yellow,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1568
-Color Yellow,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",15616
-Color Yellow,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",308
-Emotion Identification,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1546
-Emotion Identification,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",4214
-Emotion Identification,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",6456
-Emotion Identification,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",414
-Emotion Identification,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",9734
-Emotion Identification,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2068
-Emotion Identification,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2258
-Emotion Identification,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",9674
-Emotion Identification,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",284
-Identification of all emotions,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",2010
-Identification of all emotions,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",5766
-Identification of all emotions,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",8866
-Identification of all emotions,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",594
-Identification of all emotions,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",12936
-Identification of all emotions,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",3108
-Identification of all emotions,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2806
-Identification of all emotions,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",13360
-Identification of all emotions,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",468
-Numbers Comparison,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",2012
-Numbers Comparison,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",3690
-Numbers Comparison,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",9248
-Numbers Comparison,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",1210
-Numbers Comparison,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",9616
-Numbers Comparison,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",4124
-Numbers Comparison,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",5222
-Numbers Comparison,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",8936
-Numbers Comparison,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",792
-Numbers I,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",3322
-Numbers I,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",8154
-Numbers I,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",16490
-Numbers I,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",1208
-Numbers I,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",20392
-Numbers I,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",6364
-Numbers I,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",6342
-Numbers I,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",20400
-Numbers I,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",1222
-Numbers II,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",2316
-Numbers II,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",6114
-Numbers II,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",11810
-Numbers II,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",1150
-Numbers II,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",14304
-Numbers II,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",4784
-Numbers II,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",5566
-Numbers II,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",13826
-Numbers II,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",846
-Numerals 1-10,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",972
-Numerals 1-10,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",2274
-Numerals 1-10,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",4528
-Numerals 1-10,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",434
-Numerals 1-10,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",5574
-Numerals 1-10,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1768
-Numerals 1-10,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2066
-Numerals 1-10,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",5414
-Numerals 1-10,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",296
-Positions,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1824
-Positions,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",4868
-Positions,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",7816
-Positions,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",536
-Positions,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",11108
-Positions,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2864
-Positions,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2390
-Positions,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",11722
-Positions,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",388
-Primary Emotion Labelling,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1464
-Primary Emotion Labelling,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",4246
-Primary Emotion Labelling,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",7172
-Primary Emotion Labelling,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",410
-Primary Emotion Labelling,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",10076
-Primary Emotion Labelling,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2396
-Primary Emotion Labelling,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2362
-Primary Emotion Labelling,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",10230
-Primary Emotion Labelling,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",284
-Quantitative Comparison,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",2732
-Quantitative Comparison,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",7448
-Quantitative Comparison,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",15574
-Quantitative Comparison,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",914
-Quantitative Comparison,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",19476
-Quantitative Comparison,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",5364
-Quantitative Comparison,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",5222
-Quantitative Comparison,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",19900
-Quantitative Comparison,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",630
-Relational Comparison,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1986
-Relational Comparison,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",5038
-Relational Comparison,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",10424
-Relational Comparison,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",588
-Relational Comparison,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",13252
-Relational Comparison,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",3606
-Relational Comparison,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2888
-Relational Comparison,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",14202
-Relational Comparison,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",352
-Relational Comparison II,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",2184
-Relational Comparison II,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",6526
-Relational Comparison II,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",10198
-Relational Comparison II,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",598
-Relational Comparison II,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",15196
-Relational Comparison II,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",3114
-Relational Comparison II,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",3098
-Relational Comparison II,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",15378
-Relational Comparison II,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",434
-Revision Colors,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1066
-Revision Colors,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",3530
-Revision Colors,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",6008
-Revision Colors,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",316
-Revision Colors,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",8494
-Revision Colors,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1798
-Revision Colors,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1826
-Revision Colors,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",8538
-Revision Colors,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",244
-Revision Shapes,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",780
-Revision Shapes,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",2636
-Revision Shapes,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",4040
-Revision Shapes,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",190
-Revision Shapes,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",6042
-Revision Shapes,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1224
-Revision Shapes,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1372
-Revision Shapes,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",5928
-Revision Shapes,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",154
-Rhyming Words,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1079
-Rhyming Words,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",2061
-Rhyming Words,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",4554
-Rhyming Words,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",710
-Rhyming Words,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",4541
-Rhyming Words,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2440
-Rhyming Words,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2842
-Rhyming Words,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",4370
-Rhyming Words,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",480
-Shape Circle,Question 1,??? ???,268
-Shape Circle,Question 1,???? ??,466
-Shape Circle,Question 1,????-????,1466
-Shape Circle,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",8510
-Shape Circle,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",24892
-Shape Circle,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",42816
-Shape Circle,Question 2,???,2076
-Shape Circle,Question 2,??? ?? ??,122
-Shape Circle,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",2536
-Shape Circle,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",61882
-Shape Circle,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",11796
-Shape Circle,Question 3,???,1906
-Shape Circle,Question 3,??? ??,256
-Shape Circle,Question 3,????,38
-Shape Circle,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",7738
-Shape Circle,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",66790
-Shape Circle,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",1666
-Shape Rectangle,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1008
-Shape Rectangle,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",2646
-Shape Rectangle,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",4816
-Shape Rectangle,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",322
-Shape Rectangle,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",6366
-Shape Rectangle,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1784
-Shape Rectangle,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1904
-Shape Rectangle,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",6382
-Shape Rectangle,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",184
-Shape Square,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1446
-Shape Square,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",4264
-Shape Square,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",7828
-Shape Square,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",476
-Shape Square,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",10678
-Shape Square,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",2384
-Shape Square,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",2036
-Shape Square,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",11240
-Shape Square,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",260
-Shape Triangle,Question 1,??? ???,36
-Shape Triangle,Question 1,???? ??,60
-Shape Triangle,Question 1,????-????,180
-Shape Triangle,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",2722
-Shape Triangle,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",7708
-Shape Triangle,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",13816
-Shape Triangle,Question 2,???,272
-Shape Triangle,Question 2,??? ?? ??,4
-Shape Triangle,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",612
-Shape Triangle,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",19562
-Shape Triangle,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",4072
-Shape Triangle,Question 3,???,240
-Shape Triangle,Question 3,??? ??,24
-Shape Triangle,Question 3,????,12
-Shape Triangle,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",3378
-Shape Triangle,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",20286
-Shape Triangle,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",572
-Sorting Primary Colors,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",1240
-Sorting Primary Colors,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",4762
-Sorting Primary Colors,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",5762
-Sorting Primary Colors,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",276
-Sorting Primary Colors,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",10226
-Sorting Primary Colors,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",1260
-Sorting Primary Colors,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1410
-Sorting Primary Colors,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",10058
-Sorting Primary Colors,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",292
-Sorting Primary Shapes,Question 1,"{'hi_IN': '??? ???', 'mr_IN': '???/????'}",730
-Sorting Primary Shapes,Question 1,"{'hi_IN': '???? ??', 'mr_IN': '???????'}",2060
-Sorting Primary Shapes,Question 1,"{'hi_IN': '????-????', 'mr_IN': '??-????'}",3292
-Sorting Primary Shapes,Question 2,"{'hi_IN': '??? ?? ??', 'mr_IN': '?????????? ???'}",156
-Sorting Primary Shapes,Question 2,"{'hi_IN': '???', 'mr_IN': '????'}",4936
-Sorting Primary Shapes,Question 2,"{'hi_IN': '???', 'mr_IN': '?????'}",992
-Sorting Primary Shapes,Question 3,"{'hi_IN': '??? ??', 'mr_IN': '??????'}",1156
-Sorting Primary Shapes,Question 3,"{'hi_IN': '???', 'mr_IN': '??'}",4830
-Sorting Primary Shapes,Question 3,"{'hi_IN': '????', 'mr_IN': '????'}",98
+Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,1516
+Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,627
+Beginning Sound Ba/Ra/Na,Question 1,माता-पिता,2776
+Beginning Sound Ba/Ra/Na,Question 2,आधे,1072
+Beginning Sound Ba/Ra/Na,Question 2,आधे से कम,212
+Beginning Sound Ba/Ra/Na,Question 2,सभी,3635
+Beginning Sound Ba/Ra/Na,Question 3,नहीं,146
+Beginning Sound Ba/Ra/Na,Question 3,मदद से,1232
+Beginning Sound Ba/Ra/Na,Question 3,हाँ,3540
+Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,748
+Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,342
+Beginning Sounds Ka/Na/Ta,Question 1,माता-पिता,1253
+Beginning Sounds Ka/Na/Ta,Question 2,आधे,564
+Beginning Sounds Ka/Na/Ta,Question 2,आधे से कम,132
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,1647
+Beginning Sounds Ka/Na/Ta,Question 3,नहीं,71
+Beginning Sounds Ka/Na/Ta,Question 3,मदद से,630
+Beginning Sounds Ka/Na/Ta,Question 3,हाँ,1642
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1046
+Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,490
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,2123
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,977
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,226
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,2456
+Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,100
+Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1004
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,2554
+Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,3268
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,1504
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,7133
+Beginning Sounds Ma/Ka/La,Question 2,आधे,3293
+Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,766
+Beginning Sounds Ma/Ka/La,Question 2,सभी,7844
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,466
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,3133
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,8301
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,2515
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,1077
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,5510
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,2470
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,469
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,6162
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,311
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,2624
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,6166
+Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,597
+Beginning Sounds Sa/La/Va,Question 1,भाई बहन,284
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,1282
+Beginning Sounds Sa/La/Va,Question 2,आधे,549
+Beginning Sounds Sa/La/Va,Question 2,आधे से कम,99
+Beginning Sounds Sa/La/Va,Question 2,सभी,1515
+Beginning Sounds Sa/La/Va,Question 3,नहीं,70
+Beginning Sounds Sa/La/Va,Question 3,मदद से,618
+Beginning Sounds Sa/La/Va,Question 3,हाँ,1475
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,406
+Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,142
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,552
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,262
+Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,82
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,756
+Beginning Sounds Ta/Va/Ga,Question 3,नहीं,35
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,287
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,778
+Color Blue,Question 1,ख़ुद से,5150
+Color Blue,Question 1,भाई बहन,1544
+Color Blue,Question 1,माता-पिता,7848
+Color Blue,Question 2,आधे,1704
+Color Blue,Question 2,आधे से कम,392
+Color Blue,Question 2,सभी,12446
+Color Blue,Question 3,नहीं,286
+Color Blue,Question 3,मदद से,1522
+Color Blue,Question 3,हाँ,12730
+Color Red,Question 1,ख़ुद से,13668
+Color Red,Question 1,भाई बहन,4616
+Color Red,Question 1,माता-पिता,21784
+Color Red,Question 2,आधे,5162
+Color Red,Question 2,आधे से कम,1122
+Color Red,Question 2,सभी,33790
+Color Red,Question 3,नहीं,1082
+Color Red,Question 3,मदद से,3266
+Color Red,Question 3,हाँ,35714
+Color Yellow,Question 1,ख़ुद से,6122
+Color Yellow,Question 1,भाई बहन,1856
+Color Yellow,Question 1,माता-पिता,9638
+Color Yellow,Question 2,आधे,2112
+Color Yellow,Question 2,आधे से कम,348
+Color Yellow,Question 2,सभी,15158
+Color Yellow,Question 3,नहीं,310
+Color Yellow,Question 3,मदद से,1574
+Color Yellow,Question 3,हाँ,15726
+Emotion Identification,Question 1,ख़ुद से,4214
+Emotion Identification,Question 1,भाई बहन,1546
+Emotion Identification,Question 1,माता-पिता,6456
+Emotion Identification,Question 2,आधे,2068
+Emotion Identification,Question 2,आधे से कम,414
+Emotion Identification,Question 2,सभी,9734
+Emotion Identification,Question 3,नहीं,284
+Emotion Identification,Question 3,मदद से,2258
+Emotion Identification,Question 3,हाँ,9674
+Identification of all emotions,Question 1,ख़ुद से,5766
+Identification of all emotions,Question 1,भाई बहन,2010
+Identification of all emotions,Question 1,माता-पिता,8866
+Identification of all emotions,Question 2,आधे,3108
+Identification of all emotions,Question 2,आधे से कम,594
+Identification of all emotions,Question 2,सभी,12936
+Identification of all emotions,Question 3,नहीं,468
+Identification of all emotions,Question 3,मदद से,2806
+Identification of all emotions,Question 3,हाँ,13360
+Numbers Comparison,Question 1,ख़ुद से,3690
+Numbers Comparison,Question 1,भाई बहन,2012
+Numbers Comparison,Question 1,माता-पिता,9248
+Numbers Comparison,Question 2,आधे,4124
+Numbers Comparison,Question 2,आधे से कम,1210
+Numbers Comparison,Question 2,सभी,9616
+Numbers Comparison,Question 3,नहीं,792
+Numbers Comparison,Question 3,मदद से,5222
+Numbers Comparison,Question 3,हाँ,8936
+Numbers I,Question 1,ख़ुद से,8154
+Numbers I,Question 1,भाई बहन,3322
+Numbers I,Question 1,माता-पिता,16490
+Numbers I,Question 2,आधे,6364
+Numbers I,Question 2,आधे से कम,1208
+Numbers I,Question 2,सभी,20392
+Numbers I,Question 3,नहीं,1222
+Numbers I,Question 3,मदद से,6342
+Numbers I,Question 3,हाँ,20400
+Numbers II,Question 1,ख़ुद से,6114
+Numbers II,Question 1,भाई बहन,2316
+Numbers II,Question 1,माता-पिता,11810
+Numbers II,Question 2,आधे,4784
+Numbers II,Question 2,आधे से कम,1150
+Numbers II,Question 2,सभी,14304
+Numbers II,Question 3,नहीं,846
+Numbers II,Question 3,मदद से,5566
+Numbers II,Question 3,हाँ,13826
+Numerals 1-10,Question 1,ख़ुद से,2274
+Numerals 1-10,Question 1,भाई बहन,972
+Numerals 1-10,Question 1,माता-पिता,4528
+Numerals 1-10,Question 2,आधे,1768
+Numerals 1-10,Question 2,आधे से कम,434
+Numerals 1-10,Question 2,सभी,5574
+Numerals 1-10,Question 3,नहीं,296
+Numerals 1-10,Question 3,मदद से,2066
+Numerals 1-10,Question 3,हाँ,5414
+Positions,Question 1,ख़ुद से,4868
+Positions,Question 1,भाई बहन,1824
+Positions,Question 1,माता-पिता,7816
+Positions,Question 2,आधे,2864
+Positions,Question 2,आधे से कम,536
+Positions,Question 2,सभी,11108
+Positions,Question 3,नहीं,388
+Positions,Question 3,मदद से,2390
+Positions,Question 3,हाँ,11722
+Primary Emotion Labelling,Question 1,ख़ुद से,4246
+Primary Emotion Labelling,Question 1,भाई बहन,1464
+Primary Emotion Labelling,Question 1,माता-पिता,7172
+Primary Emotion Labelling,Question 2,आधे,2396
+Primary Emotion Labelling,Question 2,आधे से कम,410
+Primary Emotion Labelling,Question 2,सभी,10076
+Primary Emotion Labelling,Question 3,नहीं,284
+Primary Emotion Labelling,Question 3,मदद से,2362
+Primary Emotion Labelling,Question 3,हाँ,10230
+Quantitative Comparison,Question 1,ख़ुद से,7448
+Quantitative Comparison,Question 1,भाई बहन,2732
+Quantitative Comparison,Question 1,माता-पिता,15574
+Quantitative Comparison,Question 2,आधे,5364
+Quantitative Comparison,Question 2,आधे से कम,914
+Quantitative Comparison,Question 2,सभी,19476
+Quantitative Comparison,Question 3,नहीं,630
+Quantitative Comparison,Question 3,मदद से,5222
+Quantitative Comparison,Question 3,हाँ,19900
+Relational Comparison,Question 1,ख़ुद से,5038
+Relational Comparison,Question 1,भाई बहन,1986
+Relational Comparison,Question 1,माता-पिता,10424
+Relational Comparison,Question 2,आधे,3606
+Relational Comparison,Question 2,आधे से कम,588
+Relational Comparison,Question 2,सभी,13252
+Relational Comparison,Question 3,नहीं,352
+Relational Comparison,Question 3,मदद से,2888
+Relational Comparison,Question 3,हाँ,14202
+Relational Comparison II,Question 1,ख़ुद से,6526
+Relational Comparison II,Question 1,भाई बहन,2184
+Relational Comparison II,Question 1,माता-पिता,10198
+Relational Comparison II,Question 2,आधे,3114
+Relational Comparison II,Question 2,आधे से कम,598
+Relational Comparison II,Question 2,सभी,15196
+Relational Comparison II,Question 3,नहीं,434
+Relational Comparison II,Question 3,मदद से,3098
+Relational Comparison II,Question 3,हाँ,15378
+Revision Colors,Question 1,ख़ुद से,3530
+Revision Colors,Question 1,भाई बहन,1066
+Revision Colors,Question 1,माता-पिता,6008
+Revision Colors,Question 2,आधे,1798
+Revision Colors,Question 2,आधे से कम,316
+Revision Colors,Question 2,सभी,8494
+Revision Colors,Question 3,नहीं,244
+Revision Colors,Question 3,मदद से,1826
+Revision Colors,Question 3,हाँ,8538
+Revision Shapes,Question 1,ख़ुद से,2636
+Revision Shapes,Question 1,भाई बहन,780
+Revision Shapes,Question 1,माता-पिता,4040
+Revision Shapes,Question 2,आधे,1224
+Revision Shapes,Question 2,आधे से कम,190
+Revision Shapes,Question 2,सभी,6042
+Revision Shapes,Question 3,नहीं,154
+Revision Shapes,Question 3,मदद से,1372
+Revision Shapes,Question 3,हाँ,5928
+Rhyming Words,Question 1,ख़ुद से,2061
+Rhyming Words,Question 1,भाई बहन,1079
+Rhyming Words,Question 1,माता-पिता,4554
+Rhyming Words,Question 2,आधे,2440
+Rhyming Words,Question 2,आधे से कम,710
+Rhyming Words,Question 2,सभी,4541
+Rhyming Words,Question 3,नहीं,480
+Rhyming Words,Question 3,मदद से,2842
+Rhyming Words,Question 3,हाँ,4370
+Shape Circle,Question 1,ख़ुद से,25358
+Shape Circle,Question 1,भाई बहन,8778
+Shape Circle,Question 1,माता-पिता,44282
+Shape Circle,Question 2,आधे,12318
+Shape Circle,Question 2,आधे से कम,2658
+Shape Circle,Question 2,सभी,63436
+Shape Circle,Question 3,नहीं,1704
+Shape Circle,Question 3,मदद से,7994
+Shape Circle,Question 3,हाँ,68696
+Shape Rectangle,Question 1,ख़ुद से,2646
+Shape Rectangle,Question 1,भाई बहन,1008
+Shape Rectangle,Question 1,माता-पिता,4816
+Shape Rectangle,Question 2,आधे,1784
+Shape Rectangle,Question 2,आधे से कम,322
+Shape Rectangle,Question 2,सभी,6366
+Shape Rectangle,Question 3,नहीं,184
+Shape Rectangle,Question 3,मदद से,1904
+Shape Rectangle,Question 3,हाँ,6382
+Shape Square,Question 1,ख़ुद से,4264
+Shape Square,Question 1,भाई बहन,1446
+Shape Square,Question 1,माता-पिता,7828
+Shape Square,Question 2,आधे,2384
+Shape Square,Question 2,आधे से कम,476
+Shape Square,Question 2,सभी,10678
+Shape Square,Question 3,नहीं,260
+Shape Square,Question 3,मदद से,2036
+Shape Square,Question 3,हाँ,11240
+Shape Triangle,Question 1,ख़ुद से,7768
+Shape Triangle,Question 1,भाई बहन,2758
+Shape Triangle,Question 1,माता-पिता,13996
+Shape Triangle,Question 2,आधे,4110
+Shape Triangle,Question 2,आधे से कम,616
+Shape Triangle,Question 2,सभी,19796
+Shape Triangle,Question 3,नहीं,584
+Shape Triangle,Question 3,मदद से,3402
+Shape Triangle,Question 3,हाँ,20526
+Sorting Primary Colors,Question 1,ख़ुद से,4762
+Sorting Primary Colors,Question 1,भाई बहन,1240
+Sorting Primary Colors,Question 1,माता-पिता,5762
+Sorting Primary Colors,Question 2,आधे,1260
+Sorting Primary Colors,Question 2,आधे से कम,276
+Sorting Primary Colors,Question 2,सभी,10226
+Sorting Primary Colors,Question 3,नहीं,292
+Sorting Primary Colors,Question 3,मदद से,1410
+Sorting Primary Colors,Question 3,हाँ,10058
+Sorting Primary Shapes,Question 1,ख़ुद से,2060
+Sorting Primary Shapes,Question 1,भाई बहन,730
+Sorting Primary Shapes,Question 1,माता-पिता,3292
+Sorting Primary Shapes,Question 2,आधे,992
+Sorting Primary Shapes,Question 2,आधे से कम,156
+Sorting Primary Shapes,Question 2,सभी,4936
+Sorting Primary Shapes,Question 3,नहीं,98
+Sorting Primary Shapes,Question 3,मदद से,1156
+Sorting Primary Shapes,Question 3,हाँ,4830

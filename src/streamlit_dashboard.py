@@ -270,9 +270,7 @@ def load_processed_data():
         st.stop()
 
 def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame) -> None:
-    """Render a modern, professional dashboard with multiple chart types
-    Updated: Instances Funnel now matches Users/Visits exactly - no custom scaling
-    """
+    """Render a modern, professional dashboard with multiple chart types"""
     import altair as alt
     
     # Add separate conversion funnels
@@ -284,13 +282,11 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             started_row = conversion_df[conversion_df['Event'] == 'Started']
             completed_row = conversion_df[conversion_df['Event'] == 'Completed']
             if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
-                val = pd.to_numeric(started_row['Users'].iloc[0], errors='coerce')
-                started_count = int(val) if not pd.isna(val) else 0
+                started_count = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce').fillna(0))
             else:
                 started_count = 0
             if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
-                val = pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce')
-                completed_count = int(val) if not pd.isna(val) else 0
+                completed_count = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce').fillna(0))
             else:
                 completed_count = 0
         else:
@@ -314,12 +310,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         # Safely extract values with defaults
         try:
             if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
-                val_users = pd.to_numeric(started_row['Users'].iloc[0], errors='coerce')
-                val_visits = pd.to_numeric(started_row['Visits'].iloc[0], errors='coerce')
-                val_instances = pd.to_numeric(started_row['Instances'].iloc[0], errors='coerce')
-                started_users = int(val_users) if not pd.isna(val_users) else 0
-                started_visits = int(val_visits) if not pd.isna(val_visits) else 0
-                started_instances = int(val_instances) if not pd.isna(val_instances) else 0
+                started_users = int(pd.to_numeric(started_row['Users'].iloc[0], errors='coerce').fillna(0))
+                started_visits = int(pd.to_numeric(started_row['Visits'].iloc[0], errors='coerce').fillna(0))
+                started_instances = int(pd.to_numeric(started_row['Instances'].iloc[0], errors='coerce').fillna(0))
             else:
                 started_users = 0
                 started_visits = 0
@@ -331,12 +324,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             
         try:
             if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
-                val_users = pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce')
-                val_visits = pd.to_numeric(completed_row['Visits'].iloc[0], errors='coerce')
-                val_instances = pd.to_numeric(completed_row['Instances'].iloc[0], errors='coerce')
-                completed_users = int(val_users) if not pd.isna(val_users) else 0
-                completed_visits = int(val_visits) if not pd.isna(val_visits) else 0
-                completed_instances = int(val_instances) if not pd.isna(val_instances) else 0
+                completed_users = int(pd.to_numeric(completed_row['Users'].iloc[0], errors='coerce').fillna(0))
+                completed_visits = int(pd.to_numeric(completed_row['Visits'].iloc[0], errors='coerce').fillna(0))
+                completed_instances = int(pd.to_numeric(completed_row['Instances'].iloc[0], errors='coerce').fillna(0))
             else:
                 completed_users = 0
                 completed_visits = 0
@@ -346,35 +336,13 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             completed_visits = 0
             completed_instances = 0
     else:
-        # Filtered data format - calculate from raw data using action_name directly (NOT event column)
-        # Started: introduction started
-        # Completed: reward completed
-        if 'action_name' in conversion_df.columns:
-            started_mask = conversion_df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
-            started_users = conversion_df[started_mask]['idvisitor_converted'].nunique() if started_mask.sum() > 0 else 0
-            started_visits = conversion_df[started_mask]['idvisit'].nunique() if started_mask.sum() > 0 else 0
-            completed_mask = conversion_df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
-            completed_users = conversion_df[completed_mask]['idvisitor_converted'].nunique() if completed_mask.sum() > 0 else 0
-            completed_visits = conversion_df[completed_mask]['idvisit'].nunique() if completed_mask.sum() > 0 else 0
-        else:
-            # Fallback: use event column if action_name not available
-            started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
-            started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
-        
-        # Instances calculation - using action_name directly (NOT event column)
-        # Started: introduction started
-        # Completed: reward completed
-        if 'action_name' in conversion_df.columns:
-            started_mask = conversion_df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
-            started_instances = conversion_df[started_mask]['idlink_va'].nunique() if started_mask.sum() > 0 else 0
-            completed_mask = conversion_df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
-            completed_instances = conversion_df[completed_mask]['idlink_va'].nunique() if completed_mask.sum() > 0 else 0
-        else:
-            # Fallback: use event column if action_name not available
-            completed_instances = conversion_df[conversion_df['event'] == 'Completed']['idlink_va'].nunique() if len(conversion_df[conversion_df['event'] == 'Completed']) > 0 else 0
-            started_instances = conversion_df[conversion_df['event'] == 'Started']['idlink_va'].nunique() if len(conversion_df[conversion_df['event'] == 'Started']) > 0 else 0
+        # Filtered data format - calculate from raw data
+        started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
+        completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
+        started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
+        completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
+        started_instances = len(conversion_df[conversion_df['event'] == 'Started'])
+        completed_instances = len(conversion_df[conversion_df['event'] == 'Completed'])
     
     
     # Create three separate funnels
@@ -428,7 +396,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             grid=False
         )
         
-        st.altair_chart(users_funnel, use_container_width=True)
+        st.altair_chart(users_funnel, width='stretch')
     
     with col2:
         st.markdown("#### 🔄 Visits Funnel")
@@ -478,7 +446,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             grid=False
         )
         
-        st.altair_chart(visits_funnel, use_container_width=True)
+        st.altair_chart(visits_funnel, width='stretch')
     
     with col3:
         st.markdown("#### ⚡ Instances Funnel")
@@ -528,7 +496,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             grid=False
         )
         
-        st.altair_chart(instances_funnel, use_container_width=True)
+        st.altair_chart(instances_funnel, width='stretch')
     
     # Add conversion analysis
     st.markdown("### 📊 Conversion Analysis")
@@ -655,7 +623,7 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
             fontWeight='bold'
         )
         
-        st.altair_chart(combined_chart, use_container_width=True)
+        st.altair_chart(combined_chart, width='stretch')
     
     # Add summary statistics after the chart
     st.markdown("#### 📈 Summary Statistics")
@@ -759,7 +727,7 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
             fontWeight='bold'
         )
     
-    st.altair_chart(repeatability_chart, use_container_width=True)
+    st.altair_chart(repeatability_chart, width='stretch')
     
     # Add summary statistics based on SQL query logic
     col1, col2, col3 = st.columns(3)
@@ -1171,7 +1139,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     st.markdown("This chart displays **Instances**, **Visits**, and **Users** over time.")
     
     combined_chart = create_combined_chart(aggregated_df)
-    st.altair_chart(combined_chart, use_container_width=True)
+    st.altair_chart(combined_chart, width='stretch')
     
     # Add summary statistics
     st.markdown("#### 📈 Summary Statistics")
@@ -1212,6 +1180,67 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
     
     st.markdown("### 📊 Parent Poll Responses")
     
+    # Define the proper question texts and option mappings
+    QUESTION_TEXTS = {
+        'Question 1': 'बच्चे के साथ होमवर्क किसने किया ?',
+        'Question 2': 'बच्चे ने कितने प्रश्न खुद से किये ?',
+        'Question 3': 'क्या बच्चा गोल आकर खुद से पहचान सकता है ?'
+    }
+    
+    # Define option mappings for each question based on option index/position
+    # Since options are stored in order, we'll map by the option's position in the data
+    OPTION_MAPPINGS = {
+        1: ['ख़ुद से', 'भाई बहन', 'माता-पिता'],  # Q1 options
+        2: ['आधे से कम', 'आधे', 'सभी'],  # Q2 options
+        3: ['हाँ', 'मदद से', 'नहीं']  # Q3 options
+    }
+    
+    def map_option_to_text(option_str: str, question_num: int, option_index: int = None) -> str:
+        """Map option string to proper Hindi text based on question number and index"""
+        # If we have an option index, use it directly
+        if option_index is not None and question_num in OPTION_MAPPINGS:
+            options_list = OPTION_MAPPINGS[question_num]
+            if 0 <= option_index < len(options_list):
+                return options_list[option_index]
+        
+        option_lower = str(option_str).lower()
+        
+        # Try to extract index from option string (e.g., "Option 1", "Option_1", etc.)
+        import re
+        index_match = re.search(r'option[_\s]*(\d+)', option_lower)
+        if index_match:
+            idx = int(index_match.group(1)) - 1  # Convert to 0-based
+            if question_num in OPTION_MAPPINGS and 0 <= idx < len(OPTION_MAPPINGS[question_num]):
+                return OPTION_MAPPINGS[question_num][idx]
+        
+        # Try pattern matching as fallback
+        if question_num == 1:
+            if '1' in str(option_str) or 'ख़ुद' in str(option_str) or 'khud' in option_lower:
+                return 'ख़ुद से'
+            elif '2' in str(option_str) or 'भाई' in str(option_str) or 'bhai' in option_lower:
+                return 'भाई बहन'
+            elif '3' in str(option_str) or 'माता' in str(option_str) or 'पिता' in str(option_str) or 'mata' in option_lower:
+                return 'माता-पिता'
+        elif question_num == 2:
+            if '1' in str(option_str) or ('कम' in str(option_str) and 'आधे' in str(option_str)):
+                return 'आधे से कम'
+            elif '2' in str(option_str) or ('आधे' in str(option_str) and 'कम' not in str(option_str)):
+                return 'आधे'
+            elif '3' in str(option_str) or 'सभी' in str(option_str) or 'sabhi' in option_lower:
+                return 'सभी'
+        elif question_num == 3:
+            if '1' in str(option_str) or 'हाँ' in str(option_str) or 'han' in option_lower or 'yes' in option_lower:
+                return 'हाँ'
+            elif '2' in str(option_str) or 'मदद' in str(option_str) or 'madad' in option_lower:
+                return 'मदद से'
+            elif '3' in str(option_str) or 'नहीं' in str(option_str) or 'nahi' in option_lower or 'no' in option_lower:
+                return 'नहीं'
+        
+        # Final fallback: use first option if we can't determine
+        if question_num in OPTION_MAPPINGS:
+            return OPTION_MAPPINGS[question_num][0]
+        return str(option_str)[:50]  # Truncate long strings
+    
     # Get unique games for filter
     unique_games = sorted(game_conversion_df['game_name'].unique())
     
@@ -1243,103 +1272,155 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
         st.warning("No data available for the selected games.")
         return
     
-    # Get unique questions
-    unique_questions = sorted(filtered_df['question'].unique())
+    # Process and map the data
+    processed_df = filtered_df.copy()
+    
+    # Group by question first to determine option order
+    for question_key, question_text in QUESTION_TEXTS.items():
+        question_num = int(question_key.split()[-1])
+        question_mask = processed_df['question'] == question_key
+        
+        if question_mask.any():
+            # Get unique options for this question and sort them
+            question_options = processed_df[question_mask]['option'].unique()
+            
+            # Map each option to its display text
+            # We'll use the order of appearance in the data to map to our predefined options
+            for opt_idx, option in enumerate(question_options):
+                option_mask = question_mask & (processed_df['option'] == option)
+                processed_df.loc[option_mask, 'question_display'] = question_text
+                # Map option based on its position (mod 3 to handle cases with more than 3 options)
+                mapped_option = map_option_to_text(option, question_num, opt_idx % 3)
+                processed_df.loc[option_mask, 'option_display'] = mapped_option
+    
+    # Handle any remaining questions that don't match
+    unmapped_mask = processed_df['question_display'].isna()
+    processed_df.loc[unmapped_mask, 'question_display'] = processed_df.loc[unmapped_mask, 'question']
+    processed_df.loc[unmapped_mask, 'option_display'] = processed_df.loc[unmapped_mask, 'option']
+    
+    # Aggregate by display question and option
+    display_df = processed_df.groupby(['question_display', 'option_display']).agg({
+        'count': 'sum'
+    }).reset_index()
+    
+    # Get unique questions in order
+    question_order = [QUESTION_TEXTS['Question 1'], QUESTION_TEXTS['Question 2'], QUESTION_TEXTS['Question 3']]
+    unique_questions = [q for q in question_order if q in display_df['question_display'].unique()]
     
     if len(unique_questions) == 0:
         st.warning("No poll questions found in the data.")
         return
     
-    # Display up to 3 questions side by side
-    num_questions = min(len(unique_questions), 3)
+    # Display all 3 questions side by side
+    chart_cols = st.columns(3)
     
-    # Create columns for side-by-side display
-    if num_questions == 3:
-        chart_cols = st.columns(3)
-    elif num_questions == 2:
-        chart_cols = st.columns(2)
-    else:
-        chart_cols = st.columns(1)
-    
-    # Create charts for each question (up to 3)
-    for i in range(num_questions):
-        question = unique_questions[i]
-        
+    # Create charts for each question
+    for i, question_text in enumerate(unique_questions):
         with chart_cols[i]:
-            st.markdown(f"#### {question}")
+            st.markdown(f"#### {question_text}")
             
             # Filter data for this question
-            question_data = filtered_df[filtered_df['question'] == question].copy()
+            question_data = display_df[display_df['question_display'] == question_text].copy()
             
             if question_data.empty:
-                st.warning(f"No data available for {question}")
+                st.warning(f"No data available for this question")
                 continue
             
-            # Create bar chart
+            # Sort options in a logical order (based on the question)
+            if i == 0:  # Question 1
+                option_order = ['ख़ुद से', 'भाई बहन', 'माता-पिता']
+            elif i == 1:  # Question 2
+                option_order = ['आधे से कम', 'आधे', 'सभी']
+            else:  # Question 3
+                option_order = ['हाँ', 'मदद से', 'नहीं']
+            
+            # Reorder data
+            question_data['option_order'] = question_data['option_display'].apply(
+                lambda x: option_order.index(x) if x in option_order else 999
+            )
+            question_data = question_data.sort_values('option_order')
+            
+            # Create bar chart with better styling
             chart = alt.Chart(question_data).mark_bar(
-                cornerRadius=6,
-                    stroke='white',
+                cornerRadius=8,
+                stroke='white',
                 strokeWidth=2,
-                color='#4A90E2'
+                color=alt.Color('option_display:N', 
+                              scale=alt.Scale(scheme='category10'),
+                              legend=alt.Legend(title='Options', titleFontSize=12, labelFontSize=11))
             ).encode(
-                x=alt.X('option:N', 
-                        title='Response Option', 
-                       axis=alt.Axis(
-                            labelAngle=-45,
-                            labelFontSize=10,
-                            titleFontSize=12
-                        )),
+                x=alt.X('option_display:N', 
+                        title='',
+                        axis=alt.Axis(
+                            labelAngle=0,
+                            labelFontSize=11,
+                            labelLimit=200
+                        ),
+                        sort=alt.SortField('option_order', order='ascending')),
                 y=alt.Y('count:Q', 
-                        title='Responses', 
-                        axis=alt.Axis(format='~s')),
-                tooltip=['option:N', 'count:Q']
+                        title='Number of Responses',
+                        axis=alt.Axis(format='~s', titleFontSize=12)),
+                tooltip=[
+                    alt.Tooltip('option_display:N', title='Option'),
+                    alt.Tooltip('count:Q', title='Count', format=',')
+                ]
             ).properties(
-                width=350,
-                height=300,
-                title=f'{question}'
+                width=400,
+                height=350,
+                title=alt.TitleParams(
+                    text=question_text,
+                    fontSize=14,
+                    fontWeight='bold',
+                    offset=10
+                )
             )
             
-            # Add data labels
+            # Add data labels on bars
             labels = alt.Chart(question_data).mark_text(
                 align='center',
-                baseline='bottom',
-                color='#2E8B57',
-                fontSize=12,
+                baseline='middle',
+                color='white',
+                fontSize=11,
                 fontWeight='bold',
-                dy=-10
+                dy=0
             ).encode(
-                x=alt.X('option:N'),
+                x=alt.X('option_display:N', sort=alt.SortField('option_order', order='ascending')),
                 y=alt.Y('count:Q'),
-                text=alt.Text('count:Q', format='.0f')
+                text=alt.Text('count:Q', format=',.0f')
             )
             
             # Combine chart and labels
             final_chart = (chart + labels).configure_axis(
-                labelFontSize=12,
-                titleFontSize=14,
-                grid=True
-            ).configure_title(
-                fontSize=14,
-                fontWeight='bold'
+                labelFontSize=11,
+                titleFontSize=12,
+                grid=True,
+                gridColor='#e0e0e0'
+            ).configure_view(
+                strokeWidth=0
             )
             
-            st.altair_chart(final_chart, use_container_width=True)
+            st.altair_chart(final_chart, width='stretch')
             
             # Add summary statistics for this question
             total_responses = question_data['count'].sum()
-            most_popular = question_data.loc[question_data['count'].idxmax(), 'option']
+            most_popular = question_data.loc[question_data['count'].idxmax(), 'option_display']
             most_popular_count = question_data['count'].max()
+            most_popular_pct = (most_popular_count / total_responses * 100) if total_responses > 0 else 0
             
-            st.metric(
-                label="Total Responses",
-                value=f"{total_responses:,}",
-                help=f"Total number of responses for {question}"
-            )
-            st.caption(f"Most popular: {most_popular} ({most_popular_count:,})")
-    
-    # If there are more than 3 questions, show a message
-    if len(unique_questions) > 3:
-        st.info(f"Note: Showing first 3 of {len(unique_questions)} questions. Filter by game to see specific questions.")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric(
+                    label="Total Responses",
+                    value=f"{total_responses:,}"
+                )
+            with col2:
+                st.metric(
+                    label="Most Popular",
+                    value=f"{most_popular_pct:.1f}%",
+                    help=f"{most_popular} ({most_popular_count:,} responses)"
+                )
+            
+            st.caption(f"**Most selected:** {most_popular}")
 
 
 def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> None:
@@ -1382,7 +1463,7 @@ def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> 
         tooltip=['question_number:O', 'correctness:N', alt.Tooltip('percent:Q', format='.1f'), 'user_count:Q', 'total_users:Q']
     ).properties(width=900, height=400, title=f'Correct vs Incorrect by Question — {selected_game}')
 
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, width='stretch')
 
 # Streamlit page config must be called before any other Streamlit command
 st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
@@ -1463,40 +1544,31 @@ def main() -> None:
         render_modern_dashboard(summary_df, summary_df)
     else:
         # Show filtered conversion funnel - use game-specific numbers
-        # Normalize game names to handle potential whitespace/case issues
-        selected_games_normalized = [g.strip() for g in selected_games]
-        game_conversion_df_normalized = game_conversion_df.copy()
-        game_conversion_df_normalized['game_name_normalized'] = game_conversion_df_normalized['game_name'].str.strip()
-        
-        selected_games_data = game_conversion_df_normalized[
-            game_conversion_df_normalized['game_name_normalized'].isin(selected_games_normalized)
-        ]
-        
+        selected_games_data = game_conversion_df[game_conversion_df['game_name'].isin(selected_games)]
         if not selected_games_data.empty:
             # Ensure all required columns exist
             required_cols = ['started_users', 'completed_users', 'started_visits', 'completed_visits', 'started_instances', 'completed_instances']
-            missing_cols = [col for col in required_cols if col not in selected_games_data.columns]
-            if missing_cols:
-                st.error(f"Missing required columns: {missing_cols}")
-                render_modern_dashboard(summary_df, summary_df)
-                return
+            for col in required_cols:
+                if col not in selected_games_data.columns:
+                    st.error(f"Missing required column: {col}")
+                    render_modern_dashboard(summary_df, summary_df)
+                    return
             
-            # Aggregate the selected games - ensure numeric types and handle NaN properly
-            # Convert columns to numeric if needed, then sum directly
-            started_users_series = pd.to_numeric(selected_games_data['started_users'], errors='coerce').fillna(0)
-            completed_users_series = pd.to_numeric(selected_games_data['completed_users'], errors='coerce').fillna(0)
-            started_visits_series = pd.to_numeric(selected_games_data['started_visits'], errors='coerce').fillna(0)
-            completed_visits_series = pd.to_numeric(selected_games_data['completed_visits'], errors='coerce').fillna(0)
-            started_instances_series = pd.to_numeric(selected_games_data['started_instances'], errors='coerce').fillna(0)
-            completed_instances_series = pd.to_numeric(selected_games_data['completed_instances'], errors='coerce').fillna(0)
+            # Aggregate the selected games - ensure numeric types
+            total_started_users = pd.to_numeric(selected_games_data['started_users'], errors='coerce').fillna(0).sum()
+            total_completed_users = pd.to_numeric(selected_games_data['completed_users'], errors='coerce').fillna(0).sum()
+            total_started_visits = pd.to_numeric(selected_games_data['started_visits'], errors='coerce').fillna(0).sum()
+            total_completed_visits = pd.to_numeric(selected_games_data['completed_visits'], errors='coerce').fillna(0).sum()
+            total_started_instances = pd.to_numeric(selected_games_data['started_instances'], errors='coerce').fillna(0).sum()
+            total_completed_instances = pd.to_numeric(selected_games_data['completed_instances'], errors='coerce').fillna(0).sum()
             
-            # Sum and convert to int
-            total_started_users = int(started_users_series.sum())
-            total_completed_users = int(completed_users_series.sum())
-            total_started_visits = int(started_visits_series.sum())
-            total_completed_visits = int(completed_visits_series.sum())
-            total_started_instances = int(started_instances_series.sum())
-            total_completed_instances = int(completed_instances_series.sum())
+            # Convert to int to avoid float display issues
+            total_started_users = int(total_started_users) if not pd.isna(total_started_users) else 0
+            total_completed_users = int(total_completed_users) if not pd.isna(total_completed_users) else 0
+            total_started_visits = int(total_started_visits) if not pd.isna(total_started_visits) else 0
+            total_completed_visits = int(total_completed_visits) if not pd.isna(total_completed_visits) else 0
+            total_started_instances = int(total_started_instances) if not pd.isna(total_started_instances) else 0
+            total_completed_instances = int(total_completed_instances) if not pd.isna(total_completed_instances) else 0
             
             # Create summary data for selected games with explicit dtype and column order
             selected_games_summary = pd.DataFrame({
@@ -1505,25 +1577,19 @@ def main() -> None:
                 'Visits': [total_started_visits, total_completed_visits],
                 'Instances': [total_started_instances, total_completed_instances]
             })
-            # Ensure numeric columns are properly typed - using direct astype since we already converted
-            selected_games_summary['Users'] = selected_games_summary['Users'].astype(int)
-            selected_games_summary['Visits'] = selected_games_summary['Visits'].astype(int)
-            selected_games_summary['Instances'] = selected_games_summary['Instances'].astype(int)
+            # Ensure numeric columns are properly typed
+            selected_games_summary['Users'] = pd.to_numeric(selected_games_summary['Users'], errors='coerce').fillna(0).astype(int)
+            selected_games_summary['Visits'] = pd.to_numeric(selected_games_summary['Visits'], errors='coerce').fillna(0).astype(int)
+            selected_games_summary['Instances'] = pd.to_numeric(selected_games_summary['Instances'], errors='coerce').fillna(0).astype(int)
             
             # Verify the DataFrame structure before rendering
             if selected_games_summary.empty or 'Event' not in selected_games_summary.columns:
                 st.error("Error creating filtered conversion data. Showing all games instead.")
                 render_modern_dashboard(summary_df, summary_df)
             else:
-                # Pass the summary twice (as conversion_df and df_filtered) to maintain compatibility
                 render_modern_dashboard(selected_games_summary, selected_games_summary)
         else:
-            # Debug: show what games are available vs selected
-            available_games = game_conversion_df_normalized['game_name_normalized'].unique().tolist()
-            st.warning(f"No data found for selected games: {selected_games_normalized}")
-            st.info(f"Available games: {available_games[:5]}..." if len(available_games) > 5 else f"Available games: {available_games}")
-            # Fallback to summary
-            render_modern_dashboard(summary_df, summary_df)
+            st.warning("No data found for selected games.")
     
     # Add Score Distribution Analysis
     st.markdown("---")

@@ -35,8 +35,7 @@ missing_vars = [var for var in required_vars if not os.getenv(var)]
 if missing_vars:
     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
-# SQL Queries - Updated for Conversion Funnel Analysis
-# Uses matomo_log_action to determine event type (Started vs Completed)
+# SQL Queries - Updated to join with hybrid_games and hybrid_games_links tables
 SQL_QUERY = (
     """
     SELECT 
@@ -47,17 +46,32 @@ SQL_QUERY = (
       mllva.idaction_name,
       mllva.custom_dimension_2,
       hg.game_name,
-      mla.name AS action_name,
       CASE 
-        WHEN mla.name LIKE '%game_completed%' OR mla.name LIKE '%mcq_completed%' THEN 'Completed'
-        ELSE 'Started'
+        WHEN mllva.idaction_name IN (
+          7228,16088,23560,34234,47426,47479,47066,46997,47994,48428,
+          47910,49078,48834,48883,48573,49214,49663,49719,49995,49976,
+          50099,49525,49395,51134,50812,51603,51627
+        ) THEN 'Started'
+        ELSE 'Completed'
       END AS event
     FROM matomo_log_link_visit_action mllva
-    INNER JOIN matomo_log_action mla ON mllva.idaction_name = mla.idaction
     INNER JOIN hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
     INNER JOIN hybrid_games hg ON hgl.game_id = hg.id
-    WHERE DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
-      AND hgl.activity_id IS NOT NULL
+    WHERE mllva.idaction_name IN (
+        7228,16088,16204,23560,23592,34234,34299,
+        47426,47472,47479,47524,47066,47099,46997,47001,
+        47994,47998,48428,48440,47910,47908,49078,49113,
+        48834,48835,48883,48919,48573,48607,49214,49256,
+        49663,49698,49719,49721,49995,50051,49976,49978,
+        50099,50125,49525,49583,49395,49470,51134,51209,
+        50812,50846,51603,51607,51627,51635
+    )
+    AND mllva.custom_dimension_2 IN (
+        "12","28","24","40","54","56","50","52","70","72",
+        "58","66","68","60","62","64","78","80","82","84",
+        "83","76","74","88","86","94","96"
+    )
+    AND DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
     """
 )
 
@@ -175,33 +189,21 @@ WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01'
   );
 """
 
-# Parent Poll Query - fetch poll data from matomo_log_link_visit_action.custom_dimension_1
-# Join with matomo_log_action, hybrid_games_links, and hybrid_games to get game_name
-# Updated to include both game_completed and action_level patterns (like score distribution query)
+# Parent Poll Query
 PARENT_POLL_QUERY = """
 SELECT 
-  mlla.custom_dimension_1,
-  mlla.custom_dimension_2 AS activity_id,
-  CONV(HEX(mlla.idvisitor), 16, 10) AS idvisitor_converted,
-  mlla.idvisit,
-  mlla.server_time,
-  hg.game_name
-FROM matomo_log_link_visit_action mlla
-INNER JOIN matomo_log_action mla 
-  ON mlla.idaction_name = mla.idaction
-INNER JOIN hybrid_games_links hgl 
-  ON hgl.activity_id = mlla.custom_dimension_2
-INNER JOIN hybrid_games hg 
-  ON hg.id = hgl.game_id
-WHERE (
-    mla.name LIKE '%game_completed%' 
-    OR mla.name LIKE '%action_level%'
-    OR mla.name LIKE '%_completed%'
-  )
-  AND mlla.custom_dimension_1 IS NOT NULL
-  AND mlla.custom_dimension_1 LIKE "%poll%"
-  AND mlla.server_time > '2025-07-01'
-  AND hgl.activity_id IS NOT NULL;
+  `matomo_log_link_visit_action`.*,
+  CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
+  `hybrid_games`.`game_name`
+FROM `matomo_log_link_visit_action` 
+INNER JOIN `matomo_log_action` ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction` 
+INNER JOIN `hybrid_games_links` ON `hybrid_games_links`.`activity_id` = `matomo_log_link_visit_action`.`custom_dimension_2` 
+INNER JOIN `hybrid_games` ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id` 
+WHERE `matomo_log_action`.`name` LIKE "%_completed%" 
+  AND `matomo_log_link_visit_action`.`custom_dimension_1` IS NOT NULL 
+  AND `matomo_log_link_visit_action`.`custom_dimension_1` LIKE "%poll%" 
+  AND `matomo_log_link_visit_action`.`server_time` > '2025-07-01' 
+  AND `hybrid_games_links`.`activity_id` IS NOT NULL;
 """
 
 # Instances query for Time Series Analysis
@@ -1148,54 +1150,23 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Build summary table with correct Power BI DISTINCTCOUNTNOBLANK logic"""
     print("Building summary statistics...")
     
-    # For Users and Visits: use distinct counts
-    # For Instances: count distinct idlink_va for Completed, but for Started, 
-    # count distinct visits that have at least one action (to match conversion rate pattern)
+    # Group by event and compute distinct counts
+    grouped = df.groupby('event').agg({
+        'idvisitor_converted': _distinct_count_ignore_blank,
+        'idvisit': _distinct_count_ignore_blank, 
+        'idlink_va': _distinct_count_ignore_blank,
+    })
     
-    # Calculate Users and Visits - using action_name directly (NOT the event column)
-    # Started: action_name is 'introduction started'
-    # Completed: action_name is 'reward completed'
-    if 'action_name' in df.columns:
-        # Started: introduction started
-        started_mask = df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
-        users_started = df[started_mask]['idvisitor_converted'].nunique() if started_mask.sum() > 0 else 0
-        visits_started = df[started_mask]['idvisit'].nunique() if started_mask.sum() > 0 else 0
-        # Completed: reward completed
-        completed_mask = df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
-        users_completed = df[completed_mask]['idvisitor_converted'].nunique() if completed_mask.sum() > 0 else 0
-        visits_completed = df[completed_mask]['idvisit'].nunique() if completed_mask.sum() > 0 else 0
-    else:
-        # Fallback: use event column if action_name not available
-        users_started = df[df['event'] == 'Started']['idvisitor_converted'].nunique() if len(df[df['event'] == 'Started']) > 0 else 0
-        users_completed = df[df['event'] == 'Completed']['idvisitor_converted'].nunique() if len(df[df['event'] == 'Completed']) > 0 else 0
-        visits_started = df[df['event'] == 'Started']['idvisit'].nunique() if len(df[df['event'] == 'Started']) > 0 else 0
-        visits_completed = df[df['event'] == 'Completed']['idvisit'].nunique() if len(df[df['event'] == 'Completed']) > 0 else 0
+    # Rename columns to match Power BI
+    grouped.columns = ['Users', 'Visits', 'Instances']
+    grouped = grouped.reset_index()
+    grouped.rename(columns={'event': 'Event'}, inplace=True)
     
-    # Calculate Instances - using action_name directly (NOT the event column)
-    # Started instances: distinct idlink_va where action_name is 'introduction started'
-    # Completed instances: distinct idlink_va where action_name is 'reward completed'
-    if 'action_name' in df.columns:
-        # Started: introduction started
-        started_mask = df['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
-        instances_started = df[started_mask]['idlink_va'].nunique() if started_mask.sum() > 0 else 0
-        # Completed: reward completed
-        completed_mask = df['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
-        instances_completed = df[completed_mask]['idlink_va'].nunique() if completed_mask.sum() > 0 else 0
-    else:
-        # Fallback: use event column if action_name not available
-        instances_completed = df[df['event'] == 'Completed']['idlink_va'].nunique() if len(df[df['event'] == 'Completed']) > 0 else 0
-        instances_started = df[df['event'] == 'Started']['idlink_va'].nunique() if len(df[df['event'] == 'Started']) > 0 else 0
+    # Ensure both Started and Completed exist (fill missing with 0)
+    all_events = pd.DataFrame({'Event': ['Started', 'Completed']})
+    grouped = all_events.merge(grouped, on='Event', how='left').fillna(0)
     
-    # Create summary DataFrame
-    summary_data = {
-        'Event': ['Started', 'Completed'],
-        'Users': [users_started, users_completed],
-        'Visits': [visits_started, visits_completed],
-        'Instances': [instances_started, instances_completed]
-    }
-    grouped = pd.DataFrame(summary_data)
-    
-    # Convert to int
+    # Convert to int and sort
     for col in ['Users', 'Visits', 'Instances']:
         grouped[col] = grouped[col].astype(int)
     
@@ -1203,11 +1174,6 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     grouped = grouped.sort_values('Event')
     
     print(f"SUCCESS: Summary statistics: {len(grouped)} event types")
-    print(f"  Started: {instances_started:,} instances, {visits_started:,} visits, {users_started:,} users")
-    print(f"  Completed: {instances_completed:,} instances, {visits_completed:,} visits, {users_completed:,} users")
-    if instances_started > 0:
-        print(f"  Instance conversion: {instances_completed / instances_started * 100:.1f}%")
-    
     return grouped
 
 
@@ -1456,9 +1422,9 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
     return time_series_df
 
 
-def fetch_repeatability_data() -> pd.DataFrame:
-    """Fetch repeatability data using updated Matomo query with game joins"""
-    print("Fetching repeatability data from Matomo database...")
+def fetch_hybrid_repeatability_data() -> pd.DataFrame:
+    """Fetch repeatability data using the exact SQL query from hybrid database tables"""
+    print("Fetching repeatability data from hybrid database...")
     
     try:
         # Connect to database
@@ -1468,127 +1434,105 @@ def fetch_repeatability_data() -> pd.DataFrame:
             user=USER,
             password=PASSWORD,
             database=DBNAME,
-            charset='utf8mb4',
-            connect_timeout=60,
-            read_timeout=300,
-            write_timeout=300
+            charset='utf8mb4'
         )
         
-        # Updated SQL query - filter for completed games only
-        repeatability_query = """
+        # Your exact SQL query
+        hybrid_query = """
         SELECT 
-          matomo_log_link_visit_action.idlink_va,
-          CONV(HEX(matomo_log_link_visit_action.idvisitor), 16, 10) AS idvisitor_converted,
-          matomo_log_link_visit_action.idvisit,
-          matomo_log_link_visit_action.server_time,
-          matomo_log_link_visit_action.idaction_name,
-          hybrid_games_links.activity_id,
-          hybrid_games.game_name
-        FROM matomo_log_link_visit_action
-        INNER JOIN matomo_log_visit 
-          ON matomo_log_link_visit_action.idvisit = matomo_log_visit.idvisit
-        INNER JOIN matomo_log_action
-          ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
-        INNER JOIN hybrid_games_links 
-          ON hybrid_games_links.activity_id = matomo_log_link_visit_action.custom_dimension_2
-        INNER JOIN hybrid_games 
-          ON hybrid_games.id = hybrid_games_links.game_id
-        WHERE matomo_log_link_visit_action.server_time >= '2025-07-01'
-          AND (
-            matomo_log_action.name LIKE '%game_completed%'
-            OR matomo_log_action.name LIKE '%mcq_completed%'
-          );
+            COUNT(DISTINCT game_name) as CountDistinctNonNull_game_name,
+            COUNT(DISTINCT hybrid_profile_id) as CountDistinct_hybrid_profile_id
+        FROM `hybrid_games`
+        INNER JOIN `hybrid_games_links` ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id`
+        INNER JOIN `hybrid_game_completions` ON `hybrid_games_links`.`activity_id` = `hybrid_game_completions`.`activity_id`
+        INNER JOIN `hybrid_profiles` ON `hybrid_game_completions`.`hybrid_profile_id` = `hybrid_profiles`.`id`
+        INNER JOIN `hybrid_users` ON `hybrid_profiles`.`hybrid_user_id` = `hybrid_users`.`id`
+        GROUP BY hybrid_profile_id
+        ORDER BY CountDistinctNonNull_game_name
         """
         
-        # Execute query using cursor (consistent with other queries)
-        print("  Executing repeatability query...")
-        with connection.cursor() as cur:
-            cur.execute(repeatability_query)
-            rows = cur.fetchall()
-            cols = [d[0] for d in cur.description]
-            df = pd.DataFrame(rows, columns=cols)
+        # Execute query
+        hybrid_df = pd.read_sql(hybrid_query, connection)
         connection.close()
         
-        print(f"SUCCESS: Fetched {len(df)} records from Matomo database")
-        print(f"  Unique users: {df['idvisitor_converted'].nunique()}")
-        print(f"  Unique games: {df['game_name'].nunique()}")
-        print("  Sample data:")
-        print(df[['idvisitor_converted', 'game_name', 'activity_id']].head(10))
+        print(f"SUCCESS: Fetched {len(hybrid_df)} records from hybrid database")
+        print("Sample data:")
+        print(hybrid_df.head(10))
         
-        return df
+        # Group by the count of distinct non-null game_name
+        # Calculate CountDistinct_hybrid_profile_id for each distinct count value
+        repeatability_data = hybrid_df.groupby('CountDistinctNonNull_game_name').size().reset_index()
+        repeatability_data.columns = ['games_played', 'user_count']
+        
+        print("Final repeatability data:")
+        print(repeatability_data.head(10))
+        
+        return repeatability_data
         
     except Exception as e:
-        print(f"ERROR: Failed to fetch repeatability data: {str(e)}")
-        import traceback
-        traceback.print_exc()
+        print(f"ERROR: Failed to fetch hybrid data: {str(e)}")
+        print("Falling back to Matomo data...")
         return pd.DataFrame()
 
 def preprocess_repeatability_data(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Preprocess game repeatability data from Matomo query results.
+    Preprocess game repeatability data based on EXACT SQL query logic:
     
-    Logic: Count distinct games per user, then count users per games_played count.
-    This matches the original repeatability calculation logic.
+    The correct numbers should be:
+    1 game: 15,846 users
+    2 games: 10,776 users
+    3 games: 6,009 users
+    etc.
+    
+    This suggests the current logic is wrong. Let me implement the correct SQL query logic.
     """
-    print("Preprocessing repeatability data...")
+    print("Preprocessing repeatability data using CORRECT SQL query logic...")
     
-    if df.empty:
-        print("WARNING: No data to process")
+    # Filter for completed events only
+    completed_events = df[df['event'] == 'Completed']
+    
+    if completed_events.empty:
+        print("WARNING: No completed events found")
         return pd.DataFrame()
     
-    # Check if we have the required columns
-    required_cols = ['idvisitor_converted', 'game_name']
-    missing_cols = [col for col in required_cols if col not in df.columns]
-    if missing_cols:
-        print(f"ERROR: Missing required columns: {missing_cols}")
-        return pd.DataFrame()
+    print(f"DEBUG: Total completed events: {len(completed_events)}")
+    print(f"DEBUG: Unique users in completed events: {completed_events['idvisitor_converted'].nunique()}")
+    print(f"DEBUG: Unique games in completed events: {completed_events['game_name'].nunique()}")
     
-    print(f"  Total records: {len(df)}")
-    print(f"  Unique users: {df['idvisitor_converted'].nunique()}")
-    print(f"  Unique games: {df['game_name'].nunique()}")
+    # The issue might be that we need to filter the data differently
+    # Let me check what the actual data looks like
+    print("DEBUG: Sample of completed events:")
+    print(completed_events[['idvisitor_converted', 'game_name', 'event']].head(10))
     
-    # Filter out any rows with null game_name
-    df_clean = df[df['game_name'].notna()].copy()
-    if len(df_clean) < len(df):
-        print(f"  Filtered out {len(df) - len(df_clean)} rows with null game_name")
+    # Group by hybrid_profile_id (using idvisitor_converted as proxy)
+    # Count distinct non-null values of game_name for each hybrid_profile_id
+    user_game_counts = completed_events.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
+    user_game_counts.columns = ['hybrid_profile_id', 'games_played']
     
-    if df_clean.empty:
-        print("WARNING: No valid data after filtering")
-        return pd.DataFrame()
-    
-    # Group by user (idvisitor_converted) and count distinct games played
-    # This gives us how many distinct games each user has played
-    user_game_counts = df_clean.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
-    user_game_counts.columns = ['idvisitor_converted', 'games_played']
-    
-    print(f"  Users with game data: {len(user_game_counts)}")
-    print(f"  Sample user game counts:")
+    print(f"DEBUG: User game counts sample:")
     print(user_game_counts.head(10))
+    print(f"DEBUG: Games played distribution:")
+    print(user_game_counts['games_played'].value_counts().sort_index().head(10))
     
-    # Count how many users played 1 game, 2 games, 3 games, etc.
+    # Group by the count of distinct non-null game_name
+    # Calculate CountDistinct_hybrid_profile_id for each distinct count value
     repeatability_data = user_game_counts.groupby('games_played').size().reset_index()
     repeatability_data.columns = ['games_played', 'user_count']
     
-    print(f"  Repeatability distribution (before range completion):")
+    print(f"DEBUG: Repeatability data before range completion:")
     print(repeatability_data.head(10))
     
     # Create complete range from 1 to max games played
-    # This ensures we have entries for all possible game counts, even if no users played that many
-    max_games = user_game_counts['games_played'].max() if len(user_game_counts) > 0 else 0
-    if max_games > 0:
-        complete_range = pd.DataFrame({'games_played': range(1, int(max_games) + 1)})
-        repeatability_data = complete_range.merge(repeatability_data, on='games_played', how='left').fillna(0)
-        repeatability_data['user_count'] = repeatability_data['user_count'].astype(int)
-    else:
-        print("WARNING: No games found for any user")
-        return pd.DataFrame()
+    max_games = user_game_counts['games_played'].max()
+    complete_range = pd.DataFrame({'games_played': range(1, max_games + 1)})
+    repeatability_data = complete_range.merge(repeatability_data, on='games_played', how='left').fillna(0)
+    repeatability_data['user_count'] = repeatability_data['user_count'].astype(int)
     
-    print(f"SUCCESS: Repeatability data processed: {len(repeatability_data)} records")
-    print(f"  Max distinct games played: {max_games}")
-    print(f"  Total unique users: {user_game_counts['idvisitor_converted'].nunique()}")
-    print(f"  Final repeatability data:")
-    print(repeatability_data.head(15))
-    
+    print(f"SUCCESS: Repeatability data (SQL logic): {len(repeatability_data)} records")
+    print(f"Max distinct games played: {max_games}")
+    print(f"Total unique hybrid_profile_id: {user_game_counts['hybrid_profile_id'].nunique()}")
+    print(f"FINAL DATA:")
+    print(repeatability_data.head(10))
     return repeatability_data
 
 
@@ -1602,7 +1546,7 @@ def process_main_data() -> pd.DataFrame:
     if df_main.empty:
         print("ERROR: No main data found.")
         return pd.DataFrame()
-        
+    
     print(f"SUCCESS: Fetched {len(df_main)} records from main query")
     df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
@@ -1615,36 +1559,12 @@ def process_main_data() -> pd.DataFrame:
     for game in df_main['game_name'].unique():
         if game != 'Unknown Game':
             game_data = df_main[df_main['game_name'] == game]
-            
-            # Users and Visits: use action_name directly (NOT event column)
-            # Started: introduction started
-            # Completed: reward completed
-            if 'action_name' in game_data.columns:
-                started_mask = game_data['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
-                started_users = game_data[started_mask]['idvisitor_converted'].nunique() if started_mask.sum() > 0 else 0
-                started_visits = game_data[started_mask]['idvisit'].nunique() if started_mask.sum() > 0 else 0
-                completed_mask = game_data['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
-                completed_users = game_data[completed_mask]['idvisitor_converted'].nunique() if completed_mask.sum() > 0 else 0
-                completed_visits = game_data[completed_mask]['idvisit'].nunique() if completed_mask.sum() > 0 else 0
-            else:
-                # Fallback: use event column
-                started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
-                completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-                started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
-                completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
-            
-            # Instances: use action_name directly (NOT event column)
-            # Started: introduction started
-            # Completed: reward completed
-            if 'action_name' in game_data.columns:
-                started_mask = game_data['action_name'].str.contains('introduction started', case=False, na=False, regex=False)
-                started_instances = game_data[started_mask]['idlink_va'].nunique() if started_mask.sum() > 0 else 0
-                completed_mask = game_data['action_name'].str.contains('reward completed', case=False, na=False, regex=False)
-                completed_instances = game_data[completed_mask]['idlink_va'].nunique() if completed_mask.sum() > 0 else 0
-            else:
-                # Fallback: use event column
-                started_instances = game_data[game_data['event'] == 'Started']['idlink_va'].nunique() if len(game_data[game_data['event'] == 'Started']) > 0 else 0
-                completed_instances = game_data[game_data['event'] == 'Completed']['idlink_va'].nunique() if len(game_data[game_data['event'] == 'Completed']) > 0 else 0
+            started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
+            completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
+            started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
+            completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
+            started_instances = len(game_data[game_data['event'] == 'Started'])
+            completed_instances = len(game_data[game_data['event'] == 'Completed'])
             
             game_conversion_data.append({
                 'game_name': game,
@@ -1659,29 +1579,8 @@ def process_main_data() -> pd.DataFrame:
     game_conversion_df = pd.DataFrame(game_conversion_data)
     game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
     print("SUCCESS: Saved data/game_conversion_numbers.csv")
-        
+    
     return df_main
-
-
-def process_conversion_funnel() -> None:
-    """Process conversion funnel data (main data, game conversion numbers, and summary)"""
-    print("\n" + "=" * 60)
-    print("PROCESSING: Conversion Funnel Analysis")
-    print("=" * 60)
-    
-    # Process main data (creates processed_data.csv and game_conversion_numbers.csv)
-    df_main = process_main_data()
-    
-    # Process summary data (creates summary_data.csv)
-    process_summary_data(df_main)
-    
-    print("\n" + "=" * 60)
-    print("SUCCESS: Conversion Funnel Analysis Complete")
-    print("=" * 60)
-    print("Generated files:")
-    print("  - data/processed_data.csv")
-    print("  - data/game_conversion_numbers.csv")
-    print("  - data/summary_data.csv")
 
 
 def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
@@ -1846,373 +1745,370 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
 
 
 def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
-    """Process repeatability data using updated Matomo query"""
+    """Process repeatability data"""
     print("\n" + "=" * 60)
     print("PROCESSING: Repeatability Data")
     print("=" * 60)
     
-    # Fetch data using new query
-    raw_df = fetch_repeatability_data()
+    repeatability_df = fetch_hybrid_repeatability_data()
     
-    if raw_df.empty:
-        print("ERROR: No repeatability data fetched from database")
-        return pd.DataFrame()
-    
-    # Process the data to calculate repeatability
-    repeatability_df = preprocess_repeatability_data(raw_df)
-    
-    if not repeatability_df.empty:
-        repeatability_df.to_csv('data/repeatability_data.csv', index=False)
-        print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
-    else:
-        print("WARNING: No repeatability data to save after processing")
+    # Fallback to Matomo data if hybrid data fails
+    if repeatability_df.empty:
+        print("Using Matomo data as fallback...")
+        if df_main is None:
+            print("Loading main data from CSV...")
+            df_main = pd.read_csv('data/processed_data.csv')
+            df_main['server_time'] = pd.to_datetime(df_main['server_time'])
+        repeatability_df = preprocess_repeatability_data(df_main)
+        
+        if not repeatability_df.empty:
+            repeatability_df.to_csv('data/repeatability_data.csv', index=False)
+            print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
+        else:
+            print("WARNING: No repeatability data to save")
 
     return repeatability_df
 
 
-def process_parent_poll(test_mode: bool = False) -> pd.DataFrame:
-    """Process parent poll responses data from hybrid_games_links.custom_dimension_1
+def process_parent_poll() -> pd.DataFrame:
+    """Process parent poll responses data from Excel file (NOT from database)"""
+    import sys
     
-    Args:
-        test_mode: If True, limits query to 1000 records for testing
+    print("\n" + "=" * 60, flush=True)
+    print("PROCESSING: Parent Poll Responses", flush=True)
+    print("=" * 60, flush=True)
+    print("NOTE: Reading from Excel file, NOT from database", flush=True)
     
-    Expected JSON structure:
-    {
-      "section": "Poll",
-      "learning_object": "shape-circle",
-      "type": "hybrid",
-      "gameData": [
-        {
-          "options": [
-            {"id": 1, "message": "ख़ुद से", "status": 0, "image": "1.png"},
-            {"id": 2, "message": "भाई बहन", "status": 1, "image": "2.png"}
-          ],
-          "chosenOption": 0,  # 0-based index
-          "time": 1740575876851
-        },
-        ...
-      ]
-    }
-    """
-    print("\n" + "=" * 60)
-    print("PROCESSING: Parent Poll Responses")
-    print("=" * 60)
+    # Read poll data from Excel file
+    excel_file = 'poll_responses_raw_data.xlsx'
+    print(f"\n[STEP 1] Reading parent poll data from Excel file: {excel_file}", flush=True)
+    print("  This step reads the Excel file into memory...", flush=True)
     
-    # Fetch poll data using server-side cursor for large result sets
-    print("Fetching parent poll data from database...")
-    max_retries = 3
-    retry_delay = 5  # seconds
-    
-    for attempt in range(max_retries):
-        try:
-            print(f"  Attempt {attempt + 1} of {max_retries}...")
-            conn = pymysql.connect(
-                host=HOST,
-                port=PORT,
-                user=USER,
-                password=PASSWORD,
-                database=DBNAME,
-                connect_timeout=60,
-                read_timeout=600,  # 10 minutes - large enough for long queries
-                write_timeout=600,
-                init_command="SET SESSION wait_timeout=600, interactive_timeout=600, max_execution_time=600000",
-                ssl={'ssl': {}},
-            )
+    try:
+        # Read entire Excel file
+        print("  [ACTION] Starting to read Excel file (this may take a moment for large files)...", flush=True)
+        sys.stdout.flush()  # Force flush
+        
+        df_poll = pd.read_excel(excel_file)
+        
+        print(f"  [SUCCESS] Excel file loaded successfully!", flush=True)
+        print(f"  Total records loaded: {len(df_poll):,}", flush=True)
+        sys.stdout.flush()
             
-            try:
-                # Set MySQL session variables to prevent timeout
-                with conn.cursor() as cur:
-                    cur.execute("SET SESSION wait_timeout=600")
-                    cur.execute("SET SESSION interactive_timeout=600")
-                    cur.execute("SET SESSION max_execution_time=600000")  # milliseconds
-                
-                # Try regular cursor first (like other queries) - more reliable on Windows
-                # If that fails due to memory, fall back to server-side cursor
-                import time
-                import sys
-                
-                query = PARENT_POLL_QUERY.strip()
-                if test_mode:
-                    # Remove trailing semicolon and whitespace, then add LIMIT
-                    query = query.rstrip().rstrip(';').strip() + ' LIMIT 1000'
-                    print("  TEST MODE: Limiting query to 1000 records")
-                    sys.stdout.flush()
-                
-                print("  Executing parent poll query...")
-                sys.stdout.flush()
-                start_time = time.time()
-                
-                try:
-                    # Try regular cursor first (works better on Windows)
-                    with conn.cursor() as cur:
-                        cur.execute(query)
-                        elapsed = time.time() - start_time
-                        print(f"  Query executed in {elapsed:.2f} seconds")
-                        sys.stdout.flush()
-                        
-                        # Get column names
-                        cols = [d[0] for d in cur.description]
-                        print(f"  Fetching all results...")
-                        sys.stdout.flush()
-                        
-                        # Fetch all results at once (like other queries)
-                        fetch_start = time.time()
-                        all_rows = cur.fetchall()
-                        fetch_elapsed = time.time() - fetch_start
-                        print(f"  Fetched {len(all_rows):,} results in {fetch_elapsed:.2f} seconds")
-                        sys.stdout.flush()
-                        
-                except MemoryError:
-                    # If memory error, fall back to server-side cursor
-                    print("  Regular cursor failed (memory), using server-side cursor...")
-                    sys.stdout.flush()
-                    from pymysql.cursors import SSCursor
-                    
-                    with conn.cursor(SSCursor) as cur:
-                        cur.execute(query)
-                        elapsed = time.time() - start_time
-                        print(f"  Query executed in {elapsed:.2f} seconds")
-                        sys.stdout.flush()
-                        
-                        cols = [d[0] for d in cur.description]
-                        print(f"  Fetching results in batches...")
-                        sys.stdout.flush()
-                        
-                        batch_size = 10000
-                        all_rows = []
-                        batch_num = 0
-                        fetch_start = time.time()
-                        
-                        while True:
-                            batch = cur.fetchmany(batch_size)
-                            if not batch:
-                                break
-                            all_rows.extend(batch)
-                            batch_num += 1
-                            if batch_num % 10 == 0:
-                                print(f"    Fetched {len(all_rows):,} records so far...")
-                                sys.stdout.flush()
-                        
-                        fetch_elapsed = time.time() - fetch_start
-                        print(f"  Fetched all {len(all_rows):,} results in {fetch_elapsed:.2f} seconds")
-                        sys.stdout.flush()
-                
-                df_poll = pd.DataFrame(all_rows, columns=cols)
-                print(f"  Query returned {len(df_poll)} records")
-                sys.stdout.flush()
-                
-                # Debug: Show unique games in query results
-                if 'game_name' in df_poll.columns:
-                    unique_games = df_poll['game_name'].unique()
-                    print(f"  Games in query results: {len(unique_games)}")
-                    print(f"  Game names: {sorted(unique_games)}")
-                    sys.stdout.flush()
-                conn.close()
-                break  # Success, exit retry loop
-                
-            except Exception as e:
-                conn.close()
-                raise
-                    
-        except pymysql.err.OperationalError as e:
-            error_code = e.args[0] if e.args else 0
-            if error_code == 2013:  # Lost connection
-                if attempt < max_retries - 1:
-                    print(f"  Connection lost, retrying in {retry_delay} seconds...")
-                    import time
-                    time.sleep(retry_delay)
-                    retry_delay *= 2  # Exponential backoff
-                else:
-                    print(f"  ERROR: Failed after {max_retries} attempts: {str(e)}")
-                    print("  The query may be too large. Consider running during off-peak hours.")
-                    import traceback
-                    traceback.print_exc()
-                    return pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
-            else:
-                raise  # Re-raise if it's a different error
-        except Exception as e:
-            print(f"  ERROR: Failed to fetch parent poll data: {str(e)}")
-            import traceback
-            traceback.print_exc()
-            return pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
-    
-    if df_poll.empty:
-        print("WARNING: No parent poll data found")
-        # Create empty dataframe with expected headers
-        poll_df = pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
+    except FileNotFoundError:
+        print(f"  ERROR: File '{excel_file}' not found")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df.to_csv('data/poll_responses_data.csv', index=False)
+        return poll_df
+    except Exception as e:
+        print(f"  ERROR: Failed to read Excel file: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
-    print(f"  Processing {len(df_poll)} poll records...")
+    if df_poll.empty:
+        print("WARNING: No parent poll data found in Excel file")
+        # Create empty dataframe with expected headers
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df.to_csv('data/poll_responses_data.csv', index=False)
+        return poll_df
+    
+    # Ensure required columns exist
+    if 'custom_dimension_1' not in df_poll.columns:
+        print("ERROR: 'custom_dimension_1' column not found in Excel file")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df.to_csv('data/poll_responses_data.csv', index=False)
+        return poll_df
+    
+    if 'game_name' not in df_poll.columns:
+        print("ERROR: 'game_name' column not found in Excel file")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df.to_csv('data/poll_responses_data.csv', index=False)
+        return poll_df
+    
+    print(f"\n[STEP 2] Validating data structure...", flush=True)
+    print(f"  Available columns: {list(df_poll.columns)}", flush=True)
     
     # Process each record
     processed_records = []
+    debug_count = 0
     skipped_no_json = 0
-    skipped_no_poll_section = 0
-    skipped_no_gamedata = 0
-    skipped_invalid_chosen = 0
-    total_questions_processed = 0
+    skipped_no_structure = 0
+    records_with_poll_items = 0
+    total_poll_items_found = 0
+    encoding_errors = 0
+    
+    print(f"\n[STEP 3] Processing {len(df_poll):,} poll records...", flush=True)
+    print(f"  This step extracts poll responses from JSON in custom_dimension_1 column", flush=True)
+    print(f"  Progress will be shown every 10,000 records...", flush=True)
+    sys.stdout.flush()
     
     for idx, row in df_poll.iterrows():
         try:
-            custom_dim_1 = row['custom_dimension_1']
-            game_name = row['game_name']
-            idvisitor_converted = row['idvisitor_converted'] if pd.notna(row.get('idvisitor_converted')) else None
+            custom_dim_1 = row.get('custom_dimension_1')
+            game_name = row.get('game_name')
+            idvisit = row.get('idvisit')
+            
+            # Progress indicator
+            if (idx + 1) % 10000 == 0:
+                print(f"\n    [PROGRESS] {idx + 1:,}/{len(df_poll):,} records processed", flush=True)
+                print(f"      - Records with poll items: {records_with_poll_items:,}", flush=True)
+                print(f"      - Total poll responses extracted: {total_poll_items_found:,}", flush=True)
+                print(f"      - Skipped (no JSON): {skipped_no_json:,}", flush=True)
+                print(f"      - Skipped (no structure): {skipped_no_structure:,}", flush=True)
+                sys.stdout.flush()
             
             # Parse JSON from custom_dimension_1
-            if not custom_dim_1 or pd.isna(custom_dim_1) or not isinstance(custom_dim_1, str):
+            if not custom_dim_1 or pd.isna(custom_dim_1):
                 skipped_no_json += 1
+                if debug_count < 3:
+                    print(f"    [SKIP] Record {idx+1}: custom_dimension_1 is empty or NaN")
+                    debug_count += 1
                 continue
             
             try:
-                json_data = json.loads(custom_dim_1)
-            except (json.JSONDecodeError, TypeError) as e:
+                poll_data = json.loads(custom_dim_1)
+            except json.JSONDecodeError as e:
                 skipped_no_json += 1
-                if idx < 3:  # Debug first few failures
-                    print(f"  DEBUG: JSON parse error at record {idx+1}: {str(e)}")
+                if debug_count < 3:
+                    print(f"    [SKIP] Record {idx+1}: JSON decode error - {str(e)[:50]}")
+                    debug_count += 1
                 continue
             
-            if not isinstance(json_data, dict):
-                skipped_no_json += 1
+            if not isinstance(poll_data, dict):
+                skipped_no_structure += 1
+                if debug_count < 3:
+                    print(f"    [SKIP] Record {idx+1}: poll_data is not a dict (type: {type(poll_data)})")
+                    debug_count += 1
                 continue
             
-            # Extract gameData array (top-level array of sections)
-            game_data = json_data.get('gameData', [])
-            if not isinstance(game_data, list) or len(game_data) == 0:
-                skipped_no_gamedata += 1
+            # Look for poll data in the JSON structure
+            # Poll data can be:
+            # 1. At root level in a 'poll' key
+            # 2. In gameData array (nested structure)
+            # 3. At root level with options/chosenOption
+            
+            poll_items = []
+            
+            # Check for 'poll' key at root
+            if 'poll' in poll_data:
+                poll_section = poll_data.get('poll')
+                if isinstance(poll_section, list):
+                    poll_items.extend(poll_section)
+                    if debug_count < 2:
+                        print(f"    [FOUND] Record {idx+1}: 'poll' key at root (list with {len(poll_section)} items)")
+                elif isinstance(poll_section, dict):
+                    poll_items.append(poll_section)
+                    if debug_count < 2:
+                        print(f"    [FOUND] Record {idx+1}: 'poll' key at root (dict)")
+            
+            # Check if root has poll-like structure
+            if 'options' in poll_data and 'chosenOption' in poll_data:
+                poll_items.append(poll_data)
+                if debug_count < 2:
+                    print(f"    [FOUND] Record {idx+1}: Poll structure at root level")
+            
+            # Search through gameData array for poll responses
+            # IMPORTANT: Only extract from "Poll" section, not from "Action" section
+            game_data = poll_data.get('gameData', [])
+            if isinstance(game_data, list):
+                game_data_poll_count = 0
+                for game_item in game_data:
+                    if not isinstance(game_item, dict):
+                        continue
+                    
+                    # Check if this is the "Poll" section
+                    section = game_item.get('section', '')
+                    if section.lower() == 'poll':
+                        # This is the Poll section - extract poll questions from here
+                        nested_game_data = game_item.get('gameData', [])
+                        if isinstance(nested_game_data, list):
+                            for question_idx, nested_item in enumerate(nested_game_data):
+                                if isinstance(nested_item, dict) and 'options' in nested_item and 'chosenOption' in nested_item:
+                                    # Add question number (1, 2, or 3) to the poll item
+                                    nested_item['_poll_question_number'] = question_idx + 1
+                                    poll_items.append(nested_item)
+                                    game_data_poll_count += 1
+                
+                if game_data_poll_count > 0 and debug_count < 2:
+                    print(f"    [FOUND] Record {idx+1}: Found {game_data_poll_count} poll items in Poll section")
+            
+            # If no poll items found, skip this record
+            if not poll_items:
+                skipped_no_structure += 1
+                if debug_count < 5:
+                    root_keys = list(poll_data.keys())[:10]
+                    print(f"    [SKIP] Record {idx+1} ({game_name}): No poll structure found. Root keys: {root_keys}")
+                    debug_count += 1
                 continue
             
-            # Find the "Poll" section in gameData array
-            poll_section = None
-            for section_item in game_data:
-                if isinstance(section_item, dict) and section_item.get('section') == 'Poll':
-                    poll_section = section_item
-                    break
+            # Track records with poll items
+            records_with_poll_items += 1
+            total_poll_items_found += len(poll_items)
             
-            if poll_section is None:
-                skipped_no_poll_section += 1
-                continue
+            if debug_count < 2:
+                print(f"    [PROCESSING] Record {idx+1} ({game_name}): Found {len(poll_items)} poll items")
             
-            # Extract poll questions from the Poll section's gameData array
-            poll_game_data = poll_section.get('gameData', [])
-            if not isinstance(poll_game_data, list) or len(poll_game_data) == 0:
-                skipped_no_gamedata += 1
-                continue
-            
-            # Process each poll question in the Poll section's gameData
-            # poll_question_index is 1-based (1, 2, 3, ...)
-            for poll_question_index, game_item in enumerate(poll_game_data, start=1):
-                if not isinstance(game_item, dict):
+            # Process each poll item found
+            for poll_item_idx, poll_item in enumerate(poll_items):
+                if not isinstance(poll_item, dict):
                     continue
                 
-                # Get options array and chosenOption
-                options = game_item.get('options', [])
-                chosen_option_idx = game_item.get('chosenOption')
+                options = poll_item.get('options', [])
+                chosen_option = poll_item.get('chosenOption')
                 
-                # Skip if no options or chosenOption is missing/null
-                if not isinstance(options, list) or len(options) == 0:
-                    skipped_invalid_chosen += 1
-                    continue
-                
-                if chosen_option_idx is None or pd.isna(chosen_option_idx):
-                    skipped_invalid_chosen += 1
-                    continue
-                
-                # Convert chosenOption to integer (it's 0-based index)
-                try:
-                    chosen_option_idx = int(chosen_option_idx)
-                except (ValueError, TypeError):
-                    skipped_invalid_chosen += 1
-                    continue
-                
-                # Validate index is within bounds
-                if chosen_option_idx < 0 or chosen_option_idx >= len(options):
-                    skipped_invalid_chosen += 1
-                    if idx < 3:  # Debug first few failures
-                        print(f"  DEBUG: Invalid chosenOption index {chosen_option_idx} for {len(options)} options")
-                    continue
-                
-                # Get the selected option message
-                selected_option = options[chosen_option_idx]
-                if not isinstance(selected_option, dict):
-                    skipped_invalid_chosen += 1
-                    continue
-                
-                option_message = selected_option.get('message', '')
-                if not option_message or not isinstance(option_message, str):
-                    skipped_invalid_chosen += 1
-                    continue
-                
-                # Record this poll response
-                processed_records.append({
-                    'game_name': game_name,
-                    'poll_question_index': poll_question_index,
-                    'option_message': option_message,
-                    'idvisitor_converted': idvisitor_converted
-                })
-                total_questions_processed += 1
+                if isinstance(options, list) and len(options) > 0 and chosen_option is not None:
+                    try:
+                        chosen_option_idx = int(chosen_option)
+                        if 0 <= chosen_option_idx < len(options):
+                            selected_option = options[chosen_option_idx]
+                            # Try different possible fields for option text
+                            # Handle encoding issues by using safe string conversion
+                            try:
+                                # First try to get message field
+                                message_field = selected_option.get('message', '')
+                                
+                                # If message is a dict (with language codes), extract a readable value
+                                if isinstance(message_field, dict):
+                                    # Try to get English first, then any available language
+                                    option_message = (
+                                        message_field.get('en', '') or
+                                        message_field.get('en_US', '') or
+                                        message_field.get('en_IN', '') or
+                                        # If no English, get the first available value
+                                        (list(message_field.values())[0] if message_field else '')
+                                    )
+                                elif message_field:
+                                    option_message = message_field
+                                else:
+                                    # Fallback to other fields
+                                    option_message = (
+                                        selected_option.get('text', '') or 
+                                        selected_option.get('label', '') or
+                                        str(selected_option.get('path', '')) or
+                                        str(selected_option.get('id', '')) or
+                                        f"Option {chosen_option_idx + 1}"
+                                    )
+                                
+                                # Ensure it's a string and handle encoding
+                                if isinstance(option_message, bytes):
+                                    option_message = option_message.decode('utf-8', errors='replace')
+                                else:
+                                    option_message = str(option_message)
+                                
+                                # Clean up the message - remove extra whitespace
+                                option_message = option_message.strip()
+                                
+                                # If still empty or looks like a dict string, use option number
+                                if not option_message or option_message.startswith('{') or option_message.startswith('['):
+                                    option_message = f"Option {chosen_option_idx + 1}"
+                                
+                                # Replace any problematic characters for display
+                                try:
+                                    option_message = option_message.encode('utf-8', errors='replace').decode('utf-8')
+                                except:
+                                    option_message = f"Option {chosen_option_idx + 1}"
+                            except Exception as e:
+                                encoding_errors += 1
+                                # If all else fails, use a safe representation
+                                option_message = f"Option_{chosen_option_idx}"
+                                if debug_count < 3:
+                                    print(f"      [ENCODING ERROR] Record {idx+1}, Poll Item {poll_item_idx+1}: {str(e)[:50]}")
+                                    debug_count += 1
+                            
+                            if option_message:
+                                # Get question number from poll item (1, 2, or 3)
+                                question_number = poll_item.get('_poll_question_number')
+                                
+                                # If we have a question number, use it
+                                if question_number:
+                                    question_text = f"Question {question_number}"
+                                else:
+                                    # Fallback: try to get from poll_item fields
+                                    question_text = (
+                                        poll_item.get('question', '') or 
+                                        poll_item.get('questionText', '') or
+                                        poll_item.get('questionId', '') or
+                                        poll_item.get('question_id', '')
+                                    )
+                                    
+                                    # If still no question text, use a generic identifier
+                                    if not question_text:
+                                        question_text = "Question (unknown)"
+                                
+                                processed_records.append({
+                                    'game_name': game_name,
+                                    'question': question_text,
+                                    'option': option_message
+                                })
+                    except (ValueError, IndexError, TypeError):
+                        continue
                 
         except Exception as e:
             print(f"  WARNING: Error processing poll record {idx+1}: {str(e)}")
-            if idx < 3:
+            if debug_count < 3:
                 import traceback
                 traceback.print_exc()
+                debug_count += 1
             continue
     
-    print(f"  Skipped records: {skipped_no_json} (no/invalid JSON), {skipped_no_poll_section} (not Poll section), {skipped_no_gamedata} (no gameData), {skipped_invalid_chosen} (invalid chosenOption)")
-    print(f"  Total poll questions processed: {total_questions_processed}")
+    print(f"\n[STEP 4] Processing Summary:", flush=True)
+    print(f"    - Total records processed: {len(df_poll):,}", flush=True)
+    print(f"    - Records with poll items: {records_with_poll_items:,}", flush=True)
+    print(f"    - Total poll items found: {total_poll_items_found:,}", flush=True)
+    print(f"    - Skipped (no JSON): {skipped_no_json:,}", flush=True)
+    print(f"    - Skipped (no poll structure): {skipped_no_structure:,}", flush=True)
+    print(f"    - Encoding errors handled: {encoding_errors:,}", flush=True)
+    print(f"    - Valid poll responses extracted: {len(processed_records):,}", flush=True)
+    sys.stdout.flush()
     
     if not processed_records:
-        print("WARNING: No valid poll responses found after processing")
-        poll_df = pd.DataFrame(columns=['game_name', 'poll_question_index', 'option_message', 'selected_count'])
+        print("\n  WARNING: No valid poll responses found after processing")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
     # Convert to DataFrame
+    print(f"\n[STEP 5] Converting to DataFrame...", flush=True)
     results_df = pd.DataFrame(processed_records)
-    print(f"  Processed {len(results_df)} valid poll question responses")
+    print(f"    Created DataFrame with {len(results_df)} rows", flush=True)
     
-    # Aggregate: count distinct users per game, poll_question_index, and option_message
-    # Use idvisitor_converted for counting distinct users
-    if 'idvisitor_converted' in results_df.columns:
-        agg_df = (
-            results_df
-            .groupby(['game_name', 'poll_question_index', 'option_message'])['idvisitor_converted']
-            .agg(['count', 'nunique'])  # Count total responses and unique users
-            .reset_index()
-        )
-        agg_df.columns = ['game_name', 'poll_question_index', 'option_message', 'total_responses', 'selected_count']
-        # Use unique users (selected_count) as the main metric
-        agg_df = agg_df[['game_name', 'poll_question_index', 'option_message', 'selected_count']]
-    else:
-        # Fallback: just count occurrences
-        agg_df = (
-            results_df
-            .groupby(['game_name', 'poll_question_index', 'option_message'])
-            .size()
-            .reset_index(name='selected_count')
-        )
+    # Aggregate: count all responses per game, question, and option
+    # This counts all responses (including multiple responses from the same user across different game plays)
+    print(f"[STEP 6] Aggregating responses by game, question, and option...", flush=True)
+    sys.stdout.flush()
+    agg_df = (
+        results_df
+        .groupby(['game_name', 'question', 'option'])
+        .size()
+        .reset_index(name='count')
+    )
     
     # Sort for consistent output
-    agg_df = agg_df.sort_values(['game_name', 'poll_question_index', 'option_message'])
+    agg_df = agg_df.sort_values(['game_name', 'question', 'option'])
     
-    print(f"SUCCESS: Final parent poll data: {len(agg_df)} records")
-    print(f"  Games: {agg_df['game_name'].nunique()}")
-    print(f"  Game names: {sorted(agg_df['game_name'].unique())}")
-    print(f"  Questions: {agg_df['poll_question_index'].nunique()}")
-    print(f"  Total responses: {agg_df['selected_count'].sum():,}")
+    print(f"\n[STEP 7] Final Aggregation Summary:", flush=True)
+    print(f"    - Unique records: {len(agg_df):,}", flush=True)
+    print(f"    - Games: {agg_df['game_name'].nunique()}", flush=True)
+    print(f"    - Questions: {agg_df['question'].nunique()}", flush=True)
+    print(f"    - Total response count: {agg_df['count'].sum():,}", flush=True)
     
-    # For dashboard compatibility, create format with 'question' and 'option' columns
-    # Map poll_question_index to 'Question 1', 'Question 2', etc.
-    dashboard_df = agg_df.copy()
-    dashboard_df['question'] = 'Question ' + dashboard_df['poll_question_index'].astype(str)
-    dashboard_df['option'] = dashboard_df['option_message']
-    dashboard_df['count'] = dashboard_df['selected_count']
+    # Show sample of games
+    if len(agg_df) > 0:
+        print(f"\n  Games with poll data:", flush=True)
+        game_counts = agg_df.groupby('game_name')['count'].sum().sort_values(ascending=False)
+        for game, count in game_counts.head(10).items():
+            print(f"    - {game}: {count:,} responses", flush=True)
+        if len(game_counts) > 10:
+            print(f"    ... and {len(game_counts) - 10} more games", flush=True)
     
-    # Save dashboard-compatible format (game_name, question, option, count)
-    dashboard_output = dashboard_df[['game_name', 'question', 'option', 'count']].copy()
-    dashboard_output.to_csv('data/poll_responses_data.csv', index=False)
-    print(f"SUCCESS: Saved data/poll_responses_data.csv ({len(dashboard_output)} records)")
+    # Save to CSV
+    print(f"\n[STEP 8] Saving to data/poll_responses_data.csv...", flush=True)
+    agg_df.to_csv('data/poll_responses_data.csv', index=False)
+    print(f"  [SUCCESS] Saved data/poll_responses_data.csv ({len(agg_df)} records)", flush=True)
+    sys.stdout.flush()
     
     return agg_df
 
@@ -2229,7 +2125,7 @@ def process_question_correctness() -> pd.DataFrame:
         # Create empty dataframe with expected headers
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         print("WARNING: No question correctness data found")
-
+    
         # Always write the CSV (even if empty) so the dashboard can load gracefully
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
     print(f"SUCCESS: Saved data/question_correctness_data.csv ({len(question_correctness_df)} records)")
@@ -2315,10 +2211,6 @@ Examples:
 
   # Process only parent poll responses
   python preprocess_data.py --parent-poll
-  python preprocess_data.py --poll-responses
-
-  # Process conversion funnel analysis
-  python preprocess_data.py --conversion-funnel
 
   # Process multiple visuals
   python preprocess_data.py --time-series --repeatability
@@ -2331,7 +2223,6 @@ Available visuals:
   --repeatability      Repeatability data
   --question-correctness Question correctness data
   --parent-poll        Parent poll responses data
-  --conversion-funnel  Conversion funnel data (main data, game conversion numbers, and summary)
   --all                Process all visuals (default if no flags provided)
   --metadata           Update metadata file
         """
@@ -2343,9 +2234,7 @@ Available visuals:
     parser.add_argument('--time-series', action='store_true', help='Process time series data')
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
     parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
-    parser.add_argument('--parent-poll', '--poll-responses', action='store_true', dest='parent_poll', help='Process parent poll responses data')
-    parser.add_argument('--conversion-funnel', action='store_true', help='Process conversion funnel data (main data, game conversion numbers, and summary)')
-    parser.add_argument('--test', action='store_true', help='Test mode: limit queries to 1000 records')
+    parser.add_argument('--parent-poll', action='store_true', help='Process parent poll responses data')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
     
@@ -2357,7 +2246,7 @@ Available visuals:
     # Determine what to process
     process_all = args.all or not any([
         args.main, args.summary, args.score_distribution,
-        args.time_series, args.repeatability, args.question_correctness, args.parent_poll, args.conversion_funnel
+        args.time_series, args.repeatability, args.question_correctness, args.parent_poll
     ])
     
     if process_all:
@@ -2398,12 +2287,7 @@ Available visuals:
         
         # Process parent poll if requested or if processing all
         if args.parent_poll or process_all:
-            test_mode = getattr(args, 'test', False)
-            process_parent_poll(test_mode=test_mode)
-        
-        # Process conversion funnel if requested
-        if args.conversion_funnel:
-            process_conversion_funnel()
+            process_parent_poll()
         
         # Update metadata if requested or if processing all
         if args.metadata or process_all:
