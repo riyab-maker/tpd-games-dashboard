@@ -306,7 +306,6 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     except (IndexError, KeyError, ValueError, TypeError):
         started_count = 0
         completed_count = 0
-    st.caption(f"📅 Data range: July 2nd, 2025 onwards (Total: {started_count:,} users started, {completed_count:,} users completed)")
 
     # Get data for each funnel from conversion data
     if 'Event' in conversion_df.columns:
@@ -1161,14 +1160,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             )
         )
         
-        # Add data labels
+        # Add data labels - positioned above bars to avoid overlap
+        # Labels are positioned above each bar with sufficient spacing
         labels = alt.Chart(chart_df).mark_text(
             align='center',
-            baseline='middle',
-            fontSize=10,
+            baseline='bottom',
+            fontSize=11,
             fontWeight='bold',
-            color='white',
-            dy=0
+            color='#2C3E50',
+            dy=-10  # Position above the bar with spacing
         ).encode(
             x=alt.X('X_Position:Q'),
             y=alt.Y('Count:Q'),
