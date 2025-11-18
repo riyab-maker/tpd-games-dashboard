@@ -1464,14 +1464,45 @@ def main() -> None:
     # Add filters
     st.markdown("### 🎮 Filters")
     
-    # Game Name filter - get unique games from game_conversion_df
-    unique_games = sorted(game_conversion_df['game_name'].unique())
-    selected_games = st.multiselect(
-        "Select Game Names to filter by:",
-        options=unique_games,
-        default=[],  # Empty by default - shows all games
-        help="Select one or more games to filter the dashboard data. Leave empty to show all games."
-    )
+    # Create two columns for filters
+    filter_col1, filter_col2 = st.columns(2)
+    
+    with filter_col1:
+        # Game Name filter - get unique games from game_conversion_df
+        unique_games = sorted(game_conversion_df['game_name'].unique())
+        selected_games = st.multiselect(
+            "Select Game Names to filter by:",
+            options=unique_games,
+            default=[],  # Empty by default - shows all games
+            help="Select one or more games to filter the dashboard data. Leave empty to show all games."
+        )
+    
+    with filter_col2:
+        # Date filter - use metadata for correct date range
+        if metadata and 'data_date_range' in metadata:
+            min_date = pd.to_datetime(metadata['data_date_range']['start']).date()
+            max_date = pd.to_datetime(metadata['data_date_range']['end']).date()
+        else:
+            min_date = pd.to_datetime('2025-07-02').date()
+            # Use current date as max date
+            max_date = datetime.now().date()
+        
+        # Create date range picker
+        date_range = st.date_input(
+            "Select Date Range:",
+            value=(min_date, max_date),
+            min_value=min_date,
+            max_value=max_date,
+            help="Select a date range to filter the data. Data is available from July 2nd, 2025 onwards."
+        )
+    
+    # Show filter summary
+    if len(date_range) == 2:
+        date_summary = f"from {date_range[0]} to {date_range[1]}"
+    elif len(date_range) == 1:
+        date_summary = f"on {date_range[0]}"
+    else:
+        date_summary = "for all dates"
     
     # Show filter summary
     if not selected_games or len(selected_games) == len(unique_games):
