@@ -1148,7 +1148,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelFontSize=12,
                        grid=True,
                        gridColor='#e0e0e0'
-                   )),
+                   ),
+                   scale=alt.Scale(zero=True)),  # Ensure y-axis starts at 0
+            y2=alt.value(0),  # Bars start from bottom (y=0)
             color=alt.Color('Metric:N',
                           scale=alt.Scale(
                               domain=['Instances', 'Visits', 'Users'],
