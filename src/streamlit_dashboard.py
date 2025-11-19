@@ -1089,6 +1089,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Ensure Metric column values match exactly what we expect
         chart_df['Metric'] = chart_df['Metric'].astype(str)
         
+        # Debug: Print unique Metric values to verify they match the color scale
+        # print(f"Unique Metric values: {chart_df['Metric'].unique()}")
+        
         # Create numeric positions to group bars by time period
         # Each time period gets a base position, and metrics are offset within that group
         time_to_index = {time: idx for idx, time in enumerate(time_order)}
@@ -1121,7 +1124,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
-            stroke='white',
             strokeWidth=2,
             opacity=1.0,  # Full opacity to ensure visibility
             width=bar_width  # Bar width
@@ -1159,6 +1161,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               labelFontSize=12,
                               orient='bottom'
                           )),
+            stroke=alt.value('white'),  # White stroke for all bars
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
                 alt.Tooltip('Metric:N', title='Metric'),
