@@ -1094,12 +1094,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         # Create grouped (side-by-side) bar chart using xOffset for proper grouping
         # xOffset will position bars side by side within each time period (not stacked)
+        # Use consistent bar width across all views to match daily view spacing
+        bar_width = 20  # Same width for all views to ensure consistent spacing
+        
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
             opacity=1.0,
-            width=25  # Fixed bar width for better visibility
+            width=bar_width  # Bar width adjusted for proper spacing
         ).encode(
             x=alt.X('Time:O',
                    title='',
@@ -1120,7 +1123,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        gridColor='#e0e0e0'
                    ),
                    scale=alt.Scale(zero=True)),
-            xOffset=alt.XOffset('Metric:N'),  # This creates side-by-side grouping
+            xOffset=alt.XOffset('Metric:N',
+                               sort=['Instances', 'Visits', 'Users']),  # Order: Instances, Visits, Users
             color=alt.Color('Metric:N',
                           scale=alt.Scale(
                               domain=['Instances', 'Visits', 'Users'],
@@ -1131,7 +1135,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               titleFontSize=13,
                               labelFontSize=12,
                               orient='bottom'
-                          )),
+                          ),
+                          sort=['Instances', 'Visits', 'Users']),  # Ensure consistent order
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
                 alt.Tooltip('Metric:N', title='Metric'),
@@ -1158,7 +1163,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             dy=-8
         ).encode(
             x=alt.X('Time:O', sort=time_order),
-            xOffset=alt.XOffset('Metric:N'),
+            xOffset=alt.XOffset('Metric:N',
+                               sort=['Instances', 'Visits', 'Users']),  # Match bar order
             y=alt.Y('Count:Q'),
             text=alt.Text('Count:Q', format=',.0f')
         ).transform_filter(
