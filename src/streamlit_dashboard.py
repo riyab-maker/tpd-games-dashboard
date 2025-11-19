@@ -1113,7 +1113,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelLimit=100
                    ),
                    sort=time_order,
-                   scale=alt.Scale(bandPaddingInner=0.2, bandPaddingOuter=0.1)),  # Control spacing
+                   scale=alt.Scale(paddingInner=0.3, paddingOuter=0.1)),  # Control spacing between bars within groups
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
