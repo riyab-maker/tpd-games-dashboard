@@ -1087,10 +1087,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         chart_df = pd.DataFrame(chart_data)
         
         # Ensure Metric column values match exactly what we expect
-        chart_df['Metric'] = chart_df['Metric'].astype(str)
+        chart_df['Metric'] = chart_df['Metric'].astype(str).str.strip()
         
         # Ensure Count is numeric and handle any NaN values
         chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
+        
+        # Debug: Print unique Metric values to verify they match color scale domain
+        # print(f"Unique Metric values: {chart_df['Metric'].unique()}")  # Uncomment for debugging
         
         # Create numeric positions to group bars by time period
         # Each time period gets a base position, and metrics are offset within that group
