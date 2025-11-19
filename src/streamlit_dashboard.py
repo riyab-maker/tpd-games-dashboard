@@ -1156,7 +1156,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               titleFontSize=13,
                               labelFontSize=12,
                               orient='bottom'
-                          )),
+                          ),
+                          sort=['Instances', 'Visits', 'Users']),  # Ensure consistent color mapping
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
                 alt.Tooltip('Metric:N', title='Metric'),
