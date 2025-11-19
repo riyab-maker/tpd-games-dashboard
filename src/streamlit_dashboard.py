@@ -1033,13 +1033,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         time_order = sorted(aggregated_df['time_display'].unique().tolist())
     
     # Calculate dynamic width based on number of time periods
+    # Increased width to accommodate wider bars and spacing
     num_periods = len(time_order)
     if time_period == "Daily":
-        chart_width = max(900, num_periods * 80)  # More width for 3 bars per period
+        chart_width = max(1200, num_periods * 150)  # More width for 3 bars per period with spacing
     elif time_period == "Weekly":
-        chart_width = max(800, num_periods * 100)
+        chart_width = max(1000, num_periods * 180)
     else:  # Monthly
-        chart_width = max(700, num_periods * 120)
+        chart_width = max(900, num_periods * 200)
     
     # Create two charts - one for Started, one for Completed
     st.markdown("### 📊 Time Series Analysis: Started vs Completed")
@@ -1098,13 +1099,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         chart_df['Time_Index'] = chart_df['Time'].map(time_to_index)
         
         # Offset for each metric within a time period group
-        # Use wider spacing to prevent overlap and make bars more visible
-        metric_offset = {'Instances': 0.0, 'Visits': 2.0, 'Users': 4.0}
+        # Use much wider spacing to prevent overlap - Power BI style grouped bars
+        # Each bar gets its own space with clear separation
+        metric_offset = {'Instances': 0.0, 'Visits': 3.5, 'Users': 7.0}
         chart_df['Metric_Offset'] = chart_df['Metric'].map(metric_offset)
         
         # Calculate X position: base position for time period + offset for metric
-        # Use wider spacing of 6 units between time periods to accommodate 3 bars with proper spacing
-        chart_df['X_Position'] = chart_df['Time_Index'] * 6 + chart_df['Metric_Offset']
+        # Use much wider spacing (12 units) between time periods to accommodate 3 bars with proper spacing
+        # This creates clear separation between each date/week/month group
+        chart_df['X_Position'] = chart_df['Time_Index'] * 12 + chart_df['Metric_Offset']
         
         # Ensure Count is numeric and handle any NaN values
         chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
@@ -1113,15 +1116,16 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         axis_labels_data = []
         for idx, time in enumerate(time_order):
             axis_labels_data.append({
-                'X_Position': idx * 6 + 2.0,  # Center of the group (middle of 3 bars)
+                'X_Position': idx * 12 + 3.5,  # Center of the group (middle of 3 bars)
                 'Time_Label': time
             })
         axis_labels_df = pd.DataFrame(axis_labels_data)
         
         # Create grouped bar chart with Instances, Visits, Users side by side
         # Use standard mark_bar with x position and width
-        # Much wider bars like standard bar charts (Power BI style)
-        bar_width = 1.8 if time_period == "Monthly" else 1.6
+        # Much thicker bars like Power BI grouped bar charts
+        # Bar width of 3.0 ensures bars are clearly visible and don't overlap
+        bar_width = 3.0 if time_period == "Monthly" else 2.8
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
