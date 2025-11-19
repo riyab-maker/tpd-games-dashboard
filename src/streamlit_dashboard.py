@@ -1113,9 +1113,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelLimit=100
                    ),
                    sort=time_order,
-                   # paddingInner: spacing between bars WITHIN each group (tight - small value)
-                   # paddingOuter: spacing BETWEEN different time period groups (wider - larger value)
-                   scale=alt.Scale(paddingInner=0.1, paddingOuter=0.3)),  # Tight internal, wider external spacing
+                   # paddingInner: spacing between bars WITHIN each group (tight - small value = 0.1)
+                   # paddingOuter: spacing BETWEEN different time period groups (wider - larger value = 0.3)
+                   # These values apply to ALL views (Daily, Weekly, Monthly) for consistent grouped bars
+                   scale=alt.Scale(
+                       paddingInner=0.1,  # Tight spacing between Instances/Visits/Users within each time period
+                       paddingOuter=0.3   # Wider spacing between different time periods
+                   )),
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
