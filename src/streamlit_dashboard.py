@@ -1120,8 +1120,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        gridColor='#e0e0e0'
                    ),
                    scale=alt.Scale(zero=True)),
-            xOffset=alt.XOffset('Metric:N', 
-                               band=0.7),  # This creates side-by-side grouping
+            xOffset=alt.XOffset('Metric:N'),  # This creates side-by-side grouping
             color=alt.Color('Metric:N',
                           scale=alt.Scale(
                               domain=['Instances', 'Visits', 'Users'],
@@ -1159,7 +1158,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             dy=-8
         ).encode(
             x=alt.X('Time:O', sort=time_order),
-            xOffset=alt.XOffset('Metric:N', band=0.7),
+            xOffset=alt.XOffset('Metric:N'),
             y=alt.Y('Count:Q'),
             text=alt.Text('Count:Q', format=',.0f')
         ).transform_filter(
