@@ -1098,16 +1098,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         # Create grouped (side-by-side) bar chart using xOffset for proper grouping
         # xOffset will position bars side by side within each time period (not stacked)
-        # Use consistent bar width and padding for tight internal spacing, wider external spacing
-        # Adjust bar width to ensure tight spacing within groups across all views
-        bar_width = 16  # Slightly narrower bars for tighter grouping
+        # Use narrow bars and minimal padding to create tight grouping within each time period
+        bar_width = 12  # Narrow bars to create tight grouping
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
             opacity=1.0,
-            width=bar_width  # Bar width for all views
+            width=bar_width  # Narrow bar width for tight grouping
         ).encode(
             x=alt.X('Time:O',
                    title='',
@@ -1115,16 +1114,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
                        labelFontSize=11,
                        titleFontSize=14,
-                       labelLimit=100
+                       labelLimit=100,
+                       bandPosition=0.5  # Center bars within each band
                    ),
                    sort=time_order,
-                   # paddingInner: spacing between time period groups (not between bars within group)
-                   # paddingOuter: spacing at edges
-                   # For xOffset grouped bars, spacing within group is controlled by available space
-                   # Use smaller paddingInner to give more space per time period for tighter bar grouping
+                   # For xOffset grouped bars with tight spacing:
+                   # - paddingInner: spacing between time period groups (very small)
+                   # - paddingOuter: spacing at chart edges (small)
+                   # - Narrow bar width (12px) ensures bars are close together within each group
                    scale=alt.Scale(
-                       paddingInner=0.05,  # Minimal spacing between time periods to maximize space for bars
-                       paddingOuter=0.2    # Moderate spacing at edges
+                       paddingInner=0.01,  # Minimal spacing between time periods
+                       paddingOuter=0.1    # Small edge spacing
                    )),
             y=alt.Y('Count:Q',
                    title='Count',
