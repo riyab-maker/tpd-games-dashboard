@@ -1033,13 +1033,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         time_order = sorted(aggregated_df['time_display'].unique().tolist())
     
     # Calculate dynamic width based on number of time periods
+    # Use consistent calculation to ensure similar spacing per time period across all views
     num_periods = len(time_order)
+    # Calculate width to give similar space per time period across all views
+    # This ensures consistent bar spacing within groups
+    base_width_per_period = 100  # Base width per time period for consistent spacing
     if time_period == "Daily":
-        chart_width = max(900, num_periods * 80)  # More width for 3 bars per period
+        chart_width = max(900, num_periods * base_width_per_period)
     elif time_period == "Weekly":
-        chart_width = max(800, num_periods * 100)
+        chart_width = max(800, num_periods * base_width_per_period)
     else:  # Monthly
-        chart_width = max(700, num_periods * 120)
+        chart_width = max(700, num_periods * base_width_per_period)
     
     # Create two charts - one for Started, one for Completed
     st.markdown("### 📊 Time Series Analysis: Started vs Completed")
@@ -1095,7 +1099,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Create grouped (side-by-side) bar chart using xOffset for proper grouping
         # xOffset will position bars side by side within each time period (not stacked)
         # Use consistent bar width and padding for tight internal spacing, wider external spacing
-        bar_width = 18  # Consistent bar width across all views
+        # Adjust bar width to ensure tight spacing within groups across all views
+        bar_width = 16  # Slightly narrower bars for tighter grouping
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
@@ -1113,12 +1118,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        labelLimit=100
                    ),
                    sort=time_order,
-                   # paddingInner: spacing between bars WITHIN each group (tight - small value = 0.1)
-                   # paddingOuter: spacing BETWEEN different time period groups (wider - larger value = 0.3)
-                   # These values apply to ALL views (Daily, Weekly, Monthly) for consistent grouped bars
+                   # paddingInner: spacing between time period groups (not between bars within group)
+                   # paddingOuter: spacing at edges
+                   # For xOffset grouped bars, spacing within group is controlled by available space
+                   # Use smaller paddingInner to give more space per time period for tighter bar grouping
                    scale=alt.Scale(
-                       paddingInner=0.1,  # Tight spacing between Instances/Visits/Users within each time period
-                       paddingOuter=0.3   # Wider spacing between different time periods
+                       paddingInner=0.05,  # Minimal spacing between time periods to maximize space for bars
+                       paddingOuter=0.2    # Moderate spacing at edges
                    )),
             y=alt.Y('Count:Q',
                    title='Count',
