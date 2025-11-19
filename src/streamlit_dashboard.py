@@ -692,13 +692,13 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
     st.markdown("### 🎮 Game Repeatability Analysis")
     
     # Create the repeatability chart with explicit axis configuration
-    # Use thicker bars for better visibility
+    # Use much thicker bars - 5 times thicker than before
     chart = alt.Chart(repeatability_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
             color='#50C878',
-            width=60  # Thicker bars for repeatability chart
+            width=300  # Very thick bars for repeatability chart (5x thicker)
         ).encode(
         x=alt.X('games_played:O', 
                 title='No of games played', 
@@ -1035,14 +1035,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         time_order = sorted(aggregated_df['time_display'].unique().tolist())
     
     # Calculate dynamic width based on number of time periods
-    # Increased width to accommodate much thicker bars and wider spacing
+    # Much increased width to accommodate very thick bars (5x thicker) and wider spacing
     num_periods = len(time_order)
     if time_period == "Daily":
-        chart_width = max(1500, num_periods * 200)  # More width for 3 thick bars per period with spacing
+        chart_width = max(3000, num_periods * 500)  # Much more width for 3 very thick bars per period with spacing
     elif time_period == "Weekly":
-        chart_width = max(1300, num_periods * 250)
+        chart_width = max(2500, num_periods * 600)
     else:  # Monthly
-        chart_width = max(1100, num_periods * 280)
+        chart_width = max(2000, num_periods * 700)
     
     # Create two charts - one for Started, one for Completed
     st.markdown("### 📊 Time Series Analysis: Started vs Completed")
@@ -1102,14 +1102,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         # Offset for each metric within a time period group
         # Bars should be close together side-by-side but not overlapping
-        # With bar width of 4.0, we need spacing of at least 4.5 to prevent overlap
-        metric_offset = {'Instances': 0.0, 'Visits': 4.5, 'Users': 9.0}
+        # With bar width of 20.0, we need spacing of at least 22.0 to prevent overlap
+        metric_offset = {'Instances': 0.0, 'Visits': 22.0, 'Users': 44.0}
         chart_df['Metric_Offset'] = chart_df['Metric'].map(metric_offset)
         
         # Calculate X position: base position for time period + offset for metric
-        # Use wider spacing (15 units) between time periods to accommodate 3 thick bars with proper spacing
+        # Use much wider spacing (70 units) between time periods to accommodate 3 very thick bars with proper spacing
         # This creates clear separation between each date/week/month group while keeping bars close within group
-        chart_df['X_Position'] = chart_df['Time_Index'] * 15 + chart_df['Metric_Offset']
+        chart_df['X_Position'] = chart_df['Time_Index'] * 70 + chart_df['Metric_Offset']
         
         # Ensure Count is numeric and handle any NaN values
         chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
@@ -1118,17 +1118,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         axis_labels_data = []
         for idx, time in enumerate(time_order):
             axis_labels_data.append({
-                'X_Position': idx * 15 + 4.5,  # Center of the group (middle of 3 bars)
+                'X_Position': idx * 70 + 22.0,  # Center of the group (middle of 3 bars)
                 'Time_Label': time
             })
         axis_labels_df = pd.DataFrame(axis_labels_data)
         
         # Create grouped bar chart with Instances, Visits, Users side by side
         # Use standard mark_bar with x position and width
-        # Much thicker bars like Power BI grouped bar charts
-        # Bar width of 4.0 ensures bars are clearly visible and don't overlap
-        # Bars are close together (4.5 spacing) but don't overlap (bar width 4.0)
-        bar_width = 4.0 if time_period == "Monthly" else 3.8
+        # Very thick bars - 5 times thicker than before
+        # Bar width of 20.0 ensures bars are clearly visible and don't overlap
+        # Bars are close together (22.0 spacing) but don't overlap (bar width 20.0)
+        bar_width = 20.0 if time_period == "Monthly" else 19.0
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
