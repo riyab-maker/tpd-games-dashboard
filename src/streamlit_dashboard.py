@@ -1095,14 +1095,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Create grouped (side-by-side) bar chart using xOffset for proper grouping
         # xOffset will position bars side by side within each time period (not stacked)
         # Use consistent bar width across all views to match daily view spacing
-        bar_width = 20  # Same width for all views to ensure consistent spacing
+        bar_width = 20  # Same width for all views - matches Daily view spacing
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
             opacity=1.0,
-            width=bar_width  # Bar width adjusted for proper spacing
+            width=bar_width  # Bar width for all views
         ).encode(
             x=alt.X('Time:O',
                    title='',
@@ -1112,7 +1112,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        titleFontSize=14,
                        labelLimit=100
                    ),
-                   sort=time_order),
+                   sort=time_order,
+                   scale=alt.Scale(bandPaddingInner=0.2, bandPaddingOuter=0.1)),  # Control spacing
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
