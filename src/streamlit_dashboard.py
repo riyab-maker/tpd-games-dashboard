@@ -1092,29 +1092,34 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         chart_df['Time_Index'] = chart_df['Time'].map(time_to_index)
         
         # Offset for each metric within a time period group
-        metric_offset = {'Instances': 0.0, 'Visits': 1.0, 'Users': 2.0}
+        # Use spacing that ensures bars are visible and not overlapping
+        metric_offset = {'Instances': 0.0, 'Visits': 1.2, 'Users': 2.4}
         chart_df['Metric_Offset'] = chart_df['Metric'].map(metric_offset)
         
         # Calculate X position: base position for time period + offset for metric
-        # Use spacing of 4 units between time periods to accommodate 3 bars
-        chart_df['X_Position'] = chart_df['Time_Index'] * 4 + chart_df['Metric_Offset']
+        # Use spacing of 4.5 units between time periods to accommodate 3 bars with proper spacing
+        chart_df['X_Position'] = chart_df['Time_Index'] * 4.5 + chart_df['Metric_Offset']
         
         # Create axis labels data - one label per time period at the center
         axis_labels_data = []
         for idx, time in enumerate(time_order):
             axis_labels_data.append({
-                'X_Position': idx * 4 + 1.0,  # Center of the group (middle of 3 bars)
+                'X_Position': idx * 4.5 + 1.2,  # Center of the group (middle of 3 bars)
                 'Time_Label': time
             })
         axis_labels_df = pd.DataFrame(axis_labels_data)
         
         # Create grouped bar chart with Instances, Visits, Users side by side
+        # Adjust bar width based on time period for better visibility
+        # Wider bars for monthly view to ensure visibility
+        bar_width = 1.0 if time_period == "Monthly" else 0.9
+        
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
             opacity=0.95,
-            width=0.8  # Bar width to fit 3 bars per time period
+            width=bar_width  # Bar width to fit 3 bars per time period
         ).encode(
             x=alt.X('X_Position:Q',
                    title='',
@@ -1180,24 +1185,23 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             alt.datum.Count > 0
         )
         
-        # Add axis labels at bottom - rotate for better readability
-        # Determine rotation angle based on time period and number of periods
-        rotation_angle = 0
+        # Add axis labels at bottom - adjust height based on time period
+        # Altair doesn't support text rotation in mark_text, so we keep labels horizontal
         label_height = 60
         if time_period == "Daily" and num_periods > 7:
-            rotation_angle = -45  # Rotate for daily when many periods
-            label_height = 80
+            label_height = 80  # More height for readability
         elif time_period == "Weekly" and num_periods > 8:
-            rotation_angle = -30
             label_height = 70
         
+        # Use smaller font for daily/weekly when many periods to prevent overlap
+        label_font_size = 10 if (time_period == "Daily" and num_periods > 7) or (time_period == "Weekly" and num_periods > 8) else 11
+        
         axis_labels_chart = alt.Chart(axis_labels_df).mark_text(
-            align='left' if rotation_angle < 0 else 'center',
+            align='center',
             baseline='top',
-            fontSize=11,
+            fontSize=label_font_size,
             fontWeight='normal',
-            dy=8,
-            angle=rotation_angle
+            dy=8
         ).encode(
             x=alt.X('X_Position:Q',
                    scale=alt.Scale(
