@@ -1032,143 +1032,146 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         time_order = sorted(aggregated_df['time_display'].unique().tolist())
     
-    # Calculate dynamic width
+    # Calculate dynamic width based on number of time periods
     num_periods = len(time_order)
     if time_period == "Daily":
-        chart_width = max(800, num_periods * 30)
+        chart_width = max(900, num_periods * 80)  # More width for 3 bars per period
     elif time_period == "Weekly":
-        chart_width = max(700, num_periods * 45)
+        chart_width = max(800, num_periods * 100)
     else:  # Monthly
-        chart_width = max(600, num_periods * 60)
+        chart_width = max(700, num_periods * 120)
     
-    # Create three separate charts - one for each metric
-    st.markdown("### 📊 Time Series Analysis: Instances, Visits, and Users")
-    st.markdown("Each chart shows **Started** and **Completed** bars over time.")
+    # Create two charts - one for Started, one for Completed
+    st.markdown("### 📊 Time Series Analysis: Started vs Completed")
+    st.markdown("Each chart shows **Instances**, **Visits**, and **Users** side by side for each time period.")
     
+    # Define metrics configuration
     metrics_config = [
-        {'name': 'Instances', 'color': '#4A90E2', 'title': '⚡ Instances Over Time'},
-        {'name': 'Visits', 'color': '#50C878', 'title': '🔄 Visits Over Time'},
-        {'name': 'Users', 'color': '#FFA726', 'title': '👥 Users Over Time'}
+        {'name': 'Instances', 'color': '#4A90E2', 'label': 'Instances'},
+        {'name': 'Visits', 'color': '#50C878', 'label': 'Visits'},
+        {'name': 'Users', 'color': '#FFA726', 'label': 'Users'}
     ]
     
-    for metric_config in metrics_config:
-        metric_name = metric_config['name'].lower()
-        metric_data = aggregated_df[aggregated_df['metric'] == metric_name].copy()
+    # Create charts for Started and Completed
+    event_types = ['Started', 'Completed']
+    event_titles = {'Started': '🚀 Started Events', 'Completed': '✅ Completed Events'}
+    
+    for event_type in event_types:
+        st.markdown(f"#### {event_titles[event_type]}")
         
-        if metric_data.empty:
+        # Filter data for this event type
+        event_data = aggregated_df[aggregated_df['event'] == event_type].copy()
+        
+        if event_data.empty:
+            st.warning(f"No {event_type.lower()} data available.")
             continue
         
-        st.markdown(f"#### {metric_config['title']}")
-        
-        # Create chart data with Started and Completed
+        # Prepare chart data with all three metrics side by side for each time period
         chart_data = []
-        for _, row in metric_data.iterrows():
-            chart_data.append({
-                'Time': row['time_display'],
-                'Event': row['event'],
-                'Count': row['count']
-            })
+        for time in time_order:
+            for metric_config in metrics_config:
+                metric_name = metric_config['name'].lower()
+                metric_row = event_data[
+                    (event_data['time_display'] == time) & 
+                    (event_data['metric'] == metric_name)
+                ]
+                
+                count = metric_row['count'].iloc[0] if not metric_row.empty else 0
+                chart_data.append({
+                    'Time': time,
+                    'Metric': metric_config['label'],
+                    'Count': count,
+                    'Color': metric_config['color']
+                })
         
         chart_df = pd.DataFrame(chart_data)
         
-        # Create numeric positions to group bars closely by time period
-        # Each time period gets a base position, and Started/Completed are offset within that group
-        chart_df = chart_df.copy()
-        
-        # Create a mapping from time display to index based on time_order
+        # Create numeric positions to group bars by time period
+        # Each time period gets a base position, and metrics are offset within that group
         time_to_index = {time: idx for idx, time in enumerate(time_order)}
         chart_df['Time_Index'] = chart_df['Time'].map(time_to_index)
         
-        # Ensure we have both Started and Completed for each time period
-        # Fill missing combinations with 0
-        all_combinations = []
-        for time in time_order:
-            all_combinations.append({'Time': time, 'Event': 'Started', 'Count': 0})
-            all_combinations.append({'Time': time, 'Event': 'Completed', 'Count': 0})
-        complete_df = pd.DataFrame(all_combinations)
-        chart_df = complete_df.merge(chart_df, on=['Time', 'Event'], how='left', suffixes=('', '_actual'))
-        chart_df['Count'] = chart_df['Count_actual'].fillna(0)
-        chart_df = chart_df[['Time', 'Event', 'Count']].copy()
-        chart_df['Time_Index'] = chart_df['Time'].map(time_to_index)
+        # Offset for each metric within a time period group
+        metric_offset = {'Instances': 0.0, 'Visits': 1.0, 'Users': 2.0}
+        chart_df['Metric_Offset'] = chart_df['Metric'].map(metric_offset)
         
-        event_offset = {'Started': 0.2, 'Completed': 0.8}  # Small offsets to keep bars close
-        chart_df['X_Position'] = chart_df['Time_Index'] * 10 + chart_df['Event'].map(event_offset)
+        # Calculate X position: base position for time period + offset for metric
+        # Use spacing of 4 units between time periods to accommodate 3 bars
+        chart_df['X_Position'] = chart_df['Time_Index'] * 4 + chart_df['Metric_Offset']
         
         # Create axis labels data - one label per time period at the center
         axis_labels_data = []
         for idx, time in enumerate(time_order):
             axis_labels_data.append({
-                'X_Position': idx * 10 + 0.5,  # Center of the group (between Started and Completed)
+                'X_Position': idx * 4 + 1.0,  # Center of the group (middle of 3 bars)
                 'Time_Label': time
             })
         axis_labels_df = pd.DataFrame(axis_labels_data)
         
-        # Create grouped bar chart with Started and Completed side by side
+        # Create grouped bar chart with Instances, Visits, Users side by side
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
-            strokeWidth=2.5,
+            strokeWidth=2,
             opacity=0.95,
-            width=15  # Narrower bars to keep them close together
+            width=0.8  # Bar width to fit 3 bars per time period
         ).encode(
             x=alt.X('X_Position:Q',
                    title='',
                    axis=alt.Axis(
-                       # Hide default axis - we'll use custom labels on horizontal axis
                        labels=False,
                        ticks=False,
                        domain=False,
                        title=None
                    ),
                    scale=alt.Scale(
-                       domain=[min(chart_df['X_Position']) - 1, max(chart_df['X_Position']) + 1],
-                       padding=0.1
+                       domain=[min(chart_df['X_Position']) - 0.5, max(chart_df['X_Position']) + 0.5],
+                       padding=0.2
                    )),
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
                        format='~s',
-                       titleFontSize=13,
-                       labelFontSize=11,
+                       titleFontSize=14,
+                       labelFontSize=12,
                        grid=True,
                        gridColor='#e0e0e0'
                    )),
-            color=alt.Color('Event:N',
+            color=alt.Color('Metric:N',
                           scale=alt.Scale(
-                              domain=['Started', 'Completed'],
-                              range=['#FFA726', '#4A90E2']  # Orange for Started, Blue for Completed
+                              domain=['Instances', 'Visits', 'Users'],
+                              range=['#4A90E2', '#50C878', '#FFA726']
                           ),
                           legend=alt.Legend(
-                              title="Event Type",
-                              titleFontSize=12,
-                              labelFontSize=11,
-                              orient='bottom'  # Move legend to bottom instead of top-right
+                              title="Metric Type",
+                              titleFontSize=13,
+                              labelFontSize=12,
+                              orient='bottom'
                           )),
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
-                alt.Tooltip('Event:N', title='Event'),
+                alt.Tooltip('Metric:N', title='Metric'),
                 alt.Tooltip('Count:Q', title='Count', format=',')
             ]
         ).properties(
             width=chart_width,
-            height=400,
+            height=450,
             title=alt.TitleParams(
-                text=metric_config['title'],
-                fontSize=16,
+                text=event_titles[event_type],
+                fontSize=18,
                 fontWeight='bold',
                 offset=10
             )
         )
         
-        # Add data labels - positioned above bars to avoid overlap
-        # Labels are positioned above each bar with sufficient spacing
+        # Add data labels above bars
         labels = alt.Chart(chart_df).mark_text(
             align='center',
             baseline='bottom',
-            fontSize=11,
+            fontSize=10,
             fontWeight='bold',
             color='#2C3E50',
-            dy=-10  # Position above the bar with spacing
+            dy=-8
         ).encode(
             x=alt.X('X_Position:Q'),
             y=alt.Y('Count:Q'),
@@ -1177,24 +1180,35 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             alt.datum.Count > 0
         )
         
-        # Add axis labels - create a separate chart for labels positioned at bottom
-        # Use vconcat to place labels below the main chart
+        # Add axis labels at bottom - rotate for better readability
+        # Determine rotation angle based on time period and number of periods
+        rotation_angle = 0
+        label_height = 60
+        if time_period == "Daily" and num_periods > 7:
+            rotation_angle = -45  # Rotate for daily when many periods
+            label_height = 80
+        elif time_period == "Weekly" and num_periods > 8:
+            rotation_angle = -30
+            label_height = 70
+        
         axis_labels_chart = alt.Chart(axis_labels_df).mark_text(
-            align='center',
+            align='left' if rotation_angle < 0 else 'center',
             baseline='top',
             fontSize=11,
-            dy=5
+            fontWeight='normal',
+            dy=8,
+            angle=rotation_angle
         ).encode(
             x=alt.X('X_Position:Q',
                    scale=alt.Scale(
-                       domain=[min(chart_df['X_Position']) - 1, max(chart_df['X_Position']) + 1]
+                       domain=[min(chart_df['X_Position']) - 0.5, max(chart_df['X_Position']) + 0.5]
                    ),
                    axis=alt.Axis(labels=False, ticks=False, title=None)),
-            y=alt.value(20),  # Fixed position at bottom of label area
+            y=alt.value(30),
             text=alt.Text('Time_Label:N')
         ).properties(
             width=chart_width,
-            height=50  # Small height for label area
+            height=label_height
         )
         
         # Main chart with bars and data labels
@@ -1203,10 +1217,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             y='shared'
         ).properties(
             width=chart_width,
-            height=400
+            height=450
         )
         
-        # Combine main chart and axis labels using vconcat (vertical concatenation)
+        # Combine main chart and axis labels using vconcat
         chart = alt.vconcat(
             main_chart,
             axis_labels_chart,
@@ -1216,8 +1230,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         )
         
         chart = chart.configure_axis(
-            labelFontSize=11,
-            titleFontSize=13
+            labelFontSize=12,
+            titleFontSize=14
         ).configure_view(
             strokeWidth=0
         )
