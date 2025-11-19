@@ -1120,7 +1120,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         # Create grouped bar chart with Instances, Visits, Users side by side
         # Use standard mark_bar with x position and width
-        bar_width = 1.0 if time_period == "Monthly" else 0.9
+        # Wider bars for better visibility
+        bar_width = 1.5 if time_period == "Monthly" else 1.3
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
