@@ -1092,16 +1092,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Ensure Count is numeric and handle any NaN values
         chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
         
-        # Create grouped bar chart - use Time as X and Metric for grouping with proper encoding
-        # Create a combined field for proper grouping
-        chart_df['Time_Metric'] = chart_df['Time'].astype(str) + '|' + chart_df['Metric'].astype(str)
-        
-        # Create the main bar chart
+        # Create grouped (side-by-side) bar chart using xOffset for proper grouping
+        # xOffset will position bars side by side within each time period (not stacked)
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
-            opacity=1.0
+            opacity=1.0,
+            width=25  # Fixed bar width for better visibility
         ).encode(
             x=alt.X('Time:O',
                    title='',
@@ -1122,6 +1120,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        gridColor='#e0e0e0'
                    ),
                    scale=alt.Scale(zero=True)),
+            xOffset=alt.XOffset('Metric:N', 
+                               band=0.7),  # This creates side-by-side grouping
             color=alt.Color('Metric:N',
                           scale=alt.Scale(
                               domain=['Instances', 'Visits', 'Users'],
@@ -1159,18 +1159,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             dy=-8
         ).encode(
             x=alt.X('Time:O', sort=time_order),
+            xOffset=alt.XOffset('Metric:N', band=0.7),
             y=alt.Y('Count:Q'),
-            text=alt.Text('Count:Q', format=',.0f'),
-            color=alt.Color('Metric:N',
-                          scale=alt.Scale(
-                              domain=['Instances', 'Visits', 'Users'],
-                              range=['#4A90E2', '#50C878', '#FFA726']
-                          ))
+            text=alt.Text('Count:Q', format=',.0f')
         ).transform_filter(
             alt.datum.Count > 0
         )
         
-        # Combine bars and labels - this should create grouped bars automatically
+        # Combine bars and labels
         chart = alt.layer(bars, labels).resolve_scale(
             x='shared',
             y='shared',
