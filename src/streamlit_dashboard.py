@@ -1124,7 +1124,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
-            strokeWidth=2,
             opacity=1.0,  # Full opacity to ensure visibility
             width=bar_width  # Bar width
         ).encode(
@@ -1161,7 +1160,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               labelFontSize=12,
                               orient='bottom'
                           )),
-            stroke=alt.value('white'),  # White stroke for all bars
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
                 alt.Tooltip('Metric:N', title='Metric'),
