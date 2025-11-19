@@ -1092,53 +1092,26 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Ensure Count is numeric and handle any NaN values
         chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
         
-        # Debug: Print unique Metric values to verify they match color scale domain
-        # print(f"Unique Metric values: {chart_df['Metric'].unique()}")  # Uncomment for debugging
+        # Create grouped bar chart - use Time as X and Metric for grouping with proper encoding
+        # Create a combined field for proper grouping
+        chart_df['Time_Metric'] = chart_df['Time'].astype(str) + '|' + chart_df['Metric'].astype(str)
         
-        # Create numeric positions to group bars by time period
-        # Each time period gets a base position, and metrics are offset within that group
-        time_to_index = {time: idx for idx, time in enumerate(time_order)}
-        chart_df['Time_Index'] = chart_df['Time'].map(time_to_index)
-        
-        # Offset for each metric within a time period group
-        # Use spacing that ensures bars are visible and not overlapping
-        metric_offset = {'Instances': 0.0, 'Visits': 1.2, 'Users': 2.4}
-        chart_df['Metric_Offset'] = chart_df['Metric'].map(metric_offset)
-        
-        # Calculate X position: base position for time period + offset for metric
-        # Use spacing of 4.5 units between time periods to accommodate 3 bars with proper spacing
-        chart_df['X_Position'] = chart_df['Time_Index'] * 4.5 + chart_df['Metric_Offset']
-        
-        # Create axis labels data - one label per time period at the center
-        axis_labels_data = []
-        for idx, time in enumerate(time_order):
-            axis_labels_data.append({
-                'X_Position': idx * 4.5 + 1.2,  # Center of the group (middle of 3 bars)
-                'Time_Label': time
-            })
-        axis_labels_df = pd.DataFrame(axis_labels_data)
-        
-        # Create grouped bar chart with Instances, Visits, Users side by side
-        # Use Altair's default bar positioning (no x2/y2 needed for vertical bars)
+        # Create the main bar chart
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
-            opacity=1.0,  # Full opacity to ensure visibility
-            width=1.0  # Bar width
+            opacity=1.0
         ).encode(
-            x=alt.X('X_Position:Q',
+            x=alt.X('Time:O',
                    title='',
                    axis=alt.Axis(
-                       labels=False,
-                       ticks=False,
-                       domain=False,
-                       title=None
+                       labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
+                       labelFontSize=11,
+                       titleFontSize=14,
+                       labelLimit=100
                    ),
-                   scale=alt.Scale(
-                       domain=[min(chart_df['X_Position']) - 0.5, max(chart_df['X_Position']) + 0.5],
-                       padding=0.3
-                   )),
+                   sort=time_order),
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
@@ -1148,7 +1121,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        grid=True,
                        gridColor='#e0e0e0'
                    ),
-                   scale=alt.Scale(zero=True)),  # Ensure y-axis starts at 0
+                   scale=alt.Scale(zero=True)),
             color=alt.Color('Metric:N',
                           scale=alt.Scale(
                               domain=['Instances', 'Visits', 'Users'],
@@ -1159,8 +1132,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               titleFontSize=13,
                               labelFontSize=12,
                               orient='bottom'
-                          ),
-                          sort=['Instances', 'Visits', 'Users']),  # Ensure consistent color mapping
+                          )),
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
                 alt.Tooltip('Metric:N', title='Metric'),
@@ -1177,7 +1149,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             )
         )
         
-        # Add data labels above bars - use center of bar (X_Position)
+        # Add data labels above bars
         labels = alt.Chart(chart_df).mark_text(
             align='center',
             baseline='bottom',
@@ -1186,59 +1158,23 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             color='#2C3E50',
             dy=-8
         ).encode(
-            x=alt.X('X_Position:Q'),  # Center position of the bar
+            x=alt.X('Time:O', sort=time_order),
             y=alt.Y('Count:Q'),
-            text=alt.Text('Count:Q', format=',.0f')
+            text=alt.Text('Count:Q', format=',.0f'),
+            color=alt.Color('Metric:N',
+                          scale=alt.Scale(
+                              domain=['Instances', 'Visits', 'Users'],
+                              range=['#4A90E2', '#50C878', '#FFA726']
+                          ))
         ).transform_filter(
             alt.datum.Count > 0
         )
         
-        # Add axis labels at bottom - adjust height based on time period
-        # Altair doesn't support text rotation in mark_text, so we keep labels horizontal
-        label_height = 60
-        if time_period == "Daily" and num_periods > 7:
-            label_height = 80  # More height for readability
-        elif time_period == "Weekly" and num_periods > 8:
-            label_height = 70
-        
-        # Use smaller font for daily/weekly when many periods to prevent overlap
-        label_font_size = 10 if (time_period == "Daily" and num_periods > 7) or (time_period == "Weekly" and num_periods > 8) else 11
-        
-        axis_labels_chart = alt.Chart(axis_labels_df).mark_text(
-            align='center',
-            baseline='top',
-            fontSize=label_font_size,
-            fontWeight='normal',
-            dy=8
-        ).encode(
-            x=alt.X('X_Position:Q',
-                   scale=alt.Scale(
-                       domain=[min(chart_df['X_Position']) - 0.5, max(chart_df['X_Position']) + 0.5]
-                   ),
-                   axis=alt.Axis(labels=False, ticks=False, title=None)),
-            y=alt.value(30),
-            text=alt.Text('Time_Label:N')
-        ).properties(
-            width=chart_width,
-            height=label_height
-        )
-        
-        # Main chart with bars and data labels
-        main_chart = alt.layer(bars, labels).resolve_scale(
+        # Combine bars and labels - this should create grouped bars automatically
+        chart = alt.layer(bars, labels).resolve_scale(
             x='shared',
-            y='shared'
-        ).properties(
-            width=chart_width,
-            height=450
-        )
-        
-        # Combine main chart and axis labels using vconcat
-        chart = alt.vconcat(
-            main_chart,
-            axis_labels_chart,
-            spacing=0
-        ).resolve_scale(
-            x='shared'
+            y='shared',
+            color='shared'
         )
         
         chart = chart.configure_axis(
