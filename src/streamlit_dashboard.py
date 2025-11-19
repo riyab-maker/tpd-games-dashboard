@@ -955,7 +955,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         elif period_type == "Weekly":
             parts = str(period_label).split('_')
             if len(parts) == 2:
-                return f"Week {parts[1]} ({parts[0]})"
+                return f"Week {parts[1]}"  # Just show week number without year
             else:
                 return str(period_label)
         elif period_type == "Daily":
@@ -1086,6 +1086,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         
         chart_df = pd.DataFrame(chart_data)
         
+        # Ensure Metric column values match exactly what we expect
+        chart_df['Metric'] = chart_df['Metric'].astype(str)
+        
         # Create numeric positions to group bars by time period
         # Each time period gets a base position, and metrics are offset within that group
         time_to_index = {time: idx for idx, time in enumerate(time_order)}
@@ -1100,6 +1103,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Use spacing of 4.5 units between time periods to accommodate 3 bars with proper spacing
         chart_df['X_Position'] = chart_df['Time_Index'] * 4.5 + chart_df['Metric_Offset']
         
+        # Ensure Count is numeric and handle any NaN values
+        chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
+        
         # Create axis labels data - one label per time period at the center
         axis_labels_data = []
         for idx, time in enumerate(time_order):
@@ -1110,18 +1116,18 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         axis_labels_df = pd.DataFrame(axis_labels_data)
         
         # Create grouped bar chart with Instances, Visits, Users side by side
-        # Adjust bar width based on time period for better visibility
-        # Wider bars for monthly view to ensure visibility
+        # Use x2 encoding to explicitly define bar boundaries for proper rendering
         bar_width = 1.0 if time_period == "Monthly" else 0.9
+        chart_df['X_Position_Start'] = chart_df['X_Position'] - bar_width / 2
+        chart_df['X_Position_End'] = chart_df['X_Position'] + bar_width / 2
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
-            opacity=0.95,
-            width=bar_width  # Bar width to fit 3 bars per time period
+            opacity=1.0  # Full opacity to ensure visibility
         ).encode(
-            x=alt.X('X_Position:Q',
+            x=alt.X('X_Position_Start:Q',
                    title='',
                    axis=alt.Axis(
                        labels=False,
@@ -1130,9 +1136,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        title=None
                    ),
                    scale=alt.Scale(
-                       domain=[min(chart_df['X_Position']) - 0.5, max(chart_df['X_Position']) + 0.5],
-                       padding=0.2
+                       domain=[min(chart_df['X_Position_Start']) - 0.5, max(chart_df['X_Position_End']) + 0.5],
+                       padding=0.3
                    )),
+            x2=alt.X2('X_Position_End:Q'),
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
@@ -1169,7 +1176,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             )
         )
         
-        # Add data labels above bars
+        # Add data labels above bars - use center of bar (X_Position)
         labels = alt.Chart(chart_df).mark_text(
             align='center',
             baseline='bottom',
@@ -1178,7 +1185,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             color='#2C3E50',
             dy=-8
         ).encode(
-            x=alt.X('X_Position:Q'),
+            x=alt.X('X_Position:Q'),  # Center position of the bar
             y=alt.Y('Count:Q'),
             text=alt.Text('Count:Q', format=',.0f')
         ).transform_filter(
