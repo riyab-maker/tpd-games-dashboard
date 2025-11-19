@@ -1116,18 +1116,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         axis_labels_df = pd.DataFrame(axis_labels_data)
         
         # Create grouped bar chart with Instances, Visits, Users side by side
-        # Use x2 encoding to explicitly define bar boundaries for proper rendering
+        # Use standard mark_bar with x position and width
         bar_width = 1.0 if time_period == "Monthly" else 0.9
-        chart_df['X_Position_Start'] = chart_df['X_Position'] - bar_width / 2
-        chart_df['X_Position_End'] = chart_df['X_Position'] + bar_width / 2
         
         bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
-            opacity=1.0  # Full opacity to ensure visibility
+            opacity=1.0,  # Full opacity to ensure visibility
+            width=bar_width  # Bar width
         ).encode(
-            x=alt.X('X_Position_Start:Q',
+            x=alt.X('X_Position:Q',
                    title='',
                    axis=alt.Axis(
                        labels=False,
@@ -1136,10 +1135,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        title=None
                    ),
                    scale=alt.Scale(
-                       domain=[min(chart_df['X_Position_Start']) - 0.5, max(chart_df['X_Position_End']) + 0.5],
+                       domain=[min(chart_df['X_Position']) - 1, max(chart_df['X_Position']) + 1],
                        padding=0.3
                    )),
-            x2=alt.X2('X_Position_End:Q'),
             y=alt.Y('Count:Q',
                    title='Count',
                    axis=alt.Axis(
@@ -1149,8 +1147,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        grid=True,
                        gridColor='#e0e0e0'
                    ),
-                   scale=alt.Scale(zero=True)),  # Ensure y-axis starts at 0
-            y2=alt.value(0),  # Bars start from bottom (y=0)
+                   scale=alt.Scale(zero=True)),  # Ensure y-axis starts at 0, bars go upward
             color=alt.Color('Metric:N',
                           scale=alt.Scale(
                               domain=['Instances', 'Visits', 'Users'],
