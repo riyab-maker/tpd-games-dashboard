@@ -517,6 +517,14 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     # Add conversion analysis
     st.markdown("### 📊 Conversion Analysis")
     
+    # Extract values from funnel_data dictionary
+    started_users = funnel_data.get('started_users', 0)
+    completed_users = funnel_data.get('completed_users', 0)
+    started_visits = funnel_data.get('started_visits', 0)
+    completed_visits = funnel_data.get('completed_visits', 0)
+    started_instances = funnel_data.get('started_instances', 0)
+    completed_instances = funnel_data.get('completed_instances', 0)
+    
     analysis_col1, analysis_col2, analysis_col3 = st.columns(3)
     
     with analysis_col1:
