@@ -250,17 +250,9 @@ WHERE (mla.name LIKE '%hybrid_game_started%'
 
 
 def fetch_dataframe() -> pd.DataFrame:
-    """Fetch main dataframe from database - processes in monthly chunks to avoid timeouts"""
+    """Fetch main dataframe from database - TEST MODE: fetches only 10 records first"""
     print("Fetching main dashboard data...")
-    print("Processing data in monthly chunks to avoid connection timeouts...")
-    
-    from datetime import datetime, timedelta
-    
-    # Define date ranges - process month by month
-    start_date = datetime(2025, 7, 1)
-    end_date = datetime.now()
-    
-    all_dataframes = []
+    print("TEST MODE: Fetching only 10 records to verify query works...")
     
     try:
         # Set connection parameters
@@ -271,8 +263,8 @@ def fetch_dataframe() -> pd.DataFrame:
             'password': PASSWORD,
             'database': DBNAME,
             'connect_timeout': 60,
-            'read_timeout': 600,  # 10 minutes per chunk
-            'write_timeout': 600,
+            'read_timeout': 300,  # 5 minutes for test
+            'write_timeout': 300,
             'autocommit': True,
             'charset': 'utf8mb4',
         }
@@ -281,106 +273,89 @@ def fetch_dataframe() -> pd.DataFrame:
         if hasattr(pymysql, 'ssl'):
             conn_params['ssl'] = {'ssl': {}}
         
-        # Process month by month
-        current_date = start_date
-        month_count = 0
+        # Test query with LIMIT 10
+        test_query = """
+        SELECT DISTINCT
+          mllva.idlink_va,
+          DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
+          hg.game_name,
+          hgl.game_id, 
+          mla.name,
+          mllva.idpageview,
+          CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+          mllva.idvisit,
+          CASE 
+            WHEN mla.name LIKE '%_started%' THEN 'started'
+            WHEN mla.name LIKE '%introduction_completed%' AND mla.name NOT LIKE '%mid%' THEN 'introduction'
+            WHEN mla.name LIKE '%_mid_introduction%' THEN 'mid_introduction'
+            WHEN mla.name LIKE '%_poll_completed%' THEN 'parent_poll'
+            WHEN mla.name LIKE '%action_completed%' THEN 'validation'
+            WHEN mla.name LIKE '%reward_completed%' THEN 'rewards'
+            WHEN mla.name LIKE '%question_completed%' THEN 'questions'
+            WHEN mla.name LIKE '%completed%' 
+                 AND mla.name NOT LIKE '%introduction%'
+                 AND mla.name NOT LIKE '%reward%'
+                 AND mla.name NOT LIKE '%question%'
+                 AND mla.name NOT LIKE '%mid_introduction%'
+                 AND mla.name NOT LIKE '%poll%'
+                 AND mla.name NOT LIKE '%action%' THEN 'completed'
+            ELSE NULL
+          END AS event
+        FROM matomo_log_link_visit_action mllva
+        INNER JOIN matomo_log_action mla 
+          ON mllva.idaction_name = mla.idaction
+          AND (
+            mla.name LIKE '%introduction_completed%' OR
+            mla.name LIKE '%reward_completed%' OR
+            mla.name LIKE '%mcq_completed%' OR
+            mla.name LIKE '%game_completed%' OR
+            mla.name LIKE '%mcq_started%' OR
+            mla.name LIKE '%game_started%' OR
+            mla.name LIKE '%action_completed%' OR 
+            mla.name LIKE '%question_completed%' OR
+            mla.name LIKE '%poll_completed%'
+          )
+        INNER JOIN hybrid_games_links hgl 
+          ON mllva.custom_dimension_2 = hgl.activity_id
+        INNER JOIN hybrid_games hg 
+          ON hgl.game_id = hg.id
+        WHERE mllva.server_time > '2025-07-01'
+        LIMIT 10
+        """
         
-        while current_date < end_date:
-            month_count += 1
-            # Calculate month end
-            if current_date.month == 12:
-                month_end = datetime(current_date.year + 1, 1, 1)
-            else:
-                month_end = datetime(current_date.year, current_date.month + 1, 1)
-            
-            # Don't go beyond current date
-            if month_end > end_date:
-                month_end = end_date
-            
-            print(f"\nProcessing month {month_count}: {current_date.strftime('%Y-%m-%d')} to {month_end.strftime('%Y-%m-%d')}")
-            
-            # Build query for this month
-            monthly_query = f"""
-            SELECT DISTINCT
-              mllva.idlink_va,
-              DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
-              hg.game_name,
-              hgl.game_id, 
-              mla.name,
-              mllva.idpageview,
-              CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
-              mllva.idvisit,
-              CASE 
-                WHEN mla.name LIKE '%_started%' THEN 'started'
-                WHEN mla.name LIKE '%introduction_completed%' AND mla.name NOT LIKE '%mid%' THEN 'introduction'
-                WHEN mla.name LIKE '%_mid_introduction%' THEN 'mid_introduction'
-                WHEN mla.name LIKE '%_poll_completed%' THEN 'parent_poll'
-                WHEN mla.name LIKE '%action_completed%' THEN 'validation'
-                WHEN mla.name LIKE '%reward_completed%' THEN 'rewards'
-                WHEN mla.name LIKE '%question_completed%' THEN 'questions'
-                WHEN mla.name LIKE '%completed%' 
-                     AND mla.name NOT LIKE '%introduction%'
-                     AND mla.name NOT LIKE '%reward%'
-                     AND mla.name NOT LIKE '%question%'
-                     AND mla.name NOT LIKE '%mid_introduction%'
-                     AND mla.name NOT LIKE '%poll%'
-                     AND mla.name NOT LIKE '%action%' THEN 'completed'
-                ELSE NULL
-              END AS event
-            FROM matomo_log_link_visit_action mllva
-            INNER JOIN matomo_log_action mla 
-              ON mllva.idaction_name = mla.idaction
-              AND (
-                mla.name LIKE '%introduction_completed%' OR
-                mla.name LIKE '%reward_completed%' OR
-                mla.name LIKE '%mcq_completed%' OR
-                mla.name LIKE '%game_completed%' OR
-                mla.name LIKE '%mcq_started%' OR
-                mla.name LIKE '%game_started%' OR
-                mla.name LIKE '%action_completed%' OR 
-                mla.name LIKE '%question_completed%' OR
-                mla.name LIKE '%poll_completed%'
-              )
-            INNER JOIN hybrid_games_links hgl 
-              ON mllva.custom_dimension_2 = hgl.activity_id
-            INNER JOIN hybrid_games hg 
-              ON hgl.game_id = hg.id
-            WHERE mllva.server_time >= '{current_date.strftime('%Y-%m-%d')}'
-              AND mllva.server_time < '{month_end.strftime('%Y-%m-%d')}'
-            """
-            
-            try:
-                with pymysql.connect(**conn_params) as conn:
-                    with conn.cursor() as cur:
-                        cur.execute(monthly_query)
-                        rows = cur.fetchall()
-                        columns = [d[0] for d in cur.description]
-                        
-                        if rows:
-                            df_month = pd.DataFrame(rows, columns=columns)
-                            all_dataframes.append(df_month)
-                            print(f"  ✓ Fetched {len(df_month):,} rows for this month")
-                        else:
-                            print(f"  ✓ No rows for this month")
-                            
-            except Exception as e:
-                print(f"  ✗ Error processing month {current_date.strftime('%Y-%m-%d')}: {str(e)}")
-                print(f"  Continuing with next month...")
-                # Continue to next month even if this one fails
-            
-            # Move to next month
-            current_date = month_end
+        with pymysql.connect(**conn_params) as conn:
+            with conn.cursor() as cur:
+                print("Executing test query with LIMIT 10...")
+                cur.execute(test_query)
+                print("Query executed successfully. Fetching results...")
+                rows = cur.fetchall()
+                columns = [d[0] for d in cur.description]
+                print(f"✓ Successfully fetched {len(rows)} test records")
+                
+        df = pd.DataFrame(rows, columns=columns)
+        print(f"SUCCESS: Fetched {len(df)} test records from main query")
+        print(f"Columns in fetched data: {list(df.columns)}")
         
-        # Combine all monthly dataframes
-        if all_dataframes:
-            print(f"\nCombining data from {len(all_dataframes)} months...")
-            df = pd.concat(all_dataframes, ignore_index=True)
-            print(f"Total rows after combining: {len(df):,}")
-            rows = df.values.tolist()
-            columns = list(df.columns)
-        else:
-            print("WARNING: No data fetched from any month")
+        # Check if event column exists
+        if 'event' not in df.columns:
+            print("ERROR: 'event' column not found in fetched data!")
+            print(f"Available columns: {list(df.columns)}")
             return pd.DataFrame()
+        
+        # Check event column values
+        if len(df) > 0:
+            event_counts = df['event'].value_counts(dropna=False)
+            print(f"Event column value counts:\n{event_counts}")
+            null_events = df['event'].isna().sum()
+            if null_events > 0:
+                print(f"WARNING: {null_events} records have NULL event values")
+        
+        # Show sample data
+        if len(df) > 0:
+            print("\nSample data (first 3 rows):")
+            print(df.head(3).to_string())
+        
+        return df
             
     except Exception as e:
         print(f"ERROR: Failed to fetch main dashboard data: {str(e)}")
