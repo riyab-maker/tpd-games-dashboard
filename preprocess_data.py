@@ -1705,12 +1705,85 @@ def process_main_data() -> pd.DataFrame:
     print(f"After removing duplicates on idlink_va: {len(df_main)} records (removed {initial_count - len(df_main)} duplicates)")
     df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
-    # Save main data
-    print(f"Saving processed_data.csv ({len(df_main):,} rows)...")
+    # Create aggregated processed_data.csv by date, game, and event
+    # This will be much smaller and enable date filtering
+    print(f"\n[AGGREGATION] Creating aggregated processed_data.csv by date, game, and event...")
     sys.stdout.flush()
-    df_main.to_csv('data/processed_data.csv', index=False)
-    print("✓ SUCCESS: Saved data/processed_data.csv")
+    
+    # Filter out NULL events for aggregation
+    df_main_valid = df_main[df_main['event'].notna()].copy()
+    print(f"  Processing {len(df_main_valid):,} records with valid events for aggregation")
     sys.stdout.flush()
+    
+    if not df_main_valid.empty:
+        # Group by date, game_name, and event, then calculate metrics
+        aggregated_data = []
+        
+        # Process in batches to avoid memory issues
+        batch_size = 100000
+        total_batches = (len(df_main_valid) // batch_size) + 1
+        
+        for batch_num in range(total_batches):
+            start_idx = batch_num * batch_size
+            end_idx = min((batch_num + 1) * batch_size, len(df_main_valid))
+            batch_df = df_main_valid.iloc[start_idx:end_idx]
+            
+            # Group by date, game_name, and event
+            grouped = batch_df.groupby(['date', 'game_name', 'event']).agg({
+                'idlink_va': 'count',  # Instances
+                'idvisit': 'nunique',  # Visits (distinct)
+                'idvisitor_converted': 'nunique'  # Users (distinct)
+            }).reset_index()
+            
+            grouped.columns = ['date', 'game_name', 'event', 'instances', 'visits', 'users']
+            aggregated_data.append(grouped)
+            
+            if total_batches > 1:
+                print(f"  [Batch {batch_num + 1}/{total_batches}] Processed {end_idx:,} / {len(df_main_valid):,} records")
+                sys.stdout.flush()
+        
+        # Combine all batches
+        print(f"  Combining {len(aggregated_data)} batches...")
+        sys.stdout.flush()
+        aggregated_df = pd.concat(aggregated_data, ignore_index=True)
+        
+        # Final aggregation in case there are overlapping dates/games/events across batches
+        print(f"  Performing final aggregation...")
+        sys.stdout.flush()
+        processed_data_aggregated = aggregated_df.groupby(['date', 'game_name', 'event']).agg({
+            'instances': 'sum',
+            'visits': 'sum',  # Sum of distinct counts (approximation, but works for our use case)
+            'users': 'sum'    # Sum of distinct counts (approximation, but works for our use case)
+        }).reset_index()
+        
+        # Convert date to string for CSV storage
+        processed_data_aggregated['date'] = processed_data_aggregated['date'].astype(str)
+        
+        # Ensure numeric columns are integers
+        for col in ['instances', 'visits', 'users']:
+            processed_data_aggregated[col] = pd.to_numeric(processed_data_aggregated[col], errors='coerce').fillna(0).astype(int)
+        
+        print(f"  ✓ Aggregated to {len(processed_data_aggregated):,} rows (date × game × event combinations)")
+        print(f"  ✓ Size reduction: {len(df_main):,} → {len(processed_data_aggregated):,} rows ({100 * (1 - len(processed_data_aggregated)/len(df_main)):.1f}% reduction)")
+        sys.stdout.flush()
+        
+        # Save aggregated data
+        print(f"\nSaving aggregated processed_data.csv ({len(processed_data_aggregated):,} rows)...")
+        sys.stdout.flush()
+        processed_data_aggregated.to_csv('data/processed_data.csv', index=False)
+        print("✓ SUCCESS: Saved data/processed_data.csv (aggregated by date, game, event)")
+        sys.stdout.flush()
+        
+        # Calculate file size
+        file_size_mb = os.path.getsize('data/processed_data.csv') / (1024 * 1024)
+        print(f"✓ File size: {file_size_mb:.2f} MB")
+        sys.stdout.flush()
+    else:
+        print("  WARNING: No valid events found - creating empty processed_data.csv")
+        processed_data_aggregated = pd.DataFrame(columns=['date', 'game_name', 'event', 'instances', 'visits', 'users'])
+        processed_data_aggregated.to_csv('data/processed_data.csv', index=False)
+        print("✓ SUCCESS: Saved empty data/processed_data.csv")
+        sys.stdout.flush()
     
     # Create and save game-specific conversion numbers
     # Track all funnel stages for each game

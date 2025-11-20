@@ -85,8 +85,9 @@ Thumbs.db
 # Exclude very large poll responses CSV from git; generated at runtime on Render
 data/poll_responses_data.csv
 !processed_data/*.csv
-# Exclude large processed_data.csv (too big for GitHub)
-data/processed_data.csv
+# Note: processed_data.csv is now aggregated (date × game × event) and should be small enough for GitHub
+# If it becomes too large again, uncomment the line below:
+# data/processed_data.csv
 
 # Python cache files
 __pycache__/
