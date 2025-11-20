@@ -2148,6 +2148,7 @@ Examples:
 Available visuals:
   --main               Main dashboard data and game conversion numbers
   --summary            Summary statistics
+  --conversion-funnel  Process conversion funnel data (main + summary) - convenience flag
   --score-distribution Score distribution
   --time-series        Time series data
   --repeatability      Repeatability data
@@ -2160,6 +2161,7 @@ Available visuals:
     
     parser.add_argument('--main', action='store_true', help='Process main dashboard data')
     parser.add_argument('--summary', action='store_true', help='Process summary statistics')
+    parser.add_argument('--conversion-funnel', action='store_true', help='Process conversion funnel data (main + summary)')
     parser.add_argument('--score-distribution', action='store_true', help='Process score distribution')
     parser.add_argument('--time-series', action='store_true', help='Process time series data')
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
@@ -2173,9 +2175,14 @@ Available visuals:
     # Create data directory if it doesn't exist
     os.makedirs('data', exist_ok=True)
     
+    # Handle conversion-funnel flag (convenience flag for main + summary)
+    if args.conversion_funnel:
+        args.main = True
+        args.summary = True
+    
     # Determine what to process
     process_all = args.all or not any([
-        args.main, args.summary, args.score_distribution,
+        args.main, args.summary, args.conversion_funnel, args.score_distribution,
         args.time_series, args.repeatability, args.question_correctness, args.parent_poll
     ])
     
