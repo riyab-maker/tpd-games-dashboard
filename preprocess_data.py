@@ -250,11 +250,20 @@ WHERE (mla.name LIKE '%hybrid_game_started%'
 
 
 def fetch_dataframe() -> pd.DataFrame:
-    """Fetch main dataframe from database"""
+    """Fetch main dataframe from database - processes in monthly chunks to avoid timeouts"""
     print("Fetching main dashboard data...")
+    print("Processing data in monthly chunks to avoid connection timeouts...")
+    
+    from datetime import datetime, timedelta
+    
+    # Define date ranges - process month by month
+    start_date = datetime(2025, 7, 1)
+    end_date = datetime.now()
+    
+    all_dataframes = []
+    
     try:
-        # Set connection parameters to handle long-running queries
-        # Increase timeouts significantly for large data processing
+        # Set connection parameters
         conn_params = {
             'host': HOST,
             'port': PORT,
@@ -262,9 +271,9 @@ def fetch_dataframe() -> pd.DataFrame:
             'password': PASSWORD,
             'database': DBNAME,
             'connect_timeout': 60,
-            'read_timeout': 1800,  # 30 minutes for very large queries
-            'write_timeout': 1800,
-            'autocommit': True,  # Enable autocommit to prevent connection issues
+            'read_timeout': 600,  # 10 minutes per chunk
+            'write_timeout': 600,
+            'autocommit': True,
             'charset': 'utf8mb4',
         }
         
@@ -272,41 +281,112 @@ def fetch_dataframe() -> pd.DataFrame:
         if hasattr(pymysql, 'ssl'):
             conn_params['ssl'] = {'ssl': {}}
         
-        with pymysql.connect(**conn_params) as conn:
-            # Set session variables to prevent timeout
-            with conn.cursor() as setup_cur:
-                setup_cur.execute("SET SESSION wait_timeout = 3600")  # 1 hour
-                setup_cur.execute("SET SESSION interactive_timeout = 3600")  # 1 hour
-                setup_cur.execute("SET SESSION net_read_timeout = 3600")  # 1 hour
-                setup_cur.execute("SET SESSION net_write_timeout = 3600")  # 1 hour
-            with conn.cursor() as cur:
-                print("Executing SQL query (this may take several minutes for large datasets)...")
-                print("Note: Query is processing all events from July 2025 onwards")
-                print("Optimized query: Filtering by action names in JOIN to reduce processing time")
-                try:
-                    # Execute query with streaming results to avoid memory issues
-                    cur.execute(SQL_QUERY)
-                    print("Query executed successfully. Fetching results in batches...")
-                    
-                    # Fetch results in batches to avoid timeout
-                    batch_size = 50000
-                    all_rows = []
-                    columns = [d[0] for d in cur.description]
-                    
-                    while True:
-                        batch = cur.fetchmany(batch_size)
-                        if not batch:
-                            break
-                        all_rows.extend(batch)
-                        print(f"  Fetched {len(all_rows):,} rows so far...")
-                    
-                    rows = all_rows
-                    print(f"Total rows fetched: {len(rows):,}")
-                except pymysql.Error as e:
-                    print(f"Database error during query execution: {e}")
-                    print("This might be due to query timeout or connection issues.")
-                    print("Consider optimizing the query or processing data in smaller batches.")
-                    raise
+        # Process month by month
+        current_date = start_date
+        month_count = 0
+        
+        while current_date < end_date:
+            month_count += 1
+            # Calculate month end
+            if current_date.month == 12:
+                month_end = datetime(current_date.year + 1, 1, 1)
+            else:
+                month_end = datetime(current_date.year, current_date.month + 1, 1)
+            
+            # Don't go beyond current date
+            if month_end > end_date:
+                month_end = end_date
+            
+            print(f"\nProcessing month {month_count}: {current_date.strftime('%Y-%m-%d')} to {month_end.strftime('%Y-%m-%d')}")
+            
+            # Build query for this month
+            monthly_query = f"""
+            SELECT DISTINCT
+              mllva.idlink_va,
+              DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
+              hg.game_name,
+              hgl.game_id, 
+              mla.name,
+              mllva.idpageview,
+              CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+              mllva.idvisit,
+              CASE 
+                WHEN mla.name LIKE '%_started%' THEN 'started'
+                WHEN mla.name LIKE '%introduction_completed%' AND mla.name NOT LIKE '%mid%' THEN 'introduction'
+                WHEN mla.name LIKE '%_mid_introduction%' THEN 'mid_introduction'
+                WHEN mla.name LIKE '%_poll_completed%' THEN 'parent_poll'
+                WHEN mla.name LIKE '%action_completed%' THEN 'validation'
+                WHEN mla.name LIKE '%reward_completed%' THEN 'rewards'
+                WHEN mla.name LIKE '%question_completed%' THEN 'questions'
+                WHEN mla.name LIKE '%completed%' 
+                     AND mla.name NOT LIKE '%introduction%'
+                     AND mla.name NOT LIKE '%reward%'
+                     AND mla.name NOT LIKE '%question%'
+                     AND mla.name NOT LIKE '%mid_introduction%'
+                     AND mla.name NOT LIKE '%poll%'
+                     AND mla.name NOT LIKE '%action%' THEN 'completed'
+                ELSE NULL
+              END AS event
+            FROM matomo_log_link_visit_action mllva
+            INNER JOIN matomo_log_action mla 
+              ON mllva.idaction_name = mla.idaction
+              AND (
+                mla.name LIKE '%introduction_completed%' OR
+                mla.name LIKE '%reward_completed%' OR
+                mla.name LIKE '%mcq_completed%' OR
+                mla.name LIKE '%game_completed%' OR
+                mla.name LIKE '%mcq_started%' OR
+                mla.name LIKE '%game_started%' OR
+                mla.name LIKE '%action_completed%' OR 
+                mla.name LIKE '%question_completed%' OR
+                mla.name LIKE '%poll_completed%'
+              )
+            INNER JOIN hybrid_games_links hgl 
+              ON mllva.custom_dimension_2 = hgl.activity_id
+            INNER JOIN hybrid_games hg 
+              ON hgl.game_id = hg.id
+            WHERE mllva.server_time >= '{current_date.strftime('%Y-%m-%d')}'
+              AND mllva.server_time < '{month_end.strftime('%Y-%m-%d')}'
+            """
+            
+            try:
+                with pymysql.connect(**conn_params) as conn:
+                    with conn.cursor() as cur:
+                        cur.execute(monthly_query)
+                        rows = cur.fetchall()
+                        columns = [d[0] for d in cur.description]
+                        
+                        if rows:
+                            df_month = pd.DataFrame(rows, columns=columns)
+                            all_dataframes.append(df_month)
+                            print(f"  ✓ Fetched {len(df_month):,} rows for this month")
+                        else:
+                            print(f"  ✓ No rows for this month")
+                            
+            except Exception as e:
+                print(f"  ✗ Error processing month {current_date.strftime('%Y-%m-%d')}: {str(e)}")
+                print(f"  Continuing with next month...")
+                # Continue to next month even if this one fails
+            
+            # Move to next month
+            current_date = month_end
+        
+        # Combine all monthly dataframes
+        if all_dataframes:
+            print(f"\nCombining data from {len(all_dataframes)} months...")
+            df = pd.concat(all_dataframes, ignore_index=True)
+            print(f"Total rows after combining: {len(df):,}")
+            rows = df.values.tolist()
+            columns = list(df.columns)
+        else:
+            print("WARNING: No data fetched from any month")
+            return pd.DataFrame()
+            
+    except Exception as e:
+        print(f"ERROR: Failed to fetch main dashboard data: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame()
         df = pd.DataFrame(rows, columns=columns)
         print(f"SUCCESS: Fetched {len(df)} records from main query")
         print(f"Columns in fetched data: {list(df.columns)}")
