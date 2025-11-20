@@ -250,115 +250,174 @@ WHERE (mla.name LIKE '%hybrid_game_started%'
 
 
 def fetch_dataframe() -> pd.DataFrame:
-    """Fetch main dataframe from database - TEST MODE: fetches only 10 records first"""
-    print("Fetching main dashboard data...")
-    print("TEST MODE: Fetching only 10 records to verify query works...")
+    """Load main dataframe from conversion_funnel.csv file and process it"""
+    print("\n" + "=" * 60)
+    print("STEP 1: Loading data from conversion_funnel.csv")
+    print("=" * 60)
+    
+    csv_file = 'conversion_funnel.csv'
+    
+    if not os.path.exists(csv_file):
+        print(f"ERROR: File '{csv_file}' not found!")
+        return pd.DataFrame()
+    
+    print(f"✓ File found: {csv_file}")
+    file_size = os.path.getsize(csv_file) / (1024 * 1024)  # Size in MB
+    print(f"✓ File size: {file_size:.2f} MB")
     
     try:
-        # Set connection parameters
-        conn_params = {
-            'host': HOST,
-            'port': PORT,
-            'user': USER,
-            'password': PASSWORD,
-            'database': DBNAME,
-            'connect_timeout': 60,
-            'read_timeout': 300,  # 5 minutes for test
-            'write_timeout': 300,
-            'autocommit': True,
-            'charset': 'utf8mb4',
-        }
+        print(f"\n[STEP 1.1] Reading CSV file in chunks...")
+        sys.stdout.flush()
         
-        # Add SSL if configured
-        if hasattr(pymysql, 'ssl'):
-            conn_params['ssl'] = {'ssl': {}}
+        # Read CSV file in chunks if it's large
+        chunk_list = []
+        chunk_size = 100000  # Read 100k rows at a time
+        chunk_num = 0
         
-        # Test query with LIMIT 10
-        test_query = """
-        SELECT DISTINCT
-          mllva.idlink_va,
-          DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
-          hg.game_name,
-          hgl.game_id, 
-          mla.name,
-          mllva.idpageview,
-          CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
-          mllva.idvisit,
-          CASE 
-            WHEN mla.name LIKE '%_started%' THEN 'started'
-            WHEN mla.name LIKE '%introduction_completed%' AND mla.name NOT LIKE '%mid%' THEN 'introduction'
-            WHEN mla.name LIKE '%_mid_introduction%' THEN 'mid_introduction'
-            WHEN mla.name LIKE '%_poll_completed%' THEN 'parent_poll'
-            WHEN mla.name LIKE '%action_completed%' THEN 'validation'
-            WHEN mla.name LIKE '%reward_completed%' THEN 'rewards'
-            WHEN mla.name LIKE '%question_completed%' THEN 'questions'
-            WHEN mla.name LIKE '%completed%' 
-                 AND mla.name NOT LIKE '%introduction%'
-                 AND mla.name NOT LIKE '%reward%'
-                 AND mla.name NOT LIKE '%question%'
-                 AND mla.name NOT LIKE '%mid_introduction%'
-                 AND mla.name NOT LIKE '%poll%'
-                 AND mla.name NOT LIKE '%action%' THEN 'completed'
-            ELSE NULL
-          END AS event
-        FROM matomo_log_link_visit_action mllva
-        INNER JOIN matomo_log_action mla 
-          ON mllva.idaction_name = mla.idaction
-          AND (
-            mla.name LIKE '%introduction_completed%' OR
-            mla.name LIKE '%reward_completed%' OR
-            mla.name LIKE '%mcq_completed%' OR
-            mla.name LIKE '%game_completed%' OR
-            mla.name LIKE '%mcq_started%' OR
-            mla.name LIKE '%game_started%' OR
-            mla.name LIKE '%action_completed%' OR 
-            mla.name LIKE '%question_completed%' OR
-            mla.name LIKE '%poll_completed%'
-          )
-        INNER JOIN hybrid_games_links hgl 
-          ON mllva.custom_dimension_2 = hgl.activity_id
-        INNER JOIN hybrid_games hg 
-          ON hgl.game_id = hg.id
-        WHERE mllva.server_time > '2025-07-01'
-        LIMIT 10
-        """
+        for chunk in pd.read_csv(csv_file, chunksize=chunk_size, low_memory=False):
+            chunk_num += 1
+            chunk_list.append(chunk)
+            total_rows = sum(len(c) for c in chunk_list)
+            print(f"  [Chunk {chunk_num}] Read {len(chunk):,} rows (Total: {total_rows:,} rows)")
+            sys.stdout.flush()
         
-        with pymysql.connect(**conn_params) as conn:
-            with conn.cursor() as cur:
-                print("Executing test query with LIMIT 10...")
-                cur.execute(test_query)
-                print("Query executed successfully. Fetching results...")
-                rows = cur.fetchall()
-                columns = [d[0] for d in cur.description]
-                print(f"✓ Successfully fetched {len(rows)} test records")
-                
-        df = pd.DataFrame(rows, columns=columns)
-        print(f"SUCCESS: Fetched {len(df)} test records from main query")
-        print(f"Columns in fetched data: {list(df.columns)}")
+        print(f"\n[STEP 1.2] Combining {len(chunk_list)} chunks...")
+        sys.stdout.flush()
+        df = pd.concat(chunk_list, ignore_index=True)
+        print(f"✓ SUCCESS: Loaded {len(df):,} total records from CSV file")
+        print(f"✓ Columns in CSV: {list(df.columns)}")
+        sys.stdout.flush()
         
-        # Check if event column exists
-        if 'event' not in df.columns:
-            print("ERROR: 'event' column not found in fetched data!")
-            print(f"Available columns: {list(df.columns)}")
-            return pd.DataFrame()
+        print(f"\n[STEP 2] Processing duplicates and timezone adjustment...")
+        sys.stdout.flush()
         
-        # Check event column values
-        if len(df) > 0:
-            event_counts = df['event'].value_counts(dropna=False)
-            print(f"Event column value counts:\n{event_counts}")
-            null_events = df['event'].isna().sum()
-            if null_events > 0:
-                print(f"WARNING: {null_events} records have NULL event values")
+        # Handle duplicate idlink_va - keep first occurrence (sorted by server_time if available)
+        initial_count = len(df)
+        if 'idlink_va' in df.columns:
+            print(f"  Checking for duplicates on idlink_va column...")
+            sys.stdout.flush()
+            # Sort by server_time if available to keep earliest record
+            if 'server_time' in df.columns:
+                print(f"  Converting server_time to datetime...")
+                sys.stdout.flush()
+                df['server_time'] = pd.to_datetime(df['server_time'], errors='coerce')
+                print(f"  Sorting by server_time and removing duplicates...")
+                sys.stdout.flush()
+                df = df.sort_values('server_time').drop_duplicates(subset=['idlink_va'], keep='first')
+            else:
+                print(f"  Removing duplicates (no server_time for sorting)...")
+                sys.stdout.flush()
+                df = df.drop_duplicates(subset=['idlink_va'], keep='first')
+            print(f"  ✓ Removed {initial_count - len(df):,} duplicate idlink_va records")
+            sys.stdout.flush()
+        else:
+            print(f"  WARNING: 'idlink_va' column not found - skipping duplicate removal")
+            sys.stdout.flush()
         
-        # Show sample data
-        if len(df) > 0:
-            print("\nSample data (first 3 rows):")
-            print(df.head(3).to_string())
+        # Add 5:30 hours (330 minutes) to server_time if it exists
+        if 'server_time' in df.columns:
+            print(f"  Adding 5:30 hours (330 minutes) to server_time...")
+            sys.stdout.flush()
+            df['server_time'] = df['server_time'] + pd.Timedelta(hours=5, minutes=30)
+            print(f"  ✓ Added 5:30 hours to server_time")
+            sys.stdout.flush()
+        else:
+            print(f"  WARNING: 'server_time' column not found - skipping timezone adjustment")
+            sys.stdout.flush()
+        
+        print(f"\n[STEP 3] Categorizing events based on action names...")
+        sys.stdout.flush()
+        
+        # Categorize events based on 'name' column (action name)
+        if 'name' in df.columns:
+            print(f"  Processing {len(df):,} records for event categorization...")
+            sys.stdout.flush()
+            
+            def categorize_event(name):
+                if pd.isna(name):
+                    return None
+                name_str = str(name)
+                if '_started' in name_str:
+                    return 'started'
+                elif 'introduction_completed' in name_str and 'mid' not in name_str:
+                    return 'introduction'
+                elif '_mid_introduction' in name_str:
+                    return 'mid_introduction'
+                elif '_poll_completed' in name_str:
+                    return 'parent_poll'
+                elif 'action_completed' in name_str:
+                    return 'validation'
+                elif 'reward_completed' in name_str:
+                    return 'rewards'
+                elif 'question_completed' in name_str:
+                    return 'questions'
+                elif 'completed' in name_str and 'introduction' not in name_str and 'reward' not in name_str and 'question' not in name_str and 'mid_introduction' not in name_str and 'poll' not in name_str and 'action' not in name_str:
+                    return 'completed'
+                return None
+            
+            # Process in batches for progress tracking
+            batch_size = 50000
+            total_batches = (len(df) // batch_size) + 1
+            events = []
+            
+            for i in range(0, len(df), batch_size):
+                batch_num = (i // batch_size) + 1
+                batch = df['name'].iloc[i:i+batch_size]
+                batch_events = batch.apply(categorize_event)
+                events.extend(batch_events)
+                print(f"  [Batch {batch_num}/{total_batches}] Processed {min(i+batch_size, len(df)):,} / {len(df):,} records")
+                sys.stdout.flush()
+            
+            df['event'] = events
+            
+            # Check event column values
+            if len(df) > 0:
+                print(f"\n[STEP 3.1] Event categorization summary:")
+                sys.stdout.flush()
+                event_counts = df['event'].value_counts(dropna=False)
+                print(event_counts)
+                null_events = df['event'].isna().sum()
+                if null_events > 0:
+                    print(f"  WARNING: {null_events:,} records have NULL event values")
+                sys.stdout.flush()
+        else:
+            print(f"  WARNING: 'name' column not found - cannot categorize events")
+            df['event'] = None
+            sys.stdout.flush()
+        
+        print(f"\n[STEP 4] Processing idvisitor_converted column...")
+        sys.stdout.flush()
+        
+        # Ensure idvisitor_converted column exists (convert from idvisitor if needed)
+        if 'idvisitor_converted' not in df.columns and 'idvisitor' in df.columns:
+            print(f"  Converting idvisitor to idvisitor_converted...")
+            sys.stdout.flush()
+            # Try to convert hex to decimal if needed
+            try:
+                df['idvisitor_converted'] = df['idvisitor'].apply(
+                    lambda x: int(str(x), 16) if pd.notna(x) and isinstance(x, (str, int)) and str(x).startswith('0x') else x
+                )
+                print(f"  ✓ Converted idvisitor to idvisitor_converted")
+            except Exception as e:
+                print(f"  WARNING: Could not convert idvisitor: {e}")
+                df['idvisitor_converted'] = df['idvisitor']
+            sys.stdout.flush()
+        elif 'idvisitor_converted' in df.columns:
+            print(f"  ✓ idvisitor_converted column already exists")
+            sys.stdout.flush()
+        else:
+            print(f"  WARNING: Neither idvisitor_converted nor idvisitor column found")
+            sys.stdout.flush()
+        
+        print(f"\n[STEP 5] Final data summary:")
+        print(f"  ✓ Final data shape: {df.shape[0]:,} rows × {df.shape[1]} columns")
+        print(f"  ✓ Columns: {list(df.columns)}")
+        sys.stdout.flush()
         
         return df
             
     except Exception as e:
-        print(f"ERROR: Failed to fetch main dashboard data: {str(e)}")
+        print(f"ERROR: Failed to load data from CSV file: {str(e)}")
         import traceback
         traceback.print_exc()
         return pd.DataFrame()
@@ -1647,8 +1706,11 @@ def process_main_data() -> pd.DataFrame:
     df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
     # Save main data
+    print(f"Saving processed_data.csv ({len(df_main):,} rows)...")
+    sys.stdout.flush()
     df_main.to_csv('data/processed_data.csv', index=False)
-    print("SUCCESS: Saved data/processed_data.csv")
+    print("✓ SUCCESS: Saved data/processed_data.csv")
+    sys.stdout.flush()
     
     # Create and save game-specific conversion numbers
     # Track all funnel stages for each game
@@ -1680,9 +1742,14 @@ def process_main_data() -> pd.DataFrame:
             
             game_conversion_data.append(game_stats)
     
+    print(f"Creating game conversion numbers for {len(game_conversion_data)} games...")
+    sys.stdout.flush()
     game_conversion_df = pd.DataFrame(game_conversion_data)
+    print(f"Saving game_conversion_numbers.csv...")
+    sys.stdout.flush()
     game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)
-    print("SUCCESS: Saved data/game_conversion_numbers.csv")
+    print("✓ SUCCESS: Saved data/game_conversion_numbers.csv")
+    sys.stdout.flush()
     
     return df_main
 
@@ -1699,9 +1766,14 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
         df_main['server_time'] = pd.to_datetime(df_main['server_time'])
         df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
+    print("Building summary statistics...")
+    sys.stdout.flush()
     summary_df = build_summary(df_main)
+    print(f"Saving summary_data.csv ({len(summary_df)} records)...")
+    sys.stdout.flush()
     summary_df.to_csv('data/summary_data.csv', index=False)
-    print(f"SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
+    print(f"✓ SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
+    sys.stdout.flush()
     
     return summary_df
 
@@ -2189,30 +2261,41 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     metadata = {}
     
     if os.path.exists(metadata_file):
+        print("  Loading existing metadata...")
         with open(metadata_file, 'r') as f:
             metadata = json.load(f)
+        sys.stdout.flush()
     
     # Load data files to get current record counts
     record_counts = {}
     
     if df_main is not None:
+        print("  Using df_main for record counts...")
         record_counts['main_data_records'] = len(df_main)
-        record_counts['data_date_range'] = {
+        if 'server_time' in df_main.columns:
+            record_counts['data_date_range'] = {
                 'start': str(df_main['server_time'].min()),
                 'end': str(df_main['server_time'].max())
             }
+        sys.stdout.flush()
     else:
         if os.path.exists('data/processed_data.csv'):
-            df_check = pd.read_csv('data/processed_data.csv')
-            record_counts['main_data_records'] = len(df_check)
-            if 'server_time' in df_check.columns:
-                df_check['server_time'] = pd.to_datetime(df_check['server_time'])
-                record_counts['data_date_range'] = {
-                    'start': str(df_check['server_time'].min()),
-                    'end': str(df_check['server_time'].max())
-                }
+            print("  Reading processed_data.csv for record count (this may take a moment)...")
+            sys.stdout.flush()
+            # Just count lines instead of loading full CSV
+            try:
+                with open('data/processed_data.csv', 'r', encoding='utf-8') as f:
+                    line_count = sum(1 for _ in f) - 1  # Subtract header
+                record_counts['main_data_records'] = line_count
+                print(f"  ✓ Counted {line_count:,} records in processed_data.csv")
+            except Exception as e:
+                print(f"  WARNING: Could not count records: {e}")
+                record_counts['main_data_records'] = 0
+            sys.stdout.flush()
     
-    # Update record counts for each CSV
+    # Update record counts for each CSV - use line counting instead of loading
+    print("  Counting records in other CSV files...")
+    sys.stdout.flush()
     for csv_file, key in [
         ('data/summary_data.csv', 'summary_records'),
         ('data/score_distribution_data.csv', 'score_distribution_records'),
@@ -2222,12 +2305,22 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
         ('data/poll_responses_data.csv', 'poll_responses_records'),
     ]:
         if os.path.exists(csv_file):
-            df_check = pd.read_csv(csv_file)
-            record_counts[key] = len(df_check)
+            try:
+                # Count lines instead of loading full CSV
+                with open(csv_file, 'r', encoding='utf-8') as f:
+                    line_count = sum(1 for _ in f) - 1  # Subtract header
+                record_counts[key] = line_count
+                print(f"    ✓ {key}: {line_count:,} records")
+            except Exception as e:
+                print(f"    ✗ Error counting {key}: {e}")
+                record_counts[key] = 0
         else:
             record_counts[key] = 0
+        sys.stdout.flush()
     
     # Update metadata
+    print("  Updating metadata JSON...")
+    sys.stdout.flush()
     metadata.update({
         'preprocessing_date': datetime.now().isoformat(),
         **record_counts
@@ -2235,7 +2328,8 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     
     with open(metadata_file, 'w') as f:
         json.dump(metadata, f, indent=2)
-    print("SUCCESS: Saved data/metadata.json")
+    print("  ✓ SUCCESS: Saved data/metadata.json")
+    sys.stdout.flush()
         
 
 def main():
@@ -2341,6 +2435,8 @@ Available visuals:
         
         # Update metadata if requested or if processing all
         if args.metadata or process_all:
+            print("\n[FINAL STEP] Updating metadata...")
+            sys.stdout.flush()
             update_metadata(df_main)
         
         print("\n" + "=" * 60)
@@ -2351,6 +2447,12 @@ Available visuals:
         print("\nNext steps:")
         print("1. Commit and push the updated data/ directory to GitHub")
         print("2. Render will automatically redeploy with the latest data")
+        sys.stdout.flush()
+        print("\n✓ Script execution finished. Exiting...")
+        sys.stdout.flush()
+        
+        # Explicitly exit to ensure script terminates
+        sys.exit(0)
         
     except Exception as e:
         print(f"\nERROR during preprocessing: {str(e)}")
