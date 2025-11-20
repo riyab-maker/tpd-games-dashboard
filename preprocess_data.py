@@ -46,7 +46,7 @@ SQL_QUERY = (
       `hybrid_games_links`.`game_id`, 
       `matomo_log_action`.`name`,
       `matomo_log_link_visit_action`.`idpageview`,
-      CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+      CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
       `matomo_log_link_visit_action`.`idvisit`,
       CASE 
         WHEN `matomo_log_action`.`name` LIKE '%_started%' THEN 'started'
