@@ -37,53 +37,54 @@ if missing_vars:
 
 # SQL Queries - Updated with new event categorization
 # Event stages: started, introduction, mid_introduction, parent_poll, validation, rewards, questions, completed
+# Optimized query: Filter by action names first to reduce JOIN overhead
 SQL_QUERY = (
     """
     SELECT DISTINCT
-      `matomo_log_link_visit_action`.`idlink_va`,
-      DATE_ADD(`matomo_log_link_visit_action`.`server_time`, INTERVAL 330 MINUTE) AS server_time,
-      `hybrid_games`.`game_name`,
-      `hybrid_games_links`.`game_id`, 
-      `matomo_log_action`.`name`,
-      `matomo_log_link_visit_action`.`idpageview`,
-      CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
-      `matomo_log_link_visit_action`.`idvisit`,
+      mllva.idlink_va,
+      DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
+      hg.game_name,
+      hgl.game_id, 
+      mla.name,
+      mllva.idpageview,
+      CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+      mllva.idvisit,
       CASE 
-        WHEN `matomo_log_action`.`name` LIKE '%_started%' THEN 'started'
-        WHEN `matomo_log_action`.`name` LIKE '%introduction_completed%' AND `matomo_log_action`.`name` NOT LIKE '%mid%' THEN 'introduction'
-        WHEN `matomo_log_action`.`name` LIKE '%_mid_introduction%' THEN 'mid_introduction'
-        WHEN `matomo_log_action`.`name` LIKE '%_poll_completed%' THEN 'parent_poll'
-        WHEN `matomo_log_action`.`name` LIKE '%action_completed%' THEN 'validation'
-        WHEN `matomo_log_action`.`name` LIKE '%reward_completed%' THEN 'rewards'
-        WHEN `matomo_log_action`.`name` LIKE '%question_completed%' THEN 'questions'
-        WHEN `matomo_log_action`.`name` LIKE '%completed%' 
-             AND `matomo_log_action`.`name` NOT LIKE '%introduction%'
-             AND `matomo_log_action`.`name` NOT LIKE '%reward%'
-             AND `matomo_log_action`.`name` NOT LIKE '%question%'
-             AND `matomo_log_action`.`name` NOT LIKE '%mid_introduction%'
-             AND `matomo_log_action`.`name` NOT LIKE '%poll%'
-             AND `matomo_log_action`.`name` NOT LIKE '%action%' THEN 'completed'
+        WHEN mla.name LIKE '%_started%' THEN 'started'
+        WHEN mla.name LIKE '%introduction_completed%' AND mla.name NOT LIKE '%mid%' THEN 'introduction'
+        WHEN mla.name LIKE '%_mid_introduction%' THEN 'mid_introduction'
+        WHEN mla.name LIKE '%_poll_completed%' THEN 'parent_poll'
+        WHEN mla.name LIKE '%action_completed%' THEN 'validation'
+        WHEN mla.name LIKE '%reward_completed%' THEN 'rewards'
+        WHEN mla.name LIKE '%question_completed%' THEN 'questions'
+        WHEN mla.name LIKE '%completed%' 
+             AND mla.name NOT LIKE '%introduction%'
+             AND mla.name NOT LIKE '%reward%'
+             AND mla.name NOT LIKE '%question%'
+             AND mla.name NOT LIKE '%mid_introduction%'
+             AND mla.name NOT LIKE '%poll%'
+             AND mla.name NOT LIKE '%action%' THEN 'completed'
         ELSE NULL
       END AS event
-    FROM `matomo_log_link_visit_action`
-    INNER JOIN `matomo_log_action` 
-      ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
-    INNER JOIN `hybrid_games_links` 
-      ON `matomo_log_link_visit_action`.`custom_dimension_2` = `hybrid_games_links`.`activity_id`
-    INNER JOIN `hybrid_games` 
-      ON `hybrid_games_links`.`game_id` = `hybrid_games`.`id`
-    WHERE `matomo_log_link_visit_action`.`server_time` > '2025-07-01' 
+    FROM matomo_log_link_visit_action mllva
+    INNER JOIN matomo_log_action mla 
+      ON mllva.idaction_name = mla.idaction
       AND (
-        `matomo_log_action`.`name` LIKE '%introduction_completed%' OR
-        `matomo_log_action`.`name` LIKE '%reward_completed%' OR
-        `matomo_log_action`.`name` LIKE '%mcq_completed%' OR
-        `matomo_log_action`.`name` LIKE '%game_completed%' OR
-        `matomo_log_action`.`name` LIKE '%mcq_started%' OR
-        `matomo_log_action`.`name` LIKE '%game_started%' OR
-        `matomo_log_action`.`name` LIKE '%action_completed%' OR 
-        `matomo_log_action`.`name` LIKE '%question_completed%' OR
-        `matomo_log_action`.`name` LIKE '%poll_completed%'
+        mla.name LIKE '%introduction_completed%' OR
+        mla.name LIKE '%reward_completed%' OR
+        mla.name LIKE '%mcq_completed%' OR
+        mla.name LIKE '%game_completed%' OR
+        mla.name LIKE '%mcq_started%' OR
+        mla.name LIKE '%game_started%' OR
+        mla.name LIKE '%action_completed%' OR 
+        mla.name LIKE '%question_completed%' OR
+        mla.name LIKE '%poll_completed%'
       )
+    INNER JOIN hybrid_games_links hgl 
+      ON mllva.custom_dimension_2 = hgl.activity_id
+    INNER JOIN hybrid_games hg 
+      ON hgl.game_id = hg.id
+    WHERE mllva.server_time > '2025-07-01'
     """
 )
 
@@ -281,12 +282,26 @@ def fetch_dataframe() -> pd.DataFrame:
             with conn.cursor() as cur:
                 print("Executing SQL query (this may take several minutes for large datasets)...")
                 print("Note: Query is processing all events from July 2025 onwards")
+                print("Optimized query: Filtering by action names in JOIN to reduce processing time")
                 try:
+                    # Execute query with streaming results to avoid memory issues
                     cur.execute(SQL_QUERY)
-                    print("Query executed successfully. Fetching results...")
-                    rows = cur.fetchall()
+                    print("Query executed successfully. Fetching results in batches...")
+                    
+                    # Fetch results in batches to avoid timeout
+                    batch_size = 50000
+                    all_rows = []
                     columns = [d[0] for d in cur.description]
-                    print(f"Fetched {len(rows)} rows from database")
+                    
+                    while True:
+                        batch = cur.fetchmany(batch_size)
+                        if not batch:
+                            break
+                        all_rows.extend(batch)
+                        print(f"  Fetched {len(all_rows):,} rows so far...")
+                    
+                    rows = all_rows
+                    print(f"Total rows fetched: {len(rows):,}")
                 except pymysql.Error as e:
                     print(f"Database error during query execution: {e}")
                     print("This might be due to query timeout or connection issues.")
