@@ -49,10 +49,10 @@ SQL_QUERY = (
       CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
       `matomo_log_link_visit_action`.`idvisit`,
       CASE 
-        WHEN `matomo_log_action`.`name` LIKE '%_started%' THEN 'started'
+        WHEN `matomo_log_action`.`name` LIKE '%\\_started%' ESCAPE '\\' THEN 'started'
         WHEN `matomo_log_action`.`name` LIKE '%introduction_completed%' AND `matomo_log_action`.`name` NOT LIKE '%mid%' THEN 'introduction'
-        WHEN `matomo_log_action`.`name` LIKE '%_mid_introduction%' THEN 'mid_introduction'
-        WHEN `matomo_log_action`.`name` LIKE '%_poll_completed%' THEN 'parent_poll'
+        WHEN `matomo_log_action`.`name` LIKE '%\\_mid_introduction%' ESCAPE '\\' THEN 'mid_introduction'
+        WHEN `matomo_log_action`.`name` LIKE '%\\_poll_completed%' ESCAPE '\\' THEN 'parent_poll'
         WHEN `matomo_log_action`.`name` LIKE '%action_completed%' THEN 'validation'
         WHEN `matomo_log_action`.`name` LIKE '%reward_completed%' THEN 'rewards'
         WHEN `matomo_log_action`.`name` LIKE '%question_completed%' THEN 'questions'
