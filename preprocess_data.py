@@ -362,35 +362,6 @@ def fetch_dataframe() -> pd.DataFrame:
         import traceback
         traceback.print_exc()
         return pd.DataFrame()
-        df = pd.DataFrame(rows, columns=columns)
-        print(f"SUCCESS: Fetched {len(df)} records from main query")
-        print(f"Columns in fetched data: {list(df.columns)}")
-        
-        # Check if event column exists
-        if 'event' not in df.columns:
-            print("ERROR: 'event' column not found in fetched data!")
-            print(f"Available columns: {list(df.columns)}")
-            return pd.DataFrame()
-        
-        # Check event column values
-        if len(df) > 0:
-            event_counts = df['event'].value_counts(dropna=False)
-            print(f"Event column value counts:\n{event_counts}")
-            null_events = df['event'].isna().sum()
-            if null_events > 0:
-                print(f"WARNING: {null_events} records have NULL event values")
-        
-        # Remove duplicates on idlink_va as requested (DISTINCT in SQL should handle this, but doing it here as well for safety)
-        initial_count = len(df)
-        df = df.drop_duplicates(subset=['idlink_va'], keep='first')
-        if initial_count != len(df):
-            print(f"Removed {initial_count - len(df)} duplicate idlink_va records")
-        return df
-    except Exception as e:
-        print(f"ERROR: Failed to fetch main dashboard data: {str(e)}")
-        import traceback
-        traceback.print_exc()
-        return pd.DataFrame()
 
 
 def fetch_score_dataframe() -> pd.DataFrame:
@@ -2269,6 +2240,11 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
 
 def main():
     """Main preprocessing function with modular processing options"""
+    print("=" * 60)
+    print("STARTING PREPROCESSING SCRIPT")
+    print("=" * 60)
+    sys.stdout.flush()
+    
     parser = argparse.ArgumentParser(
         description='Preprocess data for Matomo Events Dashboard',
         formatter_class=argparse.RawDescriptionHelpFormatter,
