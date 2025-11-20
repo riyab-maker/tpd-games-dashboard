@@ -225,11 +225,17 @@ def load_processed_data():
             if col in game_conversion_df.columns:
                 game_conversion_df[col] = pd.to_numeric(game_conversion_df[col], errors='coerce').fillna(0).astype(int)
         
-        # Load processed data for date filtering
-        processed_data_df = pd.read_csv(os.path.join(DATA_DIR, "processed_data.csv"))
-        # Convert server_time to datetime for filtering
-        if 'server_time' in processed_data_df.columns:
-            processed_data_df['server_time'] = pd.to_datetime(processed_data_df['server_time'])
+        # Load processed data for date filtering (optional - file may be too large for git)
+        processed_data_path = os.path.join(DATA_DIR, "processed_data.csv")
+        if os.path.exists(processed_data_path):
+            processed_data_df = pd.read_csv(processed_data_path)
+            # Convert server_time to datetime for filtering
+            if 'server_time' in processed_data_df.columns:
+                processed_data_df['server_time'] = pd.to_datetime(processed_data_df['server_time'])
+        else:
+            # Create empty DataFrame with expected columns if file doesn't exist
+            processed_data_df = pd.DataFrame(columns=['server_time', 'game_name', 'event', 'idvisitor_converted', 'idvisit', 'idlink_va'])
+            st.info("ℹ️ Note: Date filtering is disabled because processed_data.csv is not available. Using summary data without date filtering.")
         
         # Load summary data for conversion funnels
         summary_df = pd.read_csv(os.path.join(DATA_DIR, "summary_data.csv"))
@@ -1476,40 +1482,46 @@ def main() -> None:
         game_count = len(selected_games)
     
     # Filter processed data by date range and games if specified
-    filtered_processed_data = processed_data_df.copy()
-    
-    # Apply date filter
-    if date_range and isinstance(date_range, tuple) and len(date_range) == 2:
-        start_date, end_date = date_range
-        if start_date and end_date:
-            filtered_processed_data = filtered_processed_data[
-                (filtered_processed_data['server_time'].dt.date >= start_date) &
-                (filtered_processed_data['server_time'].dt.date <= end_date)
-            ]
-    
-    # Apply game filter
-    if selected_games and len(selected_games) < len(unique_games):
-        if 'game_name' in filtered_processed_data.columns:
-            filtered_processed_data = filtered_processed_data[
-                filtered_processed_data['game_name'].isin(selected_games)
-            ]
-    
-    # Calculate funnel metrics from filtered processed data
-    if not filtered_processed_data.empty and 'event' in filtered_processed_data.columns:
-        # Calculate metrics for all funnel stages
-        funnel_stages = ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']
-        filtered_summary_data = []
-        for stage in funnel_stages:
-            stage_data = filtered_processed_data[filtered_processed_data['event'] == stage]
-            filtered_summary_data.append({
-                'Event': stage,
-                'Users': stage_data['idvisitor_converted'].nunique() if 'idvisitor_converted' in stage_data.columns else 0,
-                'Visits': stage_data['idvisit'].nunique() if 'idvisit' in stage_data.columns else 0,
-                'Instances': len(stage_data)
-            })
-        filtered_summary_df = pd.DataFrame(filtered_summary_data)
-    else:
+    # If processed_data_df is empty, use summary_df directly without filtering
+    if processed_data_df.empty:
+        # Use summary_df directly - no date filtering available
         filtered_summary_df = summary_df.copy()
+    else:
+        filtered_processed_data = processed_data_df.copy()
+        
+        # Apply date filter
+        if date_range and isinstance(date_range, tuple) and len(date_range) == 2:
+            start_date, end_date = date_range
+            if start_date and end_date:
+                filtered_processed_data = filtered_processed_data[
+                    (filtered_processed_data['server_time'].dt.date >= start_date) &
+                    (filtered_processed_data['server_time'].dt.date <= end_date)
+                ]
+        
+        # Apply game filter
+        if selected_games and len(selected_games) < len(unique_games):
+            if 'game_name' in filtered_processed_data.columns:
+                filtered_processed_data = filtered_processed_data[
+                    filtered_processed_data['game_name'].isin(selected_games)
+                ]
+        
+            # Calculate funnel metrics from filtered processed data
+            if not filtered_processed_data.empty and 'event' in filtered_processed_data.columns:
+                # Calculate metrics for all funnel stages
+                funnel_stages = ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']
+                filtered_summary_data = []
+                for stage in funnel_stages:
+                    stage_data = filtered_processed_data[filtered_processed_data['event'] == stage]
+                    filtered_summary_data.append({
+                        'Event': stage,
+                        'Users': stage_data['idvisitor_converted'].nunique() if 'idvisitor_converted' in stage_data.columns else 0,
+                        'Visits': stage_data['idvisit'].nunique() if 'idvisit' in stage_data.columns else 0,
+                        'Instances': len(stage_data)
+                    })
+                filtered_summary_df = pd.DataFrame(filtered_summary_data)
+            else:
+                # Fallback to summary_df if filtered_processed_data is empty or missing event column
+                filtered_summary_df = summary_df.copy()
     
     # Render conversion funnel with date and game filters applied
     render_modern_dashboard(filtered_summary_df, filtered_summary_df)
