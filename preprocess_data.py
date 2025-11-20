@@ -252,23 +252,46 @@ def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe from database"""
     print("Fetching main dashboard data...")
     try:
-        with pymysql.connect(
-            host=HOST,
-            port=PORT,
-            user=USER,
-            password=PASSWORD,
-            database=DBNAME,
-            connect_timeout=30,
-            read_timeout=600,  # 10 minutes for large queries
-            write_timeout=600,
-            ssl={'ssl': {}},
-        ) as conn:
+        # Set connection parameters to handle long-running queries
+        # Increase timeouts significantly for large data processing
+        conn_params = {
+            'host': HOST,
+            'port': PORT,
+            'user': USER,
+            'password': PASSWORD,
+            'database': DBNAME,
+            'connect_timeout': 60,
+            'read_timeout': 1800,  # 30 minutes for very large queries
+            'write_timeout': 1800,
+            'autocommit': True,  # Enable autocommit to prevent connection issues
+            'charset': 'utf8mb4',
+        }
+        
+        # Add SSL if configured
+        if hasattr(pymysql, 'ssl'):
+            conn_params['ssl'] = {'ssl': {}}
+        
+        with pymysql.connect(**conn_params) as conn:
+            # Set session variables to prevent timeout
+            with conn.cursor() as setup_cur:
+                setup_cur.execute("SET SESSION wait_timeout = 3600")  # 1 hour
+                setup_cur.execute("SET SESSION interactive_timeout = 3600")  # 1 hour
+                setup_cur.execute("SET SESSION net_read_timeout = 3600")  # 1 hour
+                setup_cur.execute("SET SESSION net_write_timeout = 3600")  # 1 hour
             with conn.cursor() as cur:
-                print("Executing SQL query...")
-                cur.execute(SQL_QUERY)
-                print("Fetching results...")
-                rows = cur.fetchall()
-                columns = [d[0] for d in cur.description]
+                print("Executing SQL query (this may take several minutes for large datasets)...")
+                print("Note: Query is processing all events from July 2025 onwards")
+                try:
+                    cur.execute(SQL_QUERY)
+                    print("Query executed successfully. Fetching results...")
+                    rows = cur.fetchall()
+                    columns = [d[0] for d in cur.description]
+                    print(f"Fetched {len(rows)} rows from database")
+                except pymysql.Error as e:
+                    print(f"Database error during query execution: {e}")
+                    print("This might be due to query timeout or connection issues.")
+                    print("Consider optimizing the query or processing data in smaller batches.")
+                    raise
         df = pd.DataFrame(rows, columns=columns)
         print(f"SUCCESS: Fetched {len(df)} records from main query")
         print(f"Columns in fetched data: {list(df.columns)}")
