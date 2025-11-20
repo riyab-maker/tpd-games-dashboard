@@ -35,35 +35,55 @@ missing_vars = [var for var in required_vars if not os.getenv(var)]
 if missing_vars:
     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
-# SQL Queries - Updated to use matomo_log_action.name for event determination
-# Started = hybrid_game_started OR hybrid_mcq_started
-# Completed = hybrid_game_completed OR hybrid_mcq_completed
+# SQL Queries - Updated with new event categorization
+# Event stages: started, introduction, mid_introduction, parent_poll, validation, rewards, questions, completed
 SQL_QUERY = (
     """
-    SELECT 
-      mllva.idlink_va,
+    SELECT DISTINCT
+      `matomo_log_link_visit_action`.`idlink_va`,
+      `matomo_log_link_visit_action`.`server_time`,
+      `hybrid_games`.`game_name`,
+      `hybrid_games_links`.`game_id`, 
+      `matomo_log_action`.`name`,
+      `matomo_log_link_visit_action`.`idpageview`,
       CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
-      mllva.idvisit,
-      DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
-      mllva.idaction_name,
-      mllva.custom_dimension_2,
-      hg.game_name,
-      mla.name AS action_name,
+      `matomo_log_link_visit_action`.`idvisit`,
       CASE 
-        WHEN mla.name LIKE '%hybrid_game_started%' OR mla.name LIKE '%hybrid_mcq_started%' THEN 'Started'
-        WHEN mla.name LIKE '%hybrid_game_completed%' OR mla.name LIKE '%hybrid_mcq_completed%' THEN 'Completed'
+        WHEN `matomo_log_action`.`name` LIKE '%_started%' THEN 'started'
+        WHEN `matomo_log_action`.`name` LIKE '%introduction_completed%' AND `matomo_log_action`.`name` NOT LIKE '%mid%' THEN 'introduction'
+        WHEN `matomo_log_action`.`name` LIKE '%_mid_introduction%' THEN 'mid_introduction'
+        WHEN `matomo_log_action`.`name` LIKE '%_poll_completed%' THEN 'parent_poll'
+        WHEN `matomo_log_action`.`name` LIKE '%action_completed%' THEN 'validation'
+        WHEN `matomo_log_action`.`name` LIKE '%reward_completed%' THEN 'rewards'
+        WHEN `matomo_log_action`.`name` LIKE '%question_completed%' THEN 'questions'
+        WHEN `matomo_log_action`.`name` LIKE '%completed%' 
+             AND `matomo_log_action`.`name` NOT LIKE '%introduction%'
+             AND `matomo_log_action`.`name` NOT LIKE '%reward%'
+             AND `matomo_log_action`.`name` NOT LIKE '%question%'
+             AND `matomo_log_action`.`name` NOT LIKE '%mid_introduction%'
+             AND `matomo_log_action`.`name` NOT LIKE '%poll%'
+             AND `matomo_log_action`.`name` NOT LIKE '%action%' THEN 'completed'
         ELSE NULL
       END AS event
-    FROM matomo_log_link_visit_action mllva
-    INNER JOIN matomo_log_action mla ON mllva.idaction_name = mla.idaction
-    INNER JOIN hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
-    INNER JOIN hybrid_games hg ON hgl.game_id = hg.id
-    WHERE (mla.name LIKE '%hybrid_game_started%' 
-           OR mla.name LIKE '%hybrid_mcq_started%' 
-           OR mla.name LIKE '%hybrid_game_completed%' 
-           OR mla.name LIKE '%hybrid_mcq_completed%')
-      AND hgl.activity_id IS NOT NULL
-    AND DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
+    FROM `matomo_log_link_visit_action`
+    INNER JOIN `matomo_log_action` 
+      ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
+    INNER JOIN `hybrid_games_links` 
+      ON `matomo_log_link_visit_action`.`custom_dimension_2` = `hybrid_games_links`.`activity_id`
+    INNER JOIN `hybrid_games` 
+      ON `hybrid_games_links`.`game_id` = `hybrid_games`.`id`
+    WHERE `matomo_log_link_visit_action`.`server_time` > '2025-07-01' 
+      AND (
+        `matomo_log_action`.`name` LIKE '%introduction_completed%' OR
+        `matomo_log_action`.`name` LIKE '%reward_completed%' OR
+        `matomo_log_action`.`name` LIKE '%mcq_completed%' OR
+        `matomo_log_action`.`name` LIKE '%game_completed%' OR
+        `matomo_log_action`.`name` LIKE '%mcq_started%' OR
+        `matomo_log_action`.`name` LIKE '%game_started%' OR
+        `matomo_log_action`.`name` LIKE '%action_completed%' OR 
+        `matomo_log_action`.`name` LIKE '%question_completed%' OR
+        `matomo_log_action`.`name` LIKE '%poll_completed%'
+      )
     """
 )
 
@@ -246,6 +266,11 @@ def fetch_dataframe() -> pd.DataFrame:
             columns = [d[0] for d in cur.description]
     df = pd.DataFrame(rows, columns=columns)
     print(f"SUCCESS: Fetched {len(df)} records from main query")
+    # Remove duplicates on idlink_va as requested (DISTINCT in SQL should handle this, but doing it here as well for safety)
+    initial_count = len(df)
+    df = df.drop_duplicates(subset=['idlink_va'], keep='first')
+    if initial_count != len(df):
+        print(f"Removed {initial_count - len(df)} duplicate idlink_va records")
     return df
 
 
@@ -1154,15 +1179,18 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     grouped = grouped.reset_index()
     grouped.rename(columns={'event': 'Event'}, inplace=True)
     
-    # Ensure both Started and Completed exist (fill missing with 0)
-    all_events = pd.DataFrame({'Event': ['Started', 'Completed']})
+    # Ensure all funnel stages exist (fill missing with 0)
+    # Order: started, introduction, mid_introduction, parent_poll, validation, rewards, questions, completed
+    all_events = pd.DataFrame({'Event': ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']})
     grouped = all_events.merge(grouped, on='Event', how='left').fillna(0)
     
     # Convert to int and sort
     for col in ['Users', 'Visits', 'Instances']:
         grouped[col] = grouped[col].astype(int)
     
-    grouped['Event'] = pd.Categorical(grouped['Event'], categories=['Started', 'Completed'], ordered=True)
+    grouped['Event'] = pd.Categorical(grouped['Event'], 
+                                     categories=['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed'], 
+                                     ordered=True)
     grouped = grouped.sort_values('Event')
     
     print(f"SUCCESS: Summary statistics: {len(grouped)} event types")
@@ -1508,6 +1536,10 @@ def process_main_data() -> pd.DataFrame:
         return pd.DataFrame()
     
     print(f"SUCCESS: Fetched {len(df_main)} records from main query")
+    # Remove duplicates on idlink_va as requested
+    initial_count = len(df_main)
+    df_main = df_main.drop_duplicates(subset=['idlink_va'], keep='first')
+    print(f"After removing duplicates on idlink_va: {len(df_main)} records (removed {initial_count - len(df_main)} duplicates)")
     df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
     # Save main data
@@ -1515,26 +1547,23 @@ def process_main_data() -> pd.DataFrame:
     print("SUCCESS: Saved data/processed_data.csv")
     
     # Create and save game-specific conversion numbers
+    # Track all funnel stages for each game
     game_conversion_data = []
     for game in df_main['game_name'].unique():
         if game != 'Unknown Game':
             game_data = df_main[df_main['game_name'] == game]
-            started_users = game_data[game_data['event'] == 'Started']['idvisitor_converted'].nunique()
-            completed_users = game_data[game_data['event'] == 'Completed']['idvisitor_converted'].nunique()
-            started_visits = game_data[game_data['event'] == 'Started']['idvisit'].nunique()
-            completed_visits = game_data[game_data['event'] == 'Completed']['idvisit'].nunique()
-            started_instances = len(game_data[game_data['event'] == 'Started'])
-            completed_instances = len(game_data[game_data['event'] == 'Completed'])
             
-            game_conversion_data.append({
-                'game_name': game,
-                'started_users': started_users,
-                'completed_users': completed_users,
-                'started_visits': started_visits,
-                'completed_visits': completed_visits,
-                'started_instances': started_instances,
-                'completed_instances': completed_instances
-            })
+            # Calculate metrics for each funnel stage
+            funnel_stages = ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']
+            game_stats = {'game_name': game}
+            
+            for stage in funnel_stages:
+                stage_data = game_data[game_data['event'] == stage]
+                game_stats[f'{stage}_users'] = stage_data['idvisitor_converted'].nunique()
+                game_stats[f'{stage}_visits'] = stage_data['idvisit'].nunique()
+                game_stats[f'{stage}_instances'] = len(stage_data)
+            
+            game_conversion_data.append(game_stats)
     
     game_conversion_df = pd.DataFrame(game_conversion_data)
     game_conversion_df.to_csv('data/game_conversion_numbers.csv', index=False)

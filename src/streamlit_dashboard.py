@@ -308,57 +308,55 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         completed_count = 0
 
     # Get data for each funnel from conversion data
+    # New funnel stages: started, introduction, mid_introduction, parent_poll, validation, rewards, questions, completed
+    funnel_stages = ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']
+    stage_labels = {
+        'started': 'Started',
+        'introduction': 'Introduction',
+        'mid_introduction': 'Mid Introduction',
+        'parent_poll': 'Parent Poll',
+        'validation': 'Validation',
+        'rewards': 'Rewards',
+        'questions': 'Questions',
+        'completed': 'Completed'
+    }
+    
     if 'Event' in conversion_df.columns:
         # Summary data format (total data)
-        started_row = conversion_df[conversion_df['Event'] == 'Started']
-        completed_row = conversion_df[conversion_df['Event'] == 'Completed']
-        
-        # Safely extract values with defaults
-        try:
-            if not started_row.empty and len(started_row) > 0 and 'Users' in started_row.columns:
-                started_users = int(pd.to_numeric(started_row['Users'], errors='coerce').fillna(0).iloc[0])
-                started_visits = int(pd.to_numeric(started_row['Visits'], errors='coerce').fillna(0).iloc[0])
-                started_instances = int(pd.to_numeric(started_row['Instances'], errors='coerce').fillna(0).iloc[0])
-            else:
-                started_users = 0
-                started_visits = 0
-                started_instances = 0
-        except (IndexError, KeyError, ValueError, TypeError) as e:
-            started_users = 0
-            started_visits = 0
-            started_instances = 0
-            
-        try:
-            if not completed_row.empty and len(completed_row) > 0 and 'Users' in completed_row.columns:
-                completed_users = int(pd.to_numeric(completed_row['Users'], errors='coerce').fillna(0).iloc[0])
-                completed_visits = int(pd.to_numeric(completed_row['Visits'], errors='coerce').fillna(0).iloc[0])
-                completed_instances = int(pd.to_numeric(completed_row['Instances'], errors='coerce').fillna(0).iloc[0])
-            else:
-                completed_users = 0
-                completed_visits = 0
-                completed_instances = 0
-        except (IndexError, KeyError, ValueError, TypeError) as e:
-            completed_users = 0
-            completed_visits = 0
-            completed_instances = 0
+        # Extract data for all funnel stages
+        funnel_data = {}
+        for stage in funnel_stages:
+            stage_row = conversion_df[conversion_df['Event'] == stage]
+            try:
+                if not stage_row.empty and len(stage_row) > 0 and 'Users' in stage_row.columns:
+                    funnel_data[f'{stage}_users'] = int(pd.to_numeric(stage_row['Users'], errors='coerce').fillna(0).iloc[0])
+                    funnel_data[f'{stage}_visits'] = int(pd.to_numeric(stage_row['Visits'], errors='coerce').fillna(0).iloc[0])
+                    funnel_data[f'{stage}_instances'] = int(pd.to_numeric(stage_row['Instances'], errors='coerce').fillna(0).iloc[0])
+                else:
+                    funnel_data[f'{stage}_users'] = 0
+                    funnel_data[f'{stage}_visits'] = 0
+                    funnel_data[f'{stage}_instances'] = 0
+            except (IndexError, KeyError, ValueError, TypeError):
+                funnel_data[f'{stage}_users'] = 0
+                funnel_data[f'{stage}_visits'] = 0
+                funnel_data[f'{stage}_instances'] = 0
     else:
         # Filtered data format - calculate from raw data
-        started_users = conversion_df[conversion_df['event'] == 'Started']['idvisitor_converted'].nunique()
-        completed_users = conversion_df[conversion_df['event'] == 'Completed']['idvisitor_converted'].nunique()
-        started_visits = conversion_df[conversion_df['event'] == 'Started']['idvisit'].nunique()
-        completed_visits = conversion_df[conversion_df['event'] == 'Completed']['idvisit'].nunique()
-        started_instances = len(conversion_df[conversion_df['event'] == 'Started'])
-        completed_instances = len(conversion_df[conversion_df['event'] == 'Completed'])
+        for stage in funnel_stages:
+            stage_data = conversion_df[conversion_df['event'] == stage]
+            funnel_data[f'{stage}_users'] = stage_data['idvisitor_converted'].nunique()
+            funnel_data[f'{stage}_visits'] = stage_data['idvisit'].nunique()
+            funnel_data[f'{stage}_instances'] = len(stage_data)
     
     
-    # Create three separate funnels
+    # Create three separate funnels with all stages
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown("#### 👥 Users Funnel")
         users_data = pd.DataFrame([
-            {'Stage': 'Started', 'Count': started_users, 'Order': 0},
-            {'Stage': 'Completed', 'Count': completed_users, 'Order': 1}
+            {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_users', 0), 'Order': idx}
+            for idx, stage in enumerate(funnel_stages)
         ])
         
         users_chart = alt.Chart(users_data).mark_bar(
@@ -377,7 +375,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             tooltip=['Stage:N', 'Count:Q']
         ).properties(
             width=300,
-            height=200
+            height=600  # Increased height for 8 stages
         )
         
         # Add labels with complete numbers - positioned at the start of bars
@@ -407,8 +405,8 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     with col2:
         st.markdown("#### 🔄 Visits Funnel")
         visits_data = pd.DataFrame([
-            {'Stage': 'Started', 'Count': started_visits, 'Order': 0},
-            {'Stage': 'Completed', 'Count': completed_visits, 'Order': 1}
+            {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_visits', 0), 'Order': idx}
+            for idx, stage in enumerate(funnel_stages)
         ])
         
         visits_chart = alt.Chart(visits_data).mark_bar(
@@ -427,7 +425,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             tooltip=['Stage:N', 'Count:Q']
         ).properties(
             width=300,
-            height=200
+            height=600  # Increased height for 8 stages
         )
         
         # Add labels with complete numbers - positioned at the start of bars
@@ -457,8 +455,8 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     with col3:
         st.markdown("#### ⚡ Instances Funnel")
         instances_data = pd.DataFrame([
-            {'Stage': 'Started', 'Count': started_instances, 'Order': 0},
-            {'Stage': 'Completed', 'Count': completed_instances, 'Order': 1}
+            {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_instances', 0), 'Order': idx}
+            for idx, stage in enumerate(funnel_stages)
         ])
         
         instances_chart = alt.Chart(instances_data).mark_bar(
@@ -477,7 +475,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             tooltip=['Stage:N', 'Count:Q']
         ).properties(
             width=300,
-            height=200
+            height=600  # Increased height for 8 stages
         )
         
         # Add labels with complete numbers - positioned at the start of bars
