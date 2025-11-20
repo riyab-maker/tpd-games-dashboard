@@ -41,7 +41,7 @@ SQL_QUERY = (
     """
     SELECT DISTINCT
       `matomo_log_link_visit_action`.`idlink_va`,
-      `matomo_log_link_visit_action`.`server_time`,
+      DATE_ADD(`matomo_log_link_visit_action`.`server_time`, INTERVAL 330 MINUTE) AS server_time,
       `hybrid_games`.`game_name`,
       `hybrid_games_links`.`game_id`, 
       `matomo_log_action`.`name`,
