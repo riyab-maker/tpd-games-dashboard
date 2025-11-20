@@ -271,6 +271,22 @@ def fetch_dataframe() -> pd.DataFrame:
                 columns = [d[0] for d in cur.description]
         df = pd.DataFrame(rows, columns=columns)
         print(f"SUCCESS: Fetched {len(df)} records from main query")
+        print(f"Columns in fetched data: {list(df.columns)}")
+        
+        # Check if event column exists
+        if 'event' not in df.columns:
+            print("ERROR: 'event' column not found in fetched data!")
+            print(f"Available columns: {list(df.columns)}")
+            return pd.DataFrame()
+        
+        # Check event column values
+        if len(df) > 0:
+            event_counts = df['event'].value_counts(dropna=False)
+            print(f"Event column value counts:\n{event_counts}")
+            null_events = df['event'].isna().sum()
+            if null_events > 0:
+                print(f"WARNING: {null_events} records have NULL event values")
+        
         # Remove duplicates on idlink_va as requested (DISTINCT in SQL should handle this, but doing it here as well for safety)
         initial_count = len(df)
         df = df.drop_duplicates(subset=['idlink_va'], keep='first')
@@ -1177,8 +1193,22 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Build summary table with correct Power BI DISTINCTCOUNTNOBLANK logic"""
     print("Building summary statistics...")
     
+    # Check if event column exists
+    if 'event' not in df.columns:
+        print("ERROR: 'event' column not found in dataframe")
+        print(f"Available columns: {list(df.columns)}")
+        return pd.DataFrame()
+    
+    # Filter out NULL/None events before grouping
+    df_filtered = df[df['event'].notna()].copy()
+    if df_filtered.empty:
+        print("WARNING: No records with valid event values after filtering NULLs")
+        return pd.DataFrame()
+    
+    print(f"Filtered to {len(df_filtered)} records with valid events (removed {len(df) - len(df_filtered)} NULL events)")
+    
     # Group by event and compute distinct counts
-    grouped = df.groupby('event').agg({
+    grouped = df_filtered.groupby('event').agg({
         'idvisitor_converted': _distinct_count_ignore_blank,
         'idvisit': _distinct_count_ignore_blank, 
         'idlink_va': _distinct_count_ignore_blank,
@@ -1559,9 +1589,20 @@ def process_main_data() -> pd.DataFrame:
     # Create and save game-specific conversion numbers
     # Track all funnel stages for each game
     game_conversion_data = []
-    for game in df_main['game_name'].unique():
+    
+    # Check if event column exists
+    if 'event' not in df_main.columns:
+        print("ERROR: 'event' column not found in main data")
+        print(f"Available columns: {list(df_main.columns)}")
+        return df_main
+    
+    # Filter out NULL events
+    df_main_valid = df_main[df_main['event'].notna()].copy()
+    print(f"Processing game conversion data: {len(df_main_valid)} records with valid events")
+    
+    for game in df_main_valid['game_name'].unique():
         if game != 'Unknown Game':
-            game_data = df_main[df_main['game_name'] == game]
+            game_data = df_main_valid[df_main_valid['game_name'] == game]
             
             # Calculate metrics for each funnel stage
             funnel_stages = ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']
@@ -1569,8 +1610,8 @@ def process_main_data() -> pd.DataFrame:
             
             for stage in funnel_stages:
                 stage_data = game_data[game_data['event'] == stage]
-                game_stats[f'{stage}_users'] = stage_data['idvisitor_converted'].nunique()
-                game_stats[f'{stage}_visits'] = stage_data['idvisit'].nunique()
+                game_stats[f'{stage}_users'] = stage_data['idvisitor_converted'].nunique() if 'idvisitor_converted' in stage_data.columns else 0
+                game_stats[f'{stage}_visits'] = stage_data['idvisit'].nunique() if 'idvisit' in stage_data.columns else 0
                 game_stats[f'{stage}_instances'] = len(stage_data)
             
             game_conversion_data.append(game_stats)
