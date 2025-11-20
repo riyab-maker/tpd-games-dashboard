@@ -49,10 +49,10 @@ SQL_QUERY = (
       CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
       `matomo_log_link_visit_action`.`idvisit`,
       CASE 
-        WHEN LOCATE('_started', `matomo_log_action`.`name`) > 0 THEN 'started'
+        WHEN `matomo_log_action`.`name` LIKE '%_started%' THEN 'started'
         WHEN `matomo_log_action`.`name` LIKE '%introduction_completed%' AND `matomo_log_action`.`name` NOT LIKE '%mid%' THEN 'introduction'
-        WHEN LOCATE('_mid_introduction', `matomo_log_action`.`name`) > 0 THEN 'mid_introduction'
-        WHEN LOCATE('_poll_completed', `matomo_log_action`.`name`) > 0 THEN 'parent_poll'
+        WHEN `matomo_log_action`.`name` LIKE '%_mid_introduction%' THEN 'mid_introduction'
+        WHEN `matomo_log_action`.`name` LIKE '%_poll_completed%' THEN 'parent_poll'
         WHEN `matomo_log_action`.`name` LIKE '%action_completed%' THEN 'validation'
         WHEN `matomo_log_action`.`name` LIKE '%reward_completed%' THEN 'rewards'
         WHEN `matomo_log_action`.`name` LIKE '%question_completed%' THEN 'questions'
@@ -251,27 +251,37 @@ WHERE (mla.name LIKE '%hybrid_game_started%'
 def fetch_dataframe() -> pd.DataFrame:
     """Fetch main dataframe from database"""
     print("Fetching main dashboard data...")
-    with pymysql.connect(
-        host=HOST,
-        port=PORT,
-        user=USER,
-        password=PASSWORD,
-        database=DBNAME,
-        connect_timeout=15,
-        ssl={'ssl': {}},
-    ) as conn:
-        with conn.cursor() as cur:
-            cur.execute(SQL_QUERY)
-            rows = cur.fetchall()
-            columns = [d[0] for d in cur.description]
-    df = pd.DataFrame(rows, columns=columns)
-    print(f"SUCCESS: Fetched {len(df)} records from main query")
-    # Remove duplicates on idlink_va as requested (DISTINCT in SQL should handle this, but doing it here as well for safety)
-    initial_count = len(df)
-    df = df.drop_duplicates(subset=['idlink_va'], keep='first')
-    if initial_count != len(df):
-        print(f"Removed {initial_count - len(df)} duplicate idlink_va records")
-    return df
+    try:
+        with pymysql.connect(
+            host=HOST,
+            port=PORT,
+            user=USER,
+            password=PASSWORD,
+            database=DBNAME,
+            connect_timeout=30,
+            read_timeout=600,  # 10 minutes for large queries
+            write_timeout=600,
+            ssl={'ssl': {}},
+        ) as conn:
+            with conn.cursor() as cur:
+                print("Executing SQL query...")
+                cur.execute(SQL_QUERY)
+                print("Fetching results...")
+                rows = cur.fetchall()
+                columns = [d[0] for d in cur.description]
+        df = pd.DataFrame(rows, columns=columns)
+        print(f"SUCCESS: Fetched {len(df)} records from main query")
+        # Remove duplicates on idlink_va as requested (DISTINCT in SQL should handle this, but doing it here as well for safety)
+        initial_count = len(df)
+        df = df.drop_duplicates(subset=['idlink_va'], keep='first')
+        if initial_count != len(df):
+            print(f"Removed {initial_count - len(df)} duplicate idlink_va records")
+        return df
+    except Exception as e:
+        print(f"ERROR: Failed to fetch main dashboard data: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame()
 
 
 def fetch_score_dataframe() -> pd.DataFrame:
@@ -2148,7 +2158,6 @@ Examples:
 Available visuals:
   --main               Main dashboard data and game conversion numbers
   --summary            Summary statistics
-  --conversion-funnel  Process conversion funnel data (main + summary) - convenience flag
   --score-distribution Score distribution
   --time-series        Time series data
   --repeatability      Repeatability data
@@ -2161,7 +2170,6 @@ Available visuals:
     
     parser.add_argument('--main', action='store_true', help='Process main dashboard data')
     parser.add_argument('--summary', action='store_true', help='Process summary statistics')
-    parser.add_argument('--conversion-funnel', action='store_true', help='Process conversion funnel data (main + summary)')
     parser.add_argument('--score-distribution', action='store_true', help='Process score distribution')
     parser.add_argument('--time-series', action='store_true', help='Process time series data')
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
@@ -2175,14 +2183,9 @@ Available visuals:
     # Create data directory if it doesn't exist
     os.makedirs('data', exist_ok=True)
     
-    # Handle conversion-funnel flag (convenience flag for main + summary)
-    if args.conversion_funnel:
-        args.main = True
-        args.summary = True
-    
     # Determine what to process
     process_all = args.all or not any([
-        args.main, args.summary, args.conversion_funnel, args.score_distribution,
+        args.main, args.summary, args.score_distribution,
         args.time_series, args.repeatability, args.question_correctness, args.parent_poll
     ])
     
