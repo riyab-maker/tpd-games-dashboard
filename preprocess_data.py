@@ -36,7 +36,7 @@ if missing_vars:
     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
 # SQL Queries - Updated with new event categorization
-# Event stages: started, introduction, mid_introduction, parent_poll, validation, rewards, questions, completed
+# Event stages: started, introduction, questions, mid_introduction, validation, parent_poll, rewards, completed
 # Optimized query: Filter by action names first to reduce JOIN overhead
 SQL_QUERY = (
     """
@@ -54,9 +54,9 @@ SQL_QUERY = (
         WHEN mla.name LIKE '%introduction_completed%' AND mla.name NOT LIKE '%mid%' THEN 'introduction'
         WHEN mla.name LIKE '%_mid_introduction%' THEN 'mid_introduction'
         WHEN mla.name LIKE '%_poll_completed%' THEN 'parent_poll'
-        WHEN mla.name LIKE '%action_completed%' THEN 'validation'
+        WHEN mla.name LIKE '%action_completed%' THEN 'questions'
         WHEN mla.name LIKE '%reward_completed%' THEN 'rewards'
-        WHEN mla.name LIKE '%question_completed%' THEN 'questions'
+        WHEN mla.name LIKE '%question_completed%' THEN 'validation'
         WHEN mla.name LIKE '%completed%' 
              AND mla.name NOT LIKE '%introduction%'
              AND mla.name NOT LIKE '%reward%'
@@ -346,11 +346,11 @@ def fetch_dataframe() -> pd.DataFrame:
                 elif '_poll_completed' in name_str:
                     return 'parent_poll'
                 elif 'action_completed' in name_str:
-                    return 'validation'
+                    return 'questions'
                 elif 'reward_completed' in name_str:
                     return 'rewards'
                 elif 'question_completed' in name_str:
-                    return 'questions'
+                    return 'validation'
                 elif 'completed' in name_str and 'introduction' not in name_str and 'reward' not in name_str and 'question' not in name_str and 'mid_introduction' not in name_str and 'poll' not in name_str and 'action' not in name_str:
                     return 'completed'
                 return None
@@ -1343,8 +1343,8 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     grouped.rename(columns={'event': 'Event'}, inplace=True)
     
     # Ensure all funnel stages exist (fill missing with 0)
-    # Order: started, introduction, mid_introduction, parent_poll, validation, rewards, questions, completed
-    all_events = pd.DataFrame({'Event': ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']})
+    # Order: started, introduction, questions, mid_introduction, validation, parent_poll, rewards, completed
+    all_events = pd.DataFrame({'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']})
     grouped = all_events.merge(grouped, on='Event', how='left').fillna(0)
     
     # Convert to int and sort
@@ -1352,7 +1352,7 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
         grouped[col] = grouped[col].astype(int)
     
     grouped['Event'] = pd.Categorical(grouped['Event'], 
-                                     categories=['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed'], 
+                                     categories=['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed'], 
                                      ordered=True)
     grouped = grouped.sort_values('Event')
     
@@ -1804,7 +1804,7 @@ def process_main_data() -> pd.DataFrame:
             game_data = df_main_valid[df_main_valid['game_name'] == game]
             
             # Calculate metrics for each funnel stage
-            funnel_stages = ['started', 'introduction', 'mid_introduction', 'parent_poll', 'validation', 'rewards', 'questions', 'completed']
+            funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
             game_stats = {'game_name': game}
             
             for stage in funnel_stages:

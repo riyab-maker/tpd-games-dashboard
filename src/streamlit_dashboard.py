@@ -332,8 +332,8 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         completed_count = 0
 
     # Get data for each funnel from conversion data
-    # Funnel stages order: started, introduction, mid_introduction, validation, questions, parent_poll, rewards, completed
-    funnel_stages = ['started', 'introduction', 'mid_introduction', 'validation', 'questions', 'parent_poll', 'rewards', 'completed']
+    # Funnel stages order: started, introduction, questions, mid_introduction, validation, parent_poll, rewards, completed
+    funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
     stage_labels = {
         'started': 'Started',
         'introduction': 'Introduction',
@@ -373,159 +373,78 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             funnel_data[f'{stage}_instances'] = len(stage_data)
     
     
-    # Create three separate funnels with all stages
-    # Order: Instances first, then Visits, then Users
-    col1, col2, col3 = st.columns(3)
+    # Add selection option to show only one funnel at a time
+    funnel_type = st.radio(
+        "Select Conversion Funnel Type:",
+        options=['Instances', 'Visits', 'Users'],
+        horizontal=True,
+        help="Select which conversion funnel to display"
+    )
     
-    with col1:
-        st.markdown("#### ⚡ Instances Funnel")
-        instances_data = pd.DataFrame([
-            {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_instances', 0), 'Order': idx}
-            for idx, stage in enumerate(funnel_stages)
-        ])
-        
-        instances_chart = alt.Chart(instances_data).mark_bar(
-            cornerRadius=6,
-            stroke='white',
-            strokeWidth=2,
-            color='#F5A623'
-        ).encode(
-            x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
-            opacity=alt.condition(
-                alt.datum.Stage == 'Started',
-                alt.value(0.8),
-                alt.value(1.0)
-            ),
-            tooltip=['Stage:N', 'Count:Q']
-        ).properties(
-            width=300,
-            height=600  # Increased height for 8 stages
-        )
-        
-        # Add labels with complete numbers - positioned at the start of bars
-        instances_labels = alt.Chart(instances_data).mark_text(
-            align='left',
-            baseline='middle',
-            color='white',
-            fontSize=22,
-            fontWeight='bold',
-            dx=10
-        ).encode(
-            x=alt.value(10),  # Fixed position at the start
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-            text=alt.Text('Count:Q', format='.0f')
-        )
-        
-        instances_funnel = alt.layer(instances_chart, instances_labels).configure_view(
-            strokeWidth=0
-        ).configure_axis(
-            labelFontSize=22,
-            titleFontSize=24,
-            grid=False
-        )
-        
-        _render_altair_chart(instances_funnel, use_container_width=True)
+    # Create a single funnel based on selection
+    if funnel_type == 'Instances':
+        funnel_title = "⚡ Instances Funnel"
+        funnel_color = '#F5A623'
+        data_key = 'instances'
+    elif funnel_type == 'Visits':
+        funnel_title = "🔄 Visits Funnel"
+        funnel_color = '#7ED321'
+        data_key = 'visits'
+    else:  # Users
+        funnel_title = "👥 Users Funnel"
+        funnel_color = '#4A90E2'
+        data_key = 'users'
     
-    with col2:
-        st.markdown("#### 🔄 Visits Funnel")
-        visits_data = pd.DataFrame([
-            {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_visits', 0), 'Order': idx}
-            for idx, stage in enumerate(funnel_stages)
-        ])
-        
-        visits_chart = alt.Chart(visits_data).mark_bar(
-            cornerRadius=6,
-            stroke='white',
-            strokeWidth=2,
-            color='#7ED321'
-        ).encode(
-            x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
-            opacity=alt.condition(
-                alt.datum.Stage == 'Started',
-                alt.value(0.8),
-                alt.value(1.0)
-            ),
-            tooltip=['Stage:N', 'Count:Q']
-        ).properties(
-            width=300,
-            height=600  # Increased height for 8 stages
-        )
-        
-        # Add labels with complete numbers - positioned at the start of bars
-        visits_labels = alt.Chart(visits_data).mark_text(
-            align='left',
-            baseline='middle',
-            color='white',
-            fontSize=22,
-            fontWeight='bold',
-            dx=10
-        ).encode(
-            x=alt.value(10),  # Fixed position at the start
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-            text=alt.Text('Count:Q', format='.0f')
-        )
-        
-        visits_funnel = alt.layer(visits_chart, visits_labels).configure_view(
-            strokeWidth=0
-        ).configure_axis(
-            labelFontSize=22,
-            titleFontSize=24,
-            grid=False
-        )
-        
-        _render_altair_chart(visits_funnel, use_container_width=True)
+    st.markdown(f"#### {funnel_title}")
     
-    with col3:
-        st.markdown("#### 👥 Users Funnel")
-        users_data = pd.DataFrame([
-            {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_users', 0), 'Order': idx}
-            for idx, stage in enumerate(funnel_stages)
-        ])
-        
-        users_chart = alt.Chart(users_data).mark_bar(
-            cornerRadius=6,
-            stroke='white',
-            strokeWidth=2,
-            color='#4A90E2'
-        ).encode(
-            x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
-            opacity=alt.condition(
-                alt.datum.Stage == 'Started',
-                alt.value(0.8),
-                alt.value(1.0)
-            ),
-            tooltip=['Stage:N', 'Count:Q']
-        ).properties(
-            width=300,
-            height=600  # Increased height for 8 stages
-        )
-        
-        # Add labels with complete numbers - positioned at the start of bars
-        users_labels = alt.Chart(users_data).mark_text(
-            align='left',
-            baseline='middle',
-            color='white',
-            fontSize=22,
-            fontWeight='bold',
-            dx=10
-        ).encode(
-            x=alt.value(10),  # Fixed position at the start
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-            text=alt.Text('Count:Q', format='.0f')
-        )
-        
-        users_funnel = alt.layer(users_chart, users_labels).configure_view(
-            strokeWidth=0
-        ).configure_axis(
-            labelFontSize=22,
-            titleFontSize=24,
-            grid=False
-        )
-        
-        _render_altair_chart(users_funnel, use_container_width=True)
+    # Create data for selected funnel
+    funnel_data_df = pd.DataFrame([
+        {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_{data_key}', 0), 'Order': idx}
+        for idx, stage in enumerate(funnel_stages)
+    ])
+    
+    funnel_chart = alt.Chart(funnel_data_df).mark_bar(
+        cornerRadius=6,
+        stroke='white',
+        strokeWidth=2,
+        color=funnel_color
+    ).encode(
+        x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
+        y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
+        opacity=alt.condition(
+            alt.datum.Stage == 'Started',
+            alt.value(0.8),
+            alt.value(1.0)
+        ),
+        tooltip=['Stage:N', 'Count:Q']
+    ).properties(
+        width=800,
+        height=600  # Increased height for 8 stages
+    )
+    
+    # Add labels with complete numbers - positioned at the start of bars
+    funnel_labels = alt.Chart(funnel_data_df).mark_text(
+        align='left',
+        baseline='middle',
+        color='white',
+        fontSize=22,
+        fontWeight='bold',
+        dx=10
+    ).encode(
+        x=alt.value(10),  # Fixed position at the start
+        y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
+        text=alt.Text('Count:Q', format='.0f')
+    )
+    
+    funnel_display = alt.layer(funnel_chart, funnel_labels).configure_view(
+        strokeWidth=0
+    ).configure_axis(
+        labelFontSize=22,
+        titleFontSize=24,
+        grid=False
+    )
+    
+    _render_altair_chart(funnel_display, use_container_width=True)
     
     # Add conversion analysis
     st.markdown("### 📊 Conversion Analysis")
@@ -1531,7 +1450,7 @@ def main() -> None:
             # Check if it's the new aggregated format (has instances, visits, users columns)
             if 'instances' in filtered_processed_data.columns and 'visits' in filtered_processed_data.columns and 'users' in filtered_processed_data.columns:
                 # New aggregated format: sum up the metrics by event
-                funnel_stages = ['started', 'introduction', 'mid_introduction', 'validation', 'questions', 'parent_poll', 'rewards', 'completed']
+                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_processed_data[filtered_processed_data['event'] == stage]
@@ -1552,7 +1471,7 @@ def main() -> None:
                 filtered_summary_df = pd.DataFrame(filtered_summary_data)
             else:
                 # Old format: calculate from raw data (idvisitor_converted, idvisit, idlink_va)
-                funnel_stages = ['started', 'introduction', 'mid_introduction', 'validation', 'questions', 'parent_poll', 'rewards', 'completed']
+                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_processed_data[filtered_processed_data['event'] == stage]
