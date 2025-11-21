@@ -397,9 +397,6 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     st.markdown(f"#### {funnel_title}")
     
-    # Add note about Parent Poll being optional
-    st.info("ℹ️ **Note:** Parent Poll is an optional step in the conversion funnel.")
-    
     # Create data for selected funnel
     funnel_data_df = pd.DataFrame([
         {
@@ -443,22 +440,17 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     )
     
     # Add labels with complete numbers - positioned at the start of bars
-    # Use darker color for parent_poll (optional) to ensure readability on lighter background
     funnel_labels = alt.Chart(funnel_data_df).mark_text(
         align='left',
         baseline='middle',
+        color='white',
         fontSize=22,
         fontWeight='bold',
         dx=10
     ).encode(
         x=alt.value(10),  # Fixed position at the start
         y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-        text=alt.Text('Count:Q', format='.0f'),
-        color=alt.condition(
-            alt.datum.IsOptional,
-            alt.value('#333333'),  # Darker color for optional (parent_poll) for readability
-            alt.value('white')  # White for others
-        )
+        text=alt.Text('Count:Q', format='.0f')
     )
     
     funnel_display = alt.layer(funnel_chart, funnel_labels).configure_view(
