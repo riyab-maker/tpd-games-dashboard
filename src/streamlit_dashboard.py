@@ -372,6 +372,20 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             funnel_data[f'{stage}_visits'] = stage_data['idvisit'].nunique()
             funnel_data[f'{stage}_instances'] = len(stage_data)
     
+    # Swap the counts between questions and validation to match the swapped labels
+    # questions event should show validation count, validation event should show questions count
+    temp_questions_users = funnel_data.get('questions_users', 0)
+    temp_questions_visits = funnel_data.get('questions_visits', 0)
+    temp_questions_instances = funnel_data.get('questions_instances', 0)
+    
+    funnel_data['questions_users'] = funnel_data.get('validation_users', 0)
+    funnel_data['questions_visits'] = funnel_data.get('validation_visits', 0)
+    funnel_data['questions_instances'] = funnel_data.get('validation_instances', 0)
+    
+    funnel_data['validation_users'] = temp_questions_users
+    funnel_data['validation_visits'] = temp_questions_visits
+    funnel_data['validation_instances'] = temp_questions_instances
+    
     
     # Add selection option to show only one funnel at a time
     funnel_type = st.radio(
