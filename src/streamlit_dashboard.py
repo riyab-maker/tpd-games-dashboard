@@ -397,20 +397,40 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     st.markdown(f"#### {funnel_title}")
     
+    # Add note about Parent Poll being optional
+    st.info("ℹ️ **Note:** Parent Poll is an optional step in the conversion funnel.")
+    
     # Create data for selected funnel
     funnel_data_df = pd.DataFrame([
-        {'Stage': stage_labels[stage], 'Count': funnel_data.get(f'{stage}_{data_key}', 0), 'Order': idx}
+        {
+            'Stage': stage_labels[stage], 
+            'Count': funnel_data.get(f'{stage}_{data_key}', 0), 
+            'Order': idx,
+            'IsOptional': (stage == 'parent_poll')  # Mark parent_poll as optional
+        }
         for idx, stage in enumerate(funnel_stages)
     ])
+    
+    # Define lighter colors for parent_poll (optional step)
+    lighter_colors = {
+        '#F5A623': '#F9C866',  # Lighter orange for Instances
+        '#7ED321': '#B3E57A',  # Lighter green for Visits
+        '#4A90E2': '#7DB3F0'   # Lighter blue for Users
+    }
+    lighter_color = lighter_colors.get(funnel_color, '#CCCCCC')  # Default lighter gray if color not found
     
     funnel_chart = alt.Chart(funnel_data_df).mark_bar(
         cornerRadius=6,
         stroke='white',
-        strokeWidth=2,
-        color=funnel_color
+        strokeWidth=2
     ).encode(
         x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
         y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
+        color=alt.condition(
+            alt.datum.IsOptional,
+            alt.value(lighter_color),  # Lighter color for optional (parent_poll)
+            alt.value(funnel_color)  # Normal color for others
+        ),
         opacity=alt.condition(
             alt.datum.Stage == 'Started',
             alt.value(0.8),
@@ -423,17 +443,22 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     )
     
     # Add labels with complete numbers - positioned at the start of bars
+    # Use darker color for parent_poll (optional) to ensure readability on lighter background
     funnel_labels = alt.Chart(funnel_data_df).mark_text(
         align='left',
         baseline='middle',
-        color='white',
         fontSize=22,
         fontWeight='bold',
         dx=10
     ).encode(
         x=alt.value(10),  # Fixed position at the start
         y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-        text=alt.Text('Count:Q', format='.0f')
+        text=alt.Text('Count:Q', format='.0f'),
+        color=alt.condition(
+            alt.datum.IsOptional,
+            alt.value('#333333'),  # Darker color for optional (parent_poll) for readability
+            alt.value('white')  # White for others
+        )
     )
     
     funnel_display = alt.layer(funnel_chart, funnel_labels).configure_view(
