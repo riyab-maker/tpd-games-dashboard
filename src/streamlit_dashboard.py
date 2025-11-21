@@ -339,9 +339,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         'introduction': 'Introduction',
         'mid_introduction': 'Mid Introduction',
         'parent_poll': 'Parent Poll',
-        'validation': 'Validation',
+        'validation': 'Questions',  # Display label swapped: validation event shows as "Questions"
         'rewards': 'Rewards',
-        'questions': 'Questions',
+        'questions': 'Validation',  # Display label swapped: questions event shows as "Validation"
         'completed': 'Completed'
     }
     
