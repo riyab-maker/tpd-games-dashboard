@@ -397,6 +397,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     
     st.markdown(f"#### {funnel_title}")
     
+    # Add note about Parent Poll being optional
+    st.info("ℹ️ **Note:** Parent Poll is an optional step in the conversion funnel.")
+    
     # Create data for selected funnel
     funnel_data_df = pd.DataFrame([
         {
@@ -422,7 +425,13 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         strokeWidth=2
     ).encode(
         x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
-        y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending'), title=''),
+        y=alt.Y('Stage:N', 
+               sort=alt.SortField(field='Order', order='ascending'), 
+               title='',
+               axis=alt.Axis(
+                   labelLimit=200,  # Allow longer labels to display fully
+                   labelFontSize=22
+               )),
         color=alt.condition(
             alt.datum.IsOptional,
             alt.value(lighter_color),  # Lighter color for optional (parent_poll)
