@@ -842,8 +842,7 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
     return pd.DataFrame(time_series_data)
 
 def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
-    """Render time series analysis with separate charts for Instances, Visits, and Users
-    Each chart shows Started and Completed bars"""
+    """Render time series analysis with a single chart showing Started and Completed for selected metric"""
     import altair as alt
     
     if time_series_df.empty:
@@ -853,7 +852,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     st.markdown("### 📈 Time-Series Analysis")
     
     # Create columns for filters
-    ts_filter_col1, ts_filter_col2 = st.columns(2)
+    ts_filter_col1, ts_filter_col2, ts_filter_col3 = st.columns(3)
     
     with ts_filter_col1:
         # Time period filter
@@ -864,6 +863,15 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         )
     
     with ts_filter_col2:
+        # Metric selection (Instances, Visits, Users)
+        selected_metric = st.radio(
+            "Select Metric:",
+            options=["Instances", "Visits", "Users"],
+            horizontal=True,
+            help="Select which metric to display (Instances, Visits, or Users)"
+        )
+    
+    with ts_filter_col3:
         # Game filter for time series
         unique_games_ts = sorted(game_conversion_df['game_name'].unique())
         selected_games_ts = st.multiselect(
@@ -982,12 +990,17 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         time_order = sorted(aggregated_df['time_display'].unique().tolist())
     
+    # Filter data for selected metric
+    metric_name_lower = selected_metric.lower()
+    filtered_metric_df = aggregated_df[aggregated_df['metric'] == metric_name_lower].copy()
+    
+    if filtered_metric_df.empty:
+        st.warning(f"No {selected_metric.lower()} data available for the selected time period.")
+        return
+    
     # Calculate dynamic width based on number of time periods
-    # Use consistent calculation to ensure similar spacing per time period across all views
     num_periods = len(time_order)
-    # Calculate width to give similar space per time period across all views
-    # This ensures consistent bar spacing within groups
-    base_width_per_period = 100  # Base width per time period for consistent spacing
+    base_width_per_period = 100
     if time_period == "Daily":
         chart_width = max(900, num_periods * base_width_per_period)
     elif time_period == "Weekly":
@@ -995,191 +1008,158 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:  # Monthly
         chart_width = max(700, num_periods * base_width_per_period)
     
-    # Create two charts - one for Started, one for Completed
-    st.markdown("### 📊 Time Series Analysis: Started vs Completed")
-    st.markdown("Each chart shows **Instances**, **Visits**, and **Users** side by side for each time period.")
+    # Define metric color
+    metric_colors = {
+        'Instances': '#4A90E2',
+        'Visits': '#50C878',
+        'Users': '#FFA726'
+    }
+    selected_color = metric_colors.get(selected_metric, '#4A90E2')
     
-    # Define metrics configuration
-    metrics_config = [
-        {'name': 'Instances', 'color': '#4A90E2', 'label': 'Instances'},
-        {'name': 'Visits', 'color': '#50C878', 'label': 'Visits'},
-        {'name': 'Users', 'color': '#FFA726', 'label': 'Users'}
-    ]
+    # Create single chart showing Started and Completed for selected metric
+    st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - Started vs Completed")
     
-    # Create charts for Started and Completed
-    event_types = ['Started', 'Completed']
-    event_titles = {'Started': '🚀 Started Events', 'Completed': '✅ Completed Events'}
-    
-    for event_type in event_types:
-        st.markdown(f"#### {event_titles[event_type]}")
-        
-        # Filter data for this event type
-        event_data = aggregated_df[aggregated_df['event'] == event_type].copy()
-        
-        if event_data.empty:
-            st.warning(f"No {event_type.lower()} data available.")
-            continue
-        
-        # Prepare chart data with all three metrics side by side for each time period
-        chart_data = []
-        for time in time_order:
-            for metric_config in metrics_config:
-                metric_name = metric_config['name'].lower()
-                metric_row = event_data[
-                    (event_data['time_display'] == time) & 
-                    (event_data['metric'] == metric_name)
-                ]
-                
-                count = metric_row['count'].iloc[0] if not metric_row.empty else 0
-                chart_data.append({
-                    'Time': time,
-                    'Metric': metric_config['label'],
-                    'Count': count,
-                    'Color': metric_config['color']
-                })
-        
-        chart_df = pd.DataFrame(chart_data)
-        
-        # Ensure Metric column values match exactly what we expect
-        chart_df['Metric'] = chart_df['Metric'].astype(str).str.strip()
-        
-        # Ensure Count is numeric and handle any NaN values
-        chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
-        
-        # Create grouped (side-by-side) bar chart using xOffset for proper grouping
-        # xOffset will position bars side by side within each time period (not stacked)
-        # Use narrow bars and minimal padding to create tight grouping within each time period
-        bar_width = 12  # Narrow bars to create tight grouping
-        
-        bars = alt.Chart(chart_df).mark_bar(
-            cornerRadius=6,
-            stroke='white',
-            strokeWidth=2,
-            opacity=1.0,
-            width=bar_width  # Narrow bar width for tight grouping
-        ).encode(
-            x=alt.X('Time:O',
-                   title='',
-                   axis=alt.Axis(
-                       labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
-                       labelFontSize=11,
-                       titleFontSize=14,
-                       labelLimit=100,
-                       bandPosition=0.5  # Center bars within each band
-                   ),
-                   sort=time_order,
-                   # For xOffset grouped bars with tight spacing:
-                   # - paddingInner: spacing between time period groups (very small)
-                   # - paddingOuter: spacing at chart edges (small)
-                   # - Narrow bar width (12px) ensures bars are close together within each group
-                   scale=alt.Scale(
-                       paddingInner=0.01,  # Minimal spacing between time periods
-                       paddingOuter=0.1    # Small edge spacing
-                   )),
-            y=alt.Y('Count:Q',
-                   title='Count',
-                   axis=alt.Axis(
-                       format='~s',
-                       titleFontSize=14,
-                       labelFontSize=12,
-                       grid=True,
-                       gridColor='#e0e0e0'
-                   ),
-                   scale=alt.Scale(zero=True)),
-            xOffset=alt.XOffset('Metric:N',
-                               sort=['Instances', 'Visits', 'Users']),  # Order: Instances, Visits, Users
-            color=alt.Color('Metric:N',
-                          scale=alt.Scale(
-                              domain=['Instances', 'Visits', 'Users'],
-                              range=['#4A90E2', '#50C878', '#FFA726']
-                          ),
-                          legend=alt.Legend(
-                              title="Metric Type",
-                              titleFontSize=13,
-                              labelFontSize=12,
-                              orient='bottom'
-                          ),
-                          sort=['Instances', 'Visits', 'Users']),  # Ensure consistent order
-            tooltip=[
-                alt.Tooltip('Time:N', title='Time Period'),
-                alt.Tooltip('Metric:N', title='Metric'),
-                alt.Tooltip('Count:Q', title='Count', format=',')
+    # Prepare chart data with Started and Completed for each time period
+    chart_data = []
+    for time in time_order:
+        for event_type in ['Started', 'Completed']:
+            event_row = filtered_metric_df[
+                (filtered_metric_df['time_display'] == time) & 
+                (filtered_metric_df['event'] == event_type)
             ]
-        ).properties(
-            width=chart_width,
-            height=450,
-            title=alt.TitleParams(
-                text=event_titles[event_type],
-                fontSize=18,
-                fontWeight='bold',
-                offset=10
-            )
-        )
-        
-        # Add data labels above bars
-        labels = alt.Chart(chart_df).mark_text(
-            align='center',
-            baseline='bottom',
-            fontSize=10,
-            fontWeight='bold',
-            color='#2C3E50',
-            dy=-8
-        ).encode(
-            x=alt.X('Time:O', sort=time_order),
-            xOffset=alt.XOffset('Metric:N',
-                               sort=['Instances', 'Visits', 'Users']),  # Match bar order
-            y=alt.Y('Count:Q'),
-            text=alt.Text('Count:Q', format=',.0f')
-        ).transform_filter(
-            alt.datum.Count > 0
-        )
-        
-        # Combine bars and labels
-        chart = alt.layer(bars, labels).resolve_scale(
-            x='shared',
-            y='shared',
-            color='shared'
-        )
-        
-        chart = chart.configure_axis(
-            labelFontSize=12,
-            titleFontSize=14
-        ).configure_view(
-            strokeWidth=0
-        )
-        
-        _render_altair_chart(chart, use_container_width=True)
+            
+            count = event_row['count'].iloc[0] if not event_row.empty else 0
+            chart_data.append({
+                'Time': time,
+                'Event': event_type,
+                'Count': count
+            })
     
-    # Add summary statistics
+    chart_df = pd.DataFrame(chart_data)
+    
+    # Ensure Count is numeric and handle any NaN values
+    chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
+    
+    # Create grouped (side-by-side) bar chart
+    bar_width = 20  # Bar width for Started/Completed grouping
+    
+    bars = alt.Chart(chart_df).mark_bar(
+        cornerRadius=6,
+        stroke='white',
+        strokeWidth=2,
+        opacity=1.0,
+        width=bar_width
+    ).encode(
+        x=alt.X('Time:O',
+               title='',
+               axis=alt.Axis(
+                   labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
+                   labelFontSize=11,
+                   titleFontSize=14,
+                   labelLimit=100,
+                   bandPosition=0.5
+               ),
+               sort=time_order,
+               scale=alt.Scale(
+                   paddingInner=0.1,
+                   paddingOuter=0.1
+               )),
+        y=alt.Y('Count:Q',
+               title=f'{selected_metric} Count',
+               axis=alt.Axis(
+                   format='~s',
+                   titleFontSize=14,
+                   labelFontSize=12,
+                   grid=True,
+                   gridColor='#e0e0e0'
+               ),
+               scale=alt.Scale(zero=True)),
+        xOffset=alt.XOffset('Event:N',
+                           sort=['Started', 'Completed']),
+        color=alt.Color('Event:N',
+                      scale=alt.Scale(
+                          domain=['Started', 'Completed'],
+                          range=['#4A90E2', '#50C878']
+                      ),
+                      legend=alt.Legend(
+                          title="Event Type",
+                          titleFontSize=13,
+                          labelFontSize=12,
+                          orient='bottom'
+                      ),
+                      sort=['Started', 'Completed']),
+        tooltip=[
+            alt.Tooltip('Time:N', title='Time Period'),
+            alt.Tooltip('Event:N', title='Event'),
+            alt.Tooltip('Count:Q', title='Count', format=',')
+        ]
+    ).properties(
+        width=chart_width,
+        height=450,
+        title=alt.TitleParams(
+            text=f'{selected_metric} - Started vs Completed',
+            fontSize=18,
+            fontWeight='bold',
+            offset=10
+        )
+    )
+    
+    # Add data labels above bars
+    labels = alt.Chart(chart_df).mark_text(
+        align='center',
+        baseline='bottom',
+        fontSize=10,
+        fontWeight='bold',
+        color='#2C3E50',
+        dy=-8
+    ).encode(
+        x=alt.X('Time:O', sort=time_order),
+        xOffset=alt.XOffset('Event:N',
+                           sort=['Started', 'Completed']),
+        y=alt.Y('Count:Q'),
+        text=alt.Text('Count:Q', format=',.0f')
+    ).transform_filter(
+        alt.datum.Count > 0
+    )
+    
+    # Combine bars and labels
+    chart = alt.layer(bars, labels).resolve_scale(
+        x='shared',
+        y='shared',
+        color='shared'
+    )
+    
+    chart = chart.configure_axis(
+        labelFontSize=12,
+        titleFontSize=14
+    ).configure_view(
+        strokeWidth=0
+    )
+    
+    _render_altair_chart(chart, use_container_width=True)
+    
+    # Add summary statistics for selected metric
     st.markdown("#### 📈 Summary Statistics")
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     
     with col1:
-        instances_data = aggregated_df[aggregated_df['metric'] == 'instances']
-        total_instances = instances_data['count'].sum() if not instances_data.empty else 0
+        started_data = filtered_metric_df[filtered_metric_df['event'] == 'Started']
+        total_started = started_data['count'].sum() if not started_data.empty else 0
+        metric_icon = "⚡" if selected_metric == "Instances" else "🔄" if selected_metric == "Visits" else "👥"
         st.metric(
-            label="⚡ Total Instances", 
-            value=f"{int(total_instances):,}",
-            help="Sum of instances across the selected time period"
+            label=f"{metric_icon} Total {selected_metric} (Started)", 
+            value=f"{int(total_started):,}",
+            help=f"Sum of {selected_metric.lower()} started across the selected time period"
         )
     
     with col2:
-        visits_data = aggregated_df[aggregated_df['metric'] == 'visits']
-        total_visits = visits_data['count'].sum() if not visits_data.empty else 0
+        completed_data = filtered_metric_df[filtered_metric_df['event'] == 'Completed']
+        total_completed = completed_data['count'].sum() if not completed_data.empty else 0
         st.metric(
-            label="🔄 Total Visits",
-            value=f"{int(total_visits):,}",
-            help="Sum of visits across the selected time period"
-        )
-    
-    with col3:
-        users_data = aggregated_df[aggregated_df['metric'] == 'users']
-        total_users = users_data['count'].sum() if not users_data.empty else 0
-        st.metric(
-            label="👥 Total Users",
-            value=f"{int(total_users):,}",
-            help="Sum of users across the selected time period"
+            label=f"{metric_icon} Total {selected_metric} (Completed)",
+            value=f"{int(total_completed):,}",
+            help=f"Sum of {selected_metric.lower()} completed across the selected time period"
         )
 
 def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
