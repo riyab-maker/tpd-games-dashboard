@@ -1563,15 +1563,6 @@ def main() -> None:
     else:
         st.warning("No score distribution data available.")
     
-    # Add Parent Poll Responses Analysis
-    st.markdown("---")
-    st.markdown("## 📊 Parent Poll Responses Analysis")
-    
-    if not poll_responses_df.empty:
-        render_parent_poll_responses(poll_responses_df, game_conversion_df)
-    else:
-        st.warning("No parent poll responses data available.")
-    
     # Add Question Correctness by Question Number Analysis
     st.markdown("---")
     st.markdown("## ✅ Question Correctness by Question Number")
@@ -1580,6 +1571,15 @@ def main() -> None:
         render_question_correctness_chart(question_correctness_df)
     else:
         st.warning("No question correctness data available. Please run preprocess_data.py to generate the data.")
+    
+    # Add Parent Poll Responses Analysis
+    st.markdown("---")
+    st.markdown("## 📊 Parent Poll Responses Analysis")
+    
+    if not poll_responses_df.empty:
+        render_parent_poll_responses(poll_responses_df, game_conversion_df)
+    else:
+        st.warning("No parent poll responses data available.")
     
     # Add Repeatability Analysis
     st.markdown("---")
