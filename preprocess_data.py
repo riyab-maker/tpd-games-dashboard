@@ -91,6 +91,7 @@ SQL_QUERY = (
 # Score distribution query - Updated to use hybrid_games and hybrid_games_links tables
 SCORE_DISTRIBUTION_QUERY = """
 SELECT 
+  mllva.idlink_va,
   hg.game_name AS game_name,
   mllva.idvisit,
   mla.name AS action_name,
@@ -1242,6 +1243,24 @@ def calculate_score_distribution_combined(df_score):
         # Parse each record to get individual question scores (0 or 1)
         action_level_data = action_level_data.copy()
         action_level_data['question_score'] = action_level_data['custom_dimension_1'].apply(parse_custom_dimension_1_action_games)
+        
+        # CRITICAL: Deduplicate records - remove exact duplicates based on key fields
+        # This fixes the issue where color/shape games show only even scores (questions being counted twice)
+        print("  - Deduplicating action_level records...")
+        before_dedup = len(action_level_data)
+        # Check if idlink_va is available (unique record identifier)
+        if 'idlink_va' in action_level_data.columns:
+            # Use idlink_va for deduplication (most reliable)
+            action_level_data = action_level_data.drop_duplicates(subset=['idlink_va'], keep='first')
+        else:
+            # Fallback: Deduplicate based on user, game, visit, server_time, and custom_dimension_1
+            action_level_data = action_level_data.drop_duplicates(
+                subset=['idvisitor_converted', 'game_name', 'idvisit', 'server_time', 'custom_dimension_1'],
+                keep='first'
+            )
+        after_dedup = len(action_level_data)
+        if before_dedup != after_dedup:
+            print(f"    - Removed {before_dedup - after_dedup} duplicate records ({before_dedup} -> {after_dedup})")
         
         # CRITICAL: Handle multiple game sessions per user+game+visit
         # Sort by user, game, visit, then by server_time to track session order
