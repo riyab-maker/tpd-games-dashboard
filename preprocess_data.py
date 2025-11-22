@@ -1190,6 +1190,7 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
 def calculate_score_distribution_combined(df_score):
     """Calculate score distribution using the new unified query with hybrid_games table"""
     print("Processing score distribution data...")
+    print(f"  - Total records received: {len(df_score)}")
     
     if df_score.empty:
         print("WARNING: No score distribution data found")
@@ -1203,12 +1204,23 @@ def calculate_score_distribution_combined(df_score):
     game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)]
     action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)]
     
+    print(f"  - game_completed records: {len(game_completed_data)}")
+    print(f"  - action_level records: {len(action_level_data)}")
+    
+    if len(game_completed_data) > 0:
+        print(f"  - Unique games in game_completed: {game_completed_data['game_name'].nunique()}")
+    if len(action_level_data) > 0:
+        print(f"  - Unique games in action_level: {action_level_data['game_name'].nunique()}")
+    
     # Process game_completed data (correctSelections and jsonData games)
     if not game_completed_data.empty:
         print("  - Processing game_completed data...")
+        print(f"    - Processing {game_completed_data['game_name'].nunique()} unique games")
         
         # Process each game individually to determine the correct score calculation method
         for game_name in game_completed_data['game_name'].unique():
+            game_records = len(game_completed_data[game_completed_data['game_name'] == game_name])
+            print(f"    - Processing {game_name}: {game_records} records")
             game_data = game_completed_data[game_completed_data['game_name'] == game_name].copy()
             
             # Try different score calculation methods and use the one that produces valid results
@@ -1234,15 +1246,27 @@ def calculate_score_distribution_combined(df_score):
             # Filter out zero scores and add to combined data
             game_data = game_data[game_data['total_score'] > 0]
             if not game_data.empty:
+                valid_scores = len(game_data)
+                score_range = f"{game_data['total_score'].min()}-{game_data['total_score'].max()}"
+                print(f"      - Added {valid_scores} valid scores (range: {score_range})")
                 combined_df = pd.concat([combined_df, game_data], ignore_index=True)
+            else:
+                print(f"      - No valid scores after filtering")
     
     # Process action_level data (action games) - HANDLE MULTIPLE GAME SESSIONS PER VISIT
     if not action_level_data.empty:
         print("  - Processing action_level games...")
+        print(f"    - Processing {action_level_data['game_name'].nunique()} unique games")
         
         # Parse each record to get individual question scores (0 or 1)
         action_level_data = action_level_data.copy()
+        print("    - Parsing question scores from custom_dimension_1...")
         action_level_data['question_score'] = action_level_data['custom_dimension_1'].apply(parse_custom_dimension_1_action_games)
+        
+        # Log score parsing results
+        correct_answers = (action_level_data['question_score'] == 1).sum()
+        incorrect_answers = (action_level_data['question_score'] == 0).sum()
+        print(f"    - Parsed scores: {correct_answers} correct (1), {incorrect_answers} incorrect (0)")
         
         # CRITICAL: Deduplicate records - remove exact duplicates based on key fields
         # This fixes the issue where color/shape games show only even scores (questions being counted twice)
@@ -1261,9 +1285,12 @@ def calculate_score_distribution_combined(df_score):
         after_dedup = len(action_level_data)
         if before_dedup != after_dedup:
             print(f"    - Removed {before_dedup - after_dedup} duplicate records ({before_dedup} -> {after_dedup})")
+        else:
+            print(f"    - No duplicates found ({before_dedup} records)")
         
         # CRITICAL: Handle multiple game sessions per user+game+visit
         # Sort by user, game, visit, then by server_time to track session order
+        print("    - Sorting records and creating session instances...")
         action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
         
         # Create session_instance to handle multiple plays of same game
@@ -1295,27 +1322,71 @@ def calculate_score_distribution_combined(df_score):
         
         action_level_data['session_instance'] = session_instances
         
+        # Log session statistics
+        unique_sessions = action_level_data.groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance']).size()
+        print(f"    - Created {len(unique_sessions)} unique game sessions")
+        
         # Group by user, game, visit, and session_instance
+        print("    - Grouping by session and calculating total scores...")
         action_level_grouped = action_level_data.groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])['question_score'].sum().reset_index()
         action_level_grouped.columns = ['idvisitor_converted', 'game_name', 'idvisit', 'session_instance', 'total_score']
+        
+        # Log score distribution before capping
+        print(f"    - Score range before capping: {action_level_grouped['total_score'].min()}-{action_level_grouped['total_score'].max()}")
+        scores_above_12 = (action_level_grouped['total_score'] > 12).sum()
+        if scores_above_12 > 0:
+            print(f"    - Warning: {scores_above_12} sessions have scores > 12, will be capped")
         
         # CRITICAL: Cap the total_score at 12 (max possible for one game session)
         action_level_grouped['total_score'] = action_level_grouped['total_score'].clip(upper=12)
         
         # Only include sessions with total_score > 0
+        before_filter = len(action_level_grouped)
         action_level_grouped = action_level_grouped[action_level_grouped['total_score'] > 0]
+        after_filter = len(action_level_grouped)
+        print(f"    - Filtered out {before_filter - after_filter} sessions with score 0")
+        print(f"    - Final action_level sessions: {after_filter}")
+        
+        # Log score distribution by game
+        if not action_level_grouped.empty:
+            print("    - Score distribution by game:")
+            for game in sorted(action_level_grouped['game_name'].unique()):
+                game_scores = action_level_grouped[action_level_grouped['game_name'] == game]['total_score']
+                score_range = f"{game_scores.min()}-{game_scores.max()}"
+                unique_scores = sorted(game_scores.unique().tolist())
+                print(f"      - {game}: {len(game_scores)} sessions, scores {score_range}, unique values: {unique_scores}")
+        
         combined_df = pd.concat([combined_df, action_level_grouped], ignore_index=True)
     
     if combined_df.empty:
         print("WARNING: No score distribution data found")
         return pd.DataFrame()
     
+    print(f"\n  - Combined data summary:")
+    print(f"    - Total records: {len(combined_df)}")
+    print(f"    - Unique games: {combined_df['game_name'].nunique()}")
+    print(f"    - Unique users: {combined_df['idvisitor_converted'].nunique()}")
+    print(f"    - Score range: {combined_df['total_score'].min()}-{combined_df['total_score'].max()}")
+    
     # Group by game and total score, then count distinct users
     # Each user-game-score combination is counted once
+    print("\n  - Creating final score distribution...")
     score_distribution = combined_df.groupby(['game_name', 'total_score'])['idvisitor_converted'].nunique().reset_index()
     score_distribution.columns = ['game_name', 'total_score', 'user_count']
     
-    print(f"SUCCESS: Processed score distribution: {len(score_distribution)} records")
+    print(f"\nSUCCESS: Processed score distribution: {len(score_distribution)} records")
+    print(f"  - Unique games in distribution: {score_distribution['game_name'].nunique()}")
+    print(f"  - Score range in distribution: {score_distribution['total_score'].min()}-{score_distribution['total_score'].max()}")
+    
+    # Log summary by game
+    print("\n  - Final distribution summary by game:")
+    for game in sorted(score_distribution['game_name'].unique()):
+        game_data = score_distribution[score_distribution['game_name'] == game]
+        total_users = game_data['user_count'].sum()
+        score_range = f"{game_data['total_score'].min()}-{game_data['total_score'].max()}"
+        unique_scores = sorted(game_data['total_score'].unique().tolist())
+        print(f"    - {game}: {total_users} total users, scores {score_range}, unique values: {unique_scores}")
+    
     return score_distribution
 
 
@@ -1876,14 +1947,27 @@ def process_score_distribution() -> pd.DataFrame:
     print("PROCESSING: Score Distribution")
     print("=" * 60)
     
+    print("\nStep 1: Fetching score data from database...")
     df_score = fetch_score_dataframe()
+    
+    if df_score.empty:
+        print("ERROR: No data fetched from database")
+        return pd.DataFrame()
+    
+    print(f"\nStep 2: Calculating score distribution...")
     score_distribution_df = calculate_score_distribution_combined(df_score)
     
     if not score_distribution_df.empty:
+        print(f"\nStep 3: Saving score distribution data...")
         score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
         print(f"SUCCESS: Saved data/score_distribution_data.csv ({len(score_distribution_df)} records)")
+        print(f"  - File size: {len(score_distribution_df)} rows x {len(score_distribution_df.columns)} columns")
     else:
         print("WARNING: No score distribution data to save")
+    
+    print("\n" + "=" * 60)
+    print("SCORE DISTRIBUTION PROCESSING COMPLETE")
+    print("=" * 60 + "\n")
     
     return score_distribution_df
 
