@@ -1679,8 +1679,8 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
 
 
 def fetch_hybrid_repeatability_data() -> pd.DataFrame:
-    """Fetch repeatability data using Matomo data to count all users who played games (not just completed)"""
-    print("Fetching repeatability data from Matomo database (all game plays)...")
+    """Fetch repeatability data using Matomo data to count users who completed games"""
+    print("Fetching repeatability data from Matomo database (completed events only)...")
     
     try:
         # Connect to database
@@ -1693,8 +1693,8 @@ def fetch_hybrid_repeatability_data() -> pd.DataFrame:
             charset='utf8mb4'
         )
         
-        # New query: Count all users who played games (using started events from Matomo)
-        # This includes all game plays, not just completions
+        # New query: Count users who completed games (using completed events from Matomo)
+        # Only count completed events, not started events
         repeatability_query = """
         SELECT 
             hg.game_name,
@@ -1703,9 +1703,7 @@ def fetch_hybrid_repeatability_data() -> pd.DataFrame:
         INNER JOIN `hybrid_games_links` hgl ON hg.id = hgl.game_id
         INNER JOIN `matomo_log_link_visit_action` mllva ON hgl.activity_id = mllva.custom_dimension_2
         INNER JOIN `matomo_log_action` mla ON mllva.idaction_name = mla.idaction
-        WHERE (mla.name LIKE '%hybrid_game_started%' 
-               OR mla.name LIKE '%hybrid_mcq_started%'
-               OR mla.name LIKE '%hybrid_game_completed%'
+        WHERE (mla.name LIKE '%hybrid_game_completed%'
                OR mla.name LIKE '%hybrid_mcq_completed%')
           AND hgl.activity_id IS NOT NULL
         """
