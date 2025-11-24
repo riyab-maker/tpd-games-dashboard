@@ -350,12 +350,20 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         # Extract data for all funnel stages
         funnel_data = {}
         for stage in funnel_stages:
-            stage_row = conversion_df[conversion_df['Event'] == stage]
+            # Match event (case-insensitive, handle whitespace)
+            stage_row = conversion_df[conversion_df['Event'].astype(str).str.strip().str.lower() == stage.lower().strip()]
             try:
-                if not stage_row.empty and len(stage_row) > 0 and 'Users' in stage_row.columns:
-                    funnel_data[f'{stage}_users'] = int(pd.to_numeric(stage_row['Users'], errors='coerce').fillna(0).iloc[0])
-                    funnel_data[f'{stage}_visits'] = int(pd.to_numeric(stage_row['Visits'], errors='coerce').fillna(0).iloc[0])
-                    funnel_data[f'{stage}_instances'] = int(pd.to_numeric(stage_row['Instances'], errors='coerce').fillna(0).iloc[0])
+                if not stage_row.empty and len(stage_row) > 0:
+                    # Direct access to the first matching row
+                    row = stage_row.iloc[0]
+                    # Extract Users, Visits, Instances - handle both capitalized and lowercase column names
+                    users_val = row.get('Users', row.get('users', 0))
+                    visits_val = row.get('Visits', row.get('visits', 0))
+                    instances_val = row.get('Instances', row.get('instances', 0))
+                    
+                    funnel_data[f'{stage}_users'] = int(pd.to_numeric(users_val, errors='coerce').fillna(0))
+                    funnel_data[f'{stage}_visits'] = int(pd.to_numeric(visits_val, errors='coerce').fillna(0))
+                    funnel_data[f'{stage}_instances'] = int(pd.to_numeric(instances_val, errors='coerce').fillna(0))
                 else:
                     funnel_data[f'{stage}_users'] = 0
                     funnel_data[f'{stage}_visits'] = 0
@@ -408,9 +416,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             'Order': idx,
             'IsOptional': (stage == 'parent_poll')  # Mark parent_poll as optional
         }
-        for idx, stage in enumerate(funnel_stages)
-    ])
-    
+            for idx, stage in enumerate(funnel_stages)
+        ])
+        
     # Define lighter colors for parent_poll (optional step)
     lighter_colors = {
         '#F5A623': '#F9C866',  # Lighter orange for Instances
@@ -420,11 +428,11 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     lighter_color = lighter_colors.get(funnel_color, '#CCCCCC')  # Default lighter gray if color not found
     
     funnel_chart = alt.Chart(funnel_data_df).mark_bar(
-        cornerRadius=6,
-        stroke='white',
+            cornerRadius=6,
+            stroke='white',
         strokeWidth=2
-    ).encode(
-        x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
+        ).encode(
+            x=alt.X('Count:Q', title='Count', axis=alt.Axis(format='~s')),
         y=alt.Y('Stage:N', 
                sort=alt.SortField(field='Order', order='ascending'), 
                title='',
@@ -437,39 +445,39 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             alt.value(lighter_color),  # Lighter color for optional (parent_poll)
             alt.value(funnel_color)  # Normal color for others
         ),
-        opacity=alt.condition(
-            alt.datum.Stage == 'Started',
-            alt.value(0.8),
-            alt.value(1.0)
-        ),
-        tooltip=['Stage:N', 'Count:Q']
-    ).properties(
+            opacity=alt.condition(
+                alt.datum.Stage == 'Started',
+                alt.value(0.8),
+                alt.value(1.0)
+            ),
+            tooltip=['Stage:N', 'Count:Q']
+        ).properties(
         width=800,
-        height=600  # Increased height for 8 stages
-    )
-    
-    # Add labels with complete numbers - positioned at the start of bars
+            height=600  # Increased height for 8 stages
+        )
+        
+        # Add labels with complete numbers - positioned at the start of bars
     funnel_labels = alt.Chart(funnel_data_df).mark_text(
-        align='left',
-        baseline='middle',
-        color='white',
-        fontSize=22,
-        fontWeight='bold',
-        dx=10
-    ).encode(
-        x=alt.value(10),  # Fixed position at the start
-        y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-        text=alt.Text('Count:Q', format='.0f')
-    )
-    
+            align='left',
+            baseline='middle',
+            color='white',
+            fontSize=22,
+            fontWeight='bold',
+            dx=10
+        ).encode(
+            x=alt.value(10),  # Fixed position at the start
+            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
+            text=alt.Text('Count:Q', format='.0f')
+        )
+        
     funnel_display = alt.layer(funnel_chart, funnel_labels).configure_view(
-        strokeWidth=0
-    ).configure_axis(
-        labelFontSize=22,
-        titleFontSize=24,
-        grid=False
-    )
-    
+            strokeWidth=0
+        ).configure_axis(
+            labelFontSize=22,
+            titleFontSize=24,
+            grid=False
+        )
+        
     _render_altair_chart(funnel_display, use_container_width=True)
     
     # Add conversion analysis
@@ -1044,7 +1052,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     
     # Create single chart showing Started and Completed for selected metric
     st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - Started vs Completed")
-    
+        
     # Prepare chart data with Started and Completed for each time period
     chart_data = []
     for time in time_order:
@@ -1052,84 +1060,84 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             event_row = filtered_metric_df[
                 (filtered_metric_df['time_display'] == time) & 
                 (filtered_metric_df['event'] == event_type)
-            ]
-            
+                ]
+                
             count = event_row['count'].iloc[0] if not event_row.empty else 0
             chart_data.append({
                 'Time': time,
                 'Event': event_type,
                 'Count': count
             })
-    
+        
     chart_df = pd.DataFrame(chart_data)
-    
+        
     # Ensure Count is numeric and handle any NaN values
     chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
-    
+        
     # Create grouped (side-by-side) bar chart
     bar_width = 20  # Bar width for Started/Completed grouping
-    
+        
     bars = alt.Chart(chart_df).mark_bar(
-        cornerRadius=6,
-        stroke='white',
-        strokeWidth=2,
-        opacity=1.0,
+            cornerRadius=6,
+            stroke='white',
+            strokeWidth=2,
+            opacity=1.0,
         width=bar_width
-    ).encode(
-        x=alt.X('Time:O',
-               title='',
-               axis=alt.Axis(
-                   labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
-                   labelFontSize=11,
-                   titleFontSize=14,
-                   labelLimit=100,
+        ).encode(
+            x=alt.X('Time:O',
+                   title='',
+                   axis=alt.Axis(
+                       labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
+                       labelFontSize=11,
+                       titleFontSize=14,
+                       labelLimit=100,
                    bandPosition=0.5
-               ),
-               sort=time_order,
-               scale=alt.Scale(
+                   ),
+                   sort=time_order,
+                   scale=alt.Scale(
                    paddingInner=0.1,
                    paddingOuter=0.1
-               )),
-        y=alt.Y('Count:Q',
+                   )),
+            y=alt.Y('Count:Q',
                title=f'{selected_metric} Count',
-               axis=alt.Axis(
-                   format='~s',
-                   titleFontSize=14,
-                   labelFontSize=12,
-                   grid=True,
-                   gridColor='#e0e0e0'
-               ),
-               scale=alt.Scale(zero=True)),
+                   axis=alt.Axis(
+                       format='~s',
+                       titleFontSize=14,
+                       labelFontSize=12,
+                       grid=True,
+                       gridColor='#e0e0e0'
+                   ),
+                   scale=alt.Scale(zero=True)),
         xOffset=alt.XOffset('Event:N',
                            sort=['Started', 'Completed']),
         color=alt.Color('Event:N',
-                      scale=alt.Scale(
+                          scale=alt.Scale(
                           domain=['Started', 'Completed'],
                           range=['#4A90E2', '#50C878']
-                      ),
-                      legend=alt.Legend(
+                          ),
+                          legend=alt.Legend(
                           title="Event Type",
-                          titleFontSize=13,
-                          labelFontSize=12,
-                          orient='bottom'
-                      ),
+                              titleFontSize=13,
+                              labelFontSize=12,
+                              orient='bottom'
+                          ),
                       sort=['Started', 'Completed']),
-        tooltip=[
-            alt.Tooltip('Time:N', title='Time Period'),
+            tooltip=[
+                alt.Tooltip('Time:N', title='Time Period'),
             alt.Tooltip('Event:N', title='Event'),
-            alt.Tooltip('Count:Q', title='Count', format=',')
-        ]
-    ).properties(
-        width=chart_width,
-        height=450,
-        title=alt.TitleParams(
+                alt.Tooltip('Count:Q', title='Count', format=',')
+            ]
+        ).properties(
+            width=chart_width,
+            height=450,
+            title=alt.TitleParams(
             text=f'{selected_metric} - Started vs Completed',
-            fontSize=18,
-            fontWeight='bold',
-            offset=10
+                fontSize=18,
+                fontWeight='bold',
+                offset=10
+            )
         )
-    )
-    
+        
     # Add data labels above bars
     labels = alt.Chart(chart_df).mark_text(
         align='center',
@@ -1147,21 +1155,21 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     ).transform_filter(
         alt.datum.Count > 0
     )
-    
+        
     # Combine bars and labels
     chart = alt.layer(bars, labels).resolve_scale(
         x='shared',
         y='shared',
         color='shared'
     )
-    
+        
     chart = chart.configure_axis(
         labelFontSize=12,
         titleFontSize=14
     ).configure_view(
         strokeWidth=0
     )
-    
+        
     _render_altair_chart(chart, use_container_width=True)
     
     # Add summary statistics for selected metric
