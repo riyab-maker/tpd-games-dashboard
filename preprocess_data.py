@@ -1403,7 +1403,11 @@ def _distinct_count_ignore_blank(series: pd.Series) -> int:
 
 
 def build_summary(df: pd.DataFrame) -> pd.DataFrame:
-    """Build summary table with correct Power BI DISTINCTCOUNTNOBLANK logic"""
+    """Build summary table with correct Power BI DISTINCTCOUNTNOBLANK logic
+    For Users: Counts unique users who triggered each event at least once
+    For Visits: Counts unique visits that triggered each event at least once
+    For Instances: Counts total instances (idlink_va) for each event
+    """
     print("Building summary statistics...")
     
     # Check if event column exists
@@ -1421,11 +1425,20 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     print(f"Filtered to {len(df_filtered)} records with valid events (removed {len(df) - len(df_filtered)} NULL events)")
     
     # Group by event and compute distinct counts
+    # This ensures each user is counted only once per event (if they triggered it at least once)
+    print("Calculating distinct counts per event...")
     grouped = df_filtered.groupby('event').agg({
-        'idvisitor_converted': _distinct_count_ignore_blank,
-        'idvisit': _distinct_count_ignore_blank, 
-        'idlink_va': _distinct_count_ignore_blank,
+        'idvisitor_converted': _distinct_count_ignore_blank,  # Unique users per event
+        'idvisit': _distinct_count_ignore_blank,              # Unique visits per event
+        'idlink_va': _distinct_count_ignore_blank,            # Unique instances per event (total count)
     })
+    
+    # Log the counts for verification
+    print("Event-wise distinct counts:")
+    for event in grouped.index:
+        print(f"  - {event}: {grouped.loc[event, 'idvisitor_converted']} unique users, "
+              f"{grouped.loc[event, 'idvisit']} unique visits, "
+              f"{grouped.loc[event, 'idlink_va']} instances")
     
     # Rename columns to match Power BI
     grouped.columns = ['Users', 'Visits', 'Instances']
@@ -1447,6 +1460,8 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     grouped = grouped.sort_values('Event')
     
     print(f"SUCCESS: Summary statistics: {len(grouped)} event types")
+    print("Final summary data:")
+    print(grouped.to_string(index=False))
     return grouped
 
 
