@@ -1925,13 +1925,48 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
     
     if df_main is None:
         print("Loading main data from CSV...")
-        df_main = pd.read_csv('data/processed_data.csv')
-        df_main['server_time'] = pd.to_datetime(df_main['server_time'])
-        df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
+        # Try to load from conversion_funnel.csv (raw data format)
+        csv_file = 'conversion_funnel.csv'
+        if os.path.exists(csv_file):
+            print(f"  - Loading from {csv_file} (raw data format)")
+            df_main = pd.read_csv(csv_file)
+            # Convert server_time if it exists
+            if 'server_time' in df_main.columns:
+                df_main['server_time'] = pd.to_datetime(df_main['server_time'])
+        else:
+            # Fallback: try processed_data.csv but check if it has the required columns
+            print(f"  - {csv_file} not found, trying processed_data.csv...")
+            if os.path.exists('data/processed_data.csv'):
+                df_main = pd.read_csv('data/processed_data.csv')
+                # Check if it has the required columns for build_summary
+                required_cols = ['idvisitor_converted', 'idvisit', 'idlink_va', 'event']
+                if not all(col in df_main.columns for col in required_cols):
+                    print(f"  ERROR: processed_data.csv doesn't have required columns: {required_cols}")
+                    print(f"  Available columns: {list(df_main.columns)}")
+                    print(f"  Please run --main first to generate conversion_funnel.csv")
+                    return pd.DataFrame()
+            else:
+                print(f"  ERROR: Neither {csv_file} nor data/processed_data.csv found")
+                print(f"  Please run --main first to generate the required data files")
+                return pd.DataFrame()
+    
+    # Verify required columns exist
+    required_cols = ['idvisitor_converted', 'idvisit', 'idlink_va', 'event']
+    missing_cols = [col for col in required_cols if col not in df_main.columns]
+    if missing_cols:
+        print(f"  ERROR: Missing required columns: {missing_cols}")
+        print(f"  Available columns: {list(df_main.columns)}")
+        print(f"  Please run --main first to generate the required data files")
+        return pd.DataFrame()
     
     print("Building summary statistics...")
     sys.stdout.flush()
     summary_df = build_summary(df_main)
+    
+    if summary_df.empty:
+        print("  ERROR: Failed to build summary statistics")
+        return pd.DataFrame()
+    
     print(f"Saving summary_data.csv ({len(summary_df)} records)...")
     sys.stdout.flush()
     summary_df.to_csv('data/summary_data.csv', index=False)
