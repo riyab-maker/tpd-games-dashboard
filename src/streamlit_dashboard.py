@@ -361,9 +361,15 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
                     visits_val = row.get('Visits', row.get('visits', 0))
                     instances_val = row.get('Instances', row.get('instances', 0))
                     
-                    funnel_data[f'{stage}_users'] = int(pd.to_numeric(users_val, errors='coerce').fillna(0))
-                    funnel_data[f'{stage}_visits'] = int(pd.to_numeric(visits_val, errors='coerce').fillna(0))
-                    funnel_data[f'{stage}_instances'] = int(pd.to_numeric(instances_val, errors='coerce').fillna(0))
+                    # Convert to numeric and handle NaN for scalars
+                    users_num = pd.to_numeric(users_val, errors='coerce')
+                    visits_num = pd.to_numeric(visits_val, errors='coerce')
+                    instances_num = pd.to_numeric(instances_val, errors='coerce')
+                    
+                    # Handle NaN values (pd.isna works on scalars)
+                    funnel_data[f'{stage}_users'] = int(users_num if not pd.isna(users_num) else 0)
+                    funnel_data[f'{stage}_visits'] = int(visits_num if not pd.isna(visits_num) else 0)
+                    funnel_data[f'{stage}_instances'] = int(instances_num if not pd.isna(instances_num) else 0)
                 else:
                     funnel_data[f'{stage}_users'] = 0
                     funnel_data[f'{stage}_visits'] = 0
