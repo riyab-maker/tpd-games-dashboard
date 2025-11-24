@@ -2442,20 +2442,74 @@ def process_parent_poll() -> pd.DataFrame:
 
 
 def process_question_correctness() -> pd.DataFrame:
-    """Process question correctness data"""
+    """Process question correctness data using score distribution query data"""
     print("\n" + "=" * 60)
     print("PROCESSING: Question Correctness Data")
     print("=" * 60)
     
-    question_correctness_df = fetch_question_correctness_data()
+    print("Step 1: Fetching score distribution data...")
+    df_score = fetch_score_dataframe()
     
-    if question_correctness_df.empty:
-        # Create empty dataframe with expected headers
+    if df_score.empty:
+        print("WARNING: No score distribution data found")
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
-        print("WARNING: No question correctness data found")
-
-        # Always write the CSV (even if empty) so the dashboard can load gracefully
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        return question_correctness_df
+    
+    print(f"  - Fetched {len(df_score)} records from score distribution query")
+    
+    print("Step 2: Extracting per-question correctness...")
+    per_question_df = extract_per_question_correctness(df_score)
+    
+    if per_question_df.empty:
+        print("WARNING: No per-question correctness data extracted")
+        question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        return question_correctness_df
+    
+    print(f"  - Extracted {len(per_question_df)} per-question records")
+    print(f"  - Games: {per_question_df['game_name'].nunique()}")
+    print(f"  - Questions: {per_question_df['question_number'].nunique()}")
+    
+    print("Step 3: Aggregating correctness by game and question...")
+    # Calculate total users per question (users who attempted the question)
+    total_by_q = (
+        per_question_df
+        .groupby(['game_name', 'question_number'])['idvisitor_converted']
+        .nunique()
+        .reset_index(name='total_users')
+    )
+    
+    # Calculate correct and incorrect user counts per question
+    agg = (
+        per_question_df
+        .groupby(['game_name', 'question_number', 'is_correct'])['idvisitor_converted']
+        .nunique()
+        .reset_index(name='user_count')
+    )
+    
+    # Merge to get total_users
+    agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
+    
+    # Calculate percentage
+    agg['percent'] = (agg['user_count'] / agg['total_users'].where(agg['total_users'] > 0, 1) * 100).round(2)
+    
+    # Map is_correct to Correct/Incorrect
+    agg['correctness'] = agg['is_correct'].map({1: 'Correct', 0: 'Incorrect'})
+    
+    # Select and order columns
+    question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']].copy()
+    
+    # Sort by game_name and question_number
+    question_correctness_df = question_correctness_df.sort_values(['game_name', 'question_number', 'correctness'])
+    
+    print(f"Step 4: Final aggregation complete")
+    print(f"  - Total records: {len(question_correctness_df)}")
+    print(f"  - Games: {question_correctness_df['game_name'].nunique()}")
+    print(f"  - Questions: {question_correctness_df['question_number'].nunique()}")
+    
+    print("Step 5: Saving question correctness data...")
+    question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
     print(f"SUCCESS: Saved data/question_correctness_data.csv ({len(question_correctness_df)} records)")
     
     return question_correctness_df
