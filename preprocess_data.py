@@ -1679,8 +1679,8 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
 
 
 def fetch_hybrid_repeatability_data() -> pd.DataFrame:
-    """Fetch repeatability data using the exact SQL query from hybrid database tables"""
-    print("Fetching repeatability data from hybrid database...")
+    """Fetch repeatability data using Matomo data to count all users who played games (not just completed)"""
+    print("Fetching repeatability data from Matomo database (all game plays)...")
     
     try:
         # Connect to database
@@ -1693,41 +1693,61 @@ def fetch_hybrid_repeatability_data() -> pd.DataFrame:
             charset='utf8mb4'
         )
         
-        # Your exact SQL query
-        hybrid_query = """
+        # New query: Count all users who played games (using started events from Matomo)
+        # This includes all game plays, not just completions
+        repeatability_query = """
         SELECT 
-            COUNT(DISTINCT game_name) as CountDistinctNonNull_game_name,
-            COUNT(DISTINCT hybrid_profile_id) as CountDistinct_hybrid_profile_id
-        FROM `hybrid_games`
-        INNER JOIN `hybrid_games_links` ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id`
-        INNER JOIN `hybrid_game_completions` ON `hybrid_games_links`.`activity_id` = `hybrid_game_completions`.`activity_id`
-        INNER JOIN `hybrid_profiles` ON `hybrid_game_completions`.`hybrid_profile_id` = `hybrid_profiles`.`id`
-        INNER JOIN `hybrid_users` ON `hybrid_profiles`.`hybrid_user_id` = `hybrid_users`.`id`
-        GROUP BY hybrid_profile_id
-        ORDER BY CountDistinctNonNull_game_name
+            hg.game_name,
+            CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted
+        FROM `hybrid_games` hg
+        INNER JOIN `hybrid_games_links` hgl ON hg.id = hgl.game_id
+        INNER JOIN `matomo_log_link_visit_action` mllva ON hgl.activity_id = mllva.custom_dimension_2
+        INNER JOIN `matomo_log_action` mla ON mllva.idaction_name = mla.idaction
+        WHERE (mla.name LIKE '%hybrid_game_started%' 
+               OR mla.name LIKE '%hybrid_mcq_started%'
+               OR mla.name LIKE '%hybrid_game_completed%'
+               OR mla.name LIKE '%hybrid_mcq_completed%')
+          AND hgl.activity_id IS NOT NULL
         """
         
         # Execute query
-        hybrid_df = pd.read_sql(hybrid_query, connection)
+        hybrid_df = pd.read_sql(repeatability_query, connection)
         connection.close()
         
-        print(f"SUCCESS: Fetched {len(hybrid_df)} records from hybrid database")
+        if hybrid_df.empty:
+            print("WARNING: No data found from Matomo query")
+            return pd.DataFrame()
+        
+        print(f"SUCCESS: Fetched {len(hybrid_df)} records from Matomo database")
+        print(f"Unique users: {hybrid_df['idvisitor_converted'].nunique()}")
+        print(f"Unique games: {hybrid_df['game_name'].nunique()}")
         print("Sample data:")
         print(hybrid_df.head(10))
         
-        # Group by the count of distinct non-null game_name
-        # Calculate CountDistinct_hybrid_profile_id for each distinct count value
-        repeatability_data = hybrid_df.groupby('CountDistinctNonNull_game_name').size().reset_index()
+        # Group by user and count distinct games played
+        user_game_counts = hybrid_df.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
+        user_game_counts.columns = ['idvisitor_converted', 'games_played']
+        
+        # Group by games_played count and count users
+        repeatability_data = user_game_counts.groupby('games_played').size().reset_index()
         repeatability_data.columns = ['games_played', 'user_count']
+        
+        # Create complete range from 1 to max games played
+        max_games = user_game_counts['games_played'].max() if not user_game_counts.empty else 0
+        if max_games > 0:
+            complete_range = pd.DataFrame({'games_played': range(1, max_games + 1)})
+            repeatability_data = complete_range.merge(repeatability_data, on='games_played', how='left').fillna(0)
+            repeatability_data['user_count'] = repeatability_data['user_count'].astype(int)
         
         print("Final repeatability data:")
         print(repeatability_data.head(10))
+        print(f"Total users: {user_game_counts['idvisitor_converted'].nunique()}")
         
         return repeatability_data
         
     except Exception as e:
-        print(f"ERROR: Failed to fetch hybrid data: {str(e)}")
-        print("Falling back to Matomo data...")
+        print(f"ERROR: Failed to fetch Matomo data: {str(e)}")
+        print("Falling back to processed data...")
         return pd.DataFrame()
 
 def preprocess_repeatability_data(df: pd.DataFrame) -> pd.DataFrame:
