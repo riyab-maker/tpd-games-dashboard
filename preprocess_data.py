@@ -1956,16 +1956,48 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
                 # Check if it has the required columns for build_summary
                 required_cols = ['idvisitor_converted', 'idvisit', 'idlink_va', 'event']
                 if not all(col in df_main.columns for col in required_cols):
-                    print(f"  ERROR: processed_data.csv doesn't have required columns: {required_cols}")
-                    print(f"  Available columns: {list(df_main.columns)}")
-                    print(f"  Please run --main first to generate conversion_funnel.csv")
-                    return pd.DataFrame()
+                    # Check if it's the aggregated format (date, game_name, event, instances, visits, users)
+                    if 'event' in df_main.columns and 'users' in df_main.columns and 'visits' in df_main.columns and 'instances' in df_main.columns:
+                        print(f"  - Detected aggregated format, calculating summary from aggregated data...")
+                        # Calculate summary from aggregated data
+                        summary_df = df_main.groupby('event').agg({
+                            'users': 'sum',      # Sum of unique users per event (approximation)
+                            'visits': 'sum',     # Sum of unique visits per event (approximation)
+                            'instances': 'sum'   # Sum of instances per event
+                        }).reset_index()
+                        summary_df.columns = ['Event', 'Users', 'Visits', 'Instances']
+                        
+                        # Ensure all funnel stages exist
+                        all_events = pd.DataFrame({'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']})
+                        summary_df = all_events.merge(summary_df, on='Event', how='left').fillna(0)
+                        
+                        # Convert to int
+                        for col in ['Users', 'Visits', 'Instances']:
+                            summary_df[col] = summary_df[col].astype(int)
+                        
+                        # Sort by event order
+                        summary_df['Event'] = pd.Categorical(summary_df['Event'], 
+                                                             categories=['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed'], 
+                                                             ordered=True)
+                        summary_df = summary_df.sort_values('Event')
+                        
+                        print(f"Saving summary_data.csv ({len(summary_df)} records)...")
+                        sys.stdout.flush()
+                        summary_df.to_csv('data/summary_data.csv', index=False)
+                        print(f"✓ SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
+                        sys.stdout.flush()
+                        return summary_df
+                    else:
+                        print(f"  ERROR: processed_data.csv doesn't have required columns: {required_cols}")
+                        print(f"  Available columns: {list(df_main.columns)}")
+                        print(f"  Please run --main first to generate conversion_funnel.csv")
+                        return pd.DataFrame()
             else:
                 print(f"  ERROR: Neither {csv_file} nor data/processed_data.csv found")
                 print(f"  Please run --main first to generate the required data files")
                 return pd.DataFrame()
     
-    # Verify required columns exist
+    # Verify required columns exist for raw data format
     required_cols = ['idvisitor_converted', 'idvisit', 'idlink_va', 'event']
     missing_cols = [col for col in required_cols if col not in df_main.columns]
     if missing_cols:
@@ -1974,7 +2006,7 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
         print(f"  Please run --main first to generate the required data files")
         return pd.DataFrame()
     
-    print("Building summary statistics...")
+    print("Building summary statistics from raw data...")
     sys.stdout.flush()
     summary_df = build_summary(df_main)
     
