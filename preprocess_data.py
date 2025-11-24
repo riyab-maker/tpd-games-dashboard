@@ -2132,12 +2132,13 @@ def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFram
             df_main = pd.read_csv('data/processed_data.csv')
             df_main['server_time'] = pd.to_datetime(df_main['server_time'])
         repeatability_df = preprocess_repeatability_data(df_main)
-        
-        if not repeatability_df.empty:
-            repeatability_df.to_csv('data/repeatability_data.csv', index=False)
-            print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
-        else:
-            print("WARNING: No repeatability data to save")
+    
+    # Save to CSV regardless of data source (hybrid or Matomo)
+    if not repeatability_df.empty:
+        repeatability_df.to_csv('data/repeatability_data.csv', index=False)
+        print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
+    else:
+        print("WARNING: No repeatability data to save")
 
     return repeatability_df
 
