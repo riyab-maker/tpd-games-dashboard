@@ -1932,81 +1932,78 @@ def process_main_data() -> pd.DataFrame:
     return df_main
 
 
+def parse_event_from_name(name):
+    """Parse event from action name (same logic as SQL CASE statement)"""
+    if pd.isna(name) or name is None or name == '':
+        return None
+    
+    name_str = str(name)
+    if '_started' in name_str:
+        return 'started'
+    elif 'introduction_completed' in name_str and 'mid' not in name_str:
+        return 'introduction'
+    elif '_mid_introduction' in name_str:
+        return 'mid_introduction'
+    elif '_poll_completed' in name_str:
+        return 'parent_poll'
+    elif 'action_completed' in name_str:
+        return 'questions'
+    elif 'reward_completed' in name_str:
+        return 'rewards'
+    elif 'question_completed' in name_str:
+        return 'validation'
+    elif 'completed' in name_str and 'introduction' not in name_str and 'reward' not in name_str and 'question' not in name_str and 'mid_introduction' not in name_str and 'poll' not in name_str and 'action' not in name_str:
+        return 'completed'
+    return None
+
+
 def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
-    """Process summary statistics"""
+    """Process summary statistics using conversion_funnel.csv directly"""
     print("\n" + "=" * 60)
     print("PROCESSING: Summary Statistics")
     print("=" * 60)
     
     if df_main is None:
         print("Loading main data from CSV...")
-        # Try to load from conversion_funnel.csv (raw data format)
+        # Load from conversion_funnel.csv (raw data format)
         csv_file = 'conversion_funnel.csv'
-        if os.path.exists(csv_file):
-            print(f"  - Loading from {csv_file} (raw data format)")
-            df_main = pd.read_csv(csv_file)
-            # Convert server_time if it exists
-            if 'server_time' in df_main.columns:
-                df_main['server_time'] = pd.to_datetime(df_main['server_time'])
-        else:
-            # Fallback: try processed_data.csv but check if it has the required columns
-            print(f"  - {csv_file} not found, trying processed_data.csv...")
-            if os.path.exists('data/processed_data.csv'):
-                df_main = pd.read_csv('data/processed_data.csv')
-                # Check if it has the required columns for build_summary
-                required_cols = ['idvisitor_converted', 'idvisit', 'idlink_va', 'event']
-                if not all(col in df_main.columns for col in required_cols):
-                    # Check if it's the aggregated format (date, game_name, event, instances, visits, users)
-                    if 'event' in df_main.columns and 'users' in df_main.columns and 'visits' in df_main.columns and 'instances' in df_main.columns:
-                        print(f"  - Detected aggregated format, calculating summary from aggregated data...")
-                        # Calculate summary from aggregated data
-                        summary_df = df_main.groupby('event').agg({
-                            'users': 'sum',      # Sum of unique users per event (approximation)
-                            'visits': 'sum',     # Sum of unique visits per event (approximation)
-                            'instances': 'sum'   # Sum of instances per event
-                        }).reset_index()
-                        summary_df.columns = ['Event', 'Users', 'Visits', 'Instances']
-                        
-                        # Ensure all funnel stages exist
-                        all_events = pd.DataFrame({'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']})
-                        summary_df = all_events.merge(summary_df, on='Event', how='left').fillna(0)
-                        
-                        # Convert to int
-                        for col in ['Users', 'Visits', 'Instances']:
-                            summary_df[col] = summary_df[col].astype(int)
-                        
-                        # Sort by event order
-                        summary_df['Event'] = pd.Categorical(summary_df['Event'], 
-                                                             categories=['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed'], 
-                                                             ordered=True)
-                        summary_df = summary_df.sort_values('Event')
-                        
-                        print(f"Saving summary_data.csv ({len(summary_df)} records)...")
-                        sys.stdout.flush()
-                        summary_df.to_csv('data/summary_data.csv', index=False)
-                        print(f"✓ SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
-                        sys.stdout.flush()
-                        return summary_df
-                    else:
-                        print(f"  ERROR: processed_data.csv doesn't have required columns: {required_cols}")
-                        print(f"  Available columns: {list(df_main.columns)}")
-                        print(f"  Please run --main first to generate conversion_funnel.csv")
-                        return pd.DataFrame()
-            else:
-                print(f"  ERROR: Neither {csv_file} nor data/processed_data.csv found")
-                print(f"  Please run --main first to generate the required data files")
-                return pd.DataFrame()
+        if not os.path.exists(csv_file):
+            print(f"  ERROR: {csv_file} not found")
+            print(f"  Please run --main first to generate conversion_funnel.csv")
+            return pd.DataFrame()
+        
+        print(f"  - Loading from {csv_file} (raw data format)")
+        df_main = pd.read_csv(csv_file, low_memory=False)
+        print(f"  - Loaded {len(df_main)} records")
+        print(f"  - Columns: {list(df_main.columns)}")
     
-    # Verify required columns exist for raw data format
+    # Check if we need to create event column and rename idvisitor
+    if 'event' not in df_main.columns:
+        print("  - Event column not found, creating from 'name' column...")
+        if 'name' not in df_main.columns:
+            print(f"  ERROR: Neither 'event' nor 'name' column found")
+            print(f"  Available columns: {list(df_main.columns)}")
+            return pd.DataFrame()
+        
+        # Create event column from name using the same logic
+        df_main['event'] = df_main['name'].apply(parse_event_from_name)
+        print(f"  - Created event column from name column")
+    
+    # Rename idvisitor to idvisitor_converted if needed
+    if 'idvisitor' in df_main.columns and 'idvisitor_converted' not in df_main.columns:
+        print("  - Renaming 'idvisitor' to 'idvisitor_converted'...")
+        df_main['idvisitor_converted'] = df_main['idvisitor']
+    
+    # Verify required columns exist
     required_cols = ['idvisitor_converted', 'idvisit', 'idlink_va', 'event']
     missing_cols = [col for col in required_cols if col not in df_main.columns]
     if missing_cols:
         print(f"  ERROR: Missing required columns: {missing_cols}")
         print(f"  Available columns: {list(df_main.columns)}")
-        print(f"  Please run --main first to generate the required data files")
+        print(f"  Please run --main first to generate conversion_funnel.csv with required columns")
         return pd.DataFrame()
     
-    print("Building summary statistics from raw data...")
+    print("Building summary statistics...")
     sys.stdout.flush()
     summary_df = build_summary(df_main)
     
