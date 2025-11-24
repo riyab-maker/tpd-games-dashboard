@@ -1459,7 +1459,16 @@ def main() -> None:
     
     # Filter processed data by date range and games if specified
     # If no filters are applied, use summary_df directly
-    has_date_filter = date_range and isinstance(date_range, tuple) and len(date_range) == 2 and date_range[0] and date_range[1]
+    # Check if date filter is actually filtering (not just the full range)
+    has_date_filter = False
+    if date_range and isinstance(date_range, tuple) and len(date_range) == 2 and date_range[0] and date_range[1]:
+        if 'date' in processed_data_df.columns and not processed_data_df.empty:
+            min_date = processed_data_df['date'].min()
+            max_date = processed_data_df['date'].max()
+            # Only consider it a filter if it's different from the full range
+            if date_range[0] != min_date or date_range[1] != max_date:
+                has_date_filter = True
+    
     has_game_filter = selected_games and len(selected_games) < len(unique_games)
     
     if not has_date_filter and not has_game_filter:
