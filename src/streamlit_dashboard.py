@@ -354,12 +354,28 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             stage_row = conversion_df[conversion_df['Event'].astype(str).str.strip().str.lower() == stage.lower().strip()]
             try:
                 if not stage_row.empty and len(stage_row) > 0:
-                    # Direct access to the first matching row
-                    row = stage_row.iloc[0]
-                    # Extract Users, Visits, Instances - handle both capitalized and lowercase column names
-                    users_val = row.get('Users', row.get('users', 0))
-                    visits_val = row.get('Visits', row.get('visits', 0))
-                    instances_val = row.get('Instances', row.get('instances', 0))
+                    # Direct access to the first matching row - use direct column access
+                    # Check for both capitalized and lowercase column names
+                    if 'Users' in stage_row.columns:
+                        users_val = stage_row['Users'].iloc[0]
+                    elif 'users' in stage_row.columns:
+                        users_val = stage_row['users'].iloc[0]
+                    else:
+                        users_val = 0
+                    
+                    if 'Visits' in stage_row.columns:
+                        visits_val = stage_row['Visits'].iloc[0]
+                    elif 'visits' in stage_row.columns:
+                        visits_val = stage_row['visits'].iloc[0]
+                    else:
+                        visits_val = 0
+                    
+                    if 'Instances' in stage_row.columns:
+                        instances_val = stage_row['Instances'].iloc[0]
+                    elif 'instances' in stage_row.columns:
+                        instances_val = stage_row['instances'].iloc[0]
+                    else:
+                        instances_val = 0
                     
                     # Convert to numeric and handle NaN for scalars
                     users_num = pd.to_numeric(users_val, errors='coerce')
@@ -1442,24 +1458,29 @@ def main() -> None:
         game_count = len(selected_games)
     
     # Filter processed data by date range and games if specified
-    # If processed_data_df is empty, use summary_df directly without filtering
-    if processed_data_df.empty:
-        # Use summary_df directly - no date filtering available
+    # If no filters are applied, use summary_df directly
+    has_date_filter = date_range and isinstance(date_range, tuple) and len(date_range) == 2 and date_range[0] and date_range[1]
+    has_game_filter = selected_games and len(selected_games) < len(unique_games)
+    
+    if not has_date_filter and not has_game_filter:
+        # No filters applied - use summary_df directly
+        filtered_summary_df = summary_df.copy()
+    elif processed_data_df.empty:
+        # Filters requested but no processed data available - use summary_df directly
         filtered_summary_df = summary_df.copy()
     else:
         filtered_processed_data = processed_data_df.copy()
         
         # Apply date filter
-        if date_range and isinstance(date_range, tuple) and len(date_range) == 2:
+        if has_date_filter:
             start_date, end_date = date_range
-            if start_date and end_date:
-                filtered_processed_data = filtered_processed_data[
-                    (filtered_processed_data['date'] >= start_date) &
-                    (filtered_processed_data['date'] <= end_date)
-                ]
+            filtered_processed_data = filtered_processed_data[
+                (filtered_processed_data['date'] >= start_date) &
+                (filtered_processed_data['date'] <= end_date)
+            ]
         
         # Apply game filter
-        if selected_games and len(selected_games) < len(unique_games):
+        if has_game_filter:
             if 'game_name' in filtered_processed_data.columns:
                 filtered_processed_data = filtered_processed_data[
                     filtered_processed_data['game_name'].isin(selected_games)
