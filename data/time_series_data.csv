@@ -1,880 +1,1047 @@
 period_label,game_name,event,count,metric,period_type
+2025-07-01,All Games,RM Active Users,40633,rm_active_users,Day
 2025-07-02,All Games,Completed,997,instances,Day
 2025-07-02,All Games,Started,2550,instances,Day
 2025-07-02,All Games,Completed,835,visits,Day
 2025-07-02,All Games,Started,1787,visits,Day
 2025-07-02,All Games,Completed,873,users,Day
 2025-07-02,All Games,Started,2163,users,Day
+2025-07-02,All Games,RM Active Users,35115,rm_active_users,Day
 2025-07-03,All Games,Completed,253,instances,Day
 2025-07-03,All Games,Started,645,instances,Day
 2025-07-03,All Games,Completed,213,visits,Day
 2025-07-03,All Games,Started,476,visits,Day
 2025-07-03,All Games,Completed,213,users,Day
 2025-07-03,All Games,Started,515,users,Day
+2025-07-03,All Games,RM Active Users,39170,rm_active_users,Day
 2025-07-04,All Games,Completed,1250,instances,Day
 2025-07-04,All Games,Started,3077,instances,Day
 2025-07-04,All Games,Completed,1065,visits,Day
 2025-07-04,All Games,Started,2225,visits,Day
 2025-07-04,All Games,Completed,1092,users,Day
 2025-07-04,All Games,Started,2525,users,Day
+2025-07-04,All Games,RM Active Users,30759,rm_active_users,Day
 2025-07-05,All Games,Completed,5709,instances,Day
 2025-07-05,All Games,Started,9499,instances,Day
 2025-07-05,All Games,Completed,2758,visits,Day
 2025-07-05,All Games,Started,5140,visits,Day
 2025-07-05,All Games,Completed,2889,users,Day
 2025-07-05,All Games,Started,6132,users,Day
+2025-07-05,All Games,RM Active Users,34585,rm_active_users,Day
 2025-07-06,All Games,Completed,1834,instances,Day
 2025-07-06,All Games,Started,2833,instances,Day
 2025-07-06,All Games,Completed,846,visits,Day
 2025-07-06,All Games,Started,1358,visits,Day
 2025-07-06,All Games,Completed,788,users,Day
 2025-07-06,All Games,Started,1416,users,Day
+2025-07-06,All Games,RM Active Users,26597,rm_active_users,Day
 2025-07-07,All Games,Completed,6431,instances,Day
 2025-07-07,All Games,Started,9710,instances,Day
 2025-07-07,All Games,Completed,2912,visits,Day
 2025-07-07,All Games,Started,4755,visits,Day
 2025-07-07,All Games,Completed,2953,users,Day
 2025-07-07,All Games,Started,5377,users,Day
+2025-07-07,All Games,RM Active Users,32225,rm_active_users,Day
 2025-07-08,All Games,Completed,2755,instances,Day
 2025-07-08,All Games,Started,4066,instances,Day
 2025-07-08,All Games,Completed,1257,visits,Day
 2025-07-08,All Games,Started,1961,visits,Day
 2025-07-08,All Games,Completed,1164,users,Day
 2025-07-08,All Games,Started,1974,users,Day
+2025-07-08,All Games,RM Active Users,39100,rm_active_users,Day
 2025-07-09,All Games,Completed,6250,instances,Day
 2025-07-09,All Games,Started,9599,instances,Day
 2025-07-09,All Games,Completed,2994,visits,Day
 2025-07-09,All Games,Started,4921,visits,Day
 2025-07-09,All Games,Completed,2971,users,Day
 2025-07-09,All Games,Started,5237,users,Day
+2025-07-09,All Games,RM Active Users,37189,rm_active_users,Day
 2025-07-10,All Games,Completed,2018,instances,Day
 2025-07-10,All Games,Started,3263,instances,Day
 2025-07-10,All Games,Completed,997,visits,Day
 2025-07-10,All Games,Started,1734,visits,Day
 2025-07-10,All Games,Completed,935,users,Day
 2025-07-10,All Games,Started,1725,users,Day
+2025-07-10,All Games,RM Active Users,36606,rm_active_users,Day
 2025-07-11,All Games,Completed,6676,instances,Day
 2025-07-11,All Games,Started,10382,instances,Day
 2025-07-11,All Games,Completed,3238,visits,Day
 2025-07-11,All Games,Started,5446,visits,Day
 2025-07-11,All Games,Completed,3196,users,Day
 2025-07-11,All Games,Started,5818,users,Day
+2025-07-11,All Games,RM Active Users,34188,rm_active_users,Day
 2025-07-12,All Games,Completed,6919,instances,Day
 2025-07-12,All Games,Started,10650,instances,Day
 2025-07-12,All Games,Completed,3656,visits,Day
 2025-07-12,All Games,Started,5895,visits,Day
 2025-07-12,All Games,Completed,3459,users,Day
 2025-07-12,All Games,Started,5951,users,Day
+2025-07-12,All Games,RM Active Users,32600,rm_active_users,Day
 2025-07-13,All Games,Completed,2171,instances,Day
 2025-07-13,All Games,Started,3216,instances,Day
 2025-07-13,All Games,Completed,1063,visits,Day
 2025-07-13,All Games,Started,1604,visits,Day
 2025-07-13,All Games,Completed,992,users,Day
 2025-07-13,All Games,Started,1564,users,Day
+2025-07-13,All Games,RM Active Users,30115,rm_active_users,Day
 2025-07-14,All Games,Completed,5457,instances,Day
 2025-07-14,All Games,Started,8231,instances,Day
 2025-07-14,All Games,Completed,2864,visits,Day
 2025-07-14,All Games,Started,4509,visits,Day
 2025-07-14,All Games,Completed,2816,users,Day
 2025-07-14,All Games,Started,4749,users,Day
+2025-07-14,All Games,RM Active Users,32118,rm_active_users,Day
 2025-07-15,All Games,Completed,2178,instances,Day
 2025-07-15,All Games,Started,3295,instances,Day
 2025-07-15,All Games,Completed,1151,visits,Day
 2025-07-15,All Games,Started,1788,visits,Day
 2025-07-15,All Games,Completed,1062,users,Day
 2025-07-15,All Games,Started,1750,users,Day
+2025-07-15,All Games,RM Active Users,37496,rm_active_users,Day
 2025-07-16,All Games,Completed,7224,instances,Day
 2025-07-16,All Games,Started,11285,instances,Day
 2025-07-16,All Games,Completed,3738,visits,Day
 2025-07-16,All Games,Started,5946,visits,Day
 2025-07-16,All Games,Completed,3719,users,Day
 2025-07-16,All Games,Started,6118,users,Day
+2025-07-16,All Games,RM Active Users,34920,rm_active_users,Day
 2025-07-17,All Games,Completed,3091,instances,Day
 2025-07-17,All Games,Started,4861,instances,Day
 2025-07-17,All Games,Completed,1536,visits,Day
 2025-07-17,All Games,Started,2516,visits,Day
 2025-07-17,All Games,Completed,1443,users,Day
 2025-07-17,All Games,Started,2394,users,Day
+2025-07-17,All Games,RM Active Users,36120,rm_active_users,Day
 2025-07-18,All Games,Completed,8144,instances,Day
 2025-07-18,All Games,Started,12697,instances,Day
 2025-07-18,All Games,Completed,4181,visits,Day
 2025-07-18,All Games,Started,6572,visits,Day
 2025-07-18,All Games,Completed,4167,users,Day
 2025-07-18,All Games,Started,6730,users,Day
+2025-07-18,All Games,RM Active Users,40136,rm_active_users,Day
 2025-07-19,All Games,Completed,3654,instances,Day
 2025-07-19,All Games,Started,5935,instances,Day
 2025-07-19,All Games,Completed,1809,visits,Day
 2025-07-19,All Games,Started,3088,visits,Day
 2025-07-19,All Games,Completed,1705,users,Day
 2025-07-19,All Games,Started,2936,users,Day
+2025-07-19,All Games,RM Active Users,31778,rm_active_users,Day
 2025-07-20,All Games,Completed,1516,instances,Day
 2025-07-20,All Games,Started,2270,instances,Day
 2025-07-20,All Games,Completed,651,visits,Day
 2025-07-20,All Games,Started,986,visits,Day
 2025-07-20,All Games,Completed,599,users,Day
 2025-07-20,All Games,Started,916,users,Day
+2025-07-20,All Games,RM Active Users,26231,rm_active_users,Day
 2025-07-21,All Games,Completed,7200,instances,Day
 2025-07-21,All Games,Started,10987,instances,Day
 2025-07-21,All Games,Completed,3766,visits,Day
 2025-07-21,All Games,Started,5678,visits,Day
 2025-07-21,All Games,Completed,3754,users,Day
 2025-07-21,All Games,Started,5895,users,Day
+2025-07-21,All Games,RM Active Users,29532,rm_active_users,Day
 2025-07-22,All Games,Completed,6522,instances,Day
 2025-07-22,All Games,Started,12122,instances,Day
 2025-07-22,All Games,Completed,3971,visits,Day
 2025-07-22,All Games,Started,7673,visits,Day
 2025-07-22,All Games,Completed,3290,users,Day
 2025-07-22,All Games,Started,6573,users,Day
+2025-07-22,All Games,RM Active Users,33014,rm_active_users,Day
 2025-07-23,All Games,Completed,8763,instances,Day
 2025-07-23,All Games,Started,15585,instances,Day
 2025-07-23,All Games,Completed,4533,visits,Day
 2025-07-23,All Games,Started,8142,visits,Day
 2025-07-23,All Games,Completed,3987,users,Day
 2025-07-23,All Games,Started,7103,users,Day
+2025-07-23,All Games,RM Active Users,35769,rm_active_users,Day
 2025-07-24,All Games,Completed,4018,instances,Day
 2025-07-24,All Games,Started,7313,instances,Day
 2025-07-24,All Games,Completed,1857,visits,Day
 2025-07-24,All Games,Started,3468,visits,Day
 2025-07-24,All Games,Completed,1622,users,Day
 2025-07-24,All Games,Started,3019,users,Day
+2025-07-24,All Games,RM Active Users,38583,rm_active_users,Day
 2025-07-25,All Games,Completed,9131,instances,Day
 2025-07-25,All Games,Started,16445,instances,Day
 2025-07-25,All Games,Completed,4049,visits,Day
 2025-07-25,All Games,Started,7356,visits,Day
 2025-07-25,All Games,Completed,3834,users,Day
 2025-07-25,All Games,Started,6818,users,Day
+2025-07-25,All Games,RM Active Users,33141,rm_active_users,Day
 2025-07-26,All Games,Completed,10899,instances,Day
 2025-07-26,All Games,Started,18663,instances,Day
 2025-07-26,All Games,Completed,4637,visits,Day
 2025-07-26,All Games,Started,8138,visits,Day
 2025-07-26,All Games,Completed,4265,users,Day
 2025-07-26,All Games,Started,7280,users,Day
+2025-07-26,All Games,RM Active Users,30752,rm_active_users,Day
 2025-07-27,All Games,Completed,4205,instances,Day
 2025-07-27,All Games,Started,7122,instances,Day
 2025-07-27,All Games,Completed,1543,visits,Day
 2025-07-27,All Games,Started,2725,visits,Day
 2025-07-27,All Games,Completed,1437,users,Day
 2025-07-27,All Games,Started,2474,users,Day
+2025-07-27,All Games,RM Active Users,39623,rm_active_users,Day
 2025-07-28,All Games,Completed,6938,instances,Day
 2025-07-28,All Games,Started,11607,instances,Day
 2025-07-28,All Games,Completed,3172,visits,Day
 2025-07-28,All Games,Started,5299,visits,Day
 2025-07-28,All Games,Completed,3053,users,Day
 2025-07-28,All Games,Started,5054,users,Day
+2025-07-28,All Games,RM Active Users,34320,rm_active_users,Day
 2025-07-29,All Games,Completed,7563,instances,Day
 2025-07-29,All Games,Started,12852,instances,Day
 2025-07-29,All Games,Completed,3846,visits,Day
 2025-07-29,All Games,Started,6706,visits,Day
 2025-07-29,All Games,Completed,3057,users,Day
 2025-07-29,All Games,Started,5425,users,Day
+2025-07-29,All Games,RM Active Users,40627,rm_active_users,Day
 2025-07-30,All Games,Completed,9969,instances,Day
 2025-07-30,All Games,Started,14732,instances,Day
 2025-07-30,All Games,Completed,4837,visits,Day
 2025-07-30,All Games,Started,6906,visits,Day
 2025-07-30,All Games,Completed,4544,users,Day
 2025-07-30,All Games,Started,6702,users,Day
+2025-07-30,All Games,RM Active Users,44710,rm_active_users,Day
 2025-07-31,All Games,Completed,5777,instances,Day
 2025-07-31,All Games,Started,8276,instances,Day
 2025-07-31,All Games,Completed,2514,visits,Day
 2025-07-31,All Games,Started,3571,visits,Day
 2025-07-31,All Games,Completed,2321,users,Day
 2025-07-31,All Games,Started,3436,users,Day
+2025-07-31,All Games,RM Active Users,37367,rm_active_users,Day
 2025-08-01,All Games,Completed,8672,instances,Day
 2025-08-01,All Games,Started,12232,instances,Day
 2025-08-01,All Games,Completed,4117,visits,Day
 2025-08-01,All Games,Started,5691,visits,Day
 2025-08-01,All Games,Completed,3970,users,Day
 2025-08-01,All Games,Started,5807,users,Day
+2025-08-01,All Games,RM Active Users,34811,rm_active_users,Day
 2025-08-02,All Games,Completed,8748,instances,Day
 2025-08-02,All Games,Started,12915,instances,Day
 2025-08-02,All Games,Completed,4371,visits,Day
 2025-08-02,All Games,Started,6458,visits,Day
 2025-08-02,All Games,Completed,4524,users,Day
 2025-08-02,All Games,Started,7454,users,Day
+2025-08-02,All Games,RM Active Users,33502,rm_active_users,Day
 2025-08-03,All Games,Completed,3762,instances,Day
 2025-08-03,All Games,Started,5429,instances,Day
 2025-08-03,All Games,Completed,1740,visits,Day
 2025-08-03,All Games,Started,2492,visits,Day
 2025-08-03,All Games,Completed,1777,users,Day
 2025-08-03,All Games,Started,2783,users,Day
+2025-08-03,All Games,RM Active Users,31843,rm_active_users,Day
 2025-08-04,All Games,Completed,6128,instances,Day
 2025-08-04,All Games,Started,8759,instances,Day
 2025-08-04,All Games,Completed,3034,visits,Day
 2025-08-04,All Games,Started,4299,visits,Day
 2025-08-04,All Games,Completed,3117,users,Day
 2025-08-04,All Games,Started,4864,users,Day
+2025-08-04,All Games,RM Active Users,33761,rm_active_users,Day
 2025-08-05,All Games,Completed,7287,instances,Day
 2025-08-05,All Games,Started,10849,instances,Day
 2025-08-05,All Games,Completed,3561,visits,Day
 2025-08-05,All Games,Started,5403,visits,Day
 2025-08-05,All Games,Completed,3470,users,Day
 2025-08-05,All Games,Started,5852,users,Day
+2025-08-05,All Games,RM Active Users,35547,rm_active_users,Day
 2025-08-06,All Games,Completed,9183,instances,Day
 2025-08-06,All Games,Started,13539,instances,Day
 2025-08-06,All Games,Completed,4849,visits,Day
 2025-08-06,All Games,Started,7185,visits,Day
 2025-08-06,All Games,Completed,4888,users,Day
 2025-08-06,All Games,Started,7692,users,Day
+2025-08-06,All Games,RM Active Users,36252,rm_active_users,Day
 2025-08-07,All Games,Completed,4874,instances,Day
 2025-08-07,All Games,Started,7137,instances,Day
 2025-08-07,All Games,Completed,2285,visits,Day
 2025-08-07,All Games,Started,3352,visits,Day
 2025-08-07,All Games,Completed,2151,users,Day
 2025-08-07,All Games,Started,3298,users,Day
+2025-08-07,All Games,RM Active Users,38979,rm_active_users,Day
 2025-08-08,All Games,Completed,8246,instances,Day
 2025-08-08,All Games,Started,12074,instances,Day
 2025-08-08,All Games,Completed,4071,visits,Day
 2025-08-08,All Games,Started,5972,visits,Day
 2025-08-08,All Games,Completed,3941,users,Day
 2025-08-08,All Games,Started,6027,users,Day
+2025-08-08,All Games,RM Active Users,34781,rm_active_users,Day
 2025-08-09,All Games,Completed,7147,instances,Day
 2025-08-09,All Games,Started,10714,instances,Day
 2025-08-09,All Games,Completed,3595,visits,Day
 2025-08-09,All Games,Started,5513,visits,Day
 2025-08-09,All Games,Completed,3365,users,Day
 2025-08-09,All Games,Started,5293,users,Day
+2025-08-09,All Games,RM Active Users,15565,rm_active_users,Day
 2025-08-10,All Games,Completed,3879,instances,Day
 2025-08-10,All Games,Started,5556,instances,Day
 2025-08-10,All Games,Completed,1724,visits,Day
 2025-08-10,All Games,Started,2534,visits,Day
 2025-08-10,All Games,Completed,1602,users,Day
 2025-08-10,All Games,Started,2402,users,Day
+2025-08-10,All Games,RM Active Users,33382,rm_active_users,Day
 2025-08-11,All Games,Completed,1826,instances,Day
 2025-08-11,All Games,Started,2724,instances,Day
 2025-08-11,All Games,Completed,810,visits,Day
 2025-08-11,All Games,Started,1239,visits,Day
 2025-08-11,All Games,Completed,748,users,Day
 2025-08-11,All Games,Started,1161,users,Day
+2025-08-11,All Games,RM Active Users,20983,rm_active_users,Day
 2025-08-12,All Games,Completed,4014,instances,Day
 2025-08-12,All Games,Started,6064,instances,Day
 2025-08-12,All Games,Completed,1929,visits,Day
 2025-08-12,All Games,Started,3055,visits,Day
 2025-08-12,All Games,Completed,1856,users,Day
 2025-08-12,All Games,Started,3016,users,Day
+2025-08-12,All Games,RM Active Users,25039,rm_active_users,Day
 2025-08-13,All Games,Completed,7613,instances,Day
 2025-08-13,All Games,Started,13266,instances,Day
 2025-08-13,All Games,Completed,3964,visits,Day
 2025-08-13,All Games,Started,7063,visits,Day
 2025-08-13,All Games,Completed,3833,users,Day
 2025-08-13,All Games,Started,7047,users,Day
+2025-08-13,All Games,RM Active Users,29554,rm_active_users,Day
 2025-08-14,All Games,Completed,3857,instances,Day
 2025-08-14,All Games,Started,6505,instances,Day
 2025-08-14,All Games,Completed,1894,visits,Day
 2025-08-14,All Games,Started,3262,visits,Day
 2025-08-14,All Games,Completed,1770,users,Day
 2025-08-14,All Games,Started,3109,users,Day
+2025-08-14,All Games,RM Active Users,35921,rm_active_users,Day
 2025-08-15,All Games,Completed,5671,instances,Day
 2025-08-15,All Games,Started,9472,instances,Day
 2025-08-15,All Games,Completed,2740,visits,Day
 2025-08-15,All Games,Started,4861,visits,Day
 2025-08-15,All Games,Completed,2639,users,Day
 2025-08-15,All Games,Started,4844,users,Day
+2025-08-15,All Games,RM Active Users,11085,rm_active_users,Day
 2025-08-16,All Games,Completed,7877,instances,Day
 2025-08-16,All Games,Started,12750,instances,Day
 2025-08-16,All Games,Completed,4091,visits,Day
 2025-08-16,All Games,Started,6788,visits,Day
 2025-08-16,All Games,Completed,3869,users,Day
 2025-08-16,All Games,Started,6449,users,Day
+2025-08-16,All Games,RM Active Users,23897,rm_active_users,Day
 2025-08-17,All Games,Completed,4549,instances,Day
 2025-08-17,All Games,Started,7020,instances,Day
 2025-08-17,All Games,Completed,2218,visits,Day
 2025-08-17,All Games,Started,3373,visits,Day
 2025-08-17,All Games,Completed,2075,users,Day
 2025-08-17,All Games,Started,3159,users,Day
+2025-08-17,All Games,RM Active Users,33368,rm_active_users,Day
 2025-08-18,All Games,Completed,6493,instances,Day
 2025-08-18,All Games,Started,10350,instances,Day
 2025-08-18,All Games,Completed,3378,visits,Day
 2025-08-18,All Games,Started,5421,visits,Day
 2025-08-18,All Games,Completed,3323,users,Day
 2025-08-18,All Games,Started,5471,users,Day
+2025-08-18,All Games,RM Active Users,28607,rm_active_users,Day
 2025-08-19,All Games,Completed,6704,instances,Day
 2025-08-19,All Games,Started,11097,instances,Day
 2025-08-19,All Games,Completed,3497,visits,Day
 2025-08-19,All Games,Started,6046,visits,Day
 2025-08-19,All Games,Completed,3317,users,Day
 2025-08-19,All Games,Started,5637,users,Day
+2025-08-19,All Games,RM Active Users,35606,rm_active_users,Day
 2025-08-20,All Games,Completed,8298,instances,Day
 2025-08-20,All Games,Started,13001,instances,Day
 2025-08-20,All Games,Completed,4361,visits,Day
 2025-08-20,All Games,Started,7013,visits,Day
 2025-08-20,All Games,Completed,4172,users,Day
 2025-08-20,All Games,Started,6789,users,Day
+2025-08-20,All Games,RM Active Users,35010,rm_active_users,Day
 2025-08-21,All Games,Completed,4285,instances,Day
 2025-08-21,All Games,Started,6644,instances,Day
 2025-08-21,All Games,Completed,2119,visits,Day
 2025-08-21,All Games,Started,3329,visits,Day
 2025-08-21,All Games,Completed,2000,users,Day
 2025-08-21,All Games,Started,3171,users,Day
+2025-08-21,All Games,RM Active Users,32837,rm_active_users,Day
 2025-08-22,All Games,Completed,6807,instances,Day
 2025-08-22,All Games,Started,10407,instances,Day
 2025-08-22,All Games,Completed,3426,visits,Day
 2025-08-22,All Games,Started,5381,visits,Day
 2025-08-22,All Games,Completed,3325,users,Day
 2025-08-22,All Games,Started,5396,users,Day
+2025-08-22,All Games,RM Active Users,32980,rm_active_users,Day
 2025-08-23,All Games,Completed,9190,instances,Day
 2025-08-23,All Games,Started,14220,instances,Day
 2025-08-23,All Games,Completed,4681,visits,Day
 2025-08-23,All Games,Started,7380,visits,Day
 2025-08-23,All Games,Completed,4427,users,Day
 2025-08-23,All Games,Started,7148,users,Day
+2025-08-23,All Games,RM Active Users,33229,rm_active_users,Day
 2025-08-24,All Games,Completed,4693,instances,Day
 2025-08-24,All Games,Started,7028,instances,Day
 2025-08-24,All Games,Completed,2067,visits,Day
 2025-08-24,All Games,Started,3153,visits,Day
 2025-08-24,All Games,Completed,1890,users,Day
 2025-08-24,All Games,Started,2905,users,Day
+2025-08-24,All Games,RM Active Users,23535,rm_active_users,Day
 2025-08-25,All Games,Completed,2497,instances,Day
 2025-08-25,All Games,Started,3695,instances,Day
 2025-08-25,All Games,Completed,1073,visits,Day
 2025-08-25,All Games,Started,1605,visits,Day
 2025-08-25,All Games,Completed,986,users,Day
 2025-08-25,All Games,Started,1477,users,Day
+2025-08-25,All Games,RM Active Users,30608,rm_active_users,Day
 2025-08-26,All Games,Completed,1800,instances,Day
 2025-08-26,All Games,Started,2608,instances,Day
 2025-08-26,All Games,Completed,687,visits,Day
 2025-08-26,All Games,Started,1065,visits,Day
 2025-08-26,All Games,Completed,626,users,Day
 2025-08-26,All Games,Started,985,users,Day
+2025-08-26,All Games,RM Active Users,28172,rm_active_users,Day
 2025-08-27,All Games,Completed,5708,instances,Day
 2025-08-27,All Games,Started,8834,instances,Day
 2025-08-27,All Games,Completed,3167,visits,Day
 2025-08-27,All Games,Started,4788,visits,Day
 2025-08-27,All Games,Completed,3120,users,Day
 2025-08-27,All Games,Started,4796,users,Day
+2025-08-27,All Games,RM Active Users,25292,rm_active_users,Day
 2025-08-28,All Games,Completed,3794,instances,Day
 2025-08-28,All Games,Started,5885,instances,Day
 2025-08-28,All Games,Completed,1942,visits,Day
 2025-08-28,All Games,Started,2970,visits,Day
 2025-08-28,All Games,Completed,1816,users,Day
 2025-08-28,All Games,Started,2779,users,Day
+2025-08-28,All Games,RM Active Users,30157,rm_active_users,Day
 2025-08-29,All Games,Completed,4047,instances,Day
 2025-08-29,All Games,Started,6290,instances,Day
 2025-08-29,All Games,Completed,2201,visits,Day
 2025-08-29,All Games,Started,3346,visits,Day
 2025-08-29,All Games,Completed,2134,users,Day
 2025-08-29,All Games,Started,3290,users,Day
+2025-08-29,All Games,RM Active Users,32933,rm_active_users,Day
 2025-08-30,All Games,Completed,4006,instances,Day
 2025-08-30,All Games,Started,6401,instances,Day
 2025-08-30,All Games,Completed,2226,visits,Day
 2025-08-30,All Games,Started,3512,visits,Day
 2025-08-30,All Games,Completed,2139,users,Day
 2025-08-30,All Games,Started,3400,users,Day
+2025-08-30,All Games,RM Active Users,23561,rm_active_users,Day
 2025-08-31,All Games,Completed,2358,instances,Day
 2025-08-31,All Games,Started,3801,instances,Day
 2025-08-31,All Games,Completed,1149,visits,Day
 2025-08-31,All Games,Started,1858,visits,Day
 2025-08-31,All Games,Completed,1095,users,Day
 2025-08-31,All Games,Started,1775,users,Day
+2025-08-31,All Games,RM Active Users,5372,rm_active_users,Day
 2025-09-01,All Games,Completed,5711,instances,Day
 2025-09-01,All Games,Started,9148,instances,Day
 2025-09-01,All Games,Completed,3204,visits,Day
 2025-09-01,All Games,Started,5122,visits,Day
 2025-09-01,All Games,Completed,3174,users,Day
 2025-09-01,All Games,Started,5126,users,Day
+2025-09-01,All Games,RM Active Users,27001,rm_active_users,Day
 2025-09-02,All Games,Completed,3721,instances,Day
 2025-09-02,All Games,Started,5786,instances,Day
 2025-09-02,All Games,Completed,1943,visits,Day
 2025-09-02,All Games,Started,3009,visits,Day
 2025-09-02,All Games,Completed,1857,users,Day
 2025-09-02,All Games,Started,2880,users,Day
+2025-09-02,All Games,RM Active Users,28173,rm_active_users,Day
 2025-09-03,All Games,Completed,5461,instances,Day
 2025-09-03,All Games,Started,8526,instances,Day
 2025-09-03,All Games,Completed,4098,visits,Day
 2025-09-03,All Games,Started,6003,visits,Day
 2025-09-03,All Games,Completed,4084,users,Day
 2025-09-03,All Games,Started,6025,users,Day
+2025-09-03,All Games,RM Active Users,27474,rm_active_users,Day
 2025-09-04,All Games,Completed,3242,instances,Day
 2025-09-04,All Games,Started,4896,instances,Day
 2025-09-04,All Games,Completed,2381,visits,Day
 2025-09-04,All Games,Started,3425,visits,Day
 2025-09-04,All Games,Completed,2269,users,Day
 2025-09-04,All Games,Started,3305,users,Day
+2025-09-04,All Games,RM Active Users,34584,rm_active_users,Day
 2025-09-05,All Games,Completed,5192,instances,Day
 2025-09-05,All Games,Started,7485,instances,Day
 2025-09-05,All Games,Completed,3643,visits,Day
 2025-09-05,All Games,Started,5076,visits,Day
 2025-09-05,All Games,Completed,3608,users,Day
 2025-09-05,All Games,Started,5158,users,Day
+2025-09-05,All Games,RM Active Users,35496,rm_active_users,Day
 2025-09-06,All Games,Completed,2654,instances,Day
 2025-09-06,All Games,Started,3864,instances,Day
 2025-09-06,All Games,Completed,1826,visits,Day
 2025-09-06,All Games,Started,2562,visits,Day
 2025-09-06,All Games,Completed,1808,users,Day
 2025-09-06,All Games,Started,2565,users,Day
+2025-09-06,All Games,RM Active Users,27500,rm_active_users,Day
 2025-09-07,All Games,Completed,715,instances,Day
 2025-09-07,All Games,Started,1070,instances,Day
 2025-09-07,All Games,Completed,495,visits,Day
 2025-09-07,All Games,Started,691,visits,Day
 2025-09-07,All Games,Completed,484,users,Day
 2025-09-07,All Games,Started,681,users,Day
+2025-09-07,All Games,RM Active Users,24768,rm_active_users,Day
 2025-09-08,All Games,Completed,3675,instances,Day
 2025-09-08,All Games,Started,5388,instances,Day
 2025-09-08,All Games,Completed,2929,visits,Day
 2025-09-08,All Games,Started,4082,visits,Day
 2025-09-08,All Games,Completed,2953,users,Day
 2025-09-08,All Games,Started,4206,users,Day
+2025-09-08,All Games,RM Active Users,35010,rm_active_users,Day
 2025-09-09,All Games,Completed,4420,instances,Day
 2025-09-09,All Games,Started,6967,instances,Day
 2025-09-09,All Games,Completed,3372,visits,Day
 2025-09-09,All Games,Started,5125,visits,Day
 2025-09-09,All Games,Completed,3294,users,Day
 2025-09-09,All Games,Started,5056,users,Day
+2025-09-09,All Games,RM Active Users,35664,rm_active_users,Day
 2025-09-10,All Games,Completed,6554,instances,Day
 2025-09-10,All Games,Started,11568,instances,Day
 2025-09-10,All Games,Completed,5025,visits,Day
 2025-09-10,All Games,Started,8121,visits,Day
 2025-09-10,All Games,Completed,4890,users,Day
 2025-09-10,All Games,Started,8001,users,Day
+2025-09-10,All Games,RM Active Users,29991,rm_active_users,Day
 2025-09-11,All Games,Completed,7848,instances,Day
 2025-09-11,All Games,Started,13143,instances,Day
 2025-09-11,All Games,Completed,5990,visits,Day
 2025-09-11,All Games,Started,9160,visits,Day
 2025-09-11,All Games,Completed,5717,users,Day
 2025-09-11,All Games,Started,8790,users,Day
+2025-09-11,All Games,RM Active Users,30114,rm_active_users,Day
 2025-09-12,All Games,Completed,7821,instances,Day
 2025-09-12,All Games,Started,12730,instances,Day
 2025-09-12,All Games,Completed,5525,visits,Day
 2025-09-12,All Games,Started,8429,visits,Day
 2025-09-12,All Games,Completed,5294,users,Day
 2025-09-12,All Games,Started,8084,users,Day
+2025-09-12,All Games,RM Active Users,31825,rm_active_users,Day
 2025-09-13,All Games,Completed,8460,instances,Day
 2025-09-13,All Games,Started,13989,instances,Day
 2025-09-13,All Games,Completed,6140,visits,Day
 2025-09-13,All Games,Started,9583,visits,Day
 2025-09-13,All Games,Completed,5878,users,Day
 2025-09-13,All Games,Started,9221,users,Day
+2025-09-13,All Games,RM Active Users,30355,rm_active_users,Day
 2025-09-14,All Games,Completed,8235,instances,Day
 2025-09-14,All Games,Started,12917,instances,Day
 2025-09-14,All Games,Completed,5958,visits,Day
 2025-09-14,All Games,Started,8709,visits,Day
 2025-09-14,All Games,Completed,5680,users,Day
 2025-09-14,All Games,Started,8309,users,Day
+2025-09-14,All Games,RM Active Users,21996,rm_active_users,Day
 2025-09-15,All Games,Completed,8202,instances,Day
 2025-09-15,All Games,Started,12661,instances,Day
 2025-09-15,All Games,Completed,5717,visits,Day
 2025-09-15,All Games,Started,8397,visits,Day
 2025-09-15,All Games,Completed,5539,users,Day
 2025-09-15,All Games,Started,8171,users,Day
+2025-09-15,All Games,RM Active Users,29917,rm_active_users,Day
 2025-09-16,All Games,Completed,9454,instances,Day
 2025-09-16,All Games,Started,19784,instances,Day
 2025-09-16,All Games,Completed,6030,visits,Day
 2025-09-16,All Games,Started,13606,visits,Day
 2025-09-16,All Games,Completed,6354,users,Day
 2025-09-16,All Games,Started,14260,users,Day
+2025-09-16,All Games,RM Active Users,29523,rm_active_users,Day
 2025-09-17,All Games,Completed,9709,instances,Day
 2025-09-17,All Games,Started,18602,instances,Day
 2025-09-17,All Games,Completed,6146,visits,Day
 2025-09-17,All Games,Started,12390,visits,Day
 2025-09-17,All Games,Completed,6167,users,Day
 2025-09-17,All Games,Started,12397,users,Day
+2025-09-17,All Games,RM Active Users,30010,rm_active_users,Day
 2025-09-18,All Games,Completed,5293,instances,Day
 2025-09-18,All Games,Started,8848,instances,Day
 2025-09-18,All Games,Completed,3267,visits,Day
 2025-09-18,All Games,Started,5546,visits,Day
 2025-09-18,All Games,Completed,3211,users,Day
 2025-09-18,All Games,Started,5411,users,Day
+2025-09-18,All Games,RM Active Users,26956,rm_active_users,Day
 2025-09-19,All Games,Completed,7945,instances,Day
 2025-09-19,All Games,Started,12090,instances,Day
 2025-09-19,All Games,Completed,5397,visits,Day
 2025-09-19,All Games,Started,7877,visits,Day
 2025-09-19,All Games,Completed,5293,users,Day
 2025-09-19,All Games,Started,7827,users,Day
+2025-09-19,All Games,RM Active Users,34908,rm_active_users,Day
 2025-09-20,All Games,Completed,8647,instances,Day
 2025-09-20,All Games,Started,13541,instances,Day
 2025-09-20,All Games,Completed,6306,visits,Day
 2025-09-20,All Games,Started,9333,visits,Day
 2025-09-20,All Games,Completed,6068,users,Day
 2025-09-20,All Games,Started,8954,users,Day
+2025-09-20,All Games,RM Active Users,30274,rm_active_users,Day
 2025-09-21,All Games,Completed,4707,instances,Day
 2025-09-21,All Games,Started,7381,instances,Day
 2025-09-21,All Games,Completed,3180,visits,Day
 2025-09-21,All Games,Started,4701,visits,Day
 2025-09-21,All Games,Completed,3064,users,Day
 2025-09-21,All Games,Started,4465,users,Day
+2025-09-21,All Games,RM Active Users,29062,rm_active_users,Day
 2025-09-22,All Games,Completed,6811,instances,Day
 2025-09-22,All Games,Started,10058,instances,Day
 2025-09-22,All Games,Completed,4629,visits,Day
 2025-09-22,All Games,Started,6460,visits,Day
 2025-09-22,All Games,Completed,4523,users,Day
 2025-09-22,All Games,Started,6319,users,Day
+2025-09-22,All Games,RM Active Users,32879,rm_active_users,Day
 2025-09-23,All Games,Completed,4338,instances,Day
 2025-09-23,All Games,Started,6549,instances,Day
 2025-09-23,All Games,Completed,2865,visits,Day
 2025-09-23,All Games,Started,4088,visits,Day
 2025-09-23,All Games,Completed,2788,users,Day
 2025-09-23,All Games,Started,3972,users,Day
+2025-09-23,All Games,RM Active Users,28683,rm_active_users,Day
 2025-09-24,All Games,Completed,6548,instances,Day
 2025-09-24,All Games,Started,10614,instances,Day
 2025-09-24,All Games,Completed,4749,visits,Day
 2025-09-24,All Games,Started,7320,visits,Day
 2025-09-24,All Games,Completed,4639,users,Day
 2025-09-24,All Games,Started,7147,users,Day
+2025-09-24,All Games,RM Active Users,28635,rm_active_users,Day
 2025-09-25,All Games,Completed,4101,instances,Day
 2025-09-25,All Games,Started,6399,instances,Day
 2025-09-25,All Games,Completed,2787,visits,Day
 2025-09-25,All Games,Started,4186,visits,Day
 2025-09-25,All Games,Completed,2711,users,Day
 2025-09-25,All Games,Started,4059,users,Day
+2025-09-25,All Games,RM Active Users,26014,rm_active_users,Day
 2025-09-26,All Games,Completed,5946,instances,Day
 2025-09-26,All Games,Started,9570,instances,Day
 2025-09-26,All Games,Completed,3963,visits,Day
 2025-09-26,All Games,Started,6207,visits,Day
 2025-09-26,All Games,Completed,3828,users,Day
 2025-09-26,All Games,Started,6062,users,Day
+2025-09-26,All Games,RM Active Users,29379,rm_active_users,Day
 2025-09-27,All Games,Completed,7003,instances,Day
 2025-09-27,All Games,Started,12146,instances,Day
 2025-09-27,All Games,Completed,4614,visits,Day
 2025-09-27,All Games,Started,7707,visits,Day
 2025-09-27,All Games,Completed,4386,users,Day
 2025-09-27,All Games,Started,7305,users,Day
+2025-09-27,All Games,RM Active Users,23838,rm_active_users,Day
 2025-09-28,All Games,Completed,3265,instances,Day
 2025-09-28,All Games,Started,5512,instances,Day
 2025-09-28,All Games,Completed,2041,visits,Day
 2025-09-28,All Games,Started,3311,visits,Day
 2025-09-28,All Games,Completed,1957,users,Day
 2025-09-28,All Games,Started,3154,users,Day
+2025-09-28,All Games,RM Active Users,21005,rm_active_users,Day
 2025-09-29,All Games,Completed,4938,instances,Day
 2025-09-29,All Games,Started,8185,instances,Day
 2025-09-29,All Games,Completed,3153,visits,Day
 2025-09-29,All Games,Started,5023,visits,Day
 2025-09-29,All Games,Completed,3061,users,Day
 2025-09-29,All Games,Started,4901,users,Day
+2025-09-29,All Games,RM Active Users,24899,rm_active_users,Day
 2025-09-30,All Games,Completed,4870,instances,Day
 2025-09-30,All Games,Started,9491,instances,Day
 2025-09-30,All Games,Completed,3147,visits,Day
 2025-09-30,All Games,Started,6047,visits,Day
 2025-09-30,All Games,Completed,3018,users,Day
 2025-09-30,All Games,Started,5813,users,Day
+2025-09-30,All Games,RM Active Users,28724,rm_active_users,Day
 2025-10-01,All Games,Completed,6118,instances,Day
 2025-10-01,All Games,Started,11408,instances,Day
 2025-10-01,All Games,Completed,3970,visits,Day
 2025-10-01,All Games,Started,7105,visits,Day
 2025-10-01,All Games,Completed,3810,users,Day
 2025-10-01,All Games,Started,6839,users,Day
+2025-10-01,All Games,RM Active Users,29616,rm_active_users,Day
 2025-10-02,All Games,Completed,2846,instances,Day
 2025-10-02,All Games,Started,5251,instances,Day
 2025-10-02,All Games,Completed,1777,visits,Day
 2025-10-02,All Games,Started,3201,visits,Day
 2025-10-02,All Games,Completed,1698,users,Day
 2025-10-02,All Games,Started,3019,users,Day
+2025-10-02,All Games,RM Active Users,16004,rm_active_users,Day
 2025-10-03,All Games,Completed,5555,instances,Day
 2025-10-03,All Games,Started,9616,instances,Day
 2025-10-03,All Games,Completed,3550,visits,Day
 2025-10-03,All Games,Started,5867,visits,Day
 2025-10-03,All Games,Completed,3445,users,Day
 2025-10-03,All Games,Started,5751,users,Day
+2025-10-03,All Games,RM Active Users,28981,rm_active_users,Day
 2025-10-04,All Games,Completed,5874,instances,Day
 2025-10-04,All Games,Started,10013,instances,Day
 2025-10-04,All Games,Completed,3866,visits,Day
 2025-10-04,All Games,Started,6254,visits,Day
 2025-10-04,All Games,Completed,3680,users,Day
 2025-10-04,All Games,Started,5928,users,Day
+2025-10-04,All Games,RM Active Users,32734,rm_active_users,Day
 2025-10-05,All Games,Completed,2881,instances,Day
 2025-10-05,All Games,Started,4775,instances,Day
 2025-10-05,All Games,Completed,1805,visits,Day
 2025-10-05,All Games,Started,2844,visits,Day
 2025-10-05,All Games,Completed,1691,users,Day
 2025-10-05,All Games,Started,2675,users,Day
+2025-10-05,All Games,RM Active Users,21642,rm_active_users,Day
 2025-10-06,All Games,Completed,5179,instances,Day
 2025-10-06,All Games,Started,8476,instances,Day
 2025-10-06,All Games,Completed,3364,visits,Day
 2025-10-06,All Games,Started,5308,visits,Day
 2025-10-06,All Games,Completed,3305,users,Day
 2025-10-06,All Games,Started,5230,users,Day
+2025-10-06,All Games,RM Active Users,30180,rm_active_users,Day
 2025-10-07,All Games,Completed,5537,instances,Day
 2025-10-07,All Games,Started,9897,instances,Day
 2025-10-07,All Games,Completed,3575,visits,Day
 2025-10-07,All Games,Started,6241,visits,Day
 2025-10-07,All Games,Completed,3472,users,Day
 2025-10-07,All Games,Started,5935,users,Day
+2025-10-07,All Games,RM Active Users,28153,rm_active_users,Day
 2025-10-08,All Games,Completed,5719,instances,Day
 2025-10-08,All Games,Started,9643,instances,Day
 2025-10-08,All Games,Completed,3832,visits,Day
 2025-10-08,All Games,Started,6284,visits,Day
 2025-10-08,All Games,Completed,3707,users,Day
 2025-10-08,All Games,Started,6042,users,Day
+2025-10-08,All Games,RM Active Users,28453,rm_active_users,Day
 2025-10-09,All Games,Completed,3489,instances,Day
 2025-10-09,All Games,Started,5817,instances,Day
 2025-10-09,All Games,Completed,2279,visits,Day
 2025-10-09,All Games,Started,3612,visits,Day
 2025-10-09,All Games,Completed,2173,users,Day
 2025-10-09,All Games,Started,3400,users,Day
+2025-10-09,All Games,RM Active Users,29439,rm_active_users,Day
 2025-10-10,All Games,Completed,4916,instances,Day
 2025-10-10,All Games,Started,7619,instances,Day
 2025-10-10,All Games,Completed,3236,visits,Day
 2025-10-10,All Games,Started,4783,visits,Day
 2025-10-10,All Games,Completed,3165,users,Day
 2025-10-10,All Games,Started,4666,users,Day
+2025-10-10,All Games,RM Active Users,23716,rm_active_users,Day
 2025-10-11,All Games,Completed,6729,instances,Day
 2025-10-11,All Games,Started,10468,instances,Day
 2025-10-11,All Games,Completed,5042,visits,Day
 2025-10-11,All Games,Started,7264,visits,Day
 2025-10-11,All Games,Completed,4861,users,Day
 2025-10-11,All Games,Started,6988,users,Day
+2025-10-11,All Games,RM Active Users,22534,rm_active_users,Day
 2025-10-12,All Games,Completed,3261,instances,Day
 2025-10-12,All Games,Started,5019,instances,Day
 2025-10-12,All Games,Completed,2378,visits,Day
 2025-10-12,All Games,Started,3376,visits,Day
 2025-10-12,All Games,Completed,2301,users,Day
 2025-10-12,All Games,Started,3219,users,Day
+2025-10-12,All Games,RM Active Users,16260,rm_active_users,Day
 2025-10-13,All Games,Completed,5283,instances,Day
 2025-10-13,All Games,Started,7919,instances,Day
 2025-10-13,All Games,Completed,3852,visits,Day
 2025-10-13,All Games,Started,5359,visits,Day
 2025-10-13,All Games,Completed,3798,users,Day
 2025-10-13,All Games,Started,5255,users,Day
+2025-10-13,All Games,RM Active Users,24285,rm_active_users,Day
 2025-10-14,All Games,Completed,7202,instances,Day
 2025-10-14,All Games,Started,15038,instances,Day
 2025-10-14,All Games,Completed,5053,visits,Day
 2025-10-14,All Games,Started,10863,visits,Day
 2025-10-14,All Games,Completed,5138,users,Day
 2025-10-14,All Games,Started,10643,users,Day
+2025-10-14,All Games,RM Active Users,25180,rm_active_users,Day
 2025-10-15,All Games,Completed,8016,instances,Day
 2025-10-15,All Games,Started,15109,instances,Day
 2025-10-15,All Games,Completed,5770,visits,Day
 2025-10-15,All Games,Started,10701,visits,Day
 2025-10-15,All Games,Completed,5640,users,Day
 2025-10-15,All Games,Started,10151,users,Day
+2025-10-15,All Games,RM Active Users,23967,rm_active_users,Day
 2025-10-16,All Games,Completed,3961,instances,Day
 2025-10-16,All Games,Started,6643,instances,Day
 2025-10-16,All Games,Completed,2685,visits,Day
 2025-10-16,All Games,Started,4389,visits,Day
 2025-10-16,All Games,Completed,2584,users,Day
 2025-10-16,All Games,Started,4107,users,Day
+2025-10-16,All Games,RM Active Users,21499,rm_active_users,Day
 2025-10-17,All Games,Completed,4903,instances,Day
 2025-10-17,All Games,Started,7681,instances,Day
 2025-10-17,All Games,Completed,3387,visits,Day
 2025-10-17,All Games,Started,5054,visits,Day
 2025-10-17,All Games,Completed,3342,users,Day
 2025-10-17,All Games,Started,4948,users,Day
+2025-10-17,All Games,RM Active Users,21794,rm_active_users,Day
 2025-10-18,All Games,Completed,3789,instances,Day
 2025-10-18,All Games,Started,6009,instances,Day
 2025-10-18,All Games,Completed,2705,visits,Day
 2025-10-18,All Games,Started,4069,visits,Day
 2025-10-18,All Games,Completed,2644,users,Day
 2025-10-18,All Games,Started,3891,users,Day
+2025-10-18,All Games,RM Active Users,19917,rm_active_users,Day
 2025-10-19,All Games,Completed,1987,instances,Day
 2025-10-19,All Games,Started,3101,instances,Day
 2025-10-19,All Games,Completed,1307,visits,Day
 2025-10-19,All Games,Started,1960,visits,Day
 2025-10-19,All Games,Completed,1272,users,Day
 2025-10-19,All Games,Started,1857,users,Day
+2025-10-19,All Games,RM Active Users,14601,rm_active_users,Day
 2025-10-20,All Games,Completed,2287,instances,Day
 2025-10-20,All Games,Started,3342,instances,Day
 2025-10-20,All Games,Completed,1558,visits,Day
 2025-10-20,All Games,Started,2173,visits,Day
 2025-10-20,All Games,Completed,1513,users,Day
 2025-10-20,All Games,Started,2070,users,Day
+2025-10-20,All Games,RM Active Users,7736,rm_active_users,Day
 2025-10-21,All Games,Completed,2407,instances,Day
 2025-10-21,All Games,Started,3851,instances,Day
 2025-10-21,All Games,Completed,1664,visits,Day
 2025-10-21,All Games,Started,2608,visits,Day
 2025-10-21,All Games,Completed,1610,users,Day
 2025-10-21,All Games,Started,2440,users,Day
+2025-10-21,All Games,RM Active Users,5841,rm_active_users,Day
 2025-10-22,All Games,Completed,3916,instances,Day
 2025-10-22,All Games,Started,6192,instances,Day
 2025-10-22,All Games,Completed,2962,visits,Day
 2025-10-22,All Games,Started,4420,visits,Day
 2025-10-22,All Games,Completed,2889,users,Day
 2025-10-22,All Games,Started,4260,users,Day
+2025-10-22,All Games,RM Active Users,7266,rm_active_users,Day
 2025-10-23,All Games,Completed,2524,instances,Day
 2025-10-23,All Games,Started,4025,instances,Day
 2025-10-23,All Games,Completed,1793,visits,Day
 2025-10-23,All Games,Started,2741,visits,Day
 2025-10-23,All Games,Completed,1758,users,Day
 2025-10-23,All Games,Started,2637,users,Day
+2025-10-23,All Games,RM Active Users,7660,rm_active_users,Day
 2025-10-24,All Games,Completed,3758,instances,Day
 2025-10-24,All Games,Started,5828,instances,Day
 2025-10-24,All Games,Completed,2686,visits,Day
 2025-10-24,All Games,Started,3946,visits,Day
 2025-10-24,All Games,Completed,2649,users,Day
 2025-10-24,All Games,Started,3854,users,Day
+2025-10-24,All Games,RM Active Users,17055,rm_active_users,Day
 2025-10-25,All Games,Completed,4112,instances,Day
 2025-10-25,All Games,Started,8395,instances,Day
 2025-10-25,All Games,Completed,3017,visits,Day
 2025-10-25,All Games,Started,5664,visits,Day
 2025-10-25,All Games,Completed,2901,users,Day
 2025-10-25,All Games,Started,5377,users,Day
+2025-10-25,All Games,RM Active Users,10171,rm_active_users,Day
 2025-10-26,All Games,Completed,2127,instances,Day
 2025-10-26,All Games,Started,4391,instances,Day
 2025-10-26,All Games,Completed,1473,visits,Day
 2025-10-26,All Games,Started,2830,visits,Day
 2025-10-26,All Games,Completed,1424,users,Day
 2025-10-26,All Games,Started,2690,users,Day
+2025-10-26,All Games,RM Active Users,17904,rm_active_users,Day
 2025-10-27,All Games,Completed,3165,instances,Day
 2025-10-27,All Games,Started,6646,instances,Day
 2025-10-27,All Games,Completed,2222,visits,Day
 2025-10-27,All Games,Started,4359,visits,Day
 2025-10-27,All Games,Completed,2155,users,Day
 2025-10-27,All Games,Started,4234,users,Day
+2025-10-27,All Games,RM Active Users,21451,rm_active_users,Day
 2025-10-28,All Games,Completed,2641,instances,Day
 2025-10-28,All Games,Started,6979,instances,Day
 2025-10-28,All Games,Completed,1814,visits,Day
 2025-10-28,All Games,Started,4888,visits,Day
 2025-10-28,All Games,Completed,1747,users,Day
 2025-10-28,All Games,Started,4402,users,Day
+2025-10-28,All Games,RM Active Users,19271,rm_active_users,Day
 2025-10-29,All Games,Completed,4131,instances,Day
 2025-10-29,All Games,Started,8413,instances,Day
 2025-10-29,All Games,Completed,3089,visits,Day
 2025-10-29,All Games,Started,5941,visits,Day
 2025-10-29,All Games,Completed,3014,users,Day
 2025-10-29,All Games,Started,5580,users,Day
+2025-10-29,All Games,RM Active Users,17303,rm_active_users,Day
 2025-10-30,All Games,Completed,2720,instances,Day
 2025-10-30,All Games,Started,4789,instances,Day
 2025-10-30,All Games,Completed,1866,visits,Day
 2025-10-30,All Games,Started,3201,visits,Day
 2025-10-30,All Games,Completed,1806,users,Day
 2025-10-30,All Games,Started,3033,users,Day
+2025-10-30,All Games,RM Active Users,20294,rm_active_users,Day
 2025-10-31,All Games,Completed,4176,instances,Day
 2025-10-31,All Games,Started,7080,instances,Day
 2025-10-31,All Games,Completed,2893,visits,Day
 2025-10-31,All Games,Started,4684,visits,Day
 2025-10-31,All Games,Completed,2816,users,Day
 2025-10-31,All Games,Started,4589,users,Day
+2025-10-31,All Games,RM Active Users,18160,rm_active_users,Day
 2025-11-01,All Games,Completed,4683,instances,Day
 2025-11-01,All Games,Started,8568,instances,Day
 2025-11-01,All Games,Completed,3555,visits,Day
 2025-11-01,All Games,Started,5973,visits,Day
 2025-11-01,All Games,Completed,3404,users,Day
 2025-11-01,All Games,Started,5708,users,Day
+2025-11-01,All Games,RM Active Users,19385,rm_active_users,Day
 2025-11-02,All Games,Completed,2080,instances,Day
 2025-11-02,All Games,Started,3767,instances,Day
 2025-11-02,All Games,Completed,1480,visits,Day
 2025-11-02,All Games,Started,2546,visits,Day
 2025-11-02,All Games,Completed,1449,users,Day
 2025-11-02,All Games,Started,2441,users,Day
+2025-11-02,All Games,RM Active Users,16554,rm_active_users,Day
 2025-11-03,All Games,Completed,4793,instances,Day
 2025-11-03,All Games,Started,9276,instances,Day
 2025-11-03,All Games,Completed,3322,visits,Day
 2025-11-03,All Games,Started,6162,visits,Day
 2025-11-03,All Games,Completed,3373,users,Day
 2025-11-03,All Games,Started,6370,users,Day
+2025-11-03,All Games,RM Active Users,20102,rm_active_users,Day
 2025-11-04,All Games,Completed,3227,instances,Day
 2025-11-04,All Games,Started,7271,instances,Day
 2025-11-04,All Games,Completed,2266,visits,Day
 2025-11-04,All Games,Started,5131,visits,Day
 2025-11-04,All Games,Completed,2192,users,Day
 2025-11-04,All Games,Started,4593,users,Day
+2025-11-04,All Games,RM Active Users,19744,rm_active_users,Day
 2025-11-05,All Games,Completed,2268,instances,Day
 2025-11-05,All Games,Started,3891,instances,Day
 2025-11-05,All Games,Completed,1727,visits,Day
 2025-11-05,All Games,Started,2823,visits,Day
 2025-11-05,All Games,Completed,1694,users,Day
 2025-11-05,All Games,Started,2629,users,Day
+2025-11-05,All Games,RM Active Users,18569,rm_active_users,Day
 2025-11-06,All Games,Completed,1554,instances,Day
 2025-11-06,All Games,Started,2606,instances,Day
 2025-11-06,All Games,Completed,1129,visits,Day
 2025-11-06,All Games,Started,1841,visits,Day
 2025-11-06,All Games,Completed,1097,users,Day
 2025-11-06,All Games,Started,1687,users,Day
+2025-11-06,All Games,RM Active Users,21373,rm_active_users,Day
 2025-11-07,All Games,Completed,2493,instances,Day
 2025-11-07,All Games,Started,3551,instances,Day
 2025-11-07,All Games,Completed,1798,visits,Day
 2025-11-07,All Games,Started,2445,visits,Day
 2025-11-07,All Games,Completed,1751,users,Day
 2025-11-07,All Games,Started,2292,users,Day
+2025-11-07,All Games,RM Active Users,19669,rm_active_users,Day
 2025-11-08,All Games,Completed,4438,instances,Day
 2025-11-08,All Games,Started,7111,instances,Day
 2025-11-08,All Games,Completed,3535,visits,Day
 2025-11-08,All Games,Started,5242,visits,Day
 2025-11-08,All Games,Completed,3456,users,Day
 2025-11-08,All Games,Started,5071,users,Day
+2025-11-08,All Games,RM Active Users,19650,rm_active_users,Day
 2025-11-09,All Games,Completed,2302,instances,Day
 2025-11-09,All Games,Started,3701,instances,Day
 2025-11-09,All Games,Completed,1704,visits,Day
 2025-11-09,All Games,Started,2573,visits,Day
 2025-11-09,All Games,Completed,1658,users,Day
 2025-11-09,All Games,Started,2446,users,Day
+2025-11-09,All Games,RM Active Users,15919,rm_active_users,Day
 2025-11-10,All Games,Completed,1476,instances,Day
 2025-11-10,All Games,Started,2536,instances,Day
 2025-11-10,All Games,Completed,1025,visits,Day
 2025-11-10,All Games,Started,1682,visits,Day
 2025-11-10,All Games,Completed,1008,users,Day
 2025-11-10,All Games,Started,1596,users,Day
+2025-11-10,All Games,RM Active Users,22342,rm_active_users,Day
 2025-11-11,All Games,Completed,1901,instances,Day
 2025-11-11,All Games,Started,5001,instances,Day
 2025-11-11,All Games,Completed,1207,visits,Day
 2025-11-11,All Games,Started,3265,visits,Day
 2025-11-11,All Games,Completed,1170,users,Day
 2025-11-11,All Games,Started,3119,users,Day
+2025-11-11,All Games,RM Active Users,24788,rm_active_users,Day
 2025-11-12,All Games,Completed,1502,instances,Day
 2025-11-12,All Games,Started,3265,instances,Day
 2025-11-12,All Games,Completed,1038,visits,Day
 2025-11-12,All Games,Started,2219,visits,Day
 2025-11-12,All Games,Completed,1010,users,Day
 2025-11-12,All Games,Started,2070,users,Day
+2025-11-12,All Games,RM Active Users,21498,rm_active_users,Day
 2025-11-13,All Games,Completed,891,instances,Day
 2025-11-13,All Games,Started,1745,instances,Day
 2025-11-13,All Games,Completed,621,visits,Day
 2025-11-13,All Games,Started,1185,visits,Day
 2025-11-13,All Games,Completed,603,users,Day
 2025-11-13,All Games,Started,1077,users,Day
+2025-11-13,All Games,RM Active Users,17742,rm_active_users,Day
 2025-11-14,All Games,Completed,1295,instances,Day
 2025-11-14,All Games,Started,2162,instances,Day
 2025-11-14,All Games,Completed,917,visits,Day
 2025-11-14,All Games,Started,1455,visits,Day
 2025-11-14,All Games,Completed,893,users,Day
 2025-11-14,All Games,Started,1379,users,Day
+2025-11-14,All Games,RM Active Users,21660,rm_active_users,Day
 2025-11-15,All Games,Completed,1739,instances,Day
 2025-11-15,All Games,Started,2564,instances,Day
 2025-11-15,All Games,Completed,1323,visits,Day
 2025-11-15,All Games,Started,1865,visits,Day
 2025-11-15,All Games,Completed,1297,users,Day
 2025-11-15,All Games,Started,1763,users,Day
+2025-11-15,All Games,RM Active Users,21825,rm_active_users,Day
 2025-11-16,All Games,Completed,1080,instances,Day
 2025-11-16,All Games,Started,1651,instances,Day
 2025-11-16,All Games,Completed,750,visits,Day
 2025-11-16,All Games,Started,1105,visits,Day
 2025-11-16,All Games,Completed,731,users,Day
 2025-11-16,All Games,Started,1009,users,Day
+2025-11-16,All Games,RM Active Users,14220,rm_active_users,Day
 2025-11-17,All Games,Completed,1667,instances,Day
 2025-11-17,All Games,Started,2815,instances,Day
 2025-11-17,All Games,Completed,1181,visits,Day
 2025-11-17,All Games,Started,1915,visits,Day
 2025-11-17,All Games,Completed,1160,users,Day
 2025-11-17,All Games,Started,1863,users,Day
+2025-11-17,All Games,RM Active Users,21463,rm_active_users,Day
 2025-11-18,All Games,Completed,1662,instances,Day
 2025-11-18,All Games,Started,3547,instances,Day
 2025-11-18,All Games,Completed,1147,visits,Day
 2025-11-18,All Games,Started,2620,visits,Day
 2025-11-18,All Games,Completed,1117,users,Day
 2025-11-18,All Games,Started,2364,users,Day
+2025-11-18,All Games,RM Active Users,18054,rm_active_users,Day
 2025-11-19,All Games,Completed,3830,instances,Day
 2025-11-19,All Games,Started,7678,instances,Day
 2025-11-19,All Games,Completed,2919,visits,Day
 2025-11-19,All Games,Started,5626,visits,Day
 2025-11-19,All Games,Completed,2850,users,Day
 2025-11-19,All Games,Started,5439,users,Day
+2025-11-19,All Games,RM Active Users,22208,rm_active_users,Day
 2025-11-20,All Games,Completed,2129,instances,Day
 2025-11-20,All Games,Started,4097,instances,Day
 2025-11-20,All Games,Completed,1549,visits,Day
 2025-11-20,All Games,Started,2937,visits,Day
 2025-11-20,All Games,Completed,1520,users,Day
 2025-11-20,All Games,Started,2834,users,Day
+2025-11-20,All Games,RM Active Users,22424,rm_active_users,Day
 2025-11-21,All Games,Completed,3637,instances,Day
 2025-11-21,All Games,Started,6858,instances,Day
 2025-11-21,All Games,Completed,2558,visits,Day
 2025-11-21,All Games,Started,4758,visits,Day
 2025-11-21,All Games,Completed,2526,users,Day
 2025-11-21,All Games,Started,4690,users,Day
+2025-11-21,All Games,RM Active Users,19299,rm_active_users,Day
 2025-11-22,All Games,Completed,4455,instances,Day
 2025-11-22,All Games,Started,8552,instances,Day
 2025-11-22,All Games,Completed,3356,visits,Day
 2025-11-22,All Games,Started,6110,visits,Day
 2025-11-22,All Games,Completed,3261,users,Day
 2025-11-22,All Games,Started,5908,users,Day
+2025-11-22,All Games,RM Active Users,15057,rm_active_users,Day
 2025-11-23,All Games,Completed,1965,instances,Day
 2025-11-23,All Games,Started,3655,instances,Day
 2025-11-23,All Games,Completed,1383,visits,Day
 2025-11-23,All Games,Started,2528,visits,Day
 2025-11-23,All Games,Completed,1353,users,Day
 2025-11-23,All Games,Started,2427,users,Day
-2025-11-24,All Games,Completed,299,instances,Day
-2025-11-24,All Games,Started,623,instances,Day
-2025-11-24,All Games,Completed,218,visits,Day
-2025-11-24,All Games,Started,441,visits,Day
-2025-11-24,All Games,Completed,217,users,Day
-2025-11-24,All Games,Started,440,users,Day
+2025-11-23,All Games,RM Active Users,15227,rm_active_users,Day
+2025-11-24,All Games,Completed,3357,instances,Day
+2025-11-24,All Games,Started,6009,instances,Day
+2025-11-24,All Games,Completed,2378,visits,Day
+2025-11-24,All Games,Started,4199,visits,Day
+2025-11-24,All Games,Completed,2373,users,Day
+2025-11-24,All Games,Started,4237,users,Day
+2025-11-24,All Games,RM Active Users,21056,rm_active_users,Day
+2025-11-25,All Games,Completed,1957,instances,Day
+2025-11-25,All Games,Started,3335,instances,Day
+2025-11-25,All Games,Completed,1335,visits,Day
+2025-11-25,All Games,Started,2257,visits,Day
+2025-11-25,All Games,Completed,1304,users,Day
+2025-11-25,All Games,Started,2182,users,Day
+2025-11-25,All Games,RM Active Users,21464,rm_active_users,Day
+2025-11-26,All Games,Completed,3728,instances,Day
+2025-11-26,All Games,Started,7320,instances,Day
+2025-11-26,All Games,Completed,2904,visits,Day
+2025-11-26,All Games,Started,5281,visits,Day
+2025-11-26,All Games,Completed,2870,users,Day
+2025-11-26,All Games,Started,5221,users,Day
+2025-11-26,All Games,RM Active Users,14696,rm_active_users,Day
+2025-11-27,All Games,Completed,808,instances,Day
+2025-11-27,All Games,Started,1765,instances,Day
+2025-11-27,All Games,Completed,623,visits,Day
+2025-11-27,All Games,Started,1330,visits,Day
+2025-11-27,All Games,Completed,619,users,Day
+2025-11-27,All Games,Started,1311,users,Day
 2025-09-26,Beginning Sound Ba/Ra/Na,Completed,210,instances,Day
 2025-09-26,Beginning Sound Ba/Ra/Na,Started,289,instances,Day
 2025-09-26,Beginning Sound Ba/Ra/Na,Completed,172,visits,Day
@@ -1229,12 +1396,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sound Ba/Ra/Na,Started,8,visits,Day
 2025-11-23,Beginning Sound Ba/Ra/Na,Completed,4,users,Day
 2025-11-23,Beginning Sound Ba/Ra/Na,Started,7,users,Day
-2025-11-24,Beginning Sound Ba/Ra/Na,Completed,3,instances,Day
-2025-11-24,Beginning Sound Ba/Ra/Na,Started,3,instances,Day
-2025-11-24,Beginning Sound Ba/Ra/Na,Completed,2,visits,Day
-2025-11-24,Beginning Sound Ba/Ra/Na,Started,2,visits,Day
-2025-11-24,Beginning Sound Ba/Ra/Na,Completed,2,users,Day
-2025-11-24,Beginning Sound Ba/Ra/Na,Started,2,users,Day
+2025-11-24,Beginning Sound Ba/Ra/Na,Completed,11,instances,Day
+2025-11-24,Beginning Sound Ba/Ra/Na,Started,13,instances,Day
+2025-11-24,Beginning Sound Ba/Ra/Na,Completed,9,visits,Day
+2025-11-24,Beginning Sound Ba/Ra/Na,Started,11,visits,Day
+2025-11-24,Beginning Sound Ba/Ra/Na,Completed,9,users,Day
+2025-11-24,Beginning Sound Ba/Ra/Na,Started,11,users,Day
+2025-11-25,Beginning Sound Ba/Ra/Na,Completed,16,instances,Day
+2025-11-25,Beginning Sound Ba/Ra/Na,Started,22,instances,Day
+2025-11-25,Beginning Sound Ba/Ra/Na,Completed,11,visits,Day
+2025-11-25,Beginning Sound Ba/Ra/Na,Started,16,visits,Day
+2025-11-25,Beginning Sound Ba/Ra/Na,Completed,11,users,Day
+2025-11-25,Beginning Sound Ba/Ra/Na,Started,15,users,Day
+2025-11-26,Beginning Sound Ba/Ra/Na,Completed,8,instances,Day
+2025-11-26,Beginning Sound Ba/Ra/Na,Started,11,instances,Day
+2025-11-26,Beginning Sound Ba/Ra/Na,Completed,8,visits,Day
+2025-11-26,Beginning Sound Ba/Ra/Na,Started,11,visits,Day
+2025-11-26,Beginning Sound Ba/Ra/Na,Completed,8,users,Day
+2025-11-26,Beginning Sound Ba/Ra/Na,Started,11,users,Day
+2025-11-27,Beginning Sound Ba/Ra/Na,Completed,2,instances,Day
+2025-11-27,Beginning Sound Ba/Ra/Na,Started,4,instances,Day
+2025-11-27,Beginning Sound Ba/Ra/Na,Completed,2,visits,Day
+2025-11-27,Beginning Sound Ba/Ra/Na,Started,4,visits,Day
+2025-11-27,Beginning Sound Ba/Ra/Na,Completed,2,users,Day
+2025-11-27,Beginning Sound Ba/Ra/Na,Started,4,users,Day
 2025-10-24,Beginning Sounds Ka/Na/Ta,Completed,43,instances,Day
 2025-10-24,Beginning Sounds Ka/Na/Ta,Started,105,instances,Day
 2025-10-24,Beginning Sounds Ka/Na/Ta,Completed,31,visits,Day
@@ -1421,12 +1606,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sounds Ka/Na/Ta,Started,288,visits,Day
 2025-11-23,Beginning Sounds Ka/Na/Ta,Completed,114,users,Day
 2025-11-23,Beginning Sounds Ka/Na/Ta,Started,289,users,Day
-2025-11-24,Beginning Sounds Ka/Na/Ta,Completed,28,instances,Day
-2025-11-24,Beginning Sounds Ka/Na/Ta,Started,78,instances,Day
-2025-11-24,Beginning Sounds Ka/Na/Ta,Completed,27,visits,Day
-2025-11-24,Beginning Sounds Ka/Na/Ta,Started,66,visits,Day
-2025-11-24,Beginning Sounds Ka/Na/Ta,Completed,27,users,Day
-2025-11-24,Beginning Sounds Ka/Na/Ta,Started,66,users,Day
+2025-11-24,Beginning Sounds Ka/Na/Ta,Completed,87,instances,Day
+2025-11-24,Beginning Sounds Ka/Na/Ta,Started,255,instances,Day
+2025-11-24,Beginning Sounds Ka/Na/Ta,Completed,83,visits,Day
+2025-11-24,Beginning Sounds Ka/Na/Ta,Started,214,visits,Day
+2025-11-24,Beginning Sounds Ka/Na/Ta,Completed,84,users,Day
+2025-11-24,Beginning Sounds Ka/Na/Ta,Started,216,users,Day
+2025-11-25,Beginning Sounds Ka/Na/Ta,Completed,71,instances,Day
+2025-11-25,Beginning Sounds Ka/Na/Ta,Started,222,instances,Day
+2025-11-25,Beginning Sounds Ka/Na/Ta,Completed,67,visits,Day
+2025-11-25,Beginning Sounds Ka/Na/Ta,Started,187,visits,Day
+2025-11-25,Beginning Sounds Ka/Na/Ta,Completed,67,users,Day
+2025-11-25,Beginning Sounds Ka/Na/Ta,Started,179,users,Day
+2025-11-26,Beginning Sounds Ka/Na/Ta,Completed,33,instances,Day
+2025-11-26,Beginning Sounds Ka/Na/Ta,Started,111,instances,Day
+2025-11-26,Beginning Sounds Ka/Na/Ta,Completed,32,visits,Day
+2025-11-26,Beginning Sounds Ka/Na/Ta,Started,98,visits,Day
+2025-11-26,Beginning Sounds Ka/Na/Ta,Completed,32,users,Day
+2025-11-26,Beginning Sounds Ka/Na/Ta,Started,98,users,Day
+2025-11-27,Beginning Sounds Ka/Na/Ta,Completed,5,instances,Day
+2025-11-27,Beginning Sounds Ka/Na/Ta,Started,27,instances,Day
+2025-11-27,Beginning Sounds Ka/Na/Ta,Completed,5,visits,Day
+2025-11-27,Beginning Sounds Ka/Na/Ta,Started,25,visits,Day
+2025-11-27,Beginning Sounds Ka/Na/Ta,Completed,5,users,Day
+2025-11-27,Beginning Sounds Ka/Na/Ta,Started,24,users,Day
 2025-10-29,Beginning Sounds Ma/Cha/Ba,Completed,1895,instances,Day
 2025-10-29,Beginning Sounds Ma/Cha/Ba,Started,3780,instances,Day
 2025-10-29,Beginning Sounds Ma/Cha/Ba,Completed,1858,visits,Day
@@ -1583,12 +1786,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sounds Ma/Cha/Ba,Started,1578,visits,Day
 2025-11-23,Beginning Sounds Ma/Cha/Ba,Completed,738,users,Day
 2025-11-23,Beginning Sounds Ma/Cha/Ba,Started,1541,users,Day
-2025-11-24,Beginning Sounds Ma/Cha/Ba,Completed,78,instances,Day
-2025-11-24,Beginning Sounds Ma/Cha/Ba,Started,246,instances,Day
-2025-11-24,Beginning Sounds Ma/Cha/Ba,Completed,78,visits,Day
-2025-11-24,Beginning Sounds Ma/Cha/Ba,Started,229,visits,Day
-2025-11-24,Beginning Sounds Ma/Cha/Ba,Completed,78,users,Day
-2025-11-24,Beginning Sounds Ma/Cha/Ba,Started,230,users,Day
+2025-11-24,Beginning Sounds Ma/Cha/Ba,Completed,1262,instances,Day
+2025-11-24,Beginning Sounds Ma/Cha/Ba,Started,3131,instances,Day
+2025-11-24,Beginning Sounds Ma/Cha/Ba,Completed,1229,visits,Day
+2025-11-24,Beginning Sounds Ma/Cha/Ba,Started,2708,visits,Day
+2025-11-24,Beginning Sounds Ma/Cha/Ba,Completed,1228,users,Day
+2025-11-24,Beginning Sounds Ma/Cha/Ba,Started,2736,users,Day
+2025-11-25,Beginning Sounds Ma/Cha/Ba,Completed,542,instances,Day
+2025-11-25,Beginning Sounds Ma/Cha/Ba,Started,1295,instances,Day
+2025-11-25,Beginning Sounds Ma/Cha/Ba,Completed,527,visits,Day
+2025-11-25,Beginning Sounds Ma/Cha/Ba,Started,1125,visits,Day
+2025-11-25,Beginning Sounds Ma/Cha/Ba,Completed,527,users,Day
+2025-11-25,Beginning Sounds Ma/Cha/Ba,Started,1132,users,Day
+2025-11-26,Beginning Sounds Ma/Cha/Ba,Completed,174,instances,Day
+2025-11-26,Beginning Sounds Ma/Cha/Ba,Started,438,instances,Day
+2025-11-26,Beginning Sounds Ma/Cha/Ba,Completed,173,visits,Day
+2025-11-26,Beginning Sounds Ma/Cha/Ba,Started,378,visits,Day
+2025-11-26,Beginning Sounds Ma/Cha/Ba,Completed,171,users,Day
+2025-11-26,Beginning Sounds Ma/Cha/Ba,Started,373,users,Day
+2025-11-27,Beginning Sounds Ma/Cha/Ba,Completed,15,instances,Day
+2025-11-27,Beginning Sounds Ma/Cha/Ba,Started,61,instances,Day
+2025-11-27,Beginning Sounds Ma/Cha/Ba,Completed,15,visits,Day
+2025-11-27,Beginning Sounds Ma/Cha/Ba,Started,60,visits,Day
+2025-11-27,Beginning Sounds Ma/Cha/Ba,Completed,15,users,Day
+2025-11-27,Beginning Sounds Ma/Cha/Ba,Started,59,users,Day
 2025-08-22,Beginning Sounds Ma/Ka/La,Completed,258,instances,Day
 2025-08-22,Beginning Sounds Ma/Ka/La,Started,316,instances,Day
 2025-08-22,Beginning Sounds Ma/Ka/La,Completed,206,visits,Day
@@ -2153,12 +2374,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sounds Ma/Ka/La,Started,42,visits,Day
 2025-11-23,Beginning Sounds Ma/Ka/La,Completed,23,users,Day
 2025-11-23,Beginning Sounds Ma/Ka/La,Started,40,users,Day
-2025-11-24,Beginning Sounds Ma/Ka/La,Completed,5,instances,Day
-2025-11-24,Beginning Sounds Ma/Ka/La,Started,8,instances,Day
-2025-11-24,Beginning Sounds Ma/Ka/La,Completed,4,visits,Day
-2025-11-24,Beginning Sounds Ma/Ka/La,Started,7,visits,Day
-2025-11-24,Beginning Sounds Ma/Ka/La,Completed,4,users,Day
-2025-11-24,Beginning Sounds Ma/Ka/La,Started,7,users,Day
+2025-11-24,Beginning Sounds Ma/Ka/La,Completed,40,instances,Day
+2025-11-24,Beginning Sounds Ma/Ka/La,Started,69,instances,Day
+2025-11-24,Beginning Sounds Ma/Ka/La,Completed,36,visits,Day
+2025-11-24,Beginning Sounds Ma/Ka/La,Started,63,visits,Day
+2025-11-24,Beginning Sounds Ma/Ka/La,Completed,36,users,Day
+2025-11-24,Beginning Sounds Ma/Ka/La,Started,63,users,Day
+2025-11-25,Beginning Sounds Ma/Ka/La,Completed,22,instances,Day
+2025-11-25,Beginning Sounds Ma/Ka/La,Started,52,instances,Day
+2025-11-25,Beginning Sounds Ma/Ka/La,Completed,21,visits,Day
+2025-11-25,Beginning Sounds Ma/Ka/La,Started,50,visits,Day
+2025-11-25,Beginning Sounds Ma/Ka/La,Completed,21,users,Day
+2025-11-25,Beginning Sounds Ma/Ka/La,Started,50,users,Day
+2025-11-26,Beginning Sounds Ma/Ka/La,Completed,26,instances,Day
+2025-11-26,Beginning Sounds Ma/Ka/La,Started,49,instances,Day
+2025-11-26,Beginning Sounds Ma/Ka/La,Completed,25,visits,Day
+2025-11-26,Beginning Sounds Ma/Ka/La,Started,48,visits,Day
+2025-11-26,Beginning Sounds Ma/Ka/La,Completed,25,users,Day
+2025-11-26,Beginning Sounds Ma/Ka/La,Started,48,users,Day
+2025-11-27,Beginning Sounds Ma/Ka/La,Completed,15,instances,Day
+2025-11-27,Beginning Sounds Ma/Ka/La,Started,29,instances,Day
+2025-11-27,Beginning Sounds Ma/Ka/La,Completed,13,visits,Day
+2025-11-27,Beginning Sounds Ma/Ka/La,Started,21,visits,Day
+2025-11-27,Beginning Sounds Ma/Ka/La,Completed,13,users,Day
+2025-11-27,Beginning Sounds Ma/Ka/La,Started,17,users,Day
 2025-09-02,Beginning Sounds Pa/Cha/Sa,Completed,75,instances,Day
 2025-09-02,Beginning Sounds Pa/Cha/Sa,Started,75,instances,Day
 2025-09-02,Beginning Sounds Pa/Cha/Sa,Completed,68,visits,Day
@@ -2657,12 +2896,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sounds Pa/Cha/Sa,Started,11,visits,Day
 2025-11-23,Beginning Sounds Pa/Cha/Sa,Completed,4,users,Day
 2025-11-23,Beginning Sounds Pa/Cha/Sa,Started,11,users,Day
-2025-11-24,Beginning Sounds Pa/Cha/Sa,Completed,3,instances,Day
-2025-11-24,Beginning Sounds Pa/Cha/Sa,Started,6,instances,Day
-2025-11-24,Beginning Sounds Pa/Cha/Sa,Completed,3,visits,Day
-2025-11-24,Beginning Sounds Pa/Cha/Sa,Started,6,visits,Day
-2025-11-24,Beginning Sounds Pa/Cha/Sa,Completed,3,users,Day
-2025-11-24,Beginning Sounds Pa/Cha/Sa,Started,6,users,Day
+2025-11-24,Beginning Sounds Pa/Cha/Sa,Completed,13,instances,Day
+2025-11-24,Beginning Sounds Pa/Cha/Sa,Started,24,instances,Day
+2025-11-24,Beginning Sounds Pa/Cha/Sa,Completed,11,visits,Day
+2025-11-24,Beginning Sounds Pa/Cha/Sa,Started,22,visits,Day
+2025-11-24,Beginning Sounds Pa/Cha/Sa,Completed,11,users,Day
+2025-11-24,Beginning Sounds Pa/Cha/Sa,Started,22,users,Day
+2025-11-25,Beginning Sounds Pa/Cha/Sa,Completed,17,instances,Day
+2025-11-25,Beginning Sounds Pa/Cha/Sa,Started,29,instances,Day
+2025-11-25,Beginning Sounds Pa/Cha/Sa,Completed,14,visits,Day
+2025-11-25,Beginning Sounds Pa/Cha/Sa,Started,20,visits,Day
+2025-11-25,Beginning Sounds Pa/Cha/Sa,Completed,13,users,Day
+2025-11-25,Beginning Sounds Pa/Cha/Sa,Started,19,users,Day
+2025-11-26,Beginning Sounds Pa/Cha/Sa,Completed,18,instances,Day
+2025-11-26,Beginning Sounds Pa/Cha/Sa,Started,44,instances,Day
+2025-11-26,Beginning Sounds Pa/Cha/Sa,Completed,17,visits,Day
+2025-11-26,Beginning Sounds Pa/Cha/Sa,Started,31,visits,Day
+2025-11-26,Beginning Sounds Pa/Cha/Sa,Completed,17,users,Day
+2025-11-26,Beginning Sounds Pa/Cha/Sa,Started,27,users,Day
+2025-11-27,Beginning Sounds Pa/Cha/Sa,Completed,5,instances,Day
+2025-11-27,Beginning Sounds Pa/Cha/Sa,Started,9,instances,Day
+2025-11-27,Beginning Sounds Pa/Cha/Sa,Completed,4,visits,Day
+2025-11-27,Beginning Sounds Pa/Cha/Sa,Started,7,visits,Day
+2025-11-27,Beginning Sounds Pa/Cha/Sa,Completed,4,users,Day
+2025-11-27,Beginning Sounds Pa/Cha/Sa,Started,7,users,Day
 2025-10-29,Beginning Sounds Sa/La/Va,Completed,65,instances,Day
 2025-10-29,Beginning Sounds Sa/La/Va,Started,67,instances,Day
 2025-10-29,Beginning Sounds Sa/La/Va,Completed,55,visits,Day
@@ -2819,12 +3076,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sounds Sa/La/Va,Started,12,visits,Day
 2025-11-23,Beginning Sounds Sa/La/Va,Completed,6,users,Day
 2025-11-23,Beginning Sounds Sa/La/Va,Started,9,users,Day
-2025-11-24,Beginning Sounds Sa/La/Va,Completed,1,instances,Day
-2025-11-24,Beginning Sounds Sa/La/Va,Started,2,instances,Day
-2025-11-24,Beginning Sounds Sa/La/Va,Completed,1,visits,Day
-2025-11-24,Beginning Sounds Sa/La/Va,Started,2,visits,Day
-2025-11-24,Beginning Sounds Sa/La/Va,Completed,1,users,Day
-2025-11-24,Beginning Sounds Sa/La/Va,Started,2,users,Day
+2025-11-24,Beginning Sounds Sa/La/Va,Completed,26,instances,Day
+2025-11-24,Beginning Sounds Sa/La/Va,Started,33,instances,Day
+2025-11-24,Beginning Sounds Sa/La/Va,Completed,25,visits,Day
+2025-11-24,Beginning Sounds Sa/La/Va,Started,30,visits,Day
+2025-11-24,Beginning Sounds Sa/La/Va,Completed,25,users,Day
+2025-11-24,Beginning Sounds Sa/La/Va,Started,30,users,Day
+2025-11-25,Beginning Sounds Sa/La/Va,Completed,9,instances,Day
+2025-11-25,Beginning Sounds Sa/La/Va,Started,19,instances,Day
+2025-11-25,Beginning Sounds Sa/La/Va,Completed,9,visits,Day
+2025-11-25,Beginning Sounds Sa/La/Va,Started,16,visits,Day
+2025-11-25,Beginning Sounds Sa/La/Va,Completed,9,users,Day
+2025-11-25,Beginning Sounds Sa/La/Va,Started,19,users,Day
+2025-11-26,Beginning Sounds Sa/La/Va,Completed,1955,instances,Day
+2025-11-26,Beginning Sounds Sa/La/Va,Started,4674,instances,Day
+2025-11-26,Beginning Sounds Sa/La/Va,Completed,1929,visits,Day
+2025-11-26,Beginning Sounds Sa/La/Va,Started,3905,visits,Day
+2025-11-26,Beginning Sounds Sa/La/Va,Completed,1921,users,Day
+2025-11-26,Beginning Sounds Sa/La/Va,Started,3924,users,Day
+2025-11-27,Beginning Sounds Sa/La/Va,Completed,385,instances,Day
+2025-11-27,Beginning Sounds Sa/La/Va,Started,1100,instances,Day
+2025-11-27,Beginning Sounds Sa/La/Va,Completed,383,visits,Day
+2025-11-27,Beginning Sounds Sa/La/Va,Started,968,visits,Day
+2025-11-27,Beginning Sounds Sa/La/Va,Completed,381,users,Day
+2025-11-27,Beginning Sounds Sa/La/Va,Started,958,users,Day
 2025-10-10,Beginning Sounds Ta/Va/Ga,Completed,25,instances,Day
 2025-10-10,Beginning Sounds Ta/Va/Ga,Started,42,instances,Day
 2025-10-10,Beginning Sounds Ta/Va/Ga,Completed,23,visits,Day
@@ -3095,6 +3370,27 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Beginning Sounds Ta/Va/Ga,Started,3,visits,Day
 2025-11-23,Beginning Sounds Ta/Va/Ga,Completed,2,users,Day
 2025-11-23,Beginning Sounds Ta/Va/Ga,Started,3,users,Day
+2025-11-24,Beginning Sounds Ta/Va/Ga,Completed,3,instances,Day
+2025-11-24,Beginning Sounds Ta/Va/Ga,Started,4,instances,Day
+2025-11-24,Beginning Sounds Ta/Va/Ga,Completed,2,visits,Day
+2025-11-24,Beginning Sounds Ta/Va/Ga,Started,3,visits,Day
+2025-11-24,Beginning Sounds Ta/Va/Ga,Completed,2,users,Day
+2025-11-24,Beginning Sounds Ta/Va/Ga,Started,3,users,Day
+2025-11-25,Beginning Sounds Ta/Va/Ga,Completed,8,instances,Day
+2025-11-25,Beginning Sounds Ta/Va/Ga,Started,21,instances,Day
+2025-11-25,Beginning Sounds Ta/Va/Ga,Completed,8,visits,Day
+2025-11-25,Beginning Sounds Ta/Va/Ga,Started,18,visits,Day
+2025-11-25,Beginning Sounds Ta/Va/Ga,Completed,8,users,Day
+2025-11-25,Beginning Sounds Ta/Va/Ga,Started,19,users,Day
+2025-11-26,Beginning Sounds Ta/Va/Ga,Completed,5,instances,Day
+2025-11-26,Beginning Sounds Ta/Va/Ga,Started,8,instances,Day
+2025-11-26,Beginning Sounds Ta/Va/Ga,Completed,5,visits,Day
+2025-11-26,Beginning Sounds Ta/Va/Ga,Started,8,visits,Day
+2025-11-26,Beginning Sounds Ta/Va/Ga,Completed,5,users,Day
+2025-11-26,Beginning Sounds Ta/Va/Ga,Started,8,users,Day
+2025-11-27,Beginning Sounds Ta/Va/Ga,Started,3,instances,Day
+2025-11-27,Beginning Sounds Ta/Va/Ga,Started,3,visits,Day
+2025-11-27,Beginning Sounds Ta/Va/Ga,Started,3,users,Day
 2025-07-25,Color Blue,Completed,253,instances,Day
 2025-07-25,Color Blue,Started,336,instances,Day
 2025-07-25,Color Blue,Completed,169,visits,Day
@@ -3827,12 +4123,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Color Blue,Started,39,visits,Day
 2025-11-23,Color Blue,Completed,31,users,Day
 2025-11-23,Color Blue,Started,39,users,Day
-2025-11-24,Color Blue,Completed,5,instances,Day
-2025-11-24,Color Blue,Started,11,instances,Day
-2025-11-24,Color Blue,Completed,5,visits,Day
-2025-11-24,Color Blue,Started,7,visits,Day
-2025-11-24,Color Blue,Completed,4,users,Day
-2025-11-24,Color Blue,Started,6,users,Day
+2025-11-24,Color Blue,Completed,38,instances,Day
+2025-11-24,Color Blue,Started,55,instances,Day
+2025-11-24,Color Blue,Completed,37,visits,Day
+2025-11-24,Color Blue,Started,47,visits,Day
+2025-11-24,Color Blue,Completed,36,users,Day
+2025-11-24,Color Blue,Started,46,users,Day
+2025-11-25,Color Blue,Completed,41,instances,Day
+2025-11-25,Color Blue,Started,49,instances,Day
+2025-11-25,Color Blue,Completed,40,visits,Day
+2025-11-25,Color Blue,Started,46,visits,Day
+2025-11-25,Color Blue,Completed,40,users,Day
+2025-11-25,Color Blue,Started,46,users,Day
+2025-11-26,Color Blue,Completed,36,instances,Day
+2025-11-26,Color Blue,Started,44,instances,Day
+2025-11-26,Color Blue,Completed,34,visits,Day
+2025-11-26,Color Blue,Started,40,visits,Day
+2025-11-26,Color Blue,Completed,34,users,Day
+2025-11-26,Color Blue,Started,40,users,Day
+2025-11-27,Color Blue,Completed,10,instances,Day
+2025-11-27,Color Blue,Started,12,instances,Day
+2025-11-27,Color Blue,Completed,10,visits,Day
+2025-11-27,Color Blue,Started,12,visits,Day
+2025-11-27,Color Blue,Completed,10,users,Day
+2025-11-27,Color Blue,Started,12,users,Day
 2025-07-02,Color Red,Completed,3,instances,Day
 2025-07-02,Color Red,Started,4,instances,Day
 2025-07-02,Color Red,Completed,3,visits,Day
@@ -4694,12 +5008,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Color Red,Started,195,visits,Day
 2025-11-23,Color Red,Completed,154,users,Day
 2025-11-23,Color Red,Started,190,users,Day
-2025-11-24,Color Red,Completed,26,instances,Day
-2025-11-24,Color Red,Started,36,instances,Day
-2025-11-24,Color Red,Completed,25,visits,Day
-2025-11-24,Color Red,Started,31,visits,Day
-2025-11-24,Color Red,Completed,25,users,Day
-2025-11-24,Color Red,Started,31,users,Day
+2025-11-24,Color Red,Completed,312,instances,Day
+2025-11-24,Color Red,Started,378,instances,Day
+2025-11-24,Color Red,Completed,295,visits,Day
+2025-11-24,Color Red,Started,336,visits,Day
+2025-11-24,Color Red,Completed,294,users,Day
+2025-11-24,Color Red,Started,334,users,Day
+2025-11-25,Color Red,Completed,186,instances,Day
+2025-11-25,Color Red,Started,244,instances,Day
+2025-11-25,Color Red,Completed,176,visits,Day
+2025-11-25,Color Red,Started,219,visits,Day
+2025-11-25,Color Red,Completed,175,users,Day
+2025-11-25,Color Red,Started,215,users,Day
+2025-11-26,Color Red,Completed,218,instances,Day
+2025-11-26,Color Red,Started,286,instances,Day
+2025-11-26,Color Red,Completed,207,visits,Day
+2025-11-26,Color Red,Started,261,visits,Day
+2025-11-26,Color Red,Completed,206,users,Day
+2025-11-26,Color Red,Started,255,users,Day
+2025-11-27,Color Red,Completed,58,instances,Day
+2025-11-27,Color Red,Started,75,instances,Day
+2025-11-27,Color Red,Completed,51,visits,Day
+2025-11-27,Color Red,Started,64,visits,Day
+2025-11-27,Color Red,Completed,50,users,Day
+2025-11-27,Color Red,Started,63,users,Day
 2025-07-02,Color Yellow,Completed,1,instances,Day
 2025-07-02,Color Yellow,Started,1,instances,Day
 2025-07-02,Color Yellow,Completed,1,visits,Day
@@ -5564,12 +5896,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Color Yellow,Started,45,visits,Day
 2025-11-23,Color Yellow,Completed,34,users,Day
 2025-11-23,Color Yellow,Started,44,users,Day
-2025-11-24,Color Yellow,Completed,6,instances,Day
-2025-11-24,Color Yellow,Started,10,instances,Day
-2025-11-24,Color Yellow,Completed,6,visits,Day
-2025-11-24,Color Yellow,Started,10,visits,Day
-2025-11-24,Color Yellow,Completed,6,users,Day
-2025-11-24,Color Yellow,Started,10,users,Day
+2025-11-24,Color Yellow,Completed,57,instances,Day
+2025-11-24,Color Yellow,Started,85,instances,Day
+2025-11-24,Color Yellow,Completed,53,visits,Day
+2025-11-24,Color Yellow,Started,72,visits,Day
+2025-11-24,Color Yellow,Completed,54,users,Day
+2025-11-24,Color Yellow,Started,73,users,Day
+2025-11-25,Color Yellow,Completed,56,instances,Day
+2025-11-25,Color Yellow,Started,68,instances,Day
+2025-11-25,Color Yellow,Completed,54,visits,Day
+2025-11-25,Color Yellow,Started,64,visits,Day
+2025-11-25,Color Yellow,Completed,54,users,Day
+2025-11-25,Color Yellow,Started,63,users,Day
+2025-11-26,Color Yellow,Completed,46,instances,Day
+2025-11-26,Color Yellow,Started,56,instances,Day
+2025-11-26,Color Yellow,Completed,43,visits,Day
+2025-11-26,Color Yellow,Started,49,visits,Day
+2025-11-26,Color Yellow,Completed,43,users,Day
+2025-11-26,Color Yellow,Started,49,users,Day
+2025-11-27,Color Yellow,Completed,11,instances,Day
+2025-11-27,Color Yellow,Started,13,instances,Day
+2025-11-27,Color Yellow,Completed,11,visits,Day
+2025-11-27,Color Yellow,Started,13,visits,Day
+2025-11-27,Color Yellow,Completed,11,users,Day
+2025-11-27,Color Yellow,Started,13,users,Day
 2025-09-26,Emotion Identification,Completed,177,instances,Day
 2025-09-26,Emotion Identification,Started,177,instances,Day
 2025-09-26,Emotion Identification,Completed,131,visits,Day
@@ -5924,12 +6274,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Emotion Identification,Started,11,visits,Day
 2025-11-23,Emotion Identification,Completed,6,users,Day
 2025-11-23,Emotion Identification,Started,10,users,Day
-2025-11-24,Emotion Identification,Completed,8,instances,Day
-2025-11-24,Emotion Identification,Started,10,instances,Day
-2025-11-24,Emotion Identification,Completed,7,visits,Day
-2025-11-24,Emotion Identification,Started,7,visits,Day
-2025-11-24,Emotion Identification,Completed,7,users,Day
-2025-11-24,Emotion Identification,Started,7,users,Day
+2025-11-24,Emotion Identification,Completed,23,instances,Day
+2025-11-24,Emotion Identification,Started,31,instances,Day
+2025-11-24,Emotion Identification,Completed,20,visits,Day
+2025-11-24,Emotion Identification,Started,26,visits,Day
+2025-11-24,Emotion Identification,Completed,20,users,Day
+2025-11-24,Emotion Identification,Started,26,users,Day
+2025-11-25,Emotion Identification,Completed,11,instances,Day
+2025-11-25,Emotion Identification,Started,17,instances,Day
+2025-11-25,Emotion Identification,Completed,10,visits,Day
+2025-11-25,Emotion Identification,Started,15,visits,Day
+2025-11-25,Emotion Identification,Completed,10,users,Day
+2025-11-25,Emotion Identification,Started,14,users,Day
+2025-11-26,Emotion Identification,Completed,12,instances,Day
+2025-11-26,Emotion Identification,Started,13,instances,Day
+2025-11-26,Emotion Identification,Completed,12,visits,Day
+2025-11-26,Emotion Identification,Started,13,visits,Day
+2025-11-26,Emotion Identification,Completed,12,users,Day
+2025-11-26,Emotion Identification,Started,13,users,Day
+2025-11-27,Emotion Identification,Completed,4,instances,Day
+2025-11-27,Emotion Identification,Started,7,instances,Day
+2025-11-27,Emotion Identification,Completed,4,visits,Day
+2025-11-27,Emotion Identification,Started,7,visits,Day
+2025-11-27,Emotion Identification,Completed,4,users,Day
+2025-11-27,Emotion Identification,Started,7,users,Day
 2025-08-26,Identification of all emotions,Completed,88,instances,Day
 2025-08-26,Identification of all emotions,Started,88,instances,Day
 2025-08-26,Identification of all emotions,Completed,59,visits,Day
@@ -6470,12 +6838,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Identification of all emotions,Started,15,visits,Day
 2025-11-23,Identification of all emotions,Completed,9,users,Day
 2025-11-23,Identification of all emotions,Started,15,users,Day
-2025-11-24,Identification of all emotions,Completed,2,instances,Day
-2025-11-24,Identification of all emotions,Started,3,instances,Day
-2025-11-24,Identification of all emotions,Completed,2,visits,Day
-2025-11-24,Identification of all emotions,Started,3,visits,Day
-2025-11-24,Identification of all emotions,Completed,2,users,Day
-2025-11-24,Identification of all emotions,Started,3,users,Day
+2025-11-24,Identification of all emotions,Completed,15,instances,Day
+2025-11-24,Identification of all emotions,Started,19,instances,Day
+2025-11-24,Identification of all emotions,Completed,15,visits,Day
+2025-11-24,Identification of all emotions,Started,18,visits,Day
+2025-11-24,Identification of all emotions,Completed,15,users,Day
+2025-11-24,Identification of all emotions,Started,18,users,Day
+2025-11-25,Identification of all emotions,Completed,18,instances,Day
+2025-11-25,Identification of all emotions,Started,29,instances,Day
+2025-11-25,Identification of all emotions,Completed,17,visits,Day
+2025-11-25,Identification of all emotions,Started,24,visits,Day
+2025-11-25,Identification of all emotions,Completed,17,users,Day
+2025-11-25,Identification of all emotions,Started,24,users,Day
+2025-11-26,Identification of all emotions,Completed,21,instances,Day
+2025-11-26,Identification of all emotions,Started,23,instances,Day
+2025-11-26,Identification of all emotions,Completed,21,visits,Day
+2025-11-26,Identification of all emotions,Started,23,visits,Day
+2025-11-26,Identification of all emotions,Completed,21,users,Day
+2025-11-26,Identification of all emotions,Started,23,users,Day
+2025-11-27,Identification of all emotions,Completed,3,instances,Day
+2025-11-27,Identification of all emotions,Started,5,instances,Day
+2025-11-27,Identification of all emotions,Completed,2,visits,Day
+2025-11-27,Identification of all emotions,Started,4,visits,Day
+2025-11-27,Identification of all emotions,Completed,2,users,Day
+2025-11-27,Identification of all emotions,Started,4,users,Day
 2025-08-14,Numbers Comparison,Completed,2,instances,Day
 2025-08-14,Numbers Comparison,Started,4,instances,Day
 2025-08-14,Numbers Comparison,Completed,1,visits,Day
@@ -7070,12 +7456,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Numbers Comparison,Started,19,visits,Day
 2025-11-23,Numbers Comparison,Completed,16,users,Day
 2025-11-23,Numbers Comparison,Started,19,users,Day
-2025-11-24,Numbers Comparison,Completed,3,instances,Day
-2025-11-24,Numbers Comparison,Started,4,instances,Day
-2025-11-24,Numbers Comparison,Completed,3,visits,Day
-2025-11-24,Numbers Comparison,Started,4,visits,Day
-2025-11-24,Numbers Comparison,Completed,3,users,Day
-2025-11-24,Numbers Comparison,Started,4,users,Day
+2025-11-24,Numbers Comparison,Completed,30,instances,Day
+2025-11-24,Numbers Comparison,Started,36,instances,Day
+2025-11-24,Numbers Comparison,Completed,28,visits,Day
+2025-11-24,Numbers Comparison,Started,30,visits,Day
+2025-11-24,Numbers Comparison,Completed,28,users,Day
+2025-11-24,Numbers Comparison,Started,30,users,Day
+2025-11-25,Numbers Comparison,Completed,11,instances,Day
+2025-11-25,Numbers Comparison,Started,22,instances,Day
+2025-11-25,Numbers Comparison,Completed,11,visits,Day
+2025-11-25,Numbers Comparison,Started,20,visits,Day
+2025-11-25,Numbers Comparison,Completed,11,users,Day
+2025-11-25,Numbers Comparison,Started,20,users,Day
+2025-11-26,Numbers Comparison,Completed,24,instances,Day
+2025-11-26,Numbers Comparison,Started,32,instances,Day
+2025-11-26,Numbers Comparison,Completed,23,visits,Day
+2025-11-26,Numbers Comparison,Started,30,visits,Day
+2025-11-26,Numbers Comparison,Completed,23,users,Day
+2025-11-26,Numbers Comparison,Started,30,users,Day
+2025-11-27,Numbers Comparison,Completed,4,instances,Day
+2025-11-27,Numbers Comparison,Started,5,instances,Day
+2025-11-27,Numbers Comparison,Completed,4,visits,Day
+2025-11-27,Numbers Comparison,Started,5,visits,Day
+2025-11-27,Numbers Comparison,Completed,4,users,Day
+2025-11-27,Numbers Comparison,Started,5,users,Day
 2025-07-15,Numbers I,Completed,12,instances,Day
 2025-07-15,Numbers I,Started,17,instances,Day
 2025-07-15,Numbers I,Completed,11,visits,Day
@@ -7868,12 +8272,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Numbers I,Started,74,visits,Day
 2025-11-23,Numbers I,Completed,63,users,Day
 2025-11-23,Numbers I,Started,74,users,Day
-2025-11-24,Numbers I,Completed,13,instances,Day
-2025-11-24,Numbers I,Started,16,instances,Day
-2025-11-24,Numbers I,Completed,13,visits,Day
-2025-11-24,Numbers I,Started,15,visits,Day
-2025-11-24,Numbers I,Completed,13,users,Day
-2025-11-24,Numbers I,Started,15,users,Day
+2025-11-24,Numbers I,Completed,80,instances,Day
+2025-11-24,Numbers I,Started,101,instances,Day
+2025-11-24,Numbers I,Completed,75,visits,Day
+2025-11-24,Numbers I,Started,94,visits,Day
+2025-11-24,Numbers I,Completed,75,users,Day
+2025-11-24,Numbers I,Started,94,users,Day
+2025-11-25,Numbers I,Completed,66,instances,Day
+2025-11-25,Numbers I,Started,76,instances,Day
+2025-11-25,Numbers I,Completed,64,visits,Day
+2025-11-25,Numbers I,Started,71,visits,Day
+2025-11-25,Numbers I,Completed,64,users,Day
+2025-11-25,Numbers I,Started,70,users,Day
+2025-11-26,Numbers I,Completed,89,instances,Day
+2025-11-26,Numbers I,Started,110,instances,Day
+2025-11-26,Numbers I,Completed,85,visits,Day
+2025-11-26,Numbers I,Started,103,visits,Day
+2025-11-26,Numbers I,Completed,85,users,Day
+2025-11-26,Numbers I,Started,101,users,Day
+2025-11-27,Numbers I,Completed,15,instances,Day
+2025-11-27,Numbers I,Started,18,instances,Day
+2025-11-27,Numbers I,Completed,15,visits,Day
+2025-11-27,Numbers I,Started,18,visits,Day
+2025-11-27,Numbers I,Completed,15,users,Day
+2025-11-27,Numbers I,Started,18,users,Day
 2025-07-16,Numbers II,Completed,592,instances,Day
 2025-07-16,Numbers II,Started,721,instances,Day
 2025-07-16,Numbers II,Completed,460,visits,Day
@@ -8660,12 +9082,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Numbers II,Started,57,visits,Day
 2025-11-23,Numbers II,Completed,48,users,Day
 2025-11-23,Numbers II,Started,57,users,Day
-2025-11-24,Numbers II,Completed,8,instances,Day
-2025-11-24,Numbers II,Started,11,instances,Day
-2025-11-24,Numbers II,Completed,8,visits,Day
-2025-11-24,Numbers II,Started,9,visits,Day
-2025-11-24,Numbers II,Completed,8,users,Day
-2025-11-24,Numbers II,Started,9,users,Day
+2025-11-24,Numbers II,Completed,70,instances,Day
+2025-11-24,Numbers II,Started,84,instances,Day
+2025-11-24,Numbers II,Completed,68,visits,Day
+2025-11-24,Numbers II,Started,76,visits,Day
+2025-11-24,Numbers II,Completed,68,users,Day
+2025-11-24,Numbers II,Started,76,users,Day
+2025-11-25,Numbers II,Completed,58,instances,Day
+2025-11-25,Numbers II,Started,65,instances,Day
+2025-11-25,Numbers II,Completed,55,visits,Day
+2025-11-25,Numbers II,Started,61,visits,Day
+2025-11-25,Numbers II,Completed,55,users,Day
+2025-11-25,Numbers II,Started,61,users,Day
+2025-11-26,Numbers II,Completed,49,instances,Day
+2025-11-26,Numbers II,Started,64,instances,Day
+2025-11-26,Numbers II,Completed,47,visits,Day
+2025-11-26,Numbers II,Started,61,visits,Day
+2025-11-26,Numbers II,Completed,47,users,Day
+2025-11-26,Numbers II,Started,61,users,Day
+2025-11-27,Numbers II,Completed,11,instances,Day
+2025-11-27,Numbers II,Started,13,instances,Day
+2025-11-27,Numbers II,Completed,9,visits,Day
+2025-11-27,Numbers II,Started,11,visits,Day
+2025-11-27,Numbers II,Completed,9,users,Day
+2025-11-27,Numbers II,Started,11,users,Day
 2025-09-01,Numerals 1-10,Completed,1,instances,Day
 2025-09-01,Numerals 1-10,Started,1,instances,Day
 2025-09-01,Numerals 1-10,Completed,1,visits,Day
@@ -9170,12 +9610,27 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Numerals 1-10,Started,16,visits,Day
 2025-11-23,Numerals 1-10,Completed,5,users,Day
 2025-11-23,Numerals 1-10,Started,15,users,Day
-2025-11-24,Numerals 1-10,Completed,1,instances,Day
-2025-11-24,Numerals 1-10,Started,4,instances,Day
-2025-11-24,Numerals 1-10,Completed,1,visits,Day
-2025-11-24,Numerals 1-10,Started,4,visits,Day
-2025-11-24,Numerals 1-10,Completed,1,users,Day
-2025-11-24,Numerals 1-10,Started,4,users,Day
+2025-11-24,Numerals 1-10,Completed,9,instances,Day
+2025-11-24,Numerals 1-10,Started,23,instances,Day
+2025-11-24,Numerals 1-10,Completed,9,visits,Day
+2025-11-24,Numerals 1-10,Started,22,visits,Day
+2025-11-24,Numerals 1-10,Completed,9,users,Day
+2025-11-24,Numerals 1-10,Started,22,users,Day
+2025-11-25,Numerals 1-10,Completed,12,instances,Day
+2025-11-25,Numerals 1-10,Started,28,instances,Day
+2025-11-25,Numerals 1-10,Completed,12,visits,Day
+2025-11-25,Numerals 1-10,Started,24,visits,Day
+2025-11-25,Numerals 1-10,Completed,12,users,Day
+2025-11-25,Numerals 1-10,Started,22,users,Day
+2025-11-26,Numerals 1-10,Completed,11,instances,Day
+2025-11-26,Numerals 1-10,Started,16,instances,Day
+2025-11-26,Numerals 1-10,Completed,11,visits,Day
+2025-11-26,Numerals 1-10,Started,16,visits,Day
+2025-11-26,Numerals 1-10,Completed,11,users,Day
+2025-11-26,Numerals 1-10,Started,15,users,Day
+2025-11-27,Numerals 1-10,Started,4,instances,Day
+2025-11-27,Numerals 1-10,Started,4,visits,Day
+2025-11-27,Numerals 1-10,Started,4,users,Day
 2025-10-08,Positions,Completed,1,instances,Day
 2025-10-08,Positions,Started,4,instances,Day
 2025-10-08,Positions,Completed,1,visits,Day
@@ -9458,12 +9913,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Positions,Started,64,visits,Day
 2025-11-23,Positions,Completed,24,users,Day
 2025-11-23,Positions,Started,64,users,Day
-2025-11-24,Positions,Completed,7,instances,Day
-2025-11-24,Positions,Started,17,instances,Day
-2025-11-24,Positions,Completed,6,visits,Day
-2025-11-24,Positions,Started,15,visits,Day
-2025-11-24,Positions,Completed,6,users,Day
-2025-11-24,Positions,Started,15,users,Day
+2025-11-24,Positions,Completed,43,instances,Day
+2025-11-24,Positions,Started,87,instances,Day
+2025-11-24,Positions,Completed,36,visits,Day
+2025-11-24,Positions,Started,70,visits,Day
+2025-11-24,Positions,Completed,36,users,Day
+2025-11-24,Positions,Started,65,users,Day
+2025-11-25,Positions,Completed,42,instances,Day
+2025-11-25,Positions,Started,96,instances,Day
+2025-11-25,Positions,Completed,41,visits,Day
+2025-11-25,Positions,Started,84,visits,Day
+2025-11-25,Positions,Completed,40,users,Day
+2025-11-25,Positions,Started,77,users,Day
+2025-11-26,Positions,Completed,36,instances,Day
+2025-11-26,Positions,Started,66,instances,Day
+2025-11-26,Positions,Completed,33,visits,Day
+2025-11-26,Positions,Started,62,visits,Day
+2025-11-26,Positions,Completed,33,users,Day
+2025-11-26,Positions,Started,61,users,Day
+2025-11-27,Positions,Completed,10,instances,Day
+2025-11-27,Positions,Started,30,instances,Day
+2025-11-27,Positions,Completed,10,visits,Day
+2025-11-27,Positions,Started,26,visits,Day
+2025-11-27,Positions,Completed,10,users,Day
+2025-11-27,Positions,Started,25,users,Day
 2025-08-26,Primary Emotion Labelling,Completed,68,instances,Day
 2025-08-26,Primary Emotion Labelling,Started,95,instances,Day
 2025-08-26,Primary Emotion Labelling,Completed,48,visits,Day
@@ -10004,12 +10477,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Primary Emotion Labelling,Started,13,visits,Day
 2025-11-23,Primary Emotion Labelling,Completed,11,users,Day
 2025-11-23,Primary Emotion Labelling,Started,13,users,Day
-2025-11-24,Primary Emotion Labelling,Completed,2,instances,Day
-2025-11-24,Primary Emotion Labelling,Started,2,instances,Day
-2025-11-24,Primary Emotion Labelling,Completed,2,visits,Day
-2025-11-24,Primary Emotion Labelling,Started,2,visits,Day
-2025-11-24,Primary Emotion Labelling,Completed,2,users,Day
-2025-11-24,Primary Emotion Labelling,Started,2,users,Day
+2025-11-24,Primary Emotion Labelling,Completed,17,instances,Day
+2025-11-24,Primary Emotion Labelling,Started,17,instances,Day
+2025-11-24,Primary Emotion Labelling,Completed,17,visits,Day
+2025-11-24,Primary Emotion Labelling,Started,17,visits,Day
+2025-11-24,Primary Emotion Labelling,Completed,17,users,Day
+2025-11-24,Primary Emotion Labelling,Started,17,users,Day
+2025-11-25,Primary Emotion Labelling,Completed,23,instances,Day
+2025-11-25,Primary Emotion Labelling,Started,28,instances,Day
+2025-11-25,Primary Emotion Labelling,Completed,22,visits,Day
+2025-11-25,Primary Emotion Labelling,Started,26,visits,Day
+2025-11-25,Primary Emotion Labelling,Completed,21,users,Day
+2025-11-25,Primary Emotion Labelling,Started,25,users,Day
+2025-11-26,Primary Emotion Labelling,Completed,18,instances,Day
+2025-11-26,Primary Emotion Labelling,Started,56,instances,Day
+2025-11-26,Primary Emotion Labelling,Completed,17,visits,Day
+2025-11-26,Primary Emotion Labelling,Started,30,visits,Day
+2025-11-26,Primary Emotion Labelling,Completed,17,users,Day
+2025-11-26,Primary Emotion Labelling,Started,29,users,Day
+2025-11-27,Primary Emotion Labelling,Completed,3,instances,Day
+2025-11-27,Primary Emotion Labelling,Started,5,instances,Day
+2025-11-27,Primary Emotion Labelling,Completed,3,visits,Day
+2025-11-27,Primary Emotion Labelling,Started,5,visits,Day
+2025-11-27,Primary Emotion Labelling,Completed,3,users,Day
+2025-11-27,Primary Emotion Labelling,Started,5,users,Day
 2025-07-08,Quantitative Comparison,Completed,3,instances,Day
 2025-07-08,Quantitative Comparison,Started,6,instances,Day
 2025-07-08,Quantitative Comparison,Completed,2,visits,Day
@@ -10784,12 +11275,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Quantitative Comparison,Started,35,visits,Day
 2025-11-23,Quantitative Comparison,Completed,29,users,Day
 2025-11-23,Quantitative Comparison,Started,34,users,Day
-2025-11-24,Quantitative Comparison,Completed,5,instances,Day
-2025-11-24,Quantitative Comparison,Started,5,instances,Day
-2025-11-24,Quantitative Comparison,Completed,5,visits,Day
-2025-11-24,Quantitative Comparison,Started,5,visits,Day
-2025-11-24,Quantitative Comparison,Completed,5,users,Day
-2025-11-24,Quantitative Comparison,Started,5,users,Day
+2025-11-24,Quantitative Comparison,Completed,37,instances,Day
+2025-11-24,Quantitative Comparison,Started,47,instances,Day
+2025-11-24,Quantitative Comparison,Completed,35,visits,Day
+2025-11-24,Quantitative Comparison,Started,43,visits,Day
+2025-11-24,Quantitative Comparison,Completed,35,users,Day
+2025-11-24,Quantitative Comparison,Started,43,users,Day
+2025-11-25,Quantitative Comparison,Completed,42,instances,Day
+2025-11-25,Quantitative Comparison,Started,50,instances,Day
+2025-11-25,Quantitative Comparison,Completed,36,visits,Day
+2025-11-25,Quantitative Comparison,Started,44,visits,Day
+2025-11-25,Quantitative Comparison,Completed,35,users,Day
+2025-11-25,Quantitative Comparison,Started,42,users,Day
+2025-11-26,Quantitative Comparison,Completed,34,instances,Day
+2025-11-26,Quantitative Comparison,Started,41,instances,Day
+2025-11-26,Quantitative Comparison,Completed,32,visits,Day
+2025-11-26,Quantitative Comparison,Started,36,visits,Day
+2025-11-26,Quantitative Comparison,Completed,32,users,Day
+2025-11-26,Quantitative Comparison,Started,36,users,Day
+2025-11-27,Quantitative Comparison,Completed,15,instances,Day
+2025-11-27,Quantitative Comparison,Started,17,instances,Day
+2025-11-27,Quantitative Comparison,Completed,15,visits,Day
+2025-11-27,Quantitative Comparison,Started,16,visits,Day
+2025-11-27,Quantitative Comparison,Completed,15,users,Day
+2025-11-27,Quantitative Comparison,Started,16,users,Day
 2025-07-09,Relational Comparison,Completed,1,instances,Day
 2025-07-09,Relational Comparison,Started,1,instances,Day
 2025-07-09,Relational Comparison,Completed,1,visits,Day
@@ -11567,12 +12076,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Relational Comparison,Started,35,visits,Day
 2025-11-23,Relational Comparison,Completed,29,users,Day
 2025-11-23,Relational Comparison,Started,35,users,Day
-2025-11-24,Relational Comparison,Completed,2,instances,Day
-2025-11-24,Relational Comparison,Started,5,instances,Day
-2025-11-24,Relational Comparison,Completed,2,visits,Day
-2025-11-24,Relational Comparison,Started,5,visits,Day
-2025-11-24,Relational Comparison,Completed,2,users,Day
-2025-11-24,Relational Comparison,Started,4,users,Day
+2025-11-24,Relational Comparison,Completed,41,instances,Day
+2025-11-24,Relational Comparison,Started,57,instances,Day
+2025-11-24,Relational Comparison,Completed,37,visits,Day
+2025-11-24,Relational Comparison,Started,50,visits,Day
+2025-11-24,Relational Comparison,Completed,37,users,Day
+2025-11-24,Relational Comparison,Started,49,users,Day
+2025-11-25,Relational Comparison,Completed,52,instances,Day
+2025-11-25,Relational Comparison,Started,58,instances,Day
+2025-11-25,Relational Comparison,Completed,46,visits,Day
+2025-11-25,Relational Comparison,Started,50,visits,Day
+2025-11-25,Relational Comparison,Completed,46,users,Day
+2025-11-25,Relational Comparison,Started,50,users,Day
+2025-11-26,Relational Comparison,Completed,33,instances,Day
+2025-11-26,Relational Comparison,Started,42,instances,Day
+2025-11-26,Relational Comparison,Completed,30,visits,Day
+2025-11-26,Relational Comparison,Started,35,visits,Day
+2025-11-26,Relational Comparison,Completed,30,users,Day
+2025-11-26,Relational Comparison,Started,35,users,Day
+2025-11-27,Relational Comparison,Completed,11,instances,Day
+2025-11-27,Relational Comparison,Started,15,instances,Day
+2025-11-27,Relational Comparison,Completed,8,visits,Day
+2025-11-27,Relational Comparison,Started,12,visits,Day
+2025-11-27,Relational Comparison,Completed,8,users,Day
+2025-11-27,Relational Comparison,Started,12,users,Day
 2025-08-13,Relational Comparison II,Completed,1,instances,Day
 2025-08-13,Relational Comparison II,Started,4,instances,Day
 2025-08-13,Relational Comparison II,Completed,1,visits,Day
@@ -12182,12 +12709,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Relational Comparison II,Started,28,visits,Day
 2025-11-23,Relational Comparison II,Completed,20,users,Day
 2025-11-23,Relational Comparison II,Started,28,users,Day
-2025-11-24,Relational Comparison II,Completed,3,instances,Day
-2025-11-24,Relational Comparison II,Started,4,instances,Day
-2025-11-24,Relational Comparison II,Completed,2,visits,Day
-2025-11-24,Relational Comparison II,Started,3,visits,Day
-2025-11-24,Relational Comparison II,Completed,2,users,Day
-2025-11-24,Relational Comparison II,Started,3,users,Day
+2025-11-24,Relational Comparison II,Completed,25,instances,Day
+2025-11-24,Relational Comparison II,Started,30,instances,Day
+2025-11-24,Relational Comparison II,Completed,24,visits,Day
+2025-11-24,Relational Comparison II,Started,29,visits,Day
+2025-11-24,Relational Comparison II,Completed,24,users,Day
+2025-11-24,Relational Comparison II,Started,29,users,Day
+2025-11-25,Relational Comparison II,Completed,14,instances,Day
+2025-11-25,Relational Comparison II,Started,21,instances,Day
+2025-11-25,Relational Comparison II,Completed,14,visits,Day
+2025-11-25,Relational Comparison II,Started,20,visits,Day
+2025-11-25,Relational Comparison II,Completed,14,users,Day
+2025-11-25,Relational Comparison II,Started,20,users,Day
+2025-11-26,Relational Comparison II,Completed,17,instances,Day
+2025-11-26,Relational Comparison II,Started,22,instances,Day
+2025-11-26,Relational Comparison II,Completed,17,visits,Day
+2025-11-26,Relational Comparison II,Started,22,visits,Day
+2025-11-26,Relational Comparison II,Completed,17,users,Day
+2025-11-26,Relational Comparison II,Started,22,users,Day
+2025-11-27,Relational Comparison II,Completed,5,instances,Day
+2025-11-27,Relational Comparison II,Started,10,instances,Day
+2025-11-27,Relational Comparison II,Completed,5,visits,Day
+2025-11-27,Relational Comparison II,Started,9,visits,Day
+2025-11-27,Relational Comparison II,Completed,5,users,Day
+2025-11-27,Relational Comparison II,Started,9,users,Day
 2025-08-01,Revision Colors,Completed,5,instances,Day
 2025-08-01,Revision Colors,Started,12,instances,Day
 2025-08-01,Revision Colors,Completed,5,visits,Day
@@ -12866,12 +13411,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Revision Colors,Started,20,visits,Day
 2025-11-23,Revision Colors,Completed,12,users,Day
 2025-11-23,Revision Colors,Started,20,users,Day
-2025-11-24,Revision Colors,Completed,1,instances,Day
-2025-11-24,Revision Colors,Started,2,instances,Day
-2025-11-24,Revision Colors,Completed,1,visits,Day
-2025-11-24,Revision Colors,Started,2,visits,Day
-2025-11-24,Revision Colors,Completed,1,users,Day
-2025-11-24,Revision Colors,Started,2,users,Day
+2025-11-24,Revision Colors,Completed,28,instances,Day
+2025-11-24,Revision Colors,Started,35,instances,Day
+2025-11-24,Revision Colors,Completed,23,visits,Day
+2025-11-24,Revision Colors,Started,28,visits,Day
+2025-11-24,Revision Colors,Completed,23,users,Day
+2025-11-24,Revision Colors,Started,28,users,Day
+2025-11-25,Revision Colors,Completed,19,instances,Day
+2025-11-25,Revision Colors,Started,23,instances,Day
+2025-11-25,Revision Colors,Completed,18,visits,Day
+2025-11-25,Revision Colors,Started,22,visits,Day
+2025-11-25,Revision Colors,Completed,18,users,Day
+2025-11-25,Revision Colors,Started,22,users,Day
+2025-11-26,Revision Colors,Completed,32,instances,Day
+2025-11-26,Revision Colors,Started,48,instances,Day
+2025-11-26,Revision Colors,Completed,32,visits,Day
+2025-11-26,Revision Colors,Started,44,visits,Day
+2025-11-26,Revision Colors,Completed,32,users,Day
+2025-11-26,Revision Colors,Started,41,users,Day
+2025-11-27,Revision Colors,Completed,9,instances,Day
+2025-11-27,Revision Colors,Started,16,instances,Day
+2025-11-27,Revision Colors,Completed,8,visits,Day
+2025-11-27,Revision Colors,Started,12,visits,Day
+2025-11-27,Revision Colors,Completed,8,users,Day
+2025-11-27,Revision Colors,Started,13,users,Day
 2025-08-04,Revision Shapes,Completed,2,instances,Day
 2025-08-04,Revision Shapes,Started,4,instances,Day
 2025-08-04,Revision Shapes,Completed,1,visits,Day
@@ -13544,12 +14107,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Revision Shapes,Started,17,visits,Day
 2025-11-23,Revision Shapes,Completed,16,users,Day
 2025-11-23,Revision Shapes,Started,17,users,Day
-2025-11-24,Revision Shapes,Completed,2,instances,Day
-2025-11-24,Revision Shapes,Started,3,instances,Day
-2025-11-24,Revision Shapes,Completed,2,visits,Day
-2025-11-24,Revision Shapes,Started,3,visits,Day
-2025-11-24,Revision Shapes,Completed,2,users,Day
-2025-11-24,Revision Shapes,Started,3,users,Day
+2025-11-24,Revision Shapes,Completed,21,instances,Day
+2025-11-24,Revision Shapes,Started,23,instances,Day
+2025-11-24,Revision Shapes,Completed,15,visits,Day
+2025-11-24,Revision Shapes,Started,16,visits,Day
+2025-11-24,Revision Shapes,Completed,15,users,Day
+2025-11-24,Revision Shapes,Started,16,users,Day
+2025-11-25,Revision Shapes,Completed,9,instances,Day
+2025-11-25,Revision Shapes,Started,17,instances,Day
+2025-11-25,Revision Shapes,Completed,9,visits,Day
+2025-11-25,Revision Shapes,Started,16,visits,Day
+2025-11-25,Revision Shapes,Completed,9,users,Day
+2025-11-25,Revision Shapes,Started,16,users,Day
+2025-11-26,Revision Shapes,Completed,11,instances,Day
+2025-11-26,Revision Shapes,Started,14,instances,Day
+2025-11-26,Revision Shapes,Completed,10,visits,Day
+2025-11-26,Revision Shapes,Started,12,visits,Day
+2025-11-26,Revision Shapes,Completed,10,users,Day
+2025-11-26,Revision Shapes,Started,12,users,Day
+2025-11-27,Revision Shapes,Completed,2,instances,Day
+2025-11-27,Revision Shapes,Started,2,instances,Day
+2025-11-27,Revision Shapes,Completed,2,visits,Day
+2025-11-27,Revision Shapes,Started,2,visits,Day
+2025-11-27,Revision Shapes,Completed,2,users,Day
+2025-11-27,Revision Shapes,Started,2,users,Day
 2025-08-06,Rhyming Words,Completed,1,instances,Day
 2025-08-06,Rhyming Words,Started,2,instances,Day
 2025-08-06,Rhyming Words,Completed,1,visits,Day
@@ -14192,12 +14773,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Rhyming Words,Started,35,visits,Day
 2025-11-23,Rhyming Words,Completed,27,users,Day
 2025-11-23,Rhyming Words,Started,35,users,Day
-2025-11-24,Rhyming Words,Completed,8,instances,Day
-2025-11-24,Rhyming Words,Started,12,instances,Day
-2025-11-24,Rhyming Words,Completed,7,visits,Day
-2025-11-24,Rhyming Words,Started,11,visits,Day
-2025-11-24,Rhyming Words,Completed,7,users,Day
-2025-11-24,Rhyming Words,Started,11,users,Day
+2025-11-24,Rhyming Words,Completed,51,instances,Day
+2025-11-24,Rhyming Words,Started,66,instances,Day
+2025-11-24,Rhyming Words,Completed,47,visits,Day
+2025-11-24,Rhyming Words,Started,60,visits,Day
+2025-11-24,Rhyming Words,Completed,47,users,Day
+2025-11-24,Rhyming Words,Started,60,users,Day
+2025-11-25,Rhyming Words,Completed,26,instances,Day
+2025-11-25,Rhyming Words,Started,35,instances,Day
+2025-11-25,Rhyming Words,Completed,24,visits,Day
+2025-11-25,Rhyming Words,Started,33,visits,Day
+2025-11-25,Rhyming Words,Completed,24,users,Day
+2025-11-25,Rhyming Words,Started,33,users,Day
+2025-11-26,Rhyming Words,Completed,34,instances,Day
+2025-11-26,Rhyming Words,Started,50,instances,Day
+2025-11-26,Rhyming Words,Completed,32,visits,Day
+2025-11-26,Rhyming Words,Started,46,visits,Day
+2025-11-26,Rhyming Words,Completed,32,users,Day
+2025-11-26,Rhyming Words,Started,46,users,Day
+2025-11-27,Rhyming Words,Completed,7,instances,Day
+2025-11-27,Rhyming Words,Started,12,instances,Day
+2025-11-27,Rhyming Words,Completed,7,visits,Day
+2025-11-27,Rhyming Words,Started,12,visits,Day
+2025-11-27,Rhyming Words,Completed,7,users,Day
+2025-11-27,Rhyming Words,Started,12,users,Day
 2025-07-02,Shape Circle,Completed,992,instances,Day
 2025-07-02,Shape Circle,Started,2541,instances,Day
 2025-07-02,Shape Circle,Completed,832,visits,Day
@@ -15068,12 +15667,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Shape Circle,Started,392,visits,Day
 2025-11-23,Shape Circle,Completed,313,users,Day
 2025-11-23,Shape Circle,Started,379,users,Day
-2025-11-24,Shape Circle,Completed,62,instances,Day
-2025-11-24,Shape Circle,Started,85,instances,Day
-2025-11-24,Shape Circle,Completed,53,visits,Day
-2025-11-24,Shape Circle,Started,68,visits,Day
-2025-11-24,Shape Circle,Completed,53,users,Day
-2025-11-24,Shape Circle,Started,66,users,Day
+2025-11-24,Shape Circle,Completed,859,instances,Day
+2025-11-24,Shape Circle,Started,1085,instances,Day
+2025-11-24,Shape Circle,Completed,765,visits,Day
+2025-11-24,Shape Circle,Started,907,visits,Day
+2025-11-24,Shape Circle,Completed,759,users,Day
+2025-11-24,Shape Circle,Started,889,users,Day
+2025-11-25,Shape Circle,Completed,439,instances,Day
+2025-11-25,Shape Circle,Started,552,instances,Day
+2025-11-25,Shape Circle,Completed,382,visits,Day
+2025-11-25,Shape Circle,Started,460,visits,Day
+2025-11-25,Shape Circle,Completed,375,users,Day
+2025-11-25,Shape Circle,Started,449,users,Day
+2025-11-26,Shape Circle,Completed,625,instances,Day
+2025-11-26,Shape Circle,Started,779,instances,Day
+2025-11-26,Shape Circle,Completed,563,visits,Day
+2025-11-26,Shape Circle,Started,668,visits,Day
+2025-11-26,Shape Circle,Completed,563,users,Day
+2025-11-26,Shape Circle,Started,663,users,Day
+2025-11-27,Shape Circle,Completed,159,instances,Day
+2025-11-27,Shape Circle,Started,212,instances,Day
+2025-11-27,Shape Circle,Completed,134,visits,Day
+2025-11-27,Shape Circle,Started,170,visits,Day
+2025-11-27,Shape Circle,Completed,133,users,Day
+2025-11-27,Shape Circle,Started,168,users,Day
 2025-09-01,Shape Rectangle,Completed,2,instances,Day
 2025-09-01,Shape Rectangle,Started,5,instances,Day
 2025-09-01,Shape Rectangle,Completed,2,visits,Day
@@ -15578,12 +16195,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Shape Rectangle,Started,5,visits,Day
 2025-11-23,Shape Rectangle,Completed,4,users,Day
 2025-11-23,Shape Rectangle,Started,5,users,Day
-2025-11-24,Shape Rectangle,Completed,2,instances,Day
-2025-11-24,Shape Rectangle,Started,2,instances,Day
-2025-11-24,Shape Rectangle,Completed,2,visits,Day
-2025-11-24,Shape Rectangle,Started,2,visits,Day
-2025-11-24,Shape Rectangle,Completed,2,users,Day
-2025-11-24,Shape Rectangle,Started,2,users,Day
+2025-11-24,Shape Rectangle,Completed,12,instances,Day
+2025-11-24,Shape Rectangle,Started,15,instances,Day
+2025-11-24,Shape Rectangle,Completed,11,visits,Day
+2025-11-24,Shape Rectangle,Started,12,visits,Day
+2025-11-24,Shape Rectangle,Completed,11,users,Day
+2025-11-24,Shape Rectangle,Started,12,users,Day
+2025-11-25,Shape Rectangle,Completed,8,instances,Day
+2025-11-25,Shape Rectangle,Started,11,instances,Day
+2025-11-25,Shape Rectangle,Completed,8,visits,Day
+2025-11-25,Shape Rectangle,Started,11,visits,Day
+2025-11-25,Shape Rectangle,Completed,7,users,Day
+2025-11-25,Shape Rectangle,Started,10,users,Day
+2025-11-26,Shape Rectangle,Completed,16,instances,Day
+2025-11-26,Shape Rectangle,Started,22,instances,Day
+2025-11-26,Shape Rectangle,Completed,15,visits,Day
+2025-11-26,Shape Rectangle,Started,19,visits,Day
+2025-11-26,Shape Rectangle,Completed,14,users,Day
+2025-11-26,Shape Rectangle,Started,18,users,Day
+2025-11-27,Shape Rectangle,Completed,2,instances,Day
+2025-11-27,Shape Rectangle,Started,3,instances,Day
+2025-11-27,Shape Rectangle,Completed,2,visits,Day
+2025-11-27,Shape Rectangle,Started,3,visits,Day
+2025-11-27,Shape Rectangle,Completed,2,users,Day
+2025-11-27,Shape Rectangle,Started,3,users,Day
 2025-07-25,Shape Square,Completed,165,instances,Day
 2025-07-25,Shape Square,Started,257,instances,Day
 2025-07-25,Shape Square,Completed,115,visits,Day
@@ -16316,9 +16951,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Shape Square,Started,16,visits,Day
 2025-11-23,Shape Square,Completed,12,users,Day
 2025-11-23,Shape Square,Started,16,users,Day
-2025-11-24,Shape Square,Started,1,instances,Day
-2025-11-24,Shape Square,Started,1,visits,Day
-2025-11-24,Shape Square,Started,1,users,Day
+2025-11-24,Shape Square,Completed,14,instances,Day
+2025-11-24,Shape Square,Started,15,instances,Day
+2025-11-24,Shape Square,Completed,14,visits,Day
+2025-11-24,Shape Square,Started,15,visits,Day
+2025-11-24,Shape Square,Completed,14,users,Day
+2025-11-24,Shape Square,Started,15,users,Day
+2025-11-25,Shape Square,Completed,22,instances,Day
+2025-11-25,Shape Square,Started,27,instances,Day
+2025-11-25,Shape Square,Completed,21,visits,Day
+2025-11-25,Shape Square,Started,26,visits,Day
+2025-11-25,Shape Square,Completed,21,users,Day
+2025-11-25,Shape Square,Started,26,users,Day
+2025-11-26,Shape Square,Completed,27,instances,Day
+2025-11-26,Shape Square,Started,32,instances,Day
+2025-11-26,Shape Square,Completed,27,visits,Day
+2025-11-26,Shape Square,Started,31,visits,Day
+2025-11-26,Shape Square,Completed,27,users,Day
+2025-11-26,Shape Square,Started,31,users,Day
+2025-11-27,Shape Square,Completed,10,instances,Day
+2025-11-27,Shape Square,Started,11,instances,Day
+2025-11-27,Shape Square,Completed,10,visits,Day
+2025-11-27,Shape Square,Started,11,visits,Day
+2025-11-27,Shape Square,Completed,10,users,Day
+2025-11-27,Shape Square,Started,11,users,Day
 2025-07-02,Shape Triangle,Completed,1,instances,Day
 2025-07-02,Shape Triangle,Started,4,instances,Day
 2025-07-02,Shape Triangle,Completed,1,visits,Day
@@ -17189,12 +17845,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Shape Triangle,Started,67,visits,Day
 2025-11-23,Shape Triangle,Completed,51,users,Day
 2025-11-23,Shape Triangle,Started,67,users,Day
-2025-11-24,Shape Triangle,Completed,10,instances,Day
-2025-11-24,Shape Triangle,Started,17,instances,Day
-2025-11-24,Shape Triangle,Completed,10,visits,Day
-2025-11-24,Shape Triangle,Started,13,visits,Day
-2025-11-24,Shape Triangle,Completed,10,users,Day
-2025-11-24,Shape Triangle,Started,13,users,Day
+2025-11-24,Shape Triangle,Completed,100,instances,Day
+2025-11-24,Shape Triangle,Started,123,instances,Day
+2025-11-24,Shape Triangle,Completed,98,visits,Day
+2025-11-24,Shape Triangle,Started,114,visits,Day
+2025-11-24,Shape Triangle,Completed,98,users,Day
+2025-11-24,Shape Triangle,Started,114,users,Day
+2025-11-25,Shape Triangle,Completed,83,instances,Day
+2025-11-25,Shape Triangle,Started,103,instances,Day
+2025-11-25,Shape Triangle,Completed,77,visits,Day
+2025-11-25,Shape Triangle,Started,94,visits,Day
+2025-11-25,Shape Triangle,Completed,77,users,Day
+2025-11-25,Shape Triangle,Started,94,users,Day
+2025-11-26,Shape Triangle,Completed,83,instances,Day
+2025-11-26,Shape Triangle,Started,104,instances,Day
+2025-11-26,Shape Triangle,Completed,76,visits,Day
+2025-11-26,Shape Triangle,Started,94,visits,Day
+2025-11-26,Shape Triangle,Completed,76,users,Day
+2025-11-26,Shape Triangle,Started,94,users,Day
+2025-11-27,Shape Triangle,Completed,24,instances,Day
+2025-11-27,Shape Triangle,Started,30,instances,Day
+2025-11-27,Shape Triangle,Completed,22,visits,Day
+2025-11-27,Shape Triangle,Started,26,visits,Day
+2025-11-27,Shape Triangle,Completed,22,users,Day
+2025-11-27,Shape Triangle,Started,26,users,Day
 2025-09-12,Sorting Primary Colors,Completed,64,instances,Day
 2025-09-12,Sorting Primary Colors,Started,88,instances,Day
 2025-09-12,Sorting Primary Colors,Completed,55,visits,Day
@@ -17633,12 +18307,30 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Sorting Primary Colors,Started,28,visits,Day
 2025-11-23,Sorting Primary Colors,Completed,19,users,Day
 2025-11-23,Sorting Primary Colors,Started,28,users,Day
-2025-11-24,Sorting Primary Colors,Completed,3,instances,Day
-2025-11-24,Sorting Primary Colors,Started,5,instances,Day
-2025-11-24,Sorting Primary Colors,Completed,3,visits,Day
-2025-11-24,Sorting Primary Colors,Started,4,visits,Day
-2025-11-24,Sorting Primary Colors,Completed,3,users,Day
-2025-11-24,Sorting Primary Colors,Started,4,users,Day
+2025-11-24,Sorting Primary Colors,Completed,21,instances,Day
+2025-11-24,Sorting Primary Colors,Started,32,instances,Day
+2025-11-24,Sorting Primary Colors,Completed,19,visits,Day
+2025-11-24,Sorting Primary Colors,Started,28,visits,Day
+2025-11-24,Sorting Primary Colors,Completed,18,users,Day
+2025-11-24,Sorting Primary Colors,Started,27,users,Day
+2025-11-25,Sorting Primary Colors,Completed,22,instances,Day
+2025-11-25,Sorting Primary Colors,Started,35,instances,Day
+2025-11-25,Sorting Primary Colors,Completed,20,visits,Day
+2025-11-25,Sorting Primary Colors,Started,29,visits,Day
+2025-11-25,Sorting Primary Colors,Completed,20,users,Day
+2025-11-25,Sorting Primary Colors,Started,28,users,Day
+2025-11-26,Sorting Primary Colors,Completed,30,instances,Day
+2025-11-26,Sorting Primary Colors,Started,40,instances,Day
+2025-11-26,Sorting Primary Colors,Completed,29,visits,Day
+2025-11-26,Sorting Primary Colors,Started,36,visits,Day
+2025-11-26,Sorting Primary Colors,Completed,29,users,Day
+2025-11-26,Sorting Primary Colors,Started,36,users,Day
+2025-11-27,Sorting Primary Colors,Completed,5,instances,Day
+2025-11-27,Sorting Primary Colors,Started,11,instances,Day
+2025-11-27,Sorting Primary Colors,Completed,5,visits,Day
+2025-11-27,Sorting Primary Colors,Started,10,visits,Day
+2025-11-27,Sorting Primary Colors,Completed,5,users,Day
+2025-11-27,Sorting Primary Colors,Started,9,users,Day
 2025-09-12,Sorting Primary Shapes,Completed,93,instances,Day
 2025-09-12,Sorting Primary Shapes,Started,135,instances,Day
 2025-09-12,Sorting Primary Shapes,Completed,86,visits,Day
@@ -18077,42 +18769,65 @@ period_label,game_name,event,count,metric,period_type
 2025-11-23,Sorting Primary Shapes,Started,20,visits,Day
 2025-11-23,Sorting Primary Shapes,Completed,13,users,Day
 2025-11-23,Sorting Primary Shapes,Started,19,users,Day
-2025-11-24,Sorting Primary Shapes,Completed,2,instances,Day
-2025-11-24,Sorting Primary Shapes,Started,15,instances,Day
-2025-11-24,Sorting Primary Shapes,Completed,2,visits,Day
-2025-11-24,Sorting Primary Shapes,Started,7,visits,Day
-2025-11-24,Sorting Primary Shapes,Completed,2,users,Day
-2025-11-24,Sorting Primary Shapes,Started,6,users,Day
+2025-11-24,Sorting Primary Shapes,Completed,12,instances,Day
+2025-11-24,Sorting Primary Shapes,Started,36,instances,Day
+2025-11-24,Sorting Primary Shapes,Completed,12,visits,Day
+2025-11-24,Sorting Primary Shapes,Started,25,visits,Day
+2025-11-24,Sorting Primary Shapes,Completed,12,users,Day
+2025-11-24,Sorting Primary Shapes,Started,24,users,Day
+2025-11-25,Sorting Primary Shapes,Completed,12,instances,Day
+2025-11-25,Sorting Primary Shapes,Started,21,instances,Day
+2025-11-25,Sorting Primary Shapes,Completed,9,visits,Day
+2025-11-25,Sorting Primary Shapes,Started,16,visits,Day
+2025-11-25,Sorting Primary Shapes,Completed,9,users,Day
+2025-11-25,Sorting Primary Shapes,Started,15,users,Day
+2025-11-26,Sorting Primary Shapes,Completed,7,instances,Day
+2025-11-26,Sorting Primary Shapes,Started,25,instances,Day
+2025-11-26,Sorting Primary Shapes,Completed,6,visits,Day
+2025-11-26,Sorting Primary Shapes,Started,14,visits,Day
+2025-11-26,Sorting Primary Shapes,Completed,6,users,Day
+2025-11-26,Sorting Primary Shapes,Started,13,users,Day
+2025-11-27,Sorting Primary Shapes,Completed,3,instances,Day
+2025-11-27,Sorting Primary Shapes,Started,6,instances,Day
+2025-11-27,Sorting Primary Shapes,Completed,3,visits,Day
+2025-11-27,Sorting Primary Shapes,Started,6,visits,Day
+2025-11-27,Sorting Primary Shapes,Completed,3,users,Day
+2025-11-27,Sorting Primary Shapes,Started,6,users,Day
 2025_07,All Games,Completed,155512,instances,Month
 2025_07,All Games,Started,253768,instances,Month
 2025_07,All Games,Completed,76489,visits,Month
 2025_07,All Games,Started,128369,visits,Month
 2025_07,All Games,Completed,35063,users,Month
 2025_07,All Games,Started,63511,users,Month
+2025_07,All Games,RM Active Users,116762,rm_active_users,Month
 2025_08,All Games,Completed,174013,instances,Month
 2025_08,All Games,Started,267266,instances,Month
 2025_08,All Games,Completed,86967,visits,Month
 2025_08,All Games,Started,135407,visits,Month
 2025_08,All Games,Completed,41591,users,Month
 2025_08,All Games,Started,69917,users,Month
+2025_08,All Games,RM Active Users,108327,rm_active_users,Month
 2025_09,All Games,Completed,175486,instances,Month
 2025_09,All Games,Started,288908,instances,Month
 2025_09,All Games,Completed,120520,visits,Month
 2025_09,All Games,Started,191296,visits,Month
 2025_09,All Games,Completed,44967,users,Month
 2025_09,All Games,Started,82025,users,Month
+2025_09,All Games,RM Active Users,103634,rm_active_users,Month
 2025_10,All Games,Completed,131209,instances,Month
 2025_10,All Games,Started,229433,instances,Month
 2025_10,All Games,Completed,90470,visits,Month
 2025_10,All Games,Started,151989,visits,Month
 2025_10,All Games,Completed,36618,users,Month
 2025_10,All Games,Started,66670,users,Month
-2025_11,All Games,Completed,57366,instances,Month
-2025_11,All Games,Started,106491,instances,Month
-2025_11,All Games,Completed,41708,visits,Month
-2025_11,All Games,Started,74447,visits,Month
-2025_11,All Games,Completed,20604,users,Month
-2025_11,All Games,Started,38805,users,Month
+2025_10,All Games,RM Active Users,89170,rm_active_users,Month
+2025_11,All Games,Completed,66917,instances,Month
+2025_11,All Games,Started,124297,instances,Month
+2025_11,All Games,Completed,48730,visits,Month
+2025_11,All Games,Started,87073,visits,Month
+2025_11,All Games,Completed,22971,users,Month
+2025_11,All Games,Started,43660,users,Month
+2025_11,All Games,RM Active Users,76726,rm_active_users,Month
 2025_09,Beginning Sound Ba/Ra/Na,Completed,1246,instances,Month
 2025_09,Beginning Sound Ba/Ra/Na,Started,1784,instances,Month
 2025_09,Beginning Sound Ba/Ra/Na,Completed,1081,visits,Month
@@ -18125,36 +18840,36 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Beginning Sound Ba/Ra/Na,Started,18384,visits,Month
 2025_10,Beginning Sound Ba/Ra/Na,Completed,8440,users,Month
 2025_10,Beginning Sound Ba/Ra/Na,Started,14685,users,Month
-2025_11,Beginning Sound Ba/Ra/Na,Completed,342,instances,Month
-2025_11,Beginning Sound Ba/Ra/Na,Started,556,instances,Month
-2025_11,Beginning Sound Ba/Ra/Na,Completed,317,visits,Month
-2025_11,Beginning Sound Ba/Ra/Na,Started,495,visits,Month
-2025_11,Beginning Sound Ba/Ra/Na,Completed,286,users,Month
-2025_11,Beginning Sound Ba/Ra/Na,Started,437,users,Month
+2025_11,Beginning Sound Ba/Ra/Na,Completed,376,instances,Month
+2025_11,Beginning Sound Ba/Ra/Na,Started,603,instances,Month
+2025_11,Beginning Sound Ba/Ra/Na,Completed,345,visits,Month
+2025_11,Beginning Sound Ba/Ra/Na,Started,535,visits,Month
+2025_11,Beginning Sound Ba/Ra/Na,Completed,306,users,Month
+2025_11,Beginning Sound Ba/Ra/Na,Started,467,users,Month
 2025_10,Beginning Sounds Ka/Na/Ta,Completed,5258,instances,Month
 2025_10,Beginning Sounds Ka/Na/Ta,Started,17730,instances,Month
 2025_10,Beginning Sounds Ka/Na/Ta,Completed,5035,visits,Month
 2025_10,Beginning Sounds Ka/Na/Ta,Started,13943,visits,Month
 2025_10,Beginning Sounds Ka/Na/Ta,Completed,4523,users,Month
 2025_10,Beginning Sounds Ka/Na/Ta,Started,11941,users,Month
-2025_11,Beginning Sounds Ka/Na/Ta,Completed,5752,instances,Month
-2025_11,Beginning Sounds Ka/Na/Ta,Started,15267,instances,Month
-2025_11,Beginning Sounds Ka/Na/Ta,Completed,5628,visits,Month
-2025_11,Beginning Sounds Ka/Na/Ta,Started,12979,visits,Month
-2025_11,Beginning Sounds Ka/Na/Ta,Completed,5229,users,Month
-2025_11,Beginning Sounds Ka/Na/Ta,Started,11469,users,Month
+2025_11,Beginning Sounds Ka/Na/Ta,Completed,5920,instances,Month
+2025_11,Beginning Sounds Ka/Na/Ta,Started,15804,instances,Month
+2025_11,Beginning Sounds Ka/Na/Ta,Completed,5788,visits,Month
+2025_11,Beginning Sounds Ka/Na/Ta,Started,13437,visits,Month
+2025_11,Beginning Sounds Ka/Na/Ta,Completed,5367,users,Month
+2025_11,Beginning Sounds Ka/Na/Ta,Started,11806,users,Month
 2025_10,Beginning Sounds Ma/Cha/Ba,Completed,4678,instances,Month
 2025_10,Beginning Sounds Ma/Cha/Ba,Started,9377,instances,Month
 2025_10,Beginning Sounds Ma/Cha/Ba,Completed,4505,visits,Month
 2025_10,Beginning Sounds Ma/Cha/Ba,Started,7834,visits,Month
 2025_10,Beginning Sounds Ma/Cha/Ba,Completed,4213,users,Month
 2025_10,Beginning Sounds Ma/Cha/Ba,Started,7301,users,Month
-2025_11,Beginning Sounds Ma/Cha/Ba,Completed,7124,instances,Month
-2025_11,Beginning Sounds Ma/Cha/Ba,Started,18761,instances,Month
-2025_11,Beginning Sounds Ma/Cha/Ba,Completed,6992,visits,Month
-2025_11,Beginning Sounds Ma/Cha/Ba,Started,16117,visits,Month
-2025_11,Beginning Sounds Ma/Cha/Ba,Completed,6520,users,Month
-2025_11,Beginning Sounds Ma/Cha/Ba,Started,14494,users,Month
+2025_11,Beginning Sounds Ma/Cha/Ba,Completed,9039,instances,Month
+2025_11,Beginning Sounds Ma/Cha/Ba,Started,23440,instances,Month
+2025_11,Beginning Sounds Ma/Cha/Ba,Completed,8858,visits,Month
+2025_11,Beginning Sounds Ma/Cha/Ba,Started,20159,visits,Month
+2025_11,Beginning Sounds Ma/Cha/Ba,Completed,8096,users,Month
+2025_11,Beginning Sounds Ma/Cha/Ba,Started,17794,users,Month
 2025_08,Beginning Sounds Ma/Ka/La,Completed,6256,instances,Month
 2025_08,Beginning Sounds Ma/Ka/La,Started,10745,instances,Month
 2025_08,Beginning Sounds Ma/Ka/La,Completed,5838,visits,Month
@@ -18173,12 +18888,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Beginning Sounds Ma/Ka/La,Started,7867,visits,Month
 2025_10,Beginning Sounds Ma/Ka/La,Completed,3292,users,Month
 2025_10,Beginning Sounds Ma/Ka/La,Started,6764,users,Month
-2025_11,Beginning Sounds Ma/Ka/La,Completed,1156,instances,Month
-2025_11,Beginning Sounds Ma/Ka/La,Started,2326,instances,Month
-2025_11,Beginning Sounds Ma/Ka/La,Completed,1045,visits,Month
-2025_11,Beginning Sounds Ma/Ka/La,Started,2027,visits,Month
-2025_11,Beginning Sounds Ma/Ka/La,Completed,932,users,Month
-2025_11,Beginning Sounds Ma/Ka/La,Started,1756,users,Month
+2025_11,Beginning Sounds Ma/Ka/La,Completed,1254,instances,Month
+2025_11,Beginning Sounds Ma/Ka/La,Started,2517,instances,Month
+2025_11,Beginning Sounds Ma/Ka/La,Completed,1136,visits,Month
+2025_11,Beginning Sounds Ma/Ka/La,Started,2202,visits,Month
+2025_11,Beginning Sounds Ma/Ka/La,Completed,1012,users,Month
+2025_11,Beginning Sounds Ma/Ka/La,Started,1894,users,Month
 2025_09,Beginning Sounds Pa/Cha/Sa,Completed,19796,instances,Month
 2025_09,Beginning Sounds Pa/Cha/Sa,Started,39334,instances,Month
 2025_09,Beginning Sounds Pa/Cha/Sa,Completed,18909,visits,Month
@@ -18191,36 +18906,36 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Beginning Sounds Pa/Cha/Sa,Started,6055,visits,Month
 2025_10,Beginning Sounds Pa/Cha/Sa,Completed,2910,users,Month
 2025_10,Beginning Sounds Pa/Cha/Sa,Started,5005,users,Month
-2025_11,Beginning Sounds Pa/Cha/Sa,Completed,649,instances,Month
-2025_11,Beginning Sounds Pa/Cha/Sa,Started,1112,instances,Month
-2025_11,Beginning Sounds Pa/Cha/Sa,Completed,594,visits,Month
-2025_11,Beginning Sounds Pa/Cha/Sa,Started,959,visits,Month
-2025_11,Beginning Sounds Pa/Cha/Sa,Completed,523,users,Month
-2025_11,Beginning Sounds Pa/Cha/Sa,Started,825,users,Month
+2025_11,Beginning Sounds Pa/Cha/Sa,Completed,699,instances,Month
+2025_11,Beginning Sounds Pa/Cha/Sa,Started,1212,instances,Month
+2025_11,Beginning Sounds Pa/Cha/Sa,Completed,637,visits,Month
+2025_11,Beginning Sounds Pa/Cha/Sa,Started,1033,visits,Month
+2025_11,Beginning Sounds Pa/Cha/Sa,Completed,553,users,Month
+2025_11,Beginning Sounds Pa/Cha/Sa,Started,874,users,Month
 2025_10,Beginning Sounds Sa/La/Va,Completed,292,instances,Month
 2025_10,Beginning Sounds Sa/La/Va,Started,353,instances,Month
 2025_10,Beginning Sounds Sa/La/Va,Completed,241,visits,Month
 2025_10,Beginning Sounds Sa/La/Va,Started,277,visits,Month
 2025_10,Beginning Sounds Sa/La/Va,Completed,212,users,Month
 2025_10,Beginning Sounds Sa/La/Va,Started,243,users,Month
-2025_11,Beginning Sounds Sa/La/Va,Completed,5187,instances,Month
-2025_11,Beginning Sounds Sa/La/Va,Started,10801,instances,Month
-2025_11,Beginning Sounds Sa/La/Va,Completed,5051,visits,Month
-2025_11,Beginning Sounds Sa/La/Va,Started,9236,visits,Month
-2025_11,Beginning Sounds Sa/La/Va,Completed,4707,users,Month
-2025_11,Beginning Sounds Sa/La/Va,Started,8413,users,Month
+2025_11,Beginning Sounds Sa/La/Va,Completed,7561,instances,Month
+2025_11,Beginning Sounds Sa/La/Va,Started,16625,instances,Month
+2025_11,Beginning Sounds Sa/La/Va,Completed,7396,visits,Month
+2025_11,Beginning Sounds Sa/La/Va,Started,14153,visits,Month
+2025_11,Beginning Sounds Sa/La/Va,Completed,6549,users,Month
+2025_11,Beginning Sounds Sa/La/Va,Started,12273,users,Month
 2025_10,Beginning Sounds Ta/Va/Ga,Completed,3401,instances,Month
 2025_10,Beginning Sounds Ta/Va/Ga,Started,6092,instances,Month
 2025_10,Beginning Sounds Ta/Va/Ga,Completed,3225,visits,Month
 2025_10,Beginning Sounds Ta/Va/Ga,Started,5327,visits,Month
 2025_10,Beginning Sounds Ta/Va/Ga,Completed,2646,users,Month
 2025_10,Beginning Sounds Ta/Va/Ga,Started,4288,users,Month
-2025_11,Beginning Sounds Ta/Va/Ga,Completed,129,instances,Month
-2025_11,Beginning Sounds Ta/Va/Ga,Started,337,instances,Month
-2025_11,Beginning Sounds Ta/Va/Ga,Completed,125,visits,Month
-2025_11,Beginning Sounds Ta/Va/Ga,Started,301,visits,Month
-2025_11,Beginning Sounds Ta/Va/Ga,Completed,109,users,Month
-2025_11,Beginning Sounds Ta/Va/Ga,Started,262,users,Month
+2025_11,Beginning Sounds Ta/Va/Ga,Completed,145,instances,Month
+2025_11,Beginning Sounds Ta/Va/Ga,Started,373,instances,Month
+2025_11,Beginning Sounds Ta/Va/Ga,Completed,140,visits,Month
+2025_11,Beginning Sounds Ta/Va/Ga,Started,333,visits,Month
+2025_11,Beginning Sounds Ta/Va/Ga,Completed,123,users,Month
+2025_11,Beginning Sounds Ta/Va/Ga,Started,289,users,Month
 2025_07,Color Blue,Completed,6301,instances,Month
 2025_07,Color Blue,Started,9241,instances,Month
 2025_07,Color Blue,Completed,5461,visits,Month
@@ -18245,12 +18960,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Color Blue,Started,1428,visits,Month
 2025_10,Color Blue,Completed,977,users,Month
 2025_10,Color Blue,Started,1176,users,Month
-2025_11,Color Blue,Completed,753,instances,Month
-2025_11,Color Blue,Started,961,instances,Month
-2025_11,Color Blue,Completed,712,visits,Month
-2025_11,Color Blue,Started,876,visits,Month
-2025_11,Color Blue,Completed,612,users,Month
-2025_11,Color Blue,Started,730,users,Month
+2025_11,Color Blue,Completed,873,instances,Month
+2025_11,Color Blue,Started,1110,instances,Month
+2025_11,Color Blue,Completed,828,visits,Month
+2025_11,Color Blue,Started,1014,visits,Month
+2025_11,Color Blue,Completed,705,users,Month
+2025_11,Color Blue,Started,836,users,Month
 2025_07,Color Red,Completed,21777,instances,Month
 2025_07,Color Red,Started,32474,instances,Month
 2025_07,Color Red,Completed,16654,visits,Month
@@ -18275,12 +18990,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Color Red,Started,6363,visits,Month
 2025_10,Color Red,Completed,3576,users,Month
 2025_10,Color Red,Started,4377,users,Month
-2025_11,Color Red,Completed,4580,instances,Month
-2025_11,Color Red,Started,6006,instances,Month
-2025_11,Color Red,Completed,4209,visits,Month
-2025_11,Color Red,Started,5333,visits,Month
-2025_11,Color Red,Completed,3153,users,Month
-2025_11,Color Red,Started,3824,users,Month
+2025_11,Color Red,Completed,5328,instances,Month
+2025_11,Color Red,Started,6953,instances,Month
+2025_11,Color Red,Completed,4913,visits,Month
+2025_11,Color Red,Started,6182,visits,Month
+2025_11,Color Red,Completed,3568,users,Month
+2025_11,Color Red,Started,4304,users,Month
 2025_07,Color Yellow,Completed,13983,instances,Month
 2025_07,Color Yellow,Started,21479,instances,Month
 2025_07,Color Yellow,Completed,11561,visits,Month
@@ -18305,12 +19020,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Color Yellow,Started,1491,visits,Month
 2025_10,Color Yellow,Completed,976,users,Month
 2025_10,Color Yellow,Started,1235,users,Month
-2025_11,Color Yellow,Completed,908,instances,Month
-2025_11,Color Yellow,Started,1201,instances,Month
-2025_11,Color Yellow,Completed,878,visits,Month
-2025_11,Color Yellow,Started,1120,visits,Month
-2025_11,Color Yellow,Completed,788,users,Month
-2025_11,Color Yellow,Started,967,users,Month
+2025_11,Color Yellow,Completed,1072,instances,Month
+2025_11,Color Yellow,Started,1413,instances,Month
+2025_11,Color Yellow,Completed,1033,visits,Month
+2025_11,Color Yellow,Started,1308,visits,Month
+2025_11,Color Yellow,Completed,918,users,Month
+2025_11,Color Yellow,Started,1123,users,Month
 2025_09,Emotion Identification,Completed,1198,instances,Month
 2025_09,Emotion Identification,Started,1259,instances,Month
 2025_09,Emotion Identification,Completed,930,visits,Month
@@ -18323,12 +19038,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Emotion Identification,Started,21420,visits,Month
 2025_10,Emotion Identification,Completed,10033,users,Month
 2025_10,Emotion Identification,Started,15848,users,Month
-2025_11,Emotion Identification,Completed,829,instances,Month
-2025_11,Emotion Identification,Started,1264,instances,Month
-2025_11,Emotion Identification,Completed,763,visits,Month
-2025_11,Emotion Identification,Started,1129,visits,Month
-2025_11,Emotion Identification,Completed,665,users,Month
-2025_11,Emotion Identification,Started,975,users,Month
+2025_11,Emotion Identification,Completed,871,instances,Month
+2025_11,Emotion Identification,Started,1322,instances,Month
+2025_11,Emotion Identification,Completed,802,visits,Month
+2025_11,Emotion Identification,Started,1183,visits,Month
+2025_11,Emotion Identification,Completed,696,users,Month
+2025_11,Emotion Identification,Started,1019,users,Month
 2025_08,Identification of all emotions,Completed,2771,instances,Month
 2025_08,Identification of all emotions,Started,4487,instances,Month
 2025_08,Identification of all emotions,Completed,2525,visits,Month
@@ -18347,12 +19062,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Identification of all emotions,Started,9555,visits,Month
 2025_10,Identification of all emotions,Completed,5590,users,Month
 2025_10,Identification of all emotions,Started,8396,users,Month
-2025_11,Identification of all emotions,Completed,487,instances,Month
-2025_11,Identification of all emotions,Started,739,instances,Month
-2025_11,Identification of all emotions,Completed,462,visits,Month
-2025_11,Identification of all emotions,Started,659,visits,Month
-2025_11,Identification of all emotions,Completed,412,users,Month
-2025_11,Identification of all emotions,Started,564,users,Month
+2025_11,Identification of all emotions,Completed,542,instances,Month
+2025_11,Identification of all emotions,Started,812,instances,Month
+2025_11,Identification of all emotions,Completed,515,visits,Month
+2025_11,Identification of all emotions,Started,725,visits,Month
+2025_11,Identification of all emotions,Completed,448,users,Month
+2025_11,Identification of all emotions,Started,610,users,Month
 2025_08,Numbers Comparison,Completed,9191,instances,Month
 2025_08,Numbers Comparison,Started,16551,instances,Month
 2025_08,Numbers Comparison,Completed,8651,visits,Month
@@ -18371,12 +19086,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Numbers Comparison,Started,11890,visits,Month
 2025_10,Numbers Comparison,Completed,6354,users,Month
 2025_10,Numbers Comparison,Started,10082,users,Month
-2025_11,Numbers Comparison,Completed,372,instances,Month
-2025_11,Numbers Comparison,Started,528,instances,Month
-2025_11,Numbers Comparison,Completed,350,visits,Month
-2025_11,Numbers Comparison,Started,481,visits,Month
-2025_11,Numbers Comparison,Completed,312,users,Month
-2025_11,Numbers Comparison,Started,422,users,Month
+2025_11,Numbers Comparison,Completed,438,instances,Month
+2025_11,Numbers Comparison,Started,619,instances,Month
+2025_11,Numbers Comparison,Completed,413,visits,Month
+2025_11,Numbers Comparison,Started,562,visits,Month
+2025_11,Numbers Comparison,Completed,365,users,Month
+2025_11,Numbers Comparison,Started,488,users,Month
 2025_07,Numbers I,Completed,15973,instances,Month
 2025_07,Numbers I,Started,27254,instances,Month
 2025_07,Numbers I,Completed,13336,visits,Month
@@ -18401,12 +19116,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Numbers I,Started,2268,visits,Month
 2025_10,Numbers I,Completed,1528,users,Month
 2025_10,Numbers I,Started,1798,users,Month
-2025_11,Numbers I,Completed,1573,instances,Month
-2025_11,Numbers I,Started,1933,instances,Month
-2025_11,Numbers I,Completed,1465,visits,Month
-2025_11,Numbers I,Started,1735,visits,Month
-2025_11,Numbers I,Completed,1235,users,Month
-2025_11,Numbers I,Started,1427,users,Month
+2025_11,Numbers I,Completed,1810,instances,Month
+2025_11,Numbers I,Started,2222,instances,Month
+2025_11,Numbers I,Completed,1691,visits,Month
+2025_11,Numbers I,Started,2006,visits,Month
+2025_11,Numbers I,Completed,1412,users,Month
+2025_11,Numbers I,Started,1627,users,Month
 2025_07,Numbers II,Completed,13246,instances,Month
 2025_07,Numbers II,Started,24507,instances,Month
 2025_07,Numbers II,Completed,11197,visits,Month
@@ -18431,12 +19146,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Numbers II,Started,1662,visits,Month
 2025_10,Numbers II,Completed,1090,users,Month
 2025_10,Numbers II,Started,1352,users,Month
-2025_11,Numbers II,Completed,965,instances,Month
-2025_11,Numbers II,Started,1256,instances,Month
-2025_11,Numbers II,Completed,907,visits,Month
-2025_11,Numbers II,Started,1154,visits,Month
-2025_11,Numbers II,Completed,756,users,Month
-2025_11,Numbers II,Started,944,users,Month
+2025_11,Numbers II,Completed,1145,instances,Month
+2025_11,Numbers II,Started,1471,instances,Month
+2025_11,Numbers II,Completed,1078,visits,Month
+2025_11,Numbers II,Started,1354,visits,Month
+2025_11,Numbers II,Completed,888,users,Month
+2025_11,Numbers II,Started,1093,users,Month
 2025_09,Numerals 1-10,Completed,7116,instances,Month
 2025_09,Numerals 1-10,Started,11785,instances,Month
 2025_09,Numerals 1-10,Completed,6893,visits,Month
@@ -18449,24 +19164,24 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Numerals 1-10,Started,2077,visits,Month
 2025_10,Numerals 1-10,Completed,1345,users,Month
 2025_10,Numerals 1-10,Started,1740,users,Month
-2025_11,Numerals 1-10,Completed,485,instances,Month
-2025_11,Numerals 1-10,Started,856,instances,Month
-2025_11,Numerals 1-10,Completed,447,visits,Month
-2025_11,Numerals 1-10,Started,703,visits,Month
-2025_11,Numerals 1-10,Completed,390,users,Month
-2025_11,Numerals 1-10,Started,582,users,Month
+2025_11,Numerals 1-10,Completed,516,instances,Month
+2025_11,Numerals 1-10,Started,923,instances,Month
+2025_11,Numerals 1-10,Completed,478,visits,Month
+2025_11,Numerals 1-10,Started,765,visits,Month
+2025_11,Numerals 1-10,Completed,413,users,Month
+2025_11,Numerals 1-10,Started,629,users,Month
 2025_10,Positions,Completed,18899,instances,Month
 2025_10,Positions,Started,36932,instances,Month
 2025_10,Positions,Completed,16883,visits,Month
 2025_10,Positions,Started,30835,visits,Month
 2025_10,Positions,Completed,13760,users,Month
 2025_10,Positions,Started,25725,users,Month
-2025_11,Positions,Completed,1805,instances,Month
-2025_11,Positions,Started,4483,instances,Month
-2025_11,Positions,Completed,1620,visits,Month
-2025_11,Positions,Started,3867,visits,Month
-2025_11,Positions,Completed,1381,users,Month
-2025_11,Positions,Started,3232,users,Month
+2025_11,Positions,Completed,1929,instances,Month
+2025_11,Positions,Started,4745,instances,Month
+2025_11,Positions,Completed,1734,visits,Month
+2025_11,Positions,Started,4094,visits,Month
+2025_11,Positions,Completed,1468,users,Month
+2025_11,Positions,Started,3396,users,Month
 2025_08,Primary Emotion Labelling,Completed,7227,instances,Month
 2025_08,Primary Emotion Labelling,Started,13345,instances,Month
 2025_08,Primary Emotion Labelling,Completed,6799,visits,Month
@@ -18485,12 +19200,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Primary Emotion Labelling,Started,1112,visits,Month
 2025_10,Primary Emotion Labelling,Completed,709,users,Month
 2025_10,Primary Emotion Labelling,Started,935,users,Month
-2025_11,Primary Emotion Labelling,Completed,411,instances,Month
-2025_11,Primary Emotion Labelling,Started,611,instances,Month
-2025_11,Primary Emotion Labelling,Completed,391,visits,Month
-2025_11,Primary Emotion Labelling,Started,531,visits,Month
-2025_11,Primary Emotion Labelling,Completed,341,users,Month
-2025_11,Primary Emotion Labelling,Started,460,users,Month
+2025_11,Primary Emotion Labelling,Completed,470,instances,Month
+2025_11,Primary Emotion Labelling,Started,715,instances,Month
+2025_11,Primary Emotion Labelling,Completed,448,visits,Month
+2025_11,Primary Emotion Labelling,Started,607,visits,Month
+2025_11,Primary Emotion Labelling,Completed,382,users,Month
+2025_11,Primary Emotion Labelling,Started,515,users,Month
 2025_07,Quantitative Comparison,Completed,15069,instances,Month
 2025_07,Quantitative Comparison,Started,29103,instances,Month
 2025_07,Quantitative Comparison,Completed,12054,visits,Month
@@ -18515,12 +19230,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Quantitative Comparison,Started,1458,visits,Month
 2025_10,Quantitative Comparison,Completed,968,users,Month
 2025_10,Quantitative Comparison,Started,1212,users,Month
-2025_11,Quantitative Comparison,Completed,706,instances,Month
-2025_11,Quantitative Comparison,Started,941,instances,Month
-2025_11,Quantitative Comparison,Completed,655,visits,Month
-2025_11,Quantitative Comparison,Started,829,visits,Month
-2025_11,Quantitative Comparison,Completed,583,users,Month
-2025_11,Quantitative Comparison,Started,721,users,Month
+2025_11,Quantitative Comparison,Completed,829,instances,Month
+2025_11,Quantitative Comparison,Started,1091,instances,Month
+2025_11,Quantitative Comparison,Completed,768,visits,Month
+2025_11,Quantitative Comparison,Started,963,visits,Month
+2025_11,Quantitative Comparison,Completed,670,users,Month
+2025_11,Quantitative Comparison,Started,822,users,Month
 2025_07,Relational Comparison,Completed,13738,instances,Month
 2025_07,Relational Comparison,Started,28852,instances,Month
 2025_07,Relational Comparison,Completed,10862,visits,Month
@@ -18545,12 +19260,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Relational Comparison,Started,980,visits,Month
 2025_10,Relational Comparison,Completed,669,users,Month
 2025_10,Relational Comparison,Started,831,users,Month
-2025_11,Relational Comparison,Completed,657,instances,Month
-2025_11,Relational Comparison,Started,817,instances,Month
-2025_11,Relational Comparison,Completed,591,visits,Month
-2025_11,Relational Comparison,Started,715,visits,Month
-2025_11,Relational Comparison,Completed,513,users,Month
-2025_11,Relational Comparison,Started,609,users,Month
+2025_11,Relational Comparison,Completed,792,instances,Month
+2025_11,Relational Comparison,Started,984,instances,Month
+2025_11,Relational Comparison,Completed,710,visits,Month
+2025_11,Relational Comparison,Started,857,visits,Month
+2025_11,Relational Comparison,Completed,613,users,Month
+2025_11,Relational Comparison,Started,727,users,Month
 2025_08,Relational Comparison II,Completed,12680,instances,Month
 2025_08,Relational Comparison II,Started,24940,instances,Month
 2025_08,Relational Comparison II,Completed,12001,visits,Month
@@ -18569,12 +19284,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Relational Comparison II,Started,10961,visits,Month
 2025_10,Relational Comparison II,Completed,6545,users,Month
 2025_10,Relational Comparison II,Started,9600,users,Month
-2025_11,Relational Comparison II,Completed,431,instances,Month
-2025_11,Relational Comparison II,Started,593,instances,Month
-2025_11,Relational Comparison II,Completed,407,visits,Month
-2025_11,Relational Comparison II,Started,549,visits,Month
-2025_11,Relational Comparison II,Completed,361,users,Month
-2025_11,Relational Comparison II,Started,478,users,Month
+2025_11,Relational Comparison II,Completed,489,instances,Month
+2025_11,Relational Comparison II,Started,672,instances,Month
+2025_11,Relational Comparison II,Completed,465,visits,Month
+2025_11,Relational Comparison II,Started,626,visits,Month
+2025_11,Relational Comparison II,Completed,405,users,Month
+2025_11,Relational Comparison II,Started,535,users,Month
 2025_08,Revision Colors,Completed,10848,instances,Month
 2025_08,Revision Colors,Started,18958,instances,Month
 2025_08,Revision Colors,Completed,10286,visits,Month
@@ -18593,12 +19308,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Revision Colors,Started,1304,visits,Month
 2025_10,Revision Colors,Completed,741,users,Month
 2025_10,Revision Colors,Started,963,users,Month
-2025_11,Revision Colors,Completed,412,instances,Month
-2025_11,Revision Colors,Started,585,instances,Month
-2025_11,Revision Colors,Completed,377,visits,Month
-2025_11,Revision Colors,Started,510,visits,Month
-2025_11,Revision Colors,Completed,312,users,Month
-2025_11,Revision Colors,Started,399,users,Month
+2025_11,Revision Colors,Completed,499,instances,Month
+2025_11,Revision Colors,Started,705,instances,Month
+2025_11,Revision Colors,Completed,457,visits,Month
+2025_11,Revision Colors,Started,614,visits,Month
+2025_11,Revision Colors,Completed,378,users,Month
+2025_11,Revision Colors,Started,477,users,Month
 2025_08,Revision Shapes,Completed,7709,instances,Month
 2025_08,Revision Shapes,Started,12183,instances,Month
 2025_08,Revision Shapes,Completed,6998,visits,Month
@@ -18617,12 +19332,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Revision Shapes,Started,861,visits,Month
 2025_10,Revision Shapes,Completed,569,users,Month
 2025_10,Revision Shapes,Started,716,users,Month
-2025_11,Revision Shapes,Completed,292,instances,Month
-2025_11,Revision Shapes,Started,388,instances,Month
-2025_11,Revision Shapes,Completed,265,visits,Month
-2025_11,Revision Shapes,Started,343,visits,Month
-2025_11,Revision Shapes,Completed,243,users,Month
-2025_11,Revision Shapes,Started,305,users,Month
+2025_11,Revision Shapes,Completed,333,instances,Month
+2025_11,Revision Shapes,Started,441,instances,Month
+2025_11,Revision Shapes,Completed,299,visits,Month
+2025_11,Revision Shapes,Started,386,visits,Month
+2025_11,Revision Shapes,Completed,273,users,Month
+2025_11,Revision Shapes,Started,343,users,Month
 2025_08,Rhyming Words,Completed,10599,instances,Month
 2025_08,Rhyming Words,Started,21939,instances,Month
 2025_08,Rhyming Words,Completed,9580,visits,Month
@@ -18641,12 +19356,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Rhyming Words,Started,3673,visits,Month
 2025_10,Rhyming Words,Completed,1791,users,Month
 2025_10,Rhyming Words,Started,3175,users,Month
-2025_11,Rhyming Words,Completed,754,instances,Month
-2025_11,Rhyming Words,Started,1076,instances,Month
-2025_11,Rhyming Words,Completed,707,visits,Month
-2025_11,Rhyming Words,Started,982,visits,Month
-2025_11,Rhyming Words,Completed,636,users,Month
-2025_11,Rhyming Words,Started,864,users,Month
+2025_11,Rhyming Words,Completed,864,instances,Month
+2025_11,Rhyming Words,Started,1227,instances,Month
+2025_11,Rhyming Words,Completed,810,visits,Month
+2025_11,Rhyming Words,Started,1122,visits,Month
+2025_11,Rhyming Words,Completed,720,users,Month
+2025_11,Rhyming Words,Started,977,users,Month
 2025_07,Shape Circle,Completed,37314,instances,Month
 2025_07,Shape Circle,Started,52877,instances,Month
 2025_07,Shape Circle,Completed,25025,visits,Month
@@ -18671,12 +19386,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Shape Circle,Started,14010,visits,Month
 2025_10,Shape Circle,Completed,6613,users,Month
 2025_10,Shape Circle,Started,7766,users,Month
-2025_11,Shape Circle,Completed,11865,instances,Month
-2025_11,Shape Circle,Started,15324,instances,Month
-2025_11,Shape Circle,Completed,10486,visits,Month
-2025_11,Shape Circle,Started,12873,visits,Month
-2025_11,Shape Circle,Completed,6258,users,Month
-2025_11,Shape Circle,Started,7301,users,Month
+2025_11,Shape Circle,Completed,13885,instances,Month
+2025_11,Shape Circle,Started,17867,instances,Month
+2025_11,Shape Circle,Completed,12277,visits,Month
+2025_11,Shape Circle,Started,15010,visits,Month
+2025_11,Shape Circle,Completed,7056,users,Month
+2025_11,Shape Circle,Started,8236,users,Month
 2025_09,Shape Rectangle,Completed,8781,instances,Month
 2025_09,Shape Rectangle,Started,14195,instances,Month
 2025_09,Shape Rectangle,Completed,8482,visits,Month
@@ -18689,12 +19404,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Shape Rectangle,Started,1391,visits,Month
 2025_10,Shape Rectangle,Completed,919,users,Month
 2025_10,Shape Rectangle,Started,1144,users,Month
-2025_11,Shape Rectangle,Completed,340,instances,Month
-2025_11,Shape Rectangle,Started,449,instances,Month
-2025_11,Shape Rectangle,Completed,313,visits,Month
-2025_11,Shape Rectangle,Started,403,visits,Month
-2025_11,Shape Rectangle,Completed,282,users,Month
-2025_11,Shape Rectangle,Started,354,users,Month
+2025_11,Shape Rectangle,Completed,376,instances,Month
+2025_11,Shape Rectangle,Started,498,instances,Month
+2025_11,Shape Rectangle,Completed,347,visits,Month
+2025_11,Shape Rectangle,Started,446,visits,Month
+2025_11,Shape Rectangle,Completed,311,users,Month
+2025_11,Shape Rectangle,Started,389,users,Month
 2025_07,Shape Square,Completed,2057,instances,Month
 2025_07,Shape Square,Started,2797,instances,Month
 2025_07,Shape Square,Completed,1529,visits,Month
@@ -18719,12 +19434,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Shape Square,Started,912,visits,Month
 2025_10,Shape Square,Completed,613,users,Month
 2025_10,Shape Square,Started,784,users,Month
-2025_11,Shape Square,Completed,389,instances,Month
-2025_11,Shape Square,Started,521,instances,Month
-2025_11,Shape Square,Completed,378,visits,Month
-2025_11,Shape Square,Started,495,visits,Month
-2025_11,Shape Square,Completed,350,users,Month
-2025_11,Shape Square,Started,450,users,Month
+2025_11,Shape Square,Completed,462,instances,Month
+2025_11,Shape Square,Started,605,instances,Month
+2025_11,Shape Square,Completed,450,visits,Month
+2025_11,Shape Square,Started,577,visits,Month
+2025_11,Shape Square,Completed,410,users,Month
+2025_11,Shape Square,Started,517,users,Month
 2025_07,Shape Triangle,Completed,16054,instances,Month
 2025_07,Shape Triangle,Started,25184,instances,Month
 2025_07,Shape Triangle,Completed,13136,visits,Month
@@ -18749,12 +19464,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Shape Triangle,Started,2135,visits,Month
 2025_10,Shape Triangle,Completed,1422,users,Month
 2025_10,Shape Triangle,Started,1771,users,Month
-2025_11,Shape Triangle,Completed,1475,instances,Month
-2025_11,Shape Triangle,Started,1929,instances,Month
-2025_11,Shape Triangle,Completed,1392,visits,Month
-2025_11,Shape Triangle,Started,1759,visits,Month
-2025_11,Shape Triangle,Completed,1194,users,Month
-2025_11,Shape Triangle,Started,1471,users,Month
+2025_11,Shape Triangle,Completed,1755,instances,Month
+2025_11,Shape Triangle,Started,2272,instances,Month
+2025_11,Shape Triangle,Completed,1655,visits,Month
+2025_11,Shape Triangle,Started,2074,visits,Month
+2025_11,Shape Triangle,Completed,1413,users,Month
+2025_11,Shape Triangle,Started,1722,users,Month
 2025_09,Sorting Primary Colors,Completed,11380,instances,Month
 2025_09,Sorting Primary Colors,Started,18628,instances,Month
 2025_09,Sorting Primary Colors,Completed,10787,visits,Month
@@ -18767,12 +19482,12 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Sorting Primary Colors,Started,4520,visits,Month
 2025_10,Sorting Primary Colors,Completed,2178,users,Month
 2025_10,Sorting Primary Colors,Started,2721,users,Month
-2025_11,Sorting Primary Colors,Completed,1524,instances,Month
-2025_11,Sorting Primary Colors,Started,2261,instances,Month
-2025_11,Sorting Primary Colors,Completed,1389,visits,Month
-2025_11,Sorting Primary Colors,Started,1927,visits,Month
-2025_11,Sorting Primary Colors,Completed,1024,users,Month
-2025_11,Sorting Primary Colors,Started,1343,users,Month
+2025_11,Sorting Primary Colors,Completed,1599,instances,Month
+2025_11,Sorting Primary Colors,Started,2374,instances,Month
+2025_11,Sorting Primary Colors,Completed,1459,visits,Month
+2025_11,Sorting Primary Colors,Started,2026,visits,Month
+2025_11,Sorting Primary Colors,Completed,1058,users,Month
+2025_11,Sorting Primary Colors,Started,1384,users,Month
 2025_09,Sorting Primary Shapes,Completed,2167,instances,Month
 2025_09,Sorting Primary Shapes,Started,3106,instances,Month
 2025_09,Sorting Primary Shapes,Completed,1951,visits,Month
@@ -18785,138 +19500,167 @@ period_label,game_name,event,count,metric,period_type
 2025_10,Sorting Primary Shapes,Started,1752,visits,Month
 2025_10,Sorting Primary Shapes,Completed,1044,users,Month
 2025_10,Sorting Primary Shapes,Started,1410,users,Month
-2025_11,Sorting Primary Shapes,Completed,5014,instances,Month
-2025_11,Sorting Primary Shapes,Started,12609,instances,Month
-2025_11,Sorting Primary Shapes,Completed,4647,visits,Month
-2025_11,Sorting Primary Shapes,Started,10348,visits,Month
-2025_11,Sorting Primary Shapes,Completed,4195,users,Month
-2025_11,Sorting Primary Shapes,Started,9257,users,Month
+2025_11,Sorting Primary Shapes,Completed,5046,instances,Month
+2025_11,Sorting Primary Shapes,Started,12682,instances,Month
+2025_11,Sorting Primary Shapes,Completed,4675,visits,Month
+2025_11,Sorting Primary Shapes,Started,10402,visits,Month
+2025_11,Sorting Primary Shapes,Completed,4215,users,Month
+2025_11,Sorting Primary Shapes,Started,9287,users,Month
+2025_25,All Games,RM Active Users,40633,rm_active_users,Week
 2025_26,All Games,Completed,19229,instances,Week
 2025_26,All Games,Started,32380,instances,Week
 2025_26,All Games,Completed,9886,visits,Week
 2025_26,All Games,Started,17702,visits,Week
 2025_26,All Games,Completed,7563,users,Week
 2025_26,All Games,Started,16413,users,Week
+2025_26,All Games,RM Active Users,72112,rm_active_users,Week
 2025_27,All Games,Completed,31669,instances,Week
 2025_27,All Games,Started,48636,instances,Week
 2025_27,All Games,Completed,15963,visits,Week
 2025_27,All Games,Started,25897,visits,Week
 2025_27,All Games,Completed,10592,users,Week
 2025_27,All Games,Started,19987,users,Week
+2025_27,All Games,RM Active Users,71766,rm_active_users,Week
 2025_28,All Games,Completed,37351,instances,Week
 2025_28,All Games,Started,60157,instances,Week
 2025_28,All Games,Completed,19652,visits,Week
 2025_28,All Games,Started,32459,visits,Week
 2025_28,All Games,Completed,13637,users,Week
 2025_28,All Games,Started,23003,users,Week
+2025_28,All Games,RM Active Users,71471,rm_active_users,Week
 2025_29,All Games,Completed,51517,instances,Week
 2025_29,All Games,Started,89587,instances,Week
 2025_29,All Games,Completed,23637,visits,Week
 2025_29,All Games,Started,41834,visits,Week
 2025_29,All Games,Completed,14910,users,Week
 2025_29,All Games,Started,24567,users,Week
+2025_29,All Games,RM Active Users,75843,rm_active_users,Week
 2025_30,All Games,Completed,50343,instances,Week
 2025_30,All Games,Started,73192,instances,Week
 2025_30,All Games,Completed,24174,visits,Week
 2025_30,All Games,Started,34820,visits,Week
 2025_30,All Games,Completed,18717,users,Week
 2025_30,All Games,Started,30413,users,Week
+2025_30,All Games,RM Active Users,73646,rm_active_users,Week
 2025_31,All Games,Completed,39169,instances,Week
 2025_31,All Games,Started,57808,instances,Week
 2025_31,All Games,Completed,19263,visits,Week
 2025_31,All Games,Started,28850,visits,Week
 2025_31,All Games,Completed,13547,users,Week
 2025_31,All Games,Started,21572,users,Week
+2025_31,All Games,RM Active Users,68305,rm_active_users,Week
 2025_32,All Games,Completed,42764,instances,Week
 2025_32,All Games,Started,70460,instances,Week
 2025_32,All Games,Completed,21782,visits,Week
 2025_32,All Games,Started,36814,visits,Week
 2025_32,All Games,Completed,14274,users,Week
 2025_32,All Games,Started,24186,users,Week
+2025_32,All Games,RM Active Users,68451,rm_active_users,Week
 2025_33,All Games,Completed,37570,instances,Week
 2025_33,All Games,Started,57603,instances,Week
 2025_33,All Games,Completed,18414,visits,Week
 2025_33,All Games,Started,28926,visits,Week
 2025_33,All Games,Completed,12590,users,Week
 2025_33,All Games,Started,20271,users,Week
+2025_33,All Games,RM Active Users,67205,rm_active_users,Week
 2025_34,All Games,Completed,29345,instances,Week
 2025_34,All Games,Started,46145,instances,Week
 2025_34,All Games,Completed,15832,visits,Week
 2025_34,All Games,Started,24605,visits,Week
 2025_34,All Games,Completed,11178,users,Week
 2025_34,All Games,Started,17020,users,Week
+2025_34,All Games,RM Active Users,62291,rm_active_users,Week
 2025_35,All Games,Completed,25359,instances,Week
 2025_35,All Games,Started,38196,instances,Week
 2025_35,All Games,Completed,18744,visits,Week
 2025_35,All Games,Started,26964,visits,Week
 2025_35,All Games,Completed,13268,users,Week
 2025_35,All Games,Started,19547,users,Week
+2025_35,All Games,RM Active Users,67949,rm_active_users,Week
 2025_36,All Games,Completed,56574,instances,Week
 2025_36,All Games,Started,96792,instances,Week
 2025_36,All Games,Completed,40385,visits,Week
 2025_36,All Games,Started,66005,visits,Week
 2025_36,All Games,Completed,23606,users,Week
 2025_36,All Games,Started,41489,users,Week
+2025_36,All Games,RM Active Users,63692,rm_active_users,Week
 2025_37,All Games,Completed,47450,instances,Week
 2025_37,All Games,Started,77069,instances,Week
 2025_37,All Games,Completed,31790,visits,Week
 2025_37,All Games,Started,50395,visits,Week
 2025_37,All Games,Completed,19648,users,Week
 2025_37,All Games,Started,33599,users,Week
+2025_37,All Games,RM Active Users,65129,rm_active_users,Week
 2025_38,All Games,Completed,36671,instances,Week
 2025_38,All Games,Started,61917,instances,Week
 2025_38,All Games,Completed,24454,visits,Week
 2025_38,All Games,Started,39801,visits,Week
 2025_38,All Games,Completed,14548,users,Week
 2025_38,All Games,Started,24846,users,Week
+2025_38,All Games,RM Active Users,58946,rm_active_users,Week
 2025_39,All Games,Completed,33990,instances,Week
 2025_39,All Games,Started,59436,instances,Week
 2025_39,All Games,Completed,21907,visits,Week
 2025_39,All Games,Started,36820,visits,Week
 2025_39,All Games,Completed,13923,users,Week
 2025_39,All Games,Started,23826,users,Week
+2025_39,All Games,RM Active Users,61139,rm_active_users,Week
 2025_40,All Games,Completed,36599,instances,Week
 2025_40,All Games,Started,61523,instances,Week
 2025_40,All Games,Completed,25672,visits,Week
 2025_40,All Games,Started,41541,visits,Week
 2025_40,All Games,Completed,17019,users,Week
 2025_40,All Games,Started,28567,users,Week
+2025_40,All Games,RM Active Users,55128,rm_active_users,Week
 2025_41,All Games,Completed,27350,instances,Week
 2025_41,All Games,Started,45736,instances,Week
 2025_41,All Games,Completed,19076,visits,Week
 2025_41,All Games,Started,30954,visits,Week
 2025_41,All Games,Completed,12973,users,Week
 2025_41,All Games,Started,21649,users,Week
+2025_41,All Games,RM Active Users,46356,rm_active_users,Week
 2025_42,All Games,Completed,22243,instances,Week
 2025_42,All Games,Started,42456,instances,Week
 2025_42,All Games,Completed,15967,visits,Week
 2025_42,All Games,Started,28848,visits,Week
 2025_42,All Games,Completed,10623,users,Week
 2025_42,All Games,Started,19129,users,Week
+2025_42,All Games,RM Active Users,41647,rm_active_users,Week
 2025_43,All Games,Completed,25810,instances,Week
 2025_43,All Games,Started,49164,instances,Week
 2025_43,All Games,Completed,18471,visits,Week
 2025_43,All Games,Started,33638,visits,Week
 2025_43,All Games,Completed,12633,users,Week
 2025_43,All Games,Started,23609,users,Week
+2025_43,All Games,RM Active Users,46185,rm_active_users,Week
 2025_44,All Games,Completed,16432,instances,Week
 2025_44,All Games,Started,28397,instances,Week
 2025_44,All Games,Completed,12125,visits,Week
 2025_44,All Games,Started,19871,visits,Week
 2025_44,All Games,Completed,8090,users,Week
 2025_44,All Games,Started,13633,users,Week
+2025_44,All Games,RM Active Users,48817,rm_active_users,Week
 2025_45,All Games,Completed,9836,instances,Week
 2025_45,All Games,Started,17749,instances,Week
 2025_45,All Games,Completed,6977,visits,Week
 2025_45,All Games,Started,12364,visits,Week
 2025_45,All Games,Completed,4584,users,Week
 2025_45,All Games,Started,8317,users,Week
-2025_46,All Games,Completed,16315,instances,Week
-2025_46,All Games,Started,31463,instances,Week
-2025_46,All Games,Completed,11983,visits,Week
-2025_46,All Games,Started,22400,visits,Week
-2025_46,All Games,Completed,8530,users,Week
-2025_46,All Games,Started,16087,users,Week
+2025_45,All Games,RM Active Users,47466,rm_active_users,Week
+2025_46,All Games,Completed,21330,instances,Week
+2025_46,All Games,Started,40184,instances,Week
+2025_46,All Games,Completed,15478,visits,Week
+2025_46,All Games,Started,28415,visits,Week
+2025_46,All Games,Completed,10435,users,Week
+2025_46,All Games,Started,19644,users,Week
+2025_46,All Games,RM Active Users,47506,rm_active_users,Week
+2025_47,All Games,Completed,4536,instances,Week
+2025_47,All Games,Started,9085,instances,Week
+2025_47,All Games,Completed,3527,visits,Week
+2025_47,All Games,Started,6611,visits,Week
+2025_47,All Games,Completed,3370,users,Week
+2025_47,All Games,Started,6323,users,Week
+2025_47,All Games,RM Active Users,14696,rm_active_users,Week
 2025_38,Beginning Sound Ba/Ra/Na,Completed,1246,instances,Week
 2025_38,Beginning Sound Ba/Ra/Na,Started,1784,instances,Week
 2025_38,Beginning Sound Ba/Ra/Na,Completed,1081,visits,Week
@@ -18965,12 +19709,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sound Ba/Ra/Na,Started,179,visits,Week
 2025_45,Beginning Sound Ba/Ra/Na,Completed,111,users,Week
 2025_45,Beginning Sound Ba/Ra/Na,Started,171,users,Week
-2025_46,Beginning Sound Ba/Ra/Na,Completed,45,instances,Week
-2025_46,Beginning Sound Ba/Ra/Na,Started,62,instances,Week
-2025_46,Beginning Sound Ba/Ra/Na,Completed,43,visits,Week
-2025_46,Beginning Sound Ba/Ra/Na,Started,58,visits,Week
-2025_46,Beginning Sound Ba/Ra/Na,Completed,41,users,Week
-2025_46,Beginning Sound Ba/Ra/Na,Started,55,users,Week
+2025_46,Beginning Sound Ba/Ra/Na,Completed,69,instances,Week
+2025_46,Beginning Sound Ba/Ra/Na,Started,94,instances,Week
+2025_46,Beginning Sound Ba/Ra/Na,Completed,61,visits,Week
+2025_46,Beginning Sound Ba/Ra/Na,Started,83,visits,Week
+2025_46,Beginning Sound Ba/Ra/Na,Completed,59,users,Week
+2025_46,Beginning Sound Ba/Ra/Na,Started,79,users,Week
+2025_47,Beginning Sound Ba/Ra/Na,Completed,10,instances,Week
+2025_47,Beginning Sound Ba/Ra/Na,Started,15,instances,Week
+2025_47,Beginning Sound Ba/Ra/Na,Completed,10,visits,Week
+2025_47,Beginning Sound Ba/Ra/Na,Started,15,visits,Week
+2025_47,Beginning Sound Ba/Ra/Na,Completed,10,users,Week
+2025_47,Beginning Sound Ba/Ra/Na,Started,15,users,Week
 2025_42,Beginning Sounds Ka/Na/Ta,Completed,4479,instances,Week
 2025_42,Beginning Sounds Ka/Na/Ta,Started,14884,instances,Week
 2025_42,Beginning Sounds Ka/Na/Ta,Completed,4282,visits,Week
@@ -18995,12 +19745,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sounds Ka/Na/Ta,Started,474,visits,Week
 2025_45,Beginning Sounds Ka/Na/Ta,Completed,188,users,Week
 2025_45,Beginning Sounds Ka/Na/Ta,Started,441,users,Week
-2025_46,Beginning Sounds Ka/Na/Ta,Completed,5115,instances,Week
-2025_46,Beginning Sounds Ka/Na/Ta,Started,13125,instances,Week
-2025_46,Beginning Sounds Ka/Na/Ta,Completed,5016,visits,Week
-2025_46,Beginning Sounds Ka/Na/Ta,Started,11061,visits,Week
-2025_46,Beginning Sounds Ka/Na/Ta,Completed,4713,users,Week
-2025_46,Beginning Sounds Ka/Na/Ta,Started,9973,users,Week
+2025_46,Beginning Sounds Ka/Na/Ta,Completed,5245,instances,Week
+2025_46,Beginning Sounds Ka/Na/Ta,Started,13524,instances,Week
+2025_46,Beginning Sounds Ka/Na/Ta,Completed,5139,visits,Week
+2025_46,Beginning Sounds Ka/Na/Ta,Started,11396,visits,Week
+2025_46,Beginning Sounds Ka/Na/Ta,Completed,4822,users,Week
+2025_46,Beginning Sounds Ka/Na/Ta,Started,10229,users,Week
+2025_47,Beginning Sounds Ka/Na/Ta,Completed,38,instances,Week
+2025_47,Beginning Sounds Ka/Na/Ta,Started,138,instances,Week
+2025_47,Beginning Sounds Ka/Na/Ta,Completed,37,visits,Week
+2025_47,Beginning Sounds Ka/Na/Ta,Started,123,visits,Week
+2025_47,Beginning Sounds Ka/Na/Ta,Completed,37,users,Week
+2025_47,Beginning Sounds Ka/Na/Ta,Started,121,users,Week
 2025_43,Beginning Sounds Ma/Cha/Ba,Completed,7972,instances,Week
 2025_43,Beginning Sounds Ma/Cha/Ba,Started,18223,instances,Week
 2025_43,Beginning Sounds Ma/Cha/Ba,Completed,7745,visits,Week
@@ -19019,12 +19775,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sounds Ma/Cha/Ba,Started,905,visits,Week
 2025_45,Beginning Sounds Ma/Cha/Ba,Completed,289,users,Week
 2025_45,Beginning Sounds Ma/Cha/Ba,Started,837,users,Week
-2025_46,Beginning Sounds Ma/Cha/Ba,Completed,2883,instances,Week
-2025_46,Beginning Sounds Ma/Cha/Ba,Started,6675,instances,Week
-2025_46,Beginning Sounds Ma/Cha/Ba,Completed,2827,visits,Week
-2025_46,Beginning Sounds Ma/Cha/Ba,Started,5714,visits,Week
-2025_46,Beginning Sounds Ma/Cha/Ba,Completed,2784,users,Week
-2025_46,Beginning Sounds Ma/Cha/Ba,Started,5523,users,Week
+2025_46,Beginning Sounds Ma/Cha/Ba,Completed,4609,instances,Week
+2025_46,Beginning Sounds Ma/Cha/Ba,Started,10855,instances,Week
+2025_46,Beginning Sounds Ma/Cha/Ba,Completed,4505,visits,Week
+2025_46,Beginning Sounds Ma/Cha/Ba,Started,9318,visits,Week
+2025_46,Beginning Sounds Ma/Cha/Ba,Completed,4351,users,Week
+2025_46,Beginning Sounds Ma/Cha/Ba,Started,8808,users,Week
+2025_47,Beginning Sounds Ma/Cha/Ba,Completed,189,instances,Week
+2025_47,Beginning Sounds Ma/Cha/Ba,Started,499,instances,Week
+2025_47,Beginning Sounds Ma/Cha/Ba,Completed,188,visits,Week
+2025_47,Beginning Sounds Ma/Cha/Ba,Started,438,visits,Week
+2025_47,Beginning Sounds Ma/Cha/Ba,Completed,186,users,Week
+2025_47,Beginning Sounds Ma/Cha/Ba,Started,432,users,Week
 2025_33,Beginning Sounds Ma/Ka/La,Completed,5516,instances,Week
 2025_33,Beginning Sounds Ma/Ka/La,Started,9584,instances,Week
 2025_33,Beginning Sounds Ma/Ka/La,Completed,5138,visits,Week
@@ -19103,12 +19865,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sounds Ma/Ka/La,Started,566,visits,Week
 2025_45,Beginning Sounds Ma/Ka/La,Completed,204,users,Week
 2025_45,Beginning Sounds Ma/Ka/La,Started,522,users,Week
-2025_46,Beginning Sounds Ma/Ka/La,Completed,186,instances,Week
-2025_46,Beginning Sounds Ma/Ka/La,Started,474,instances,Week
-2025_46,Beginning Sounds Ma/Ka/La,Completed,168,visits,Week
-2025_46,Beginning Sounds Ma/Ka/La,Started,422,visits,Week
-2025_46,Beginning Sounds Ma/Ka/La,Completed,161,users,Week
-2025_46,Beginning Sounds Ma/Ka/La,Started,385,users,Week
+2025_46,Beginning Sounds Ma/Ka/La,Completed,243,instances,Week
+2025_46,Beginning Sounds Ma/Ka/La,Started,587,instances,Week
+2025_46,Beginning Sounds Ma/Ka/La,Completed,221,visits,Week
+2025_46,Beginning Sounds Ma/Ka/La,Started,528,visits,Week
+2025_46,Beginning Sounds Ma/Ka/La,Completed,210,users,Week
+2025_46,Beginning Sounds Ma/Ka/La,Started,483,users,Week
+2025_47,Beginning Sounds Ma/Ka/La,Completed,41,instances,Week
+2025_47,Beginning Sounds Ma/Ka/La,Started,78,instances,Week
+2025_47,Beginning Sounds Ma/Ka/La,Completed,38,visits,Week
+2025_47,Beginning Sounds Ma/Ka/La,Started,69,visits,Week
+2025_47,Beginning Sounds Ma/Ka/La,Completed,38,users,Week
+2025_47,Beginning Sounds Ma/Ka/La,Started,64,users,Week
 2025_34,Beginning Sounds Pa/Cha/Sa,Completed,75,instances,Week
 2025_34,Beginning Sounds Pa/Cha/Sa,Started,75,instances,Week
 2025_34,Beginning Sounds Pa/Cha/Sa,Completed,68,visits,Week
@@ -19181,12 +19949,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sounds Pa/Cha/Sa,Started,312,visits,Week
 2025_45,Beginning Sounds Pa/Cha/Sa,Completed,186,users,Week
 2025_45,Beginning Sounds Pa/Cha/Sa,Started,279,users,Week
-2025_46,Beginning Sounds Pa/Cha/Sa,Completed,68,instances,Week
-2025_46,Beginning Sounds Pa/Cha/Sa,Started,132,instances,Week
-2025_46,Beginning Sounds Pa/Cha/Sa,Completed,61,visits,Week
-2025_46,Beginning Sounds Pa/Cha/Sa,Started,114,visits,Week
-2025_46,Beginning Sounds Pa/Cha/Sa,Completed,55,users,Week
-2025_46,Beginning Sounds Pa/Cha/Sa,Started,108,users,Week
+2025_46,Beginning Sounds Pa/Cha/Sa,Completed,95,instances,Week
+2025_46,Beginning Sounds Pa/Cha/Sa,Started,179,instances,Week
+2025_46,Beginning Sounds Pa/Cha/Sa,Completed,83,visits,Week
+2025_46,Beginning Sounds Pa/Cha/Sa,Started,150,visits,Week
+2025_46,Beginning Sounds Pa/Cha/Sa,Completed,76,users,Week
+2025_46,Beginning Sounds Pa/Cha/Sa,Started,140,users,Week
+2025_47,Beginning Sounds Pa/Cha/Sa,Completed,23,instances,Week
+2025_47,Beginning Sounds Pa/Cha/Sa,Started,53,instances,Week
+2025_47,Beginning Sounds Pa/Cha/Sa,Completed,21,visits,Week
+2025_47,Beginning Sounds Pa/Cha/Sa,Started,38,visits,Week
+2025_47,Beginning Sounds Pa/Cha/Sa,Completed,20,users,Week
+2025_47,Beginning Sounds Pa/Cha/Sa,Started,32,users,Week
 2025_43,Beginning Sounds Sa/La/Va,Completed,4735,instances,Week
 2025_43,Beginning Sounds Sa/La/Va,Started,9674,instances,Week
 2025_43,Beginning Sounds Sa/La/Va,Completed,4574,visits,Week
@@ -19205,12 +19979,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sounds Sa/La/Va,Started,395,visits,Week
 2025_45,Beginning Sounds Sa/La/Va,Completed,187,users,Week
 2025_45,Beginning Sounds Sa/La/Va,Started,373,users,Week
-2025_46,Beginning Sounds Sa/La/Va,Completed,61,instances,Week
-2025_46,Beginning Sounds Sa/La/Va,Started,111,instances,Week
-2025_46,Beginning Sounds Sa/La/Va,Completed,59,visits,Week
-2025_46,Beginning Sounds Sa/La/Va,Started,103,visits,Week
-2025_46,Beginning Sounds Sa/La/Va,Completed,59,users,Week
-2025_46,Beginning Sounds Sa/La/Va,Started,98,users,Week
+2025_46,Beginning Sounds Sa/La/Va,Completed,95,instances,Week
+2025_46,Beginning Sounds Sa/La/Va,Started,161,instances,Week
+2025_46,Beginning Sounds Sa/La/Va,Completed,92,visits,Week
+2025_46,Beginning Sounds Sa/La/Va,Started,147,visits,Week
+2025_46,Beginning Sounds Sa/La/Va,Completed,90,users,Week
+2025_46,Beginning Sounds Sa/La/Va,Started,143,users,Week
+2025_47,Beginning Sounds Sa/La/Va,Completed,2340,instances,Week
+2025_47,Beginning Sounds Sa/La/Va,Started,5774,instances,Week
+2025_47,Beginning Sounds Sa/La/Va,Completed,2312,visits,Week
+2025_47,Beginning Sounds Sa/La/Va,Started,4873,visits,Week
+2025_47,Beginning Sounds Sa/La/Va,Completed,2291,users,Week
+2025_47,Beginning Sounds Sa/La/Va,Started,4830,users,Week
 2025_40,Beginning Sounds Ta/Va/Ga,Completed,866,instances,Week
 2025_40,Beginning Sounds Ta/Va/Ga,Started,1121,instances,Week
 2025_40,Beginning Sounds Ta/Va/Ga,Completed,801,visits,Week
@@ -19247,12 +20027,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Beginning Sounds Ta/Va/Ga,Started,91,visits,Week
 2025_45,Beginning Sounds Ta/Va/Ga,Completed,37,users,Week
 2025_45,Beginning Sounds Ta/Va/Ga,Started,84,users,Week
-2025_46,Beginning Sounds Ta/Va/Ga,Completed,16,instances,Week
-2025_46,Beginning Sounds Ta/Va/Ga,Started,36,instances,Week
-2025_46,Beginning Sounds Ta/Va/Ga,Completed,16,visits,Week
-2025_46,Beginning Sounds Ta/Va/Ga,Started,36,visits,Week
-2025_46,Beginning Sounds Ta/Va/Ga,Completed,14,users,Week
-2025_46,Beginning Sounds Ta/Va/Ga,Started,34,users,Week
+2025_46,Beginning Sounds Ta/Va/Ga,Completed,27,instances,Week
+2025_46,Beginning Sounds Ta/Va/Ga,Started,61,instances,Week
+2025_46,Beginning Sounds Ta/Va/Ga,Completed,26,visits,Week
+2025_46,Beginning Sounds Ta/Va/Ga,Started,57,visits,Week
+2025_46,Beginning Sounds Ta/Va/Ga,Completed,23,users,Week
+2025_46,Beginning Sounds Ta/Va/Ga,Started,54,users,Week
+2025_47,Beginning Sounds Ta/Va/Ga,Completed,5,instances,Week
+2025_47,Beginning Sounds Ta/Va/Ga,Started,11,instances,Week
+2025_47,Beginning Sounds Ta/Va/Ga,Completed,5,visits,Week
+2025_47,Beginning Sounds Ta/Va/Ga,Started,11,visits,Week
+2025_47,Beginning Sounds Ta/Va/Ga,Completed,5,users,Week
+2025_47,Beginning Sounds Ta/Va/Ga,Started,11,users,Week
 2025_29,Color Blue,Completed,1535,instances,Week
 2025_29,Color Blue,Started,1961,instances,Week
 2025_29,Color Blue,Completed,1019,visits,Week
@@ -19355,12 +20141,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Color Blue,Started,231,visits,Week
 2025_45,Color Blue,Completed,179,users,Week
 2025_45,Color Blue,Started,212,users,Week
-2025_46,Color Blue,Completed,224,instances,Week
-2025_46,Color Blue,Started,290,instances,Week
-2025_46,Color Blue,Completed,215,visits,Week
-2025_46,Color Blue,Started,260,visits,Week
-2025_46,Color Blue,Completed,196,users,Week
-2025_46,Color Blue,Started,228,users,Week
+2025_46,Color Blue,Completed,298,instances,Week
+2025_46,Color Blue,Started,383,instances,Week
+2025_46,Color Blue,Completed,287,visits,Week
+2025_46,Color Blue,Started,346,visits,Week
+2025_46,Color Blue,Completed,260,users,Week
+2025_46,Color Blue,Started,302,users,Week
+2025_47,Color Blue,Completed,46,instances,Week
+2025_47,Color Blue,Started,56,instances,Week
+2025_47,Color Blue,Completed,44,visits,Week
+2025_47,Color Blue,Started,52,visits,Week
+2025_47,Color Blue,Completed,44,users,Week
+2025_47,Color Blue,Started,52,users,Week
 2025_26,Color Red,Completed,6925,instances,Week
 2025_26,Color Red,Started,12989,instances,Week
 2025_26,Color Red,Completed,5728,visits,Week
@@ -19481,12 +20273,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Color Red,Started,1295,visits,Week
 2025_45,Color Red,Completed,904,users,Week
 2025_45,Color Red,Started,1115,users,Week
-2025_46,Color Red,Completed,1243,instances,Week
-2025_46,Color Red,Started,1588,instances,Week
-2025_46,Color Red,Completed,1158,visits,Week
-2025_46,Color Red,Started,1433,visits,Week
-2025_46,Color Red,Completed,1033,users,Week
-2025_46,Color Red,Started,1247,users,Week
+2025_46,Color Red,Completed,1715,instances,Week
+2025_46,Color Red,Started,2174,instances,Week
+2025_46,Color Red,Completed,1604,visits,Week
+2025_46,Color Red,Started,1957,visits,Week
+2025_46,Color Red,Completed,1368,users,Week
+2025_46,Color Red,Started,1632,users,Week
+2025_47,Color Red,Completed,276,instances,Week
+2025_47,Color Red,Started,361,instances,Week
+2025_47,Color Red,Completed,258,visits,Week
+2025_47,Color Red,Started,325,visits,Week
+2025_47,Color Red,Completed,249,users,Week
+2025_47,Color Red,Started,307,users,Week
 2025_26,Color Yellow,Completed,1388,instances,Week
 2025_26,Color Yellow,Started,1909,instances,Week
 2025_26,Color Yellow,Completed,1062,visits,Week
@@ -19607,12 +20405,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Color Yellow,Started,260,visits,Week
 2025_45,Color Yellow,Completed,194,users,Week
 2025_45,Color Yellow,Started,247,users,Week
-2025_46,Color Yellow,Completed,250,instances,Week
-2025_46,Color Yellow,Started,333,instances,Week
-2025_46,Color Yellow,Completed,241,visits,Week
-2025_46,Color Yellow,Started,313,visits,Week
-2025_46,Color Yellow,Completed,233,users,Week
-2025_46,Color Yellow,Started,296,users,Week
+2025_46,Color Yellow,Completed,357,instances,Week
+2025_46,Color Yellow,Started,476,instances,Week
+2025_46,Color Yellow,Completed,342,visits,Week
+2025_46,Color Yellow,Started,439,visits,Week
+2025_46,Color Yellow,Completed,321,users,Week
+2025_46,Color Yellow,Started,403,users,Week
+2025_47,Color Yellow,Completed,57,instances,Week
+2025_47,Color Yellow,Started,69,instances,Week
+2025_47,Color Yellow,Completed,54,visits,Week
+2025_47,Color Yellow,Started,62,visits,Week
+2025_47,Color Yellow,Completed,54,users,Week
+2025_47,Color Yellow,Started,62,users,Week
 2025_38,Emotion Identification,Completed,1198,instances,Week
 2025_38,Emotion Identification,Started,1259,instances,Week
 2025_38,Emotion Identification,Completed,930,visits,Week
@@ -19661,12 +20465,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Emotion Identification,Started,480,visits,Week
 2025_45,Emotion Identification,Completed,311,users,Week
 2025_45,Emotion Identification,Started,438,users,Week
-2025_46,Emotion Identification,Completed,96,instances,Week
-2025_46,Emotion Identification,Started,137,instances,Week
-2025_46,Emotion Identification,Completed,88,visits,Week
-2025_46,Emotion Identification,Started,122,visits,Week
-2025_46,Emotion Identification,Completed,83,users,Week
-2025_46,Emotion Identification,Started,114,users,Week
+2025_46,Emotion Identification,Completed,122,instances,Week
+2025_46,Emotion Identification,Started,175,instances,Week
+2025_46,Emotion Identification,Completed,111,visits,Week
+2025_46,Emotion Identification,Started,156,visits,Week
+2025_46,Emotion Identification,Completed,104,users,Week
+2025_46,Emotion Identification,Started,144,users,Week
+2025_47,Emotion Identification,Completed,16,instances,Week
+2025_47,Emotion Identification,Started,20,instances,Week
+2025_47,Emotion Identification,Completed,16,visits,Week
+2025_47,Emotion Identification,Started,20,visits,Week
+2025_47,Emotion Identification,Completed,16,users,Week
+2025_47,Emotion Identification,Started,20,users,Week
 2025_33,Identification of all emotions,Completed,88,instances,Week
 2025_33,Identification of all emotions,Started,88,instances,Week
 2025_33,Identification of all emotions,Completed,59,visits,Week
@@ -19745,12 +20555,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Identification of all emotions,Started,186,visits,Week
 2025_45,Identification of all emotions,Completed,122,users,Week
 2025_45,Identification of all emotions,Started,172,users,Week
-2025_46,Identification of all emotions,Completed,99,instances,Week
-2025_46,Identification of all emotions,Started,148,instances,Week
-2025_46,Identification of all emotions,Completed,90,visits,Week
-2025_46,Identification of all emotions,Started,129,visits,Week
-2025_46,Identification of all emotions,Completed,85,users,Week
-2025_46,Identification of all emotions,Started,116,users,Week
+2025_46,Identification of all emotions,Completed,130,instances,Week
+2025_46,Identification of all emotions,Started,193,instances,Week
+2025_46,Identification of all emotions,Completed,120,visits,Week
+2025_46,Identification of all emotions,Started,168,visits,Week
+2025_46,Identification of all emotions,Completed,112,users,Week
+2025_46,Identification of all emotions,Started,151,users,Week
+2025_47,Identification of all emotions,Completed,24,instances,Week
+2025_47,Identification of all emotions,Started,28,instances,Week
+2025_47,Identification of all emotions,Completed,23,visits,Week
+2025_47,Identification of all emotions,Started,27,visits,Week
+2025_47,Identification of all emotions,Completed,22,users,Week
+2025_47,Identification of all emotions,Started,26,users,Week
 2025_32,Numbers Comparison,Completed,572,instances,Week
 2025_32,Numbers Comparison,Started,763,instances,Week
 2025_32,Numbers Comparison,Completed,487,visits,Week
@@ -19835,12 +20651,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Numbers Comparison,Started,134,visits,Week
 2025_45,Numbers Comparison,Completed,89,users,Week
 2025_45,Numbers Comparison,Started,128,users,Week
-2025_46,Numbers Comparison,Completed,99,instances,Week
-2025_46,Numbers Comparison,Started,124,instances,Week
-2025_46,Numbers Comparison,Completed,91,visits,Week
-2025_46,Numbers Comparison,Started,111,visits,Week
-2025_46,Numbers Comparison,Completed,89,users,Week
-2025_46,Numbers Comparison,Started,108,users,Week
+2025_46,Numbers Comparison,Completed,137,instances,Week
+2025_46,Numbers Comparison,Started,178,instances,Week
+2025_46,Numbers Comparison,Completed,127,visits,Week
+2025_46,Numbers Comparison,Started,157,visits,Week
+2025_46,Numbers Comparison,Completed,123,users,Week
+2025_46,Numbers Comparison,Started,151,users,Week
+2025_47,Numbers Comparison,Completed,28,instances,Week
+2025_47,Numbers Comparison,Started,37,instances,Week
+2025_47,Numbers Comparison,Completed,27,visits,Week
+2025_47,Numbers Comparison,Started,35,visits,Week
+2025_47,Numbers Comparison,Completed,27,users,Week
+2025_47,Numbers Comparison,Started,35,users,Week
 2025_27,Numbers I,Completed,12,instances,Week
 2025_27,Numbers I,Started,17,instances,Week
 2025_27,Numbers I,Completed,11,visits,Week
@@ -19955,12 +20777,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Numbers I,Started,389,visits,Week
 2025_45,Numbers I,Completed,318,users,Week
 2025_45,Numbers I,Started,364,users,Week
-2025_46,Numbers I,Completed,463,instances,Week
-2025_46,Numbers I,Started,581,instances,Week
-2025_46,Numbers I,Completed,425,visits,Week
-2025_46,Numbers I,Started,514,visits,Week
-2025_46,Numbers I,Completed,393,users,Week
-2025_46,Numbers I,Started,465,users,Week
+2025_46,Numbers I,Completed,596,instances,Week
+2025_46,Numbers I,Started,742,instances,Week
+2025_46,Numbers I,Completed,551,visits,Week
+2025_46,Numbers I,Started,664,visits,Week
+2025_46,Numbers I,Completed,504,users,Week
+2025_46,Numbers I,Started,593,users,Week
+2025_47,Numbers I,Completed,104,instances,Week
+2025_47,Numbers I,Started,128,instances,Week
+2025_47,Numbers I,Completed,100,visits,Week
+2025_47,Numbers I,Started,121,visits,Week
+2025_47,Numbers I,Completed,100,users,Week
+2025_47,Numbers I,Started,119,users,Week
 2025_28,Numbers II,Completed,9030,instances,Week
 2025_28,Numbers II,Started,16619,instances,Week
 2025_28,Numbers II,Completed,7916,visits,Week
@@ -20069,12 +20897,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Numbers II,Started,282,visits,Week
 2025_45,Numbers II,Completed,203,users,Week
 2025_45,Numbers II,Started,262,users,Week
-2025_46,Numbers II,Completed,280,instances,Week
-2025_46,Numbers II,Started,351,instances,Week
-2025_46,Numbers II,Completed,261,visits,Week
-2025_46,Numbers II,Started,325,visits,Week
-2025_46,Numbers II,Completed,241,users,Week
-2025_46,Numbers II,Started,295,users,Week
+2025_46,Numbers II,Completed,400,instances,Week
+2025_46,Numbers II,Started,489,instances,Week
+2025_46,Numbers II,Completed,376,visits,Week
+2025_46,Numbers II,Started,453,visits,Week
+2025_46,Numbers II,Completed,335,users,Week
+2025_46,Numbers II,Started,400,users,Week
+2025_47,Numbers II,Completed,60,instances,Week
+2025_47,Numbers II,Started,77,instances,Week
+2025_47,Numbers II,Completed,56,visits,Week
+2025_47,Numbers II,Started,72,visits,Week
+2025_47,Numbers II,Completed,56,users,Week
+2025_47,Numbers II,Started,72,users,Week
 2025_34,Numerals 1-10,Completed,34,instances,Week
 2025_34,Numerals 1-10,Started,50,instances,Week
 2025_34,Numerals 1-10,Completed,29,visits,Week
@@ -20147,12 +20981,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Numerals 1-10,Started,204,visits,Week
 2025_45,Numerals 1-10,Completed,107,users,Week
 2025_45,Numerals 1-10,Started,179,users,Week
-2025_46,Numerals 1-10,Completed,63,instances,Week
-2025_46,Numerals 1-10,Started,134,instances,Week
-2025_46,Numerals 1-10,Completed,61,visits,Week
-2025_46,Numerals 1-10,Started,122,visits,Week
-2025_46,Numerals 1-10,Completed,55,users,Week
-2025_46,Numerals 1-10,Started,106,users,Week
+2025_46,Numerals 1-10,Completed,83,instances,Week
+2025_46,Numerals 1-10,Started,181,instances,Week
+2025_46,Numerals 1-10,Completed,81,visits,Week
+2025_46,Numerals 1-10,Started,164,visits,Week
+2025_46,Numerals 1-10,Completed,72,users,Week
+2025_46,Numerals 1-10,Started,139,users,Week
+2025_47,Numerals 1-10,Completed,11,instances,Week
+2025_47,Numerals 1-10,Started,20,instances,Week
+2025_47,Numerals 1-10,Completed,11,visits,Week
+2025_47,Numerals 1-10,Started,20,visits,Week
+2025_47,Numerals 1-10,Completed,11,users,Week
+2025_47,Numerals 1-10,Started,19,users,Week
 2025_40,Positions,Completed,12791,instances,Week
 2025_40,Positions,Started,23001,instances,Week
 2025_40,Positions,Completed,11541,visits,Week
@@ -20189,12 +21029,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Positions,Started,1438,visits,Week
 2025_45,Positions,Completed,553,users,Week
 2025_45,Positions,Started,1289,users,Week
-2025_46,Positions,Completed,238,instances,Week
-2025_46,Positions,Started,735,instances,Week
-2025_46,Positions,Completed,218,visits,Week
-2025_46,Positions,Started,657,visits,Week
-2025_46,Positions,Completed,204,users,Week
-2025_46,Positions,Started,592,users,Week
+2025_46,Positions,Completed,316,instances,Week
+2025_46,Positions,Started,901,instances,Week
+2025_46,Positions,Completed,289,visits,Week
+2025_46,Positions,Started,796,visits,Week
+2025_46,Positions,Completed,269,users,Week
+2025_46,Positions,Started,704,users,Week
+2025_47,Positions,Completed,46,instances,Week
+2025_47,Positions,Started,96,instances,Week
+2025_47,Positions,Completed,43,visits,Week
+2025_47,Positions,Started,88,visits,Week
+2025_47,Positions,Completed,42,users,Week
+2025_47,Positions,Started,85,users,Week
 2025_33,Primary Emotion Labelling,Completed,68,instances,Week
 2025_33,Primary Emotion Labelling,Started,95,instances,Week
 2025_33,Primary Emotion Labelling,Completed,48,visits,Week
@@ -20273,12 +21119,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Primary Emotion Labelling,Started,143,visits,Week
 2025_45,Primary Emotion Labelling,Completed,106,users,Week
 2025_45,Primary Emotion Labelling,Started,137,users,Week
-2025_46,Primary Emotion Labelling,Completed,105,instances,Week
-2025_46,Primary Emotion Labelling,Started,145,instances,Week
-2025_46,Primary Emotion Labelling,Completed,98,visits,Week
-2025_46,Primary Emotion Labelling,Started,120,visits,Week
-2025_46,Primary Emotion Labelling,Completed,94,users,Week
-2025_46,Primary Emotion Labelling,Started,113,users,Week
+2025_46,Primary Emotion Labelling,Completed,143,instances,Week
+2025_46,Primary Emotion Labelling,Started,188,instances,Week
+2025_46,Primary Emotion Labelling,Completed,135,visits,Week
+2025_46,Primary Emotion Labelling,Started,161,visits,Week
+2025_46,Primary Emotion Labelling,Completed,123,users,Week
+2025_46,Primary Emotion Labelling,Started,146,users,Week
+2025_47,Primary Emotion Labelling,Completed,21,instances,Week
+2025_47,Primary Emotion Labelling,Started,61,instances,Week
+2025_47,Primary Emotion Labelling,Completed,20,visits,Week
+2025_47,Primary Emotion Labelling,Started,35,visits,Week
+2025_47,Primary Emotion Labelling,Completed,20,users,Week
+2025_47,Primary Emotion Labelling,Started,34,users,Week
 2025_26,Quantitative Comparison,Completed,3,instances,Week
 2025_26,Quantitative Comparison,Started,6,instances,Week
 2025_26,Quantitative Comparison,Completed,2,visits,Week
@@ -20399,12 +21251,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Quantitative Comparison,Started,217,visits,Week
 2025_45,Quantitative Comparison,Completed,165,users,Week
 2025_45,Quantitative Comparison,Started,202,users,Week
-2025_46,Quantitative Comparison,Completed,180,instances,Week
-2025_46,Quantitative Comparison,Started,247,instances,Week
-2025_46,Quantitative Comparison,Completed,169,visits,Week
-2025_46,Quantitative Comparison,Started,216,visits,Week
-2025_46,Quantitative Comparison,Completed,160,users,Week
-2025_46,Quantitative Comparison,Started,200,users,Week
+2025_46,Quantitative Comparison,Completed,254,instances,Week
+2025_46,Quantitative Comparison,Started,339,instances,Week
+2025_46,Quantitative Comparison,Completed,235,visits,Week
+2025_46,Quantitative Comparison,Started,298,visits,Week
+2025_46,Quantitative Comparison,Completed,216,users,Week
+2025_46,Quantitative Comparison,Started,270,users,Week
+2025_47,Quantitative Comparison,Completed,49,instances,Week
+2025_47,Quantitative Comparison,Started,58,instances,Week
+2025_47,Quantitative Comparison,Completed,47,visits,Week
+2025_47,Quantitative Comparison,Started,52,visits,Week
+2025_47,Quantitative Comparison,Completed,47,users,Week
+2025_47,Quantitative Comparison,Started,52,users,Week
 2025_27,Relational Comparison,Completed,19,instances,Week
 2025_27,Relational Comparison,Started,38,instances,Week
 2025_27,Relational Comparison,Completed,14,visits,Week
@@ -20519,12 +21377,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Relational Comparison,Started,173,visits,Week
 2025_45,Relational Comparison,Completed,143,users,Week
 2025_45,Relational Comparison,Started,170,users,Week
-2025_46,Relational Comparison,Completed,169,instances,Week
-2025_46,Relational Comparison,Started,216,instances,Week
-2025_46,Relational Comparison,Completed,155,visits,Week
-2025_46,Relational Comparison,Started,193,visits,Week
-2025_46,Relational Comparison,Completed,142,users,Week
-2025_46,Relational Comparison,Started,179,users,Week
+2025_46,Relational Comparison,Completed,260,instances,Week
+2025_46,Relational Comparison,Started,326,instances,Week
+2025_46,Relational Comparison,Completed,236,visits,Week
+2025_46,Relational Comparison,Started,288,visits,Week
+2025_46,Relational Comparison,Completed,215,users,Week
+2025_46,Relational Comparison,Started,263,users,Week
+2025_47,Relational Comparison,Completed,44,instances,Week
+2025_47,Relational Comparison,Started,57,instances,Week
+2025_47,Relational Comparison,Completed,38,visits,Week
+2025_47,Relational Comparison,Started,47,visits,Week
+2025_47,Relational Comparison,Completed,38,users,Week
+2025_47,Relational Comparison,Started,46,users,Week
 2025_32,Relational Comparison II,Completed,9815,instances,Week
 2025_32,Relational Comparison II,Started,19381,instances,Week
 2025_32,Relational Comparison II,Completed,9307,visits,Week
@@ -20609,12 +21473,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Relational Comparison II,Started,148,visits,Week
 2025_45,Relational Comparison II,Completed,104,users,Week
 2025_45,Relational Comparison II,Started,141,users,Week
-2025_46,Relational Comparison II,Completed,110,instances,Week
-2025_46,Relational Comparison II,Started,151,instances,Week
-2025_46,Relational Comparison II,Completed,104,visits,Week
-2025_46,Relational Comparison II,Started,141,visits,Week
-2025_46,Relational Comparison II,Completed,98,users,Week
-2025_46,Relational Comparison II,Started,132,users,Week
+2025_46,Relational Comparison II,Completed,146,instances,Week
+2025_46,Relational Comparison II,Started,198,instances,Week
+2025_46,Relational Comparison II,Completed,140,visits,Week
+2025_46,Relational Comparison II,Started,187,visits,Week
+2025_46,Relational Comparison II,Completed,124,users,Week
+2025_46,Relational Comparison II,Started,166,users,Week
+2025_47,Relational Comparison II,Completed,22,instances,Week
+2025_47,Relational Comparison II,Started,32,instances,Week
+2025_47,Relational Comparison II,Completed,22,visits,Week
+2025_47,Relational Comparison II,Started,31,visits,Week
+2025_47,Relational Comparison II,Completed,22,users,Week
+2025_47,Relational Comparison II,Started,31,users,Week
 2025_30,Revision Colors,Completed,8,instances,Week
 2025_30,Revision Colors,Started,21,instances,Week
 2025_30,Revision Colors,Completed,8,visits,Week
@@ -20711,12 +21581,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Revision Colors,Started,145,visits,Week
 2025_45,Revision Colors,Completed,93,users,Week
 2025_45,Revision Colors,Started,125,users,Week
-2025_46,Revision Colors,Completed,100,instances,Week
-2025_46,Revision Colors,Started,138,instances,Week
-2025_46,Revision Colors,Completed,88,visits,Week
-2025_46,Revision Colors,Started,116,visits,Week
-2025_46,Revision Colors,Completed,81,users,Week
-2025_46,Revision Colors,Started,105,users,Week
+2025_46,Revision Colors,Completed,146,instances,Week
+2025_46,Revision Colors,Started,194,instances,Week
+2025_46,Revision Colors,Completed,128,visits,Week
+2025_46,Revision Colors,Started,164,visits,Week
+2025_46,Revision Colors,Completed,114,users,Week
+2025_46,Revision Colors,Started,146,users,Week
+2025_47,Revision Colors,Completed,41,instances,Week
+2025_47,Revision Colors,Started,64,instances,Week
+2025_47,Revision Colors,Completed,40,visits,Week
+2025_47,Revision Colors,Started,56,visits,Week
+2025_47,Revision Colors,Completed,39,users,Week
+2025_47,Revision Colors,Started,52,users,Week
 2025_30,Revision Shapes,Completed,3,instances,Week
 2025_30,Revision Shapes,Started,6,instances,Week
 2025_30,Revision Shapes,Completed,2,visits,Week
@@ -20813,12 +21689,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Revision Shapes,Started,83,visits,Week
 2025_45,Revision Shapes,Completed,60,users,Week
 2025_45,Revision Shapes,Started,81,users,Week
-2025_46,Revision Shapes,Completed,74,instances,Week
-2025_46,Revision Shapes,Started,96,instances,Week
-2025_46,Revision Shapes,Completed,71,visits,Week
-2025_46,Revision Shapes,Started,89,visits,Week
-2025_46,Revision Shapes,Completed,68,users,Week
-2025_46,Revision Shapes,Started,85,users,Week
+2025_46,Revision Shapes,Completed,102,instances,Week
+2025_46,Revision Shapes,Started,133,instances,Week
+2025_46,Revision Shapes,Completed,93,visits,Week
+2025_46,Revision Shapes,Started,118,visits,Week
+2025_46,Revision Shapes,Completed,89,users,Week
+2025_46,Revision Shapes,Started,113,users,Week
+2025_47,Revision Shapes,Completed,13,instances,Week
+2025_47,Revision Shapes,Started,16,instances,Week
+2025_47,Revision Shapes,Completed,12,visits,Week
+2025_47,Revision Shapes,Started,14,visits,Week
+2025_47,Revision Shapes,Completed,11,users,Week
+2025_47,Revision Shapes,Started,13,users,Week
 2025_31,Rhyming Words,Completed,10,instances,Week
 2025_31,Rhyming Words,Started,31,instances,Week
 2025_31,Rhyming Words,Completed,10,visits,Week
@@ -20909,12 +21791,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Rhyming Words,Started,250,visits,Week
 2025_45,Rhyming Words,Completed,183,users,Week
 2025_45,Rhyming Words,Started,238,users,Week
-2025_46,Rhyming Words,Completed,202,instances,Week
-2025_46,Rhyming Words,Started,276,instances,Week
-2025_46,Rhyming Words,Completed,189,visits,Week
-2025_46,Rhyming Words,Started,253,visits,Week
-2025_46,Rhyming Words,Completed,182,users,Week
-2025_46,Rhyming Words,Started,241,users,Week
+2025_46,Rhyming Words,Completed,271,instances,Week
+2025_46,Rhyming Words,Started,365,instances,Week
+2025_46,Rhyming Words,Completed,253,visits,Week
+2025_46,Rhyming Words,Started,335,visits,Week
+2025_46,Rhyming Words,Completed,241,users,Week
+2025_46,Rhyming Words,Started,316,users,Week
+2025_47,Rhyming Words,Completed,41,instances,Week
+2025_47,Rhyming Words,Started,62,instances,Week
+2025_47,Rhyming Words,Completed,39,visits,Week
+2025_47,Rhyming Words,Started,58,visits,Week
+2025_47,Rhyming Words,Completed,39,users,Week
+2025_47,Rhyming Words,Started,58,users,Week
 2025_26,Shape Circle,Completed,8190,instances,Week
 2025_26,Shape Circle,Started,14043,instances,Week
 2025_26,Shape Circle,Completed,6147,visits,Week
@@ -21035,12 +21923,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Shape Circle,Started,3238,visits,Week
 2025_45,Shape Circle,Completed,2082,users,Week
 2025_45,Shape Circle,Started,2533,users,Week
-2025_46,Shape Circle,Completed,3164,instances,Week
-2025_46,Shape Circle,Started,3989,instances,Week
-2025_46,Shape Circle,Completed,2777,visits,Week
-2025_46,Shape Circle,Started,3335,visits,Week
-2025_46,Shape Circle,Completed,2162,users,Week
-2025_46,Shape Circle,Started,2517,users,Week
+2025_46,Shape Circle,Completed,4400,instances,Week
+2025_46,Shape Circle,Started,5541,instances,Week
+2025_46,Shape Circle,Completed,3871,visits,Week
+2025_46,Shape Circle,Started,4634,visits,Week
+2025_46,Shape Circle,Completed,2866,users,Week
+2025_46,Shape Circle,Started,3342,users,Week
+2025_47,Shape Circle,Completed,784,instances,Week
+2025_47,Shape Circle,Started,991,instances,Week
+2025_47,Shape Circle,Completed,697,visits,Week
+2025_47,Shape Circle,Started,838,visits,Week
+2025_47,Shape Circle,Completed,673,users,Week
+2025_47,Shape Circle,Started,802,users,Week
 2025_34,Shape Rectangle,Completed,77,instances,Week
 2025_34,Shape Rectangle,Started,94,instances,Week
 2025_34,Shape Rectangle,Completed,68,visits,Week
@@ -21113,12 +22007,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Shape Rectangle,Started,135,visits,Week
 2025_45,Shape Rectangle,Completed,100,users,Week
 2025_45,Shape Rectangle,Started,126,users,Week
-2025_46,Shape Rectangle,Completed,54,instances,Week
-2025_46,Shape Rectangle,Started,62,instances,Week
-2025_46,Shape Rectangle,Completed,52,visits,Week
-2025_46,Shape Rectangle,Started,59,visits,Week
-2025_46,Shape Rectangle,Completed,52,users,Week
-2025_46,Shape Rectangle,Started,59,users,Week
+2025_46,Shape Rectangle,Completed,72,instances,Week
+2025_46,Shape Rectangle,Started,86,instances,Week
+2025_46,Shape Rectangle,Completed,69,visits,Week
+2025_46,Shape Rectangle,Started,80,visits,Week
+2025_46,Shape Rectangle,Completed,66,users,Week
+2025_46,Shape Rectangle,Started,77,users,Week
+2025_47,Shape Rectangle,Completed,18,instances,Week
+2025_47,Shape Rectangle,Started,25,instances,Week
+2025_47,Shape Rectangle,Completed,17,visits,Week
+2025_47,Shape Rectangle,Started,22,visits,Week
+2025_47,Shape Rectangle,Completed,16,users,Week
+2025_47,Shape Rectangle,Started,21,users,Week
 2025_29,Shape Square,Completed,1060,instances,Week
 2025_29,Shape Square,Started,1508,instances,Week
 2025_29,Shape Square,Completed,725,visits,Week
@@ -21221,12 +22121,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Shape Square,Started,135,visits,Week
 2025_45,Shape Square,Completed,97,users,Week
 2025_45,Shape Square,Started,131,users,Week
-2025_46,Shape Square,Completed,89,instances,Week
-2025_46,Shape Square,Started,121,instances,Week
-2025_46,Shape Square,Completed,87,visits,Week
-2025_46,Shape Square,Started,115,visits,Week
-2025_46,Shape Square,Completed,86,users,Week
-2025_46,Shape Square,Started,113,users,Week
+2025_46,Shape Square,Completed,125,instances,Week
+2025_46,Shape Square,Started,162,instances,Week
+2025_46,Shape Square,Completed,122,visits,Week
+2025_46,Shape Square,Started,155,visits,Week
+2025_46,Shape Square,Completed,117,users,Week
+2025_46,Shape Square,Started,149,users,Week
+2025_47,Shape Square,Completed,37,instances,Week
+2025_47,Shape Square,Started,43,instances,Week
+2025_47,Shape Square,Completed,37,visits,Week
+2025_47,Shape Square,Started,42,visits,Week
+2025_47,Shape Square,Completed,37,users,Week
+2025_47,Shape Square,Started,42,users,Week
 2025_26,Shape Triangle,Completed,2723,instances,Week
 2025_26,Shape Triangle,Started,3433,instances,Week
 2025_26,Shape Triangle,Completed,2051,visits,Week
@@ -21347,12 +22253,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Shape Triangle,Started,436,visits,Week
 2025_45,Shape Triangle,Completed,325,users,Week
 2025_45,Shape Triangle,Started,408,users,Week
-2025_46,Shape Triangle,Completed,432,instances,Week
-2025_46,Shape Triangle,Started,569,instances,Week
-2025_46,Shape Triangle,Completed,403,visits,Week
-2025_46,Shape Triangle,Started,505,visits,Week
-2025_46,Shape Triangle,Completed,383,users,Week
-2025_46,Shape Triangle,Started,471,users,Week
+2025_46,Shape Triangle,Completed,605,instances,Week
+2025_46,Shape Triangle,Started,778,instances,Week
+2025_46,Shape Triangle,Completed,568,visits,Week
+2025_46,Shape Triangle,Started,700,visits,Week
+2025_46,Shape Triangle,Completed,533,users,Week
+2025_46,Shape Triangle,Started,646,users,Week
+2025_47,Shape Triangle,Completed,107,instances,Week
+2025_47,Shape Triangle,Started,134,instances,Week
+2025_47,Shape Triangle,Completed,98,visits,Week
+2025_47,Shape Triangle,Started,120,visits,Week
+2025_47,Shape Triangle,Completed,96,users,Week
+2025_47,Shape Triangle,Started,118,users,Week
 2025_36,Sorting Primary Colors,Completed,344,instances,Week
 2025_36,Sorting Primary Colors,Started,518,instances,Week
 2025_36,Sorting Primary Colors,Completed,317,visits,Week
@@ -21413,12 +22325,18 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Sorting Primary Colors,Started,487,visits,Week
 2025_45,Sorting Primary Colors,Completed,233,users,Week
 2025_45,Sorting Primary Colors,Started,399,users,Week
-2025_46,Sorting Primary Colors,Completed,147,instances,Week
-2025_46,Sorting Primary Colors,Started,223,instances,Week
-2025_46,Sorting Primary Colors,Completed,134,visits,Week
-2025_46,Sorting Primary Colors,Started,193,visits,Week
-2025_46,Sorting Primary Colors,Completed,117,users,Week
-2025_46,Sorting Primary Colors,Started,164,users,Week
+2025_46,Sorting Primary Colors,Completed,187,instances,Week
+2025_46,Sorting Primary Colors,Started,285,instances,Week
+2025_46,Sorting Primary Colors,Completed,170,visits,Week
+2025_46,Sorting Primary Colors,Started,246,visits,Week
+2025_46,Sorting Primary Colors,Completed,143,users,Week
+2025_46,Sorting Primary Colors,Started,199,users,Week
+2025_47,Sorting Primary Colors,Completed,35,instances,Week
+2025_47,Sorting Primary Colors,Started,51,instances,Week
+2025_47,Sorting Primary Colors,Completed,34,visits,Week
+2025_47,Sorting Primary Colors,Started,46,visits,Week
+2025_47,Sorting Primary Colors,Completed,34,users,Week
+2025_47,Sorting Primary Colors,Started,45,users,Week
 2025_36,Sorting Primary Shapes,Completed,763,instances,Week
 2025_36,Sorting Primary Shapes,Started,1145,instances,Week
 2025_36,Sorting Primary Shapes,Completed,663,visits,Week
@@ -21479,9 +22397,15 @@ period_label,game_name,event,count,metric,period_type
 2025_45,Sorting Primary Shapes,Started,2016,visits,Week
 2025_45,Sorting Primary Shapes,Completed,212,users,Week
 2025_45,Sorting Primary Shapes,Started,1903,users,Week
-2025_46,Sorting Primary Shapes,Completed,60,instances,Week
-2025_46,Sorting Primary Shapes,Started,194,instances,Week
-2025_46,Sorting Primary Shapes,Completed,56,visits,Week
-2025_46,Sorting Primary Shapes,Started,167,visits,Week
-2025_46,Sorting Primary Shapes,Completed,51,users,Week
-2025_46,Sorting Primary Shapes,Started,149,users,Week
+2025_46,Sorting Primary Shapes,Completed,82,instances,Week
+2025_46,Sorting Primary Shapes,Started,236,instances,Week
+2025_46,Sorting Primary Shapes,Completed,75,visits,Week
+2025_46,Sorting Primary Shapes,Started,201,visits,Week
+2025_46,Sorting Primary Shapes,Completed,67,users,Week
+2025_46,Sorting Primary Shapes,Started,174,users,Week
+2025_47,Sorting Primary Shapes,Completed,10,instances,Week
+2025_47,Sorting Primary Shapes,Started,31,instances,Week
+2025_47,Sorting Primary Shapes,Completed,9,visits,Week
+2025_47,Sorting Primary Shapes,Started,20,visits,Week
+2025_47,Sorting Primary Shapes,Completed,8,users,Week
+2025_47,Sorting Primary Shapes,Started,18,users,Week

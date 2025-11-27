@@ -944,12 +944,31 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     
     # Apply game filtering
     if selected_games_ts and len(selected_games_ts) > 0:
-        filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)]
+        # Separate RM active users (which doesn't have game-specific data)
+        rm_data = filtered_ts_df[
+            (filtered_ts_df['game_name'] == 'All Games') & 
+            (filtered_ts_df['metric'] == 'rm_active_users')
+        ].copy()
+        
+        # Filter game-specific data
+        game_data = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)].copy()
+        
         # Aggregate across selected games
-        aggregated_df = filtered_ts_df.groupby(['period_label', 'metric', 'event']).agg({'count': 'sum'}).reset_index()
-        aggregated_df['game_name'] = 'Selected Games'
+        if not game_data.empty:
+            aggregated_game_df = game_data.groupby(['period_label', 'metric', 'event']).agg({'count': 'sum'}).reset_index()
+            aggregated_game_df['game_name'] = 'Selected Games'
+        else:
+            aggregated_game_df = pd.DataFrame(columns=['period_label', 'metric', 'event', 'count', 'game_name'])
+        
+        # Combine RM data with game data
+        if not rm_data.empty:
+            rm_data = rm_data[['period_label', 'metric', 'event', 'count']].copy()
+            rm_data['game_name'] = 'All Games'
+            aggregated_df = pd.concat([aggregated_game_df, rm_data], ignore_index=True)
+        else:
+            aggregated_df = aggregated_game_df
     else:
-        # Use "All Games" data
+        # Use "All Games" data (includes RM active users)
         filtered_ts_df = filtered_ts_df[filtered_ts_df['game_name'] == 'All Games']
         aggregated_df = filtered_ts_df[['period_label', 'metric', 'event', 'count']].copy()
     
@@ -1046,9 +1065,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         time_order = sorted(aggregated_df['time_display'].unique().tolist())
     
-    # Filter data for selected metric
+    # Filter data for selected metric and include RM active users
     metric_name_lower = selected_metric.lower()
-    filtered_metric_df = aggregated_df[aggregated_df['metric'] == metric_name_lower].copy()
+    # Include both the selected metric and RM active users (if available)
+    filtered_metric_df = aggregated_df[
+        (aggregated_df['metric'] == metric_name_lower) | 
+        (aggregated_df['metric'] == 'rm_active_users')
+    ].copy()
     
     if filtered_metric_df.empty:
         st.warning(f"No {selected_metric.lower()} data available for the selected time period.")
@@ -1072,12 +1095,33 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     }
     selected_color = metric_colors.get(selected_metric, '#4A90E2')
     
-    # Create single chart showing Started and Completed for selected metric
-    st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - Started vs Completed")
+    # Check if RM active users data exists
+    rm_data_exists = 'rm_active_users' in filtered_metric_df['metric'].values if not filtered_metric_df.empty else False
+    
+    # Create single chart showing RM Active Users, Started and Completed for selected metric
+    if rm_data_exists:
+        st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - RM Active Users, Started vs Completed")
+    else:
+        st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - Started vs Completed")
         
-    # Prepare chart data with Started and Completed for each time period
+    # Prepare chart data with RM Active Users, Started and Completed for each time period
     chart_data = []
     for time in time_order:
+        # Add RM Active Users first if it exists
+        if rm_data_exists:
+            rm_row = filtered_metric_df[
+                (filtered_metric_df['time_display'] == time) & 
+                (filtered_metric_df['metric'] == 'rm_active_users') &
+                (filtered_metric_df['event'] == 'RM Active Users')
+            ]
+            rm_count = rm_row['count'].iloc[0] if not rm_row.empty else 0
+            chart_data.append({
+                'Time': time,
+                'Event': 'RM Active Users',
+                'Count': rm_count
+            })
+        
+        # Add Started and Completed
         for event_type in ['Started', 'Completed']:
             event_row = filtered_metric_df[
                 (filtered_metric_df['time_display'] == time) & 
@@ -1131,11 +1175,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                    ),
                    scale=alt.Scale(zero=True)),
         xOffset=alt.XOffset('Event:N',
-                           sort=['Started', 'Completed']),
+                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
         color=alt.Color('Event:N',
                           scale=alt.Scale(
-                          domain=['Started', 'Completed'],
-                          range=['#4A90E2', '#50C878']
+                          domain=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
+                          range=['#FF6B6B', '#4A90E2', '#50C878'] if rm_data_exists else ['#4A90E2', '#50C878']
                           ),
                           legend=alt.Legend(
                           title="Event Type",
@@ -1143,7 +1187,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               labelFontSize=12,
                               orient='bottom'
                           ),
-                      sort=['Started', 'Completed']),
+                      sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
             tooltip=[
                 alt.Tooltip('Time:N', title='Time Period'),
             alt.Tooltip('Event:N', title='Event'),
@@ -1153,7 +1197,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             width=chart_width,
             height=450,
             title=alt.TitleParams(
-            text=f'{selected_metric} - Started vs Completed',
+            text=f'{selected_metric} - RM Active Users, Started vs Completed' if rm_data_exists else f'{selected_metric} - Started vs Completed',
                 fontSize=18,
                 fontWeight='bold',
                 offset=10
@@ -1171,7 +1215,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     ).encode(
         x=alt.X('Time:O', sort=time_order),
         xOffset=alt.XOffset('Event:N',
-                           sort=['Started', 'Completed']),
+                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
         y=alt.Y('Count:Q'),
         text=alt.Text('Count:Q', format=',.0f')
     ).transform_filter(

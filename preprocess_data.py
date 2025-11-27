@@ -15,6 +15,13 @@ import sys
 import argparse
 import pandas as pd
 import pymysql
+try:
+    import psycopg2  # For Redshift connection
+    PSYCOPG2_AVAILABLE = True
+except ImportError:
+    PSYCOPG2_AVAILABLE = False
+    print("WARNING: psycopg2 not installed. RM active users feature will be disabled.")
+    print("  Install it with: pip install psycopg2-binary")
 from datetime import datetime
 from dotenv import load_dotenv
 from typing import List, Tuple, Optional
@@ -28,6 +35,13 @@ PORT = int(os.getenv("DB_PORT", "3310"))
 DBNAME = os.getenv("DB_NAME")
 USER = os.getenv("DB_USER")
 PASSWORD = os.getenv("DB_PASSWORD")
+
+# Redshift connection settings
+REDSHIFT_HOST = "redshift-cluster.c9fcj1g6yq2x.ap-south-1.redshift.amazonaws.com"
+REDSHIFT_DATABASE = "rocket_dwh_prod"
+REDSHIFT_PORT = 5439
+REDSHIFT_USER = "rl_product"
+REDSHIFT_PASSWORD = "Rlproduct@1234"
 
 # Validate required environment variables
 required_vars = ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]
@@ -2069,6 +2083,190 @@ def process_score_distribution() -> pd.DataFrame:
     return score_distribution_df
 
 
+def fetch_valid_group_ids() -> List[int]:
+    """Fetch valid group IDs from SQL database based on the specified criteria"""
+    print("Fetching valid group IDs from SQL database...")
+    try:
+        connection = pymysql.connect(
+            host=HOST,
+            port=PORT,
+            user=USER,
+            password=PASSWORD,
+            database=DBNAME,
+            charset='utf8mb4'
+        )
+        
+        group_query = """
+        SELECT `groups`.`id` as `group_id`
+        FROM `groups` 
+        LEFT JOIN `schools` ON `groups`.`school_id` = `schools`.`id` 
+        LEFT JOIN `district_product` ON `groups`.`district_product_id` = `district_product`.`id` 
+        LEFT JOIN `launches` ON `groups`.`launch_id` = `launches`.`id` 
+        LEFT JOIN `organization_district_product` ON `groups`.`district_product_id` = `organization_district_product`.`district_product_id` 
+            AND `groups`.`launch_id` = `organization_district_product`.`launch_id` 
+        LEFT JOIN `districts` ON `district_product`.`district_id` = `districts`.`id` 
+        LEFT JOIN `group_vnumber` ON `groups`.`id` = `group_vnumber`.`group_id` 
+        WHERE `group_vnumber`.`role` = "CB" 
+            AND `schools`.`deleted_at` IS NULL 
+            AND `launches`.`deleted_at` IS NULL 
+            AND `groups`.`deleted_at` IS NULL 
+            AND `groups`.`sunset_tag` IS NULL 
+            AND `district_product`.`broad_tag` IN ("ECE - Maharashtra", "ECE - MP", "ECE - Chandigarh", "ECE - UP", "ECE - RJ", "ECE - Haryana")
+        GROUP BY `groups`.`id`
+        ORDER BY `group_id`
+        """
+        
+        group_ids_df = pd.read_sql(group_query, connection)
+        connection.close()
+        
+        group_ids = group_ids_df['group_id'].dropna().astype(int).tolist()
+        print(f"SUCCESS: Fetched {len(group_ids)} valid group IDs")
+        return group_ids
+        
+    except Exception as e:
+        print(f"ERROR: Failed to fetch group IDs: {str(e)}")
+        return []
+
+
+def fetch_rm_active_users(group_ids: List[int] = None) -> pd.DataFrame:
+    """Load RM active users from CSV file"""
+    print("Loading RM active users from CSV file...")
+    
+    # Check in root directory first, then data directory
+    csv_path = 'RM_active_users_data.csv'
+    if not os.path.exists(csv_path):
+        csv_path = os.path.join('data', 'RM_active_users_data.csv')
+    
+    if not os.path.exists(csv_path):
+        print(f"WARNING: RM_active_users_data.csv not found at {csv_path}")
+        print("  Skipping RM active users data...")
+        return pd.DataFrame()
+    
+    try:
+        print(f"  Reading CSV file: {csv_path}")
+        rm_df = pd.read_csv(csv_path)
+        
+        # Check if required columns exist
+        required_columns = ['phone', 'group_id', 'sent_date']
+        missing_columns = [col for col in required_columns if col not in rm_df.columns]
+        if missing_columns:
+            print(f"WARNING: Missing required columns in CSV: {missing_columns}")
+            print(f"  Available columns: {list(rm_df.columns)}")
+            return pd.DataFrame()
+        
+        # Filter by group_ids if provided
+        if group_ids and len(group_ids) > 0:
+            print(f"  Filtering by {len(group_ids)} group IDs...")
+            rm_df = rm_df[rm_df['group_id'].isin(group_ids)]
+        
+        # Filter out null values
+        rm_df = rm_df[
+            rm_df['phone'].notna() & 
+            rm_df['group_id'].notna() & 
+            rm_df['sent_date'].notna()
+        ].copy()
+        
+        # Filter by date (sent_date >= '2025-07-01')
+        rm_df['sent_date'] = pd.to_datetime(rm_df['sent_date'], errors='coerce')
+        rm_df = rm_df[rm_df['sent_date'] >= '2025-07-01'].copy()
+        
+        print(f"SUCCESS: Loaded {len(rm_df)} RM active user records from CSV")
+        if not rm_df.empty:
+            print(f"  Unique phones: {rm_df['phone'].nunique()}")
+            print(f"  Date range: {rm_df['sent_date'].min()} to {rm_df['sent_date'].max()}")
+        
+        return rm_df
+        
+    except Exception as e:
+        print(f"ERROR: Failed to load RM active users from CSV: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        print("  Continuing without RM active users data...")
+        return pd.DataFrame()
+
+
+def process_rm_active_users_time_series(rm_df: pd.DataFrame) -> pd.DataFrame:
+    """Process RM active users data for time series (daily, weekly, monthly)"""
+    if rm_df.empty:
+        return pd.DataFrame()
+    
+    print("Processing RM active users time series data...")
+    
+    # Convert sent_date to datetime
+    rm_df['sent_date'] = pd.to_datetime(rm_df['sent_date'])
+    rm_df['date'] = rm_df['sent_date'].dt.date
+    
+    time_series_data = []
+    
+    # Daily aggregation
+    daily_rm = rm_df.groupby('date')['phone'].nunique().reset_index()
+    daily_rm.columns = ['date', 'rm_active_users']
+    daily_rm['period_label'] = daily_rm['date'].astype(str)
+    daily_rm['period_type'] = 'Day'
+    daily_rm['game_name'] = 'All Games'
+    daily_rm['metric'] = 'rm_active_users'
+    daily_rm['event'] = 'RM Active Users'
+    
+    for _, row in daily_rm.iterrows():
+        time_series_data.append({
+            'period_label': row['period_label'],
+            'game_name': row['game_name'],
+            'metric': row['metric'],
+            'event': row['event'],
+            'count': int(row['rm_active_users']),
+            'period_type': row['period_type']
+        })
+    
+    # Weekly aggregation
+    rm_df['shifted_date'] = rm_df['sent_date'] - pd.Timedelta(days=2)
+    rm_df['year'] = rm_df['shifted_date'].dt.year
+    rm_df['week'] = rm_df['shifted_date'].dt.strftime('%W').astype(int)
+    rm_df['period_label'] = rm_df['year'].astype(str) + '_' + rm_df['week'].astype(str).str.zfill(2)
+    
+    weekly_rm = rm_df.groupby('period_label')['phone'].nunique().reset_index()
+    weekly_rm.columns = ['period_label', 'rm_active_users']
+    weekly_rm['period_type'] = 'Week'
+    weekly_rm['game_name'] = 'All Games'
+    weekly_rm['metric'] = 'rm_active_users'
+    weekly_rm['event'] = 'RM Active Users'
+    
+    for _, row in weekly_rm.iterrows():
+        time_series_data.append({
+            'period_label': row['period_label'],
+            'game_name': row['game_name'],
+            'metric': row['metric'],
+            'event': row['event'],
+            'count': int(row['rm_active_users']),
+            'period_type': row['period_type']
+        })
+    
+    # Monthly aggregation
+    rm_df['year'] = rm_df['sent_date'].dt.year
+    rm_df['month'] = rm_df['sent_date'].dt.month
+    rm_df['period_label'] = rm_df['year'].astype(str) + '_' + rm_df['month'].astype(str).str.zfill(2)
+    
+    monthly_rm = rm_df.groupby('period_label')['phone'].nunique().reset_index()
+    monthly_rm.columns = ['period_label', 'rm_active_users']
+    monthly_rm['period_type'] = 'Month'
+    monthly_rm['game_name'] = 'All Games'
+    monthly_rm['metric'] = 'rm_active_users'
+    monthly_rm['event'] = 'RM Active Users'
+    
+    for _, row in monthly_rm.iterrows():
+        time_series_data.append({
+            'period_label': row['period_label'],
+            'game_name': row['game_name'],
+            'metric': row['metric'],
+            'event': row['event'],
+            'count': int(row['rm_active_users']),
+            'period_type': row['period_type']
+        })
+    
+    rm_time_series_df = pd.DataFrame(time_series_data)
+    print(f"SUCCESS: Processed {len(rm_time_series_df)} RM active users time series records")
+    return rm_time_series_df
+
+
 def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     """Process time series data for instances, visits, and users
     All metrics are calculated from a single query using idlink_va for instances"""
@@ -2116,6 +2314,38 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     else:
         print("WARNING: No time series data to process")
         time_series_df = pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type'])
+    
+    # Load and process RM active users data from CSV (optional - don't block if it fails)
+    print("\n" + "=" * 60)
+    print("LOADING: RM Active Users Data from CSV (Optional)")
+    print("=" * 60)
+    rm_time_series_df = pd.DataFrame()
+    
+    try:
+        # Optionally filter by group_ids if needed, but CSV should already be filtered
+        group_ids = fetch_valid_group_ids()
+        rm_df = fetch_rm_active_users(group_ids if group_ids else None)
+        
+        if not rm_df.empty:
+            try:
+                rm_time_series_df = process_rm_active_users_time_series(rm_df)
+                print("SUCCESS: RM active users data processed and will be included in time series")
+            except Exception as e:
+                print(f"WARNING: Failed to process RM active users time series: {str(e)}")
+                import traceback
+                traceback.print_exc()
+        else:
+            print("WARNING: No RM active users data loaded, continuing without it")
+    except Exception as e:
+        print(f"WARNING: Error during RM active users processing: {str(e)}")
+        print("  Continuing with time series processing without RM active users...")
+        import traceback
+        traceback.print_exc()
+    
+    # Combine time series data with RM active users
+    if not rm_time_series_df.empty:
+        time_series_df = pd.concat([time_series_df, rm_time_series_df], ignore_index=True)
+        print(f"Combined time series data: {len(time_series_df)} records (including RM active users)")
     
     # Sort by period_type, game_name, and period_label
     time_series_df = time_series_df.sort_values(['period_type', 'game_name', 'period_label'])
