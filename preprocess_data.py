@@ -15,13 +15,6 @@ import sys
 import argparse
 import pandas as pd
 import pymysql
-try:
-    import psycopg2  # For Redshift connection
-    PSYCOPG2_AVAILABLE = True
-except ImportError:
-    PSYCOPG2_AVAILABLE = False
-    print("WARNING: psycopg2 not installed. RM active users feature will be disabled.")
-    print("  Install it with: pip install psycopg2-binary")
 from datetime import datetime
 from dotenv import load_dotenv
 from typing import List, Tuple, Optional
@@ -35,13 +28,6 @@ PORT = int(os.getenv("DB_PORT", "3310"))
 DBNAME = os.getenv("DB_NAME")
 USER = os.getenv("DB_USER")
 PASSWORD = os.getenv("DB_PASSWORD")
-
-# Redshift connection settings
-REDSHIFT_HOST = "redshift-cluster.c9fcj1g6yq2x.ap-south-1.redshift.amazonaws.com"
-REDSHIFT_DATABASE = "rocket_dwh_prod"
-REDSHIFT_PORT = 5439
-REDSHIFT_USER = "rl_product"
-REDSHIFT_PASSWORD = "Rlproduct@1234"
 
 # Validate required environment variables
 required_vars = ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]
