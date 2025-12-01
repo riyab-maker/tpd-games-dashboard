@@ -2272,7 +2272,7 @@ date,game_name,event,instances,visits,users
 2025-08-08,Rhyming Words,started,7,4,5
 2025-08-08,Rhyming Words,validation,2,2,2
 2025-08-08,Shape Circle,completed,1875,1476,1444
-2025-08-08,Shape Circle,introduction,2419,1797,1739
+2025-08-08,Shape Circle,introduction,2419,1798,1740
 2025-08-08,Shape Circle,mid_introduction,1540,1316,1298
 2025-08-08,Shape Circle,parent_poll,651,607,603
 2025-08-08,Shape Circle,questions,1897,1518,1484
@@ -5432,7 +5432,7 @@ date,game_name,event,instances,visits,users
 2025-09-03,Color Blue,started,54,49,49
 2025-09-03,Color Blue,validation,35,33,33
 2025-09-03,Color Red,completed,283,272,271
-2025-09-03,Color Red,introduction,373,344,342
+2025-09-03,Color Red,introduction,373,343,341
 2025-09-03,Color Red,mid_introduction,251,246,246
 2025-09-03,Color Red,parent_poll,94,94,94
 2025-09-03,Color Red,questions,293,281,280
@@ -7608,7 +7608,7 @@ date,game_name,event,instances,visits,users
 2025-09-16,Beginning Sounds Ma/Ka/La,completed,3981,3845,3823
 2025-09-16,Beginning Sounds Ma/Ka/La,introduction,9760,8796,8990
 2025-09-16,Beginning Sounds Ma/Ka/La,mid_introduction,3978,3854,3851
-2025-09-16,Beginning Sounds Ma/Ka/La,parent_poll,1720,1698,1684
+2025-09-16,Beginning Sounds Ma/Ka/La,parent_poll,1720,1697,1683
 2025-09-16,Beginning Sounds Ma/Ka/La,questions,3888,3741,3747
 2025-09-16,Beginning Sounds Ma/Ka/La,rewards,3651,3561,3545
 2025-09-16,Beginning Sounds Ma/Ka/La,started,12159,10820,11123
@@ -9783,7 +9783,7 @@ date,game_name,event,instances,visits,users
 2025-09-27,Rhyming Words,parent_poll,958,948,949
 2025-09-27,Rhyming Words,questions,2403,2243,2245
 2025-09-27,Rhyming Words,rewards,1729,1678,1679
-2025-09-27,Rhyming Words,started,4750,3757,3796
+2025-09-27,Rhyming Words,started,4750,3756,3795
 2025-09-27,Rhyming Words,validation,2105,2034,2036
 2025-09-27,Shape Circle,completed,1057,954,943
 2025-09-27,Shape Circle,introduction,1333,1143,1121
@@ -12556,13 +12556,13 @@ date,game_name,event,instances,visits,users
 2025-10-11,Numerals 1-10,mid_introduction,65,57,58
 2025-10-11,Numerals 1-10,parent_poll,119,81,83
 2025-10-11,Numerals 1-10,questions,76,67,68
-2025-10-11,Numerals 1-10,rewards,63,56,57
+2025-10-11,Numerals 1-10,rewards,63,55,56
 2025-10-11,Numerals 1-10,started,97,84,86
 2025-10-11,Numerals 1-10,validation,64,56,57
 2025-10-11,Positions,completed,3333,3079,3091
 2025-10-11,Positions,introduction,4754,4107,4184
 2025-10-11,Positions,mid_introduction,3346,3215,3239
-2025-10-11,Positions,parent_poll,6469,4266,4343
+2025-10-11,Positions,parent_poll,6469,4265,4342
 2025-10-11,Positions,questions,3536,3322,3361
 2025-10-11,Positions,rewards,3036,2919,2929
 2025-10-11,Positions,started,5194,4385,4456
@@ -22537,227 +22537,1910 @@ date,game_name,event,instances,visits,users
 2025-11-23,Sorting Primary Shapes,rewards,9,9,9
 2025-11-23,Sorting Primary Shapes,started,21,20,19
 2025-11-23,Sorting Primary Shapes,validation,9,9,9
-2025-11-24,Beginning Sound Ba/Ra/Na,completed,3,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,introduction,2,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,mid_introduction,2,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,parent_poll,6,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,questions,2,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,rewards,2,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,started,3,2,2
-2025-11-24,Beginning Sound Ba/Ra/Na,validation,2,2,2
-2025-11-24,Beginning Sounds Ka/Na/Ta,completed,25,25,25
-2025-11-24,Beginning Sounds Ka/Na/Ta,introduction,66,58,58
-2025-11-24,Beginning Sounds Ka/Na/Ta,mid_introduction,36,35,35
-2025-11-24,Beginning Sounds Ka/Na/Ta,parent_poll,79,60,60
-2025-11-24,Beginning Sounds Ka/Na/Ta,questions,38,37,37
-2025-11-24,Beginning Sounds Ka/Na/Ta,rewards,30,29,29
-2025-11-24,Beginning Sounds Ka/Na/Ta,started,74,63,63
-2025-11-24,Beginning Sounds Ka/Na/Ta,validation,32,31,31
-2025-11-24,Beginning Sounds Ma/Cha/Ba,completed,72,72,72
-2025-11-24,Beginning Sounds Ma/Cha/Ba,introduction,213,200,201
-2025-11-24,Beginning Sounds Ma/Cha/Ba,mid_introduction,108,107,107
-2025-11-24,Beginning Sounds Ma/Cha/Ba,parent_poll,267,211,212
-2025-11-24,Beginning Sounds Ma/Cha/Ba,questions,111,110,110
-2025-11-24,Beginning Sounds Ma/Cha/Ba,rewards,82,81,81
-2025-11-24,Beginning Sounds Ma/Cha/Ba,started,235,220,221
-2025-11-24,Beginning Sounds Ma/Cha/Ba,validation,95,94,94
-2025-11-24,Beginning Sounds Ma/Ka/La,completed,5,4,4
-2025-11-24,Beginning Sounds Ma/Ka/La,introduction,6,5,5
-2025-11-24,Beginning Sounds Ma/Ka/La,mid_introduction,5,4,4
-2025-11-24,Beginning Sounds Ma/Ka/La,parent_poll,6,5,5
-2025-11-24,Beginning Sounds Ma/Ka/La,questions,5,4,4
-2025-11-24,Beginning Sounds Ma/Ka/La,rewards,4,4,4
-2025-11-24,Beginning Sounds Ma/Ka/La,started,8,7,7
-2025-11-24,Beginning Sounds Ma/Ka/La,validation,4,4,4
-2025-11-24,Beginning Sounds Pa/Cha/Sa,completed,3,3,3
-2025-11-24,Beginning Sounds Pa/Cha/Sa,introduction,5,5,5
-2025-11-24,Beginning Sounds Pa/Cha/Sa,mid_introduction,2,2,2
-2025-11-24,Beginning Sounds Pa/Cha/Sa,parent_poll,6,6,6
-2025-11-24,Beginning Sounds Pa/Cha/Sa,questions,3,3,3
-2025-11-24,Beginning Sounds Pa/Cha/Sa,rewards,2,2,2
-2025-11-24,Beginning Sounds Pa/Cha/Sa,started,6,6,6
-2025-11-24,Beginning Sounds Pa/Cha/Sa,validation,2,2,2
-2025-11-24,Beginning Sounds Sa/La/Va,completed,1,1,1
-2025-11-24,Beginning Sounds Sa/La/Va,introduction,1,1,1
-2025-11-24,Beginning Sounds Sa/La/Va,parent_poll,1,1,1
-2025-11-24,Beginning Sounds Sa/La/Va,questions,1,1,1
-2025-11-24,Beginning Sounds Sa/La/Va,started,2,2,2
-2025-11-24,Color Blue,completed,5,5,4
-2025-11-24,Color Blue,introduction,10,7,6
-2025-11-24,Color Blue,mid_introduction,3,3,3
-2025-11-24,Color Blue,parent_poll,21,7,6
-2025-11-24,Color Blue,questions,6,5,4
-2025-11-24,Color Blue,rewards,3,3,3
-2025-11-24,Color Blue,started,11,7,6
-2025-11-24,Color Blue,validation,3,3,3
-2025-11-24,Color Red,completed,25,24,24
-2025-11-24,Color Red,introduction,30,25,25
-2025-11-24,Color Red,mid_introduction,19,19,19
-2025-11-24,Color Red,parent_poll,39,27,27
-2025-11-24,Color Red,questions,25,24,24
-2025-11-24,Color Red,rewards,19,19,19
-2025-11-24,Color Red,started,33,28,28
-2025-11-24,Color Red,validation,19,19,19
-2025-11-24,Color Yellow,completed,6,6,6
-2025-11-24,Color Yellow,introduction,9,9,9
-2025-11-24,Color Yellow,mid_introduction,5,5,5
-2025-11-24,Color Yellow,parent_poll,10,9,9
-2025-11-24,Color Yellow,questions,7,7,7
-2025-11-24,Color Yellow,rewards,5,5,5
-2025-11-24,Color Yellow,started,10,10,10
-2025-11-24,Color Yellow,validation,4,4,4
-2025-11-24,Emotion Identification,completed,7,6,6
-2025-11-24,Emotion Identification,introduction,7,6,6
-2025-11-24,Emotion Identification,mid_introduction,5,5,5
-2025-11-24,Emotion Identification,parent_poll,9,6,6
-2025-11-24,Emotion Identification,questions,6,6,6
-2025-11-24,Emotion Identification,rewards,5,5,5
-2025-11-24,Emotion Identification,started,9,6,6
-2025-11-24,Emotion Identification,validation,5,5,5
-2025-11-24,Identification of all emotions,completed,2,2,2
-2025-11-24,Identification of all emotions,introduction,3,3,3
-2025-11-24,Identification of all emotions,mid_introduction,2,2,2
-2025-11-24,Identification of all emotions,parent_poll,3,3,3
-2025-11-24,Identification of all emotions,questions,3,3,3
-2025-11-24,Identification of all emotions,rewards,2,2,2
-2025-11-24,Identification of all emotions,started,3,3,3
-2025-11-24,Identification of all emotions,validation,2,2,2
-2025-11-24,Numbers Comparison,completed,3,3,3
-2025-11-24,Numbers Comparison,introduction,4,4,4
-2025-11-24,Numbers Comparison,mid_introduction,3,3,3
-2025-11-24,Numbers Comparison,parent_poll,6,4,4
-2025-11-24,Numbers Comparison,questions,3,3,3
-2025-11-24,Numbers Comparison,rewards,3,3,3
-2025-11-24,Numbers Comparison,started,4,4,4
-2025-11-24,Numbers Comparison,validation,3,3,3
-2025-11-24,Numbers I,completed,9,9,9
-2025-11-24,Numbers I,introduction,11,11,11
-2025-11-24,Numbers I,mid_introduction,6,6,6
-2025-11-24,Numbers I,parent_poll,16,12,12
-2025-11-24,Numbers I,questions,9,9,9
-2025-11-24,Numbers I,rewards,6,6,6
-2025-11-24,Numbers I,started,12,12,12
-2025-11-24,Numbers I,validation,6,6,6
-2025-11-24,Numbers II,completed,8,8,8
-2025-11-24,Numbers II,introduction,11,9,9
-2025-11-24,Numbers II,mid_introduction,8,8,8
-2025-11-24,Numbers II,parent_poll,15,9,9
-2025-11-24,Numbers II,questions,9,9,9
-2025-11-24,Numbers II,rewards,8,8,8
-2025-11-24,Numbers II,started,11,9,9
-2025-11-24,Numbers II,validation,8,8,8
-2025-11-24,Numerals 1-10,completed,1,1,1
-2025-11-24,Numerals 1-10,introduction,2,2,2
-2025-11-24,Numerals 1-10,mid_introduction,1,1,1
-2025-11-24,Numerals 1-10,parent_poll,4,3,3
-2025-11-24,Numerals 1-10,questions,1,1,1
-2025-11-24,Numerals 1-10,rewards,1,1,1
-2025-11-24,Numerals 1-10,started,4,4,4
-2025-11-24,Numerals 1-10,validation,1,1,1
-2025-11-24,Positions,completed,6,5,5
-2025-11-24,Positions,introduction,9,7,7
-2025-11-24,Positions,mid_introduction,6,6,6
-2025-11-24,Positions,parent_poll,10,7,7
-2025-11-24,Positions,questions,7,7,7
-2025-11-24,Positions,rewards,4,4,4
-2025-11-24,Positions,started,17,15,15
-2025-11-24,Positions,validation,6,6,6
-2025-11-24,Primary Emotion Labelling,completed,2,2,2
-2025-11-24,Primary Emotion Labelling,introduction,2,2,2
-2025-11-24,Primary Emotion Labelling,mid_introduction,2,2,2
-2025-11-24,Primary Emotion Labelling,parent_poll,3,2,2
-2025-11-24,Primary Emotion Labelling,questions,2,2,2
-2025-11-24,Primary Emotion Labelling,rewards,1,1,1
-2025-11-24,Primary Emotion Labelling,started,2,2,2
-2025-11-24,Primary Emotion Labelling,validation,2,2,2
-2025-11-24,Quantitative Comparison,completed,5,5,5
-2025-11-24,Quantitative Comparison,introduction,5,5,5
-2025-11-24,Quantitative Comparison,mid_introduction,5,5,5
-2025-11-24,Quantitative Comparison,parent_poll,8,5,5
-2025-11-24,Quantitative Comparison,questions,5,5,5
-2025-11-24,Quantitative Comparison,rewards,5,5,5
-2025-11-24,Quantitative Comparison,started,5,5,5
-2025-11-24,Quantitative Comparison,validation,5,5,5
-2025-11-24,Relational Comparison,completed,2,2,2
-2025-11-24,Relational Comparison,introduction,4,4,3
-2025-11-24,Relational Comparison,mid_introduction,1,1,1
-2025-11-24,Relational Comparison,parent_poll,5,5,4
-2025-11-24,Relational Comparison,questions,1,1,1
-2025-11-24,Relational Comparison,rewards,1,1,1
-2025-11-24,Relational Comparison,started,5,5,4
-2025-11-24,Relational Comparison,validation,1,1,1
-2025-11-24,Relational Comparison II,completed,3,2,2
-2025-11-24,Relational Comparison II,introduction,4,3,3
-2025-11-24,Relational Comparison II,mid_introduction,2,2,2
-2025-11-24,Relational Comparison II,parent_poll,5,3,3
-2025-11-24,Relational Comparison II,questions,3,2,2
-2025-11-24,Relational Comparison II,rewards,2,2,2
-2025-11-24,Relational Comparison II,started,4,3,3
-2025-11-24,Relational Comparison II,validation,2,2,2
-2025-11-24,Revision Colors,completed,1,1,1
-2025-11-24,Revision Colors,introduction,2,2,2
-2025-11-24,Revision Colors,mid_introduction,2,2,2
-2025-11-24,Revision Colors,parent_poll,3,2,2
-2025-11-24,Revision Colors,questions,2,2,2
-2025-11-24,Revision Colors,rewards,2,2,2
-2025-11-24,Revision Colors,started,2,2,2
-2025-11-24,Revision Colors,validation,2,2,2
-2025-11-24,Revision Shapes,completed,2,2,2
-2025-11-24,Revision Shapes,introduction,2,2,2
-2025-11-24,Revision Shapes,mid_introduction,2,2,2
-2025-11-24,Revision Shapes,parent_poll,3,3,3
-2025-11-24,Revision Shapes,questions,2,2,2
-2025-11-24,Revision Shapes,rewards,2,2,2
-2025-11-24,Revision Shapes,started,3,3,3
-2025-11-24,Revision Shapes,validation,2,2,2
-2025-11-24,Rhyming Words,completed,8,7,7
-2025-11-24,Rhyming Words,introduction,10,9,9
-2025-11-24,Rhyming Words,mid_introduction,4,4,4
-2025-11-24,Rhyming Words,parent_poll,12,9,9
-2025-11-24,Rhyming Words,questions,7,7,7
-2025-11-24,Rhyming Words,rewards,4,4,4
-2025-11-24,Rhyming Words,started,10,9,9
-2025-11-24,Rhyming Words,validation,4,4,4
-2025-11-24,Shape Circle,completed,61,52,52
-2025-11-24,Shape Circle,introduction,73,60,58
-2025-11-24,Shape Circle,mid_introduction,48,45,45
-2025-11-24,Shape Circle,parent_poll,96,64,62
-2025-11-24,Shape Circle,questions,56,50,49
-2025-11-24,Shape Circle,rewards,47,44,44
-2025-11-24,Shape Circle,started,80,64,62
-2025-11-24,Shape Circle,validation,47,44,44
-2025-11-24,Shape Rectangle,completed,1,1,1
-2025-11-24,Shape Rectangle,introduction,1,1,1
-2025-11-24,Shape Rectangle,mid_introduction,1,1,1
-2025-11-24,Shape Rectangle,parent_poll,1,1,1
-2025-11-24,Shape Rectangle,questions,1,1,1
-2025-11-24,Shape Rectangle,rewards,1,1,1
-2025-11-24,Shape Rectangle,started,1,1,1
-2025-11-24,Shape Rectangle,validation,1,1,1
-2025-11-24,Shape Square,introduction,1,1,1
-2025-11-24,Shape Square,parent_poll,1,1,1
-2025-11-24,Shape Square,started,1,1,1
-2025-11-24,Shape Triangle,completed,10,10,10
-2025-11-24,Shape Triangle,introduction,16,12,12
-2025-11-24,Shape Triangle,mid_introduction,10,10,10
-2025-11-24,Shape Triangle,parent_poll,20,12,12
-2025-11-24,Shape Triangle,questions,11,11,11
-2025-11-24,Shape Triangle,rewards,10,10,10
-2025-11-24,Shape Triangle,started,17,13,13
-2025-11-24,Shape Triangle,validation,10,10,10
-2025-11-24,Sorting Primary Colors,completed,3,3,3
-2025-11-24,Sorting Primary Colors,introduction,4,4,4
-2025-11-24,Sorting Primary Colors,mid_introduction,3,3,3
-2025-11-24,Sorting Primary Colors,parent_poll,6,4,4
-2025-11-24,Sorting Primary Colors,questions,3,3,3
-2025-11-24,Sorting Primary Colors,rewards,3,3,3
-2025-11-24,Sorting Primary Colors,started,5,4,4
-2025-11-24,Sorting Primary Colors,validation,3,3,3
-2025-11-24,Sorting Primary Shapes,completed,2,2,2
-2025-11-24,Sorting Primary Shapes,introduction,14,7,6
-2025-11-24,Sorting Primary Shapes,mid_introduction,3,3,3
-2025-11-24,Sorting Primary Shapes,parent_poll,16,7,6
-2025-11-24,Sorting Primary Shapes,questions,3,3,3
-2025-11-24,Sorting Primary Shapes,rewards,2,2,2
-2025-11-24,Sorting Primary Shapes,started,15,7,6
-2025-11-24,Sorting Primary Shapes,validation,2,2,2
+2025-11-24,Beginning Sound Ba/Ra/Na,completed,11,9,9
+2025-11-24,Beginning Sound Ba/Ra/Na,introduction,12,11,11
+2025-11-24,Beginning Sound Ba/Ra/Na,mid_introduction,9,9,9
+2025-11-24,Beginning Sound Ba/Ra/Na,parent_poll,29,11,11
+2025-11-24,Beginning Sound Ba/Ra/Na,questions,9,9,9
+2025-11-24,Beginning Sound Ba/Ra/Na,rewards,9,9,9
+2025-11-24,Beginning Sound Ba/Ra/Na,started,13,11,11
+2025-11-24,Beginning Sound Ba/Ra/Na,validation,9,9,9
+2025-11-24,Beginning Sounds Ka/Na/Ta,completed,87,83,84
+2025-11-24,Beginning Sounds Ka/Na/Ta,introduction,211,184,186
+2025-11-24,Beginning Sounds Ka/Na/Ta,mid_introduction,113,110,110
+2025-11-24,Beginning Sounds Ka/Na/Ta,parent_poll,274,201,203
+2025-11-24,Beginning Sounds Ka/Na/Ta,questions,121,117,118
+2025-11-24,Beginning Sounds Ka/Na/Ta,rewards,97,94,94
+2025-11-24,Beginning Sounds Ka/Na/Ta,started,255,215,217
+2025-11-24,Beginning Sounds Ka/Na/Ta,validation,103,100,100
+2025-11-24,Beginning Sounds Ma/Cha/Ba,completed,1262,1229,1229
+2025-11-24,Beginning Sounds Ma/Cha/Ba,introduction,2688,2363,2415
+2025-11-24,Beginning Sounds Ma/Cha/Ba,mid_introduction,1362,1344,1344
+2025-11-24,Beginning Sounds Ma/Cha/Ba,parent_poll,3522,2541,2597
+2025-11-24,Beginning Sounds Ma/Cha/Ba,questions,1448,1418,1418
+2025-11-24,Beginning Sounds Ma/Cha/Ba,rewards,1168,1165,1161
+2025-11-24,Beginning Sounds Ma/Cha/Ba,started,3131,2712,2766
+2025-11-24,Beginning Sounds Ma/Cha/Ba,validation,1257,1248,1247
+2025-11-24,Beginning Sounds Ma/Ka/La,completed,40,36,36
+2025-11-24,Beginning Sounds Ma/Ka/La,introduction,53,48,48
+2025-11-24,Beginning Sounds Ma/Ka/La,mid_introduction,37,34,34
+2025-11-24,Beginning Sounds Ma/Ka/La,parent_poll,71,51,51
+2025-11-24,Beginning Sounds Ma/Ka/La,questions,39,36,36
+2025-11-24,Beginning Sounds Ma/Ka/La,rewards,35,33,33
+2025-11-24,Beginning Sounds Ma/Ka/La,started,69,63,63
+2025-11-24,Beginning Sounds Ma/Ka/La,validation,34,32,32
+2025-11-24,Beginning Sounds Pa/Cha/Sa,completed,13,11,11
+2025-11-24,Beginning Sounds Pa/Cha/Sa,introduction,20,19,19
+2025-11-24,Beginning Sounds Pa/Cha/Sa,mid_introduction,11,11,11
+2025-11-24,Beginning Sounds Pa/Cha/Sa,parent_poll,24,20,20
+2025-11-24,Beginning Sounds Pa/Cha/Sa,questions,14,13,13
+2025-11-24,Beginning Sounds Pa/Cha/Sa,rewards,9,9,9
+2025-11-24,Beginning Sounds Pa/Cha/Sa,started,24,22,22
+2025-11-24,Beginning Sounds Pa/Cha/Sa,validation,10,10,10
+2025-11-24,Beginning Sounds Sa/La/Va,completed,26,26,26
+2025-11-24,Beginning Sounds Sa/La/Va,introduction,32,29,29
+2025-11-24,Beginning Sounds Sa/La/Va,mid_introduction,25,25,25
+2025-11-24,Beginning Sounds Sa/La/Va,parent_poll,45,30,30
+2025-11-24,Beginning Sounds Sa/La/Va,questions,55,29,29
+2025-11-24,Beginning Sounds Sa/La/Va,rewards,25,25,25
+2025-11-24,Beginning Sounds Sa/La/Va,started,33,30,30
+2025-11-24,Beginning Sounds Sa/La/Va,validation,25,25,25
+2025-11-24,Beginning Sounds Ta/Va/Ga,completed,3,2,2
+2025-11-24,Beginning Sounds Ta/Va/Ga,introduction,4,3,3
+2025-11-24,Beginning Sounds Ta/Va/Ga,mid_introduction,1,1,1
+2025-11-24,Beginning Sounds Ta/Va/Ga,parent_poll,5,3,3
+2025-11-24,Beginning Sounds Ta/Va/Ga,questions,3,2,2
+2025-11-24,Beginning Sounds Ta/Va/Ga,rewards,1,1,1
+2025-11-24,Beginning Sounds Ta/Va/Ga,started,4,3,3
+2025-11-24,Beginning Sounds Ta/Va/Ga,validation,1,1,1
+2025-11-24,Color Blue,completed,38,37,36
+2025-11-24,Color Blue,introduction,50,44,43
+2025-11-24,Color Blue,mid_introduction,33,32,32
+2025-11-24,Color Blue,parent_poll,81,47,46
+2025-11-24,Color Blue,questions,40,38,37
+2025-11-24,Color Blue,rewards,32,31,31
+2025-11-24,Color Blue,started,55,47,46
+2025-11-24,Color Blue,validation,32,31,31
+2025-11-24,Color Red,completed,312,295,295
+2025-11-24,Color Red,introduction,347,310,310
+2025-11-24,Color Red,mid_introduction,268,258,258
+2025-11-24,Color Red,parent_poll,479,330,330
+2025-11-24,Color Red,questions,301,287,287
+2025-11-24,Color Red,rewards,255,248,248
+2025-11-24,Color Red,started,378,337,337
+2025-11-24,Color Red,validation,264,255,255
+2025-11-24,Color Yellow,completed,57,53,54
+2025-11-24,Color Yellow,introduction,79,69,69
+2025-11-24,Color Yellow,mid_introduction,47,47,47
+2025-11-24,Color Yellow,parent_poll,98,69,70
+2025-11-24,Color Yellow,questions,59,56,56
+2025-11-24,Color Yellow,rewards,46,46,46
+2025-11-24,Color Yellow,started,85,72,73
+2025-11-24,Color Yellow,validation,46,46,46
+2025-11-24,Emotion Identification,completed,23,21,21
+2025-11-24,Emotion Identification,introduction,28,26,26
+2025-11-24,Emotion Identification,mid_introduction,21,20,20
+2025-11-24,Emotion Identification,parent_poll,34,26,26
+2025-11-24,Emotion Identification,questions,24,23,23
+2025-11-24,Emotion Identification,rewards,18,17,17
+2025-11-24,Emotion Identification,started,31,27,27
+2025-11-24,Emotion Identification,validation,19,18,18
+2025-11-24,Identification of all emotions,completed,15,15,15
+2025-11-24,Identification of all emotions,introduction,18,17,17
+2025-11-24,Identification of all emotions,mid_introduction,14,14,14
+2025-11-24,Identification of all emotions,parent_poll,25,17,17
+2025-11-24,Identification of all emotions,questions,16,16,16
+2025-11-24,Identification of all emotions,rewards,13,13,13
+2025-11-24,Identification of all emotions,started,19,18,18
+2025-11-24,Identification of all emotions,validation,14,14,14
+2025-11-24,Numbers Comparison,completed,30,28,28
+2025-11-24,Numbers Comparison,introduction,34,28,28
+2025-11-24,Numbers Comparison,mid_introduction,27,25,25
+2025-11-24,Numbers Comparison,parent_poll,48,29,29
+2025-11-24,Numbers Comparison,questions,29,27,27
+2025-11-24,Numbers Comparison,rewards,26,25,25
+2025-11-24,Numbers Comparison,started,36,30,30
+2025-11-24,Numbers Comparison,validation,26,25,25
+2025-11-24,Numbers I,completed,80,75,75
+2025-11-24,Numbers I,introduction,95,88,88
+2025-11-24,Numbers I,mid_introduction,70,68,68
+2025-11-24,Numbers I,parent_poll,133,90,90
+2025-11-24,Numbers I,questions,81,75,75
+2025-11-24,Numbers I,rewards,67,65,65
+2025-11-24,Numbers I,started,101,94,94
+2025-11-24,Numbers I,validation,70,68,68
+2025-11-24,Numbers II,completed,70,68,68
+2025-11-24,Numbers II,introduction,82,74,74
+2025-11-24,Numbers II,mid_introduction,60,59,59
+2025-11-24,Numbers II,parent_poll,114,76,76
+2025-11-24,Numbers II,questions,71,69,69
+2025-11-24,Numbers II,rewards,59,58,58
+2025-11-24,Numbers II,started,84,76,76
+2025-11-24,Numbers II,validation,59,58,58
+2025-11-24,Numerals 1-10,completed,9,9,9
+2025-11-24,Numerals 1-10,introduction,18,18,18
+2025-11-24,Numerals 1-10,mid_introduction,14,14,14
+2025-11-24,Numerals 1-10,parent_poll,28,21,21
+2025-11-24,Numerals 1-10,questions,15,15,15
+2025-11-24,Numerals 1-10,rewards,14,14,14
+2025-11-24,Numerals 1-10,started,23,22,22
+2025-11-24,Numerals 1-10,validation,14,14,14
+2025-11-24,Positions,completed,43,36,36
+2025-11-24,Positions,introduction,60,46,45
+2025-11-24,Positions,mid_introduction,39,35,35
+2025-11-24,Positions,parent_poll,79,48,46
+2025-11-24,Positions,questions,43,36,36
+2025-11-24,Positions,rewards,34,32,32
+2025-11-24,Positions,started,87,70,65
+2025-11-24,Positions,validation,37,34,34
+2025-11-24,Primary Emotion Labelling,completed,17,17,17
+2025-11-24,Primary Emotion Labelling,introduction,17,17,17
+2025-11-24,Primary Emotion Labelling,mid_introduction,13,13,13
+2025-11-24,Primary Emotion Labelling,parent_poll,23,17,17
+2025-11-24,Primary Emotion Labelling,questions,17,17,17
+2025-11-24,Primary Emotion Labelling,rewards,12,12,12
+2025-11-24,Primary Emotion Labelling,started,17,17,17
+2025-11-24,Primary Emotion Labelling,validation,13,13,13
+2025-11-24,Quantitative Comparison,completed,37,35,35
+2025-11-24,Quantitative Comparison,introduction,47,43,43
+2025-11-24,Quantitative Comparison,mid_introduction,32,31,31
+2025-11-24,Quantitative Comparison,parent_poll,63,44,44
+2025-11-24,Quantitative Comparison,questions,38,36,36
+2025-11-24,Quantitative Comparison,rewards,32,31,31
+2025-11-24,Quantitative Comparison,started,47,43,43
+2025-11-24,Quantitative Comparison,validation,31,30,30
+2025-11-24,Relational Comparison,completed,41,37,37
+2025-11-24,Relational Comparison,introduction,52,47,46
+2025-11-24,Relational Comparison,mid_introduction,33,31,31
+2025-11-24,Relational Comparison,parent_poll,75,49,48
+2025-11-24,Relational Comparison,questions,39,35,35
+2025-11-24,Relational Comparison,rewards,33,31,31
+2025-11-24,Relational Comparison,started,57,50,49
+2025-11-24,Relational Comparison,validation,33,31,31
+2025-11-24,Relational Comparison II,completed,25,24,24
+2025-11-24,Relational Comparison II,introduction,30,29,29
+2025-11-24,Relational Comparison II,mid_introduction,24,24,24
+2025-11-24,Relational Comparison II,parent_poll,44,30,30
+2025-11-24,Relational Comparison II,questions,26,25,25
+2025-11-24,Relational Comparison II,rewards,23,23,23
+2025-11-24,Relational Comparison II,started,30,29,29
+2025-11-24,Relational Comparison II,validation,23,23,23
+2025-11-24,Revision Colors,completed,28,23,23
+2025-11-24,Revision Colors,introduction,33,26,26
+2025-11-24,Revision Colors,mid_introduction,27,23,23
+2025-11-24,Revision Colors,parent_poll,51,27,27
+2025-11-24,Revision Colors,questions,28,24,24
+2025-11-24,Revision Colors,rewards,27,23,23
+2025-11-24,Revision Colors,started,35,28,28
+2025-11-24,Revision Colors,validation,27,23,23
+2025-11-24,Revision Shapes,completed,21,15,15
+2025-11-24,Revision Shapes,introduction,21,15,15
+2025-11-24,Revision Shapes,mid_introduction,18,14,14
+2025-11-24,Revision Shapes,parent_poll,26,16,16
+2025-11-24,Revision Shapes,questions,20,15,15
+2025-11-24,Revision Shapes,rewards,18,14,14
+2025-11-24,Revision Shapes,started,23,16,16
+2025-11-24,Revision Shapes,validation,18,14,14
+2025-11-24,Rhyming Words,completed,51,47,47
+2025-11-24,Rhyming Words,introduction,65,59,59
+2025-11-24,Rhyming Words,mid_introduction,37,36,36
+2025-11-24,Rhyming Words,parent_poll,85,60,60
+2025-11-24,Rhyming Words,questions,49,47,47
+2025-11-24,Rhyming Words,rewards,35,34,34
+2025-11-24,Rhyming Words,started,66,60,60
+2025-11-24,Rhyming Words,validation,37,36,36
+2025-11-24,Shape Circle,completed,859,767,762
+2025-11-24,Shape Circle,introduction,987,839,827
+2025-11-24,Shape Circle,mid_introduction,723,679,678
+2025-11-24,Shape Circle,parent_poll,1374,885,872
+2025-11-24,Shape Circle,questions,829,753,748
+2025-11-24,Shape Circle,rewards,692,653,652
+2025-11-24,Shape Circle,started,1085,908,893
+2025-11-24,Shape Circle,validation,709,668,667
+2025-11-24,Shape Rectangle,completed,12,11,11
+2025-11-24,Shape Rectangle,introduction,15,12,12
+2025-11-24,Shape Rectangle,mid_introduction,10,10,10
+2025-11-24,Shape Rectangle,parent_poll,23,12,12
+2025-11-24,Shape Rectangle,questions,11,11,11
+2025-11-24,Shape Rectangle,rewards,10,10,10
+2025-11-24,Shape Rectangle,started,15,12,12
+2025-11-24,Shape Rectangle,validation,10,10,10
+2025-11-24,Shape Square,completed,14,14,14
+2025-11-24,Shape Square,introduction,14,14,14
+2025-11-24,Shape Square,mid_introduction,13,13,13
+2025-11-24,Shape Square,parent_poll,25,15,15
+2025-11-24,Shape Square,questions,13,13,13
+2025-11-24,Shape Square,rewards,13,13,13
+2025-11-24,Shape Square,started,15,15,15
+2025-11-24,Shape Square,validation,13,13,13
+2025-11-24,Shape Triangle,completed,100,98,98
+2025-11-24,Shape Triangle,introduction,114,105,105
+2025-11-24,Shape Triangle,mid_introduction,86,84,84
+2025-11-24,Shape Triangle,parent_poll,169,112,112
+2025-11-24,Shape Triangle,questions,97,95,95
+2025-11-24,Shape Triangle,rewards,84,82,82
+2025-11-24,Shape Triangle,started,123,114,114
+2025-11-24,Shape Triangle,validation,86,84,84
+2025-11-24,Sorting Primary Colors,completed,21,19,18
+2025-11-24,Sorting Primary Colors,introduction,30,27,26
+2025-11-24,Sorting Primary Colors,mid_introduction,22,21,20
+2025-11-24,Sorting Primary Colors,parent_poll,40,28,27
+2025-11-24,Sorting Primary Colors,questions,23,21,20
+2025-11-24,Sorting Primary Colors,rewards,19,18,17
+2025-11-24,Sorting Primary Colors,started,32,28,27
+2025-11-24,Sorting Primary Colors,validation,21,20,19
+2025-11-24,Sorting Primary Shapes,completed,12,12,12
+2025-11-24,Sorting Primary Shapes,introduction,35,25,24
+2025-11-24,Sorting Primary Shapes,mid_introduction,13,12,12
+2025-11-24,Sorting Primary Shapes,parent_poll,41,25,24
+2025-11-24,Sorting Primary Shapes,questions,14,13,13
+2025-11-24,Sorting Primary Shapes,rewards,11,11,11
+2025-11-24,Sorting Primary Shapes,started,36,25,24
+2025-11-24,Sorting Primary Shapes,validation,12,11,11
+2025-11-25,Beginning Sound Ba/Ra/Na,completed,16,11,11
+2025-11-25,Beginning Sound Ba/Ra/Na,introduction,19,14,14
+2025-11-25,Beginning Sound Ba/Ra/Na,mid_introduction,13,9,9
+2025-11-25,Beginning Sound Ba/Ra/Na,parent_poll,42,14,14
+2025-11-25,Beginning Sound Ba/Ra/Na,questions,16,11,11
+2025-11-25,Beginning Sound Ba/Ra/Na,rewards,13,9,9
+2025-11-25,Beginning Sound Ba/Ra/Na,started,22,16,15
+2025-11-25,Beginning Sound Ba/Ra/Na,validation,13,9,9
+2025-11-25,Beginning Sounds Ka/Na/Ta,completed,71,67,67
+2025-11-25,Beginning Sounds Ka/Na/Ta,introduction,182,156,153
+2025-11-25,Beginning Sounds Ka/Na/Ta,mid_introduction,94,88,88
+2025-11-25,Beginning Sounds Ka/Na/Ta,parent_poll,231,167,164
+2025-11-25,Beginning Sounds Ka/Na/Ta,questions,98,92,92
+2025-11-25,Beginning Sounds Ka/Na/Ta,rewards,85,78,78
+2025-11-25,Beginning Sounds Ka/Na/Ta,started,222,187,179
+2025-11-25,Beginning Sounds Ka/Na/Ta,validation,88,82,82
+2025-11-25,Beginning Sounds Ma/Cha/Ba,completed,542,527,527
+2025-11-25,Beginning Sounds Ma/Cha/Ba,introduction,1100,963,970
+2025-11-25,Beginning Sounds Ma/Cha/Ba,mid_introduction,572,558,561
+2025-11-25,Beginning Sounds Ma/Cha/Ba,parent_poll,1447,1050,1061
+2025-11-25,Beginning Sounds Ma/Cha/Ba,questions,614,596,598
+2025-11-25,Beginning Sounds Ma/Cha/Ba,rewards,495,491,491
+2025-11-25,Beginning Sounds Ma/Cha/Ba,started,1295,1125,1132
+2025-11-25,Beginning Sounds Ma/Cha/Ba,validation,527,520,521
+2025-11-25,Beginning Sounds Ma/Ka/La,completed,22,21,21
+2025-11-25,Beginning Sounds Ma/Ka/La,introduction,36,35,34
+2025-11-25,Beginning Sounds Ma/Ka/La,mid_introduction,22,21,21
+2025-11-25,Beginning Sounds Ma/Ka/La,parent_poll,41,35,34
+2025-11-25,Beginning Sounds Ma/Ka/La,questions,26,25,25
+2025-11-25,Beginning Sounds Ma/Ka/La,rewards,18,17,17
+2025-11-25,Beginning Sounds Ma/Ka/La,started,52,50,50
+2025-11-25,Beginning Sounds Ma/Ka/La,validation,18,17,17
+2025-11-25,Beginning Sounds Pa/Cha/Sa,completed,17,14,13
+2025-11-25,Beginning Sounds Pa/Cha/Sa,introduction,27,19,18
+2025-11-25,Beginning Sounds Pa/Cha/Sa,mid_introduction,16,14,13
+2025-11-25,Beginning Sounds Pa/Cha/Sa,parent_poll,32,19,18
+2025-11-25,Beginning Sounds Pa/Cha/Sa,questions,17,14,13
+2025-11-25,Beginning Sounds Pa/Cha/Sa,rewards,16,14,13
+2025-11-25,Beginning Sounds Pa/Cha/Sa,started,29,20,19
+2025-11-25,Beginning Sounds Pa/Cha/Sa,validation,16,14,13
+2025-11-25,Beginning Sounds Sa/La/Va,completed,9,9,9
+2025-11-25,Beginning Sounds Sa/La/Va,introduction,17,15,17
+2025-11-25,Beginning Sounds Sa/La/Va,mid_introduction,10,10,10
+2025-11-25,Beginning Sounds Sa/La/Va,parent_poll,28,15,18
+2025-11-25,Beginning Sounds Sa/La/Va,questions,23,12,13
+2025-11-25,Beginning Sounds Sa/La/Va,rewards,10,10,10
+2025-11-25,Beginning Sounds Sa/La/Va,started,19,16,19
+2025-11-25,Beginning Sounds Sa/La/Va,validation,10,10,10
+2025-11-25,Beginning Sounds Ta/Va/Ga,completed,8,8,8
+2025-11-25,Beginning Sounds Ta/Va/Ga,introduction,15,13,14
+2025-11-25,Beginning Sounds Ta/Va/Ga,mid_introduction,5,5,5
+2025-11-25,Beginning Sounds Ta/Va/Ga,parent_poll,16,13,14
+2025-11-25,Beginning Sounds Ta/Va/Ga,questions,8,8,8
+2025-11-25,Beginning Sounds Ta/Va/Ga,rewards,5,5,5
+2025-11-25,Beginning Sounds Ta/Va/Ga,started,21,18,19
+2025-11-25,Beginning Sounds Ta/Va/Ga,validation,5,5,5
+2025-11-25,Color Blue,completed,41,40,40
+2025-11-25,Color Blue,introduction,47,45,45
+2025-11-25,Color Blue,mid_introduction,35,35,35
+2025-11-25,Color Blue,parent_poll,68,46,46
+2025-11-25,Color Blue,questions,38,38,38
+2025-11-25,Color Blue,rewards,35,35,35
+2025-11-25,Color Blue,started,49,46,46
+2025-11-25,Color Blue,validation,35,35,35
+2025-11-25,Color Red,completed,186,176,175
+2025-11-25,Color Red,introduction,232,208,204
+2025-11-25,Color Red,mid_introduction,169,163,162
+2025-11-25,Color Red,parent_poll,307,212,208
+2025-11-25,Color Red,questions,191,180,179
+2025-11-25,Color Red,rewards,157,151,150
+2025-11-25,Color Red,started,244,219,215
+2025-11-25,Color Red,validation,161,155,154
+2025-11-25,Color Yellow,completed,56,54,54
+2025-11-25,Color Yellow,introduction,66,62,62
+2025-11-25,Color Yellow,mid_introduction,44,44,44
+2025-11-25,Color Yellow,parent_poll,94,63,63
+2025-11-25,Color Yellow,questions,59,57,57
+2025-11-25,Color Yellow,rewards,42,42,42
+2025-11-25,Color Yellow,started,68,64,63
+2025-11-25,Color Yellow,validation,42,42,42
+2025-11-25,Emotion Identification,completed,11,10,10
+2025-11-25,Emotion Identification,introduction,16,14,13
+2025-11-25,Emotion Identification,mid_introduction,12,11,10
+2025-11-25,Emotion Identification,parent_poll,23,14,13
+2025-11-25,Emotion Identification,questions,12,11,10
+2025-11-25,Emotion Identification,rewards,11,10,10
+2025-11-25,Emotion Identification,started,17,15,14
+2025-11-25,Emotion Identification,validation,11,10,10
+2025-11-25,Identification of all emotions,completed,18,17,17
+2025-11-25,Identification of all emotions,introduction,28,24,24
+2025-11-25,Identification of all emotions,mid_introduction,17,16,16
+2025-11-25,Identification of all emotions,parent_poll,30,24,24
+2025-11-25,Identification of all emotions,questions,18,17,17
+2025-11-25,Identification of all emotions,rewards,16,16,16
+2025-11-25,Identification of all emotions,started,29,24,24
+2025-11-25,Identification of all emotions,validation,16,16,16
+2025-11-25,Numbers Comparison,completed,11,11,11
+2025-11-25,Numbers Comparison,introduction,20,18,18
+2025-11-25,Numbers Comparison,mid_introduction,11,11,11
+2025-11-25,Numbers Comparison,parent_poll,26,19,19
+2025-11-25,Numbers Comparison,questions,12,12,12
+2025-11-25,Numbers Comparison,rewards,10,10,10
+2025-11-25,Numbers Comparison,started,22,20,20
+2025-11-25,Numbers Comparison,validation,11,11,11
+2025-11-25,Numbers I,completed,66,64,64
+2025-11-25,Numbers I,introduction,75,70,69
+2025-11-25,Numbers I,mid_introduction,61,59,59
+2025-11-25,Numbers I,parent_poll,103,70,69
+2025-11-25,Numbers I,questions,68,65,65
+2025-11-25,Numbers I,rewards,59,57,57
+2025-11-25,Numbers I,started,76,71,70
+2025-11-25,Numbers I,validation,61,59,59
+2025-11-25,Numbers II,completed,58,55,55
+2025-11-25,Numbers II,introduction,61,58,58
+2025-11-25,Numbers II,mid_introduction,51,49,49
+2025-11-25,Numbers II,parent_poll,88,58,58
+2025-11-25,Numbers II,questions,57,55,55
+2025-11-25,Numbers II,rewards,51,49,49
+2025-11-25,Numbers II,started,65,61,61
+2025-11-25,Numbers II,validation,51,49,49
+2025-11-25,Numerals 1-10,completed,12,12,12
+2025-11-25,Numerals 1-10,introduction,19,17,17
+2025-11-25,Numerals 1-10,mid_introduction,16,16,16
+2025-11-25,Numerals 1-10,parent_poll,27,20,20
+2025-11-25,Numerals 1-10,questions,15,15,15
+2025-11-25,Numerals 1-10,rewards,15,15,15
+2025-11-25,Numerals 1-10,started,28,24,22
+2025-11-25,Numerals 1-10,validation,15,15,15
+2025-11-25,Positions,completed,42,41,40
+2025-11-25,Positions,introduction,60,51,50
+2025-11-25,Positions,mid_introduction,42,40,39
+2025-11-25,Positions,parent_poll,82,54,53
+2025-11-25,Positions,questions,43,41,40
+2025-11-25,Positions,rewards,41,40,39
+2025-11-25,Positions,started,96,84,77
+2025-11-25,Positions,validation,41,40,39
+2025-11-25,Primary Emotion Labelling,completed,23,22,21
+2025-11-25,Primary Emotion Labelling,introduction,27,25,24
+2025-11-25,Primary Emotion Labelling,mid_introduction,23,21,20
+2025-11-25,Primary Emotion Labelling,parent_poll,37,25,24
+2025-11-25,Primary Emotion Labelling,questions,24,22,21
+2025-11-25,Primary Emotion Labelling,rewards,22,21,20
+2025-11-25,Primary Emotion Labelling,started,28,26,25
+2025-11-25,Primary Emotion Labelling,validation,22,21,20
+2025-11-25,Quantitative Comparison,completed,42,36,35
+2025-11-25,Quantitative Comparison,introduction,47,43,42
+2025-11-25,Quantitative Comparison,mid_introduction,36,33,32
+2025-11-25,Quantitative Comparison,parent_poll,73,43,42
+2025-11-25,Quantitative Comparison,questions,41,37,36
+2025-11-25,Quantitative Comparison,rewards,35,32,31
+2025-11-25,Quantitative Comparison,started,50,44,42
+2025-11-25,Quantitative Comparison,validation,36,33,32
+2025-11-25,Relational Comparison,completed,52,46,46
+2025-11-25,Relational Comparison,introduction,55,48,48
+2025-11-25,Relational Comparison,mid_introduction,37,37,37
+2025-11-25,Relational Comparison,parent_poll,80,50,50
+2025-11-25,Relational Comparison,questions,48,45,45
+2025-11-25,Relational Comparison,rewards,37,37,37
+2025-11-25,Relational Comparison,started,58,50,50
+2025-11-25,Relational Comparison,validation,37,37,37
+2025-11-25,Relational Comparison II,completed,14,14,14
+2025-11-25,Relational Comparison II,introduction,20,19,19
+2025-11-25,Relational Comparison II,mid_introduction,11,11,11
+2025-11-25,Relational Comparison II,parent_poll,26,19,19
+2025-11-25,Relational Comparison II,questions,14,14,14
+2025-11-25,Relational Comparison II,rewards,10,10,10
+2025-11-25,Relational Comparison II,started,21,20,20
+2025-11-25,Relational Comparison II,validation,10,10,10
+2025-11-25,Revision Colors,completed,19,18,18
+2025-11-25,Revision Colors,introduction,21,20,20
+2025-11-25,Revision Colors,mid_introduction,17,16,16
+2025-11-25,Revision Colors,parent_poll,29,21,21
+2025-11-25,Revision Colors,questions,17,16,16
+2025-11-25,Revision Colors,rewards,17,16,16
+2025-11-25,Revision Colors,started,23,22,22
+2025-11-25,Revision Colors,validation,17,16,16
+2025-11-25,Revision Shapes,completed,9,9,9
+2025-11-25,Revision Shapes,introduction,16,15,15
+2025-11-25,Revision Shapes,mid_introduction,10,10,10
+2025-11-25,Revision Shapes,parent_poll,22,16,16
+2025-11-25,Revision Shapes,questions,10,10,10
+2025-11-25,Revision Shapes,rewards,9,9,9
+2025-11-25,Revision Shapes,started,17,16,16
+2025-11-25,Revision Shapes,validation,9,9,9
+2025-11-25,Rhyming Words,completed,26,24,24
+2025-11-25,Rhyming Words,introduction,30,28,28
+2025-11-25,Rhyming Words,mid_introduction,20,20,20
+2025-11-25,Rhyming Words,parent_poll,40,29,29
+2025-11-25,Rhyming Words,questions,26,24,24
+2025-11-25,Rhyming Words,rewards,19,19,19
+2025-11-25,Rhyming Words,started,35,33,33
+2025-11-25,Rhyming Words,validation,20,20,20
+2025-11-25,Shape Circle,completed,439,382,375
+2025-11-25,Shape Circle,introduction,523,438,428
+2025-11-25,Shape Circle,mid_introduction,374,337,333
+2025-11-25,Shape Circle,parent_poll,686,453,442
+2025-11-25,Shape Circle,questions,440,385,379
+2025-11-25,Shape Circle,rewards,360,323,319
+2025-11-25,Shape Circle,started,552,460,449
+2025-11-25,Shape Circle,validation,364,327,323
+2025-11-25,Shape Rectangle,completed,8,8,7
+2025-11-25,Shape Rectangle,introduction,11,11,10
+2025-11-25,Shape Rectangle,mid_introduction,9,9,8
+2025-11-25,Shape Rectangle,parent_poll,17,11,10
+2025-11-25,Shape Rectangle,questions,9,9,8
+2025-11-25,Shape Rectangle,rewards,8,8,7
+2025-11-25,Shape Rectangle,started,11,11,10
+2025-11-25,Shape Rectangle,validation,8,8,7
+2025-11-25,Shape Square,completed,22,21,21
+2025-11-25,Shape Square,introduction,26,25,25
+2025-11-25,Shape Square,mid_introduction,21,20,20
+2025-11-25,Shape Square,parent_poll,39,25,25
+2025-11-25,Shape Square,questions,22,21,21
+2025-11-25,Shape Square,rewards,21,20,20
+2025-11-25,Shape Square,started,27,26,26
+2025-11-25,Shape Square,validation,21,20,20
+2025-11-25,Shape Triangle,completed,83,77,77
+2025-11-25,Shape Triangle,introduction,100,91,91
+2025-11-25,Shape Triangle,mid_introduction,73,70,70
+2025-11-25,Shape Triangle,parent_poll,129,92,92
+2025-11-25,Shape Triangle,questions,83,78,78
+2025-11-25,Shape Triangle,rewards,67,64,64
+2025-11-25,Shape Triangle,started,103,94,94
+2025-11-25,Shape Triangle,validation,71,68,68
+2025-11-25,Sorting Primary Colors,completed,22,20,20
+2025-11-25,Sorting Primary Colors,introduction,35,29,28
+2025-11-25,Sorting Primary Colors,mid_introduction,21,20,19
+2025-11-25,Sorting Primary Colors,parent_poll,40,29,28
+2025-11-25,Sorting Primary Colors,questions,25,23,22
+2025-11-25,Sorting Primary Colors,rewards,16,15,15
+2025-11-25,Sorting Primary Colors,started,35,29,28
+2025-11-25,Sorting Primary Colors,validation,17,16,16
+2025-11-25,Sorting Primary Shapes,completed,12,9,9
+2025-11-25,Sorting Primary Shapes,introduction,18,13,12
+2025-11-25,Sorting Primary Shapes,mid_introduction,8,7,7
+2025-11-25,Sorting Primary Shapes,parent_poll,23,15,14
+2025-11-25,Sorting Primary Shapes,questions,12,9,9
+2025-11-25,Sorting Primary Shapes,rewards,8,7,7
+2025-11-25,Sorting Primary Shapes,started,21,16,15
+2025-11-25,Sorting Primary Shapes,validation,8,7,7
+2025-11-26,Beginning Sound Ba/Ra/Na,completed,8,8,8
+2025-11-26,Beginning Sound Ba/Ra/Na,introduction,9,9,9
+2025-11-26,Beginning Sound Ba/Ra/Na,mid_introduction,7,7,7
+2025-11-26,Beginning Sound Ba/Ra/Na,parent_poll,21,9,9
+2025-11-26,Beginning Sound Ba/Ra/Na,questions,7,7,7
+2025-11-26,Beginning Sound Ba/Ra/Na,rewards,7,7,7
+2025-11-26,Beginning Sound Ba/Ra/Na,started,11,11,11
+2025-11-26,Beginning Sound Ba/Ra/Na,validation,7,7,7
+2025-11-26,Beginning Sounds Ka/Na/Ta,completed,33,32,32
+2025-11-26,Beginning Sounds Ka/Na/Ta,introduction,78,70,70
+2025-11-26,Beginning Sounds Ka/Na/Ta,mid_introduction,44,44,44
+2025-11-26,Beginning Sounds Ka/Na/Ta,parent_poll,102,79,79
+2025-11-26,Beginning Sounds Ka/Na/Ta,questions,47,47,47
+2025-11-26,Beginning Sounds Ka/Na/Ta,rewards,32,32,32
+2025-11-26,Beginning Sounds Ka/Na/Ta,started,111,98,98
+2025-11-26,Beginning Sounds Ka/Na/Ta,validation,37,37,37
+2025-11-26,Beginning Sounds Ma/Cha/Ba,completed,174,173,171
+2025-11-26,Beginning Sounds Ma/Cha/Ba,introduction,361,316,314
+2025-11-26,Beginning Sounds Ma/Cha/Ba,mid_introduction,197,188,188
+2025-11-26,Beginning Sounds Ma/Cha/Ba,parent_poll,458,343,340
+2025-11-26,Beginning Sounds Ma/Cha/Ba,questions,208,197,196
+2025-11-26,Beginning Sounds Ma/Cha/Ba,rewards,162,160,160
+2025-11-26,Beginning Sounds Ma/Cha/Ba,started,438,378,373
+2025-11-26,Beginning Sounds Ma/Cha/Ba,validation,175,171,171
+2025-11-26,Beginning Sounds Ma/Ka/La,completed,26,25,25
+2025-11-26,Beginning Sounds Ma/Ka/La,introduction,35,34,34
+2025-11-26,Beginning Sounds Ma/Ka/La,mid_introduction,20,20,20
+2025-11-26,Beginning Sounds Ma/Ka/La,parent_poll,47,36,36
+2025-11-26,Beginning Sounds Ma/Ka/La,questions,24,24,24
+2025-11-26,Beginning Sounds Ma/Ka/La,rewards,20,19,19
+2025-11-26,Beginning Sounds Ma/Ka/La,started,49,48,48
+2025-11-26,Beginning Sounds Ma/Ka/La,validation,20,20,20
+2025-11-26,Beginning Sounds Pa/Cha/Sa,completed,18,17,17
+2025-11-26,Beginning Sounds Pa/Cha/Sa,introduction,38,28,24
+2025-11-26,Beginning Sounds Pa/Cha/Sa,mid_introduction,17,16,15
+2025-11-26,Beginning Sounds Pa/Cha/Sa,parent_poll,48,27,23
+2025-11-26,Beginning Sounds Pa/Cha/Sa,questions,20,19,18
+2025-11-26,Beginning Sounds Pa/Cha/Sa,rewards,15,14,14
+2025-11-26,Beginning Sounds Pa/Cha/Sa,started,44,31,27
+2025-11-26,Beginning Sounds Pa/Cha/Sa,validation,16,15,15
+2025-11-26,Beginning Sounds Sa/La/Va,completed,1955,1929,1921
+2025-11-26,Beginning Sounds Sa/La/Va,introduction,4253,3639,3670
+2025-11-26,Beginning Sounds Sa/La/Va,mid_introduction,2489,2477,2473
+2025-11-26,Beginning Sounds Sa/La/Va,parent_poll,5694,3768,3794
+2025-11-26,Beginning Sounds Sa/La/Va,questions,5587,2934,2923
+2025-11-26,Beginning Sounds Sa/La/Va,rewards,2320,2310,2307
+2025-11-26,Beginning Sounds Sa/La/Va,started,4674,3905,3924
+2025-11-26,Beginning Sounds Sa/La/Va,validation,2415,2405,2401
+2025-11-26,Beginning Sounds Ta/Va/Ga,completed,5,5,5
+2025-11-26,Beginning Sounds Ta/Va/Ga,introduction,7,7,7
+2025-11-26,Beginning Sounds Ta/Va/Ga,mid_introduction,4,4,4
+2025-11-26,Beginning Sounds Ta/Va/Ga,parent_poll,8,7,7
+2025-11-26,Beginning Sounds Ta/Va/Ga,questions,6,5,5
+2025-11-26,Beginning Sounds Ta/Va/Ga,rewards,4,4,4
+2025-11-26,Beginning Sounds Ta/Va/Ga,started,8,8,8
+2025-11-26,Beginning Sounds Ta/Va/Ga,validation,4,4,4
+2025-11-26,Color Blue,completed,36,34,34
+2025-11-26,Color Blue,introduction,43,40,40
+2025-11-26,Color Blue,mid_introduction,33,33,33
+2025-11-26,Color Blue,parent_poll,55,40,40
+2025-11-26,Color Blue,questions,36,35,35
+2025-11-26,Color Blue,rewards,32,32,32
+2025-11-26,Color Blue,started,44,40,40
+2025-11-26,Color Blue,validation,31,31,31
+2025-11-26,Color Red,completed,218,207,206
+2025-11-26,Color Red,introduction,267,244,238
+2025-11-26,Color Red,mid_introduction,177,174,173
+2025-11-26,Color Red,parent_poll,344,254,248
+2025-11-26,Color Red,questions,220,207,206
+2025-11-26,Color Red,rewards,167,164,163
+2025-11-26,Color Red,started,286,261,255
+2025-11-26,Color Red,validation,173,170,169
+2025-11-26,Color Yellow,completed,46,43,43
+2025-11-26,Color Yellow,introduction,51,47,47
+2025-11-26,Color Yellow,mid_introduction,38,38,38
+2025-11-26,Color Yellow,parent_poll,76,49,49
+2025-11-26,Color Yellow,questions,45,42,42
+2025-11-26,Color Yellow,rewards,36,36,36
+2025-11-26,Color Yellow,started,56,49,49
+2025-11-26,Color Yellow,validation,38,38,38
+2025-11-26,Emotion Identification,completed,12,12,12
+2025-11-26,Emotion Identification,introduction,12,12,12
+2025-11-26,Emotion Identification,mid_introduction,12,12,12
+2025-11-26,Emotion Identification,parent_poll,16,12,12
+2025-11-26,Emotion Identification,questions,12,12,12
+2025-11-26,Emotion Identification,rewards,12,12,12
+2025-11-26,Emotion Identification,started,13,13,13
+2025-11-26,Emotion Identification,validation,12,12,12
+2025-11-26,Identification of all emotions,completed,21,21,21
+2025-11-26,Identification of all emotions,introduction,23,23,23
+2025-11-26,Identification of all emotions,mid_introduction,21,21,21
+2025-11-26,Identification of all emotions,parent_poll,31,23,23
+2025-11-26,Identification of all emotions,questions,23,23,23
+2025-11-26,Identification of all emotions,rewards,19,19,19
+2025-11-26,Identification of all emotions,started,23,23,23
+2025-11-26,Identification of all emotions,validation,20,20,20
+2025-11-26,Numbers Comparison,completed,24,23,23
+2025-11-26,Numbers Comparison,introduction,31,29,29
+2025-11-26,Numbers Comparison,mid_introduction,23,23,23
+2025-11-26,Numbers Comparison,parent_poll,42,29,29
+2025-11-26,Numbers Comparison,questions,26,26,26
+2025-11-26,Numbers Comparison,rewards,20,20,20
+2025-11-26,Numbers Comparison,started,32,30,30
+2025-11-26,Numbers Comparison,validation,23,23,23
+2025-11-26,Numbers I,completed,89,85,85
+2025-11-26,Numbers I,introduction,106,99,97
+2025-11-26,Numbers I,mid_introduction,76,74,74
+2025-11-26,Numbers I,parent_poll,140,102,100
+2025-11-26,Numbers I,questions,90,87,87
+2025-11-26,Numbers I,rewards,73,71,71
+2025-11-26,Numbers I,started,110,103,101
+2025-11-26,Numbers I,validation,75,73,73
+2025-11-26,Numbers II,completed,49,47,47
+2025-11-26,Numbers II,introduction,56,54,54
+2025-11-26,Numbers II,mid_introduction,45,44,44
+2025-11-26,Numbers II,parent_poll,86,56,56
+2025-11-26,Numbers II,questions,51,50,50
+2025-11-26,Numbers II,rewards,41,40,40
+2025-11-26,Numbers II,started,64,61,61
+2025-11-26,Numbers II,validation,43,42,42
+2025-11-26,Numerals 1-10,completed,11,11,11
+2025-11-26,Numerals 1-10,introduction,13,13,12
+2025-11-26,Numerals 1-10,mid_introduction,8,8,8
+2025-11-26,Numerals 1-10,parent_poll,20,16,15
+2025-11-26,Numerals 1-10,questions,13,13,13
+2025-11-26,Numerals 1-10,rewards,8,8,8
+2025-11-26,Numerals 1-10,started,16,16,15
+2025-11-26,Numerals 1-10,validation,8,8,8
+2025-11-26,Positions,completed,36,33,33
+2025-11-26,Positions,introduction,45,42,41
+2025-11-26,Positions,mid_introduction,32,30,30
+2025-11-26,Positions,parent_poll,58,42,41
+2025-11-26,Positions,questions,35,33,33
+2025-11-26,Positions,rewards,31,29,29
+2025-11-26,Positions,started,66,62,61
+2025-11-26,Positions,validation,32,30,30
+2025-11-26,Primary Emotion Labelling,completed,18,17,17
+2025-11-26,Primary Emotion Labelling,introduction,35,30,29
+2025-11-26,Primary Emotion Labelling,mid_introduction,18,18,18
+2025-11-26,Primary Emotion Labelling,parent_poll,45,30,29
+2025-11-26,Primary Emotion Labelling,questions,19,18,18
+2025-11-26,Primary Emotion Labelling,rewards,18,18,18
+2025-11-26,Primary Emotion Labelling,started,56,30,29
+2025-11-26,Primary Emotion Labelling,validation,18,18,18
+2025-11-26,Quantitative Comparison,completed,34,32,32
+2025-11-26,Quantitative Comparison,introduction,40,35,35
+2025-11-26,Quantitative Comparison,mid_introduction,29,28,28
+2025-11-26,Quantitative Comparison,parent_poll,47,35,35
+2025-11-26,Quantitative Comparison,questions,34,32,32
+2025-11-26,Quantitative Comparison,rewards,28,27,27
+2025-11-26,Quantitative Comparison,started,41,36,36
+2025-11-26,Quantitative Comparison,validation,29,28,28
+2025-11-26,Relational Comparison,completed,33,30,30
+2025-11-26,Relational Comparison,introduction,39,34,34
+2025-11-26,Relational Comparison,mid_introduction,31,29,29
+2025-11-26,Relational Comparison,parent_poll,56,35,35
+2025-11-26,Relational Comparison,questions,35,32,32
+2025-11-26,Relational Comparison,rewards,30,28,28
+2025-11-26,Relational Comparison,started,42,35,35
+2025-11-26,Relational Comparison,validation,31,29,29
+2025-11-26,Relational Comparison II,completed,17,17,17
+2025-11-26,Relational Comparison II,introduction,21,21,21
+2025-11-26,Relational Comparison II,mid_introduction,16,16,16
+2025-11-26,Relational Comparison II,parent_poll,27,21,21
+2025-11-26,Relational Comparison II,questions,17,17,17
+2025-11-26,Relational Comparison II,rewards,16,16,16
+2025-11-26,Relational Comparison II,started,22,22,22
+2025-11-26,Relational Comparison II,validation,16,16,16
+2025-11-26,Revision Colors,completed,32,32,32
+2025-11-26,Revision Colors,introduction,42,40,38
+2025-11-26,Revision Colors,mid_introduction,30,30,30
+2025-11-26,Revision Colors,parent_poll,59,42,40
+2025-11-26,Revision Colors,questions,33,33,33
+2025-11-26,Revision Colors,rewards,28,28,28
+2025-11-26,Revision Colors,started,48,44,41
+2025-11-26,Revision Colors,validation,28,28,28
+2025-11-26,Revision Shapes,completed,11,10,10
+2025-11-26,Revision Shapes,introduction,14,12,12
+2025-11-26,Revision Shapes,mid_introduction,8,7,7
+2025-11-26,Revision Shapes,parent_poll,16,12,12
+2025-11-26,Revision Shapes,questions,11,10,10
+2025-11-26,Revision Shapes,rewards,8,7,7
+2025-11-26,Revision Shapes,started,14,12,12
+2025-11-26,Revision Shapes,validation,8,7,7
+2025-11-26,Rhyming Words,completed,34,32,32
+2025-11-26,Rhyming Words,introduction,45,41,41
+2025-11-26,Rhyming Words,mid_introduction,29,27,27
+2025-11-26,Rhyming Words,parent_poll,58,43,43
+2025-11-26,Rhyming Words,questions,32,30,30
+2025-11-26,Rhyming Words,rewards,27,25,25
+2025-11-26,Rhyming Words,started,50,46,46
+2025-11-26,Rhyming Words,validation,28,26,26
+2025-11-26,Shape Circle,completed,625,563,563
+2025-11-26,Shape Circle,introduction,725,628,623
+2025-11-26,Shape Circle,mid_introduction,535,503,503
+2025-11-26,Shape Circle,parent_poll,950,650,645
+2025-11-26,Shape Circle,questions,619,563,561
+2025-11-26,Shape Circle,rewards,505,476,476
+2025-11-26,Shape Circle,started,779,668,663
+2025-11-26,Shape Circle,validation,523,491,491
+2025-11-26,Shape Rectangle,completed,16,15,14
+2025-11-26,Shape Rectangle,introduction,21,19,18
+2025-11-26,Shape Rectangle,mid_introduction,16,15,14
+2025-11-26,Shape Rectangle,parent_poll,31,19,18
+2025-11-26,Shape Rectangle,questions,16,15,14
+2025-11-26,Shape Rectangle,rewards,15,14,13
+2025-11-26,Shape Rectangle,started,22,19,18
+2025-11-26,Shape Rectangle,validation,16,15,14
+2025-11-26,Shape Square,completed,27,27,27
+2025-11-26,Shape Square,introduction,32,31,31
+2025-11-26,Shape Square,mid_introduction,26,26,26
+2025-11-26,Shape Square,parent_poll,50,31,31
+2025-11-26,Shape Square,questions,27,27,27
+2025-11-26,Shape Square,rewards,26,26,26
+2025-11-26,Shape Square,started,32,31,31
+2025-11-26,Shape Square,validation,26,26,26
+2025-11-26,Shape Triangle,completed,83,76,76
+2025-11-26,Shape Triangle,introduction,96,87,87
+2025-11-26,Shape Triangle,mid_introduction,65,62,62
+2025-11-26,Shape Triangle,parent_poll,130,93,93
+2025-11-26,Shape Triangle,questions,80,72,72
+2025-11-26,Shape Triangle,rewards,61,59,59
+2025-11-26,Shape Triangle,started,104,94,94
+2025-11-26,Shape Triangle,validation,64,61,61
+2025-11-26,Sorting Primary Colors,completed,30,29,29
+2025-11-26,Sorting Primary Colors,introduction,40,36,36
+2025-11-26,Sorting Primary Colors,mid_introduction,30,29,29
+2025-11-26,Sorting Primary Colors,parent_poll,53,36,36
+2025-11-26,Sorting Primary Colors,questions,31,30,30
+2025-11-26,Sorting Primary Colors,rewards,29,28,28
+2025-11-26,Sorting Primary Colors,started,40,36,36
+2025-11-26,Sorting Primary Colors,validation,29,28,28
+2025-11-26,Sorting Primary Shapes,completed,7,6,6
+2025-11-26,Sorting Primary Shapes,introduction,22,13,13
+2025-11-26,Sorting Primary Shapes,mid_introduction,6,6,6
+2025-11-26,Sorting Primary Shapes,parent_poll,24,13,13
+2025-11-26,Sorting Primary Shapes,questions,19,8,9
+2025-11-26,Sorting Primary Shapes,rewards,3,3,3
+2025-11-26,Sorting Primary Shapes,started,25,14,13
+2025-11-26,Sorting Primary Shapes,validation,3,3,3
+2025-11-27,Beginning Sound Ba/Ra/Na,completed,5,5,5
+2025-11-27,Beginning Sound Ba/Ra/Na,introduction,8,8,7
+2025-11-27,Beginning Sound Ba/Ra/Na,mid_introduction,6,6,6
+2025-11-27,Beginning Sound Ba/Ra/Na,parent_poll,19,8,7
+2025-11-27,Beginning Sound Ba/Ra/Na,questions,6,6,6
+2025-11-27,Beginning Sound Ba/Ra/Na,rewards,5,5,5
+2025-11-27,Beginning Sound Ba/Ra/Na,started,11,11,10
+2025-11-27,Beginning Sound Ba/Ra/Na,validation,6,6,6
+2025-11-27,Beginning Sounds Ka/Na/Ta,completed,17,17,17
+2025-11-27,Beginning Sounds Ka/Na/Ta,introduction,53,48,48
+2025-11-27,Beginning Sounds Ka/Na/Ta,mid_introduction,28,28,28
+2025-11-27,Beginning Sounds Ka/Na/Ta,parent_poll,66,50,50
+2025-11-27,Beginning Sounds Ka/Na/Ta,questions,30,30,30
+2025-11-27,Beginning Sounds Ka/Na/Ta,rewards,24,24,24
+2025-11-27,Beginning Sounds Ka/Na/Ta,started,70,62,58
+2025-11-27,Beginning Sounds Ka/Na/Ta,validation,27,27,27
+2025-11-27,Beginning Sounds Ma/Cha/Ba,completed,59,57,57
+2025-11-27,Beginning Sounds Ma/Cha/Ba,introduction,122,111,109
+2025-11-27,Beginning Sounds Ma/Cha/Ba,mid_introduction,59,59,58
+2025-11-27,Beginning Sounds Ma/Cha/Ba,parent_poll,161,125,123
+2025-11-27,Beginning Sounds Ma/Cha/Ba,questions,65,64,63
+2025-11-27,Beginning Sounds Ma/Cha/Ba,rewards,49,49,48
+2025-11-27,Beginning Sounds Ma/Cha/Ba,started,161,149,146
+2025-11-27,Beginning Sounds Ma/Cha/Ba,validation,52,52,51
+2025-11-27,Beginning Sounds Ma/Ka/La,completed,28,25,25
+2025-11-27,Beginning Sounds Ma/Ka/La,introduction,35,29,26
+2025-11-27,Beginning Sounds Ma/Ka/La,mid_introduction,27,24,24
+2025-11-27,Beginning Sounds Ma/Ka/La,parent_poll,48,31,27
+2025-11-27,Beginning Sounds Ma/Ka/La,questions,28,24,24
+2025-11-27,Beginning Sounds Ma/Ka/La,rewards,26,24,24
+2025-11-27,Beginning Sounds Ma/Ka/La,started,50,39,35
+2025-11-27,Beginning Sounds Ma/Ka/La,validation,27,24,24
+2025-11-27,Beginning Sounds Pa/Cha/Sa,completed,7,6,6
+2025-11-27,Beginning Sounds Pa/Cha/Sa,introduction,11,10,10
+2025-11-27,Beginning Sounds Pa/Cha/Sa,mid_introduction,7,7,7
+2025-11-27,Beginning Sounds Pa/Cha/Sa,parent_poll,14,10,10
+2025-11-27,Beginning Sounds Pa/Cha/Sa,questions,7,7,7
+2025-11-27,Beginning Sounds Pa/Cha/Sa,rewards,6,6,6
+2025-11-27,Beginning Sounds Pa/Cha/Sa,started,15,13,13
+2025-11-27,Beginning Sounds Pa/Cha/Sa,validation,6,6,6
+2025-11-27,Beginning Sounds Sa/La/Va,completed,775,762,758
+2025-11-27,Beginning Sounds Sa/La/Va,introduction,1813,1625,1599
+2025-11-27,Beginning Sounds Sa/La/Va,mid_introduction,997,996,994
+2025-11-27,Beginning Sounds Sa/La/Va,parent_poll,2365,1709,1674
+2025-11-27,Beginning Sounds Sa/La/Va,questions,2311,1252,1237
+2025-11-27,Beginning Sounds Sa/La/Va,rewards,892,891,889
+2025-11-27,Beginning Sounds Sa/La/Va,started,2015,1763,1728
+2025-11-27,Beginning Sounds Sa/La/Va,validation,950,949,947
+2025-11-27,Beginning Sounds Ta/Va/Ga,completed,1,1,1
+2025-11-27,Beginning Sounds Ta/Va/Ga,introduction,5,5,5
+2025-11-27,Beginning Sounds Ta/Va/Ga,mid_introduction,1,1,1
+2025-11-27,Beginning Sounds Ta/Va/Ga,parent_poll,6,5,5
+2025-11-27,Beginning Sounds Ta/Va/Ga,questions,1,1,1
+2025-11-27,Beginning Sounds Ta/Va/Ga,rewards,1,1,1
+2025-11-27,Beginning Sounds Ta/Va/Ga,started,7,6,6
+2025-11-27,Beginning Sounds Ta/Va/Ga,validation,1,1,1
+2025-11-27,Color Blue,completed,29,27,27
+2025-11-27,Color Blue,introduction,33,31,31
+2025-11-27,Color Blue,mid_introduction,26,25,25
+2025-11-27,Color Blue,parent_poll,48,31,31
+2025-11-27,Color Blue,questions,30,28,28
+2025-11-27,Color Blue,rewards,25,24,24
+2025-11-27,Color Blue,started,33,31,31
+2025-11-27,Color Blue,validation,26,25,25
+2025-11-27,Color Red,completed,173,150,146
+2025-11-27,Color Red,introduction,198,171,165
+2025-11-27,Color Red,mid_introduction,148,134,132
+2025-11-27,Color Red,parent_poll,262,174,168
+2025-11-27,Color Red,questions,170,150,146
+2025-11-27,Color Red,rewards,139,127,125
+2025-11-27,Color Red,started,211,182,176
+2025-11-27,Color Red,validation,143,130,128
+2025-11-27,Color Yellow,completed,31,30,29
+2025-11-27,Color Yellow,introduction,40,37,35
+2025-11-27,Color Yellow,mid_introduction,28,28,27
+2025-11-27,Color Yellow,parent_poll,56,37,35
+2025-11-27,Color Yellow,questions,31,30,29
+2025-11-27,Color Yellow,rewards,27,27,26
+2025-11-27,Color Yellow,started,39,37,35
+2025-11-27,Color Yellow,validation,28,28,27
+2025-11-27,Emotion Identification,completed,10,10,10
+2025-11-27,Emotion Identification,introduction,16,15,15
+2025-11-27,Emotion Identification,mid_introduction,12,12,12
+2025-11-27,Emotion Identification,parent_poll,23,15,15
+2025-11-27,Emotion Identification,questions,12,12,12
+2025-11-27,Emotion Identification,rewards,10,10,10
+2025-11-27,Emotion Identification,started,21,19,19
+2025-11-27,Emotion Identification,validation,10,10,10
+2025-11-27,Identification of all emotions,completed,14,12,12
+2025-11-27,Identification of all emotions,introduction,18,16,16
+2025-11-27,Identification of all emotions,mid_introduction,11,11,11
+2025-11-27,Identification of all emotions,parent_poll,24,17,17
+2025-11-27,Identification of all emotions,questions,13,11,11
+2025-11-27,Identification of all emotions,rewards,11,11,11
+2025-11-27,Identification of all emotions,started,19,17,17
+2025-11-27,Identification of all emotions,validation,11,11,11
+2025-11-27,Numbers Comparison,completed,13,13,13
+2025-11-27,Numbers Comparison,introduction,17,17,17
+2025-11-27,Numbers Comparison,mid_introduction,13,13,13
+2025-11-27,Numbers Comparison,parent_poll,26,18,18
+2025-11-27,Numbers Comparison,questions,13,13,13
+2025-11-27,Numbers Comparison,rewards,12,12,12
+2025-11-27,Numbers Comparison,started,19,19,19
+2025-11-27,Numbers Comparison,validation,13,13,13
+2025-11-27,Numbers I,completed,61,58,57
+2025-11-27,Numbers I,introduction,76,65,64
+2025-11-27,Numbers I,mid_introduction,53,51,50
+2025-11-27,Numbers I,parent_poll,107,65,64
+2025-11-27,Numbers I,questions,60,57,56
+2025-11-27,Numbers I,rewards,52,50,49
+2025-11-27,Numbers I,started,78,66,65
+2025-11-27,Numbers I,validation,53,51,50
+2025-11-27,Numbers II,completed,36,30,30
+2025-11-27,Numbers II,introduction,39,32,32
+2025-11-27,Numbers II,mid_introduction,29,27,27
+2025-11-27,Numbers II,parent_poll,49,32,32
+2025-11-27,Numbers II,questions,35,29,29
+2025-11-27,Numbers II,rewards,28,26,26
+2025-11-27,Numbers II,started,41,32,32
+2025-11-27,Numbers II,validation,28,26,26
+2025-11-27,Numerals 1-10,completed,10,9,9
+2025-11-27,Numerals 1-10,introduction,18,17,16
+2025-11-27,Numerals 1-10,mid_introduction,15,14,14
+2025-11-27,Numerals 1-10,parent_poll,31,17,16
+2025-11-27,Numerals 1-10,questions,16,15,14
+2025-11-27,Numerals 1-10,rewards,14,13,13
+2025-11-27,Numerals 1-10,started,22,19,18
+2025-11-27,Numerals 1-10,validation,15,14,14
+2025-11-27,Positions,completed,28,24,23
+2025-11-27,Positions,introduction,43,35,33
+2025-11-27,Positions,mid_introduction,28,25,24
+2025-11-27,Positions,parent_poll,53,36,34
+2025-11-27,Positions,questions,29,26,25
+2025-11-27,Positions,rewards,24,21,20
+2025-11-27,Positions,started,70,58,54
+2025-11-27,Positions,validation,25,22,21
+2025-11-27,Primary Emotion Labelling,completed,15,15,15
+2025-11-27,Primary Emotion Labelling,introduction,22,20,20
+2025-11-27,Primary Emotion Labelling,mid_introduction,13,13,13
+2025-11-27,Primary Emotion Labelling,parent_poll,30,20,20
+2025-11-27,Primary Emotion Labelling,questions,16,16,16
+2025-11-27,Primary Emotion Labelling,rewards,13,13,13
+2025-11-27,Primary Emotion Labelling,started,22,20,20
+2025-11-27,Primary Emotion Labelling,validation,13,13,13
+2025-11-27,Quantitative Comparison,completed,29,28,28
+2025-11-27,Quantitative Comparison,introduction,31,28,28
+2025-11-27,Quantitative Comparison,mid_introduction,27,26,26
+2025-11-27,Quantitative Comparison,parent_poll,43,29,29
+2025-11-27,Quantitative Comparison,questions,29,28,28
+2025-11-27,Quantitative Comparison,rewards,26,25,25
+2025-11-27,Quantitative Comparison,started,32,29,29
+2025-11-27,Quantitative Comparison,validation,27,26,26
+2025-11-27,Relational Comparison,completed,25,21,21
+2025-11-27,Relational Comparison,introduction,33,29,29
+2025-11-27,Relational Comparison,mid_introduction,20,18,18
+2025-11-27,Relational Comparison,parent_poll,46,30,30
+2025-11-27,Relational Comparison,questions,25,22,22
+2025-11-27,Relational Comparison,rewards,21,19,19
+2025-11-27,Relational Comparison,started,34,30,30
+2025-11-27,Relational Comparison,validation,21,19,19
+2025-11-27,Relational Comparison II,completed,9,8,8
+2025-11-27,Relational Comparison II,introduction,14,12,12
+2025-11-27,Relational Comparison II,mid_introduction,7,6,6
+2025-11-27,Relational Comparison II,parent_poll,17,14,14
+2025-11-27,Relational Comparison II,questions,8,7,7
+2025-11-27,Relational Comparison II,rewards,6,5,5
+2025-11-27,Relational Comparison II,started,17,15,15
+2025-11-27,Relational Comparison II,validation,7,6,6
+2025-11-27,Revision Colors,completed,29,28,28
+2025-11-27,Revision Colors,introduction,41,37,37
+2025-11-27,Revision Colors,mid_introduction,29,28,27
+2025-11-27,Revision Colors,parent_poll,55,37,37
+2025-11-27,Revision Colors,questions,33,32,31
+2025-11-27,Revision Colors,rewards,26,25,25
+2025-11-27,Revision Colors,started,43,38,37
+2025-11-27,Revision Colors,validation,28,27,26
+2025-11-27,Revision Shapes,completed,13,13,13
+2025-11-27,Revision Shapes,introduction,14,14,14
+2025-11-27,Revision Shapes,mid_introduction,12,12,12
+2025-11-27,Revision Shapes,parent_poll,18,14,14
+2025-11-27,Revision Shapes,questions,13,13,13
+2025-11-27,Revision Shapes,rewards,12,12,12
+2025-11-27,Revision Shapes,started,14,14,14
+2025-11-27,Revision Shapes,validation,12,12,12
+2025-11-27,Rhyming Words,completed,33,31,31
+2025-11-27,Rhyming Words,introduction,38,36,36
+2025-11-27,Rhyming Words,mid_introduction,26,25,25
+2025-11-27,Rhyming Words,parent_poll,51,36,36
+2025-11-27,Rhyming Words,questions,32,30,30
+2025-11-27,Rhyming Words,rewards,25,24,24
+2025-11-27,Rhyming Words,started,39,37,37
+2025-11-27,Rhyming Words,validation,26,25,25
+2025-11-27,Shape Circle,completed,372,309,307
+2025-11-27,Shape Circle,introduction,464,371,365
+2025-11-27,Shape Circle,mid_introduction,327,287,285
+2025-11-27,Shape Circle,parent_poll,601,382,375
+2025-11-27,Shape Circle,questions,374,313,311
+2025-11-27,Shape Circle,rewards,312,273,271
+2025-11-27,Shape Circle,started,493,387,380
+2025-11-27,Shape Circle,validation,324,285,283
+2025-11-27,Shape Rectangle,completed,5,5,5
+2025-11-27,Shape Rectangle,introduction,8,8,8
+2025-11-27,Shape Rectangle,mid_introduction,4,4,4
+2025-11-27,Shape Rectangle,parent_poll,9,8,8
+2025-11-27,Shape Rectangle,questions,5,5,5
+2025-11-27,Shape Rectangle,rewards,4,4,4
+2025-11-27,Shape Rectangle,started,9,8,8
+2025-11-27,Shape Rectangle,validation,4,4,4
+2025-11-27,Shape Square,completed,29,27,27
+2025-11-27,Shape Square,introduction,32,28,28
+2025-11-27,Shape Square,mid_introduction,25,23,23
+2025-11-27,Shape Square,parent_poll,45,28,28
+2025-11-27,Shape Square,questions,29,26,26
+2025-11-27,Shape Square,rewards,25,23,23
+2025-11-27,Shape Square,started,32,28,28
+2025-11-27,Shape Square,validation,25,23,23
+2025-11-27,Shape Triangle,completed,56,54,54
+2025-11-27,Shape Triangle,introduction,67,63,63
+2025-11-27,Shape Triangle,mid_introduction,51,50,50
+2025-11-27,Shape Triangle,parent_poll,97,66,66
+2025-11-27,Shape Triangle,questions,58,57,57
+2025-11-27,Shape Triangle,rewards,47,47,47
+2025-11-27,Shape Triangle,started,71,66,66
+2025-11-27,Shape Triangle,validation,49,49,49
+2025-11-27,Sorting Primary Colors,completed,24,21,21
+2025-11-27,Sorting Primary Colors,introduction,36,32,31
+2025-11-27,Sorting Primary Colors,mid_introduction,24,23,23
+2025-11-27,Sorting Primary Colors,parent_poll,43,33,32
+2025-11-27,Sorting Primary Colors,questions,25,24,24
+2025-11-27,Sorting Primary Colors,rewards,20,19,19
+2025-11-27,Sorting Primary Colors,started,38,33,32
+2025-11-27,Sorting Primary Colors,validation,22,21,21
+2025-11-27,Sorting Primary Shapes,completed,12,12,12
+2025-11-27,Sorting Primary Shapes,introduction,17,17,17
+2025-11-27,Sorting Primary Shapes,mid_introduction,12,12,12
+2025-11-27,Sorting Primary Shapes,parent_poll,24,17,17
+2025-11-27,Sorting Primary Shapes,questions,12,12,12
+2025-11-27,Sorting Primary Shapes,rewards,12,12,12
+2025-11-27,Sorting Primary Shapes,started,17,17,17
+2025-11-27,Sorting Primary Shapes,validation,12,12,12
+2025-11-28,Beginning Sound Ba/Ra/Na,completed,12,12,12
+2025-11-28,Beginning Sound Ba/Ra/Na,introduction,14,14,14
+2025-11-28,Beginning Sound Ba/Ra/Na,mid_introduction,9,9,9
+2025-11-28,Beginning Sound Ba/Ra/Na,parent_poll,30,14,14
+2025-11-28,Beginning Sound Ba/Ra/Na,questions,12,12,12
+2025-11-28,Beginning Sound Ba/Ra/Na,rewards,9,9,9
+2025-11-28,Beginning Sound Ba/Ra/Na,started,14,14,14
+2025-11-28,Beginning Sound Ba/Ra/Na,validation,9,9,9
+2025-11-28,Beginning Sounds Ka/Na/Ta,completed,11,10,10
+2025-11-28,Beginning Sounds Ka/Na/Ta,introduction,25,24,24
+2025-11-28,Beginning Sounds Ka/Na/Ta,mid_introduction,13,13,13
+2025-11-28,Beginning Sounds Ka/Na/Ta,parent_poll,34,29,29
+2025-11-28,Beginning Sounds Ka/Na/Ta,questions,13,13,13
+2025-11-28,Beginning Sounds Ka/Na/Ta,rewards,11,11,11
+2025-11-28,Beginning Sounds Ka/Na/Ta,started,39,36,34
+2025-11-28,Beginning Sounds Ka/Na/Ta,validation,11,11,11
+2025-11-28,Beginning Sounds Ma/Cha/Ba,completed,51,51,51
+2025-11-28,Beginning Sounds Ma/Cha/Ba,introduction,123,105,108
+2025-11-28,Beginning Sounds Ma/Cha/Ba,mid_introduction,59,59,59
+2025-11-28,Beginning Sounds Ma/Cha/Ba,parent_poll,152,109,112
+2025-11-28,Beginning Sounds Ma/Cha/Ba,questions,63,63,63
+2025-11-28,Beginning Sounds Ma/Cha/Ba,rewards,49,49,49
+2025-11-28,Beginning Sounds Ma/Cha/Ba,started,143,123,125
+2025-11-28,Beginning Sounds Ma/Cha/Ba,validation,58,58,58
+2025-11-28,Beginning Sounds Ma/Ka/La,completed,27,27,27
+2025-11-28,Beginning Sounds Ma/Ka/La,introduction,38,35,35
+2025-11-28,Beginning Sounds Ma/Ka/La,mid_introduction,27,27,27
+2025-11-28,Beginning Sounds Ma/Ka/La,parent_poll,53,38,38
+2025-11-28,Beginning Sounds Ma/Ka/La,questions,29,29,29
+2025-11-28,Beginning Sounds Ma/Ka/La,rewards,24,24,24
+2025-11-28,Beginning Sounds Ma/Ka/La,started,49,46,46
+2025-11-28,Beginning Sounds Ma/Ka/La,validation,26,26,26
+2025-11-28,Beginning Sounds Pa/Cha/Sa,completed,30,27,25
+2025-11-28,Beginning Sounds Pa/Cha/Sa,introduction,37,33,31
+2025-11-28,Beginning Sounds Pa/Cha/Sa,mid_introduction,25,23,21
+2025-11-28,Beginning Sounds Pa/Cha/Sa,parent_poll,49,34,32
+2025-11-28,Beginning Sounds Pa/Cha/Sa,questions,29,26,24
+2025-11-28,Beginning Sounds Pa/Cha/Sa,rewards,25,23,21
+2025-11-28,Beginning Sounds Pa/Cha/Sa,started,42,37,35
+2025-11-28,Beginning Sounds Pa/Cha/Sa,validation,25,23,21
+2025-11-28,Beginning Sounds Sa/La/Va,completed,1712,1617,1608
+2025-11-28,Beginning Sounds Sa/La/Va,introduction,3400,2929,2976
+2025-11-28,Beginning Sounds Sa/La/Va,mid_introduction,1750,1743,1742
+2025-11-28,Beginning Sounds Sa/La/Va,parent_poll,4673,3227,3269
+2025-11-28,Beginning Sounds Sa/La/Va,questions,4111,2222,2222
+2025-11-28,Beginning Sounds Sa/La/Va,rewards,1591,1587,1585
+2025-11-28,Beginning Sounds Sa/La/Va,started,4064,3384,3428
+2025-11-28,Beginning Sounds Sa/La/Va,validation,1680,1673,1672
+2025-11-28,Beginning Sounds Ta/Va/Ga,completed,3,2,2
+2025-11-28,Beginning Sounds Ta/Va/Ga,introduction,4,3,3
+2025-11-28,Beginning Sounds Ta/Va/Ga,mid_introduction,3,2,2
+2025-11-28,Beginning Sounds Ta/Va/Ga,parent_poll,4,3,3
+2025-11-28,Beginning Sounds Ta/Va/Ga,questions,3,2,2
+2025-11-28,Beginning Sounds Ta/Va/Ga,rewards,3,2,2
+2025-11-28,Beginning Sounds Ta/Va/Ga,started,4,3,3
+2025-11-28,Beginning Sounds Ta/Va/Ga,validation,3,2,2
+2025-11-28,Color Blue,completed,55,48,48
+2025-11-28,Color Blue,introduction,62,52,52
+2025-11-28,Color Blue,mid_introduction,48,43,43
+2025-11-28,Color Blue,parent_poll,86,52,52
+2025-11-28,Color Blue,questions,56,49,49
+2025-11-28,Color Blue,rewards,46,41,41
+2025-11-28,Color Blue,started,66,56,56
+2025-11-28,Color Blue,validation,46,41,41
+2025-11-28,Color Red,completed,383,354,353
+2025-11-28,Color Red,introduction,438,384,383
+2025-11-28,Color Red,mid_introduction,314,301,301
+2025-11-28,Color Red,parent_poll,585,395,393
+2025-11-28,Color Red,questions,381,351,351
+2025-11-28,Color Red,rewards,305,292,292
+2025-11-28,Color Red,started,462,401,399
+2025-11-28,Color Red,validation,310,297,297
+2025-11-28,Color Yellow,completed,64,59,59
+2025-11-28,Color Yellow,introduction,72,65,65
+2025-11-28,Color Yellow,mid_introduction,55,53,53
+2025-11-28,Color Yellow,parent_poll,100,66,66
+2025-11-28,Color Yellow,questions,66,61,61
+2025-11-28,Color Yellow,rewards,50,48,48
+2025-11-28,Color Yellow,started,74,67,67
+2025-11-28,Color Yellow,validation,51,49,49
+2025-11-28,Emotion Identification,completed,16,16,15
+2025-11-28,Emotion Identification,introduction,17,17,16
+2025-11-28,Emotion Identification,mid_introduction,14,14,13
+2025-11-28,Emotion Identification,parent_poll,25,18,17
+2025-11-28,Emotion Identification,questions,16,16,15
+2025-11-28,Emotion Identification,rewards,13,13,12
+2025-11-28,Emotion Identification,started,19,19,18
+2025-11-28,Emotion Identification,validation,14,14,13
+2025-11-28,Identification of all emotions,completed,32,27,27
+2025-11-28,Identification of all emotions,introduction,40,31,31
+2025-11-28,Identification of all emotions,mid_introduction,23,21,21
+2025-11-28,Identification of all emotions,parent_poll,57,32,32
+2025-11-28,Identification of all emotions,questions,30,26,26
+2025-11-28,Identification of all emotions,rewards,22,20,20
+2025-11-28,Identification of all emotions,started,44,34,34
+2025-11-28,Identification of all emotions,validation,23,21,21
+2025-11-28,Numbers Comparison,completed,31,29,29
+2025-11-28,Numbers Comparison,introduction,39,35,35
+2025-11-28,Numbers Comparison,mid_introduction,30,29,29
+2025-11-28,Numbers Comparison,parent_poll,57,35,35
+2025-11-28,Numbers Comparison,questions,32,31,31
+2025-11-28,Numbers Comparison,rewards,29,28,28
+2025-11-28,Numbers Comparison,started,40,35,35
+2025-11-28,Numbers Comparison,validation,29,28,28
+2025-11-28,Numbers I,completed,111,103,103
+2025-11-28,Numbers I,introduction,126,118,118
+2025-11-28,Numbers I,mid_introduction,105,101,101
+2025-11-28,Numbers I,parent_poll,186,121,121
+2025-11-28,Numbers I,questions,111,107,107
+2025-11-28,Numbers I,rewards,100,96,96
+2025-11-28,Numbers I,started,131,121,121
+2025-11-28,Numbers I,validation,104,100,100
+2025-11-28,Numbers II,completed,74,67,67
+2025-11-28,Numbers II,introduction,85,78,78
+2025-11-28,Numbers II,mid_introduction,67,65,65
+2025-11-28,Numbers II,parent_poll,123,81,81
+2025-11-28,Numbers II,questions,73,69,69
+2025-11-28,Numbers II,rewards,64,63,63
+2025-11-28,Numbers II,started,89,81,81
+2025-11-28,Numbers II,validation,67,65,65
+2025-11-28,Numerals 1-10,completed,15,15,15
+2025-11-28,Numerals 1-10,introduction,25,25,25
+2025-11-28,Numerals 1-10,mid_introduction,19,19,19
+2025-11-28,Numerals 1-10,parent_poll,33,25,25
+2025-11-28,Numerals 1-10,questions,21,21,21
+2025-11-28,Numerals 1-10,rewards,17,17,17
+2025-11-28,Numerals 1-10,started,26,26,26
+2025-11-28,Numerals 1-10,validation,18,18,18
+2025-11-28,Positions,completed,49,39,38
+2025-11-28,Positions,introduction,67,53,48
+2025-11-28,Positions,mid_introduction,50,41,40
+2025-11-28,Positions,parent_poll,84,55,50
+2025-11-28,Positions,questions,52,41,40
+2025-11-28,Positions,rewards,48,39,38
+2025-11-28,Positions,started,81,64,59
+2025-11-28,Positions,validation,49,40,39
+2025-11-28,Primary Emotion Labelling,completed,26,25,25
+2025-11-28,Primary Emotion Labelling,introduction,29,28,28
+2025-11-28,Primary Emotion Labelling,mid_introduction,24,23,23
+2025-11-28,Primary Emotion Labelling,parent_poll,41,29,29
+2025-11-28,Primary Emotion Labelling,questions,26,25,25
+2025-11-28,Primary Emotion Labelling,rewards,23,22,22
+2025-11-28,Primary Emotion Labelling,started,32,29,29
+2025-11-28,Primary Emotion Labelling,validation,24,23,23
+2025-11-28,Quantitative Comparison,completed,37,36,36
+2025-11-28,Quantitative Comparison,introduction,49,46,46
+2025-11-28,Quantitative Comparison,mid_introduction,38,36,36
+2025-11-28,Quantitative Comparison,parent_poll,70,48,48
+2025-11-28,Quantitative Comparison,questions,41,38,38
+2025-11-28,Quantitative Comparison,rewards,35,33,33
+2025-11-28,Quantitative Comparison,started,53,50,50
+2025-11-28,Quantitative Comparison,validation,37,35,35
+2025-11-28,Relational Comparison,completed,45,45,45
+2025-11-28,Relational Comparison,introduction,56,51,51
+2025-11-28,Relational Comparison,mid_introduction,41,41,41
+2025-11-28,Relational Comparison,parent_poll,83,53,53
+2025-11-28,Relational Comparison,questions,43,43,43
+2025-11-28,Relational Comparison,rewards,40,40,40
+2025-11-28,Relational Comparison,started,60,54,54
+2025-11-28,Relational Comparison,validation,41,41,41
+2025-11-28,Relational Comparison II,completed,34,34,34
+2025-11-28,Relational Comparison II,introduction,37,36,36
+2025-11-28,Relational Comparison II,mid_introduction,34,34,34
+2025-11-28,Relational Comparison II,parent_poll,58,37,37
+2025-11-28,Relational Comparison II,questions,34,34,34
+2025-11-28,Relational Comparison II,rewards,34,34,34
+2025-11-28,Relational Comparison II,started,40,39,39
+2025-11-28,Relational Comparison II,validation,34,34,34
+2025-11-28,Revision Colors,completed,23,22,22
+2025-11-28,Revision Colors,introduction,27,27,27
+2025-11-28,Revision Colors,mid_introduction,21,21,21
+2025-11-28,Revision Colors,parent_poll,40,29,29
+2025-11-28,Revision Colors,questions,22,22,22
+2025-11-28,Revision Colors,rewards,21,21,21
+2025-11-28,Revision Colors,started,30,29,29
+2025-11-28,Revision Colors,validation,21,21,21
+2025-11-28,Revision Shapes,completed,17,16,16
+2025-11-28,Revision Shapes,introduction,20,17,17
+2025-11-28,Revision Shapes,mid_introduction,17,16,16
+2025-11-28,Revision Shapes,parent_poll,26,17,17
+2025-11-28,Revision Shapes,questions,20,17,17
+2025-11-28,Revision Shapes,rewards,15,15,15
+2025-11-28,Revision Shapes,started,20,17,17
+2025-11-28,Revision Shapes,validation,15,15,15
+2025-11-28,Rhyming Words,completed,51,46,46
+2025-11-28,Rhyming Words,introduction,63,58,58
+2025-11-28,Rhyming Words,mid_introduction,43,42,42
+2025-11-28,Rhyming Words,parent_poll,84,59,59
+2025-11-28,Rhyming Words,questions,53,49,49
+2025-11-28,Rhyming Words,rewards,40,39,39
+2025-11-28,Rhyming Words,started,68,60,60
+2025-11-28,Rhyming Words,validation,40,39,39
+2025-11-28,Shape Circle,completed,1109,961,952
+2025-11-28,Shape Circle,introduction,1273,1064,1048
+2025-11-28,Shape Circle,mid_introduction,959,861,854
+2025-11-28,Shape Circle,parent_poll,1722,1091,1074
+2025-11-28,Shape Circle,questions,1112,962,954
+2025-11-28,Shape Circle,rewards,909,817,810
+2025-11-28,Shape Circle,started,1336,1109,1091
+2025-11-28,Shape Circle,validation,932,838,831
+2025-11-28,Shape Rectangle,completed,19,17,17
+2025-11-28,Shape Rectangle,introduction,23,20,20
+2025-11-28,Shape Rectangle,mid_introduction,16,15,15
+2025-11-28,Shape Rectangle,parent_poll,32,21,21
+2025-11-28,Shape Rectangle,questions,19,17,17
+2025-11-28,Shape Rectangle,rewards,15,14,14
+2025-11-28,Shape Rectangle,started,24,21,21
+2025-11-28,Shape Rectangle,validation,16,15,15
+2025-11-28,Shape Square,completed,23,23,23
+2025-11-28,Shape Square,introduction,26,26,26
+2025-11-28,Shape Square,mid_introduction,20,20,20
+2025-11-28,Shape Square,parent_poll,38,27,27
+2025-11-28,Shape Square,questions,23,23,23
+2025-11-28,Shape Square,rewards,19,19,19
+2025-11-28,Shape Square,started,27,27,27
+2025-11-28,Shape Square,validation,20,20,20
+2025-11-28,Shape Triangle,completed,96,91,90
+2025-11-28,Shape Triangle,introduction,121,108,108
+2025-11-28,Shape Triangle,mid_introduction,89,86,85
+2025-11-28,Shape Triangle,parent_poll,164,112,112
+2025-11-28,Shape Triangle,questions,102,96,96
+2025-11-28,Shape Triangle,rewards,84,81,81
+2025-11-28,Shape Triangle,started,128,114,114
+2025-11-28,Shape Triangle,validation,88,85,84
+2025-11-28,Sorting Primary Colors,completed,30,23,23
+2025-11-28,Sorting Primary Colors,introduction,39,31,31
+2025-11-28,Sorting Primary Colors,mid_introduction,29,26,26
+2025-11-28,Sorting Primary Colors,parent_poll,51,32,32
+2025-11-28,Sorting Primary Colors,questions,33,28,28
+2025-11-28,Sorting Primary Colors,rewards,24,21,21
+2025-11-28,Sorting Primary Colors,started,40,32,32
+2025-11-28,Sorting Primary Colors,validation,27,24,24
+2025-11-28,Sorting Primary Shapes,completed,16,16,16
+2025-11-28,Sorting Primary Shapes,introduction,19,18,18
+2025-11-28,Sorting Primary Shapes,mid_introduction,13,13,13
+2025-11-28,Sorting Primary Shapes,parent_poll,30,21,21
+2025-11-28,Sorting Primary Shapes,questions,14,14,14
+2025-11-28,Sorting Primary Shapes,rewards,12,12,12
+2025-11-28,Sorting Primary Shapes,started,23,22,22
+2025-11-28,Sorting Primary Shapes,validation,13,13,13
+2025-11-29,Beginning Sound Ba/Ra/Na,completed,11,10,10
+2025-11-29,Beginning Sound Ba/Ra/Na,introduction,14,11,11
+2025-11-29,Beginning Sound Ba/Ra/Na,mid_introduction,9,9,9
+2025-11-29,Beginning Sound Ba/Ra/Na,parent_poll,32,11,11
+2025-11-29,Beginning Sound Ba/Ra/Na,questions,11,10,10
+2025-11-29,Beginning Sound Ba/Ra/Na,rewards,9,9,9
+2025-11-29,Beginning Sound Ba/Ra/Na,started,16,13,13
+2025-11-29,Beginning Sound Ba/Ra/Na,validation,8,8,8
+2025-11-29,Beginning Sounds Ka/Na/Ta,completed,6,6,6
+2025-11-29,Beginning Sounds Ka/Na/Ta,introduction,10,10,10
+2025-11-29,Beginning Sounds Ka/Na/Ta,mid_introduction,7,7,7
+2025-11-29,Beginning Sounds Ka/Na/Ta,parent_poll,15,12,12
+2025-11-29,Beginning Sounds Ka/Na/Ta,questions,7,7,7
+2025-11-29,Beginning Sounds Ka/Na/Ta,rewards,6,6,6
+2025-11-29,Beginning Sounds Ka/Na/Ta,started,19,18,18
+2025-11-29,Beginning Sounds Ka/Na/Ta,validation,6,6,6
+2025-11-29,Beginning Sounds Ma/Cha/Ba,completed,53,50,51
+2025-11-29,Beginning Sounds Ma/Cha/Ba,introduction,109,90,95
+2025-11-29,Beginning Sounds Ma/Cha/Ba,mid_introduction,56,53,53
+2025-11-29,Beginning Sounds Ma/Cha/Ba,parent_poll,139,98,103
+2025-11-29,Beginning Sounds Ma/Cha/Ba,questions,64,58,58
+2025-11-29,Beginning Sounds Ma/Cha/Ba,rewards,49,47,47
+2025-11-29,Beginning Sounds Ma/Cha/Ba,started,145,124,128
+2025-11-29,Beginning Sounds Ma/Cha/Ba,validation,52,50,50
+2025-11-29,Beginning Sounds Ma/Ka/La,completed,35,32,32
+2025-11-29,Beginning Sounds Ma/Ka/La,introduction,47,41,40
+2025-11-29,Beginning Sounds Ma/Ka/La,mid_introduction,24,23,23
+2025-11-29,Beginning Sounds Ma/Ka/La,parent_poll,63,44,43
+2025-11-29,Beginning Sounds Ma/Ka/La,questions,34,32,32
+2025-11-29,Beginning Sounds Ma/Ka/La,rewards,23,22,22
+2025-11-29,Beginning Sounds Ma/Ka/La,started,59,52,49
+2025-11-29,Beginning Sounds Ma/Ka/La,validation,24,23,23
+2025-11-29,Beginning Sounds Pa/Cha/Sa,completed,20,19,19
+2025-11-29,Beginning Sounds Pa/Cha/Sa,introduction,31,29,29
+2025-11-29,Beginning Sounds Pa/Cha/Sa,mid_introduction,18,17,17
+2025-11-29,Beginning Sounds Pa/Cha/Sa,parent_poll,39,30,30
+2025-11-29,Beginning Sounds Pa/Cha/Sa,questions,22,21,21
+2025-11-29,Beginning Sounds Pa/Cha/Sa,rewards,16,15,15
+2025-11-29,Beginning Sounds Pa/Cha/Sa,started,37,34,34
+2025-11-29,Beginning Sounds Pa/Cha/Sa,validation,18,17,17
+2025-11-29,Beginning Sounds Sa/La/Va,completed,682,669,661
+2025-11-29,Beginning Sounds Sa/La/Va,introduction,1463,1318,1313
+2025-11-29,Beginning Sounds Sa/La/Va,mid_introduction,752,751,749
+2025-11-29,Beginning Sounds Sa/La/Va,parent_poll,1927,1432,1419
+2025-11-29,Beginning Sounds Sa/La/Va,questions,1775,979,970
+2025-11-29,Beginning Sounds Sa/La/Va,rewards,685,684,682
+2025-11-29,Beginning Sounds Sa/La/Va,started,1719,1513,1501
+2025-11-29,Beginning Sounds Sa/La/Va,validation,727,726,724
+2025-11-29,Beginning Sounds Ta/Va/Ga,completed,6,5,4
+2025-11-29,Beginning Sounds Ta/Va/Ga,introduction,5,5,4
+2025-11-29,Beginning Sounds Ta/Va/Ga,mid_introduction,2,2,2
+2025-11-29,Beginning Sounds Ta/Va/Ga,parent_poll,6,5,4
+2025-11-29,Beginning Sounds Ta/Va/Ga,questions,4,4,3
+2025-11-29,Beginning Sounds Ta/Va/Ga,rewards,2,2,2
+2025-11-29,Beginning Sounds Ta/Va/Ga,started,6,5,4
+2025-11-29,Beginning Sounds Ta/Va/Ga,validation,2,2,2
+2025-11-29,Color Blue,completed,51,49,49
+2025-11-29,Color Blue,introduction,58,53,53
+2025-11-29,Color Blue,mid_introduction,44,43,43
+2025-11-29,Color Blue,parent_poll,78,52,52
+2025-11-29,Color Blue,questions,52,50,50
+2025-11-29,Color Blue,rewards,43,42,42
+2025-11-29,Color Blue,started,58,53,53
+2025-11-29,Color Blue,validation,43,42,42
+2025-11-29,Color Red,completed,296,277,276
+2025-11-29,Color Red,introduction,357,321,318
+2025-11-29,Color Red,mid_introduction,255,247,247
+2025-11-29,Color Red,parent_poll,455,333,330
+2025-11-29,Color Red,questions,296,281,280
+2025-11-29,Color Red,rewards,244,237,237
+2025-11-29,Color Red,started,383,346,343
+2025-11-29,Color Red,validation,248,240,240
+2025-11-29,Color Yellow,completed,65,63,63
+2025-11-29,Color Yellow,introduction,75,74,74
+2025-11-29,Color Yellow,mid_introduction,60,60,60
+2025-11-29,Color Yellow,parent_poll,109,77,77
+2025-11-29,Color Yellow,questions,68,67,67
+2025-11-29,Color Yellow,rewards,59,59,59
+2025-11-29,Color Yellow,started,81,78,78
+2025-11-29,Color Yellow,validation,59,59,59
+2025-11-29,Emotion Identification,completed,16,15,15
+2025-11-29,Emotion Identification,introduction,25,22,22
+2025-11-29,Emotion Identification,mid_introduction,16,16,16
+2025-11-29,Emotion Identification,parent_poll,32,22,22
+2025-11-29,Emotion Identification,questions,19,18,18
+2025-11-29,Emotion Identification,rewards,12,12,12
+2025-11-29,Emotion Identification,started,26,23,23
+2025-11-29,Emotion Identification,validation,14,14,14
+2025-11-29,Identification of all emotions,completed,39,35,35
+2025-11-29,Identification of all emotions,introduction,53,43,43
+2025-11-29,Identification of all emotions,mid_introduction,38,35,35
+2025-11-29,Identification of all emotions,parent_poll,71,44,44
+2025-11-29,Identification of all emotions,questions,41,37,37
+2025-11-29,Identification of all emotions,rewards,35,32,32
+2025-11-29,Identification of all emotions,started,55,44,44
+2025-11-29,Identification of all emotions,validation,36,33,33
+2025-11-29,Numbers Comparison,completed,16,15,15
+2025-11-29,Numbers Comparison,introduction,20,19,18
+2025-11-29,Numbers Comparison,mid_introduction,15,15,15
+2025-11-29,Numbers Comparison,parent_poll,29,21,20
+2025-11-29,Numbers Comparison,questions,18,17,16
+2025-11-29,Numbers Comparison,rewards,14,14,14
+2025-11-29,Numbers Comparison,started,24,23,21
+2025-11-29,Numbers Comparison,validation,15,15,15
+2025-11-29,Numbers I,completed,108,104,103
+2025-11-29,Numbers I,introduction,123,117,115
+2025-11-29,Numbers I,mid_introduction,96,94,93
+2025-11-29,Numbers I,parent_poll,178,119,117
+2025-11-29,Numbers I,questions,111,107,106
+2025-11-29,Numbers I,rewards,93,91,90
+2025-11-29,Numbers I,started,126,120,118
+2025-11-29,Numbers I,validation,95,93,92
+2025-11-29,Numbers II,completed,59,56,55
+2025-11-29,Numbers II,introduction,69,63,62
+2025-11-29,Numbers II,mid_introduction,59,55,54
+2025-11-29,Numbers II,parent_poll,95,63,62
+2025-11-29,Numbers II,questions,61,57,56
+2025-11-29,Numbers II,rewards,56,53,52
+2025-11-29,Numbers II,started,71,65,64
+2025-11-29,Numbers II,validation,57,54,53
+2025-11-29,Numerals 1-10,completed,7,7,7
+2025-11-29,Numerals 1-10,introduction,15,15,15
+2025-11-29,Numerals 1-10,mid_introduction,12,12,12
+2025-11-29,Numerals 1-10,parent_poll,19,15,15
+2025-11-29,Numerals 1-10,questions,12,12,12
+2025-11-29,Numerals 1-10,rewards,12,12,12
+2025-11-29,Numerals 1-10,started,15,15,15
+2025-11-29,Numerals 1-10,validation,12,12,12
+2025-11-29,Positions,completed,37,34,33
+2025-11-29,Positions,introduction,58,48,47
+2025-11-29,Positions,mid_introduction,29,27,26
+2025-11-29,Positions,parent_poll,74,50,48
+2025-11-29,Positions,questions,37,34,32
+2025-11-29,Positions,rewards,29,27,26
+2025-11-29,Positions,started,76,63,60
+2025-11-29,Positions,validation,29,27,26
+2025-11-29,Primary Emotion Labelling,completed,24,20,19
+2025-11-29,Primary Emotion Labelling,introduction,28,22,21
+2025-11-29,Primary Emotion Labelling,mid_introduction,21,17,16
+2025-11-29,Primary Emotion Labelling,parent_poll,36,23,22
+2025-11-29,Primary Emotion Labelling,questions,24,20,19
+2025-11-29,Primary Emotion Labelling,rewards,19,16,15
+2025-11-29,Primary Emotion Labelling,started,31,25,24
+2025-11-29,Primary Emotion Labelling,validation,20,17,16
+2025-11-29,Quantitative Comparison,completed,51,47,47
+2025-11-29,Quantitative Comparison,introduction,55,51,51
+2025-11-29,Quantitative Comparison,mid_introduction,44,43,43
+2025-11-29,Quantitative Comparison,parent_poll,78,53,52
+2025-11-29,Quantitative Comparison,questions,50,47,47
+2025-11-29,Quantitative Comparison,rewards,42,41,41
+2025-11-29,Quantitative Comparison,started,57,53,52
+2025-11-29,Quantitative Comparison,validation,43,42,42
+2025-11-29,Relational Comparison,completed,53,50,50
+2025-11-29,Relational Comparison,introduction,59,55,54
+2025-11-29,Relational Comparison,mid_introduction,49,48,48
+2025-11-29,Relational Comparison,parent_poll,79,55,54
+2025-11-29,Relational Comparison,questions,53,51,51
+2025-11-29,Relational Comparison,rewards,48,47,47
+2025-11-29,Relational Comparison,started,59,55,54
+2025-11-29,Relational Comparison,validation,48,47,47
+2025-11-29,Relational Comparison II,completed,19,18,18
+2025-11-29,Relational Comparison II,introduction,25,23,23
+2025-11-29,Relational Comparison II,mid_introduction,20,18,18
+2025-11-29,Relational Comparison II,parent_poll,35,22,22
+2025-11-29,Relational Comparison II,questions,22,20,20
+2025-11-29,Relational Comparison II,rewards,17,16,16
+2025-11-29,Relational Comparison II,started,27,23,23
+2025-11-29,Relational Comparison II,validation,17,16,16
+2025-11-29,Revision Colors,completed,26,23,23
+2025-11-29,Revision Colors,introduction,35,31,31
+2025-11-29,Revision Colors,mid_introduction,28,25,25
+2025-11-29,Revision Colors,parent_poll,44,31,31
+2025-11-29,Revision Colors,questions,30,26,26
+2025-11-29,Revision Colors,rewards,25,22,22
+2025-11-29,Revision Colors,started,35,31,31
+2025-11-29,Revision Colors,validation,27,24,24
+2025-11-29,Revision Shapes,completed,14,12,12
+2025-11-29,Revision Shapes,introduction,18,16,16
+2025-11-29,Revision Shapes,mid_introduction,13,11,11
+2025-11-29,Revision Shapes,parent_poll,22,16,16
+2025-11-29,Revision Shapes,questions,14,12,12
+2025-11-29,Revision Shapes,rewards,13,11,11
+2025-11-29,Revision Shapes,started,19,17,17
+2025-11-29,Revision Shapes,validation,13,11,11
+2025-11-29,Rhyming Words,completed,42,41,40
+2025-11-29,Rhyming Words,introduction,50,47,46
+2025-11-29,Rhyming Words,mid_introduction,33,33,32
+2025-11-29,Rhyming Words,parent_poll,67,49,48
+2025-11-29,Rhyming Words,questions,42,41,40
+2025-11-29,Rhyming Words,rewards,31,31,30
+2025-11-29,Rhyming Words,started,56,51,50
+2025-11-29,Rhyming Words,validation,32,32,31
+2025-11-29,Shape Circle,completed,781,714,707
+2025-11-29,Shape Circle,introduction,947,820,805
+2025-11-29,Shape Circle,mid_introduction,664,625,620
+2025-11-29,Shape Circle,parent_poll,1248,845,828
+2025-11-29,Shape Circle,questions,778,714,709
+2025-11-29,Shape Circle,rewards,639,601,596
+2025-11-29,Shape Circle,started,1007,868,852
+2025-11-29,Shape Circle,validation,652,613,608
+2025-11-29,Shape Rectangle,completed,13,13,12
+2025-11-29,Shape Rectangle,introduction,19,15,14
+2025-11-29,Shape Rectangle,mid_introduction,14,13,12
+2025-11-29,Shape Rectangle,parent_poll,25,15,14
+2025-11-29,Shape Rectangle,questions,14,13,12
+2025-11-29,Shape Rectangle,rewards,13,13,12
+2025-11-29,Shape Rectangle,started,20,16,15
+2025-11-29,Shape Rectangle,validation,13,13,12
+2025-11-29,Shape Square,completed,31,31,31
+2025-11-29,Shape Square,introduction,35,35,35
+2025-11-29,Shape Square,mid_introduction,32,32,32
+2025-11-29,Shape Square,parent_poll,51,35,35
+2025-11-29,Shape Square,questions,33,33,33
+2025-11-29,Shape Square,rewards,31,31,31
+2025-11-29,Shape Square,started,35,35,35
+2025-11-29,Shape Square,validation,32,32,32
+2025-11-29,Shape Triangle,completed,88,83,83
+2025-11-29,Shape Triangle,introduction,112,102,101
+2025-11-29,Shape Triangle,mid_introduction,79,74,74
+2025-11-29,Shape Triangle,parent_poll,150,104,103
+2025-11-29,Shape Triangle,questions,90,85,85
+2025-11-29,Shape Triangle,rewards,75,70,70
+2025-11-29,Shape Triangle,started,116,105,104
+2025-11-29,Shape Triangle,validation,76,71,71
+2025-11-29,Sorting Primary Colors,completed,38,37,37
+2025-11-29,Sorting Primary Colors,introduction,50,48,48
+2025-11-29,Sorting Primary Colors,mid_introduction,36,35,35
+2025-11-29,Sorting Primary Colors,parent_poll,69,48,48
+2025-11-29,Sorting Primary Colors,questions,42,41,41
+2025-11-29,Sorting Primary Colors,rewards,34,33,33
+2025-11-29,Sorting Primary Colors,started,51,48,48
+2025-11-29,Sorting Primary Colors,validation,36,35,35
+2025-11-29,Sorting Primary Shapes,completed,14,13,13
+2025-11-29,Sorting Primary Shapes,introduction,16,16,16
+2025-11-29,Sorting Primary Shapes,mid_introduction,12,12,12
+2025-11-29,Sorting Primary Shapes,parent_poll,21,17,17
+2025-11-29,Sorting Primary Shapes,questions,13,13,13
+2025-11-29,Sorting Primary Shapes,rewards,11,11,11
+2025-11-29,Sorting Primary Shapes,started,19,18,18
+2025-11-29,Sorting Primary Shapes,validation,11,11,11
+2025-11-30,Beginning Sound Ba/Ra/Na,completed,5,5,5
+2025-11-30,Beginning Sound Ba/Ra/Na,introduction,6,6,6
+2025-11-30,Beginning Sound Ba/Ra/Na,mid_introduction,4,4,4
+2025-11-30,Beginning Sound Ba/Ra/Na,parent_poll,13,6,6
+2025-11-30,Beginning Sound Ba/Ra/Na,questions,5,5,5
+2025-11-30,Beginning Sound Ba/Ra/Na,rewards,4,4,4
+2025-11-30,Beginning Sound Ba/Ra/Na,started,7,7,7
+2025-11-30,Beginning Sound Ba/Ra/Na,validation,4,4,4
+2025-11-30,Beginning Sounds Ka/Na/Ta,completed,12,12,12
+2025-11-30,Beginning Sounds Ka/Na/Ta,introduction,20,19,19
+2025-11-30,Beginning Sounds Ka/Na/Ta,mid_introduction,13,13,13
+2025-11-30,Beginning Sounds Ka/Na/Ta,parent_poll,27,19,19
+2025-11-30,Beginning Sounds Ka/Na/Ta,questions,13,13,13
+2025-11-30,Beginning Sounds Ka/Na/Ta,rewards,13,13,13
+2025-11-30,Beginning Sounds Ka/Na/Ta,started,24,22,22
+2025-11-30,Beginning Sounds Ka/Na/Ta,validation,13,13,13
+2025-11-30,Beginning Sounds Ma/Cha/Ba,completed,24,23,22
+2025-11-30,Beginning Sounds Ma/Cha/Ba,introduction,47,45,45
+2025-11-30,Beginning Sounds Ma/Cha/Ba,mid_introduction,24,24,24
+2025-11-30,Beginning Sounds Ma/Cha/Ba,parent_poll,60,48,47
+2025-11-30,Beginning Sounds Ma/Cha/Ba,questions,26,26,26
+2025-11-30,Beginning Sounds Ma/Cha/Ba,rewards,21,21,21
+2025-11-30,Beginning Sounds Ma/Cha/Ba,started,61,57,56
+2025-11-30,Beginning Sounds Ma/Cha/Ba,validation,23,23,23
+2025-11-30,Beginning Sounds Ma/Ka/La,completed,26,25,25
+2025-11-30,Beginning Sounds Ma/Ka/La,introduction,39,38,37
+2025-11-30,Beginning Sounds Ma/Ka/La,mid_introduction,24,24,23
+2025-11-30,Beginning Sounds Ma/Ka/La,parent_poll,49,39,38
+2025-11-30,Beginning Sounds Ma/Ka/La,questions,28,27,26
+2025-11-30,Beginning Sounds Ma/Ka/La,rewards,21,21,21
+2025-11-30,Beginning Sounds Ma/Ka/La,started,47,43,42
+2025-11-30,Beginning Sounds Ma/Ka/La,validation,22,22,22
+2025-11-30,Beginning Sounds Pa/Cha/Sa,completed,20,19,19
+2025-11-30,Beginning Sounds Pa/Cha/Sa,introduction,29,27,25
+2025-11-30,Beginning Sounds Pa/Cha/Sa,mid_introduction,19,18,18
+2025-11-30,Beginning Sounds Pa/Cha/Sa,parent_poll,38,27,25
+2025-11-30,Beginning Sounds Pa/Cha/Sa,questions,22,21,21
+2025-11-30,Beginning Sounds Pa/Cha/Sa,rewards,17,16,16
+2025-11-30,Beginning Sounds Pa/Cha/Sa,started,29,27,25
+2025-11-30,Beginning Sounds Pa/Cha/Sa,validation,17,16,16
+2025-11-30,Beginning Sounds Sa/La/Va,completed,130,127,127
+2025-11-30,Beginning Sounds Sa/La/Va,introduction,309,269,269
+2025-11-30,Beginning Sounds Sa/La/Va,mid_introduction,142,142,142
+2025-11-30,Beginning Sounds Sa/La/Va,parent_poll,401,293,294
+2025-11-30,Beginning Sounds Sa/La/Va,questions,349,195,195
+2025-11-30,Beginning Sounds Sa/La/Va,rewards,131,131,131
+2025-11-30,Beginning Sounds Sa/La/Va,started,374,323,323
+2025-11-30,Beginning Sounds Sa/La/Va,validation,135,135,135
+2025-11-30,Beginning Sounds Ta/Va/Ga,completed,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,introduction,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,mid_introduction,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,parent_poll,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,questions,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,rewards,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,started,1,1,1
+2025-11-30,Beginning Sounds Ta/Va/Ga,validation,1,1,1
+2025-11-30,Color Blue,completed,38,37,36
+2025-11-30,Color Blue,introduction,41,38,37
+2025-11-30,Color Blue,mid_introduction,32,32,31
+2025-11-30,Color Blue,parent_poll,50,39,38
+2025-11-30,Color Blue,questions,38,37,36
+2025-11-30,Color Blue,rewards,31,31,30
+2025-11-30,Color Blue,started,42,39,38
+2025-11-30,Color Blue,validation,32,32,31
+2025-11-30,Color Red,completed,182,168,166
+2025-11-30,Color Red,introduction,221,197,191
+2025-11-30,Color Red,mid_introduction,154,146,145
+2025-11-30,Color Red,parent_poll,288,202,196
+2025-11-30,Color Red,questions,181,169,167
+2025-11-30,Color Red,rewards,144,137,136
+2025-11-30,Color Red,started,235,209,203
+2025-11-30,Color Red,validation,151,143,142
+2025-11-30,Color Yellow,completed,46,44,44
+2025-11-30,Color Yellow,introduction,55,53,53
+2025-11-30,Color Yellow,mid_introduction,44,43,43
+2025-11-30,Color Yellow,parent_poll,78,54,54
+2025-11-30,Color Yellow,questions,47,46,46
+2025-11-30,Color Yellow,rewards,40,39,39
+2025-11-30,Color Yellow,started,57,55,55
+2025-11-30,Color Yellow,validation,41,40,40
+2025-11-30,Emotion Identification,completed,8,8,8
+2025-11-30,Emotion Identification,introduction,10,10,10
+2025-11-30,Emotion Identification,mid_introduction,8,8,8
+2025-11-30,Emotion Identification,parent_poll,14,11,11
+2025-11-30,Emotion Identification,questions,8,8,8
+2025-11-30,Emotion Identification,rewards,6,6,6
+2025-11-30,Emotion Identification,started,13,12,12
+2025-11-30,Emotion Identification,validation,6,6,6
+2025-11-30,Identification of all emotions,completed,35,32,31
+2025-11-30,Identification of all emotions,introduction,41,36,35
+2025-11-30,Identification of all emotions,mid_introduction,33,31,30
+2025-11-30,Identification of all emotions,parent_poll,48,35,34
+2025-11-30,Identification of all emotions,questions,34,31,30
+2025-11-30,Identification of all emotions,rewards,31,29,28
+2025-11-30,Identification of all emotions,started,42,36,34
+2025-11-30,Identification of all emotions,validation,32,30,29
+2025-11-30,Numbers Comparison,completed,19,18,18
+2025-11-30,Numbers Comparison,introduction,20,19,19
+2025-11-30,Numbers Comparison,mid_introduction,17,17,17
+2025-11-30,Numbers Comparison,parent_poll,31,20,20
+2025-11-30,Numbers Comparison,questions,17,17,17
+2025-11-30,Numbers Comparison,rewards,16,16,16
+2025-11-30,Numbers Comparison,started,21,20,20
+2025-11-30,Numbers Comparison,validation,17,17,17
+2025-11-30,Numbers I,completed,72,66,66
+2025-11-30,Numbers I,introduction,82,73,72
+2025-11-30,Numbers I,mid_introduction,65,60,60
+2025-11-30,Numbers I,parent_poll,113,75,74
+2025-11-30,Numbers I,questions,70,64,64
+2025-11-30,Numbers I,rewards,64,60,60
+2025-11-30,Numbers I,started,86,77,76
+2025-11-30,Numbers I,validation,64,60,60
+2025-11-30,Numbers II,completed,45,43,43
+2025-11-30,Numbers II,introduction,55,49,48
+2025-11-30,Numbers II,mid_introduction,43,42,42
+2025-11-30,Numbers II,parent_poll,70,49,48
+2025-11-30,Numbers II,questions,47,45,44
+2025-11-30,Numbers II,rewards,41,40,40
+2025-11-30,Numbers II,started,59,51,50
+2025-11-30,Numbers II,validation,42,41,41
+2025-11-30,Numerals 1-10,completed,12,11,11
+2025-11-30,Numerals 1-10,introduction,17,14,14
+2025-11-30,Numerals 1-10,mid_introduction,12,11,11
+2025-11-30,Numerals 1-10,parent_poll,24,14,14
+2025-11-30,Numerals 1-10,questions,15,13,13
+2025-11-30,Numerals 1-10,rewards,11,10,10
+2025-11-30,Numerals 1-10,started,17,14,14
+2025-11-30,Numerals 1-10,validation,11,10,10
+2025-11-30,Positions,completed,38,34,34
+2025-11-30,Positions,introduction,45,40,40
+2025-11-30,Positions,mid_introduction,38,34,34
+2025-11-30,Positions,parent_poll,60,41,41
+2025-11-30,Positions,questions,40,36,36
+2025-11-30,Positions,rewards,36,32,32
+2025-11-30,Positions,started,62,54,52
+2025-11-30,Positions,validation,37,33,33
+2025-11-30,Primary Emotion Labelling,completed,18,18,17
+2025-11-30,Primary Emotion Labelling,introduction,29,21,19
+2025-11-30,Primary Emotion Labelling,mid_introduction,18,18,17
+2025-11-30,Primary Emotion Labelling,parent_poll,38,22,20
+2025-11-30,Primary Emotion Labelling,questions,18,18,17
+2025-11-30,Primary Emotion Labelling,rewards,18,18,17
+2025-11-30,Primary Emotion Labelling,started,33,24,20
+2025-11-30,Primary Emotion Labelling,validation,18,18,17
+2025-11-30,Quantitative Comparison,completed,19,18,18
+2025-11-30,Quantitative Comparison,introduction,32,29,29
+2025-11-30,Quantitative Comparison,mid_introduction,19,19,19
+2025-11-30,Quantitative Comparison,parent_poll,40,29,29
+2025-11-30,Quantitative Comparison,questions,23,22,22
+2025-11-30,Quantitative Comparison,rewards,16,16,16
+2025-11-30,Quantitative Comparison,started,34,31,31
+2025-11-30,Quantitative Comparison,validation,17,17,17
+2025-11-30,Relational Comparison,completed,29,28,28
+2025-11-30,Relational Comparison,introduction,36,33,33
+2025-11-30,Relational Comparison,mid_introduction,29,28,28
+2025-11-30,Relational Comparison,parent_poll,47,33,33
+2025-11-30,Relational Comparison,questions,30,29,29
+2025-11-30,Relational Comparison,rewards,27,26,26
+2025-11-30,Relational Comparison,started,36,33,33
+2025-11-30,Relational Comparison,validation,29,28,28
+2025-11-30,Relational Comparison II,completed,12,11,11
+2025-11-30,Relational Comparison II,introduction,16,14,14
+2025-11-30,Relational Comparison II,mid_introduction,10,10,10
+2025-11-30,Relational Comparison II,parent_poll,21,14,14
+2025-11-30,Relational Comparison II,questions,12,12,12
+2025-11-30,Relational Comparison II,rewards,8,8,8
+2025-11-30,Relational Comparison II,started,17,15,15
+2025-11-30,Relational Comparison II,validation,10,10,10
+2025-11-30,Revision Colors,completed,26,20,18
+2025-11-30,Revision Colors,introduction,39,27,25
+2025-11-30,Revision Colors,mid_introduction,21,18,17
+2025-11-30,Revision Colors,parent_poll,49,28,26
+2025-11-30,Revision Colors,questions,23,19,18
+2025-11-30,Revision Colors,rewards,22,18,17
+2025-11-30,Revision Colors,started,43,29,27
+2025-11-30,Revision Colors,validation,21,18,17
+2025-11-30,Revision Shapes,completed,10,8,8
+2025-11-30,Revision Shapes,introduction,16,13,13
+2025-11-30,Revision Shapes,mid_introduction,9,9,9
+2025-11-30,Revision Shapes,parent_poll,17,12,12
+2025-11-30,Revision Shapes,questions,10,9,9
+2025-11-30,Revision Shapes,rewards,8,8,8
+2025-11-30,Revision Shapes,started,15,12,12
+2025-11-30,Revision Shapes,validation,8,8,8
+2025-11-30,Rhyming Words,completed,39,37,37
+2025-11-30,Rhyming Words,introduction,46,43,43
+2025-11-30,Rhyming Words,mid_introduction,29,28,28
+2025-11-30,Rhyming Words,parent_poll,60,45,45
+2025-11-30,Rhyming Words,questions,38,36,36
+2025-11-30,Rhyming Words,rewards,29,28,28
+2025-11-30,Rhyming Words,started,50,46,46
+2025-11-30,Rhyming Words,validation,29,28,28
+2025-11-30,Shape Circle,completed,416,376,375
+2025-11-30,Shape Circle,introduction,519,445,434
+2025-11-30,Shape Circle,mid_introduction,346,322,321
+2025-11-30,Shape Circle,parent_poll,668,466,455
+2025-11-30,Shape Circle,questions,409,372,370
+2025-11-30,Shape Circle,rewards,327,305,304
+2025-11-30,Shape Circle,started,559,478,467
+2025-11-30,Shape Circle,validation,339,316,315
+2025-11-30,Shape Rectangle,completed,8,8,8
+2025-11-30,Shape Rectangle,introduction,10,10,10
+2025-11-30,Shape Rectangle,mid_introduction,6,6,6
+2025-11-30,Shape Rectangle,parent_poll,13,11,11
+2025-11-30,Shape Rectangle,questions,7,7,7
+2025-11-30,Shape Rectangle,rewards,7,7,7
+2025-11-30,Shape Rectangle,started,10,10,10
+2025-11-30,Shape Rectangle,validation,7,7,7
+2025-11-30,Shape Square,completed,18,18,17
+2025-11-30,Shape Square,introduction,24,23,23
+2025-11-30,Shape Square,mid_introduction,16,16,16
+2025-11-30,Shape Square,parent_poll,31,25,24
+2025-11-30,Shape Square,questions,18,18,18
+2025-11-30,Shape Square,rewards,15,15,15
+2025-11-30,Shape Square,started,28,26,25
+2025-11-30,Shape Square,validation,15,15,15
+2025-11-30,Shape Triangle,completed,61,60,60
+2025-11-30,Shape Triangle,introduction,74,68,68
+2025-11-30,Shape Triangle,mid_introduction,54,53,53
+2025-11-30,Shape Triangle,parent_poll,104,69,69
+2025-11-30,Shape Triangle,questions,62,60,60
+2025-11-30,Shape Triangle,rewards,51,50,50
+2025-11-30,Shape Triangle,started,75,69,69
+2025-11-30,Shape Triangle,validation,53,52,52
+2025-11-30,Sorting Primary Colors,completed,30,29,29
+2025-11-30,Sorting Primary Colors,introduction,39,35,34
+2025-11-30,Sorting Primary Colors,mid_introduction,25,25,25
+2025-11-30,Sorting Primary Colors,parent_poll,47,35,34
+2025-11-30,Sorting Primary Colors,questions,30,29,29
+2025-11-30,Sorting Primary Colors,rewards,24,24,24
+2025-11-30,Sorting Primary Colors,started,40,36,35
+2025-11-30,Sorting Primary Colors,validation,25,25,25
+2025-11-30,Sorting Primary Shapes,completed,21,18,17
+2025-11-30,Sorting Primary Shapes,introduction,21,18,16
+2025-11-30,Sorting Primary Shapes,mid_introduction,18,15,14
+2025-11-30,Sorting Primary Shapes,parent_poll,34,20,18
+2025-11-30,Sorting Primary Shapes,questions,19,16,15
+2025-11-30,Sorting Primary Shapes,rewards,18,15,14
+2025-11-30,Sorting Primary Shapes,started,23,20,18
+2025-11-30,Sorting Primary Shapes,validation,18,15,14
+2025-12-01,Beginning Sound Ba/Ra/Na,completed,6,3,3
+2025-12-01,Beginning Sound Ba/Ra/Na,introduction,8,3,3
+2025-12-01,Beginning Sound Ba/Ra/Na,mid_introduction,3,1,1
+2025-12-01,Beginning Sound Ba/Ra/Na,parent_poll,16,3,3
+2025-12-01,Beginning Sound Ba/Ra/Na,questions,6,3,3
+2025-12-01,Beginning Sound Ba/Ra/Na,rewards,3,1,1
+2025-12-01,Beginning Sound Ba/Ra/Na,started,8,3,3
+2025-12-01,Beginning Sound Ba/Ra/Na,validation,3,1,1
+2025-12-01,Beginning Sounds Ka/Na/Ta,completed,1,1,1
+2025-12-01,Beginning Sounds Ka/Na/Ta,introduction,3,3,3
+2025-12-01,Beginning Sounds Ka/Na/Ta,mid_introduction,2,2,2
+2025-12-01,Beginning Sounds Ka/Na/Ta,parent_poll,3,3,3
+2025-12-01,Beginning Sounds Ka/Na/Ta,questions,2,2,2
+2025-12-01,Beginning Sounds Ka/Na/Ta,rewards,1,1,1
+2025-12-01,Beginning Sounds Ka/Na/Ta,started,6,6,6
+2025-12-01,Beginning Sounds Ka/Na/Ta,validation,1,1,1
+2025-12-01,Beginning Sounds Ma/Cha/Ba,completed,1,1,1
+2025-12-01,Beginning Sounds Ma/Cha/Ba,introduction,5,4,4
+2025-12-01,Beginning Sounds Ma/Cha/Ba,mid_introduction,1,1,1
+2025-12-01,Beginning Sounds Ma/Cha/Ba,parent_poll,5,4,4
+2025-12-01,Beginning Sounds Ma/Cha/Ba,questions,1,1,1
+2025-12-01,Beginning Sounds Ma/Cha/Ba,rewards,1,1,1
+2025-12-01,Beginning Sounds Ma/Cha/Ba,started,9,8,8
+2025-12-01,Beginning Sounds Ma/Cha/Ba,validation,1,1,1
+2025-12-01,Beginning Sounds Ma/Ka/La,introduction,1,1,1
+2025-12-01,Beginning Sounds Ma/Ka/La,parent_poll,1,1,1
+2025-12-01,Beginning Sounds Ma/Ka/La,started,1,1,1
+2025-12-01,Beginning Sounds Pa/Cha/Sa,completed,3,2,2
+2025-12-01,Beginning Sounds Pa/Cha/Sa,introduction,3,2,2
+2025-12-01,Beginning Sounds Pa/Cha/Sa,mid_introduction,2,1,1
+2025-12-01,Beginning Sounds Pa/Cha/Sa,parent_poll,3,2,2
+2025-12-01,Beginning Sounds Pa/Cha/Sa,questions,3,2,2
+2025-12-01,Beginning Sounds Pa/Cha/Sa,rewards,2,1,1
+2025-12-01,Beginning Sounds Pa/Cha/Sa,started,3,2,2
+2025-12-01,Beginning Sounds Pa/Cha/Sa,validation,2,1,1
+2025-12-01,Beginning Sounds Sa/La/Va,completed,11,11,11
+2025-12-01,Beginning Sounds Sa/La/Va,introduction,37,35,35
+2025-12-01,Beginning Sounds Sa/La/Va,mid_introduction,14,14,14
+2025-12-01,Beginning Sounds Sa/La/Va,parent_poll,49,39,39
+2025-12-01,Beginning Sounds Sa/La/Va,questions,39,24,24
+2025-12-01,Beginning Sounds Sa/La/Va,rewards,12,12,12
+2025-12-01,Beginning Sounds Sa/La/Va,started,46,42,42
+2025-12-01,Beginning Sounds Sa/La/Va,validation,12,12,12
+2025-12-01,Color Blue,completed,5,5,4
+2025-12-01,Color Blue,introduction,7,6,5
+2025-12-01,Color Blue,mid_introduction,6,6,5
+2025-12-01,Color Blue,parent_poll,9,6,5
+2025-12-01,Color Blue,questions,6,6,5
+2025-12-01,Color Blue,rewards,5,5,4
+2025-12-01,Color Blue,started,7,6,5
+2025-12-01,Color Blue,validation,5,5,4
+2025-12-01,Color Red,completed,17,15,14
+2025-12-01,Color Red,introduction,24,18,17
+2025-12-01,Color Red,mid_introduction,17,17,16
+2025-12-01,Color Red,parent_poll,28,18,17
+2025-12-01,Color Red,questions,20,17,16
+2025-12-01,Color Red,rewards,15,15,14
+2025-12-01,Color Red,started,24,18,17
+2025-12-01,Color Red,validation,15,15,14
+2025-12-01,Color Yellow,completed,11,11,11
+2025-12-01,Color Yellow,introduction,12,12,12
+2025-12-01,Color Yellow,mid_introduction,10,10,10
+2025-12-01,Color Yellow,parent_poll,16,13,13
+2025-12-01,Color Yellow,questions,11,11,11
+2025-12-01,Color Yellow,rewards,10,10,10
+2025-12-01,Color Yellow,started,13,13,13
+2025-12-01,Color Yellow,validation,10,10,10
+2025-12-01,Emotion Identification,completed,2,2,2
+2025-12-01,Emotion Identification,introduction,4,4,4
+2025-12-01,Emotion Identification,mid_introduction,2,2,2
+2025-12-01,Emotion Identification,parent_poll,6,4,4
+2025-12-01,Emotion Identification,questions,2,2,2
+2025-12-01,Emotion Identification,rewards,2,2,2
+2025-12-01,Emotion Identification,started,4,4,4
+2025-12-01,Emotion Identification,validation,2,2,2
+2025-12-01,Identification of all emotions,completed,4,4,4
+2025-12-01,Identification of all emotions,introduction,5,5,5
+2025-12-01,Identification of all emotions,mid_introduction,4,4,4
+2025-12-01,Identification of all emotions,parent_poll,5,5,5
+2025-12-01,Identification of all emotions,questions,4,4,4
+2025-12-01,Identification of all emotions,rewards,4,4,4
+2025-12-01,Identification of all emotions,started,5,5,5
+2025-12-01,Identification of all emotions,validation,4,4,4
+2025-12-01,Numbers Comparison,completed,1,1,1
+2025-12-01,Numbers Comparison,introduction,3,3,3
+2025-12-01,Numbers Comparison,mid_introduction,1,1,1
+2025-12-01,Numbers Comparison,parent_poll,3,3,3
+2025-12-01,Numbers Comparison,questions,1,1,1
+2025-12-01,Numbers Comparison,rewards,1,1,1
+2025-12-01,Numbers Comparison,started,3,3,3
+2025-12-01,Numbers Comparison,validation,1,1,1
+2025-12-01,Numbers I,completed,12,12,12
+2025-12-01,Numbers I,introduction,15,15,15
+2025-12-01,Numbers I,mid_introduction,11,11,11
+2025-12-01,Numbers I,parent_poll,21,16,16
+2025-12-01,Numbers I,questions,12,12,12
+2025-12-01,Numbers I,rewards,11,11,11
+2025-12-01,Numbers I,started,16,16,16
+2025-12-01,Numbers I,validation,11,11,11
+2025-12-01,Numbers II,completed,8,8,8
+2025-12-01,Numbers II,introduction,11,9,9
+2025-12-01,Numbers II,mid_introduction,8,8,8
+2025-12-01,Numbers II,parent_poll,14,9,9
+2025-12-01,Numbers II,questions,8,8,8
+2025-12-01,Numbers II,rewards,8,8,8
+2025-12-01,Numbers II,started,11,9,9
+2025-12-01,Numbers II,validation,8,8,8
+2025-12-01,Numerals 1-10,completed,3,2,2
+2025-12-01,Numerals 1-10,introduction,5,3,3
+2025-12-01,Numerals 1-10,mid_introduction,1,1,1
+2025-12-01,Numerals 1-10,parent_poll,5,3,3
+2025-12-01,Numerals 1-10,questions,4,3,3
+2025-12-01,Numerals 1-10,rewards,1,1,1
+2025-12-01,Numerals 1-10,started,5,3,3
+2025-12-01,Numerals 1-10,validation,1,1,1
+2025-12-01,Positions,completed,9,9,9
+2025-12-01,Positions,introduction,11,10,10
+2025-12-01,Positions,mid_introduction,8,7,7
+2025-12-01,Positions,parent_poll,12,11,11
+2025-12-01,Positions,questions,8,7,7
+2025-12-01,Positions,rewards,8,7,7
+2025-12-01,Positions,started,15,14,13
+2025-12-01,Positions,validation,8,7,7
+2025-12-01,Primary Emotion Labelling,completed,4,4,4
+2025-12-01,Primary Emotion Labelling,introduction,4,4,4
+2025-12-01,Primary Emotion Labelling,mid_introduction,4,4,4
+2025-12-01,Primary Emotion Labelling,parent_poll,4,4,4
+2025-12-01,Primary Emotion Labelling,questions,4,4,4
+2025-12-01,Primary Emotion Labelling,rewards,4,4,4
+2025-12-01,Primary Emotion Labelling,started,4,4,4
+2025-12-01,Primary Emotion Labelling,validation,4,4,4
+2025-12-01,Quantitative Comparison,completed,4,4,4
+2025-12-01,Quantitative Comparison,introduction,5,5,5
+2025-12-01,Quantitative Comparison,mid_introduction,5,5,5
+2025-12-01,Quantitative Comparison,parent_poll,8,5,5
+2025-12-01,Quantitative Comparison,questions,5,5,5
+2025-12-01,Quantitative Comparison,rewards,4,4,4
+2025-12-01,Quantitative Comparison,started,5,5,5
+2025-12-01,Quantitative Comparison,validation,5,5,5
+2025-12-01,Relational Comparison,completed,5,5,5
+2025-12-01,Relational Comparison,introduction,8,7,7
+2025-12-01,Relational Comparison,mid_introduction,5,5,5
+2025-12-01,Relational Comparison,parent_poll,10,7,7
+2025-12-01,Relational Comparison,questions,5,5,5
+2025-12-01,Relational Comparison,rewards,5,5,5
+2025-12-01,Relational Comparison,started,8,7,7
+2025-12-01,Relational Comparison,validation,5,5,5
+2025-12-01,Relational Comparison II,completed,4,4,4
+2025-12-01,Relational Comparison II,introduction,7,7,7
+2025-12-01,Relational Comparison II,mid_introduction,4,4,4
+2025-12-01,Relational Comparison II,parent_poll,9,7,7
+2025-12-01,Relational Comparison II,questions,4,4,4
+2025-12-01,Relational Comparison II,rewards,4,4,4
+2025-12-01,Relational Comparison II,started,7,7,7
+2025-12-01,Relational Comparison II,validation,4,4,4
+2025-12-01,Revision Colors,completed,3,3,3
+2025-12-01,Revision Colors,introduction,5,4,4
+2025-12-01,Revision Colors,mid_introduction,3,3,3
+2025-12-01,Revision Colors,parent_poll,5,4,4
+2025-12-01,Revision Colors,questions,3,3,3
+2025-12-01,Revision Colors,rewards,3,3,3
+2025-12-01,Revision Colors,started,6,5,4
+2025-12-01,Revision Colors,validation,3,3,3
+2025-12-01,Revision Shapes,completed,3,3,3
+2025-12-01,Revision Shapes,introduction,3,3,3
+2025-12-01,Revision Shapes,mid_introduction,2,2,2
+2025-12-01,Revision Shapes,parent_poll,3,3,3
+2025-12-01,Revision Shapes,questions,2,2,2
+2025-12-01,Revision Shapes,rewards,2,2,2
+2025-12-01,Revision Shapes,started,4,4,4
+2025-12-01,Revision Shapes,validation,2,2,2
+2025-12-01,Rhyming Words,completed,14,11,11
+2025-12-01,Rhyming Words,introduction,18,14,14
+2025-12-01,Rhyming Words,mid_introduction,12,10,10
+2025-12-01,Rhyming Words,parent_poll,19,14,14
+2025-12-01,Rhyming Words,questions,14,11,11
+2025-12-01,Rhyming Words,rewards,12,10,10
+2025-12-01,Rhyming Words,started,18,14,14
+2025-12-01,Rhyming Words,validation,12,10,10
+2025-12-01,Shape Circle,completed,48,45,45
+2025-12-01,Shape Circle,introduction,67,60,60
+2025-12-01,Shape Circle,mid_introduction,44,42,42
+2025-12-01,Shape Circle,parent_poll,88,61,61
+2025-12-01,Shape Circle,questions,47,45,45
+2025-12-01,Shape Circle,rewards,41,40,40
+2025-12-01,Shape Circle,started,69,62,62
+2025-12-01,Shape Circle,validation,43,41,41
+2025-12-01,Shape Rectangle,completed,4,4,4
+2025-12-01,Shape Rectangle,introduction,4,4,4
+2025-12-01,Shape Rectangle,mid_introduction,4,4,4
+2025-12-01,Shape Rectangle,parent_poll,5,4,4
+2025-12-01,Shape Rectangle,questions,4,4,4
+2025-12-01,Shape Rectangle,rewards,4,4,4
+2025-12-01,Shape Rectangle,started,4,4,4
+2025-12-01,Shape Rectangle,validation,4,4,4
+2025-12-01,Shape Square,completed,3,2,2
+2025-12-01,Shape Square,introduction,2,2,2
+2025-12-01,Shape Square,mid_introduction,2,2,2
+2025-12-01,Shape Square,parent_poll,4,2,2
+2025-12-01,Shape Square,questions,2,2,2
+2025-12-01,Shape Square,rewards,2,2,2
+2025-12-01,Shape Square,started,3,2,2
+2025-12-01,Shape Square,validation,2,2,2
+2025-12-01,Shape Triangle,completed,9,9,9
+2025-12-01,Shape Triangle,introduction,10,10,10
+2025-12-01,Shape Triangle,mid_introduction,7,7,7
+2025-12-01,Shape Triangle,parent_poll,10,10,10
+2025-12-01,Shape Triangle,questions,9,9,9
+2025-12-01,Shape Triangle,rewards,7,7,7
+2025-12-01,Shape Triangle,started,11,11,11
+2025-12-01,Shape Triangle,validation,7,7,7
+2025-12-01,Sorting Primary Colors,completed,3,3,3
+2025-12-01,Sorting Primary Colors,introduction,3,3,3
+2025-12-01,Sorting Primary Colors,mid_introduction,3,3,3
+2025-12-01,Sorting Primary Colors,parent_poll,3,3,3
+2025-12-01,Sorting Primary Colors,questions,3,3,3
+2025-12-01,Sorting Primary Colors,rewards,2,2,2
+2025-12-01,Sorting Primary Colors,started,3,3,3
+2025-12-01,Sorting Primary Colors,validation,2,2,2
+2025-12-01,Sorting Primary Shapes,completed,5,5,5
+2025-12-01,Sorting Primary Shapes,introduction,5,5,5
+2025-12-01,Sorting Primary Shapes,mid_introduction,4,4,4
+2025-12-01,Sorting Primary Shapes,parent_poll,7,5,5
+2025-12-01,Sorting Primary Shapes,questions,4,4,4
+2025-12-01,Sorting Primary Shapes,rewards,4,4,4
+2025-12-01,Sorting Primary Shapes,started,5,5,5
+2025-12-01,Sorting Primary Shapes,validation,4,4,4
