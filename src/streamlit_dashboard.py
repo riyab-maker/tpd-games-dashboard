@@ -1484,10 +1484,26 @@ def main() -> None:
     else:
         date_range = None
     
+    # Domain filter - get unique domains from game_conversion_df or processed_data_df
+    unique_domains = []
+    if 'domain' in game_conversion_df.columns:
+        unique_domains = sorted([d for d in game_conversion_df['domain'].dropna().unique() if d])
+    elif 'domain' in processed_data_df.columns:
+        unique_domains = sorted([d for d in processed_data_df['domain'].dropna().unique() if d])
+    
+    selected_domains = []
+    if unique_domains:
+        selected_domains = st.multiselect(
+            "🌐 Select Domain(s) to filter by:",
+            options=unique_domains,
+            default=[],  # Empty by default - shows all domains
+            help="Select one or more domains to filter the conversion funnel. Leave empty to show all domains. Domain is extracted from game_code (e.g., HY-01-CG-01 -> CG)."
+        )
+    
     # Game Name filter - get unique games from game_conversion_df
     unique_games = sorted(game_conversion_df['game_name'].unique())
     selected_games = st.multiselect(
-        "Select Game Names to filter by:",
+        "🎮 Select Game Names to filter by:",
         options=unique_games,
         default=[],  # Empty by default - shows all games
         help="Select one or more games to filter the dashboard data. Leave empty to show all games."
@@ -1500,6 +1516,26 @@ def main() -> None:
     else:
         game_summary = f"{', '.join(selected_games)}"
         game_count = len(selected_games)
+    
+    domain_summary = ""
+    domain_count = 0
+    if unique_domains:
+        if not selected_domains or len(selected_domains) == len(unique_domains):
+            domain_summary = "**All Domains**"
+            domain_count = len(unique_domains)
+        else:
+            domain_summary = f"**{', '.join(selected_domains)}**"
+            domain_count = len(selected_domains)
+    
+    # Display filter summary
+    if unique_domains or selected_games:
+        filter_info = []
+        if unique_domains:
+            filter_info.append(f"🌐 Domain: {domain_summary} ({domain_count})")
+        if selected_games:
+            filter_info.append(f"🎮 Games: {game_summary} ({game_count})")
+        if filter_info:
+            st.info(" | ".join(filter_info))
     
     # Filter processed data by date range and games if specified
     # If no filters are applied, use summary_df directly
@@ -1514,8 +1550,9 @@ def main() -> None:
                 has_date_filter = True
     
     has_game_filter = selected_games and len(selected_games) < len(unique_games)
+    has_domain_filter = selected_domains and len(selected_domains) < len(unique_domains) if unique_domains else False
     
-    if not has_date_filter and not has_game_filter:
+    if not has_date_filter and not has_game_filter and not has_domain_filter:
         # No filters applied - use summary_df directly
         filtered_summary_df = summary_df.copy()
     elif processed_data_df.empty:
@@ -1531,6 +1568,22 @@ def main() -> None:
                 (filtered_processed_data['date'] >= start_date) &
                 (filtered_processed_data['date'] <= end_date)
             ]
+        
+        # Apply domain filter
+        if has_domain_filter:
+            if 'domain' in filtered_processed_data.columns:
+                filtered_processed_data = filtered_processed_data[
+                    filtered_processed_data['domain'].isin(selected_domains)
+                ]
+            elif 'domain' in game_conversion_df.columns:
+                # If domain is not in processed_data but is in game_conversion_df, filter by games
+                games_in_domains = game_conversion_df[
+                    game_conversion_df['domain'].isin(selected_domains)
+                ]['game_name'].unique()
+                if 'game_name' in filtered_processed_data.columns:
+                    filtered_processed_data = filtered_processed_data[
+                        filtered_processed_data['game_name'].isin(games_in_domains)
+                    ]
         
         # Apply game filter
         if has_game_filter:

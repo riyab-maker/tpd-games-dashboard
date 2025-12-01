@@ -16,7 +16,12 @@ import json
 import sys
 import argparse
 import pandas as pd
-import pymysql
+try:
+    import psycopg2  # For Redshift connection
+    PSYCOPG2_AVAILABLE = True
+except ImportError:
+    PSYCOPG2_AVAILABLE = False
+    print("WARNING: psycopg2 not installed. Install it with: pip install psycopg2-binary")
 from datetime import datetime
 from dotenv import load_dotenv
 from typing import List, Tuple, Optional
@@ -24,18 +29,34 @@ from typing import List, Tuple, Optional
 # Load environment variables
 load_dotenv()
 
-# Database connection settings
-HOST = os.getenv("DB_HOST")
-PORT = int(os.getenv("DB_PORT", "3310"))
-DBNAME = os.getenv("DB_NAME")
-USER = os.getenv("DB_USER")
-PASSWORD = os.getenv("DB_PASSWORD")
+# Redshift connection settings (from environment variables for security)
+REDSHIFT_HOST = os.getenv("REDSHIFT_HOST", "redshift-cluster.c9fcj1g6yq2x.ap-south-1.redshift.amazonaws.com")
+REDSHIFT_DATABASE = os.getenv("REDSHIFT_DATABASE", "rl_dwh_prod")
+REDSHIFT_PORT = int(os.getenv("REDSHIFT_PORT", "5439"))
+REDSHIFT_USER = os.getenv("REDSHIFT_USER", "rl_product")
+REDSHIFT_PASSWORD = os.getenv("REDSHIFT_PASSWORD", "Rlproduct@1234")
 
-# Validate required environment variables
-required_vars = ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]
-missing_vars = [var for var in required_vars if not os.getenv(var)]
-if missing_vars:
-    raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
+# Schema prefix for all queries
+SCHEMA_PREFIX = "rl_dwh_prod.live"
+
+# Print database configuration at startup
+print("\n" + "=" * 60)
+print("DATABASE CONFIGURATION")
+print("=" * 60)
+print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
+print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
+print(f"  Host: {REDSHIFT_HOST}")
+print(f"  Database: {REDSHIFT_DATABASE}")
+print(f"  Port: {REDSHIFT_PORT}")
+print(f"  User: {REDSHIFT_USER}")
+print(f"  Schema Prefix: {SCHEMA_PREFIX}")
+print("=" * 60 + "\n")
+
+# Validate required environment variables (use defaults if not set, but warn)
+if not PSYCOPG2_AVAILABLE:
+    print("ERROR: psycopg2 is required for Redshift connection.")
+    print("  Install with: pip install psycopg2-binary")
+    raise ValueError("psycopg2 is required for Redshift connection. Install with: pip install psycopg2-binary")
 
 # SQL Queries - Updated with new event categorization
 # Event stages: started, introduction, questions, mid_introduction, validation, parent_poll, rewards, completed
@@ -44,12 +65,12 @@ SQL_QUERY = (
     """
     SELECT DISTINCT
       mllva.idlink_va,
-      DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
+      DATEADD(minute, 330, mllva.server_time) AS server_time,
       hg.game_name,
       hgl.game_id, 
       mla.name,
       mllva.idpageview,
-      CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+      TO_HEX(mllva.idvisitor) AS idvisitor_hex,
       mllva.idvisit,
       CASE 
         WHEN mla.name LIKE '%_started%' THEN 'started'
@@ -68,8 +89,8 @@ SQL_QUERY = (
              AND mla.name NOT LIKE '%action%' THEN 'completed'
         ELSE NULL
       END AS event
-    FROM matomo_log_link_visit_action mllva
-    INNER JOIN matomo_log_action mla 
+    FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+    INNER JOIN rl_dwh_prod.live.matomo_log_action mla 
       ON mllva.idaction_name = mla.idaction
       AND (
         mla.name LIKE '%introduction_completed%' OR
@@ -82,9 +103,9 @@ SQL_QUERY = (
         mla.name LIKE '%question_completed%' OR
         mla.name LIKE '%poll_completed%'
       )
-    INNER JOIN hybrid_games_links hgl 
+    INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl 
       ON mllva.custom_dimension_2 = hgl.activity_id
-    INNER JOIN hybrid_games hg 
+    INNER JOIN rl_dwh_prod.live.hybrid_games hg 
       ON hgl.game_id = hg.id
     WHERE mllva.server_time > '2025-07-01'
     """
@@ -98,16 +119,16 @@ SELECT
   mllva.idvisit,
   mla.name AS action_name,
   mllva.custom_dimension_1,
-  CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+  TO_HEX(mllva.idvisitor) AS idvisitor_hex,
   mllva.server_time,
   mllva.idaction_name,
   mllva.custom_dimension_2,
   mla.idaction,
   mla.type
-FROM hybrid_games hg
-INNER JOIN hybrid_games_links hgl ON hg.id = hgl.game_id
-INNER JOIN matomo_log_link_visit_action mllva ON hgl.activity_id = mllva.custom_dimension_2
-INNER JOIN matomo_log_action mla ON mllva.idaction_name = mla.idaction
+FROM rl_dwh_prod.live.hybrid_games hg
+INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+INNER JOIN rl_dwh_prod.live.matomo_log_link_visit_action mllva ON hgl.activity_id = mllva.custom_dimension_2
+INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
 WHERE mllva.server_time >= '2025-07-01'
   AND hgl.activity_id IS NOT NULL
   AND (
@@ -119,21 +140,21 @@ WHERE mllva.server_time >= '2025-07-01'
 # Question Correctness Queries - Three separate queries for different game types
 QUESTION_CORRECTNESS_QUERY_1 = """
 SELECT 
-  `matomo_log_link_visit_action`.`custom_dimension_2`, 
-  `matomo_log_link_visit_action`.`idvisit`, 
-  `matomo_log_action`.`name`, 
-  `matomo_log_link_visit_action`.`custom_dimension_1`, 
-  CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted,
-  `hybrid_games`.`game_name`
-FROM `matomo_log_link_visit_action` 
-INNER JOIN `matomo_log_action` 
-  ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
-INNER JOIN `hybrid_games_links`
-  ON `matomo_log_link_visit_action`.`custom_dimension_2` = `hybrid_games_links`.`activity_id`
-INNER JOIN `hybrid_games`
-  ON `hybrid_games_links`.`game_id` = `hybrid_games`.`id`
-WHERE `matomo_log_action`.`name` LIKE '%game_completed%'
-  AND `hybrid_games`.`game_name` IN (
+  matomo_log_link_visit_action.custom_dimension_2, 
+  matomo_log_link_visit_action.idvisit, 
+  matomo_log_action.name, 
+  matomo_log_link_visit_action.custom_dimension_1, 
+  TO_HEX(matomo_log_link_visit_action.idvisitor) AS idvisitor_hex,
+  hybrid_games.game_name
+FROM rl_dwh_prod.live.matomo_log_link_visit_action 
+INNER JOIN rl_dwh_prod.live.matomo_log_action 
+  ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
+INNER JOIN rl_dwh_prod.live.hybrid_games_links
+  ON matomo_log_link_visit_action.custom_dimension_2 = hybrid_games_links.activity_id
+INNER JOIN rl_dwh_prod.live.hybrid_games
+  ON hybrid_games_links.game_id = hybrid_games.id
+WHERE matomo_log_action.name LIKE '%game_completed%'
+  AND hybrid_games.game_name IN (
     'Relational Comparison',
     'Quantitative Comparison',
     'Relational Comparison II',
@@ -142,7 +163,7 @@ WHERE `matomo_log_action`.`name` LIKE '%game_completed%'
     'Emotion Identification',
     'Identification of all emotions',
     'Beginning Sound Pa Cha Sa'
-  );
+  )
 """
 
 QUESTION_CORRECTNESS_QUERY_2 = """
@@ -151,45 +172,45 @@ SELECT
   matomo_log_link_visit_action.idvisit,
   matomo_log_action.name,
   matomo_log_link_visit_action.custom_dimension_1,
-  CONV(HEX(matomo_log_link_visit_action.idvisitor), 16, 10) AS idvisitor_converted,
+  TO_HEX(matomo_log_link_visit_action.idvisitor) AS idvisitor_hex,
   hybrid_games.game_name
-FROM matomo_log_link_visit_action
-INNER JOIN matomo_log_action
+FROM rl_dwh_prod.live.matomo_log_link_visit_action
+INNER JOIN rl_dwh_prod.live.matomo_log_action
   ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
-INNER JOIN hybrid_games_links
+INNER JOIN rl_dwh_prod.live.hybrid_games_links
   ON matomo_log_link_visit_action.custom_dimension_2 = hybrid_games_links.activity_id
-INNER JOIN hybrid_games
+INNER JOIN rl_dwh_prod.live.hybrid_games
   ON hybrid_games_links.game_id = hybrid_games.id
 WHERE matomo_log_action.name LIKE '%game_completed%'
   AND hybrid_games.game_name IN (
     'Revision Primary Colors',
     'Revision Primary Shapes',
     'Rhyming Words'
-  );
+  )
 """
 
 QUESTION_CORRECTNESS_QUERY_3 = """
-SELECT `matomo_log_link_visit_action`.`idlink_va`, 
-CONV(HEX(`matomo_log_link_visit_action`.idvisitor), 16, 10) AS idvisitor_converted, 
-`matomo_log_link_visit_action`.`idvisit`, 
-`matomo_log_link_visit_action`.`server_time`, 
-`matomo_log_link_visit_action`.`idaction_name`, 
-`matomo_log_link_visit_action`.`custom_dimension_1`, 
-`matomo_log_link_visit_action`.`custom_dimension_2`, 
-`matomo_log_action`.`idaction`, 
-`matomo_log_action`.`name`, 
-`matomo_log_action`.`type`,
-`hybrid_games`.`game_name`
-FROM `matomo_log_link_visit_action` 
-INNER JOIN `matomo_log_action` 
-  ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction`
-INNER JOIN `hybrid_games_links`
-  ON `matomo_log_link_visit_action`.`custom_dimension_2` = `hybrid_games_links`.`activity_id`
-INNER JOIN `hybrid_games`
-  ON `hybrid_games_links`.`game_id` = `hybrid_games`.`id`
-WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01' 
-  AND `matomo_log_action`.`name` LIKE '%action_level%'
-  AND `hybrid_games`.`game_name` IN (
+SELECT matomo_log_link_visit_action.idlink_va, 
+TO_HEX(matomo_log_link_visit_action.idvisitor) AS idvisitor_hex, 
+matomo_log_link_visit_action.idvisit, 
+matomo_log_link_visit_action.server_time, 
+matomo_log_link_visit_action.idaction_name, 
+matomo_log_link_visit_action.custom_dimension_1, 
+matomo_log_link_visit_action.custom_dimension_2, 
+matomo_log_action.idaction, 
+matomo_log_action.name, 
+matomo_log_action.type,
+hybrid_games.game_name
+FROM rl_dwh_prod.live.matomo_log_link_visit_action 
+INNER JOIN rl_dwh_prod.live.matomo_log_action 
+  ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction
+INNER JOIN rl_dwh_prod.live.hybrid_games_links
+  ON matomo_log_link_visit_action.custom_dimension_2 = hybrid_games_links.activity_id
+INNER JOIN rl_dwh_prod.live.hybrid_games
+  ON hybrid_games_links.game_id = hybrid_games.id
+WHERE matomo_log_link_visit_action.server_time >= '2025-07-01' 
+  AND matomo_log_action.name LIKE '%action_level%'
+  AND hybrid_games.game_name IN (
     'Shape Circle',
     'Shape Triangle',
     'Shape Square',
@@ -202,24 +223,24 @@ WHERE `matomo_log_link_visit_action`.`server_time` >= '2025-07-01'
     'Numerals 1-10',
     'Beginning Sound Ma Ka La',
     'Beginning Sound Ba Ra Na'
-  );
+  )
 """
 
 # Parent Poll Query
 PARENT_POLL_QUERY = """
 SELECT 
-  `matomo_log_link_visit_action`.*,
-  CONV(HEX(`matomo_log_link_visit_action`.`idvisitor`), 16, 10) AS idvisitor_converted,
-  `hybrid_games`.`game_name`
-FROM `matomo_log_link_visit_action` 
-INNER JOIN `matomo_log_action` ON `matomo_log_link_visit_action`.`idaction_name` = `matomo_log_action`.`idaction` 
-INNER JOIN `hybrid_games_links` ON `hybrid_games_links`.`activity_id` = `matomo_log_link_visit_action`.`custom_dimension_2` 
-INNER JOIN `hybrid_games` ON `hybrid_games`.`id` = `hybrid_games_links`.`game_id` 
-WHERE `matomo_log_action`.`name` LIKE "%_completed%" 
-  AND `matomo_log_link_visit_action`.`custom_dimension_1` IS NOT NULL 
-  AND `matomo_log_link_visit_action`.`custom_dimension_1` LIKE "%poll%" 
-  AND `matomo_log_link_visit_action`.`server_time` > '2025-07-01' 
-  AND `hybrid_games_links`.`activity_id` IS NOT NULL;
+  matomo_log_link_visit_action.*,
+  TO_HEX(matomo_log_link_visit_action.idvisitor) AS idvisitor_hex,
+  hybrid_games.game_name
+FROM rl_dwh_prod.live.matomo_log_link_visit_action 
+INNER JOIN rl_dwh_prod.live.matomo_log_action ON matomo_log_link_visit_action.idaction_name = matomo_log_action.idaction 
+INNER JOIN rl_dwh_prod.live.hybrid_games_links ON hybrid_games_links.activity_id = matomo_log_link_visit_action.custom_dimension_2 
+INNER JOIN rl_dwh_prod.live.hybrid_games ON hybrid_games.id = hybrid_games_links.game_id 
+WHERE matomo_log_action.name LIKE '%_completed%' 
+  AND matomo_log_link_visit_action.custom_dimension_1 IS NOT NULL 
+  AND matomo_log_link_visit_action.custom_dimension_1 LIKE '%poll%' 
+  AND matomo_log_link_visit_action.server_time > '2025-07-01' 
+  AND hybrid_games_links.activity_id IS NOT NULL
 """
 
 # Time Series Analysis Query - Uses same logic as conversion funnel query
@@ -227,9 +248,9 @@ WHERE `matomo_log_action`.`name` LIKE "%_completed%"
 TIME_SERIES_QUERY = """
 SELECT 
   mllva.idlink_va,
-  CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted,
+  TO_HEX(mllva.idvisitor) AS idvisitor_hex,
   mllva.idvisit,
-  DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) AS server_time,
+  DATEADD(minute, 330, mllva.server_time) AS server_time,
   mllva.idaction_name,
   mllva.custom_dimension_2,
   hg.game_name,
@@ -239,17 +260,37 @@ SELECT
     WHEN mla.name LIKE '%hybrid_game_completed%' OR mla.name LIKE '%hybrid_mcq_completed%' THEN 'Completed'
     ELSE NULL
   END AS event
-FROM matomo_log_link_visit_action mllva
-INNER JOIN matomo_log_action mla ON mllva.idaction_name = mla.idaction
-INNER JOIN hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
-INNER JOIN hybrid_games hg ON hgl.game_id = hg.id
+FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
+INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
+INNER JOIN rl_dwh_prod.live.hybrid_games hg ON hgl.game_id = hg.id
 WHERE (mla.name LIKE '%hybrid_game_started%' 
        OR mla.name LIKE '%hybrid_mcq_started%' 
        OR mla.name LIKE '%hybrid_game_completed%' 
        OR mla.name LIKE '%hybrid_mcq_completed%')
   AND hgl.activity_id IS NOT NULL
-  AND DATE_ADD(mllva.server_time, INTERVAL 330 MINUTE) >= '2025-07-02'
+  AND DATEADD(minute, 330, mllva.server_time) >= '2025-07-02'
 """
+
+
+def convert_hex_to_int(df: pd.DataFrame, hex_column: str = 'idvisitor_hex', output_column: str = 'idvisitor_converted') -> pd.DataFrame:
+    """Convert hex string column to integer column in Python (handles large values)"""
+    if hex_column not in df.columns:
+        return df
+    
+    def hex_to_int(hex_str):
+        """Convert hex string to integer, handling large values"""
+        if pd.isna(hex_str) or hex_str is None or hex_str == '':
+            return 0
+        try:
+            # Python's int() can handle arbitrarily large integers
+            return int(str(hex_str), 16)
+        except (ValueError, TypeError):
+            return 0
+    
+    df[output_column] = df[hex_column].apply(hex_to_int)
+    df = df.drop(columns=[hex_column])
+    return df
 
 
 def fetch_dataframe() -> pd.DataFrame:
@@ -428,23 +469,64 @@ def fetch_dataframe() -> pd.DataFrame:
 
 def fetch_score_dataframe() -> pd.DataFrame:
     """Fetch data for score distribution analysis using hybrid_games and hybrid_games_links tables"""
-    print("Fetching score data using hybrid_games and hybrid_games_links tables...")
-    with pymysql.connect(
-        host=HOST,
-        port=PORT,
-        user=USER,
-        password=PASSWORD,
-        database=DBNAME,
-        connect_timeout=15,
-        ssl={'ssl': {}},
-    ) as conn:
-        with conn.cursor() as cur:
-            cur.execute(SCORE_DISTRIBUTION_QUERY)
-            rows = cur.fetchall()
-            columns = [d[0] for d in cur.description]
-    df = pd.DataFrame(rows, columns=columns)
-    print(f"SUCCESS: Fetched {len(df)} records from score distribution query")
-    return df
+    if not PSYCOPG2_AVAILABLE:
+        print("ERROR: psycopg2 not available. Cannot fetch score data from Redshift.")
+        print("  Install with: pip install psycopg2-binary")
+        return pd.DataFrame()
+    
+    print("=" * 60)
+    print("FETCHING: Score Distribution Data from REDSHIFT")
+    print("=" * 60)
+    print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
+    print(f"  Host: {REDSHIFT_HOST}")
+    print(f"  Database: {REDSHIFT_DATABASE}")
+    print(f"  Port: {REDSHIFT_PORT}")
+    print(f"  User: {REDSHIFT_USER}")
+    print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
+    
+    try:
+        print(f"\n  [ACTION] Connecting to REDSHIFT...")
+        conn = psycopg2.connect(
+            host=REDSHIFT_HOST,
+            database=REDSHIFT_DATABASE,
+            port=REDSHIFT_PORT,
+            user=REDSHIFT_USER,
+            password=REDSHIFT_PASSWORD,
+            connect_timeout=30
+        )
+        print(f"  ✓ Successfully connected to REDSHIFT")
+        print(f"  [ACTION] Executing query on REDSHIFT...")
+        df = pd.read_sql(SCORE_DISTRIBUTION_QUERY, conn)
+        conn.close()
+        print(f"  ✓ Query executed successfully on REDSHIFT")
+        print(f"  ✓ Connection closed")
+        
+        # Convert hex to int in Python (handles large values)
+        if 'idvisitor_hex' in df.columns:
+            print(f"  [ACTION] Converting hex to integer in Python...")
+            df = convert_hex_to_int(df, 'idvisitor_hex', 'idvisitor_converted')
+            print(f"  ✓ Converted idvisitor_hex to idvisitor_converted")
+        
+        print(f"SUCCESS: Fetched {len(df)} records from REDSHIFT")
+        return df
+    except psycopg2.OperationalError as e:
+        print(f"\nERROR: Failed to connect to REDSHIFT:")
+        print(f"  Error Type: OperationalError (connection issue)")
+        print(f"  Error Message: {str(e)}")
+        print(f"  Check:")
+        print(f"    - REDSHIFT credentials are correct in .env file")
+        print(f"    - Network connectivity to Redshift cluster")
+        print(f"    - Redshift cluster is running and accessible")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"\nERROR: Failed to fetch score data from REDSHIFT:")
+        print(f"  Error Type: {type(e).__name__}")
+        print(f"  Error Message: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame()
 
 
 def parse_correct_selections_questions(custom_dim_1, game_name):
@@ -604,34 +686,56 @@ def get_game_type(game_name):
 
 def fetch_question_correctness_data() -> pd.DataFrame:
     """Fetch question correctness data using three separate queries"""
-    print("Fetching question correctness data from three queries...")
+    print("=" * 60)
+    print("FETCHING: Question Correctness Data from REDSHIFT")
+    print("=" * 60)
+    print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
+    print(f"  Host: {REDSHIFT_HOST}")
+    print(f"  Database: {REDSHIFT_DATABASE}")
+    print(f"  Port: {REDSHIFT_PORT}")
+    print(f"  User: {REDSHIFT_USER}")
+    print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
+    
     all_results = []
+    
+    if not PSYCOPG2_AVAILABLE:
+        print("ERROR: psycopg2 not available. Cannot fetch question correctness data from Redshift.")
+        print("  Install with: pip install psycopg2-binary")
+        return pd.DataFrame()
     
     # Helper function to execute a single query
     def execute_query(query, query_name):
         """Execute a single query and return DataFrame, handling errors gracefully"""
         try:
-            with pymysql.connect(
-                host=HOST,
-                port=PORT,
-                user=USER,
-                password=PASSWORD,
-                database=DBNAME,
-                connect_timeout=30,  # Increased timeout
-                read_timeout=300,     # 5 minutes for large queries
-                write_timeout=300,
-                ssl={'ssl': {}},
-            ) as conn:
-                with conn.cursor() as cur:
-                    print(f"  Executing {query_name}...")
-                    cur.execute(query)
-                    rows = cur.fetchall()
-                    cols = [d[0] for d in cur.description]
-                    df = pd.DataFrame(rows, columns=cols)
-                    print(f"  {query_name} returned {len(df)} records")
-                    return df
+            print(f"\n  [ACTION] Connecting to REDSHIFT for {query_name}...")
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=30
+            )
+            print(f"  ✓ Connected to REDSHIFT")
+            print(f"  [ACTION] Executing {query_name} on REDSHIFT...")
+            df = pd.read_sql(query, conn)
+            conn.close()
+            print(f"  ✓ {query_name} executed successfully on REDSHIFT")
+            
+            # Convert hex to int in Python (handles large values)
+            if 'idvisitor_hex' in df.columns:
+                print(f"  [ACTION] Converting hex to integer in Python for {query_name}...")
+                df = convert_hex_to_int(df, 'idvisitor_hex', 'idvisitor_converted')
+                print(f"  ✓ Converted idvisitor_hex to idvisitor_converted")
+            
+            print(f"  ✓ {query_name} returned {len(df)} records")
+            return df
+        except psycopg2.OperationalError as e:
+            print(f"  ERROR: {query_name} failed to connect to REDSHIFT: {str(e)}")
+            print(f"  Continuing with other queries...")
+            return pd.DataFrame()
         except Exception as e:
-            print(f"  ERROR: {query_name} failed: {str(e)}")
+            print(f"  ERROR: {query_name} failed on REDSHIFT: {str(e)}")
             print(f"  Continuing with other queries...")
             return pd.DataFrame()
     
@@ -1682,72 +1786,172 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
 
 def fetch_hybrid_repeatability_data() -> pd.DataFrame:
     """Fetch repeatability data using Matomo data to count users who completed games"""
-    print("Fetching repeatability data from Matomo database (completed events only)...")
+    print("\n" + "=" * 60)
+    print("FETCHING: Repeatability Data from Redshift")
+    print("=" * 60)
+    
+    if not PSYCOPG2_AVAILABLE:
+        print("ERROR: psycopg2 not available. Cannot fetch repeatability data from Redshift.")
+        print("  Install with: pip install psycopg2-binary")
+        return pd.DataFrame()
+    
+    print(f"[STEP 1] Connecting to Redshift...")
+    print(f"  Host: {REDSHIFT_HOST}")
+    print(f"  Database: {REDSHIFT_DATABASE}")
+    print(f"  Port: {REDSHIFT_PORT}")
+    print(f"  User: {REDSHIFT_USER}")
     
     try:
-        # Connect to database
-        connection = pymysql.connect(
-            host=HOST,
-            port=PORT,
-            user=USER,
-            password=PASSWORD,
-            database=DBNAME,
-            charset='utf8mb4'
+        # Connect to Redshift
+        print(f"  [ACTION] Establishing connection...")
+        connection = psycopg2.connect(
+            host=REDSHIFT_HOST,
+            database=REDSHIFT_DATABASE,
+            port=REDSHIFT_PORT,
+            user=REDSHIFT_USER,
+            password=REDSHIFT_PASSWORD,
+            connect_timeout=30
         )
+        print(f"  ✓ Successfully connected to Redshift")
         
         # New query: Count users who completed games (using completed events from Matomo)
         # Only count completed events, not started events
+        # Note: In Redshift, idvisitor might already be in numeric format or we need to handle binary differently
+        print(f"\n[STEP 2] Executing repeatability query...")
+        print(f"  Query: Fetching completed game events from Redshift")
         repeatability_query = """
         SELECT 
             hg.game_name,
-            CONV(HEX(mllva.idvisitor), 16, 10) AS idvisitor_converted
-        FROM `hybrid_games` hg
-        INNER JOIN `hybrid_games_links` hgl ON hg.id = hgl.game_id
-        INNER JOIN `matomo_log_link_visit_action` mllva ON hgl.activity_id = mllva.custom_dimension_2
-        INNER JOIN `matomo_log_action` mla ON mllva.idaction_name = mla.idaction
+            TO_HEX(mllva.idvisitor) AS idvisitor_hex
+        FROM rl_dwh_prod.live.hybrid_games hg
+        INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+        INNER JOIN rl_dwh_prod.live.matomo_log_link_visit_action mllva ON hgl.activity_id = mllva.custom_dimension_2
+        INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
         WHERE (mla.name LIKE '%hybrid_game_completed%'
                OR mla.name LIKE '%hybrid_mcq_completed%')
           AND hgl.activity_id IS NOT NULL
         """
         
-        # Execute query
+        print(f"  [DEBUG] Query to execute:")
+        print(f"  {repeatability_query.strip()}")
+        print(f"  [ACTION] Executing SQL query...")
         hybrid_df = pd.read_sql(repeatability_query, connection)
         connection.close()
+        print(f"  ✓ Query executed successfully")
+        print(f"  ✓ Connection closed")
         
         if hybrid_df.empty:
-            print("WARNING: No data found from Matomo query")
+            print(f"\n[WARNING] No data found from Redshift query")
+            print(f"  This could mean:")
+            print(f"    - No completed events in the database")
+            print(f"    - Query conditions not matching any records")
             return pd.DataFrame()
         
-        print(f"SUCCESS: Fetched {len(hybrid_df)} records from Matomo database")
-        print(f"Unique users: {hybrid_df['idvisitor_converted'].nunique()}")
-        print(f"Unique games: {hybrid_df['game_name'].nunique()}")
-        print("Sample data:")
-        print(hybrid_df.head(10))
+        print(f"\n[STEP 3] Processing query results...")
+        print(f"  ✓ Fetched {len(hybrid_df):,} records from Redshift")
         
+        # Convert hex string to numeric in Python (handles large values that STRTOL can't)
+        if 'idvisitor_hex' in hybrid_df.columns:
+            print(f"  [ACTION] Converting hex string to numeric in Python...")
+            try:
+                def hex_to_int(hex_str):
+                    """Convert hex string to integer, handling large values"""
+                    if pd.isna(hex_str) or hex_str is None or hex_str == '':
+                        return 0
+                    try:
+                        # Python's int() can handle arbitrarily large integers
+                        return int(str(hex_str), 16)
+                    except (ValueError, TypeError):
+                        return 0
+                
+                hybrid_df['idvisitor_converted'] = hybrid_df['idvisitor_hex'].apply(hex_to_int)
+                # Drop the hex column
+                hybrid_df = hybrid_df.drop(columns=['idvisitor_hex'])
+                
+                # Verify conversion
+                sample_value = hybrid_df['idvisitor_converted'].iloc[0] if len(hybrid_df) > 0 else None
+                print(f"  ✓ Sample idvisitor_converted value: {sample_value} (type: {type(sample_value).__name__})")
+                
+                # Verify we have unique values
+                unique_count = hybrid_df['idvisitor_converted'].nunique()
+                total_count = len(hybrid_df)
+                print(f"  ✓ Unique idvisitor_converted values: {unique_count:,} out of {total_count:,} total")
+                if unique_count == total_count:
+                    print(f"  ✓ All values are unique (good!)")
+                elif unique_count < total_count:
+                    print(f"  ⚠ WARNING: Some duplicate idvisitor_converted values found")
+                    print(f"    This might indicate a conversion issue")
+            except Exception as e:
+                print(f"  ERROR: Could not convert idvisitor_hex to numeric: {str(e)}")
+                import traceback
+                traceback.print_exc()
+                return pd.DataFrame()
+        
+        print(f"  ✓ Unique users: {hybrid_df['idvisitor_converted'].nunique():,}")
+        print(f"  ✓ Unique games: {hybrid_df['game_name'].nunique()}")
+        print(f"  ✓ Sample data (first 5 rows):")
+        print(hybrid_df.head(5).to_string())
+        
+        print(f"\n[STEP 4] Calculating repeatability metrics...")
         # Group by user and count distinct games played
+        print(f"  [ACTION] Grouping by user and counting distinct games...")
         user_game_counts = hybrid_df.groupby('idvisitor_converted')['game_name'].nunique().reset_index()
         user_game_counts.columns = ['idvisitor_converted', 'games_played']
+        print(f"  ✓ Calculated games played per user")
+        print(f"  ✓ Total unique users: {len(user_game_counts):,}")
         
         # Group by games_played count and count users
+        print(f"  [ACTION] Grouping by games_played count...")
         repeatability_data = user_game_counts.groupby('games_played').size().reset_index()
         repeatability_data.columns = ['games_played', 'user_count']
+        print(f"  ✓ Calculated user counts per games_played")
         
         # Create complete range from 1 to max games played
         max_games = user_game_counts['games_played'].max() if not user_game_counts.empty else 0
+        print(f"  ✓ Max games played by any user: {max_games}")
+        
         if max_games > 0:
+            print(f"  [ACTION] Creating complete range from 1 to {max_games}...")
             complete_range = pd.DataFrame({'games_played': range(1, max_games + 1)})
             repeatability_data = complete_range.merge(repeatability_data, on='games_played', how='left').fillna(0)
             repeatability_data['user_count'] = repeatability_data['user_count'].astype(int)
+            print(f"  ✓ Created complete range with {len(repeatability_data)} rows")
         
-        print("Final repeatability data:")
-        print(repeatability_data.head(10))
-        print(f"Total users: {user_game_counts['idvisitor_converted'].nunique()}")
+        print(f"\n[STEP 5] Final repeatability data summary:")
+        print(f"  ✓ Total rows: {len(repeatability_data)}")
+        print(f"  ✓ Total users: {user_game_counts['idvisitor_converted'].nunique():,}")
+        print(f"  ✓ Top 10 games_played counts:")
+        print(repeatability_data.head(10).to_string())
+        print(f"\n✓ SUCCESS: Repeatability data fetched and processed successfully")
         
         return repeatability_data
         
+    except psycopg2.OperationalError as e:
+        print(f"\n[ERROR] Failed to connect to Redshift:")
+        print(f"  Error: {str(e)}")
+        print(f"  Check:")
+        print(f"    - Redshift credentials are correct")
+        print(f"    - Network connectivity to Redshift")
+        print(f"    - Redshift cluster is accessible")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame()
+    except psycopg2.ProgrammingError as e:
+        print(f"\n[ERROR] SQL query error:")
+        print(f"  Error: {str(e)}")
+        print(f"  Check:")
+        print(f"    - Table names and schema are correct")
+        print(f"    - Column names exist in Redshift")
+        print(f"    - SQL syntax is valid for Redshift")
+        import traceback
+        traceback.print_exc()
+        return pd.DataFrame()
     except Exception as e:
-        print(f"ERROR: Failed to fetch Matomo data: {str(e)}")
-        print("Falling back to processed data...")
+        print(f"\n[ERROR] Unexpected error while fetching repeatability data:")
+        print(f"  Error type: {type(e).__name__}")
+        print(f"  Error message: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return pd.DataFrame()
 
 def preprocess_repeatability_data(df: pd.DataFrame) -> pd.DataFrame:
@@ -1830,6 +2034,19 @@ def process_main_data() -> pd.DataFrame:
     print(f"After removing duplicates on idlink_va: {len(df_main)} records (removed {initial_count - len(df_main)} duplicates)")
     df_main['date'] = pd.to_datetime(df_main['server_time']).dt.date
     
+    # Extract domain from game_code if it exists
+    if 'game_code' in df_main.columns:
+        print(f"\n[DOMAIN EXTRACTION] Extracting domain from game_code...")
+        sys.stdout.flush()
+        df_main['domain'] = df_main['game_code'].apply(extract_domain_from_game_code)
+        print(f"  ✓ Extracted domain for {df_main['domain'].notna().sum():,} records")
+        print(f"  ✓ Unique domains: {df_main['domain'].dropna().unique().tolist()}")
+        sys.stdout.flush()
+    else:
+        print(f"\n[DOMAIN EXTRACTION] WARNING: 'game_code' column not found - skipping domain extraction")
+        sys.stdout.flush()
+        df_main['domain'] = None
+    
     # Create aggregated processed_data.csv by date, game, and event
     # This will be much smaller and enable date filtering
     print(f"\n[AGGREGATION] Creating aggregated processed_data.csv by date, game, and event...")
@@ -1853,14 +2070,21 @@ def process_main_data() -> pd.DataFrame:
             end_idx = min((batch_num + 1) * batch_size, len(df_main_valid))
             batch_df = df_main_valid.iloc[start_idx:end_idx]
             
-            # Group by date, game_name, and event
-            grouped = batch_df.groupby(['date', 'game_name', 'event']).agg({
+            # Group by date, game_name, event, and domain (if available)
+            groupby_cols = ['date', 'game_name', 'event']
+            if 'domain' in batch_df.columns:
+                groupby_cols.append('domain')
+            
+            grouped = batch_df.groupby(groupby_cols).agg({
                 'idlink_va': 'count',  # Instances
                 'idvisit': 'nunique',  # Visits (distinct)
                 'idvisitor_converted': 'nunique'  # Users (distinct)
             }).reset_index()
             
-            grouped.columns = ['date', 'game_name', 'event', 'instances', 'visits', 'users']
+            if 'domain' in batch_df.columns:
+                grouped.columns = ['date', 'game_name', 'event', 'domain', 'instances', 'visits', 'users']
+            else:
+                grouped.columns = ['date', 'game_name', 'event', 'instances', 'visits', 'users']
             aggregated_data.append(grouped)
             
             if total_batches > 1:
@@ -1875,7 +2099,11 @@ def process_main_data() -> pd.DataFrame:
         # Final aggregation in case there are overlapping dates/games/events across batches
         print(f"  Performing final aggregation...")
         sys.stdout.flush()
-        processed_data_aggregated = aggregated_df.groupby(['date', 'game_name', 'event']).agg({
+        groupby_cols = ['date', 'game_name', 'event']
+        if 'domain' in aggregated_df.columns:
+            groupby_cols.append('domain')
+        
+        processed_data_aggregated = aggregated_df.groupby(groupby_cols).agg({
             'instances': 'sum',
             'visits': 'sum',  # Sum of distinct counts (approximation, but works for our use case)
             'users': 'sum'    # Sum of distinct counts (approximation, but works for our use case)
@@ -1928,9 +2156,18 @@ def process_main_data() -> pd.DataFrame:
         if game != 'Unknown Game':
             game_data = df_main_valid[df_main_valid['game_name'] == game]
             
+            # Get domain for this game (take first non-null domain if available)
+            domain = None
+            if 'domain' in game_data.columns:
+                game_domains = game_data['domain'].dropna().unique()
+                if len(game_domains) > 0:
+                    domain = game_domains[0]
+            
             # Calculate metrics for each funnel stage
             funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
             game_stats = {'game_name': game}
+            if domain:
+                game_stats['domain'] = domain
             
             for stage in funnel_stages:
                 stage_data = game_data[game_data['event'] == stage]
@@ -1951,6 +2188,18 @@ def process_main_data() -> pd.DataFrame:
     
     return df_main
 
+
+def extract_domain_from_game_code(game_code):
+    """Extract domain from game code (e.g., HY-01-CG-01 -> CG)"""
+    if pd.isna(game_code) or game_code is None or game_code == '':
+        return None
+    
+    game_code_str = str(game_code)
+    parts = game_code_str.split('-')
+    # Pattern: HY-01-CG-01 -> domain is CG (3rd element, index 2)
+    if len(parts) >= 3:
+        return parts[2]
+    return None
 
 def parse_event_from_name(name):
     """Parse event from action name (same logic as SQL CASE statement)"""
@@ -2072,36 +2321,41 @@ def process_score_distribution() -> pd.DataFrame:
 
 
 def fetch_valid_group_ids() -> List[int]:
-    """Fetch valid group IDs from SQL database based on the specified criteria"""
-    print("Fetching valid group IDs from SQL database...")
+    """Fetch valid group IDs from Redshift database based on the specified criteria"""
+    if not PSYCOPG2_AVAILABLE:
+        print("WARNING: psycopg2 not available. Cannot fetch group IDs from Redshift.")
+        return []
+    
+    print("Fetching valid group IDs from Redshift database...")
+    
     try:
-        connection = pymysql.connect(
-            host=HOST,
-            port=PORT,
-            user=USER,
-            password=PASSWORD,
-            database=DBNAME,
-            charset='utf8mb4'
+        connection = psycopg2.connect(
+            host=REDSHIFT_HOST,
+            database=REDSHIFT_DATABASE,
+            port=REDSHIFT_PORT,
+            user=REDSHIFT_USER,
+            password=REDSHIFT_PASSWORD,
+            connect_timeout=30
         )
         
         group_query = """
-        SELECT `groups`.`id` as `group_id`
-        FROM `groups` 
-        LEFT JOIN `schools` ON `groups`.`school_id` = `schools`.`id` 
-        LEFT JOIN `district_product` ON `groups`.`district_product_id` = `district_product`.`id` 
-        LEFT JOIN `launches` ON `groups`.`launch_id` = `launches`.`id` 
-        LEFT JOIN `organization_district_product` ON `groups`.`district_product_id` = `organization_district_product`.`district_product_id` 
-            AND `groups`.`launch_id` = `organization_district_product`.`launch_id` 
-        LEFT JOIN `districts` ON `district_product`.`district_id` = `districts`.`id` 
-        LEFT JOIN `group_vnumber` ON `groups`.`id` = `group_vnumber`.`group_id` 
-        WHERE `group_vnumber`.`role` = "CB" 
-            AND `schools`.`deleted_at` IS NULL 
-            AND `launches`.`deleted_at` IS NULL 
-            AND `groups`.`deleted_at` IS NULL 
-            AND `groups`.`sunset_tag` IS NULL 
-            AND `district_product`.`broad_tag` IN ("ECE - Maharashtra", "ECE - MP", "ECE - Chandigarh", "ECE - UP", "ECE - RJ", "ECE - Haryana")
-        GROUP BY `groups`.`id`
-        ORDER BY `group_id`
+        SELECT groups.id as group_id
+        FROM rl_dwh_prod.live.groups 
+        LEFT JOIN rl_dwh_prod.live.schools ON groups.school_id = schools.id 
+        LEFT JOIN rl_dwh_prod.live.district_product ON groups.district_product_id = district_product.id 
+        LEFT JOIN rl_dwh_prod.live.launches ON groups.launch_id = launches.id 
+        LEFT JOIN rl_dwh_prod.live.organization_district_product ON groups.district_product_id = organization_district_product.district_product_id 
+            AND groups.launch_id = organization_district_product.launch_id 
+        LEFT JOIN rl_dwh_prod.live.districts ON district_product.district_id = districts.id 
+        LEFT JOIN rl_dwh_prod.live.group_vnumber ON groups.id = group_vnumber.group_id 
+        WHERE group_vnumber.role = 'CB' 
+            AND schools.deleted_at IS NULL 
+            AND launches.deleted_at IS NULL 
+            AND groups.deleted_at IS NULL 
+            AND groups.sunset_tag IS NULL 
+            AND district_product.broad_tag IN ('ECE - Maharashtra', 'ECE - MP', 'ECE - Chandigarh', 'ECE - UP', 'ECE - RJ', 'ECE - Haryana')
+        GROUP BY groups.id
+        ORDER BY group_id
         """
         
         group_ids_df = pd.read_sql(group_query, connection)
@@ -2113,6 +2367,8 @@ def fetch_valid_group_ids() -> List[int]:
         
     except Exception as e:
         print(f"ERROR: Failed to fetch group IDs: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return []
 
 
@@ -2262,32 +2518,63 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
     print("PROCESSING: Time Series Data (Instances, Visits, Users)")
     print("=" * 60)
     
-    # Fetch time series data from database (single query for all metrics)
-    print("Fetching time series data from database...")
+    # Fetch time series data from Redshift (single query for all metrics)
+    print("=" * 60)
+    print("FETCHING: Time Series Data from REDSHIFT")
+    print("=" * 60)
+    print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
+    print(f"  Host: {REDSHIFT_HOST}")
+    print(f"  Database: {REDSHIFT_DATABASE}")
+    print(f"  Port: {REDSHIFT_PORT}")
+    print(f"  User: {REDSHIFT_USER}")
+    print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
+    
     df_time_series = pd.DataFrame()
-    try:
-        with pymysql.connect(
-            host=HOST,
-            port=PORT,
-            user=USER,
-            password=PASSWORD,
-            database=DBNAME,
-            connect_timeout=30,
-            read_timeout=300,
-            write_timeout=300,
-            ssl={'ssl': {}},
-        ) as conn:
-            with conn.cursor() as cur:
-                print("  Executing time series query...")
-                cur.execute(TIME_SERIES_QUERY)
-                rows = cur.fetchall()
-                cols = [d[0] for d in cur.description]
-                df_time_series = pd.DataFrame(rows, columns=cols)
-                print(f"  Time series query returned {len(df_time_series)} records")
-    except Exception as e:
-        print(f"  ERROR: Failed to fetch time series data: {str(e)}")
-        import traceback
-        traceback.print_exc()
+    
+    if not PSYCOPG2_AVAILABLE:
+        print("ERROR: psycopg2 not available. Cannot fetch time series data from Redshift.")
+        print("  Install with: pip install psycopg2-binary")
+    else:
+        try:
+            print(f"\n  [ACTION] Connecting to REDSHIFT...")
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=30
+            )
+            print(f"  ✓ Successfully connected to REDSHIFT")
+            print(f"  [ACTION] Executing time series query on REDSHIFT...")
+            df_time_series = pd.read_sql(TIME_SERIES_QUERY, conn)
+            conn.close()
+            print(f"  ✓ Query executed successfully on REDSHIFT")
+            print(f"  ✓ Connection closed")
+            
+            # Convert hex to int in Python (handles large values)
+            if 'idvisitor_hex' in df_time_series.columns:
+                print(f"  [ACTION] Converting hex to integer in Python...")
+                df_time_series = convert_hex_to_int(df_time_series, 'idvisitor_hex', 'idvisitor_converted')
+                print(f"  ✓ Converted idvisitor_hex to idvisitor_converted")
+            
+            print(f"  ✓ Time series query returned {len(df_time_series)} records from REDSHIFT")
+        except psycopg2.OperationalError as e:
+            print(f"\n  ERROR: Failed to connect to REDSHIFT:")
+            print(f"    Error Type: OperationalError (connection issue)")
+            print(f"    Error Message: {str(e)}")
+            print(f"    Check:")
+            print(f"      - REDSHIFT credentials are correct in .env file")
+            print(f"      - Network connectivity to Redshift cluster")
+            print(f"      - Redshift cluster is running and accessible")
+            import traceback
+            traceback.print_exc()
+        except Exception as e:
+            print(f"\n  ERROR: Failed to fetch time series data from REDSHIFT:")
+            print(f"    Error Type: {type(e).__name__}")
+            print(f"    Error Message: {str(e)}")
+            import traceback
+            traceback.print_exc()
     
     # Process time series data (instances, visits, users all from same query)
     time_series_df = pd.DataFrame()
@@ -2358,24 +2645,65 @@ def process_repeatability(df_main: Optional[pd.DataFrame] = None) -> pd.DataFram
     print("PROCESSING: Repeatability Data")
     print("=" * 60)
     
+    print(f"\n[STEP 1] Fetching repeatability data from Redshift...")
     repeatability_df = fetch_hybrid_repeatability_data()
     
-    # Fallback to Matomo data if hybrid data fails
+    # Fallback to processed data if Redshift fetch fails
     if repeatability_df.empty:
-        print("Using Matomo data as fallback...")
-        if df_main is None:
-            print("Loading main data from CSV...")
-            df_main = pd.read_csv('data/processed_data.csv')
-            df_main['server_time'] = pd.to_datetime(df_main['server_time'])
-        repeatability_df = preprocess_repeatability_data(df_main)
-    
-    # Save to CSV regardless of data source (hybrid or Matomo)
-    if not repeatability_df.empty:
-        repeatability_df.to_csv('data/repeatability_data.csv', index=False)
-        print(f"SUCCESS: Saved data/repeatability_data.csv ({len(repeatability_df)} records)")
+        print(f"\n[STEP 2] Redshift data is empty, trying fallback to processed data...")
+        print(f"  [ACTION] Loading processed_data.csv...")
+        try:
+            if df_main is None:
+                if not os.path.exists('data/processed_data.csv'):
+                    print(f"  ERROR: data/processed_data.csv not found")
+                    print(f"  Cannot use fallback method")
+                    print(f"  WARNING: No repeatability data to save")
+                    return pd.DataFrame()
+                
+                print(f"  [ACTION] Reading data/processed_data.csv...")
+                df_main = pd.read_csv('data/processed_data.csv')
+                print(f"  ✓ Loaded {len(df_main):,} records from processed_data.csv")
+                
+                if 'server_time' in df_main.columns:
+                    df_main['server_time'] = pd.to_datetime(df_main['server_time'])
+                    print(f"  ✓ Converted server_time to datetime")
+                else:
+                    print(f"  WARNING: server_time column not found in processed_data.csv")
+            
+            print(f"  [ACTION] Processing repeatability data from processed_data.csv...")
+            repeatability_df = preprocess_repeatability_data(df_main)
+            
+            if not repeatability_df.empty:
+                print(f"  ✓ Successfully processed repeatability data from fallback source")
+            else:
+                print(f"  WARNING: Fallback processing returned empty data")
+        except Exception as e:
+            print(f"  ERROR: Fallback processing failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
     else:
-        print("WARNING: No repeatability data to save")
+        print(f"\n[STEP 2] Redshift data fetched successfully, skipping fallback")
+    
+    # Save to CSV regardless of data source (Redshift or fallback)
+    print(f"\n[STEP 3] Saving repeatability data to CSV...")
+    if not repeatability_df.empty:
+        print(f"  [ACTION] Writing to data/repeatability_data.csv...")
+        repeatability_df.to_csv('data/repeatability_data.csv', index=False)
+        file_size_kb = os.path.getsize('data/repeatability_data.csv') / 1024
+        print(f"  ✓ SUCCESS: Saved data/repeatability_data.csv")
+        print(f"    - Records: {len(repeatability_df):,}")
+        print(f"    - File size: {file_size_kb:.2f} KB")
+        print(f"    - Columns: {list(repeatability_df.columns)}")
+        print(f"    - Sample data (first 5 rows):")
+        print(repeatability_df.head(5).to_string())
+    else:
+        print(f"  WARNING: No repeatability data to save")
+        print(f"  Creating empty CSV file...")
+        empty_df = pd.DataFrame(columns=['games_played', 'user_count'])
+        empty_df.to_csv('data/repeatability_data.csv', index=False)
+        print(f"  ✓ Created empty data/repeatability_data.csv")
 
+    print(f"\n✓ PROCESSING COMPLETE: Repeatability Data")
     return repeatability_df
 
 
@@ -2723,23 +3051,24 @@ def process_parent_poll() -> pd.DataFrame:
 
 
 def process_question_correctness() -> pd.DataFrame:
-    """Process question correctness data using score distribution query data"""
+    """Process question correctness data using three separate queries for all games"""
     print("\n" + "=" * 60)
     print("PROCESSING: Question Correctness Data")
     print("=" * 60)
     
-    print("Step 1: Fetching score distribution data...")
+    # Use score distribution query to get ALL games (not just the 23 in the three queries)
+    # This ensures we capture all ~28 games that should be included
+    print("Step 1: Fetching score distribution data (includes all games)...")
     df_score = fetch_score_dataframe()
     
     if df_score.empty:
-        print("WARNING: No score distribution data found")
+        print("WARNING: No score distribution data found either")
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
         return question_correctness_df
     
     print(f"  - Fetched {len(df_score)} records from score distribution query")
-    
-    print("Step 2: Extracting per-question correctness...")
+    print("Step 2: Extracting per-question correctness from score data...")
     per_question_df = extract_per_question_correctness(df_score)
     
     if per_question_df.empty:
