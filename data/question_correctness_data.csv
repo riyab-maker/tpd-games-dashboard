@@ -48,6 +48,13 @@ Beginning Sounds Ma/Ka/La,11,Correct,29.01,2425,8359
 Beginning Sounds Ma/Ka/La,11,Incorrect,77.2,6453,8359
 Beginning Sounds Ma/Ka/La,12,Correct,27.59,2274,8241
 Beginning Sounds Ma/Ka/La,12,Incorrect,78.05,6432,8241
+Beginning Sounds Sa/La/Va,1,Incorrect,100.0,10997,10997
+Beginning Sounds Sa/La/Va,2,Incorrect,100.0,10690,10690
+Beginning Sounds Sa/La/Va,3,Incorrect,100.0,10518,10518
+Beginning Sounds Sa/La/Va,4,Incorrect,100.0,10248,10248
+Beginning Sounds Sa/La/Va,5,Incorrect,100.0,10017,10017
+Beginning Sounds Sa/La/Va,6,Incorrect,100.0,9854,9854
+Beginning Sounds Sa/La/Va,7,Incorrect,100.0,1,1
 Beginning Sounds Ta/Va/Ga,1,Incorrect,100.0,1,1
 Beginning Sounds Ta/Va/Ga,2,Correct,100.0,1,1
 Beginning Sounds Ta/Va/Ga,3,Correct,100.0,1,1
@@ -130,6 +137,30 @@ Color Yellow,11,Correct,30.12,4224,14025
 Color Yellow,11,Incorrect,80.57,11300,14025
 Color Yellow,12,Correct,31.51,4373,13878
 Color Yellow,12,Incorrect,79.36,11013,13878
+Numbers Comparison,1,Correct,91.83,5055,5505
+Numbers Comparison,1,Incorrect,10.1,556,5505
+Numbers Comparison,2,Correct,91.59,5018,5479
+Numbers Comparison,2,Incorrect,10.55,578,5479
+Numbers Comparison,3,Correct,89.06,4891,5492
+Numbers Comparison,3,Incorrect,14.06,772,5492
+Numbers Comparison,4,Correct,91.48,5026,5494
+Numbers Comparison,4,Incorrect,10.5,577,5494
+Numbers Comparison,5,Correct,91.33,5012,5488
+Numbers Comparison,5,Incorrect,11.21,615,5488
+Numbers Comparison,6,Correct,86.29,4741,5494
+Numbers Comparison,6,Incorrect,16.98,933,5494
+Numbers Comparison,7,Correct,89.58,4928,5501
+Numbers Comparison,7,Incorrect,13.29,731,5501
+Numbers Comparison,8,Correct,91.2,5005,5488
+Numbers Comparison,8,Incorrect,11.24,617,5488
+Numbers Comparison,9,Correct,90.78,4984,5490
+Numbers Comparison,9,Incorrect,11.24,617,5490
+Numbers Comparison,10,Correct,88.33,4851,5492
+Numbers Comparison,10,Incorrect,14.42,792,5492
+Numbers Comparison,11,Correct,88.29,4849,5492
+Numbers Comparison,11,Incorrect,14.62,803,5492
+Numbers Comparison,12,Correct,90.34,4967,5498
+Numbers Comparison,12,Incorrect,12.13,667,5498
 Numbers I,1,Correct,60.74,13867,22830
 Numbers I,1,Incorrect,61.52,14046,22830
 Numbers I,2,Correct,44.53,9894,22218
@@ -225,6 +256,102 @@ Positions,12,Incorrect,71.05,11092,15612
 Positions,13,Correct,25.99,3997,15380
 Positions,13,Incorrect,81.05,12466,15380
 Positions,14,Incorrect,100.0,2,2
+Primary Emotion Labelling,1,Correct,91.9,5615,6110
+Primary Emotion Labelling,1,Incorrect,11.18,683,6110
+Primary Emotion Labelling,2,Correct,93.04,5658,6081
+Primary Emotion Labelling,2,Incorrect,9.7,590,6081
+Primary Emotion Labelling,3,Correct,95.37,5815,6097
+Primary Emotion Labelling,3,Incorrect,7.0,427,6097
+Primary Emotion Labelling,4,Correct,92.38,5625,6089
+Primary Emotion Labelling,4,Incorrect,10.51,640,6089
+Primary Emotion Labelling,5,Correct,92.09,5610,6092
+Primary Emotion Labelling,5,Incorrect,10.93,666,6092
+Primary Emotion Labelling,6,Correct,86.62,5276,6091
+Primary Emotion Labelling,6,Incorrect,17.63,1074,6091
+Primary Emotion Labelling,7,Correct,94.36,5740,6083
+Primary Emotion Labelling,7,Incorrect,8.17,497,6083
+Primary Emotion Labelling,8,Correct,78.65,4793,6094
+Primary Emotion Labelling,8,Incorrect,26.34,1605,6094
+Primary Emotion Labelling,9,Correct,94.93,5790,6099
+Primary Emotion Labelling,9,Incorrect,7.25,442,6099
+Primary Emotion Labelling,10,Correct,93.73,5711,6093
+Primary Emotion Labelling,10,Incorrect,8.94,545,6093
+Primary Emotion Labelling,11,Correct,94.66,5762,6087
+Primary Emotion Labelling,11,Incorrect,7.61,463,6087
+Primary Emotion Labelling,12,Correct,91.83,5606,6105
+Primary Emotion Labelling,12,Incorrect,11.12,679,6105
+Quantitative Comparison,1,Correct,94.76,9083,9585
+Quantitative Comparison,1,Incorrect,7.44,713,9585
+Quantitative Comparison,2,Correct,89.56,8548,9544
+Quantitative Comparison,2,Incorrect,14.1,1346,9544
+Quantitative Comparison,3,Correct,94.34,9023,9564
+Quantitative Comparison,3,Incorrect,8.49,812,9564
+Quantitative Comparison,4,Correct,92.46,8834,9554
+Quantitative Comparison,4,Incorrect,10.55,1008,9554
+Quantitative Comparison,5,Correct,94.94,9077,9561
+Quantitative Comparison,5,Incorrect,7.43,710,9561
+Quantitative Comparison,6,Correct,86.44,8267,9564
+Quantitative Comparison,6,Incorrect,17.6,1683,9564
+Quantitative Comparison,7,Correct,94.73,9065,9569
+Quantitative Comparison,7,Incorrect,7.5,718,9569
+Quantitative Comparison,8,Correct,86.17,8237,9559
+Quantitative Comparison,8,Incorrect,18.81,1798,9559
+Quantitative Comparison,9,Correct,91.12,8712,9561
+Quantitative Comparison,9,Incorrect,12.26,1172,9561
+Quantitative Comparison,10,Correct,90.33,8636,9560
+Quantitative Comparison,10,Incorrect,13.39,1280,9560
+Quantitative Comparison,11,Correct,94.91,9076,9563
+Quantitative Comparison,11,Incorrect,7.43,711,9563
+Quantitative Comparison,12,Correct,93.25,8918,9564
+Quantitative Comparison,12,Incorrect,9.97,954,9564
+Relational Comparison,1,Correct,94.09,6252,6645
+Relational Comparison,1,Incorrect,8.31,552,6645
+Relational Comparison,2,Correct,88.39,5863,6633
+Relational Comparison,2,Incorrect,16.82,1116,6633
+Relational Comparison,3,Correct,95.02,6319,6650
+Relational Comparison,3,Incorrect,7.83,521,6650
+Relational Comparison,4,Correct,92.97,6173,6640
+Relational Comparison,4,Incorrect,10.5,697,6640
+Relational Comparison,5,Correct,94.52,6280,6644
+Relational Comparison,5,Incorrect,8.55,568,6644
+Relational Comparison,6,Correct,89.3,5932,6643
+Relational Comparison,6,Incorrect,15.84,1052,6643
+Relational Comparison,7,Correct,92.32,6128,6638
+Relational Comparison,7,Incorrect,11.3,750,6638
+Relational Comparison,8,Correct,93.11,6186,6644
+Relational Comparison,8,Incorrect,10.31,685,6644
+Relational Comparison,9,Correct,90.68,6020,6639
+Relational Comparison,9,Incorrect,13.66,907,6639
+Relational Comparison,10,Correct,91.91,6109,6647
+Relational Comparison,10,Incorrect,12.01,798,6647
+Relational Comparison,11,Correct,86.9,5777,6648
+Relational Comparison,11,Incorrect,18.76,1247,6648
+Relational Comparison,12,Correct,93.05,6185,6647
+Relational Comparison,12,Incorrect,10.19,677,6647
+Relational Comparison II,1,Correct,95.13,5816,6114
+Relational Comparison II,1,Incorrect,7.51,459,6114
+Relational Comparison II,2,Correct,93.54,5704,6098
+Relational Comparison II,2,Incorrect,10.13,618,6098
+Relational Comparison II,3,Correct,94.54,5767,6100
+Relational Comparison II,3,Incorrect,9.07,553,6100
+Relational Comparison II,4,Correct,92.12,5621,6102
+Relational Comparison II,4,Incorrect,12.86,785,6102
+Relational Comparison II,5,Correct,93.43,5700,6101
+Relational Comparison II,5,Incorrect,10.24,625,6101
+Relational Comparison II,6,Correct,85.74,5229,6099
+Relational Comparison II,6,Incorrect,21.31,1300,6099
+Relational Comparison II,7,Correct,93.09,5683,6105
+Relational Comparison II,7,Incorrect,10.43,637,6105
+Relational Comparison II,8,Correct,91.67,5588,6096
+Relational Comparison II,8,Incorrect,13.29,810,6096
+Relational Comparison II,9,Correct,92.47,5648,6108
+Relational Comparison II,9,Incorrect,12.26,749,6108
+Relational Comparison II,10,Correct,88.34,5392,6104
+Relational Comparison II,10,Incorrect,17.32,1057,6104
+Relational Comparison II,11,Correct,94.49,5766,6102
+Relational Comparison II,11,Incorrect,8.47,517,6102
+Relational Comparison II,12,Correct,89.04,5436,6105
+Relational Comparison II,12,Incorrect,16.1,983,6105
 Revision Colors,1,Correct,96.02,4755,4952
 Revision Colors,1,Incorrect,4.95,245,4952
 Revision Colors,2,Correct,92.86,4632,4988
@@ -391,3 +518,28 @@ Shape Triangle,11,Correct,31.38,5821,18552
 Shape Triangle,11,Incorrect,81.38,15097,18552
 Shape Triangle,12,Correct,26.45,4847,18322
 Shape Triangle,12,Incorrect,84.58,15497,18322
+Sorting Primary Colors,1,Incorrect,100.0,13073,13073
+Sorting Primary Colors,2,Incorrect,100.0,12670,12670
+Sorting Primary Colors,3,Incorrect,100.0,12379,12379
+Sorting Primary Colors,4,Incorrect,100.0,12167,12167
+Sorting Primary Colors,5,Incorrect,100.0,11970,11970
+Sorting Primary Colors,6,Incorrect,100.0,11799,11799
+Sorting Primary Colors,7,Incorrect,100.0,11663,11663
+Sorting Primary Colors,8,Incorrect,100.0,11507,11507
+Sorting Primary Colors,9,Incorrect,100.0,11340,11340
+Sorting Primary Colors,10,Incorrect,100.0,11167,11167
+Sorting Primary Colors,11,Incorrect,100.0,11003,11003
+Sorting Primary Colors,12,Incorrect,100.0,10918,10918
+Sorting Primary Shapes,0,Incorrect,100.0,2,2
+Sorting Primary Shapes,1,Incorrect,100.0,7300,7300
+Sorting Primary Shapes,2,Incorrect,100.0,7124,7124
+Sorting Primary Shapes,3,Incorrect,100.0,6795,6795
+Sorting Primary Shapes,4,Incorrect,100.0,6695,6695
+Sorting Primary Shapes,5,Incorrect,100.0,6612,6612
+Sorting Primary Shapes,6,Incorrect,100.0,6480,6480
+Sorting Primary Shapes,7,Incorrect,100.0,6386,6386
+Sorting Primary Shapes,8,Incorrect,100.0,6302,6302
+Sorting Primary Shapes,9,Incorrect,100.0,6226,6226
+Sorting Primary Shapes,10,Incorrect,100.0,6032,6032
+Sorting Primary Shapes,11,Incorrect,100.0,5953,5953
+Sorting Primary Shapes,12,Incorrect,100.0,5880,5880
