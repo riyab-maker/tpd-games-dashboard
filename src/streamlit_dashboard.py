@@ -351,7 +351,7 @@ def load_processed_data():
         }
         
         return (summary_df, game_conversion_df, time_series_df, 
-                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df, conversion_funnel_df)
+                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df, conversion_funnel_df, conversion_funnel_path)
     
     except Exception as e:
         st.error(f"❌ Error loading processed data: {str(e)}")
@@ -1577,7 +1577,7 @@ def main() -> None:
 
     with st.spinner("Loading data..."):
         (summary_df, game_conversion_df, time_series_df, 
-         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df, conversion_funnel_df) = load_processed_data()
+         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df, conversion_funnel_df, conversion_funnel_path) = load_processed_data()
 
     if summary_df.empty:
         st.warning("No data available.")
@@ -1658,9 +1658,8 @@ def main() -> None:
             st.write(f"- Empty: {conversion_funnel_df.empty}")
             st.write(f"- Columns: {list(conversion_funnel_df.columns) if not conversion_funnel_df.empty else 'N/A'}")
             st.write(f"- Has 'language' column: {'language' in conversion_funnel_df.columns if not conversion_funnel_df.empty else 'N/A'}")
-            # Show which file was loaded (if we can determine it)
-            if 'conversion_funnel_path' in locals():
-                st.write(f"- Loaded from: {conversion_funnel_path if 'conversion_funnel_path' in locals() else 'Unknown'}")
+            # Show which file was loaded
+            st.write(f"- Loaded from: {conversion_funnel_path if conversion_funnel_path else 'Unknown (fallback to processed_data_df)'}")
             st.write(f"**processed_data_df:**")
             st.write(f"- Empty: {processed_data_df.empty}")
             st.write(f"- Columns: {list(processed_data_df.columns) if not processed_data_df.empty else 'N/A'}")
