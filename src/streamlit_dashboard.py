@@ -259,10 +259,14 @@ def load_processed_data():
         if 'Instances' in summary_df.columns:
             summary_df['Instances'] = pd.to_numeric(summary_df['Instances'], errors='coerce').fillna(0).astype(int)
         
-        # Load conversion funnel raw data
+        # Load conversion funnel raw data - check both root and data/ directory
         conversion_funnel_path = os.path.join(DATA_DIR, "conversion_funnel.csv")
+        if not os.path.exists(conversion_funnel_path):
+            # Try root directory
+            conversion_funnel_path = "conversion_funnel.csv"
+        
         if os.path.exists(conversion_funnel_path):
-            conversion_funnel_df = pd.read_csv(conversion_funnel_path)
+            conversion_funnel_df = pd.read_csv(conversion_funnel_path, low_memory=False)
             # Ensure date column is properly formatted if it exists
             if 'date' in conversion_funnel_df.columns:
                 conversion_funnel_df['date'] = pd.to_datetime(conversion_funnel_df['date']).dt.date
@@ -1576,13 +1580,23 @@ def main() -> None:
     # Language filter - get unique languages from conversion_funnel_df (primary source for conversion funnel)
     unique_languages = []
     language_source = "none"
-    if 'language' in conversion_funnel_df.columns and not conversion_funnel_df.empty:
-        unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l and str(l).strip() != ''])
-        language_source = "conversion_funnel.csv"
-    elif 'language' in processed_data_df.columns and not processed_data_df.empty:
+    
+    # Check all possible sources for language data
+    if not conversion_funnel_df.empty:
+        if 'language' in conversion_funnel_df.columns:
+            unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l and str(l).strip() != ''])
+            language_source = "conversion_funnel.csv"
+        # If no language in conversion_funnel, try other sources
+        if not unique_languages and not processed_data_df.empty and 'language' in processed_data_df.columns:
+            unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l and str(l).strip() != ''])
+            language_source = "processed_data.csv"
+        if not unique_languages and not game_conversion_df.empty and 'language' in game_conversion_df.columns:
+            unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l and str(l).strip() != ''])
+            language_source = "game_conversion_numbers.csv"
+    elif not processed_data_df.empty and 'language' in processed_data_df.columns:
         unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l and str(l).strip() != ''])
         language_source = "processed_data.csv"
-    elif 'language' in game_conversion_df.columns and not game_conversion_df.empty:
+    elif not game_conversion_df.empty and 'language' in game_conversion_df.columns:
         unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l and str(l).strip() != ''])
         language_source = "game_conversion_numbers.csv"
     
@@ -1604,6 +1618,20 @@ def main() -> None:
             disabled=True,
             help="No language data found. Please ensure conversion_funnel.csv has a 'language' column with language values."
         )
+        # Show debug info to help diagnose the issue
+        with st.expander("🔍 Debug: Language Filter Issue", expanded=False):
+            st.write(f"**conversion_funnel_df:**")
+            st.write(f"- Empty: {conversion_funnel_df.empty}")
+            st.write(f"- Columns: {list(conversion_funnel_df.columns) if not conversion_funnel_df.empty else 'N/A'}")
+            st.write(f"- Has 'language' column: {'language' in conversion_funnel_df.columns if not conversion_funnel_df.empty else 'N/A'}")
+            st.write(f"**processed_data_df:**")
+            st.write(f"- Empty: {processed_data_df.empty}")
+            st.write(f"- Columns: {list(processed_data_df.columns) if not processed_data_df.empty else 'N/A'}")
+            st.write(f"- Has 'language' column: {'language' in processed_data_df.columns if not processed_data_df.empty else 'N/A'}")
+            st.write(f"**game_conversion_df:**")
+            st.write(f"- Empty: {game_conversion_df.empty}")
+            st.write(f"- Columns: {list(game_conversion_df.columns) if not game_conversion_df.empty else 'N/A'}")
+            st.write(f"- Has 'language' column: {'language' in game_conversion_df.columns if not game_conversion_df.empty else 'N/A'}")
     
     # Show filter summary
     if not selected_games or len(selected_games) == len(unique_games):
