@@ -259,20 +259,52 @@ def load_processed_data():
         if 'Instances' in summary_df.columns:
             summary_df['Instances'] = pd.to_numeric(summary_df['Instances'], errors='coerce').fillna(0).astype(int)
         
-        # Load conversion funnel raw data - check both root and data/ directory
-        # Priority: 1) data/conversion_funnel.csv, 2) conversion_funnel.csv (root)
+        # Load conversion funnel raw data - prioritize raw data with language column
+        # Strategy: Check both locations, but prefer files that have 'language' column
+        conversion_funnel_df = None
         conversion_funnel_path = None
-        if os.path.exists(os.path.join(DATA_DIR, "conversion_funnel.csv")):
-            conversion_funnel_path = os.path.join(DATA_DIR, "conversion_funnel.csv")
-        elif os.path.exists("conversion_funnel.csv"):
-            conversion_funnel_path = "conversion_funnel.csv"
         
-        if conversion_funnel_path and os.path.exists(conversion_funnel_path):
+        # Check all possible locations
+        possible_paths = [
+            os.path.join(DATA_DIR, "conversion_funnel.csv"),  # data/conversion_funnel.csv
+            "conversion_funnel.csv"  # root directory
+        ]
+        
+        # First, find all existing files and check which has language column
+        best_path = None
+        best_has_language = False
+        
+        for path in possible_paths:
+            if os.path.exists(path):
+                try:
+                    # Check first few rows to see if it has language column
+                    sample = pd.read_csv(path, nrows=5, low_memory=False)
+                    has_language = 'language' in sample.columns
+                    is_raw_data = 'idlink_va' in sample.columns or 'idvisitor' in sample.columns
+                    
+                    # Prefer files with language column, and raw data over aggregated
+                    if has_language and (best_path is None or not best_has_language):
+                        best_path = path
+                        best_has_language = True
+                    elif best_path is None:
+                        # Use this as fallback if no better option found
+                        best_path = path
+                except Exception:
+                    continue
+        
+        # Load the best file found
+        if best_path:
+            conversion_funnel_path = best_path
             conversion_funnel_df = pd.read_csv(conversion_funnel_path, low_memory=False)
+            
             # Ensure date column is properly formatted if it exists
             if 'date' in conversion_funnel_df.columns:
                 conversion_funnel_df['date'] = pd.to_datetime(conversion_funnel_df['date']).dt.date
-            # Ensure numeric columns are properly typed
+            elif 'server_time' in conversion_funnel_df.columns:
+                # Convert server_time to date if date column doesn't exist
+                conversion_funnel_df['date'] = pd.to_datetime(conversion_funnel_df['server_time']).dt.date
+            
+            # Ensure numeric columns are properly typed (only if they exist - for aggregated data)
             for col in ['instances', 'visits', 'users']:
                 if col in conversion_funnel_df.columns:
                     conversion_funnel_df[col] = pd.to_numeric(conversion_funnel_df[col], errors='coerce').fillna(0).astype(int)
@@ -1626,6 +1658,9 @@ def main() -> None:
             st.write(f"- Empty: {conversion_funnel_df.empty}")
             st.write(f"- Columns: {list(conversion_funnel_df.columns) if not conversion_funnel_df.empty else 'N/A'}")
             st.write(f"- Has 'language' column: {'language' in conversion_funnel_df.columns if not conversion_funnel_df.empty else 'N/A'}")
+            # Show which file was loaded (if we can determine it)
+            if 'conversion_funnel_path' in locals():
+                st.write(f"- Loaded from: {conversion_funnel_path if 'conversion_funnel_path' in locals() else 'Unknown'}")
             st.write(f"**processed_data_df:**")
             st.write(f"- Empty: {processed_data_df.empty}")
             st.write(f"- Columns: {list(processed_data_df.columns) if not processed_data_df.empty else 'N/A'}")
