@@ -1646,10 +1646,12 @@ def main() -> None:
             st.info(" | ".join(filter_info))
     
     # Apply global filters (domain, game, and language) to all dataframes
-    has_game_filter = selected_games and len(selected_games) < len(unique_games)
-    has_domain_filter = selected_domains and len(selected_domains) < len(unique_domains) if unique_domains else False
-    # Language filter is active if any languages are selected (even if all are selected, we still want to show it)
-    has_language_filter = selected_languages and len(selected_languages) > 0 if unique_languages else False
+    # Only consider a filter active if something is actually selected AND it's a subset of all options
+    has_game_filter = bool(selected_games) and len(selected_games) > 0 and len(selected_games) < len(unique_games)
+    has_domain_filter = bool(selected_domains) and len(selected_domains) > 0 and len(selected_domains) < len(unique_domains) if unique_domains else False
+    # Language filter is active ONLY when languages are actually selected (not empty)
+    # Unlike games/domains, we filter by language even if all languages are selected (to show explicit filtering)
+    has_language_filter = bool(selected_languages) and len(selected_languages) > 0 if unique_languages else False
     
     # Helper function to filter dataframes by domain, game, and language
     def apply_global_filters(df, df_name=''):
@@ -1672,18 +1674,20 @@ def main() -> None:
             if 'game_name' in filtered_df.columns:
                 filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
         
-        # Apply language filter
-        if has_language_filter:
+        # Apply language filter - ONLY if languages are actually selected (explicit check)
+        # This prevents filtering when selected_languages is empty or None
+        if has_language_filter and selected_languages is not None and len(selected_languages) > 0:
             if 'language' in filtered_df.columns:
+                # Only filter if the column exists and we have valid selections
                 filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
             elif 'game_name' in filtered_df.columns:
                 # Try to filter by games in selected languages from conversion_funnel_df or processed_data_df
                 games_in_languages = []
-                if 'language' in conversion_funnel_df.columns:
+                if 'language' in conversion_funnel_df.columns and not conversion_funnel_df.empty:
                     games_in_languages = conversion_funnel_df[
                         conversion_funnel_df['language'].isin(selected_languages)
                     ]['game_name'].unique()
-                elif 'language' in processed_data_df.columns:
+                elif 'language' in processed_data_df.columns and not processed_data_df.empty:
                     games_in_languages = processed_data_df[
                         processed_data_df['language'].isin(selected_languages)
                     ]['game_name'].unique()
@@ -1730,7 +1734,10 @@ def main() -> None:
     
     # Recalculate summary from conversion_funnel_df when any filter is applied
     # This ensures summary_data changes when language, domain, game, or date filters are applied
-    if not has_date_filter and not has_game_filter and not has_domain_filter and not has_language_filter:
+    # IMPORTANT: If language filter is applied (even without games), we must recalculate
+    any_filter_applied = has_date_filter or has_game_filter or has_domain_filter or has_language_filter
+    
+    if not any_filter_applied:
         # No filters applied - use summary_df directly for performance
         filtered_summary_df = summary_df.copy()
     elif conversion_funnel_df.empty:
@@ -1771,15 +1778,45 @@ def main() -> None:
                     filtered_conversion_funnel_data['game_name'].isin(selected_games)
                 ]
         
-        # Apply language filter
-        if has_language_filter:
+        # Apply language filter - ONLY if languages are actually selected (explicit check)
+        # This prevents filtering when selected_languages is empty or None
+        if has_language_filter and selected_languages is not None and len(selected_languages) > 0:
             if 'language' in filtered_conversion_funnel_data.columns:
+                # Only filter if the column exists and we have valid selections
                 filtered_conversion_funnel_data = filtered_conversion_funnel_data[
                     filtered_conversion_funnel_data['language'].isin(selected_languages)
                 ]
         
         # Calculate funnel metrics from filtered conversion_funnel data
         # This ensures summary_data changes when any filter (including language) is applied
+        # Debug: Check if event column exists
+        if 'event' not in filtered_conversion_funnel_data.columns:
+            # If event column doesn't exist, try to create it from 'name' column
+            if 'name' in filtered_conversion_funnel_data.columns:
+                # Import the parse function if available, or use a simple mapping
+                def parse_event_from_name(name):
+                    if pd.isna(name):
+                        return None
+                    name_str = str(name).lower()
+                    if 'started' in name_str:
+                        return 'started'
+                    elif 'introduction_completed' in name_str and 'mid' not in name_str:
+                        return 'introduction'
+                    elif 'mid_introduction' in name_str:
+                        return 'mid_introduction'
+                    elif 'poll_completed' in name_str:
+                        return 'parent_poll'
+                    elif 'action_completed' in name_str:
+                        return 'questions'
+                    elif 'reward_completed' in name_str:
+                        return 'rewards'
+                    elif 'question_completed' in name_str:
+                        return 'validation'
+                    elif 'completed' in name_str:
+                        return 'completed'
+                    return None
+                filtered_conversion_funnel_data['event'] = filtered_conversion_funnel_data['name'].apply(parse_event_from_name)
+        
         if not filtered_conversion_funnel_data.empty and 'event' in filtered_conversion_funnel_data.columns:
             # Check if it's the new aggregated format (has instances, visits, users columns)
             if 'instances' in filtered_conversion_funnel_data.columns and 'visits' in filtered_conversion_funnel_data.columns and 'users' in filtered_conversion_funnel_data.columns:
