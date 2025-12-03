@@ -1575,20 +1575,34 @@ def main() -> None:
     
     # Language filter - get unique languages from conversion_funnel_df (primary source for conversion funnel)
     unique_languages = []
-    if 'language' in conversion_funnel_df.columns:
-        unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l])
-    elif 'language' in processed_data_df.columns:
-        unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l])
-    elif 'language' in game_conversion_df.columns:
-        unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l])
+    language_source = "none"
+    if 'language' in conversion_funnel_df.columns and not conversion_funnel_df.empty:
+        unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l and str(l).strip() != ''])
+        language_source = "conversion_funnel.csv"
+    elif 'language' in processed_data_df.columns and not processed_data_df.empty:
+        unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l and str(l).strip() != ''])
+        language_source = "processed_data.csv"
+    elif 'language' in game_conversion_df.columns and not game_conversion_df.empty:
+        unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l and str(l).strip() != ''])
+        language_source = "game_conversion_numbers.csv"
     
+    # Always show language filter
     selected_languages = []
     if unique_languages:
         selected_languages = st.multiselect(
             "🌍 Select Language(s) to filter by:",
             options=unique_languages,
             default=[],  # Empty by default - shows all languages
-            help="Select one or more languages to filter all dashboard sections. Leave empty to show all languages."
+            help=f"Select one or more languages to filter all dashboard sections. Leave empty to show all languages. Found {len(unique_languages)} languages from {language_source}."
+        )
+    else:
+        # Show language filter as disabled if no languages found
+        st.multiselect(
+            "🌍 Select Language(s) to filter by:",
+            options=[],
+            default=[],
+            disabled=True,
+            help="No language data found. Please ensure conversion_funnel.csv has a 'language' column with language values."
         )
     
     # Show filter summary
@@ -1634,7 +1648,8 @@ def main() -> None:
     # Apply global filters (domain, game, and language) to all dataframes
     has_game_filter = selected_games and len(selected_games) < len(unique_games)
     has_domain_filter = selected_domains and len(selected_domains) < len(unique_domains) if unique_domains else False
-    has_language_filter = selected_languages and len(selected_languages) < len(unique_languages) if unique_languages else False
+    # Language filter is active if any languages are selected (even if all are selected, we still want to show it)
+    has_language_filter = selected_languages and len(selected_languages) > 0 if unique_languages else False
     
     # Helper function to filter dataframes by domain, game, and language
     def apply_global_filters(df, df_name=''):
