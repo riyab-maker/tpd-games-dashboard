@@ -316,9 +316,6 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     """Render a modern, professional dashboard with multiple chart types"""
     import altair as alt
     
-    # Add separate conversion funnels
-    st.markdown("### 🔄 Conversion Funnels")
-    
     # Display date range for conversion funnel - safe access
     try:
         if 'Event' in conversion_df.columns:
@@ -1533,22 +1530,8 @@ def main() -> None:
         st.warning("No data available.")
         return
 
-    # Add filters
-    st.markdown("### 🎮 Filters")
-    
-    # Date range filter for conversion funnel
-    if 'date' in processed_data_df.columns and not processed_data_df.empty:
-        min_date = processed_data_df['date'].min()
-        max_date = processed_data_df['date'].max()
-        date_range = st.date_input(
-            "📅 Select Date Range for Conversion Funnel:",
-            value=(min_date, max_date),
-            min_value=min_date,
-            max_value=max_date,
-            help="Select a date range to filter the conversion funnel data."
-        )
-    else:
-        date_range = None
+    # Add global filters (applies to all sections except conversion funnel date range)
+    st.markdown("### 🎮 Global Filters")
     
     # Domain filter - get unique domains from game_conversion_df or processed_data_df
     unique_domains = []
@@ -1563,7 +1546,7 @@ def main() -> None:
             "🌐 Select Domain(s) to filter by:",
             options=unique_domains,
             default=[],  # Empty by default - shows all domains
-            help="Select one or more domains to filter the conversion funnel. Leave empty to show all domains. Domain is extracted from game_code (e.g., HY-01-CG-01 -> CG)."
+            help="Select one or more domains to filter all dashboard sections. Leave empty to show all domains. Domain is extracted from game_code (e.g., HY-01-CG-01 -> CG)."
         )
     
     # Game Name filter - get unique games from game_conversion_df
@@ -1572,7 +1555,7 @@ def main() -> None:
         "🎮 Select Game Names to filter by:",
         options=unique_games,
         default=[],  # Empty by default - shows all games
-        help="Select one or more games to filter the dashboard data. Leave empty to show all games."
+        help="Select one or more games to filter all dashboard sections. Leave empty to show all games."
     )
     
     # Show filter summary
@@ -1603,9 +1586,60 @@ def main() -> None:
         if filter_info:
             st.info(" | ".join(filter_info))
     
-    # Filter processed data by date range and games if specified
-    # If no filters are applied, use summary_df directly
-    # Check if date filter is actually filtering (not just the full range)
+    # Apply global filters (domain and game) to all dataframes
+    has_game_filter = selected_games and len(selected_games) < len(unique_games)
+    has_domain_filter = selected_domains and len(selected_domains) < len(unique_domains) if unique_domains else False
+    
+    # Helper function to filter dataframes by domain and game
+    def apply_global_filters(df, df_name=''):
+        """Apply domain and game filters to a dataframe"""
+        filtered_df = df.copy()
+        
+        # Apply domain filter
+        if has_domain_filter:
+            if 'domain' in filtered_df.columns:
+                filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
+            elif 'game_name' in filtered_df.columns and 'domain' in game_conversion_df.columns:
+                # Filter by games in selected domains
+                games_in_domains = game_conversion_df[
+                    game_conversion_df['domain'].isin(selected_domains)
+                ]['game_name'].unique()
+                filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_domains)]
+        
+        # Apply game filter
+        if has_game_filter:
+            if 'game_name' in filtered_df.columns:
+                filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
+        
+        return filtered_df
+    
+    # Filter all dataframes with global filters
+    filtered_time_series_df = apply_global_filters(time_series_df) if not time_series_df.empty else time_series_df
+    filtered_score_distribution_df = apply_global_filters(score_distribution_df) if not score_distribution_df.empty else score_distribution_df
+    filtered_question_correctness_df = apply_global_filters(question_correctness_df) if not question_correctness_df.empty else question_correctness_df
+    filtered_poll_responses_df = apply_global_filters(poll_responses_df) if not poll_responses_df.empty else poll_responses_df
+    filtered_repeatability_df = apply_global_filters(repeatability_df) if not repeatability_df.empty else repeatability_df
+    filtered_video_viewership_df = apply_global_filters(video_viewership_df) if not video_viewership_df.empty else video_viewership_df
+    
+    # Render conversion funnel section with date range filter
+    st.markdown("---")
+    st.markdown("## 🔄 Conversion Funnels")
+    
+    # Date range filter for conversion funnel (only for this section)
+    if 'date' in processed_data_df.columns and not processed_data_df.empty:
+        min_date = processed_data_df['date'].min()
+        max_date = processed_data_df['date'].max()
+        date_range = st.date_input(
+            "📅 Select Date Range for Conversion Funnel:",
+            value=(min_date, max_date),
+            min_value=min_date,
+            max_value=max_date,
+            help="Select a date range to filter the conversion funnel data."
+        )
+    else:
+        date_range = None
+    
+    # Filter processed data by date range and global filters for conversion funnel
     has_date_filter = False
     if date_range and isinstance(date_range, tuple) and len(date_range) == 2 and date_range[0] and date_range[1]:
         if 'date' in processed_data_df.columns and not processed_data_df.empty:
@@ -1614,9 +1648,6 @@ def main() -> None:
             # Only consider it a filter if it's different from the full range
             if date_range[0] != min_date or date_range[1] != max_date:
                 has_date_filter = True
-    
-    has_game_filter = selected_games and len(selected_games) < len(unique_games)
-    has_domain_filter = selected_domains and len(selected_domains) < len(unique_domains) if unique_domains else False
     
     if not has_date_filter and not has_game_filter and not has_domain_filter:
         # No filters applied - use summary_df directly
@@ -1702,62 +1733,12 @@ def main() -> None:
     # Render conversion funnel with date and game filters applied
     render_modern_dashboard(filtered_summary_df, filtered_summary_df)
     
-    # Keep the old game-specific logic for backward compatibility (but it won't be used now)
-    if False:  # Disabled - using filtered_processed_data instead
-        # Show filtered conversion funnel - use game-specific numbers
-        selected_games_data = game_conversion_df[game_conversion_df['game_name'].isin(selected_games)]
-        if not selected_games_data.empty:
-            # Ensure all required columns exist
-            required_cols = ['started_users', 'completed_users', 'started_visits', 'completed_visits', 'started_instances', 'completed_instances']
-            for col in required_cols:
-                if col not in selected_games_data.columns:
-                    st.error(f"Missing required column: {col}")
-                    render_modern_dashboard(summary_df, summary_df)
-                    return
-            
-            # Aggregate the selected games - ensure numeric types
-            total_started_users = pd.to_numeric(selected_games_data['started_users'], errors='coerce').fillna(0).sum()
-            total_completed_users = pd.to_numeric(selected_games_data['completed_users'], errors='coerce').fillna(0).sum()
-            total_started_visits = pd.to_numeric(selected_games_data['started_visits'], errors='coerce').fillna(0).sum()
-            total_completed_visits = pd.to_numeric(selected_games_data['completed_visits'], errors='coerce').fillna(0).sum()
-            total_started_instances = pd.to_numeric(selected_games_data['started_instances'], errors='coerce').fillna(0).sum()
-            total_completed_instances = pd.to_numeric(selected_games_data['completed_instances'], errors='coerce').fillna(0).sum()
-            
-            # Convert to int to avoid float display issues
-            total_started_users = int(total_started_users) if not pd.isna(total_started_users) else 0
-            total_completed_users = int(total_completed_users) if not pd.isna(total_completed_users) else 0
-            total_started_visits = int(total_started_visits) if not pd.isna(total_started_visits) else 0
-            total_completed_visits = int(total_completed_visits) if not pd.isna(total_completed_visits) else 0
-            total_started_instances = int(total_started_instances) if not pd.isna(total_started_instances) else 0
-            total_completed_instances = int(total_completed_instances) if not pd.isna(total_completed_instances) else 0
-            
-            # Create summary data for selected games with explicit dtype and column order
-            selected_games_summary = pd.DataFrame({
-                'Event': ['Started', 'Completed'],
-                'Users': [total_started_users, total_completed_users],
-                'Visits': [total_started_visits, total_completed_visits],
-                'Instances': [total_started_instances, total_completed_instances]
-            })
-            # Ensure numeric columns are properly typed
-            selected_games_summary['Users'] = pd.to_numeric(selected_games_summary['Users'], errors='coerce').fillna(0).astype(int)
-            selected_games_summary['Visits'] = pd.to_numeric(selected_games_summary['Visits'], errors='coerce').fillna(0).astype(int)
-            selected_games_summary['Instances'] = pd.to_numeric(selected_games_summary['Instances'], errors='coerce').fillna(0).astype(int)
-            
-            # Verify the DataFrame structure before rendering
-            if selected_games_summary.empty or 'Event' not in selected_games_summary.columns:
-                st.error("Error creating filtered conversion data. Showing all games instead.")
-                render_modern_dashboard(summary_df, summary_df)
-            else:
-                render_modern_dashboard(selected_games_summary, selected_games_summary)
-        else:
-            st.warning("No data found for selected games.")
-    
     # Add Time Series Analysis - right after conversion funnels
     st.markdown("---")
     st.markdown("## 📈 Time-Series Analysis")
     
-    if not time_series_df.empty:
-        render_time_series_analysis(time_series_df, game_conversion_df)
+    if not filtered_time_series_df.empty:
+        render_time_series_analysis(filtered_time_series_df, game_conversion_df)
     else:
         st.warning("No time series data available.")
     
@@ -1765,8 +1746,8 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## 🎯 Score Distribution Analysis")
     
-    if not score_distribution_df.empty:
-        render_score_distribution_chart(score_distribution_df)
+    if not filtered_score_distribution_df.empty:
+        render_score_distribution_chart(filtered_score_distribution_df)
     else:
         st.warning("No score distribution data available.")
     
@@ -1774,8 +1755,8 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## ✅ Question Correctness by Question Number")
     
-    if not question_correctness_df.empty:
-        render_question_correctness_chart(question_correctness_df)
+    if not filtered_question_correctness_df.empty:
+        render_question_correctness_chart(filtered_question_correctness_df)
     else:
         st.warning("No question correctness data available. Please run preprocess_data.py to generate the data.")
     
@@ -1783,8 +1764,8 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## 📊 Parent Poll Responses Analysis")
     
-    if not poll_responses_df.empty:
-        render_parent_poll_responses(poll_responses_df, game_conversion_df)
+    if not filtered_poll_responses_df.empty:
+        render_parent_poll_responses(filtered_poll_responses_df, game_conversion_df)
     else:
         st.warning("No parent poll responses data available.")
     
@@ -1792,8 +1773,8 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## 🎮 Game Repeatability Analysis")
     
-    if not repeatability_df.empty:
-        render_repeatability_analysis(repeatability_df)
+    if not filtered_repeatability_df.empty:
+        render_repeatability_analysis(filtered_repeatability_df)
     else:
         st.warning("No repeatability data available.")
     
@@ -1801,8 +1782,8 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## 📹 Video Viewership")
     
-    if not video_viewership_df.empty:
-        render_video_viewership(video_viewership_df)
+    if not filtered_video_viewership_df.empty:
+        render_video_viewership(filtered_video_viewership_df)
     else:
         st.warning("No video viewership data available.")
 
