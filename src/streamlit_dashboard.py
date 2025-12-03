@@ -278,6 +278,18 @@ def load_processed_data():
         else:
             question_correctness_df = pd.DataFrame()
         
+        # Load video viewership data (optional)
+        vpath = os.path.join(DATA_DIR, "video_viewership_data.csv")
+        if os.path.exists(vpath):
+            video_viewership_df = pd.read_csv(vpath)
+            # Ensure numeric columns are properly typed
+            numeric_cols = ['Started', 'Questions', 'Rewards', 'Video Started', 'Average', 'Min', 'Max']
+            for col in numeric_cols:
+                if col in video_viewership_df.columns:
+                    video_viewership_df[col] = pd.to_numeric(video_viewership_df[col], errors='coerce').fillna(0)
+        else:
+            video_viewership_df = pd.DataFrame()
+        
         # Create metadata
         metadata = {
             'last_updated': datetime.now().isoformat(),
@@ -286,7 +298,7 @@ def load_processed_data():
         }
         
         return (summary_df, game_conversion_df, time_series_df, 
-                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, metadata, processed_data_df)
+                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df)
     
     except Exception as e:
         st.error(f"❌ Error loading processed data: {str(e)}")
@@ -1445,6 +1457,60 @@ def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> 
 
     _render_altair_chart(chart, use_container_width=True)
 
+
+def render_video_viewership(video_viewership_df: pd.DataFrame) -> None:
+    """Render video viewership data as a table with metrics."""
+    if video_viewership_df.empty:
+        st.warning("No video viewership data available.")
+        return
+    
+    st.markdown("### 📹 Video Viewership Metrics")
+    
+    # Display the data as a formatted table
+    display_df = video_viewership_df.copy()
+    
+    # Format numeric columns for better display
+    if 'Average' in display_df.columns:
+        display_df['Average'] = display_df['Average'].apply(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
+    if 'Min' in display_df.columns:
+        display_df['Min'] = display_df['Min'].apply(lambda x: f"{int(x)}" if pd.notna(x) else "N/A")
+    if 'Max' in display_df.columns:
+        display_df['Max'] = display_df['Max'].apply(lambda x: f"{int(x)}" if pd.notna(x) else "N/A")
+    
+    # Format other numeric columns
+    numeric_cols = ['Started', 'Questions', 'Rewards', 'Video Started']
+    for col in numeric_cols:
+        if col in display_df.columns:
+            display_df[col] = display_df[col].apply(lambda x: f"{int(x):,}" if pd.notna(x) else "N/A")
+    
+    # Display the table
+    st.dataframe(
+        display_df,
+        use_container_width=True,
+        hide_index=True
+    )
+    
+    # Add summary statistics
+    if not video_viewership_df.empty:
+        st.markdown("#### Summary Statistics")
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            total_started = video_viewership_df['Started'].sum() if 'Started' in video_viewership_df.columns else 0
+            st.metric("Total Started", f"{int(total_started):,}")
+        
+        with col2:
+            total_questions = video_viewership_df['Questions'].sum() if 'Questions' in video_viewership_df.columns else 0
+            st.metric("Total Questions", f"{int(total_questions):,}")
+        
+        with col3:
+            total_rewards = video_viewership_df['Rewards'].sum() if 'Rewards' in video_viewership_df.columns else 0
+            st.metric("Total Rewards", f"{int(total_rewards):,}")
+        
+        with col4:
+            total_video_started = video_viewership_df['Video Started'].sum() if 'Video Started' in video_viewership_df.columns else 0
+            st.metric("Total Video Started", f"{int(total_video_started):,}")
+
 # Streamlit page config must be called before any other Streamlit command
 st.set_page_config(page_title="Hybrid Dashboard", layout="wide")
 
@@ -1461,7 +1527,7 @@ def main() -> None:
 
     with st.spinner("Loading data..."):
         (summary_df, game_conversion_df, time_series_df, 
-         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, metadata, processed_data_df) = load_processed_data()
+         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df) = load_processed_data()
 
     if summary_df.empty:
         st.warning("No data available.")
@@ -1730,6 +1796,15 @@ def main() -> None:
         render_repeatability_analysis(repeatability_df)
     else:
         st.warning("No repeatability data available.")
+    
+    # Add Video Viewership Analysis
+    st.markdown("---")
+    st.markdown("## 📹 Video Viewership")
+    
+    if not video_viewership_df.empty:
+        render_video_viewership(video_viewership_df)
+    else:
+        st.warning("No video viewership data available.")
 
 
 # Streamlit automatically runs the script, so call main() directly
