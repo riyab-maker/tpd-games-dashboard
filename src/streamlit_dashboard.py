@@ -1622,37 +1622,24 @@ def main() -> None:
         help="Select one or more games to filter all dashboard sections. Leave empty to show all games."
     )
     
-    # Language filter - get unique languages from conversion_funnel_df (primary source for conversion funnel)
+    # Language filter - get unique languages from game_conversion_df or processed_data_df (same pattern as domain filter)
     unique_languages = []
-    language_source = "none"
-    
-    # Check all possible sources for language data
-    if not conversion_funnel_df.empty:
-        if 'language' in conversion_funnel_df.columns:
-            unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l and str(l).strip() != ''])
-            language_source = "conversion_funnel.csv"
-        # If no language in conversion_funnel, try other sources
-        if not unique_languages and not processed_data_df.empty and 'language' in processed_data_df.columns:
-            unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l and str(l).strip() != ''])
-            language_source = "processed_data.csv"
-        if not unique_languages and not game_conversion_df.empty and 'language' in game_conversion_df.columns:
-            unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l and str(l).strip() != ''])
-            language_source = "game_conversion_numbers.csv"
-    elif not processed_data_df.empty and 'language' in processed_data_df.columns:
-        unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l and str(l).strip() != ''])
-        language_source = "processed_data.csv"
-    elif not game_conversion_df.empty and 'language' in game_conversion_df.columns:
+    if 'language' in game_conversion_df.columns:
         unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l and str(l).strip() != ''])
-        language_source = "game_conversion_numbers.csv"
+    elif 'language' in processed_data_df.columns:
+        unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l and str(l).strip() != ''])
+    elif not conversion_funnel_df.empty and 'language' in conversion_funnel_df.columns:
+        # Fallback to conversion_funnel_df if not found in main dataframes
+        unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l and str(l).strip() != ''])
     
-    # Always show language filter
+    # Language filter - same pattern as domain filter
     selected_languages = []
     if unique_languages:
         selected_languages = st.multiselect(
             "🌍 Select Language(s) to filter by:",
             options=unique_languages,
             default=[],  # Empty by default - shows all languages
-            help=f"Select one or more languages to filter all dashboard sections. Leave empty to show all languages. Found {len(unique_languages)} languages from {language_source}."
+            help="Select one or more languages to filter all dashboard sections. Leave empty to show all languages."
         )
     else:
         # Show language filter as disabled if no languages found
@@ -1661,7 +1648,7 @@ def main() -> None:
             options=[],
             default=[],
             disabled=True,
-            help="No language data found. Please ensure conversion_funnel.csv has a 'language' column with language values."
+            help="No language data found. Please ensure game_conversion_numbers.csv or processed_data.csv has a 'language' column with language values."
         )
         # Show debug info to help diagnose the issue
         with st.expander("🔍 Debug: Language Filter Issue", expanded=False):
@@ -1749,25 +1736,16 @@ def main() -> None:
             if 'game_name' in filtered_df.columns:
                 filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
         
-        # Apply language filter - ONLY if languages are actually selected (explicit check)
-        # This prevents filtering when selected_languages is empty or None
-        if has_language_filter and selected_languages is not None and len(selected_languages) > 0:
+        # Apply language filter - same pattern as domain filter
+        if has_language_filter:
             if 'language' in filtered_df.columns:
-                # Only filter if the column exists and we have valid selections
                 filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
-            elif 'game_name' in filtered_df.columns:
-                # Try to filter by games in selected languages from conversion_funnel_df or processed_data_df
-                games_in_languages = []
-                if 'language' in conversion_funnel_df.columns and not conversion_funnel_df.empty:
-                    games_in_languages = conversion_funnel_df[
-                        conversion_funnel_df['language'].isin(selected_languages)
-                    ]['game_name'].unique()
-                elif 'language' in processed_data_df.columns and not processed_data_df.empty:
-                    games_in_languages = processed_data_df[
-                        processed_data_df['language'].isin(selected_languages)
-                    ]['game_name'].unique()
-                if len(games_in_languages) > 0:
-                    filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_languages)]
+            elif 'game_name' in filtered_df.columns and 'language' in game_conversion_df.columns:
+                # Filter by games in selected languages
+                games_in_languages = game_conversion_df[
+                    game_conversion_df['language'].isin(selected_languages)
+                ]['game_name'].unique()
+                filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_languages)]
         
         return filtered_df
     
