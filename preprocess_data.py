@@ -39,24 +39,30 @@ REDSHIFT_PASSWORD = os.getenv("REDSHIFT_PASSWORD", "Rlproduct@1234")
 # Schema prefix for all queries
 SCHEMA_PREFIX = "rl_dwh_prod.live"
 
-# Print database configuration at startup
-print("\n" + "=" * 60)
-print("DATABASE CONFIGURATION")
-print("=" * 60)
-print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
-print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
-print(f"  Host: {REDSHIFT_HOST}")
-print(f"  Database: {REDSHIFT_DATABASE}")
-print(f"  Port: {REDSHIFT_PORT}")
-print(f"  User: {REDSHIFT_USER}")
-print(f"  Schema Prefix: {SCHEMA_PREFIX}")
-print("=" * 60 + "\n")
+# Print database configuration at startup (only if psycopg2 is available)
+# Note: Question correctness uses scores_data.csv and doesn't need Redshift
+if PSYCOPG2_AVAILABLE:
+    print("\n" + "=" * 60)
+    print("DATABASE CONFIGURATION (for functions that need Redshift)")
+    print("=" * 60)
+    print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
+    print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
+    print(f"  Host: {REDSHIFT_HOST}")
+    print(f"  Database: {REDSHIFT_DATABASE}")
+    print(f"  Port: {REDSHIFT_PORT}")
+    print(f"  User: {REDSHIFT_USER}")
+    print(f"  Schema Prefix: {SCHEMA_PREFIX}")
+    print("=" * 60 + "\n")
+else:
+    print("\n" + "=" * 60)
+    print("NOTE: psycopg2 not available - Redshift functions will be disabled")
+    print("=" * 60)
+    print("  Question correctness uses scores_data.csv (no Redshift needed)")
+    print("  Other functions that need Redshift will show errors")
+    print("=" * 60 + "\n")
 
-# Validate required environment variables (use defaults if not set, but warn)
-if not PSYCOPG2_AVAILABLE:
-    print("ERROR: psycopg2 is required for Redshift connection.")
-    print("  Install with: pip install psycopg2-binary")
-    raise ValueError("psycopg2 is required for Redshift connection. Install with: pip install psycopg2-binary")
+# Validate psycopg2 only when needed (not required for question correctness which uses CSV)
+# The validation will happen in functions that actually need Redshift connection
 
 # SQL Queries - Updated with new event categorization
 # Event stages: started, introduction, questions, mid_introduction, validation, parent_poll, rewards, completed
@@ -137,8 +143,10 @@ WHERE mllva.server_time >= '2025-07-01'
   )
 """
 
-# Question Correctness Queries - Three separate queries for different game types
-QUESTION_CORRECTNESS_QUERY_1 = """
+# Note: Question Correctness now uses SCORE_DISTRIBUTION_QUERY (same as score distribution)
+# The old QUESTION_CORRECTNESS_QUERY_1, QUERY_2, and QUERY_3 are no longer used
+# They are kept below for reference but should not be used
+QUESTION_CORRECTNESS_QUERY_1_DEPRECATED = """
 SELECT 
   matomo_log_link_visit_action.custom_dimension_2, 
   matomo_log_link_visit_action.idvisit, 
@@ -166,7 +174,7 @@ WHERE matomo_log_action.name LIKE '%game_completed%'
   )
 """
 
-QUESTION_CORRECTNESS_QUERY_2 = """
+QUESTION_CORRECTNESS_QUERY_2_DEPRECATED = """
 SELECT 
   matomo_log_link_visit_action.custom_dimension_2,
   matomo_log_link_visit_action.idvisit,
@@ -189,7 +197,7 @@ WHERE matomo_log_action.name LIKE '%game_completed%'
   )
 """
 
-QUESTION_CORRECTNESS_QUERY_3 = """
+QUESTION_CORRECTNESS_QUERY_3_DEPRECATED = """
 SELECT matomo_log_link_visit_action.idlink_va, 
 TO_HEX(matomo_log_link_visit_action.idvisitor) AS idvisitor_hex, 
 matomo_log_link_visit_action.idvisit, 
@@ -530,7 +538,12 @@ def fetch_score_dataframe() -> pd.DataFrame:
 
 
 def parse_correct_selections_questions(custom_dim_1, game_name):
-    """Parse correctSelections structure to extract question correctness (for "This or That" games)"""
+    """Parse correctSelections structure to extract question correctness (for "This or That" games)
+    
+    Checks two structures:
+    1. roundDetails structure (for games like Quantitative Comparison)
+    2. Nested gameData structure (same path as score distribution's parse_custom_dimension_1_correct_selections)
+    """
     results = []
     try:
         if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
@@ -538,7 +551,7 @@ def parse_correct_selections_questions(custom_dim_1, game_name):
         
         data = json.loads(custom_dim_1)
         
-        # Check for roundDetails structure
+        # Method 1: Check for roundDetails structure (for games like Quantitative Comparison)
         if 'roundDetails' in data and isinstance(data['roundDetails'], list):
             for round_detail in data['roundDetails']:
                 if 'roundNumber' in round_detail:
@@ -570,13 +583,97 @@ def parse_correct_selections_questions(custom_dim_1, game_name):
                             'game_name': game_name
                         })
         
+        # Method 2: Check nested gameData structure for roundDetails
+        # Path: gameData[*] (where section="Action") -> gameData[*].gameData[*].roundDetails
+        # This matches the structure shown in the example JSON
+        if len(results) == 0 and 'gameData' in data and isinstance(data['gameData'], list):
+            for game_data in data['gameData']:
+                # Look for section="Action" (same as score distribution logic)
+                if game_data.get('section') == 'Action' and 'gameData' in game_data and isinstance(game_data['gameData'], list):
+                    for inner_game_data in game_data['gameData']:
+                        # Check for roundDetails in the nested structure (this is the key!)
+                        if 'roundDetails' in inner_game_data and isinstance(inner_game_data['roundDetails'], list):
+                            for round_detail in inner_game_data['roundDetails']:
+                                if 'roundNumber' in round_detail:
+                                    question_num = round_detail['roundNumber']
+                                    cards = round_detail.get('cards', [])
+                                    selections = round_detail.get('selections', [])
+                                    
+                                    if cards and selections:
+                                        # Find the correct card (status = true)
+                                        correct_card_index = None
+                                        for idx, card in enumerate(cards):
+                                            if card.get('status') is True:
+                                                correct_card_index = idx
+                                                break
+                                        
+                                        # Get selected card
+                                        selected_card_index = None
+                                        if selections and len(selections) > 0:
+                                            selected_card_index = selections[0].get('card')
+                                        
+                                        # Determine correctness
+                                        is_correct = (selected_card_index is not None and 
+                                                    correct_card_index is not None and 
+                                                    selected_card_index == correct_card_index)
+                                        
+                                        results.append({
+                                            'question_number': question_num,
+                                            'is_correct': 1 if is_correct else 0,
+                                            'game_name': game_name
+                                        })
+                        
+                        # Also check for rounds array (alternative structure)
+                        elif 'rounds' in inner_game_data and isinstance(inner_game_data['rounds'], list):
+                            for round_idx, round_data in enumerate(inner_game_data['rounds'], 1):
+                                if isinstance(round_data, dict):
+                                    # Try to determine correctness from round data
+                                    # Look for common patterns: isCorrect, correct, status, etc.
+                                    is_correct = 0
+                                    if 'isCorrect' in round_data:
+                                        is_correct = 1 if round_data['isCorrect'] else 0
+                                    elif 'correct' in round_data:
+                                        is_correct = 1 if round_data['correct'] else 0
+                                    elif 'status' in round_data:
+                                        is_correct = 1 if round_data['status'] else 0
+                                    elif 'selected' in round_data and 'correctOption' in round_data:
+                                        is_correct = 1 if round_data.get('selected') == round_data.get('correctOption') else 0
+                                    
+                                    question_num = round_data.get('roundNumber', round_data.get('questionNumber', round_data.get('level', round_idx)))
+                                    results.append({
+                                        'question_number': int(question_num),
+                                        'is_correct': is_correct,
+                                        'game_name': game_name
+                                    })
+                        
+                        # Also check for questions array
+                        elif 'questions' in inner_game_data and isinstance(inner_game_data['questions'], list):
+                            for q_idx, question_data in enumerate(inner_game_data['questions'], 1):
+                                if isinstance(question_data, dict):
+                                    is_correct = 0
+                                    if 'isCorrect' in question_data:
+                                        is_correct = 1 if question_data['isCorrect'] else 0
+                                    elif 'correct' in question_data:
+                                        is_correct = 1 if question_data['correct'] else 0
+                                    
+                                    question_num = question_data.get('questionNumber', question_data.get('number', q_idx))
+                                    results.append({
+                                        'question_number': int(question_num),
+                                        'is_correct': is_correct,
+                                        'game_name': game_name
+                                    })
+        
         return results
     except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError) as e:
         return results
 
 
 def parse_flow_stop_go_questions(custom_dim_1, game_name):
-    """Parse flow stop&go structure to extract question correctness (for "Flow Stop & Go" games)"""
+    """Parse flow structure to extract question correctness (for "Flow" games)
+    
+    This matches the logic used in score distribution's parse_custom_dimension_1_json_data
+    but extracts per-question instead of total score.
+    """
     results = []
     try:
         if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
@@ -584,25 +681,32 @@ def parse_flow_stop_go_questions(custom_dim_1, game_name):
         
         data = json.loads(custom_dim_1)
         
-        # Check for gameData structure with Action section
+        # Check for gameData structure with Action section (same as score distribution)
         if 'gameData' in data and isinstance(data['gameData'], list):
             for game_data in data['gameData']:
                 if game_data.get('section') == 'Action' and 'jsonData' in game_data:
                     json_data = game_data['jsonData']
                     
                     if isinstance(json_data, list):
+                        question_idx = 0
                         for level_data in json_data:
-                            if 'level' in level_data and 'flow' in level_data and level_data.get('flow') == 'stop&Go':
-                                question_num = level_data.get('level', 1)
-                                user_responses = level_data.get('userResponse', [])
-                                
-                                if user_responses and isinstance(user_responses, list):
-                                    # Get the first response
-                                    response = user_responses[0] if len(user_responses) > 0 else {}
+                            if not isinstance(level_data, dict):
+                                continue
+                            
+                            # Extract per-question from userResponse (same logic as score distribution)
+                            user_responses = level_data.get('userResponse', [])
+                            if isinstance(user_responses, list) and len(user_responses) > 0:
+                                # Use first userResponse (same as score distribution logic)
+                                response = user_responses[0]
+                                if isinstance(response, dict):
                                     is_correct = response.get('isCorrect', False)
+                                    question_idx += 1
+                                    
+                                    # Get question number from level if available, otherwise use index
+                                    question_num = level_data.get('level', question_idx)
                                     
                                     results.append({
-                                        'question_number': question_num,
+                                        'question_number': int(question_num),
                                         'is_correct': 1 if is_correct else 0,
                                         'game_name': game_name
                                     })
@@ -685,200 +789,18 @@ def get_game_type(game_name):
 
 
 def fetch_question_correctness_data() -> pd.DataFrame:
-    """Fetch question correctness data using three separate queries"""
+    """DEPRECATED: This function is no longer used. Use process_question_correctness() instead.
+    
+    This function has been replaced by process_question_correctness() which uses scores_data.csv
+    instead of fetching from the database. Kept for backward compatibility only.
+    """
     print("=" * 60)
-    print("FETCHING: Question Correctness Data from REDSHIFT")
+    print("WARNING: fetch_question_correctness_data() is DEPRECATED")
     print("=" * 60)
-    print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
-    print(f"  Host: {REDSHIFT_HOST}")
-    print(f"  Database: {REDSHIFT_DATABASE}")
-    print(f"  Port: {REDSHIFT_PORT}")
-    print(f"  User: {REDSHIFT_USER}")
-    print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
-    
-    all_results = []
-    
-    if not PSYCOPG2_AVAILABLE:
-        print("ERROR: psycopg2 not available. Cannot fetch question correctness data from Redshift.")
-        print("  Install with: pip install psycopg2-binary")
-        return pd.DataFrame()
-    
-    # Helper function to execute a single query
-    def execute_query(query, query_name):
-        """Execute a single query and return DataFrame, handling errors gracefully"""
-        try:
-            print(f"\n  [ACTION] Connecting to REDSHIFT for {query_name}...")
-            conn = psycopg2.connect(
-                host=REDSHIFT_HOST,
-                database=REDSHIFT_DATABASE,
-                port=REDSHIFT_PORT,
-                user=REDSHIFT_USER,
-                password=REDSHIFT_PASSWORD,
-                connect_timeout=30
-            )
-            print(f"  ✓ Connected to REDSHIFT")
-            print(f"  [ACTION] Executing {query_name} on REDSHIFT...")
-            df = pd.read_sql(query, conn)
-            conn.close()
-            print(f"  ✓ {query_name} executed successfully on REDSHIFT")
-            
-            # Convert hex to int in Python (handles large values)
-            if 'idvisitor_hex' in df.columns:
-                print(f"  [ACTION] Converting hex to integer in Python for {query_name}...")
-                df = convert_hex_to_int(df, 'idvisitor_hex', 'idvisitor_converted')
-                print(f"  ✓ Converted idvisitor_hex to idvisitor_converted")
-            
-            print(f"  ✓ {query_name} returned {len(df)} records")
-            return df
-        except psycopg2.OperationalError as e:
-            print(f"  ERROR: {query_name} failed to connect to REDSHIFT: {str(e)}")
-            print(f"  Continuing with other queries...")
-            return pd.DataFrame()
-        except Exception as e:
-            print(f"  ERROR: {query_name} failed on REDSHIFT: {str(e)}")
-            print(f"  Continuing with other queries...")
-            return pd.DataFrame()
-    
-    # Execute each query separately with error handling
-    df_score_1 = execute_query(QUESTION_CORRECTNESS_QUERY_1, "Query 1 (correctSelections games)")
-    df_score_2 = execute_query(QUESTION_CORRECTNESS_QUERY_2, "Query 2 (flow games)")
-    df_score_3 = execute_query(QUESTION_CORRECTNESS_QUERY_3, "Query 3 (action_level games)")
-    
-    # Process Query 1: correctSelections games
-    if not df_score_1.empty:
-        print("  Processing Query 1 results...")
-        if 'game_name' not in df_score_1.columns:
-            print("  WARNING: game_name column missing from Query 1 results")
-        else:
-            processed_count = 0
-            for _, row in df_score_1.iterrows():
-                try:
-                    game_name = row['game_name']
-                    custom_dim_1 = row['custom_dimension_1']
-                    game_type = get_game_type(game_name)
-                    
-                    if game_type == 'correctSelections':
-                        questions = parse_correct_selections_questions(custom_dim_1, game_name)
-                        for q in questions:
-                            all_results.append({
-                                'game_name': q['game_name'],
-                                'question_number': q['question_number'],
-                                'is_correct': q['is_correct'],
-                                'idvisitor_converted': row['idvisitor_converted'],
-                                'idvisit': row['idvisit']
-                            })
-                            processed_count += 1
-                except Exception as e:
-                    print(f"  WARNING: Error processing row in Query 1: {str(e)}")
-                    continue
-            print(f"  Processed {processed_count} question records from Query 1")
-    
-    # Process Query 2: flow games
-    if not df_score_2.empty:
-        print("  Processing Query 2 results...")
-        if 'game_name' not in df_score_2.columns:
-            print("  WARNING: game_name column missing from Query 2 results")
-        else:
-            processed_count = 0
-            for _, row in df_score_2.iterrows():
-                try:
-                    game_name = row['game_name']
-                    custom_dim_1 = row['custom_dimension_1']
-                    game_type = get_game_type(game_name)
-                    
-                    if game_type == 'flow':
-                        questions = parse_flow_stop_go_questions(custom_dim_1, game_name)
-                        for q in questions:
-                            all_results.append({
-                                'game_name': q['game_name'],
-                                'question_number': q['question_number'],
-                                'is_correct': q['is_correct'],
-                                'idvisitor_converted': row['idvisitor_converted'],
-                                'idvisit': row['idvisit']
-                            })
-                            processed_count += 1
-                except Exception as e:
-                    print(f"  WARNING: Error processing row in Query 2: {str(e)}")
-                    continue
-            print(f"  Processed {processed_count} question records from Query 2")
-    
-    # Process Query 3: action_level games
-    if not df_score_3.empty:
-        print("  Processing Query 3 results...")
-        if 'game_name' not in df_score_3.columns:
-            print("  WARNING: game_name column missing from Query 3 results")
-        else:
-            # Filter only action_level_* records
-            df_score_3_filtered = df_score_3[df_score_3['name'].str.contains('action_level_', na=False)].copy()
-            
-            # Extract level number from name
-            def extract_level_number(name):
-                try:
-                    if 'action_level_' in str(name):
-                        return int(str(name).split('action_level_')[1])
-                    return None
-                except:
-                    return None
-            
-            df_score_3_filtered['level_number'] = df_score_3_filtered['name'].apply(extract_level_number)
-            
-            processed_count = 0
-            for _, row in df_score_3_filtered.iterrows():
-                try:
-                    game_name = row['game_name']
-                    custom_dim_1 = row['custom_dimension_1']
-                    level_number = row['level_number']
-                    
-                    if level_number is not None:
-                        questions = parse_action_level_questions(custom_dim_1, game_name, level_number)
-                        for q in questions:
-                            all_results.append({
-                                'game_name': q['game_name'],
-                                'question_number': q['question_number'],
-                                'is_correct': q['is_correct'],
-                                'idvisitor_converted': row['idvisitor_converted'],
-                                'idvisit': row['idvisit']
-                            })
-                            processed_count += 1
-                except Exception as e:
-                    print(f"  WARNING: Error processing row in Query 3: {str(e)}")
-                    continue
-            print(f"  Processed {processed_count} question records from Query 3")
-    
-    if not all_results:
-        print("WARNING: No question correctness data found after processing all queries")
-        return pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
-    
-    # Convert to DataFrame
-    print(f"\nAggregating {len(all_results)} question records...")
-    results_df = pd.DataFrame(all_results)
-    print(f"SUCCESS: Processed {len(results_df)} question correctness records")
-    
-    # Transform to expected format (with correctness, percent, user_count, total_users)
-    # Aggregate by game and question: distinct users per correctness
-    total_by_q = (
-        results_df
-        .groupby(['game_name', 'question_number'])['idvisitor_converted']
-        .nunique()
-        .reset_index(name='total_users')
-    )
-    
-    # Correct and incorrect distinct users
-    agg = (
-        results_df
-        .groupby(['game_name', 'question_number', 'is_correct'])['idvisitor_converted']
-        .nunique()
-        .reset_index(name='user_count')
-    )
-    agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
-    agg['percent'] = (agg['user_count'] / agg['total_users'].where(agg['total_users'] > 0, 1) * 100).round(2)
-    agg['correctness'] = agg['is_correct'].map({1: 'Correct', 0: 'Incorrect'})
-    question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']]
-    
-    print(f"SUCCESS: Final question correctness data: {len(question_correctness_df)} records")
-    print(f"  Games: {question_correctness_df['game_name'].nunique()}")
-    print(f"  Questions: {question_correctness_df['question_number'].nunique()}")
-    return question_correctness_df
+    print("  This function is no longer used.")
+    print("  Use process_question_correctness() instead, which uses scores_data.csv")
+    print("=" * 60)
+    return pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
 
 
 def parse_custom_dimension_1_correct_selections(custom_dim_1):
@@ -1012,7 +934,12 @@ def get_game_name_from_custom_dimension_2(custom_dim_2):
 
 
 def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
-    """Extract per-question correctness across games using the unified score query dataset.
+    """Extract per-question correctness across games using the same processing method as score distribution.
+    
+    This function processes each game dynamically, using the same logic as calculate_score_distribution_combined:
+    - For game_completed: Tries both correct_selections and jsonData methods, picks the one that works
+    - Also checks for roundDetails first (for games like Quantitative Comparison)
+    - For action_level: Uses parse_custom_dimension_1_action_games (same as score distribution)
 
     Output columns:
     - game_name: str
@@ -1042,209 +969,284 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     except Exception:
         pass
 
-    # Target games and mechanics mapping
-    MECHANIC_BY_GAME = {
-        'Beginning Sound Ba/Ra/Na': 'action_level',
-        'Beginning Sounds Ma/Ka/La': 'action_level',
-        'Beginning Sounds Pa/Cha/Sa': 'correct_selections',
-        'Color Blue': 'action_level',
-        'Color Red': 'action_level',
-        'Color Yellow': 'action_level',
-        'Emotion Identification': 'correct_selections',
-        'Identification of all emotions': 'correct_selections',
-        'Numbers Comparison': 'correct_selections',
-        'Numbers I': 'action_level',
-        'Numbers II': 'action_level',
-        'Numerals 1-10': 'action_level',
-        'Primary Emotion Labelling': 'correct_selections',
-        'Quantitative Comparison': 'correct_selections',
-        'Relational Comparison': 'correct_selections',
-        'Relational Comparison II': 'correct_selections',
-        'Revision Colors': 'flow',
-        'Revision Shapes': 'flow',
-        'Rhyming Words': 'flow',
-        'Shape Circle': 'action_level',
-        'Shape Rectangle': 'action_level',
-        'Shape Square': 'action_level',
-        'Shape Triangle': 'action_level',
-    }
+    # Note: We no longer exclude sorting games - they should be processed like other games
 
-    # Debug: Show all unique game names in the data
-    print("\nDEBUG: All unique game names in df_score:")
-    unique_games = sorted(df_score['game_name'].unique().tolist())
-    for g in unique_games:
-        print(f"  - '{g}'")
-    print(f"Total unique games: {len(unique_games)}")
-
-    # Exclude any sorting games, robustly by name match
-    df_score = df_score[~df_score['game_name'].astype(str).str.contains('sorting', case=False, na=False)].copy()
-
-    # Create a more flexible matching: case-insensitive and handle variations
-    def _find_matching_game(actual_name: str, target_map: dict) -> tuple:
-        """Find matching game name from target map, case-insensitive and flexible"""
-        actual_lower = str(actual_name).lower().strip()
-        for target_name, mech in target_map.items():
-            target_lower = str(target_name).lower().strip()
-            # Exact match
-            if actual_lower == target_lower:
-                return (target_name, mech)
-            # Partial match (contains)
-            if target_lower in actual_lower or actual_lower in target_lower:
-                return (target_name, mech)
-        return (None, None)
-    
-    # Create a mapping from actual game names to canonical names
-    game_mapping = {}
-    for actual_name in df_score['game_name'].unique():
-        canonical, mech = _find_matching_game(actual_name, MECHANIC_BY_GAME)
-        if canonical:
-            game_mapping[actual_name] = (canonical, mech)
-            print(f"DEBUG: Mapped '{actual_name}' -> '{canonical}' ({mech})")
-    
-    print(f"\nDEBUG: Successfully matched {len(game_mapping)} games out of {len(MECHANIC_BY_GAME)} target games")
-    unmatched_targets = set(MECHANIC_BY_GAME.keys()) - {v[0] for v in game_mapping.values()}
-    if unmatched_targets:
-        print(f"DEBUG: Unmatched target games: {sorted(unmatched_targets)}")
-    
-    # Filter and normalize game names
-    df_score = df_score[df_score['game_name'].isin(game_mapping.keys())].copy()
-    df_score['game_name_canonical'] = df_score['game_name'].map(lambda x: game_mapping.get(x, (None, None))[0])
-    df_score = df_score[df_score['game_name_canonical'].notna()].copy()
-    df_score['game_name'] = df_score['game_name_canonical']
-    df_score = df_score.drop(columns=['game_name_canonical'])
+    print(f"\nProcessing per-question correctness for {df_score['game_name'].nunique()} unique games")
+    print(f"  - Total records: {len(df_score):,}")
 
     # Split by action types
-    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
+    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed|mcq_completed', na=False, case=False)].copy()
     action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
+
+    print(f"  - game_completed/mcq_completed records: {len(game_completed_data):,}")
+    print(f"  - action_level records: {len(action_level_data):,}")
+    print(f"  - Unique games in game_completed/mcq_completed: {game_completed_data['game_name'].nunique()}")
+    print(f"  - Unique games in action_level: {action_level_data['game_name'].nunique()}")
 
     per_question_rows: list[dict] = []
 
-    # 1) Handle game_completed with correctSelections / roundDetails schema OR flow
+    # Helper function to find matching game name (case-insensitive, handles variations)
+    # Used only for action_level filtering
+    def _find_game_method(game_name: str) -> str:
+        """Find processing method for a game name (case-insensitive match) - used for action_level filtering only"""
+        # Only check if it's action_level (games that should be in action_level_data)
+        action_level_games = {
+            'Beginning Sounds Ma/Ka/La', 'Color Blue', 'Color Red', 'Color Yellow',
+            'Numbers I', 'Numbers II', 'Numerals 1-10', 'Shape Circle', 'Shape Rectangle',
+            'Shape Square', 'Shape Triangle', 'Positions', 'Sorting Primary Colors'
+        }
+        game_name_clean = str(game_name).strip().lower()
+        for mapped_game in action_level_games:
+            if game_name_clean == str(mapped_game).strip().lower():
+                return 'action_level'
+        return None
+
+    # 1) Handle game_completed/mcq_completed - Process each game dynamically (same as score distribution)
     if not game_completed_data.empty:
-        for _, row in game_completed_data.iterrows():
-            # Only process this record using the intended mechanic for the game
-            # Game name is already canonicalized above
-            mech = MECHANIC_BY_GAME.get(str(row['game_name']))
-            if mech not in ('correct_selections', 'flow'):
+        unique_games = game_completed_data['game_name'].nunique()
+        total_game_completed_records = len(game_completed_data)
+        print(f"\n  [STEP 1] Processing {unique_games} unique games from game_completed/mcq_completed")
+        print(f"  - Total records: {total_game_completed_records:,}")
+        print(f"  - Using dynamic method selection (same as score distribution)...")
+        print(f"  - Games to process: {sorted(game_completed_data['game_name'].unique())}")
+        
+        import time
+        step_start_time = time.time()
+        
+        # Process each game dynamically - try both methods and pick the best one (same as score distribution)
+        games_processed = 0
+        games_skipped = 0
+        all_games_list = sorted(game_completed_data['game_name'].unique())
+        
+        for game_idx, game_name in enumerate(all_games_list, 1):
+            print(f"\n    [GAME {game_idx}/{len(all_games_list)}] Processing: {game_name}")
+            game_data = game_completed_data[game_completed_data['game_name'] == game_name].copy()
+            
+            # Skip action_level games in game_completed (they should be in action_level_data)
+            if _find_game_method(game_name) == 'action_level':
+                print(f"    [SKIP] {game_name}: Should be processed in action_level section")
+                games_skipped += 1
                 continue
-            raw = row.get('custom_dimension_1')
-            if pd.isna(raw) or raw in (None, '', 'null'):
-                continue
-            try:
-                obj = json.loads(raw)
-            except Exception:
-                continue
-
-            # Prefer roundDetails for per-question ("This or That" mechanic) when mapped
-            round_details = obj.get('roundDetails') if isinstance(obj, dict) else None
-            if mech == 'correct_selections' and isinstance(round_details, list) and len(round_details) > 0:
-                for rd in round_details:
-                    try:
-                        # Determine correct card index
-                        correct_index = None
-                        cards = rd.get('cards', [])
-                        if isinstance(cards, list):
-                            for idx, card in enumerate(cards):
-                                if isinstance(card, dict) and card.get('status') is True:
-                                    correct_index = idx
-                                    break
-
-                        # Determine selected card index (use last selection if multiple)
-                        selections = rd.get('selections', [])
-                        selected_index = None
-                        if isinstance(selections, list) and len(selections) > 0:
-                            sel = selections[-1]
-                            if isinstance(sel, dict) and 'card' in sel:
-                                selected_index = sel.get('card')
-
-                        # Compute correctness
-                        is_correct = 1 if (correct_index is not None and selected_index is not None and int(selected_index) == int(correct_index)) else 0
-
-                        # Question number from roundNumber, fallback to sequence
-                        qn = rd.get('roundNumber')
-                        if isinstance(qn, int):
-                            question_number = qn
-                        else:
-                            # Fallback to 1-based index
-                            question_number = 1
-
-                        per_question_rows.append({
-                            'game_name': row['game_name'],
-                            'idvisitor_converted': row['idvisitor_converted'],
-                            'idvisit': row['idvisit'],
-                            'session_instance': 1,
-                            'question_number': int(question_number),
-                            'is_correct': int(is_correct)
-                        })
-                    except Exception:
-                        continue
-            elif mech == 'flow':
-                # Try jsonData structure with userResponse[].isCorrect per level ("Flow Stop & Go" mechanic)
+            
+            total_records = len(game_data)
+            print(f"    - Testing methods for {game_name} ({total_records:,} records)...")
+            
+            # Try both methods on a sample to determine which works better (same as score distribution)
+            # Method 1: correct_selections (roundDetails or nested gameData)
+            correct_selections_count = 0
+            correct_selections_total_questions = 0
+            # Method 2: flow (gameData->jsonData)
+            flow_count = 0
+            flow_total_questions = 0
+            
+            # Test on up to 200 records or all records if less than 200 (increased from 100 for better coverage)
+            test_sample_size = min(200, total_records)
+            test_sample = game_data.head(test_sample_size)
+            
+            for row_tuple in test_sample.itertuples(index=False):
+                raw = getattr(row_tuple, 'custom_dimension_1', None)
+                if pd.isna(raw) or raw in (None, '', 'null'):
+                    continue
+                
+                # Test Method 1: correct_selections
                 try:
-                    game_data = obj.get('gameData') if isinstance(obj, dict) else None
-                    if isinstance(game_data, list):
-                        question_idx = 0
-                        for gd in game_data:
-                            if isinstance(gd, dict) and gd.get('section') == 'Action' and isinstance(gd.get('jsonData'), list):
-                                for level in gd['jsonData']:
-                                    if not isinstance(level, dict):
-                                        continue
-                                    # Only consider stop&Go flow where applicable
-                                    flow_val = level.get('flow')
-                                    # If flow is present, require stop&Go; if flow absent, still process as single question
-                                    if flow_val is not None and str(flow_val).lower() != 'stop&go':
-                                        continue
-                                    # Use first userResponse if list exists
-                                    user_resp = level.get('userResponse')
-                                    if isinstance(user_resp, list) and len(user_resp) > 0 and isinstance(user_resp[0], dict):
-                                        is_corr = 1 if bool(user_resp[0].get('isCorrect')) else 0
-                                        question_idx += 1
-                                        per_question_rows.append({
-                                            'game_name': row['game_name'],
-                                            'idvisitor_converted': row['idvisitor_converted'],
-                                            'idvisit': row['idvisit'],
-                                            'session_instance': 1,
-                                            'question_number': int(question_idx),
-                                            'is_correct': is_corr
-                                        })
+                    results = parse_correct_selections_questions(raw, game_name)
+                    if len(results) > 0:
+                        correct_selections_count += 1
+                        correct_selections_total_questions += len(results)
                 except Exception:
                     pass
+                
+                # Test Method 2: flow
+                try:
+                    results = parse_flow_stop_go_questions(raw, game_name)
+                    if len(results) > 0:
+                        flow_count += 1
+                        flow_total_questions += len(results)
+                except Exception:
+                    pass
+            
+            # Choose the method that produces more valid results (same logic as score distribution)
+            # Prefer the method that extracts more questions overall, not just more records
+            if correct_selections_total_questions >= flow_total_questions and correct_selections_count > 0:
+                processing_method = 'correct_selections'
+                print(f"    - {game_name}: Using correct_selections method ({correct_selections_count} valid records, {correct_selections_total_questions} questions in sample)")
+            elif flow_total_questions > 0:
+                processing_method = 'flow'
+                print(f"    - {game_name}: Using flow method ({flow_count} valid records, {flow_total_questions} questions in sample)")
+            elif correct_selections_count > 0:
+                # Fallback: use correct_selections if it has any valid records
+                processing_method = 'correct_selections'
+                print(f"    - {game_name}: Using correct_selections method (fallback: {correct_selections_count} valid records in sample)")
+            elif flow_count > 0:
+                # Fallback: use flow if it has any valid records
+                processing_method = 'flow'
+                print(f"    - {game_name}: Using flow method (fallback: {flow_count} valid records in sample)")
             else:
-                # If mapping says correct_selections but roundDetails absent, skip
-                # If mapping says flow but flow data absent, skip
+                print(f"    - {game_name}: No valid results found with either method in sample of {test_sample_size} records")
+                print(f"      WARNING: This game will be skipped. Check if data structure matches expected format.")
+                games_skipped += 1
                 continue
+            
+            print(f"    [PROCESS] {game_name}: Using method '{processing_method}' ({total_records:,} records)")
+            games_processed += 1
+            
+            # Process records using the determined method (use itertuples for better performance)
+            records_processed = 0
+            records_with_data = 0
+            questions_extracted = 0
+            progress_interval = max(1000, total_records // 10)  # Show progress every 10% or 1000 records
+            
+            import time
+            start_time = time.time()
+            
+            for idx, row_tuple in enumerate(game_data.itertuples(index=False), 1):
+                # Show progress at intervals
+                if idx % progress_interval == 0 or idx == total_records:
+                    elapsed = time.time() - start_time
+                    rate = idx / elapsed if elapsed > 0 else 0
+                    remaining = (total_records - idx) / rate if rate > 0 else 0
+                    print(f"      [PROGRESS] {game_name}: {idx:,}/{total_records:,} records ({idx*100//total_records}%) | "
+                          f"Processed: {records_processed:,} | Questions: {questions_extracted:,} | "
+                          f"Rate: {rate:.0f} rec/s | ETA: {remaining:.0f}s", flush=True)
+                
+                # Get values from named tuple
+                raw = getattr(row_tuple, 'custom_dimension_1', None)
+                if pd.isna(raw) or raw in (None, '', 'null'):
+                    continue
+                
+                game_name_val = getattr(row_tuple, 'game_name', game_name)
+                idvisitor = getattr(row_tuple, 'idvisitor_converted', None)
+                idvisit = getattr(row_tuple, 'idvisit', None)
+                
+                # Method 1: correct_selections (roundDetails)
+                if processing_method == 'correct_selections':
+                    try:
+                        results = parse_correct_selections_questions(raw, game_name)
+                        if len(results) > 0:
+                            records_with_data += 1
+                            questions_extracted += len(results)
+                            for q_result in results:
+                                per_question_rows.append({
+                                    'game_name': game_name_val,
+                                    'idvisitor_converted': idvisitor,
+                                    'idvisit': idvisit,
+                                    'session_instance': 1,
+                                    'question_number': int(q_result['question_number']),
+                                    'is_correct': int(q_result['is_correct'])
+                                })
+                        records_processed += 1
+                    except Exception:
+                        records_processed += 1
+                        pass
+                
+                # Method 2: flow stop&go
+                elif processing_method == 'flow':
+                    try:
+                        results = parse_flow_stop_go_questions(raw, game_name)
+                        if len(results) > 0:
+                            records_with_data += 1
+                            questions_extracted += len(results)
+                            for q_result in results:
+                                per_question_rows.append({
+                                    'game_name': game_name_val,
+                                    'idvisitor_converted': idvisitor,
+                                    'idvisit': idvisit,
+                                    'session_instance': 1,
+                                    'question_number': int(q_result['question_number']),
+                                    'is_correct': int(q_result['is_correct'])
+                                })
+                        records_processed += 1
+                    except Exception:
+                        records_processed += 1
+                        pass
+            
+            elapsed_total = time.time() - start_time
+            print(f"      [OK] {game_name}: Completed in {elapsed_total:.1f}s | "
+                  f"Records: {records_processed:,}/{total_records:,} | "
+                  f"With data: {records_with_data:,} | "
+                  f"Questions extracted: {questions_extracted:,}", flush=True)
+                
 
-    # 2) Handle action_level records (single-question per record) — "Action Level" mechanic
+        step_elapsed = time.time() - step_start_time
+        total_questions = len([r for r in per_question_rows])
+        print(f"\n  [STEP 1 SUMMARY] Completed in {step_elapsed:.1f}s")
+        print(f"    - Processed: {games_processed} games")
+        print(f"    - Skipped: {games_skipped} games")
+        print(f"    - Total per-question records extracted: {total_questions:,}")
+    
+    # 2) Handle action_level records (same as score distribution)
     if not action_level_data.empty:
-        # Filter to only games that are action_level
-        action_level_games = {g for g, m in MECHANIC_BY_GAME.items() if m == 'action_level'}
-        action_level_data = action_level_data[action_level_data['game_name'].isin(action_level_games)].copy()
-        # Sort and assign session_instance per (user, game, visit) based on time gaps
+        # Process all action_level games (same as score distribution - no filtering)
+        unique_action_games = action_level_data['game_name'].nunique()
+        print(f"\n  [STEP 2] Processing {unique_action_games} unique games from action_level")
+        print(f"    - Games: {sorted(action_level_data['game_name'].unique())}")
+        
+        # Deduplicate (same as score distribution)
+        before_dedup = len(action_level_data)
+        print(f"    - Records before deduplication: {before_dedup:,}")
+        if 'idlink_va' in action_level_data.columns:
+            action_level_data = action_level_data.drop_duplicates(subset=['idlink_va'], keep='first')
+            print(f"    - Using idlink_va for deduplication")
+        else:
+            action_level_data = action_level_data.drop_duplicates(
+                subset=['idvisitor_converted', 'game_name', 'idvisit', 'server_time', 'custom_dimension_1'],
+                keep='first'
+            )
+            print(f"    - Using composite key for deduplication")
+        after_dedup = len(action_level_data)
+        if before_dedup != after_dedup:
+            print(f"    [OK] Removed {before_dedup - after_dedup:,} duplicate records ({before_dedup:,} -> {after_dedup:,})")
+        else:
+            print(f"    [OK] No duplicates found")
+        
+        # Sort and create session instances (same as score distribution)
+        print(f"    - Sorting records and creating session instances...")
         action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
-
+        
         session_instances = []
         current_session = 1
         prev_user = prev_game = prev_visit = None
         prev_time = None
-        for _, r in action_level_data.iterrows():
-            user = r['idvisitor_converted']
-            game = r['game_name']
-            visit = r['idvisit']
-            t = r['server_time']
+        
+        # Use itertuples for better performance
+        total_action_records = len(action_level_data)
+        print(f"    - Processing {total_action_records:,} records to create session instances...")
+        progress_interval = max(5000, total_action_records // 10)  # Show progress every 10% or 5000 records
+        
+        import time
+        start_time = time.time()
+        
+        for idx, row_tuple in enumerate(action_level_data.itertuples(index=False), 1):
+            # Show progress at intervals
+            if idx % progress_interval == 0 or idx == total_action_records:
+                elapsed = time.time() - start_time
+                rate = idx / elapsed if elapsed > 0 else 0
+                remaining = (total_action_records - idx) / rate if rate > 0 else 0
+                print(f"      [PROGRESS] Session instances: {idx:,}/{total_action_records:,} ({idx*100//total_action_records}%) | "
+                      f"Rate: {rate:.0f} rec/s | ETA: {remaining:.0f}s", flush=True)
+            
+            user = getattr(row_tuple, 'idvisitor_converted', None)
+            game = getattr(row_tuple, 'game_name', None)
+            visit = getattr(row_tuple, 'idvisit', None)
+            time_val = getattr(row_tuple, 'server_time', None)
+            
             if user != prev_user or game != prev_game or visit != prev_visit:
                 current_session = 1
-            elif prev_time is not None:
-                try:
-                    gap = (t - prev_time).total_seconds()
-                    if gap > 300:
-                        current_session += 1
-                except Exception:
-                    pass
+            elif prev_time is not None and (time_val - prev_time).total_seconds() > 300:
+                current_session += 1
+            
             session_instances.append(current_session)
-            prev_user, prev_game, prev_visit, prev_time = user, game, visit, t
+            prev_user, prev_game, prev_visit, prev_time = user, game, visit, time_val
+        
+        elapsed_total = time.time() - start_time
+        print(f"    [OK] Created session instances in {elapsed_total:.1f}s")
+        
         action_level_data['session_instance'] = session_instances
-
-        # Prefer explicit level from action_name like "action_level_3"; fallback to sequence per session
+        unique_sessions = action_level_data.groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance']).size()
+        print(f"    [OK] Created {len(unique_sessions):,} unique game sessions")
+        
+        # Extract question number from action_name
         import re
         def _extract_level(action_name: str):
             try:
@@ -1254,7 +1256,7 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
             except Exception:
                 pass
             return None
-
+        
         levels = action_level_data['action_name'].apply(_extract_level)
         action_level_data['question_number'] = levels
         # Fallback numbering where level not found
@@ -1265,26 +1267,88 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                 .groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])
                 .cumcount() + 1
             )
-
-        # Compute correctness per record
-        def _safe_action_score(x: str) -> int:
+        
+        # Compute correctness per record using parse_action_level_questions (same as score distribution)
+        total_action_records = len(action_level_data)
+        print(f"    - Parsing question scores from custom_dimension_1 using parse_action_level_questions...")
+        print(f"    - Processing {total_action_records:,} records...")
+        correct_count = 0
+        incorrect_count = 0
+        progress_interval = max(5000, total_action_records // 10)  # Show progress every 10% or 5000 records
+        
+        import time
+        start_time = time.time()
+        
+        # Use itertuples for better performance
+        for idx, row_tuple in enumerate(action_level_data.itertuples(index=False), 1):
+            # Show progress at intervals
+            if idx % progress_interval == 0 or idx == total_action_records:
+                elapsed = time.time() - start_time
+                rate = idx / elapsed if elapsed > 0 else 0
+                remaining = (total_action_records - idx) / rate if rate > 0 else 0
+                print(f"      [PROGRESS] Parsing: {idx:,}/{total_action_records:,} ({idx*100//total_action_records}%) | "
+                      f"Correct: {correct_count:,} | Incorrect: {incorrect_count:,} | "
+                      f"Rate: {rate:.0f} rec/s | ETA: {remaining:.0f}s", flush=True)
+            
             try:
-                return int(parse_custom_dimension_1_action_games(x))
+                custom_dim = getattr(row_tuple, 'custom_dimension_1', None)
+                game_name_val = getattr(row_tuple, 'game_name', None)
+                question_num = int(getattr(row_tuple, 'question_number', 0))
+                
+                results = parse_action_level_questions(custom_dim, game_name_val, question_num)
+                if len(results) > 0:
+                    q_result = results[0]  # Should only have one result per record
+                    is_correct = q_result['is_correct']
+                    if is_correct == 1:
+                        correct_count += 1
+                    else:
+                        incorrect_count += 1
+                    
+                    per_question_rows.append({
+                        'game_name': game_name_val,
+                        'idvisitor_converted': getattr(row_tuple, 'idvisitor_converted', None),
+                        'idvisit': getattr(row_tuple, 'idvisit', None),
+                        'session_instance': int(getattr(row_tuple, 'session_instance', 1)),
+                        'question_number': question_num,
+                        'is_correct': int(is_correct)
+                    })
+                else:
+                    incorrect_count += 1
+                    # Still add record with is_correct=0 if no results
+                    per_question_rows.append({
+                        'game_name': game_name_val,
+                        'idvisitor_converted': getattr(row_tuple, 'idvisitor_converted', None),
+                        'idvisit': getattr(row_tuple, 'idvisit', None),
+                        'session_instance': int(getattr(row_tuple, 'session_instance', 1)),
+                        'question_number': question_num,
+                        'is_correct': 0
+                    })
             except Exception:
-                return 0
+                incorrect_count += 1
+                # Still add record with is_correct=0 if parsing fails
+                try:
+                    per_question_rows.append({
+                        'game_name': getattr(row_tuple, 'game_name', None),
+                        'idvisitor_converted': getattr(row_tuple, 'idvisitor_converted', None),
+                        'idvisit': getattr(row_tuple, 'idvisit', None),
+                        'session_instance': int(getattr(row_tuple, 'session_instance', 1)),
+                        'question_number': int(getattr(row_tuple, 'question_number', 0)),
+                        'is_correct': 0
+                    })
+                except:
+                    pass
+        
+        elapsed_total = time.time() - start_time
+        print(f"    [OK] Parsed scores in {elapsed_total:.1f}s: {correct_count:,} correct (1), {incorrect_count:,} incorrect (0)")
 
-        action_level_data['is_correct'] = action_level_data['custom_dimension_1'].apply(_safe_action_score)
-
-        for _, r in action_level_data.iterrows():
-            per_question_rows.append({
-                'game_name': r['game_name'],
-                'idvisitor_converted': r['idvisitor_converted'],
-                'idvisit': r['idvisit'],
-                'session_instance': int(r['session_instance']),
-                'question_number': int(r['question_number']),
-                'is_correct': int(r['is_correct'])
-            })
-
+        # Pre-compute unique game names as a set for O(1) lookup instead of calling .unique() in the comprehension
+        action_level_game_names = set(action_level_data['game_name'].unique())
+        print(f"    [OK] Extracted {len([r for r in per_question_rows if r.get('game_name') in action_level_game_names])} per-question records from action_level")
+        print(f"\n  [STEP 2 SUMMARY] Processed {unique_action_games} action_level games")
+    
+    total_extracted = len(per_question_rows)
+    print(f"\n  [FINAL] Total per-question records extracted: {total_extracted:,}")
+    
     if not per_question_rows:
         return pd.DataFrame(columns=[
             'game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct'
@@ -2070,10 +2134,12 @@ def process_main_data() -> pd.DataFrame:
             end_idx = min((batch_num + 1) * batch_size, len(df_main_valid))
             batch_df = df_main_valid.iloc[start_idx:end_idx]
             
-            # Group by date, game_name, event, and domain (if available)
+            # Group by date, game_name, event, domain, and language (if available)
             groupby_cols = ['date', 'game_name', 'event']
             if 'domain' in batch_df.columns:
                 groupby_cols.append('domain')
+            if 'language' in batch_df.columns:
+                groupby_cols.append('language')
             
             grouped = batch_df.groupby(groupby_cols).agg({
                 'idlink_va': 'count',  # Instances
@@ -2081,10 +2147,14 @@ def process_main_data() -> pd.DataFrame:
                 'idvisitor_converted': 'nunique'  # Users (distinct)
             }).reset_index()
             
+            # Set column names based on available columns
+            col_names = ['date', 'game_name', 'event']
             if 'domain' in batch_df.columns:
-                grouped.columns = ['date', 'game_name', 'event', 'domain', 'instances', 'visits', 'users']
-            else:
-                grouped.columns = ['date', 'game_name', 'event', 'instances', 'visits', 'users']
+                col_names.append('domain')
+            if 'language' in batch_df.columns:
+                col_names.append('language')
+            col_names.extend(['instances', 'visits', 'users'])
+            grouped.columns = col_names
             aggregated_data.append(grouped)
             
             if total_batches > 1:
@@ -2102,6 +2172,8 @@ def process_main_data() -> pd.DataFrame:
         groupby_cols = ['date', 'game_name', 'event']
         if 'domain' in aggregated_df.columns:
             groupby_cols.append('domain')
+        if 'language' in aggregated_df.columns:
+            groupby_cols.append('language')
         
         processed_data_aggregated = aggregated_df.groupby(groupby_cols).agg({
             'instances': 'sum',
@@ -2133,7 +2205,13 @@ def process_main_data() -> pd.DataFrame:
         sys.stdout.flush()
     else:
         print("  WARNING: No valid events found - creating empty processed_data.csv")
-        processed_data_aggregated = pd.DataFrame(columns=['date', 'game_name', 'event', 'instances', 'visits', 'users'])
+        # Include language column if it exists in df_main
+        base_cols = ['date', 'game_name', 'event', 'instances', 'visits', 'users']
+        if 'language' in df_main.columns:
+            base_cols.insert(3, 'language')  # Insert after 'event'
+        if 'domain' in df_main.columns:
+            base_cols.insert(3, 'domain')  # Insert after 'event'
+        processed_data_aggregated = pd.DataFrame(columns=base_cols)
         processed_data_aggregated.to_csv('data/processed_data.csv', index=False)
         print("✓ SUCCESS: Saved empty data/processed_data.csv")
         sys.stdout.flush()
@@ -2163,11 +2241,20 @@ def process_main_data() -> pd.DataFrame:
                 if len(game_domains) > 0:
                     domain = game_domains[0]
             
+            # Get language for this game (take first non-null language if available)
+            language = None
+            if 'language' in game_data.columns:
+                game_languages = game_data['language'].dropna().unique()
+                if len(game_languages) > 0:
+                    language = game_languages[0]
+            
             # Calculate metrics for each funnel stage
             funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
             game_stats = {'game_name': game}
             if domain:
                 game_stats['domain'] = domain
+            if language:
+                game_stats['language'] = language
             
             for stage in funnel_stages:
                 stage_data = game_data[game_data['event'] == stage]
@@ -3051,37 +3138,102 @@ def process_parent_poll() -> pd.DataFrame:
 
 
 def process_question_correctness() -> pd.DataFrame:
-    """Process question correctness data using three separate queries for all games"""
+    """Process question correctness data using scores_data.csv as the data source.
+    
+    Uses the same processing method as score distribution for each game.
+    """
     print("\n" + "=" * 60)
     print("PROCESSING: Question Correctness Data")
     print("=" * 60)
     
-    # Use score distribution query to get ALL games (not just the 23 in the three queries)
-    # This ensures we capture all ~28 games that should be included
-    print("Step 1: Fetching score distribution data (includes all games)...")
-    df_score = fetch_score_dataframe()
+    # Use scores_data.csv as the data source (same as score distribution)
+    print("Step 1: Loading data from scores_data.csv...")
+    csv_file = 'scores_data.csv'
     
-    if df_score.empty:
-        print("WARNING: No score distribution data found either")
+    if not os.path.exists(csv_file):
+        print(f"  [ERROR] {csv_file} not found!")
+        print(f"  [ERROR] Please ensure scores_data.csv is in the current directory")
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
         return question_correctness_df
     
-    print(f"  - Fetched {len(df_score)} records from score distribution query")
-    print("Step 2: Extracting per-question correctness from score data...")
+    try:
+        # Read CSV file with encoding error handling
+        print(f"  [ACTION] Reading {csv_file}...")
+        print(f"  [INFO] This may take a moment for large files...")
+        try:
+            # Try UTF-8 first
+            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='utf-8')
+        except UnicodeDecodeError:
+            # If UTF-8 fails, try latin-1 (which can handle any byte)
+            print(f"  [WARNING] UTF-8 encoding failed, trying latin-1...")
+            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='latin-1')
+        print(f"  [OK] Loaded {len(df_score):,} records from CSV")
+        
+        # Check required columns
+        print(f"  [INFO] Checking required columns...")
+        required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisitor_hex', 'idvisit', 'server_time']
+        missing_cols = [col for col in required_cols if col not in df_score.columns]
+        if missing_cols:
+            print(f"  [ERROR] Missing required columns: {missing_cols}")
+            print(f"  [INFO] Available columns: {list(df_score.columns)}")
+            question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+            question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+            return question_correctness_df
+        print(f"  [OK] All required columns present")
+        
+        # Convert idvisitor_hex to idvisitor_converted if needed
+        if 'idvisitor_hex' in df_score.columns and 'idvisitor_converted' not in df_score.columns:
+            print(f"  [ACTION] Converting idvisitor_hex to idvisitor_converted...")
+            df_score = convert_hex_to_int(df_score, 'idvisitor_hex', 'idvisitor_converted')
+            print(f"  [OK] Conversion complete")
+        
+        # Convert server_time to datetime if it's a string
+        if 'server_time' in df_score.columns:
+            try:
+                print(f"  [ACTION] Converting server_time to datetime...")
+                df_score['server_time'] = pd.to_datetime(df_score['server_time'])
+                print(f"  [OK] Datetime conversion complete")
+            except Exception as e:
+                print(f"  [WARNING] Could not convert server_time: {e}")
+        
+    except Exception as e:
+        print(f"  ERROR: Error loading CSV file: {e}")
+        import traceback
+        traceback.print_exc()
+        question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        return question_correctness_df
+    
+    if df_score.empty:
+        print("  [WARNING] No data found in scores_data.csv")
+        question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        return question_correctness_df
+    
+    print(f"  [OK] Successfully loaded {len(df_score):,} records from {csv_file}")
+    print(f"  [INFO] Unique games in data: {df_score['game_name'].nunique()}")
+    print(f"  [INFO] Action types: {df_score['action_name'].str[:30].unique().tolist()}")
+    
+    print("\nStep 2: Extracting per-question correctness from score data...")
+    print("  [INFO] Using same processing method as score distribution for each game...")
+    print("  [INFO] This will process each game dynamically based on JSON structure...")
     per_question_df = extract_per_question_correctness(df_score)
     
     if per_question_df.empty:
-        print("WARNING: No per-question correctness data extracted")
+        print("  [WARNING] No per-question correctness data extracted")
+        print("  [WARNING] Check the logs above for processing details")
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
         return question_correctness_df
     
-    print(f"  - Extracted {len(per_question_df)} per-question records")
-    print(f"  - Games: {per_question_df['game_name'].nunique()}")
-    print(f"  - Questions: {per_question_df['question_number'].nunique()}")
+    print(f"\n  [OK] Extracted {len(per_question_df):,} per-question records")
+    print(f"  [INFO] Games with data: {per_question_df['game_name'].nunique()}")
+    print(f"  [INFO] Unique questions: {per_question_df['question_number'].nunique()}")
+    print(f"  [INFO] Games: {sorted(per_question_df['game_name'].unique())}")
     
-    print("Step 3: Aggregating correctness by game and question...")
+    print("\nStep 3: Aggregating correctness by game and question...")
+    print("  [ACTION] Calculating total users per question...")
     # Calculate total users per question (users who attempted the question)
     total_by_q = (
         per_question_df
@@ -3090,6 +3242,9 @@ def process_question_correctness() -> pd.DataFrame:
         .reset_index(name='total_users')
     )
     
+    print(f"  [OK] Calculated total users for {len(total_by_q)} game-question combinations")
+    
+    print("  [ACTION] Calculating correct and incorrect user counts...")
     # Calculate correct and incorrect user counts per question
     agg = (
         per_question_df
@@ -3098,10 +3253,14 @@ def process_question_correctness() -> pd.DataFrame:
         .reset_index(name='user_count')
     )
     
+    print(f"  [OK] Calculated user counts for {len(agg)} game-question-correctness combinations")
+    
     # Merge to get total_users
+    print("  [ACTION] Merging total users...")
     agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
     
     # Calculate percentage
+    print("  [ACTION] Calculating percentages...")
     agg['percent'] = (agg['user_count'] / agg['total_users'].where(agg['total_users'] > 0, 1) * 100).round(2)
     
     # Map is_correct to Correct/Incorrect
@@ -3109,18 +3268,27 @@ def process_question_correctness() -> pd.DataFrame:
     
     # Select and order columns
     question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']].copy()
+    print(f"  [OK] Aggregation complete")
     
     # Sort by game_name and question_number
+    print("  [ACTION] Sorting results...")
     question_correctness_df = question_correctness_df.sort_values(['game_name', 'question_number', 'correctness'])
+    print(f"  [OK] Sorting complete")
     
-    print(f"Step 4: Final aggregation complete")
-    print(f"  - Total records: {len(question_correctness_df)}")
-    print(f"  - Games: {question_correctness_df['game_name'].nunique()}")
-    print(f"  - Questions: {question_correctness_df['question_number'].nunique()}")
-    
-    print("Step 5: Saving question correctness data...")
+    print("\nStep 4: Saving results to CSV...")
     question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
-    print(f"SUCCESS: Saved data/question_correctness_data.csv ({len(question_correctness_df)} records)")
+    print(f"  [OK] Question correctness data saved to data/question_correctness_data.csv")
+    
+    print("\n" + "=" * 60)
+    print("QUESTION CORRECTNESS PROCESSING COMPLETE")
+    print("=" * 60)
+    print(f"  Total records: {len(question_correctness_df):,}")
+    print(f"  Games: {question_correctness_df['game_name'].nunique()}")
+    print(f"  Questions: {question_correctness_df['question_number'].nunique()}")
+    print(f"  Correct records: {len(question_correctness_df[question_correctness_df['correctness'] == 'Correct']):,}")
+    print(f"  Incorrect records: {len(question_correctness_df[question_correctness_df['correctness'] == 'Incorrect']):,}")
+    print(f"  Games processed: {sorted(question_correctness_df['game_name'].unique())}")
+    print("=" * 60)
     
     return question_correctness_df
 

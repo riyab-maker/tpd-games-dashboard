@@ -259,6 +259,21 @@ def load_processed_data():
         if 'Instances' in summary_df.columns:
             summary_df['Instances'] = pd.to_numeric(summary_df['Instances'], errors='coerce').fillna(0).astype(int)
         
+        # Load conversion funnel raw data
+        conversion_funnel_path = os.path.join(DATA_DIR, "conversion_funnel.csv")
+        if os.path.exists(conversion_funnel_path):
+            conversion_funnel_df = pd.read_csv(conversion_funnel_path)
+            # Ensure date column is properly formatted if it exists
+            if 'date' in conversion_funnel_df.columns:
+                conversion_funnel_df['date'] = pd.to_datetime(conversion_funnel_df['date']).dt.date
+            # Ensure numeric columns are properly typed
+            for col in ['instances', 'visits', 'users']:
+                if col in conversion_funnel_df.columns:
+                    conversion_funnel_df[col] = pd.to_numeric(conversion_funnel_df[col], errors='coerce').fillna(0).astype(int)
+        else:
+            # Fallback to processed_data_df if conversion_funnel.csv doesn't exist
+            conversion_funnel_df = processed_data_df.copy()
+        
         # Load time series data
         time_series_df = pd.read_csv(os.path.join(DATA_DIR, "time_series_data.csv"))
         
@@ -298,7 +313,7 @@ def load_processed_data():
         }
         
         return (summary_df, game_conversion_df, time_series_df, 
-                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df)
+                repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df, conversion_funnel_df)
     
     except Exception as e:
         st.error(f"❌ Error loading processed data: {str(e)}")
@@ -1524,7 +1539,7 @@ def main() -> None:
 
     with st.spinner("Loading data..."):
         (summary_df, game_conversion_df, time_series_df, 
-         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df) = load_processed_data()
+         repeatability_df, score_distribution_df, poll_responses_df, question_correctness_df, video_viewership_df, metadata, processed_data_df, conversion_funnel_df) = load_processed_data()
 
     if summary_df.empty:
         st.warning("No data available.")
@@ -1558,6 +1573,24 @@ def main() -> None:
         help="Select one or more games to filter all dashboard sections. Leave empty to show all games."
     )
     
+    # Language filter - get unique languages from conversion_funnel_df (primary source for conversion funnel)
+    unique_languages = []
+    if 'language' in conversion_funnel_df.columns:
+        unique_languages = sorted([l for l in conversion_funnel_df['language'].dropna().unique() if l])
+    elif 'language' in processed_data_df.columns:
+        unique_languages = sorted([l for l in processed_data_df['language'].dropna().unique() if l])
+    elif 'language' in game_conversion_df.columns:
+        unique_languages = sorted([l for l in game_conversion_df['language'].dropna().unique() if l])
+    
+    selected_languages = []
+    if unique_languages:
+        selected_languages = st.multiselect(
+            "🌍 Select Language(s) to filter by:",
+            options=unique_languages,
+            default=[],  # Empty by default - shows all languages
+            help="Select one or more languages to filter all dashboard sections. Leave empty to show all languages."
+        )
+    
     # Show filter summary
     if not selected_games or len(selected_games) == len(unique_games):
         game_summary = "**All Games**"
@@ -1576,23 +1609,36 @@ def main() -> None:
             domain_summary = f"**{', '.join(selected_domains)}**"
             domain_count = len(selected_domains)
     
+    language_summary = ""
+    language_count = 0
+    if unique_languages:
+        if not selected_languages or len(selected_languages) == len(unique_languages):
+            language_summary = "**All Languages**"
+            language_count = len(unique_languages)
+        else:
+            language_summary = f"**{', '.join(selected_languages)}**"
+            language_count = len(selected_languages)
+    
     # Display filter summary
-    if unique_domains or selected_games:
+    if unique_domains or selected_games or unique_languages:
         filter_info = []
         if unique_domains:
             filter_info.append(f"🌐 Domain: {domain_summary} ({domain_count})")
         if selected_games:
             filter_info.append(f"🎮 Games: {game_summary} ({game_count})")
+        if unique_languages:
+            filter_info.append(f"🌍 Language: {language_summary} ({language_count})")
         if filter_info:
             st.info(" | ".join(filter_info))
     
-    # Apply global filters (domain and game) to all dataframes
+    # Apply global filters (domain, game, and language) to all dataframes
     has_game_filter = selected_games and len(selected_games) < len(unique_games)
     has_domain_filter = selected_domains and len(selected_domains) < len(unique_domains) if unique_domains else False
+    has_language_filter = selected_languages and len(selected_languages) < len(unique_languages) if unique_languages else False
     
-    # Helper function to filter dataframes by domain and game
+    # Helper function to filter dataframes by domain, game, and language
     def apply_global_filters(df, df_name=''):
-        """Apply domain and game filters to a dataframe"""
+        """Apply domain, game, and language filters to a dataframe"""
         filtered_df = df.copy()
         
         # Apply domain filter
@@ -1611,6 +1657,24 @@ def main() -> None:
             if 'game_name' in filtered_df.columns:
                 filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
         
+        # Apply language filter
+        if has_language_filter:
+            if 'language' in filtered_df.columns:
+                filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
+            elif 'game_name' in filtered_df.columns:
+                # Try to filter by games in selected languages from conversion_funnel_df or processed_data_df
+                games_in_languages = []
+                if 'language' in conversion_funnel_df.columns:
+                    games_in_languages = conversion_funnel_df[
+                        conversion_funnel_df['language'].isin(selected_languages)
+                    ]['game_name'].unique()
+                elif 'language' in processed_data_df.columns:
+                    games_in_languages = processed_data_df[
+                        processed_data_df['language'].isin(selected_languages)
+                    ]['game_name'].unique()
+                if len(games_in_languages) > 0:
+                    filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_languages)]
+        
         return filtered_df
     
     # Filter all dataframes with global filters
@@ -1625,10 +1689,10 @@ def main() -> None:
     st.markdown("---")
     st.markdown("## 🔄 Conversion Funnels")
     
-    # Date range filter for conversion funnel (only for this section)
-    if 'date' in processed_data_df.columns and not processed_data_df.empty:
-        min_date = processed_data_df['date'].min()
-        max_date = processed_data_df['date'].max()
+    # Date range filter for conversion funnel (only for this section) - use conversion_funnel_df
+    if 'date' in conversion_funnel_df.columns and not conversion_funnel_df.empty:
+        min_date = conversion_funnel_df['date'].min()
+        max_date = conversion_funnel_df['date'].max()
         date_range = st.date_input(
             "📅 Select Date Range for Conversion Funnel:",
             value=(min_date, max_date),
@@ -1639,65 +1703,76 @@ def main() -> None:
     else:
         date_range = None
     
-    # Filter processed data by date range and global filters for conversion funnel
+    # Filter conversion_funnel_df by date range and global filters for conversion funnel
     has_date_filter = False
     if date_range and isinstance(date_range, tuple) and len(date_range) == 2 and date_range[0] and date_range[1]:
-        if 'date' in processed_data_df.columns and not processed_data_df.empty:
-            min_date = processed_data_df['date'].min()
-            max_date = processed_data_df['date'].max()
+        if 'date' in conversion_funnel_df.columns and not conversion_funnel_df.empty:
+            min_date = conversion_funnel_df['date'].min()
+            max_date = conversion_funnel_df['date'].max()
             # Only consider it a filter if it's different from the full range
             if date_range[0] != min_date or date_range[1] != max_date:
                 has_date_filter = True
     
-    if not has_date_filter and not has_game_filter and not has_domain_filter:
-        # No filters applied - use summary_df directly
+    # Recalculate summary from conversion_funnel_df when any filter is applied
+    # This ensures summary_data changes when language, domain, game, or date filters are applied
+    if not has_date_filter and not has_game_filter and not has_domain_filter and not has_language_filter:
+        # No filters applied - use summary_df directly for performance
         filtered_summary_df = summary_df.copy()
-    elif processed_data_df.empty:
-        # Filters requested but no processed data available - use summary_df directly
+    elif conversion_funnel_df.empty:
+        # Filters requested but no conversion funnel data available - use summary_df directly
         filtered_summary_df = summary_df.copy()
     else:
-        filtered_processed_data = processed_data_df.copy()
+        # Filters are applied - recalculate summary from filtered conversion_funnel data
+        filtered_conversion_funnel_data = conversion_funnel_df.copy()
         
         # Apply date filter
         if has_date_filter:
             start_date, end_date = date_range
-            filtered_processed_data = filtered_processed_data[
-                (filtered_processed_data['date'] >= start_date) &
-                (filtered_processed_data['date'] <= end_date)
+            filtered_conversion_funnel_data = filtered_conversion_funnel_data[
+                (filtered_conversion_funnel_data['date'] >= start_date) &
+                (filtered_conversion_funnel_data['date'] <= end_date)
             ]
         
         # Apply domain filter
         if has_domain_filter:
-            if 'domain' in filtered_processed_data.columns:
-                filtered_processed_data = filtered_processed_data[
-                    filtered_processed_data['domain'].isin(selected_domains)
+            if 'domain' in filtered_conversion_funnel_data.columns:
+                filtered_conversion_funnel_data = filtered_conversion_funnel_data[
+                    filtered_conversion_funnel_data['domain'].isin(selected_domains)
                 ]
             elif 'domain' in game_conversion_df.columns:
-                # If domain is not in processed_data but is in game_conversion_df, filter by games
+                # If domain is not in conversion_funnel but is in game_conversion_df, filter by games
                 games_in_domains = game_conversion_df[
                     game_conversion_df['domain'].isin(selected_domains)
                 ]['game_name'].unique()
-                if 'game_name' in filtered_processed_data.columns:
-                    filtered_processed_data = filtered_processed_data[
-                        filtered_processed_data['game_name'].isin(games_in_domains)
+                if 'game_name' in filtered_conversion_funnel_data.columns:
+                    filtered_conversion_funnel_data = filtered_conversion_funnel_data[
+                        filtered_conversion_funnel_data['game_name'].isin(games_in_domains)
                     ]
         
         # Apply game filter
         if has_game_filter:
-            if 'game_name' in filtered_processed_data.columns:
-                filtered_processed_data = filtered_processed_data[
-                    filtered_processed_data['game_name'].isin(selected_games)
+            if 'game_name' in filtered_conversion_funnel_data.columns:
+                filtered_conversion_funnel_data = filtered_conversion_funnel_data[
+                    filtered_conversion_funnel_data['game_name'].isin(selected_games)
                 ]
         
-        # Calculate funnel metrics from filtered aggregated data
-        if not filtered_processed_data.empty and 'event' in filtered_processed_data.columns:
+        # Apply language filter
+        if has_language_filter:
+            if 'language' in filtered_conversion_funnel_data.columns:
+                filtered_conversion_funnel_data = filtered_conversion_funnel_data[
+                    filtered_conversion_funnel_data['language'].isin(selected_languages)
+                ]
+        
+        # Calculate funnel metrics from filtered conversion_funnel data
+        # This ensures summary_data changes when any filter (including language) is applied
+        if not filtered_conversion_funnel_data.empty and 'event' in filtered_conversion_funnel_data.columns:
             # Check if it's the new aggregated format (has instances, visits, users columns)
-            if 'instances' in filtered_processed_data.columns and 'visits' in filtered_processed_data.columns and 'users' in filtered_processed_data.columns:
+            if 'instances' in filtered_conversion_funnel_data.columns and 'visits' in filtered_conversion_funnel_data.columns and 'users' in filtered_conversion_funnel_data.columns:
                 # New aggregated format: sum up the metrics by event
                 funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
-                    stage_data = filtered_processed_data[filtered_processed_data['event'] == stage]
+                    stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
                     if not stage_data.empty:
                         filtered_summary_data.append({
                             'Event': stage,
@@ -1718,7 +1793,7 @@ def main() -> None:
                 funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
-                    stage_data = filtered_processed_data[filtered_processed_data['event'] == stage]
+                    stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
                     filtered_summary_data.append({
                         'Event': stage,
                         'Users': stage_data['idvisitor_converted'].nunique() if 'idvisitor_converted' in stage_data.columns else 0,
@@ -1727,7 +1802,7 @@ def main() -> None:
                     })
                 filtered_summary_df = pd.DataFrame(filtered_summary_data)
         else:
-            # Fallback to summary_df if filtered_processed_data is empty or missing event column
+            # Fallback to summary_df if filtered_conversion_funnel_data is empty or missing event column
             filtered_summary_df = summary_df.copy()
     
     # Render conversion funnel with date and game filters applied
