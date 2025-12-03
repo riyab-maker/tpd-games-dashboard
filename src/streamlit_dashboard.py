@@ -260,12 +260,14 @@ def load_processed_data():
             summary_df['Instances'] = pd.to_numeric(summary_df['Instances'], errors='coerce').fillna(0).astype(int)
         
         # Load conversion funnel raw data - check both root and data/ directory
-        conversion_funnel_path = os.path.join(DATA_DIR, "conversion_funnel.csv")
-        if not os.path.exists(conversion_funnel_path):
-            # Try root directory
+        # Priority: 1) data/conversion_funnel.csv, 2) conversion_funnel.csv (root)
+        conversion_funnel_path = None
+        if os.path.exists(os.path.join(DATA_DIR, "conversion_funnel.csv")):
+            conversion_funnel_path = os.path.join(DATA_DIR, "conversion_funnel.csv")
+        elif os.path.exists("conversion_funnel.csv"):
             conversion_funnel_path = "conversion_funnel.csv"
         
-        if os.path.exists(conversion_funnel_path):
+        if conversion_funnel_path and os.path.exists(conversion_funnel_path):
             conversion_funnel_df = pd.read_csv(conversion_funnel_path, low_memory=False)
             # Ensure date column is properly formatted if it exists
             if 'date' in conversion_funnel_df.columns:
