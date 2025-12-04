@@ -2004,6 +2004,7 @@ def main() -> None:
     has_language_in_summary = 'language' in summary_df.columns
     
     # Determine which combination to use from pre-calculated summary_data
+    # Priority: Game filter > Domain/Language filters > No filters
     if not any_filter_applied:
         # No filters applied - use overall summary (domain='All', language='All')
         if has_domain_in_summary and has_language_in_summary:
@@ -2014,10 +2015,6 @@ def main() -> None:
                 filtered_summary_df = summary_df.copy()
         else:
             filtered_summary_df = summary_df.copy()
-    elif (has_domain_filter or has_language_filter) and has_domain_in_summary and has_language_in_summary:
-        # Domain/language filters - use pre-calculated combinations from summary_data
-        # This handles: domain only, language only, or both domain+language
-        filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
     elif has_game_filter and not has_date_filter:
         # Game filter (without date filter) - use pre-calculated game_conversion_numbers.csv
         # This is much faster and more accurate than recalculating from raw data
@@ -2075,6 +2072,10 @@ def main() -> None:
             # Continue with existing logic for date filters (handled in else block below)
             # Don't set filtered_summary_df here - it will be set in the else block
             pass
+    elif (has_domain_filter or has_language_filter) and has_domain_in_summary and has_language_in_summary:
+        # Domain/language filters (without game filter) - use pre-calculated combinations from summary_data
+        # This handles: domain only, language only, or both domain+language
+        filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
     elif conversion_funnel_df.empty:
         # Filters requested but no conversion funnel data available - use summary_df directly
         filtered_summary_df = summary_df.copy()
