@@ -629,7 +629,7 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
             help=f"{completed_instances:,} out of {started_instances:,} instances completed"
         )
     
-def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None:
+def render_score_distribution_chart(score_distribution_df: pd.DataFrame, selected_games: list) -> None:
     """Render score distribution chart"""
     import altair as alt
     
@@ -638,24 +638,23 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
         st.warning("No score distribution data available.")
         return
     
-    # Get unique games for filter
-    unique_games = sorted(score_distribution_df['game_name'].unique())
+    # Use global game filter - function receives selected_games as parameter
+    # Data is already filtered by global filters, but we need to ensure at least one game is selected
+    if not selected_games:
+        st.warning("Please select at least one game in the global filters above.")
+        return
     
-    # Add game filter
-    st.markdown("**🎮 Game Filter:**")
-    selected_games = st.multiselect(
-        "Select Games for Score Distribution:",
-        options=unique_games,
-        default=[unique_games[0]] if unique_games else [],  # Show first game by default
-        help="Select one or more games to show score distribution. First game is selected by default."
-    )
+    # Show which games are being displayed
+    available_games = sorted(score_distribution_df['game_name'].unique())
+    display_games = [g for g in selected_games if g in available_games]
+    if display_games:
+        if len(display_games) == 1:
+            st.info(f"📊 Showing score distribution for: **{display_games[0]}**")
+        else:
+            st.info(f"📊 Showing score distribution for: **{', '.join(display_games)}** ({len(display_games)} games)")
     
-    # Filter data based on selected games
-    if selected_games:
-        filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)]
-    else:
-        # If no games selected, show first game
-        filtered_df = score_distribution_df[score_distribution_df['game_name'] == unique_games[0]] if unique_games else score_distribution_df
+    # Filter data based on global game filter (already applied, but double-check)
+    filtered_df = score_distribution_df[score_distribution_df['game_name'].isin(selected_games)] if selected_games else score_distribution_df
     
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
@@ -663,10 +662,10 @@ def render_score_distribution_chart(score_distribution_df: pd.DataFrame) -> None
     
     # Create the score distribution chart
     st.markdown("### 📊 Score Distribution")
-    if len(selected_games) == 1:
-        st.markdown(f"This chart shows how many users achieved each total score for **{selected_games[0]}**.")
+    if len(display_games) == 1:
+        st.markdown(f"This chart shows how many users achieved each total score for **{display_games[0]}**.")
     else:
-        st.markdown(f"This chart shows how many users achieved each total score for the selected games ({len(selected_games)} games).")
+        st.markdown(f"This chart shows how many users achieved each total score for the selected games ({len(display_games)} games).")
     
     # Add score distribution chart
     st.markdown("#### 🎯 Score Distribution")
@@ -996,9 +995,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         return
     
     st.markdown("### 📈 Time-Series Analysis")
+    st.info("ℹ️ This section uses the global game, domain, and language filters from above.")
     
     # Create columns for filters
-    ts_filter_col1, ts_filter_col2, ts_filter_col3 = st.columns(3)
+    ts_filter_col1, ts_filter_col2 = st.columns(2)
     
     with ts_filter_col1:
         # Time period filter
@@ -1017,31 +1017,29 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             help="Select which metric to display (Instances, Visits, or Users)"
         )
     
-    with ts_filter_col3:
-        # Game filter for time series
-        unique_games_ts = sorted(game_conversion_df['game_name'].unique())
-        selected_games_ts = st.multiselect(
-            "Select Games:",
-            options=unique_games_ts,
-            default=[],  # Empty by default - shows all games
-            help="Select games to include in time series analysis. Leave empty to show all games."
-        )
-    
     # Filter by selected time period
     period_type_map = {"Daily": "Day", "Weekly": "Week", "Monthly": "Month"}
     period_filter = period_type_map.get(time_period, time_period)
     filtered_ts_df = time_series_df[time_series_df['period_type'] == period_filter].copy()
     
-    # Apply game filtering
-    if selected_games_ts and len(selected_games_ts) > 0:
+    # Use global filters (already applied to time_series_df via filtered_time_series_df)
+    # Filter by game if global game filter is active
+    if filtered_ts_df.empty:
+        st.warning("No data available for the selected filters.")
+        return
+    
+    # Check if we have game-specific data or "All Games" data
+    has_game_specific_data = filtered_ts_df[filtered_ts_df['game_name'] != 'All Games'].shape[0] > 0
+    
+    if has_game_specific_data:
         # Separate RM active users (which doesn't have game-specific data)
         rm_data = filtered_ts_df[
             (filtered_ts_df['game_name'] == 'All Games') & 
             (filtered_ts_df['metric'] == 'rm_active_users')
         ].copy()
         
-        # Filter game-specific data
-        game_data = filtered_ts_df[filtered_ts_df['game_name'].isin(selected_games_ts)].copy()
+        # Filter game-specific data (already filtered by global filters)
+        game_data = filtered_ts_df[filtered_ts_df['game_name'] != 'All Games'].copy()
         
         # Aggregate across selected games
         if not game_data.empty:
@@ -1451,7 +1449,9 @@ def _get_filtered_summary(summary_df: pd.DataFrame, selected_domains: list, sele
     return filtered_df[['Event', 'Users', 'Visits', 'Instances']]
 
 
-def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
+def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame, 
+                                 selected_games: list, selected_domains: list, selected_languages: list,
+                                 has_domain_filter: bool, has_language_filter: bool) -> None:
     """Render parent poll responses visualization"""
     import altair as alt
     
@@ -1460,71 +1460,35 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
         return
     
     st.markdown("### 📊 Parent Poll Responses")
+    st.info("ℹ️ This section uses the global game, domain, and language filters from above.")
     
-    # Get unique values for filters from poll data
-    unique_games = sorted(poll_responses_df['game_name'].unique()) if 'game_name' in poll_responses_df.columns else []
-    unique_domains = sorted([d for d in poll_responses_df['domain'].dropna().unique() if d]) if 'domain' in poll_responses_df.columns else []
-    unique_languages = sorted([l for l in poll_responses_df['language'].dropna().unique() if l]) if 'language' in poll_responses_df.columns else []
+    # Use global filters - function receives selected_games, selected_domains, selected_languages as parameters
+    if not selected_games:
+        st.warning("Please select at least one game in the global filters above.")
+        return
     
-    # Create filter columns
-    filter_col1, filter_col2, filter_col3 = st.columns(3)
-    
-    with filter_col1:
-        # Game filter - default to first game if available
-        st.markdown("**🎮 Game Filter:**")
-        default_games = [unique_games[0]] if len(unique_games) > 0 else []
-        selected_games = st.multiselect(
-            "Select Games:",
-            options=unique_games,
-            default=default_games,  # Default to first game
-            help="Select one or more games to filter parent poll responses.",
-            key="poll_game_filter"
-        )
-    
-    with filter_col2:
-        # Domain filter
-        if unique_domains:
-            st.markdown("**🌐 Domain Filter:**")
-            selected_domains = st.multiselect(
-                "Select Domain(s):",
-                options=unique_domains,
-                default=[],  # Empty by default - shows all domains
-                help="Select one or more domains to filter parent poll responses.",
-                key="poll_domain_filter"
-            )
+    # Show which games are being displayed
+    available_games = sorted(poll_responses_df['game_name'].unique()) if 'game_name' in poll_responses_df.columns else []
+    display_games = [g for g in selected_games if g in available_games]
+    if display_games:
+        if len(display_games) == 1:
+            st.info(f"📊 Showing poll responses for: **{display_games[0]}**")
         else:
-            selected_domains = []
-            st.markdown("**🌐 Domain Filter:**")
-            st.info("No domain data available")
-    
-    with filter_col3:
-        # Language filter
-        if unique_languages:
-            st.markdown("**🌍 Language Filter:**")
-            selected_languages = st.multiselect(
-                "Select Language(s):",
-                options=unique_languages,
-                default=[],  # Empty by default - shows all languages
-                help="Select one or more languages to filter parent poll responses.",
-                key="poll_language_filter"
-            )
-        else:
-            selected_languages = []
-            st.markdown("**🌍 Language Filter:**")
-            st.info("No language data available")
+            st.info(f"📊 Showing poll responses for: **{', '.join(display_games)}** ({len(display_games)} games)")
     
     # Apply filters to poll data - use pre-calculated combinations
+    # Data is already filtered by global filters, but we need to apply game filter explicitly
     filtered_df = poll_responses_df.copy()
     
-    # Apply game filter
+    # Apply game filter (data should already be filtered, but ensure it)
     if selected_games and 'game_name' in filtered_df.columns:
         filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
     
-    # Use pre-calculated combinations based on domain and language filters
+    # Use pre-calculated combinations based on global domain and language filters
     # The data has all combinations: (All, All), (domain, All), (All, language), (domain, language)
     if 'domain' in filtered_df.columns and 'language' in filtered_df.columns:
-        # Determine which combination to use
-        if not selected_domains and not selected_languages:
+        # Determine which combination to use based on global filters
+        if not has_domain_filter and not has_language_filter:
             # No filters - use overall totals (All, All)
             filtered_df = filtered_df[
                 (filtered_df['domain'] == 'All') & (filtered_df['language'] == 'All')
@@ -1686,7 +1650,7 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
         st.info(f"Note: Showing first 3 of {len(unique_questions)} questions. Filter by game to see specific questions.")
 
 
-def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> None:
+def render_question_correctness_chart(question_correctness_df: pd.DataFrame, selected_games: list) -> None:
     """Render stacked percent bar chart of Correct vs Incorrect per question for a selected game."""
     import altair as alt
 
@@ -1695,19 +1659,29 @@ def render_question_correctness_chart(question_correctness_df: pd.DataFrame) -> 
         return
 
     st.markdown("### ✅ Question Correctness by Question Number")
+    st.info("ℹ️ This section uses the global game, domain, and language filters from above.")
 
-    # Game selector (single-select)
-    games = sorted(question_correctness_df['game_name'].dropna().unique())
-    if not games:
-        st.warning("No games found in correctness data.")
+    # Use global game filter - function receives selected_games as parameter
+    if not selected_games:
+        st.warning("Please select at least one game in the global filters above.")
         return
 
-    selected_game = st.selectbox(
-        "Select a Game:",
-        options=games,
-        index=0,
-        help="Choose a game to view per-question correctness."
-    )
+    # Get available games from filtered data
+    available_games = sorted(question_correctness_df['game_name'].dropna().unique())
+    display_games = [g for g in selected_games if g in available_games]
+    
+    if not display_games:
+        st.warning("No games available for the selected filters.")
+        return
+
+    # Show which game(s) are being displayed
+    if len(display_games) == 1:
+        selected_game = display_games[0]
+        st.info(f"📊 Showing question correctness for: **{selected_game}**")
+    else:
+        # If multiple games selected, show the first one
+        selected_game = display_games[0]
+        st.info(f"📊 Showing question correctness for: **{selected_game}** (first of {len(display_games)} selected games)")
 
     df_game = question_correctness_df[question_correctness_df['game_name'] == selected_game].copy()
     if df_game.empty:
@@ -1825,11 +1799,13 @@ def main() -> None:
     
     # Game Name filter - get unique games from game_conversion_df
     unique_games = sorted(game_conversion_df['game_name'].unique())
+    # Ensure at least one game is selected by default (first game)
+    default_games = [unique_games[0]] if unique_games else []
     selected_games = st.multiselect(
         "🎮 Select Game Names to filter by:",
         options=unique_games,
-        default=[],  # Empty by default - shows all games
-        help="Select one or more games to filter all dashboard sections. Leave empty to show all games."
+        default=default_games,  # Default to first game - at least one game must be selected
+        help="Select one or more games to filter all dashboard sections. At least one game is selected by default."
     )
     
     # Language filter - get unique languages from game_conversion_df or processed_data_df (same pattern as domain filter)
@@ -1959,13 +1935,14 @@ def main() -> None:
         
         return filtered_df
     
-    # Filter all dataframes with global filters
+    # Filter all dataframes with global filters (except repeatability and video viewership)
     filtered_time_series_df = apply_global_filters(time_series_df) if not time_series_df.empty else time_series_df
     filtered_score_distribution_df = apply_global_filters(score_distribution_df) if not score_distribution_df.empty else score_distribution_df
     filtered_question_correctness_df = apply_global_filters(question_correctness_df) if not question_correctness_df.empty else question_correctness_df
     filtered_poll_responses_df = apply_global_filters(poll_responses_df) if not poll_responses_df.empty else poll_responses_df
-    filtered_repeatability_df = apply_global_filters(repeatability_df) if not repeatability_df.empty else repeatability_df
-    filtered_video_viewership_df = apply_global_filters(video_viewership_df) if not video_viewership_df.empty else video_viewership_df
+    # Repeatability and Video Viewership are NOT affected by global filters
+    filtered_repeatability_df = repeatability_df  # Keep original, no global filters
+    filtered_video_viewership_df = video_viewership_df  # Keep original, no global filters
     
     # Render conversion funnel section with date range filter
     st.markdown("---")
@@ -2372,7 +2349,7 @@ def main() -> None:
     st.markdown("## ✅ Question Correctness by Question Number")
     
     if not filtered_question_correctness_df.empty:
-        render_question_correctness_chart(filtered_question_correctness_df)
+        render_question_correctness_chart(filtered_question_correctness_df, selected_games)
     else:
         st.warning("No question correctness data available. Please run preprocess_data.py to generate the data.")
     
@@ -2381,7 +2358,7 @@ def main() -> None:
     st.markdown("## 📊 Parent Poll Responses Analysis")
     
     if not filtered_poll_responses_df.empty:
-        render_parent_poll_responses(filtered_poll_responses_df, game_conversion_df)
+        render_parent_poll_responses(filtered_poll_responses_df, game_conversion_df, selected_games, selected_domains, selected_languages, has_domain_filter, has_language_filter)
     else:
         st.warning("No parent poll responses data available.")
     
