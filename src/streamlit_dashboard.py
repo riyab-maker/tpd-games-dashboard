@@ -2029,7 +2029,12 @@ def main() -> None:
         
         # Apply language filter if set
         if has_language_filter and 'language' in filtered_game_df.columns:
-            filtered_game_df = filtered_game_df[filtered_game_df['language'].isin(selected_languages)]
+            # Normalize language values for comparison (strip whitespace, handle case)
+            # Create a mask using normalized values but apply to original dataframe
+            language_mask = filtered_game_df['language'].astype(str).str.strip().str.lower().isin(
+                [str(lang).strip().lower() for lang in selected_languages]
+            )
+            filtered_game_df = filtered_game_df[language_mask]
         
         # Convert game_conversion_numbers format to summary format
         if not filtered_game_df.empty:
