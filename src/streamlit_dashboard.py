@@ -312,6 +312,10 @@ def load_processed_data():
                 # Convert server_time to date if date column doesn't exist
                 conversion_funnel_df['date'] = pd.to_datetime(conversion_funnel_df['server_time']).dt.date
             
+            # Ensure idvisitor_converted exists if we have idvisitor (for raw data)
+            if 'idvisitor' in conversion_funnel_df.columns and 'idvisitor_converted' not in conversion_funnel_df.columns:
+                conversion_funnel_df['idvisitor_converted'] = conversion_funnel_df['idvisitor']
+            
             # Only process numeric columns if this is aggregated data (has instances/visits/users)
             # Raw data won't have these columns
             if 'instances' in conversion_funnel_df.columns:
@@ -1871,31 +1875,66 @@ def main() -> None:
                 filtered_conversion_funnel_data['event'] = filtered_conversion_funnel_data['name'].apply(parse_event_from_name)
         
         if not filtered_conversion_funnel_data.empty and 'event' in filtered_conversion_funnel_data.columns:
-            # Check if we have raw data (idvisitor_converted) - use that for accurate distinct counts
-            has_raw_data = 'idvisitor_converted' in filtered_conversion_funnel_data.columns
+            # Check if we have raw data columns - ALWAYS prefer raw data for accurate distinct counts
+            has_idvisitor_converted = 'idvisitor_converted' in filtered_conversion_funnel_data.columns
+            has_idvisitor = 'idvisitor' in filtered_conversion_funnel_data.columns
+            has_idvisit = 'idvisit' in filtered_conversion_funnel_data.columns
+            has_idlink_va = 'idlink_va' in filtered_conversion_funnel_data.columns
+            has_raw_data = has_idvisitor_converted or has_idvisitor
             
             # Check if it's the new aggregated format (has instances, visits, users columns)
-            if 'instances' in filtered_conversion_funnel_data.columns and 'visits' in filtered_conversion_funnel_data.columns and 'users' in filtered_conversion_funnel_data.columns:
-                # New aggregated format: calculate metrics by event
+            has_aggregated = 'instances' in filtered_conversion_funnel_data.columns and 'visits' in filtered_conversion_funnel_data.columns and 'users' in filtered_conversion_funnel_data.columns
+            
+            # If we have raw data, use it (even if aggregated columns also exist)
+            if has_raw_data:
+                # Use raw data format - calculate distinct counts
                 funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
                     if not stage_data.empty:
-                        # For Users: use distinct count from raw data if available, otherwise sum (which may inflate)
-                        if has_raw_data:
+                        # Use distinct counts from raw data
+                        if has_idvisitor_converted:
                             users_count = stage_data['idvisitor_converted'].nunique()
+                        elif has_idvisitor:
+                            users_count = stage_data['idvisitor'].nunique()
                         else:
-                            # Summing aggregated users can inflate counts, but it's the best we can do without raw data
-                            users_count = stage_data['users'].sum()
+                            users_count = 0
                         
-                        # For Visits: use distinct count from raw data if available, otherwise sum
-                        if 'idvisit' in filtered_conversion_funnel_data.columns:
+                        if has_idvisit:
                             visits_count = stage_data['idvisit'].nunique()
                         else:
-                            visits_count = stage_data['visits'].sum()
+                            visits_count = 0
                         
-                        # For Instances: sum is correct (total count)
+                        if has_idlink_va:
+                            instances_count = len(stage_data)
+                        else:
+                            instances_count = 0
+                        
+                        filtered_summary_data.append({
+                            'Event': stage,
+                            'Users': users_count,
+                            'Visits': visits_count,
+                            'Instances': instances_count
+                        })
+                    else:
+                        filtered_summary_data.append({
+                            'Event': stage,
+                            'Users': 0,
+                            'Visits': 0,
+                            'Instances': 0
+                        })
+                filtered_summary_df = pd.DataFrame(filtered_summary_data)
+            elif has_aggregated:
+                # Only aggregated format available - use it (may have slight inflation for Users/Visits)
+                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+                filtered_summary_data = []
+                for stage in funnel_stages:
+                    stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
+                    if not stage_data.empty:
+                        # Summing aggregated users/visits can inflate counts, but it's the best we can do without raw data
+                        users_count = stage_data['users'].sum()
+                        visits_count = stage_data['visits'].sum()
                         instances_count = stage_data['instances'].sum()
                         
                         filtered_summary_data.append({
