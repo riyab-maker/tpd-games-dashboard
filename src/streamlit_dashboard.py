@@ -1871,19 +1871,38 @@ def main() -> None:
                 filtered_conversion_funnel_data['event'] = filtered_conversion_funnel_data['name'].apply(parse_event_from_name)
         
         if not filtered_conversion_funnel_data.empty and 'event' in filtered_conversion_funnel_data.columns:
+            # Check if we have raw data (idvisitor_converted) - use that for accurate distinct counts
+            has_raw_data = 'idvisitor_converted' in filtered_conversion_funnel_data.columns
+            
             # Check if it's the new aggregated format (has instances, visits, users columns)
             if 'instances' in filtered_conversion_funnel_data.columns and 'visits' in filtered_conversion_funnel_data.columns and 'users' in filtered_conversion_funnel_data.columns:
-                # New aggregated format: sum up the metrics by event
+                # New aggregated format: calculate metrics by event
                 funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
                     if not stage_data.empty:
+                        # For Users: use distinct count from raw data if available, otherwise sum (which may inflate)
+                        if has_raw_data:
+                            users_count = stage_data['idvisitor_converted'].nunique()
+                        else:
+                            # Summing aggregated users can inflate counts, but it's the best we can do without raw data
+                            users_count = stage_data['users'].sum()
+                        
+                        # For Visits: use distinct count from raw data if available, otherwise sum
+                        if 'idvisit' in filtered_conversion_funnel_data.columns:
+                            visits_count = stage_data['idvisit'].nunique()
+                        else:
+                            visits_count = stage_data['visits'].sum()
+                        
+                        # For Instances: sum is correct (total count)
+                        instances_count = stage_data['instances'].sum()
+                        
                         filtered_summary_data.append({
                             'Event': stage,
-                            'Users': stage_data['users'].sum(),
-                            'Visits': stage_data['visits'].sum(),
-                            'Instances': stage_data['instances'].sum()
+                            'Users': users_count,
+                            'Visits': visits_count,
+                            'Instances': instances_count
                         })
                     else:
                         filtered_summary_data.append({
