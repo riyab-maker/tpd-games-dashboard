@@ -1,6 +1,6 @@
 # ⚠️ All data used in this dashboard must be preprocessed using master_processor.py before deployment.
 # This dashboard only handles visualization of preprocessed data to stay within Render's 512MB memory limit.
-# Trigger redeploy - fix conversion funnel filtering
+# Updated: Using game_conversion_numbers.csv for optimized game filtering (commit 90ecd9a)
 
 import os
 import json
