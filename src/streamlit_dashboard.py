@@ -2340,7 +2340,7 @@ def main() -> None:
     st.markdown("## 🎯 Score Distribution Analysis")
     
     if not filtered_score_distribution_df.empty:
-        render_score_distribution_chart(filtered_score_distribution_df)
+        render_score_distribution_chart(filtered_score_distribution_df, selected_games)
     else:
         st.warning("No score distribution data available.")
     
