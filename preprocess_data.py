@@ -1635,6 +1635,116 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     return grouped
 
 
+def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
+    """Build summary table with all combinations: overall, by domain, by language, and by both
+    This allows the dashboard to filter by domain/language and get accurate distinct counts
+    """
+    print("Building summary statistics with domain and language grouping...")
+    
+    # Check if event column exists
+    if 'event' not in df.columns:
+        print("ERROR: 'event' column not found in dataframe")
+        return pd.DataFrame()
+    
+    # Filter out NULL/None events before grouping
+    df_filtered = df[df['event'].notna()].copy()
+    if df_filtered.empty:
+        print("WARNING: No records with valid event values after filtering NULLs")
+        return pd.DataFrame()
+    
+    print(f"Filtered to {len(df_filtered)} records with valid events")
+    
+    all_summaries = []
+    
+    # 1. Overall summary (domain='All', language='All')
+    print("Calculating overall summary (domain='All', language='All')...")
+    overall = df_filtered.groupby('event').agg({
+        'idvisitor_converted': _distinct_count_ignore_blank,
+        'idvisit': _distinct_count_ignore_blank,
+        'idlink_va': _distinct_count_ignore_blank,
+    })
+    overall.columns = ['Users', 'Visits', 'Instances']
+    overall = overall.reset_index()
+    overall.rename(columns={'event': 'Event'}, inplace=True)
+    overall['domain'] = 'All'
+    overall['language'] = 'All'
+    all_summaries.append(overall)
+    
+    # 2. By domain only (language='All')
+    if 'domain' in df_filtered.columns:
+        print("Calculating summary by domain (language='All')...")
+        by_domain = df_filtered.groupby(['event', 'domain']).agg({
+            'idvisitor_converted': _distinct_count_ignore_blank,
+            'idvisit': _distinct_count_ignore_blank,
+            'idlink_va': _distinct_count_ignore_blank,
+        })
+        by_domain.columns = ['Users', 'Visits', 'Instances']
+        by_domain = by_domain.reset_index()
+        by_domain.rename(columns={'event': 'Event'}, inplace=True)
+        by_domain['language'] = 'All'
+        # Remove rows where domain is null
+        by_domain = by_domain[by_domain['domain'].notna()]
+        all_summaries.append(by_domain)
+    
+    # 3. By language only (domain='All')
+    if 'language' in df_filtered.columns:
+        print("Calculating summary by language (domain='All')...")
+        by_language = df_filtered.groupby(['event', 'language']).agg({
+            'idvisitor_converted': _distinct_count_ignore_blank,
+            'idvisit': _distinct_count_ignore_blank,
+            'idlink_va': _distinct_count_ignore_blank,
+        })
+        by_language.columns = ['Users', 'Visits', 'Instances']
+        by_language = by_language.reset_index()
+        by_language.rename(columns={'event': 'Event'}, inplace=True)
+        by_language['domain'] = 'All'
+        # Remove rows where language is null
+        by_language = by_language[by_language['language'].notna()]
+        all_summaries.append(by_language)
+    
+    # 4. By both domain and language
+    if 'domain' in df_filtered.columns and 'language' in df_filtered.columns:
+        print("Calculating summary by domain and language...")
+        by_both = df_filtered.groupby(['event', 'domain', 'language']).agg({
+            'idvisitor_converted': _distinct_count_ignore_blank,
+            'idvisit': _distinct_count_ignore_blank,
+            'idlink_va': _distinct_count_ignore_blank,
+        })
+        by_both.columns = ['Users', 'Visits', 'Instances']
+        by_both = by_both.reset_index()
+        by_both.rename(columns={'event': 'Event'}, inplace=True)
+        # Remove rows where domain or language is null
+        by_both = by_both[by_both['domain'].notna() & by_both['language'].notna()]
+        all_summaries.append(by_both)
+    
+    # Combine all summaries
+    if all_summaries:
+        combined = pd.concat(all_summaries, ignore_index=True)
+        
+        # Convert to int
+        for col in ['Users', 'Visits', 'Instances']:
+            combined[col] = combined[col].astype(int)
+        
+        # Sort
+        sort_cols = ['Event']
+        if 'domain' in combined.columns:
+            sort_cols.append('domain')
+        if 'language' in combined.columns:
+            sort_cols.append('language')
+        combined = combined.sort_values(sort_cols)
+        
+        print(f"SUCCESS: Summary statistics with filters: {len(combined)} combinations")
+        print(f"  - Unique events: {combined['Event'].nunique()}")
+        if 'domain' in combined.columns:
+            print(f"  - Unique domains: {combined['domain'].nunique()}")
+        if 'language' in combined.columns:
+            print(f"  - Unique languages: {combined['language'].nunique()}")
+        
+        return combined
+    else:
+        return pd.DataFrame()
+
+
 def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.DataFrame:
     """DEPRECATED: Preprocess time series data for instances only - using created_at and distinct id counts
     This function is no longer used. Instances are now calculated from idlink_va in the combined query."""
@@ -2359,18 +2469,34 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
         print(f"  Please run --main first to generate conversion_funnel.csv with required columns")
         return pd.DataFrame()
     
-    print("Building summary statistics...")
+    # Ensure domain and language columns exist (extract if needed)
+    if 'domain' not in df_main.columns and 'game_code' in df_main.columns:
+        print("  - Extracting domain from game_code...")
+        df_main['domain'] = df_main['game_code'].apply(extract_domain_from_game_code)
+    
+    # Build summary with domain and language grouping (includes overall summary)
+    print("Building summary statistics with domain and language grouping...")
     sys.stdout.flush()
-    summary_df = build_summary(df_main)
+    summary_df = build_summary_with_filters(df_main)
     
     if summary_df.empty:
         print("  ERROR: Failed to build summary statistics")
         return pd.DataFrame()
     
+    # Sort by Event, domain, language
+    sort_cols = ['Event']
+    if 'domain' in summary_df.columns:
+        sort_cols.append('domain')
+    if 'language' in summary_df.columns:
+        sort_cols.append('language')
+    summary_df = summary_df.sort_values(sort_cols)
+    
     print(f"Saving summary_data.csv ({len(summary_df)} records)...")
     sys.stdout.flush()
     summary_df.to_csv('data/summary_data.csv', index=False)
     print(f"✓ SUCCESS: Saved data/summary_data.csv ({len(summary_df)} records)")
+    print(f"  - Includes overall totals (domain='All', language='All')")
+    print(f"  - Includes breakdowns by domain and language")
     sys.stdout.flush()
     
     return summary_df
