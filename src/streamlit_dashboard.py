@@ -1351,6 +1351,105 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             help=f"Sum of {selected_metric.lower()} completed across the selected time period"
         )
 
+def _get_filtered_summary(summary_df: pd.DataFrame, selected_domains: list, selected_languages: list, 
+                          has_domain_filter: bool, has_language_filter: bool) -> pd.DataFrame:
+    """Get filtered summary using pre-calculated combinations from summary_data.csv
+    
+    Combinations available:
+    - Overall totals: domain='All', language='All'
+    - By domain only: domain='CG', language='All'
+    - By language only: domain='All', language='hi'
+    - By both: domain='CG', language='hi'
+    """
+    if summary_df.empty:
+        return pd.DataFrame(columns=['Event', 'Users', 'Visits', 'Instances'])
+    
+    # Determine which combination to use
+    if not has_domain_filter and not has_language_filter:
+        # No filters - use overall totals (All, All)
+        filtered_df = summary_df[
+            (summary_df['domain'] == 'All') & (summary_df['language'] == 'All')
+        ].copy()
+    elif has_domain_filter and not has_language_filter:
+        # Domain filter only - use (domain, All) combinations
+        if len(selected_domains) == 1:
+            # Single domain - use exact combination
+            filtered_df = summary_df[
+                (summary_df['domain'] == selected_domains[0]) & (summary_df['language'] == 'All')
+            ].copy()
+        else:
+            # Multiple domains - aggregate (domain, All) rows
+            filtered_df = summary_df[
+                (summary_df['domain'].isin(selected_domains)) & (summary_df['language'] == 'All')
+            ].copy()
+            if not filtered_df.empty:
+                filtered_df = filtered_df.groupby('Event').agg({
+                    'Users': 'sum',
+                    'Visits': 'sum',
+                    'Instances': 'sum'
+                }).reset_index()
+    elif not has_domain_filter and has_language_filter:
+        # Language filter only - use (All, language) combinations
+        if len(selected_languages) == 1:
+            # Single language - use exact combination
+            filtered_df = summary_df[
+                (summary_df['domain'] == 'All') & (summary_df['language'] == selected_languages[0])
+            ].copy()
+        else:
+            # Multiple languages - aggregate (All, language) rows
+            filtered_df = summary_df[
+                (summary_df['domain'] == 'All') & (summary_df['language'].isin(selected_languages))
+            ].copy()
+            if not filtered_df.empty:
+                filtered_df = filtered_df.groupby('Event').agg({
+                    'Users': 'sum',
+                    'Visits': 'sum',
+                    'Instances': 'sum'
+                }).reset_index()
+    else:
+        # Both domain and language filters - use (domain, language) combinations
+        if len(selected_domains) == 1 and len(selected_languages) == 1:
+            # Single domain and language - use exact combination
+            filtered_df = summary_df[
+                (summary_df['domain'] == selected_domains[0]) & 
+                (summary_df['language'] == selected_languages[0])
+            ].copy()
+        else:
+            # Multiple domains or languages - aggregate matching rows
+            filtered_df = summary_df[
+                (summary_df['domain'].isin(selected_domains)) & 
+                (summary_df['language'].isin(selected_languages))
+            ].copy()
+            if not filtered_df.empty:
+                groupby_cols = ['Event']
+                filtered_df = filtered_df.groupby(groupby_cols).agg({
+                    'Users': 'sum',
+                    'Visits': 'sum',
+                    'Instances': 'sum'
+                }).reset_index()
+    
+    # Ensure all events exist
+    if filtered_df.empty:
+        all_events = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+        filtered_df = pd.DataFrame({
+            'Event': all_events,
+            'Users': [0] * 8,
+            'Visits': [0] * 8,
+            'Instances': [0] * 8
+        })
+    else:
+        # Ensure all events are present
+        all_events = pd.DataFrame({'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']})
+        filtered_df = all_events.merge(filtered_df, on='Event', how='left').fillna(0)
+    
+    # Convert to int
+    for col in ['Users', 'Visits', 'Instances']:
+        if col in filtered_df.columns:
+            filtered_df[col] = filtered_df[col].astype(int)
+    
+    return filtered_df[['Event', 'Users', 'Visits', 'Instances']]
+
+
 def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
     """Render parent poll responses visualization"""
     import altair as alt
@@ -1895,19 +1994,18 @@ def main() -> None:
             if date_range[0] != min_date or date_range[1] != max_date:
                 has_date_filter = True
     
-    # Recalculate summary from conversion_funnel_df when any filter is applied
-    # This ensures summary_data changes when language, domain, game, or date filters are applied
-    # IMPORTANT: If language filter is applied (even without games), we must recalculate
+    # Use pre-calculated combinations from summary_data.csv (similar to poll responses)
+    # The data has all combinations: (All, All), (domain, All), (All, language), (domain, language)
     any_filter_applied = has_date_filter or has_game_filter or has_domain_filter or has_language_filter
     
     # Check if summary_df has domain and language columns (enhanced format)
     has_domain_in_summary = 'domain' in summary_df.columns
     has_language_in_summary = 'language' in summary_df.columns
     
+    # Determine which combination to use from pre-calculated summary_data
     if not any_filter_applied:
-        # No filters applied - use overall summary (domain='All', language='All') or first row
+        # No filters applied - use overall summary (domain='All', language='All')
         if has_domain_in_summary and has_language_in_summary:
-            # Filter for overall totals
             filtered_summary_df = summary_df[
                 (summary_df['domain'] == 'All') & (summary_df['language'] == 'All')
             ].copy()
@@ -1915,107 +2013,23 @@ def main() -> None:
                 filtered_summary_df = summary_df.copy()
         else:
             filtered_summary_df = summary_df.copy()
+    elif (has_domain_filter or has_language_filter) and has_domain_in_summary and has_language_in_summary:
+        # Domain/language filters - use pre-calculated combinations from summary_data
+        # This handles: domain only, language only, or both domain+language
+        filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
     elif has_date_filter or has_game_filter:
         # Date or game filters require recalculating from conversion_funnel_data
-        # (not pre-calculated in summary_data)
+        # But we can still use domain/language pre-calculated values if no date/game filter
         if conversion_funnel_df.empty:
-            filtered_summary_df = summary_df.copy()
+            # Fallback to summary_df with domain/language filters if available
+            if has_domain_in_summary and has_language_in_summary:
+                filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
+            else:
+                filtered_summary_df = summary_df.copy()
         else:
-            # Continue with existing logic for date/game filters
-            pass  # Will be handled below
-    elif (has_domain_filter or has_language_filter) and has_domain_in_summary and has_language_in_summary:
-        # Domain/language filters - use pre-calculated values from enhanced summary_data
-        filtered_summary = summary_df.copy()
-        
-        # Filter by domain
-        if has_domain_filter:
-            # Filter for selected domains OR 'All' (for overall)
-            filtered_summary = filtered_summary[
-                (filtered_summary['domain'].isin(selected_domains)) | (filtered_summary['domain'] == 'All')
-            ]
-        
-        # Filter by language
-        if has_language_filter:
-            # Filter for selected languages
-            filtered_summary = filtered_summary[filtered_summary['language'].isin(selected_languages)]
-        
-        # Exclude 'All' rows if we have specific filters
-        if has_domain_filter:
-            filtered_summary = filtered_summary[filtered_summary['domain'] != 'All']
-        if has_language_filter:
-            filtered_summary = filtered_summary[filtered_summary['language'] != 'All']
-        
-        # Use pre-calculated values directly - no need to aggregate since we have all combinations
-        # Filter to get the exact combination we need
-        if has_domain_filter and has_language_filter:
-            # Both filters - use exact combination
-            filtered_summary = filtered_summary[
-                (filtered_summary['domain'].isin(selected_domains)) &
-                (filtered_summary['language'].isin(selected_languages))
-            ]
-            # If multiple domains/languages selected, sum them (they're distinct combinations)
-            if len(selected_domains) > 1 or len(selected_languages) > 1:
-                filtered_summary_df = filtered_summary.groupby('Event').agg({
-                    'Users': 'sum',
-                    'Visits': 'sum',
-                    'Instances': 'sum'
-                }).reset_index()
-            else:
-                # Single combination - use directly
-                filtered_summary_df = filtered_summary[['Event', 'Users', 'Visits', 'Instances']].copy()
-        elif has_domain_filter:
-            # Domain filter only - use pre-calculated by-domain values (language='All')
-            filtered_summary = filtered_summary[
-                (filtered_summary['domain'].isin(selected_domains)) &
-                (filtered_summary['language'] == 'All')
-            ]
-            if len(selected_domains) > 1:
-                filtered_summary_df = filtered_summary.groupby('Event').agg({
-                    'Users': 'sum',
-                    'Visits': 'sum',
-                    'Instances': 'sum'
-                }).reset_index()
-            else:
-                filtered_summary_df = filtered_summary[['Event', 'Users', 'Visits', 'Instances']].copy()
-        elif has_language_filter:
-            # Language filter only - use pre-calculated by-language values (domain='All')
-            filtered_summary = filtered_summary[
-                (filtered_summary['domain'] == 'All') &
-                (filtered_summary['language'].isin(selected_languages))
-            ]
-            if len(selected_languages) > 1:
-                filtered_summary_df = filtered_summary.groupby('Event').agg({
-                    'Users': 'sum',
-                    'Visits': 'sum',
-                    'Instances': 'sum'
-                }).reset_index()
-            else:
-                filtered_summary_df = filtered_summary[['Event', 'Users', 'Visits', 'Instances']].copy()
-        
-        if filtered_summary_df.empty:
-            # No matching data - return empty summary
-            filtered_summary_df = pd.DataFrame({
-                'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed'],
-                'Users': [0] * 8,
-                'Visits': [0] * 8,
-                'Instances': [0] * 8
-            })
-            
-            # Ensure all events exist
-            all_events = pd.DataFrame({'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']})
-            filtered_summary_df = all_events.merge(filtered_summary_df, on='Event', how='left').fillna(0)
-            
-            # Convert to int
-            for col in ['Users', 'Visits', 'Instances']:
-                filtered_summary_df[col] = filtered_summary_df[col].astype(int)
-        else:
-            # No matching data - return empty summary
-            filtered_summary_df = pd.DataFrame({
-                'Event': ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed'],
-                'Users': [0] * 8,
-                'Visits': [0] * 8,
-                'Instances': [0] * 8
-            })
+            # Continue with existing logic for date/game filters (handled below)
+            # This will recalculate from raw data, but we should still apply domain/language filters
+            pass
     elif conversion_funnel_df.empty:
         # Filters requested but no conversion funnel data available - use summary_df directly
         filtered_summary_df = summary_df.copy()
