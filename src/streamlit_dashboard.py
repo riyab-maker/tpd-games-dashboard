@@ -2003,16 +2003,18 @@ def main() -> None:
                         # Visits: sum is acceptable (may have slight inflation but works for filtered data)
                         visits_count = stage_data['visits'].sum()
                         
-                        # Users: use raw data if available, otherwise sum (with note that it may be inflated)
+                        # Users: use raw data if available for accurate distinct counts, otherwise use aggregated sum
                         if raw_conversion_funnel is not None and not raw_conversion_funnel.empty and 'event' in raw_conversion_funnel.columns:
-                            # Use raw data for accurate Users count
+                            # Use raw data for accurate Users count (distinct count)
                             raw_stage_data = raw_conversion_funnel[raw_conversion_funnel['event'] == stage]
                             if not raw_stage_data.empty:
                                 users_count = raw_stage_data['idvisitor_converted'].nunique() if 'idvisitor_converted' in raw_stage_data.columns else stage_data['users'].sum()
                             else:
                                 users_count = 0
                         else:
-                            # No raw data available - use sum (may be inflated but best we can do)
+                            # No raw data available - use sum from aggregated data
+                            # Note: This may have some inflation as same user can appear in multiple rows
+                            # but it's the best approximation we can get from aggregated data
                             users_count = stage_data['users'].sum()
                         
                         filtered_summary_data.append({
@@ -2030,10 +2032,6 @@ def main() -> None:
                         })
                 
                 filtered_summary_df = pd.DataFrame(filtered_summary_data)
-                
-                # Only show warning for Users if raw data wasn't available
-                if raw_conversion_funnel is None or raw_conversion_funnel.empty:
-                    st.info("ℹ️ **Note:** User counts may be slightly inflated when using aggregated data with filters. For accurate User counts, ensure conversion_funnel.csv (raw data) is available.")
             else:
                 # Old format: calculate from raw data (idvisitor_converted, idvisit, idlink_va)
                 funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
