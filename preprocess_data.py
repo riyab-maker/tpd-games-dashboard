@@ -2929,52 +2929,66 @@ def process_parent_poll() -> pd.DataFrame:
     print("=" * 60, flush=True)
     print("NOTE: Reading from Excel file, NOT from database", flush=True)
     
-    # Read poll data from Excel file
+    # Read poll data from CSV or Excel file (prefer CSV)
+    csv_file = 'poll_responses_raw_data.csv'
     excel_file = 'poll_responses_raw_data.xlsx'
-    print(f"\n[STEP 1] Reading parent poll data from Excel file: {excel_file}", flush=True)
-    print("  This step reads the Excel file into memory...", flush=True)
+    df_poll = None
     
-    try:
-        # Read entire Excel file
-        print("  [ACTION] Starting to read Excel file (this may take a moment for large files)...", flush=True)
-        sys.stdout.flush()  # Force flush
-        
-        df_poll = pd.read_excel(excel_file)
-        
-        print(f"  [SUCCESS] Excel file loaded successfully!", flush=True)
-        print(f"  Total records loaded: {len(df_poll):,}", flush=True)
-        sys.stdout.flush()
-            
-    except FileNotFoundError:
-        print(f"  ERROR: File '{excel_file}' not found")
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
-        poll_df.to_csv('data/poll_responses_data.csv', index=False)
-        return poll_df
-    except Exception as e:
-        print(f"  ERROR: Failed to read Excel file: {str(e)}")
-        import traceback
-        traceback.print_exc()
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+    # Try CSV first
+    if os.path.exists(csv_file):
+        print(f"\n[STEP 1] Reading parent poll data from CSV file: {csv_file}", flush=True)
+        print("  This step reads the CSV file into memory...", flush=True)
+        try:
+            print("  [ACTION] Starting to read CSV file (this may take a moment for large files)...", flush=True)
+            sys.stdout.flush()
+            df_poll = pd.read_csv(csv_file, low_memory=False)
+            print(f"  [SUCCESS] CSV file loaded successfully!", flush=True)
+            print(f"  Total records loaded: {len(df_poll):,}", flush=True)
+            sys.stdout.flush()
+        except Exception as e:
+            print(f"  ERROR: Failed to read CSV file: {str(e)}")
+            import traceback
+            traceback.print_exc()
+    
+    # Fallback to Excel if CSV not found or failed
+    if df_poll is None and os.path.exists(excel_file):
+        print(f"\n[STEP 1] Reading parent poll data from Excel file: {excel_file}", flush=True)
+        print("  This step reads the Excel file into memory...", flush=True)
+        try:
+            print("  [ACTION] Starting to read Excel file (this may take a moment for large files)...", flush=True)
+            sys.stdout.flush()
+            df_poll = pd.read_excel(excel_file)
+            print(f"  [SUCCESS] Excel file loaded successfully!", flush=True)
+            print(f"  Total records loaded: {len(df_poll):,}", flush=True)
+            sys.stdout.flush()
+        except Exception as e:
+            print(f"  ERROR: Failed to read Excel file: {str(e)}")
+            import traceback
+            traceback.print_exc()
+    
+    if df_poll is None:
+        print(f"  ERROR: Neither '{csv_file}' nor '{excel_file}' found")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count', 'language', 'domain'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
     if df_poll.empty:
-        print("WARNING: No parent poll data found in Excel file")
+        print("WARNING: No parent poll data found in file")
         # Create empty dataframe with expected headers
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count', 'language', 'domain'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
     # Ensure required columns exist
     if 'custom_dimension_1' not in df_poll.columns:
-        print("ERROR: 'custom_dimension_1' column not found in Excel file")
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        print("ERROR: 'custom_dimension_1' column not found in file")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count', 'language', 'domain'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
     if 'game_name' not in df_poll.columns:
-        print("ERROR: 'game_name' column not found in Excel file")
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        print("ERROR: 'game_name' column not found in file")
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count', 'language', 'domain'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
@@ -2995,11 +3009,25 @@ def process_parent_poll() -> pd.DataFrame:
     print(f"  Progress will be shown every 10,000 records...", flush=True)
     sys.stdout.flush()
     
+    # Extract language and game_code from raw data if available
+    has_language = 'language' in df_poll.columns
+    has_game_code = 'game_code' in df_poll.columns
+    
+    if has_language:
+        print(f"  [INFO] Language column found in raw data", flush=True)
+    if has_game_code:
+        print(f"  [INFO] game_code column found in raw data - will extract domain", flush=True)
+    
     for idx, row in df_poll.iterrows():
         try:
             custom_dim_1 = row.get('custom_dimension_1')
             game_name = row.get('game_name')
             idvisit = row.get('idvisit')
+            language = row.get('language') if has_language else None
+            game_code = row.get('game_code') if has_game_code else None
+            domain = None
+            if game_code:
+                domain = extract_domain_from_game_code(game_code)
             
             # Progress indicator
             if (idx + 1) % 10000 == 0:
@@ -3188,11 +3216,18 @@ def process_parent_poll() -> pd.DataFrame:
                                     if not question_text:
                                         question_text = "Question (unknown)"
                                 
-                                processed_records.append({
+                                record = {
                                     'game_name': game_name,
                                     'question': question_text,
                                     'option': option_message
-                                })
+                                }
+                                # Add language and domain if available
+                                if language is not None:
+                                    record['language'] = language
+                                if domain is not None:
+                                    record['domain'] = domain
+                                
+                                processed_records.append(record)
                     except (ValueError, IndexError, TypeError):
                         continue
                 
@@ -3216,7 +3251,7 @@ def process_parent_poll() -> pd.DataFrame:
     
     if not processed_records:
         print("\n  WARNING: No valid poll responses found after processing")
-        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count'])
+        poll_df = pd.DataFrame(columns=['game_name', 'question', 'option', 'count', 'language', 'domain'])
         poll_df.to_csv('data/poll_responses_data.csv', index=False)
         return poll_df
     
@@ -3225,19 +3260,35 @@ def process_parent_poll() -> pd.DataFrame:
     results_df = pd.DataFrame(processed_records)
     print(f"    Created DataFrame with {len(results_df)} rows", flush=True)
     
-    # Aggregate: count all responses per game, question, and option
+    # Aggregate: count all responses per game, question, option, language, and domain
     # This counts all responses (including multiple responses from the same user across different game plays)
-    print(f"[STEP 6] Aggregating responses by game, question, and option...", flush=True)
+    print(f"[STEP 6] Aggregating responses by game, question, option, language, and domain...", flush=True)
     sys.stdout.flush()
+    
+    # Determine grouping columns
+    groupby_cols = ['game_name', 'question', 'option']
+    if 'language' in results_df.columns:
+        groupby_cols.append('language')
+    if 'domain' in results_df.columns:
+        groupby_cols.append('domain')
+    
+    print(f"  Grouping by: {groupby_cols}", flush=True)
+    sys.stdout.flush()
+    
     agg_df = (
         results_df
-        .groupby(['game_name', 'question', 'option'])
+        .groupby(groupby_cols)
         .size()
         .reset_index(name='count')
     )
     
     # Sort for consistent output
-    agg_df = agg_df.sort_values(['game_name', 'question', 'option'])
+    sort_cols = ['game_name', 'question', 'option']
+    if 'language' in agg_df.columns:
+        sort_cols.append('language')
+    if 'domain' in agg_df.columns:
+        sort_cols.append('domain')
+    agg_df = agg_df.sort_values(sort_cols)
     
     print(f"\n[STEP 7] Final Aggregation Summary:", flush=True)
     print(f"    - Unique records: {len(agg_df):,}", flush=True)

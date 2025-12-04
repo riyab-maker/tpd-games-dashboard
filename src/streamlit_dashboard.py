@@ -1370,12 +1370,13 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
     filter_col1, filter_col2, filter_col3 = st.columns(3)
     
     with filter_col1:
-        # Game filter
+        # Game filter - default to first game if available
         st.markdown("**🎮 Game Filter:**")
+        default_games = [unique_games[0]] if len(unique_games) > 0 else []
         selected_games = st.multiselect(
             "Select Games:",
             options=unique_games,
-            default=[],  # Empty by default - shows all games
+            default=default_games,  # Default to first game
             help="Select one or more games to filter parent poll responses.",
             key="poll_game_filter"
         )
