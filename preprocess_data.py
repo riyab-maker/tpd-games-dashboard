@@ -3301,9 +3301,12 @@ def process_parent_poll() -> pd.DataFrame:
     results_df = pd.DataFrame(processed_records)
     print(f"    Created DataFrame with {len(results_df)} rows", flush=True)
     
-    # Aggregate: count all responses per game, question, option, language, and domain
-    # This counts all responses (including multiple responses from the same user across different game plays)
-    print(f"[STEP 6] Aggregating responses by game, question, option, language, and domain...", flush=True)
+    # Aggregate: generate all combinations like summary_data.csv
+    # 1. Overall totals (domain='All', language='All')
+    # 2. By domain only (domain='CG', language='All')
+    # 3. By language only (domain='All', language='hi')
+    # 4. By both (domain='CG', language='hi')
+    print(f"[STEP 6] Generating all combinations (overall, by domain, by language, by both)...", flush=True)
     sys.stdout.flush()
     
     # Fill NaN values in language and domain with 'Unknown' for grouping
@@ -3314,37 +3317,87 @@ def process_parent_poll() -> pd.DataFrame:
         results_df['domain'] = results_df['domain'].fillna('Unknown')
         print(f"  [INFO] Domain column found - unique values: {results_df['domain'].nunique()}", flush=True)
     
-    # Determine grouping columns
-    groupby_cols = ['game_name', 'question', 'option']
-    if 'language' in results_df.columns:
-        groupby_cols.append('language')
+    all_combinations = []
+    
+    # 1. Overall totals (domain='All', language='All')
+    print(f"  [1/4] Calculating overall totals (domain='All', language='All')...", flush=True)
+    overall = results_df.groupby(['game_name', 'question', 'option']).size().reset_index(name='count')
+    overall['domain'] = 'All'
+    overall['language'] = 'All'
+    all_combinations.append(overall)
+    print(f"    Generated {len(overall):,} overall records", flush=True)
+    
+    # 2. By domain only (domain='CG', language='All')
     if 'domain' in results_df.columns:
-        groupby_cols.append('domain')
+        print(f"  [2/4] Calculating by domain only (language='All')...", flush=True)
+        by_domain = results_df.groupby(['game_name', 'question', 'option', 'domain']).size().reset_index(name='count')
+        by_domain['language'] = 'All'
+        # Remove rows where domain is 'Unknown'
+        by_domain = by_domain[by_domain['domain'] != 'Unknown']
+        all_combinations.append(by_domain)
+        print(f"    Generated {len(by_domain):,} domain-only records", flush=True)
     
-    print(f"  Grouping by: {groupby_cols}", flush=True)
-    print(f"  Total records before aggregation: {len(results_df):,}", flush=True)
-    sys.stdout.flush()
+    # 3. By language only (domain='All', language='hi')
+    if 'language' in results_df.columns:
+        print(f"  [3/4] Calculating by language only (domain='All')...", flush=True)
+        by_language = results_df.groupby(['game_name', 'question', 'option', 'language']).size().reset_index(name='count')
+        by_language['domain'] = 'All'
+        # Remove rows where language is 'Unknown'
+        by_language = by_language[by_language['language'] != 'Unknown']
+        all_combinations.append(by_language)
+        print(f"    Generated {len(by_language):,} language-only records", flush=True)
     
-    agg_df = (
-        results_df
-        .groupby(groupby_cols)
-        .size()
-        .reset_index(name='count')
-    )
+    # 4. By both (domain='CG', language='hi')
+    if 'domain' in results_df.columns and 'language' in results_df.columns:
+        print(f"  [4/4] Calculating by both domain and language...", flush=True)
+        by_both = results_df.groupby(['game_name', 'question', 'option', 'domain', 'language']).size().reset_index(name='count')
+        # Remove rows where domain or language is 'Unknown'
+        by_both = by_both[(by_both['domain'] != 'Unknown') & (by_both['language'] != 'Unknown')]
+        all_combinations.append(by_both)
+        print(f"    Generated {len(by_both):,} domain+language records", flush=True)
     
-    print(f"  Total records after aggregation: {len(agg_df):,}", flush=True)
-    if 'language' in agg_df.columns:
-        print(f"  Unique languages in aggregated data: {sorted(agg_df['language'].unique())}", flush=True)
-    if 'domain' in agg_df.columns:
-        print(f"  Unique domains in aggregated data: {sorted(agg_df['domain'].dropna().unique())}", flush=True)
+    # Combine all combinations
+    if all_combinations:
+        # Ensure all dataframes have the same columns in the same order
+        base_cols = ['game_name', 'question', 'option', 'count', 'domain', 'language']
+        # Reorder columns for each dataframe
+        reordered_combinations = []
+        for df in all_combinations:
+            # Only include columns that exist
+            available_cols = [col for col in base_cols if col in df.columns]
+            reordered_df = df[available_cols].copy()
+            # Add missing columns with default values
+            for col in base_cols:
+                if col not in reordered_df.columns:
+                    if col == 'domain':
+                        reordered_df['domain'] = 'All'
+                    elif col == 'language':
+                        reordered_df['language'] = 'All'
+            # Reorder to match base_cols
+            reordered_df = reordered_df[base_cols]
+            reordered_combinations.append(reordered_df)
+        agg_df = pd.concat(reordered_combinations, ignore_index=True)
+        
+        print(f"  Total records after combining all combinations: {len(agg_df):,}", flush=True)
+        if 'language' in agg_df.columns:
+            print(f"  Unique languages: {sorted(agg_df['language'].unique())}", flush=True)
+        if 'domain' in agg_df.columns:
+            print(f"  Unique domains: {sorted(agg_df['domain'].dropna().unique())}", flush=True)
+    else:
+        # Fallback: basic aggregation if no language/domain columns
+        print(f"  [FALLBACK] Basic aggregation (no language/domain columns)...", flush=True)
+        agg_df = results_df.groupby(['game_name', 'question', 'option']).size().reset_index(name='count')
+        agg_df['domain'] = 'All'
+        agg_df['language'] = 'All'
+    
     sys.stdout.flush()
     
     # Sort for consistent output
     sort_cols = ['game_name', 'question', 'option']
-    if 'language' in agg_df.columns:
-        sort_cols.append('language')
     if 'domain' in agg_df.columns:
         sort_cols.append('domain')
+    if 'language' in agg_df.columns:
+        sort_cols.append('language')
     agg_df = agg_df.sort_values(sort_cols)
     
     print(f"\n[STEP 7] Final Aggregation Summary:", flush=True)

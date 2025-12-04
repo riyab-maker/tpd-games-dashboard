@@ -1413,32 +1413,75 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
             st.markdown("**🌍 Language Filter:**")
             st.info("No language data available")
     
-    # Apply filters to poll data
+    # Apply filters to poll data - use pre-calculated combinations
     filtered_df = poll_responses_df.copy()
     
     # Apply game filter
     if selected_games and 'game_name' in filtered_df.columns:
         filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
     
-    # Apply domain filter
-    if selected_domains and 'domain' in filtered_df.columns:
-        filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
-    
-    # Apply language filter
-    if selected_languages and 'language' in filtered_df.columns:
-        filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
-    
-    # If no language filter is selected, aggregate counts across all languages
-    # This combines hi and mr (or any other languages) into overall numbers
-    if not selected_languages and 'language' in filtered_df.columns:
-        # Group by game_name, question, and option, sum the counts
-        groupby_cols = ['game_name', 'question', 'option']
-        if 'domain' in filtered_df.columns:
-            # Keep domain in grouping if domain filter is applied
-            if selected_domains:
-                groupby_cols.append('domain')
-        
-        filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
+    # Use pre-calculated combinations based on domain and language filters
+    # The data has all combinations: (All, All), (domain, All), (All, language), (domain, language)
+    if 'domain' in filtered_df.columns and 'language' in filtered_df.columns:
+        # Determine which combination to use
+        if not selected_domains and not selected_languages:
+            # No filters - use overall totals (All, All)
+            filtered_df = filtered_df[
+                (filtered_df['domain'] == 'All') & (filtered_df['language'] == 'All')
+            ]
+        elif selected_domains and not selected_languages:
+            # Domain filter only - use (domain, All) combinations
+            if len(selected_domains) == 1:
+                # Single domain - use exact combination
+                filtered_df = filtered_df[
+                    (filtered_df['domain'] == selected_domains[0]) & (filtered_df['language'] == 'All')
+                ]
+            else:
+                # Multiple domains - aggregate (domain, All) rows
+                filtered_df = filtered_df[
+                    (filtered_df['domain'].isin(selected_domains)) & (filtered_df['language'] == 'All')
+                ]
+                filtered_df = filtered_df.groupby(['game_name', 'question', 'option', 'domain'])['count'].sum().reset_index()
+                filtered_df['language'] = 'All'
+        elif not selected_domains and selected_languages:
+            # Language filter only - use (All, language) combinations
+            if len(selected_languages) == 1:
+                # Single language - use exact combination
+                filtered_df = filtered_df[
+                    (filtered_df['domain'] == 'All') & (filtered_df['language'] == selected_languages[0])
+                ]
+            else:
+                # Multiple languages - aggregate (All, language) rows
+                filtered_df = filtered_df[
+                    (filtered_df['domain'] == 'All') & (filtered_df['language'].isin(selected_languages))
+                ]
+                filtered_df = filtered_df.groupby(['game_name', 'question', 'option', 'language'])['count'].sum().reset_index()
+                filtered_df['domain'] = 'All'
+        else:
+            # Both domain and language filters - use (domain, language) combinations
+            if len(selected_domains) == 1 and len(selected_languages) == 1:
+                # Single domain and language - use exact combination
+                filtered_df = filtered_df[
+                    (filtered_df['domain'] == selected_domains[0]) & 
+                    (filtered_df['language'] == selected_languages[0])
+                ]
+            else:
+                # Multiple domains or languages - aggregate matching rows
+                filtered_df = filtered_df[
+                    (filtered_df['domain'].isin(selected_domains)) & 
+                    (filtered_df['language'].isin(selected_languages))
+                ]
+                groupby_cols = ['game_name', 'question', 'option']
+                if len(selected_domains) > 1:
+                    groupby_cols.append('domain')
+                if len(selected_languages) > 1:
+                    groupby_cols.append('language')
+                filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
+                # Fill in fixed values for single selections
+                if len(selected_domains) == 1:
+                    filtered_df['domain'] = selected_domains[0]
+                if len(selected_languages) == 1:
+                    filtered_df['language'] = selected_languages[0]
     
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
