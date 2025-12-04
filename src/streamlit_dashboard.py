@@ -1,5 +1,6 @@
 # ⚠️ All data used in this dashboard must be preprocessed using master_processor.py before deployment.
 # This dashboard only handles visualization of preprocessed data to stay within Render's 512MB memory limit.
+# Trigger redeploy - fix conversion funnel filtering
 
 import os
 import json
