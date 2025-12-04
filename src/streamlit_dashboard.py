@@ -1428,6 +1428,18 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
     if selected_languages and 'language' in filtered_df.columns:
         filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
     
+    # If no language filter is selected, aggregate counts across all languages
+    # This combines hi and mr (or any other languages) into overall numbers
+    if not selected_languages and 'language' in filtered_df.columns:
+        # Group by game_name, question, and option, sum the counts
+        groupby_cols = ['game_name', 'question', 'option']
+        if 'domain' in filtered_df.columns:
+            # Keep domain in grouping if domain filter is applied
+            if selected_domains:
+                groupby_cols.append('domain')
+        
+        filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
+    
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
         return
