@@ -338,6 +338,18 @@ def load_processed_data():
         
         # Load poll responses data
         poll_responses_df = pd.read_csv(os.path.join(DATA_DIR, "poll_responses_data.csv"))
+        
+        # Extract domain from game_code if available
+        if 'game_code' in poll_responses_df.columns and 'domain' not in poll_responses_df.columns:
+            def extract_domain_from_game_code(game_code):
+                """Extract domain from game_code (e.g., HY-01-CG-01 -> CG)"""
+                if pd.isna(game_code) or not isinstance(game_code, str):
+                    return None
+                parts = game_code.split('-')
+                if len(parts) >= 3:
+                    return parts[2]  # Domain is typically the third part
+                return None
+            poll_responses_df['domain'] = poll_responses_df['game_code'].apply(extract_domain_from_game_code)
 
         # Load per-question correctness data (optional)
         qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
@@ -1349,33 +1361,71 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
     
     st.markdown("### 📊 Parent Poll Responses")
     
-    # Get unique games for filter
-    unique_games = sorted(game_conversion_df['game_name'].unique())
+    # Get unique values for filters from poll data
+    unique_games = sorted(poll_responses_df['game_name'].unique()) if 'game_name' in poll_responses_df.columns else []
+    unique_domains = sorted([d for d in poll_responses_df['domain'].dropna().unique() if d]) if 'domain' in poll_responses_df.columns else []
+    unique_languages = sorted([l for l in poll_responses_df['language'].dropna().unique() if l]) if 'language' in poll_responses_df.columns else []
     
-    # Add game filter - default to first game if available
-    st.markdown("**🎮 Game Filter:**")
-    default_games = [unique_games[0]] if len(unique_games) > 0 else []
-    selected_games = st.multiselect(
-        "Select Games for Parent Poll Analysis:",
-        options=unique_games,
-        default=default_games,  # Default to first game
-        help="Select one or more games to show parent poll responses."
-    )
+    # Create filter columns
+    filter_col1, filter_col2, filter_col3 = st.columns(3)
     
-    # Filter data based on selected games
-    if selected_games:
-        # Check if game_name column exists in poll data
-        if 'game_name' in poll_responses_df.columns:
-            filtered_df = poll_responses_df[poll_responses_df['game_name'].isin(selected_games)]
-            if filtered_df.empty:
-                st.warning(f"No poll data found for selected games: {', '.join(selected_games)}")
-                return
+    with filter_col1:
+        # Game filter
+        st.markdown("**🎮 Game Filter:**")
+        selected_games = st.multiselect(
+            "Select Games:",
+            options=unique_games,
+            default=[],  # Empty by default - shows all games
+            help="Select one or more games to filter parent poll responses.",
+            key="poll_game_filter"
+        )
+    
+    with filter_col2:
+        # Domain filter
+        if unique_domains:
+            st.markdown("**🌐 Domain Filter:**")
+            selected_domains = st.multiselect(
+                "Select Domain(s):",
+                options=unique_domains,
+                default=[],  # Empty by default - shows all domains
+                help="Select one or more domains to filter parent poll responses.",
+                key="poll_domain_filter"
+            )
         else:
-            # Fallback for data without game_name column
-            filtered_df = poll_responses_df.copy()
-            st.info(f"🎮 Game filter selected: {', '.join(selected_games)} (Note: Poll data doesn't include game filtering yet)")
-    else:
-        filtered_df = poll_responses_df.copy()
+            selected_domains = []
+            st.markdown("**🌐 Domain Filter:**")
+            st.info("No domain data available")
+    
+    with filter_col3:
+        # Language filter
+        if unique_languages:
+            st.markdown("**🌍 Language Filter:**")
+            selected_languages = st.multiselect(
+                "Select Language(s):",
+                options=unique_languages,
+                default=[],  # Empty by default - shows all languages
+                help="Select one or more languages to filter parent poll responses.",
+                key="poll_language_filter"
+            )
+        else:
+            selected_languages = []
+            st.markdown("**🌍 Language Filter:**")
+            st.info("No language data available")
+    
+    # Apply filters to poll data
+    filtered_df = poll_responses_df.copy()
+    
+    # Apply game filter
+    if selected_games and 'game_name' in filtered_df.columns:
+        filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
+    
+    # Apply domain filter
+    if selected_domains and 'domain' in filtered_df.columns:
+        filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
+    
+    # Apply language filter
+    if selected_languages and 'language' in filtered_df.columns:
+        filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
     
     if filtered_df.empty:
         st.warning("No data available for the selected games.")
