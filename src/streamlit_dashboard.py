@@ -2028,13 +2028,15 @@ def main() -> None:
             else:
                 filtered_summary_df = summary_df.copy()
         else:
-            # Continue with existing logic for date/game filters (handled below)
-            # This will recalculate from raw data, but we should still apply domain/language filters
+            # Continue with existing logic for date/game filters (handled in else block below)
+            # Don't set filtered_summary_df here - it will be set in the else block
             pass
     elif conversion_funnel_df.empty:
         # Filters requested but no conversion funnel data available - use summary_df directly
         filtered_summary_df = summary_df.copy()
-    else:
+    
+    # Handle date/game filters that require recalculating from conversion_funnel_data
+    if (has_date_filter or has_game_filter) and not conversion_funnel_df.empty:
         # Filters are applied - recalculate summary from filtered conversion_funnel data
         filtered_conversion_funnel_data = conversion_funnel_df.copy()
         
@@ -2281,6 +2283,16 @@ def main() -> None:
                 filtered_summary_df = pd.DataFrame(filtered_summary_data)
         else:
             # Fallback to summary_df if filtered_conversion_funnel_data is empty or missing event column
+            if has_domain_in_summary and has_language_in_summary:
+                filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
+            else:
+                filtered_summary_df = summary_df.copy()
+    
+    # Ensure filtered_summary_df is always set (fallback if not set above)
+    if 'filtered_summary_df' not in locals():
+        if has_domain_in_summary and has_language_in_summary:
+            filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
+        else:
             filtered_summary_df = summary_df.copy()
     
     # Render conversion funnel with date and game filters applied
