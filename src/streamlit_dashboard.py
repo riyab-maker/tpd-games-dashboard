@@ -2018,9 +2018,53 @@ def main() -> None:
         # Domain/language filters - use pre-calculated combinations from summary_data
         # This handles: domain only, language only, or both domain+language
         filtered_summary_df = _get_filtered_summary(summary_df, selected_domains, selected_languages, has_domain_filter, has_language_filter)
-    elif has_date_filter or has_game_filter:
-        # Date or game filters require recalculating from conversion_funnel_data
-        # But we can still use domain/language pre-calculated values if no date/game filter
+    elif has_game_filter and not has_date_filter:
+        # Game filter (without date filter) - use pre-calculated game_conversion_numbers.csv
+        # This is much faster and more accurate than recalculating from raw data
+        filtered_game_df = game_conversion_df.copy()
+        
+        # Apply game filter
+        filtered_game_df = filtered_game_df[filtered_game_df['game_name'].isin(selected_games)]
+        
+        # Apply domain filter if set
+        if has_domain_filter and 'domain' in filtered_game_df.columns:
+            filtered_game_df = filtered_game_df[filtered_game_df['domain'].isin(selected_domains)]
+        
+        # Apply language filter if set
+        if has_language_filter and 'language' in filtered_game_df.columns:
+            filtered_game_df = filtered_game_df[filtered_game_df['language'].isin(selected_languages)]
+        
+        # Convert game_conversion_numbers format to summary format
+        if not filtered_game_df.empty:
+            funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+            summary_data = []
+            for stage in funnel_stages:
+                users_col = f'{stage}_users'
+                visits_col = f'{stage}_visits'
+                instances_col = f'{stage}_instances'
+                
+                users = filtered_game_df[users_col].sum() if users_col in filtered_game_df.columns else 0
+                visits = filtered_game_df[visits_col].sum() if visits_col in filtered_game_df.columns else 0
+                instances = filtered_game_df[instances_col].sum() if instances_col in filtered_game_df.columns else 0
+                
+                summary_data.append({
+                    'Event': stage,
+                    'Users': int(users),
+                    'Visits': int(visits),
+                    'Instances': int(instances)
+                })
+            filtered_summary_df = pd.DataFrame(summary_data)
+        else:
+            # No matching games - return empty summary
+            all_events = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+            filtered_summary_df = pd.DataFrame({
+                'Event': all_events,
+                'Users': [0] * 8,
+                'Visits': [0] * 8,
+                'Instances': [0] * 8
+            })
+    elif has_date_filter:
+        # Date filter requires recalculating from conversion_funnel_data
         if conversion_funnel_df.empty:
             # Fallback to summary_df with domain/language filters if available
             if has_domain_in_summary and has_language_in_summary:
@@ -2028,15 +2072,16 @@ def main() -> None:
             else:
                 filtered_summary_df = summary_df.copy()
         else:
-            # Continue with existing logic for date/game filters (handled in else block below)
+            # Continue with existing logic for date filters (handled in else block below)
             # Don't set filtered_summary_df here - it will be set in the else block
             pass
     elif conversion_funnel_df.empty:
         # Filters requested but no conversion funnel data available - use summary_df directly
         filtered_summary_df = summary_df.copy()
     
-    # Handle date/game filters that require recalculating from conversion_funnel_data
-    if (has_date_filter or has_game_filter) and not conversion_funnel_df.empty:
+    # Handle date filters that require recalculating from conversion_funnel_data
+    # (Game filters are now handled above using game_conversion_numbers.csv)
+    if has_date_filter and not conversion_funnel_df.empty:
         # Filters are applied - recalculate summary from filtered conversion_funnel data
         filtered_conversion_funnel_data = conversion_funnel_df.copy()
         
