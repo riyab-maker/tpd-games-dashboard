@@ -1926,31 +1926,99 @@ def main() -> None:
                         })
                 filtered_summary_df = pd.DataFrame(filtered_summary_data)
             elif has_aggregated:
-                # Only aggregated format available - use it (may have slight inflation for Users/Visits)
-                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
-                filtered_summary_data = []
-                for stage in funnel_stages:
-                    stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
-                    if not stage_data.empty:
-                        # Summing aggregated users/visits can inflate counts, but it's the best we can do without raw data
-                        users_count = stage_data['users'].sum()
-                        visits_count = stage_data['visits'].sum()
-                        instances_count = stage_data['instances'].sum()
-                        
-                        filtered_summary_data.append({
-                            'Event': stage,
-                            'Users': users_count,
-                            'Visits': visits_count,
-                            'Instances': instances_count
-                        })
-                    else:
-                        filtered_summary_data.append({
-                            'Event': stage,
-                            'Users': 0,
-                            'Visits': 0,
-                            'Instances': 0
-                        })
-                filtered_summary_df = pd.DataFrame(filtered_summary_data)
+                # Only aggregated format available - but we CANNOT sum 'users' as it causes inflation
+                # Try to reload raw conversion_funnel.csv if available, otherwise show warning
+                raw_conversion_funnel = None
+                root_path = "conversion_funnel.csv"
+                data_path = os.path.join(DATA_DIR, "conversion_funnel.csv")
+                
+                # Try to load raw data
+                for path in [root_path, data_path]:
+                    if os.path.exists(path):
+                        try:
+                            sample = pd.read_csv(path, nrows=5, low_memory=False)
+                            is_raw = 'idlink_va' in sample.columns or 'idvisitor' in sample.columns or 'idvisitor_converted' in sample.columns
+                            if is_raw:
+                                raw_conversion_funnel = pd.read_csv(path, low_memory=False)
+                                # Apply same filters to raw data
+                                if 'date' in raw_conversion_funnel.columns or 'server_time' in raw_conversion_funnel.columns:
+                                    if 'date' not in raw_conversion_funnel.columns and 'server_time' in raw_conversion_funnel.columns:
+                                        raw_conversion_funnel['date'] = pd.to_datetime(raw_conversion_funnel['server_time']).dt.date
+                                    if has_date_filter:
+                                        start_date, end_date = date_range
+                                        raw_conversion_funnel = raw_conversion_funnel[
+                                            (raw_conversion_funnel['date'] >= start_date) &
+                                            (raw_conversion_funnel['date'] <= end_date)
+                                        ]
+                                if has_domain_filter and 'domain' in raw_conversion_funnel.columns:
+                                    raw_conversion_funnel = raw_conversion_funnel[raw_conversion_funnel['domain'].isin(selected_domains)]
+                                if has_game_filter and 'game_name' in raw_conversion_funnel.columns:
+                                    raw_conversion_funnel = raw_conversion_funnel[raw_conversion_funnel['game_name'].isin(selected_games)]
+                                if has_language_filter and 'language' in raw_conversion_funnel.columns:
+                                    raw_conversion_funnel = raw_conversion_funnel[raw_conversion_funnel['language'].isin(selected_languages)]
+                                
+                                # Ensure idvisitor_converted exists
+                                if 'idvisitor' in raw_conversion_funnel.columns and 'idvisitor_converted' not in raw_conversion_funnel.columns:
+                                    raw_conversion_funnel['idvisitor_converted'] = raw_conversion_funnel['idvisitor']
+                                
+                                # Create event column if needed
+                                if 'event' not in raw_conversion_funnel.columns and 'name' in raw_conversion_funnel.columns:
+                                    def parse_event_from_name(name):
+                                        if pd.isna(name):
+                                            return None
+                                        name_str = str(name).lower()
+                                        if 'started' in name_str:
+                                            return 'started'
+                                        elif 'introduction_completed' in name_str and 'mid' not in name_str:
+                                            return 'introduction'
+                                        elif 'mid_introduction' in name_str:
+                                            return 'mid_introduction'
+                                        elif 'poll_completed' in name_str:
+                                            return 'parent_poll'
+                                        elif 'action_completed' in name_str:
+                                            return 'questions'
+                                        elif 'reward_completed' in name_str:
+                                            return 'rewards'
+                                        elif 'question_completed' in name_str:
+                                            return 'validation'
+                                        elif 'completed' in name_str:
+                                            return 'completed'
+                                        return None
+                                    raw_conversion_funnel['event'] = raw_conversion_funnel['name'].apply(parse_event_from_name)
+                                break
+                        except Exception:
+                            continue
+                
+                if raw_conversion_funnel is not None and not raw_conversion_funnel.empty and 'event' in raw_conversion_funnel.columns:
+                    # Use raw data for accurate distinct counts
+                    funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+                    filtered_summary_data = []
+                    for stage in funnel_stages:
+                        stage_data = raw_conversion_funnel[raw_conversion_funnel['event'] == stage]
+                        if not stage_data.empty:
+                            users_count = stage_data['idvisitor_converted'].nunique() if 'idvisitor_converted' in stage_data.columns else 0
+                            visits_count = stage_data['idvisit'].nunique() if 'idvisit' in stage_data.columns else 0
+                            instances_count = len(stage_data) if 'idlink_va' in stage_data.columns else 0
+                            
+                            filtered_summary_data.append({
+                                'Event': stage,
+                                'Users': users_count,
+                                'Visits': visits_count,
+                                'Instances': instances_count
+                            })
+                        else:
+                            filtered_summary_data.append({
+                                'Event': stage,
+                                'Users': 0,
+                                'Visits': 0,
+                                'Instances': 0
+                            })
+                    filtered_summary_df = pd.DataFrame(filtered_summary_data)
+                else:
+                    # No raw data available - we cannot accurately calculate Users/Visits from aggregated data
+                    # Show warning and use summary_df as fallback (which was calculated from raw data)
+                    st.warning("⚠️ **Note:** Cannot calculate accurate User/Visit counts from aggregated data with filters applied. Using unfiltered summary data. Please ensure conversion_funnel.csv (raw data) is available for accurate filtered results.")
+                    filtered_summary_df = summary_df.copy()
             else:
                 # Old format: calculate from raw data (idvisitor_converted, idvisit, idlink_va)
                 funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
