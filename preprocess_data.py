@@ -2995,6 +2995,39 @@ def process_parent_poll() -> pd.DataFrame:
     print(f"\n[STEP 2] Validating data structure...", flush=True)
     print(f"  Available columns: {list(df_poll.columns)}", flush=True)
     
+    # Normalize column names (handle case variations and spaces)
+    column_mapping = {}
+    for col in df_poll.columns:
+        col_lower = str(col).lower().strip()
+        if col_lower in ['language', 'lanuagae']:  # Handle typo
+            column_mapping['language'] = col
+        elif col_lower in ['game_code', 'gamecode', 'game code']:
+            column_mapping['game_code'] = col
+        elif col_lower == 'custom_dimension_1':
+            column_mapping['custom_dimension_1'] = col
+        elif col_lower == 'game_name':
+            column_mapping['game_name'] = col
+    
+    # Check for required columns
+    has_language = 'language' in column_mapping
+    has_game_code = 'game_code' in column_mapping
+    
+    if has_language:
+        print(f"  [INFO] Language column found in raw data: '{column_mapping['language']}'", flush=True)
+    else:
+        print(f"  [WARNING] Language column not found - checking available columns...", flush=True)
+        lang_cols = [c for c in df_poll.columns if 'lang' in str(c).lower()]
+        if lang_cols:
+            print(f"    Found potential language columns: {lang_cols}", flush=True)
+    
+    if has_game_code:
+        print(f"  [INFO] game_code column found in raw data: '{column_mapping['game_code']}' - will extract domain", flush=True)
+    else:
+        print(f"  [WARNING] game_code column not found - checking available columns...", flush=True)
+        game_code_cols = [c for c in df_poll.columns if 'game' in str(c).lower() and 'code' in str(c).lower()]
+        if game_code_cols:
+            print(f"    Found potential game_code columns: {game_code_cols}", flush=True)
+    
     # Process each record
     processed_records = []
     debug_count = 0
@@ -3009,22 +3042,30 @@ def process_parent_poll() -> pd.DataFrame:
     print(f"  Progress will be shown every 10,000 records...", flush=True)
     sys.stdout.flush()
     
-    # Extract language and game_code from raw data if available
-    has_language = 'language' in df_poll.columns
-    has_game_code = 'game_code' in df_poll.columns
-    
-    if has_language:
-        print(f"  [INFO] Language column found in raw data", flush=True)
-    if has_game_code:
-        print(f"  [INFO] game_code column found in raw data - will extract domain", flush=True)
-    
     for idx, row in df_poll.iterrows():
         try:
-            custom_dim_1 = row.get('custom_dimension_1')
-            game_name = row.get('game_name')
+            # Get columns using normalized mapping or direct access
+            custom_dim_1 = row.get(column_mapping.get('custom_dimension_1', 'custom_dimension_1'))
+            game_name = row.get(column_mapping.get('game_name', 'game_name'))
             idvisit = row.get('idvisit')
-            language = row.get('language') if has_language else None
-            game_code = row.get('game_code') if has_game_code else None
+            
+            # Get language and game_code using normalized column names
+            language = None
+            if has_language:
+                language_col = column_mapping.get('language')
+                language = row.get(language_col) if language_col else None
+                # Handle NaN/None
+                if pd.isna(language):
+                    language = None
+            
+            game_code = None
+            if has_game_code:
+                game_code_col = column_mapping.get('game_code')
+                game_code = row.get(game_code_col) if game_code_col else None
+                # Handle NaN/None
+                if pd.isna(game_code):
+                    game_code = None
+            
             domain = None
             if game_code:
                 domain = extract_domain_from_game_code(game_code)
@@ -3265,6 +3306,14 @@ def process_parent_poll() -> pd.DataFrame:
     print(f"[STEP 6] Aggregating responses by game, question, option, language, and domain...", flush=True)
     sys.stdout.flush()
     
+    # Fill NaN values in language and domain with 'Unknown' for grouping
+    if 'language' in results_df.columns:
+        results_df['language'] = results_df['language'].fillna('Unknown')
+        print(f"  [INFO] Language column found - unique values: {results_df['language'].nunique()}", flush=True)
+    if 'domain' in results_df.columns:
+        results_df['domain'] = results_df['domain'].fillna('Unknown')
+        print(f"  [INFO] Domain column found - unique values: {results_df['domain'].nunique()}", flush=True)
+    
     # Determine grouping columns
     groupby_cols = ['game_name', 'question', 'option']
     if 'language' in results_df.columns:
@@ -3273,6 +3322,7 @@ def process_parent_poll() -> pd.DataFrame:
         groupby_cols.append('domain')
     
     print(f"  Grouping by: {groupby_cols}", flush=True)
+    print(f"  Total records before aggregation: {len(results_df):,}", flush=True)
     sys.stdout.flush()
     
     agg_df = (
@@ -3281,6 +3331,13 @@ def process_parent_poll() -> pd.DataFrame:
         .size()
         .reset_index(name='count')
     )
+    
+    print(f"  Total records after aggregation: {len(agg_df):,}", flush=True)
+    if 'language' in agg_df.columns:
+        print(f"  Unique languages in aggregated data: {sorted(agg_df['language'].unique())}", flush=True)
+    if 'domain' in agg_df.columns:
+        print(f"  Unique domains in aggregated data: {sorted(agg_df['domain'].dropna().unique())}", flush=True)
+    sys.stdout.flush()
     
     # Sort for consistent output
     sort_cols = ['game_name', 'question', 'option']
