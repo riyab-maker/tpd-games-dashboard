@@ -986,7 +986,7 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
         
     return pd.DataFrame(time_series_data)
 
-def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df: pd.DataFrame) -> None:
+def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df: pd.DataFrame, selected_games: list = None) -> None:
     """Render time series analysis with a single chart showing Started and Completed for selected metric"""
     import altair as alt
     
@@ -996,6 +996,23 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     
     st.markdown("### 📈 Time-Series Analysis")
     st.info("ℹ️ This section uses the global game, domain, and language filters from above.")
+    
+    # Show which games are being displayed
+    # Get available games from the data (excluding "All Games")
+    available_games = sorted([g for g in time_series_df['game_name'].unique() if g != 'All Games'])
+    
+    if selected_games and len(selected_games) > 0:
+        # Show selected games if any are available in the data
+        display_games = [g for g in selected_games if g in available_games]
+        if display_games:
+            if len(display_games) == 1:
+                st.info(f"📊 Showing time series for: **{display_games[0]}**")
+            else:
+                st.info(f"📊 Showing time series for: **{', '.join(display_games)}** ({len(display_games)} games)")
+    elif not selected_games or len(selected_games) == 0:
+        # Show "All Games" when no specific games are selected
+        if 'All Games' in time_series_df['game_name'].unique():
+            st.info("📊 Showing time series for: **All Games**")
     
     # Create columns for filters
     ts_filter_col1, ts_filter_col2 = st.columns(2)
@@ -2348,7 +2365,7 @@ def main() -> None:
     st.markdown("## 📈 Time-Series Analysis")
     
     if not filtered_time_series_df.empty:
-        render_time_series_analysis(filtered_time_series_df, game_conversion_df)
+        render_time_series_analysis(filtered_time_series_df, game_conversion_df, selected_games)
     else:
         st.warning("No time series data available.")
     
