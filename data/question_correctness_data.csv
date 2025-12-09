@@ -1,545 +1,1064 @@
-game_name,question_number,correctness,percent,user_count,total_users
-Beginning Sound Ba/Ra/Na,1,Correct,95.99,359,374
-Beginning Sound Ba/Ra/Na,1,Incorrect,5.08,19,374
-Beginning Sound Ba/Ra/Na,2,Correct,89.28,333,373
-Beginning Sound Ba/Ra/Na,2,Incorrect,12.87,48,373
-Beginning Sound Ba/Ra/Na,3,Correct,95.97,357,372
-Beginning Sound Ba/Ra/Na,3,Incorrect,5.65,21,372
-Beginning Sound Ba/Ra/Na,4,Correct,89.3,334,374
-Beginning Sound Ba/Ra/Na,4,Incorrect,12.83,48,374
-Beginning Sound Ba/Ra/Na,5,Correct,94.69,357,377
-Beginning Sound Ba/Ra/Na,5,Incorrect,5.84,22,377
-Beginning Sound Ba/Ra/Na,6,Correct,92.84,350,377
-Beginning Sound Ba/Ra/Na,6,Incorrect,9.28,35,377
-Beginning Sound Ba/Ra/Na,7,Correct,75.2,282,375
-Beginning Sound Ba/Ra/Na,7,Incorrect,28.8,108,375
-Beginning Sound Ba/Ra/Na,8,Correct,86.02,320,372
-Beginning Sound Ba/Ra/Na,8,Incorrect,18.28,68,372
-Beginning Sound Ba/Ra/Na,9,Correct,91.73,344,375
-Beginning Sound Ba/Ra/Na,9,Incorrect,9.87,37,375
-Beginning Sound Ba/Ra/Na,10,Correct,81.75,309,378
-Beginning Sound Ba/Ra/Na,10,Incorrect,20.9,79,378
-Beginning Sound Ba/Ra/Na,11,Correct,89.95,340,378
-Beginning Sound Ba/Ra/Na,11,Incorrect,11.9,45,378
-Beginning Sound Ba/Ra/Na,12,Correct,88.74,331,373
-Beginning Sound Ba/Ra/Na,12,Incorrect,12.6,47,373
-Beginning Sounds Ka/Na/Ta,1,Correct,100.0,1,1
-Beginning Sounds Ma/Ka/La,1,Correct,54.24,5500,10141
-Beginning Sounds Ma/Ka/La,1,Incorrect,57.02,5782,10141
-Beginning Sounds Ma/Ka/La,2,Correct,38.44,3765,9795
-Beginning Sounds Ma/Ka/La,2,Incorrect,70.92,6947,9795
-Beginning Sounds Ma/Ka/La,3,Correct,55.05,5248,9534
-Beginning Sounds Ma/Ka/La,3,Incorrect,54.88,5232,9534
-Beginning Sounds Ma/Ka/La,4,Correct,38.13,3558,9332
-Beginning Sounds Ma/Ka/La,4,Incorrect,70.45,6574,9332
-Beginning Sounds Ma/Ka/La,5,Correct,54.03,4956,9172
-Beginning Sounds Ma/Ka/La,5,Incorrect,55.65,5104,9172
-Beginning Sounds Ma/Ka/La,6,Correct,37.8,3422,9052
-Beginning Sounds Ma/Ka/La,6,Incorrect,70.3,6364,9052
-Beginning Sounds Ma/Ka/La,7,Correct,36.96,3289,8900
-Beginning Sounds Ma/Ka/La,7,Incorrect,70.51,6275,8900
-Beginning Sounds Ma/Ka/La,8,Correct,37.54,3296,8780
-Beginning Sounds Ma/Ka/La,8,Incorrect,70.31,6173,8780
-Beginning Sounds Ma/Ka/La,9,Correct,37.15,3209,8637
-Beginning Sounds Ma/Ka/La,9,Incorrect,69.63,6014,8637
-Beginning Sounds Ma/Ka/La,10,Correct,28.31,2412,8521
-Beginning Sounds Ma/Ka/La,10,Incorrect,77.98,6645,8521
-Beginning Sounds Ma/Ka/La,11,Correct,28.85,2426,8408
-Beginning Sounds Ma/Ka/La,11,Incorrect,77.35,6504,8408
-Beginning Sounds Ma/Ka/La,12,Correct,27.43,2274,8289
-Beginning Sounds Ma/Ka/La,12,Incorrect,78.19,6481,8289
-Beginning Sounds Sa/La/Va,1,Incorrect,100.0,11217,11217
-Beginning Sounds Sa/La/Va,2,Incorrect,100.0,10901,10901
-Beginning Sounds Sa/La/Va,3,Incorrect,100.0,10728,10728
-Beginning Sounds Sa/La/Va,4,Incorrect,100.0,10451,10451
-Beginning Sounds Sa/La/Va,5,Incorrect,100.0,10215,10215
-Beginning Sounds Sa/La/Va,6,Incorrect,100.0,10047,10047
-Beginning Sounds Sa/La/Va,7,Incorrect,100.0,1,1
-Beginning Sounds Ta/Va/Ga,1,Incorrect,100.0,1,1
-Beginning Sounds Ta/Va/Ga,2,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,3,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,4,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,5,Incorrect,100.0,1,1
-Beginning Sounds Ta/Va/Ga,6,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,7,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,8,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,9,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,10,Incorrect,100.0,1,1
-Beginning Sounds Ta/Va/Ga,11,Correct,100.0,1,1
-Beginning Sounds Ta/Va/Ga,12,Correct,100.0,1,1
-Color Blue,1,Correct,29.05,4278,14726
-Color Blue,1,Incorrect,80.75,11891,14726
-Color Blue,2,Correct,30.12,4298,14271
-Color Blue,2,Incorrect,79.03,11278,14271
-Color Blue,3,Correct,29.5,4120,13968
-Color Blue,3,Incorrect,79.32,11079,13968
-Color Blue,4,Correct,38.32,5278,13774
-Color Blue,4,Incorrect,71.61,9863,13774
-Color Blue,5,Correct,29.66,4034,13599
-Color Blue,5,Incorrect,79.02,10746,13599
-Color Blue,6,Correct,29.3,3946,13466
-Color Blue,6,Incorrect,79.15,10659,13466
-Color Blue,7,Correct,38.48,5124,13316
-Color Blue,7,Incorrect,71.28,9491,13316
-Color Blue,8,Correct,29.31,3854,13149
-Color Blue,8,Incorrect,78.5,10322,13149
-Color Blue,9,Correct,23.21,3025,13035
-Color Blue,9,Incorrect,83.53,10888,13035
-Color Blue,10,Correct,37.85,4881,12896
-Color Blue,10,Incorrect,71.43,9211,12896
-Color Blue,11,Correct,29.8,3808,12779
-Color Blue,11,Incorrect,77.97,9964,12779
-Color Red,1,Correct,47.05,15551,33050
-Color Red,1,Incorrect,77.51,25617,33050
-Color Red,2,Correct,36.14,11627,32175
-Color Red,2,Incorrect,83.93,27006,32175
-Color Red,3,Correct,37.34,11803,31611
-Color Red,3,Incorrect,82.93,26216,31611
-Color Red,4,Correct,45.89,14319,31200
-Color Red,4,Incorrect,77.38,24144,31200
-Color Red,5,Correct,36.62,11289,30826
-Color Red,5,Incorrect,83.26,25667,30826
-Color Red,6,Correct,35.34,10773,30485
-Color Red,6,Incorrect,83.68,25509,30485
-Color Red,7,Correct,45.01,13567,30141
-Color Red,7,Incorrect,76.98,23203,30141
-Color Red,8,Correct,35.86,10711,29870
-Color Red,8,Incorrect,83.15,24837,29870
-Color Red,9,Correct,29.29,8678,29629
-Color Red,9,Incorrect,87.0,25778,29629
-Color Red,10,Correct,45.05,13231,29368
-Color Red,10,Incorrect,76.76,22542,29368
-Color Red,11,Correct,35.3,10261,29067
-Color Red,11,Incorrect,82.84,24078,29067
-Color Red,12,Correct,34.96,10072,28806
-Color Red,12,Incorrect,83.22,23973,28806
-Color Yellow,1,Correct,41.89,6901,16475
-Color Yellow,1,Incorrect,73.85,12167,16475
-Color Yellow,2,Correct,32.34,5161,15957
-Color Yellow,2,Incorrect,80.84,12900,15957
-Color Yellow,3,Correct,31.27,4875,15590
-Color Yellow,3,Incorrect,81.41,12692,15590
-Color Yellow,4,Correct,40.47,6205,15334
-Color Yellow,4,Incorrect,73.86,11326,15334
-Color Yellow,5,Correct,31.79,4805,15116
-Color Yellow,5,Incorrect,80.38,12150,15116
-Color Yellow,6,Correct,31.63,4723,14932
-Color Yellow,6,Incorrect,80.17,11971,14932
-Color Yellow,7,Correct,41.33,6096,14751
-Color Yellow,7,Incorrect,72.23,10654,14751
-Color Yellow,8,Correct,31.05,4529,14585
-Color Yellow,8,Incorrect,80.61,11757,14585
-Color Yellow,9,Correct,24.81,3579,14423
-Color Yellow,9,Incorrect,84.46,12181,14423
-Color Yellow,10,Correct,40.14,5718,14245
-Color Yellow,10,Incorrect,72.92,10388,14245
-Color Yellow,11,Correct,29.94,4224,14107
-Color Yellow,11,Incorrect,80.73,11388,14107
-Color Yellow,12,Correct,31.35,4376,13957
-Color Yellow,12,Incorrect,79.49,11095,13957
-Numbers Comparison,1,Correct,91.83,5055,5505
-Numbers Comparison,1,Incorrect,10.1,556,5505
-Numbers Comparison,2,Correct,91.59,5018,5479
-Numbers Comparison,2,Incorrect,10.55,578,5479
-Numbers Comparison,3,Correct,89.06,4891,5492
-Numbers Comparison,3,Incorrect,14.06,772,5492
-Numbers Comparison,4,Correct,91.48,5026,5494
-Numbers Comparison,4,Incorrect,10.5,577,5494
-Numbers Comparison,5,Correct,91.33,5012,5488
-Numbers Comparison,5,Incorrect,11.21,615,5488
-Numbers Comparison,6,Correct,86.29,4741,5494
-Numbers Comparison,6,Incorrect,16.98,933,5494
-Numbers Comparison,7,Correct,89.58,4928,5501
-Numbers Comparison,7,Incorrect,13.29,731,5501
-Numbers Comparison,8,Correct,91.2,5005,5488
-Numbers Comparison,8,Incorrect,11.24,617,5488
-Numbers Comparison,9,Correct,90.78,4984,5490
-Numbers Comparison,9,Incorrect,11.24,617,5490
-Numbers Comparison,10,Correct,88.33,4851,5492
-Numbers Comparison,10,Incorrect,14.42,792,5492
-Numbers Comparison,11,Correct,88.29,4849,5492
-Numbers Comparison,11,Incorrect,14.62,803,5492
-Numbers Comparison,12,Correct,90.34,4967,5498
-Numbers Comparison,12,Incorrect,12.13,667,5498
-Numbers I,1,Correct,60.38,13883,22992
-Numbers I,1,Incorrect,61.87,14226,22992
-Numbers I,2,Correct,44.29,9911,22380
-Numbers I,2,Incorrect,75.17,16823,22380
-Numbers I,3,Correct,34.52,7571,21935
-Numbers I,3,Incorrect,81.84,17951,21935
-Numbers I,4,Correct,34.23,7377,21549
-Numbers I,4,Incorrect,81.8,17627,21549
-Numbers I,5,Correct,34.1,7244,21243
-Numbers I,5,Incorrect,81.71,17358,21243
-Numbers I,6,Correct,58.72,12308,20960
-Numbers I,6,Incorrect,60.82,12748,20960
-Numbers I,7,Correct,59.85,12421,20755
-Numbers I,7,Incorrect,60.1,12474,20755
-Numbers I,8,Correct,42.22,8689,20578
-Numbers I,8,Incorrect,75.51,15538,20578
-Numbers I,9,Correct,42.34,8640,20405
-Numbers I,9,Incorrect,74.87,15277,20405
-Numbers I,10,Correct,32.85,6632,20187
-Numbers I,10,Incorrect,81.44,16441,20187
-Numbers I,11,Correct,22.22,2,9
-Numbers I,11,Incorrect,77.78,7,9
-Numbers I,12,Incorrect,100.0,4,4
-Numbers II,1,Correct,57.27,10946,19112
-Numbers II,1,Incorrect,60.06,11479,19112
-Numbers II,2,Correct,57.83,10690,18485
-Numbers II,2,Incorrect,58.77,10864,18485
-Numbers II,3,Correct,40.96,7383,18025
-Numbers II,3,Incorrect,73.81,13304,18025
-Numbers II,4,Correct,40.32,7104,17621
-Numbers II,4,Incorrect,74.2,13074,17621
-Numbers II,5,Correct,31.58,5483,17361
-Numbers II,5,Incorrect,80.55,13984,17361
-Numbers II,6,Correct,57.55,9882,17171
-Numbers II,6,Incorrect,58.13,9982,17171
-Numbers II,7,Correct,57.84,9801,16944
-Numbers II,7,Incorrect,58.09,9842,16944
-Numbers II,8,Correct,40.69,6815,16747
-Numbers II,8,Incorrect,73.17,12254,16747
-Numbers II,9,Correct,39.28,6510,16575
-Numbers II,9,Incorrect,74.17,12293,16575
-Numbers II,10,Correct,31.16,5116,16421
-Numbers II,10,Incorrect,80.56,13229,16421
-Numbers II,11,Incorrect,100.0,7,7
-Numbers II,12,Correct,60.0,3,5
-Numbers II,12,Incorrect,40.0,2,5
-Numerals 1-10,1,Correct,52.42,4857,9266
-Numerals 1-10,1,Incorrect,54.93,5090,9266
-Numerals 1-10,2,Correct,53.12,4793,9023
-Numerals 1-10,2,Incorrect,53.95,4868,9023
-Numerals 1-10,3,Correct,35.47,3132,8829
-Numerals 1-10,3,Incorrect,70.48,6223,8829
-Numerals 1-10,4,Correct,26.87,2336,8693
-Numerals 1-10,4,Incorrect,77.94,6775,8693
-Numerals 1-10,5,Correct,52.53,4502,8570
-Numerals 1-10,5,Incorrect,53.65,4598,8570
-Numerals 1-10,6,Correct,51.86,4396,8477
-Numerals 1-10,6,Incorrect,53.72,4554,8477
-Numerals 1-10,7,Correct,52.18,4372,8378
-Numerals 1-10,7,Incorrect,53.4,4474,8378
-Numerals 1-10,8,Correct,34.69,2881,8305
-Numerals 1-10,8,Incorrect,70.36,5843,8305
-Numerals 1-10,9,Correct,27.16,2232,8217
-Numerals 1-10,9,Incorrect,77.17,6341,8217
-Numerals 1-10,10,Incorrect,100.0,4,4
-Numerals 1-10,11,Correct,25.0,1,4
-Numerals 1-10,11,Incorrect,75.0,3,4
-Numerals 1-10,12,Incorrect,100.0,1,1
-Positions,1,Correct,54.95,10731,19528
-Positions,1,Incorrect,57.96,11318,19528
-Positions,2,Correct,53.52,10015,18714
-Positions,2,Incorrect,58.92,11027,18714
-Positions,3,Correct,38.04,6919,18189
-Positions,3,Incorrect,72.68,13219,18189
-Positions,4,Correct,54.3,9679,17825
-Positions,4,Incorrect,57.41,10234,17825
-Positions,5,Correct,53.7,9372,17451
-Positions,5,Incorrect,58.0,10121,17451
-Positions,6,Correct,38.19,6535,17112
-Positions,6,Incorrect,71.73,12275,17112
-Positions,7,Correct,24.85,4172,16788
-Positions,7,Incorrect,82.44,13840,16788
-Positions,8,Correct,54.48,8997,16514
-Positions,8,Incorrect,56.96,9407,16514
-Positions,9,Correct,54.54,8913,16342
-Positions,9,Incorrect,56.24,9190,16342
-Positions,10,Correct,37.48,6047,16132
-Positions,10,Incorrect,71.95,11607,16132
-Positions,11,Correct,53.73,8558,15929
-Positions,11,Incorrect,57.13,9100,15929
-Positions,12,Correct,37.87,5977,15782
-Positions,12,Incorrect,71.44,11275,15782
-Positions,13,Correct,25.72,4000,15550
-Positions,13,Incorrect,81.32,12646,15550
-Positions,14,Incorrect,100.0,2,2
-Primary Emotion Labelling,1,Correct,91.9,5615,6110
-Primary Emotion Labelling,1,Incorrect,11.18,683,6110
-Primary Emotion Labelling,2,Correct,93.04,5658,6081
-Primary Emotion Labelling,2,Incorrect,9.7,590,6081
-Primary Emotion Labelling,3,Correct,95.37,5815,6097
-Primary Emotion Labelling,3,Incorrect,7.0,427,6097
-Primary Emotion Labelling,4,Correct,92.38,5625,6089
-Primary Emotion Labelling,4,Incorrect,10.51,640,6089
-Primary Emotion Labelling,5,Correct,92.09,5610,6092
-Primary Emotion Labelling,5,Incorrect,10.93,666,6092
-Primary Emotion Labelling,6,Correct,86.62,5276,6091
-Primary Emotion Labelling,6,Incorrect,17.63,1074,6091
-Primary Emotion Labelling,7,Correct,94.36,5740,6083
-Primary Emotion Labelling,7,Incorrect,8.17,497,6083
-Primary Emotion Labelling,8,Correct,78.65,4793,6094
-Primary Emotion Labelling,8,Incorrect,26.34,1605,6094
-Primary Emotion Labelling,9,Correct,94.93,5790,6099
-Primary Emotion Labelling,9,Incorrect,7.25,442,6099
-Primary Emotion Labelling,10,Correct,93.73,5711,6093
-Primary Emotion Labelling,10,Incorrect,8.94,545,6093
-Primary Emotion Labelling,11,Correct,94.66,5762,6087
-Primary Emotion Labelling,11,Incorrect,7.61,463,6087
-Primary Emotion Labelling,12,Correct,91.83,5606,6105
-Primary Emotion Labelling,12,Incorrect,11.12,679,6105
-Quantitative Comparison,1,Correct,94.76,9083,9585
-Quantitative Comparison,1,Incorrect,7.44,713,9585
-Quantitative Comparison,2,Correct,89.56,8548,9544
-Quantitative Comparison,2,Incorrect,14.1,1346,9544
-Quantitative Comparison,3,Correct,94.34,9023,9564
-Quantitative Comparison,3,Incorrect,8.49,812,9564
-Quantitative Comparison,4,Correct,92.46,8834,9554
-Quantitative Comparison,4,Incorrect,10.55,1008,9554
-Quantitative Comparison,5,Correct,94.94,9077,9561
-Quantitative Comparison,5,Incorrect,7.43,710,9561
-Quantitative Comparison,6,Correct,86.44,8267,9564
-Quantitative Comparison,6,Incorrect,17.6,1683,9564
-Quantitative Comparison,7,Correct,94.73,9065,9569
-Quantitative Comparison,7,Incorrect,7.5,718,9569
-Quantitative Comparison,8,Correct,86.17,8237,9559
-Quantitative Comparison,8,Incorrect,18.81,1798,9559
-Quantitative Comparison,9,Correct,91.12,8712,9561
-Quantitative Comparison,9,Incorrect,12.26,1172,9561
-Quantitative Comparison,10,Correct,90.33,8636,9560
-Quantitative Comparison,10,Incorrect,13.39,1280,9560
-Quantitative Comparison,11,Correct,94.91,9076,9563
-Quantitative Comparison,11,Incorrect,7.43,711,9563
-Quantitative Comparison,12,Correct,93.25,8918,9564
-Quantitative Comparison,12,Incorrect,9.97,954,9564
-Relational Comparison,1,Correct,94.09,6252,6645
-Relational Comparison,1,Incorrect,8.31,552,6645
-Relational Comparison,2,Correct,88.39,5863,6633
-Relational Comparison,2,Incorrect,16.82,1116,6633
-Relational Comparison,3,Correct,95.02,6319,6650
-Relational Comparison,3,Incorrect,7.83,521,6650
-Relational Comparison,4,Correct,92.97,6173,6640
-Relational Comparison,4,Incorrect,10.5,697,6640
-Relational Comparison,5,Correct,94.52,6280,6644
-Relational Comparison,5,Incorrect,8.55,568,6644
-Relational Comparison,6,Correct,89.3,5932,6643
-Relational Comparison,6,Incorrect,15.84,1052,6643
-Relational Comparison,7,Correct,92.32,6128,6638
-Relational Comparison,7,Incorrect,11.3,750,6638
-Relational Comparison,8,Correct,93.11,6186,6644
-Relational Comparison,8,Incorrect,10.31,685,6644
-Relational Comparison,9,Correct,90.68,6020,6639
-Relational Comparison,9,Incorrect,13.66,907,6639
-Relational Comparison,10,Correct,91.91,6109,6647
-Relational Comparison,10,Incorrect,12.01,798,6647
-Relational Comparison,11,Correct,86.9,5777,6648
-Relational Comparison,11,Incorrect,18.76,1247,6648
-Relational Comparison,12,Correct,93.05,6185,6647
-Relational Comparison,12,Incorrect,10.19,677,6647
-Relational Comparison II,1,Correct,95.13,5816,6114
-Relational Comparison II,1,Incorrect,7.51,459,6114
-Relational Comparison II,2,Correct,93.54,5704,6098
-Relational Comparison II,2,Incorrect,10.13,618,6098
-Relational Comparison II,3,Correct,94.54,5767,6100
-Relational Comparison II,3,Incorrect,9.07,553,6100
-Relational Comparison II,4,Correct,92.12,5621,6102
-Relational Comparison II,4,Incorrect,12.86,785,6102
-Relational Comparison II,5,Correct,93.43,5700,6101
-Relational Comparison II,5,Incorrect,10.24,625,6101
-Relational Comparison II,6,Correct,85.74,5229,6099
-Relational Comparison II,6,Incorrect,21.31,1300,6099
-Relational Comparison II,7,Correct,93.09,5683,6105
-Relational Comparison II,7,Incorrect,10.43,637,6105
-Relational Comparison II,8,Correct,91.67,5588,6096
-Relational Comparison II,8,Incorrect,13.29,810,6096
-Relational Comparison II,9,Correct,92.47,5648,6108
-Relational Comparison II,9,Incorrect,12.26,749,6108
-Relational Comparison II,10,Correct,88.34,5392,6104
-Relational Comparison II,10,Incorrect,17.32,1057,6104
-Relational Comparison II,11,Correct,94.49,5766,6102
-Relational Comparison II,11,Incorrect,8.47,517,6102
-Relational Comparison II,12,Correct,89.04,5436,6105
-Relational Comparison II,12,Incorrect,16.1,983,6105
-Revision Colors,1,Correct,96.02,4755,4952
-Revision Colors,1,Incorrect,4.95,245,4952
-Revision Colors,2,Correct,92.86,4632,4988
-Revision Colors,2,Incorrect,8.68,433,4988
-Revision Colors,3,Correct,96.16,4803,4995
-Revision Colors,3,Incorrect,5.07,253,4995
-Revision Colors,4,Correct,97.1,4862,5007
-Revision Colors,4,Incorrect,4.01,201,5007
-Revision Colors,5,Correct,97.08,4856,5002
-Revision Colors,5,Incorrect,4.08,204,5002
-Revision Colors,6,Correct,96.14,4811,5004
-Revision Colors,6,Incorrect,5.14,257,5004
-Revision Colors,7,Correct,89.72,4461,4972
-Revision Colors,7,Incorrect,12.63,628,4972
-Revision Colors,8,Correct,84.03,4177,4971
-Revision Colors,8,Incorrect,18.89,939,4971
-Revision Colors,9,Correct,84.51,4202,4972
-Revision Colors,9,Incorrect,18.06,898,4972
-Revision Colors,10,Correct,95.77,4712,4920
-Revision Colors,10,Incorrect,5.33,262,4920
-Revision Colors,11,Correct,98.02,4894,4993
-Revision Colors,11,Incorrect,2.72,136,4993
-Revision Colors,12,Correct,97.33,4852,4985
-Revision Colors,12,Incorrect,3.59,179,4985
-Revision Shapes,1,Correct,95.04,3087,3248
-Revision Shapes,1,Incorrect,6.62,215,3248
-Revision Shapes,2,Correct,95.41,3117,3267
-Revision Shapes,2,Incorrect,6.4,209,3267
-Revision Shapes,3,Correct,96.02,3134,3264
-Revision Shapes,3,Incorrect,5.55,181,3264
-Revision Shapes,4,Correct,95.2,3094,3250
-Revision Shapes,4,Incorrect,6.71,218,3250
-Revision Shapes,5,Correct,95.77,3128,3266
-Revision Shapes,5,Incorrect,6.25,204,3266
-Revision Shapes,6,Correct,91.57,2989,3264
-Revision Shapes,6,Incorrect,10.78,352,3264
-Revision Shapes,7,Correct,77.41,2505,3236
-Revision Shapes,7,Incorrect,27.97,905,3236
-Revision Shapes,8,Correct,87.77,2841,3237
-Revision Shapes,8,Incorrect,15.72,509,3237
-Revision Shapes,9,Correct,81.66,2653,3249
-Revision Shapes,9,Incorrect,23.92,777,3249
-Revision Shapes,10,Correct,81.94,2663,3250
-Revision Shapes,10,Incorrect,22.55,733,3250
-Revision Shapes,11,Correct,92.46,3005,3250
-Revision Shapes,11,Incorrect,10.15,330,3250
-Revision Shapes,12,Correct,83.58,2698,3228
-Revision Shapes,12,Incorrect,20.85,673,3228
-Rhyming Words,1,Correct,74.89,5121,6838
-Rhyming Words,1,Incorrect,29.83,2040,6838
-Rhyming Words,2,Correct,70.19,4826,6876
-Rhyming Words,2,Incorrect,34.71,2387,6876
-Rhyming Words,3,Correct,66.14,4599,6953
-Rhyming Words,3,Incorrect,38.95,2708,6953
-Rhyming Words,4,Correct,73.59,5143,6989
-Rhyming Words,4,Incorrect,31.54,2204,6989
-Rhyming Words,5,Correct,76.6,5374,7016
-Rhyming Words,5,Incorrect,28.21,1979,7016
-Rhyming Words,6,Correct,81.26,5695,7008
-Rhyming Words,6,Incorrect,22.93,1607,7008
-Rhyming Words,7,Correct,63.28,4408,6966
-Rhyming Words,7,Incorrect,41.93,2921,6966
-Rhyming Words,8,Correct,56.55,3947,6980
-Rhyming Words,8,Incorrect,49.76,3473,6980
-Rhyming Words,9,Correct,47.84,3330,6960
-Rhyming Words,9,Incorrect,58.33,4060,6960
-Rhyming Words,10,Correct,55.48,3850,6939
-Rhyming Words,10,Incorrect,50.57,3509,6939
-Rhyming Words,11,Correct,63.68,1974,3100
-Rhyming Words,11,Incorrect,43.65,1353,3100
-Shape Circle,1,Correct,54.1,24697,45648
-Shape Circle,1,Incorrect,82.74,37769,45648
-Shape Circle,2,Correct,43.26,19259,44518
-Shape Circle,2,Incorrect,88.09,39218,44518
-Shape Circle,3,Correct,53.65,23503,43810
-Shape Circle,3,Incorrect,82.36,36084,43810
-Shape Circle,4,Correct,44.31,19203,43340
-Shape Circle,4,Incorrect,87.0,37707,43340
-Shape Circle,5,Correct,53.64,23015,42909
-Shape Circle,5,Incorrect,81.69,35051,42909
-Shape Circle,6,Correct,42.4,18023,42509
-Shape Circle,6,Incorrect,87.52,37204,42509
-Shape Circle,7,Correct,52.39,22049,42088
-Shape Circle,7,Incorrect,82.01,34515,42088
-Shape Circle,8,Correct,42.74,17818,41686
-Shape Circle,8,Incorrect,87.33,36403,41686
-Shape Circle,9,Correct,36.68,15145,41293
-Shape Circle,9,Incorrect,89.74,37058,41293
-Shape Circle,10,Correct,52.31,21417,40940
-Shape Circle,10,Incorrect,81.69,33442,40940
-Shape Circle,11,Correct,43.38,17633,40645
-Shape Circle,11,Incorrect,86.35,35095,40645
-Shape Circle,12,Correct,37.09,14961,40337
-Shape Circle,12,Incorrect,89.11,35946,40337
-Shape Circle,13,Incorrect,100.0,2,2
-Shape Rectangle,1,Correct,35.61,3835,10769
-Shape Rectangle,1,Incorrect,70.04,7543,10769
-Shape Rectangle,2,Correct,34.96,3643,10419
-Shape Rectangle,2,Incorrect,70.58,7354,10419
-Shape Rectangle,3,Correct,35.67,3651,10235
-Shape Rectangle,3,Incorrect,69.46,7109,10235
-Shape Rectangle,4,Correct,35.89,3625,10100
-Shape Rectangle,4,Incorrect,69.22,6991,10100
-Shape Rectangle,5,Correct,36.84,3673,9969
-Shape Rectangle,5,Incorrect,68.16,6795,9969
-Shape Rectangle,6,Correct,36.11,3559,9856
-Shape Rectangle,6,Incorrect,68.25,6727,9856
-Shape Rectangle,7,Correct,34.75,3380,9727
-Shape Rectangle,7,Incorrect,69.62,6772,9727
-Shape Rectangle,8,Correct,34.44,3311,9613
-Shape Rectangle,8,Incorrect,69.58,6689,9613
-Shape Rectangle,9,Correct,35.03,3336,9523
-Shape Rectangle,9,Incorrect,68.93,6564,9523
-Shape Rectangle,10,Correct,34.5,3252,9425
-Shape Rectangle,10,Incorrect,69.29,6531,9425
-Shape Rectangle,11,Correct,34.14,3187,9336
-Shape Rectangle,11,Incorrect,69.66,6503,9336
-Shape Rectangle,12,Incorrect,100.0,1,1
-Shape Square,1,Correct,36.98,5780,15628
-Shape Square,1,Incorrect,70.0,10939,15628
-Shape Square,2,Correct,35.5,5366,15116
-Shape Square,2,Incorrect,70.79,10700,15116
-Shape Square,3,Correct,35.45,5225,14739
-Shape Square,3,Incorrect,70.49,10389,14739
-Shape Square,4,Correct,36.88,5341,14484
-Shape Square,4,Incorrect,69.24,10029,14484
-Shape Square,5,Correct,35.69,5094,14273
-Shape Square,5,Incorrect,70.27,10030,14273
-Shape Square,6,Correct,35.34,4985,14105
-Shape Square,6,Incorrect,70.08,9885,14105
-Shape Square,7,Correct,35.79,4968,13882
-Shape Square,7,Incorrect,69.94,9709,13882
-Shape Square,8,Correct,35.73,4891,13689
-Shape Square,8,Incorrect,69.59,9526,13689
-Shape Square,9,Correct,35.35,4779,13518
-Shape Square,9,Incorrect,69.81,9437,13518
-Shape Square,10,Correct,35.05,4684,13363
-Shape Square,10,Incorrect,69.83,9332,13363
-Shape Square,11,Correct,52.63,6943,13192
-Shape Square,11,Incorrect,53.13,7009,13192
-Shape Square,12,Correct,50.0,1,2
-Shape Square,12,Incorrect,50.0,1,2
-Shape Triangle,1,Correct,42.8,9332,21802
-Shape Triangle,1,Incorrect,74.76,16300,21802
-Shape Triangle,2,Correct,32.78,6929,21136
-Shape Triangle,2,Incorrect,81.8,17289,21136
-Shape Triangle,3,Correct,44.44,9210,20724
-Shape Triangle,3,Incorrect,72.98,15124,20724
-Shape Triangle,4,Correct,31.42,6415,20414
-Shape Triangle,4,Incorrect,82.44,16829,20414
-Shape Triangle,5,Correct,41.51,8372,20168
-Shape Triangle,5,Incorrect,74.92,15110,20168
-Shape Triangle,6,Correct,33.2,6619,19939
-Shape Triangle,6,Incorrect,80.67,16084,19939
-Shape Triangle,7,Correct,41.0,8073,19692
-Shape Triangle,7,Incorrect,74.64,14699,19692
-Shape Triangle,8,Correct,32.53,6311,19403
-Shape Triangle,8,Incorrect,81.04,15724,19403
-Shape Triangle,9,Correct,25.94,4966,19141
-Shape Triangle,9,Incorrect,84.98,16266,19141
-Shape Triangle,10,Correct,40.78,7705,18892
-Shape Triangle,10,Incorrect,74.21,14020,18892
-Shape Triangle,11,Correct,31.2,5830,18686
-Shape Triangle,11,Incorrect,81.51,15231,18686
-Shape Triangle,12,Correct,26.29,4853,18456
-Shape Triangle,12,Incorrect,84.72,15636,18456
-Sorting Primary Colors,1,Incorrect,100.0,13193,13193
-Sorting Primary Colors,2,Incorrect,100.0,12791,12791
-Sorting Primary Colors,3,Incorrect,100.0,12498,12498
-Sorting Primary Colors,4,Incorrect,100.0,12287,12287
-Sorting Primary Colors,5,Incorrect,100.0,12088,12088
-Sorting Primary Colors,6,Incorrect,100.0,11916,11916
-Sorting Primary Colors,7,Incorrect,100.0,11777,11777
-Sorting Primary Colors,8,Incorrect,100.0,11619,11619
-Sorting Primary Colors,9,Incorrect,100.0,11449,11449
-Sorting Primary Colors,10,Incorrect,100.0,11273,11273
-Sorting Primary Colors,11,Incorrect,100.0,11104,11104
-Sorting Primary Colors,12,Incorrect,100.0,11017,11017
-Sorting Primary Shapes,0,Incorrect,100.0,2,2
-Sorting Primary Shapes,1,Incorrect,100.0,7362,7362
-Sorting Primary Shapes,2,Incorrect,100.0,7186,7186
-Sorting Primary Shapes,3,Incorrect,100.0,6857,6857
-Sorting Primary Shapes,4,Incorrect,100.0,6756,6756
-Sorting Primary Shapes,5,Incorrect,100.0,6673,6673
-Sorting Primary Shapes,6,Incorrect,100.0,6541,6541
-Sorting Primary Shapes,7,Incorrect,100.0,6446,6446
-Sorting Primary Shapes,8,Incorrect,100.0,6361,6361
-Sorting Primary Shapes,9,Incorrect,100.0,6285,6285
-Sorting Primary Shapes,10,Incorrect,100.0,6092,6092
-Sorting Primary Shapes,11,Incorrect,100.0,6014,6014
-Sorting Primary Shapes,12,Incorrect,100.0,5940,5940
+game_name,question_number,correctness,percent,user_count,total_users,language,game_code
+Beginning Sound Ba/Ra/Na,1,Correct,96.92,126,130,hi,LL
+Beginning Sound Ba/Ra/Na,1,Correct,95.42,229,240,mr,LL
+Beginning Sound Ba/Ra/Na,1,Incorrect,4.62,6,130,hi,LL
+Beginning Sound Ba/Ra/Na,1,Incorrect,5.42,13,240,mr,LL
+Beginning Sound Ba/Ra/Na,2,Correct,86.82,112,129,hi,LL
+Beginning Sound Ba/Ra/Na,2,Correct,90.46,218,241,mr,LL
+Beginning Sound Ba/Ra/Na,2,Incorrect,14.73,19,129,hi,LL
+Beginning Sound Ba/Ra/Na,2,Incorrect,11.62,28,241,mr,LL
+Beginning Sound Ba/Ra/Na,3,Correct,96.9,125,129,hi,LL
+Beginning Sound Ba/Ra/Na,3,Correct,95.0,228,240,mr,LL
+Beginning Sound Ba/Ra/Na,3,Incorrect,4.65,6,129,hi,LL
+Beginning Sound Ba/Ra/Na,3,Incorrect,6.25,15,240,mr,LL
+Beginning Sound Ba/Ra/Na,4,Correct,92.31,120,130,hi,LL
+Beginning Sound Ba/Ra/Na,4,Correct,87.55,211,241,mr,LL
+Beginning Sound Ba/Ra/Na,4,Incorrect,10.0,13,130,hi,LL
+Beginning Sound Ba/Ra/Na,4,Incorrect,14.52,35,241,mr,LL
+Beginning Sound Ba/Ra/Na,5,Correct,92.31,120,130,hi,LL
+Beginning Sound Ba/Ra/Na,5,Correct,95.9,234,244,mr,LL
+Beginning Sound Ba/Ra/Na,5,Incorrect,8.46,11,130,hi,LL
+Beginning Sound Ba/Ra/Na,5,Incorrect,4.51,11,244,mr,LL
+Beginning Sound Ba/Ra/Na,6,Correct,94.66,124,131,hi,LL
+Beginning Sound Ba/Ra/Na,6,Correct,91.77,223,243,mr,LL
+Beginning Sound Ba/Ra/Na,6,Incorrect,8.4,11,131,hi,LL
+Beginning Sound Ba/Ra/Na,6,Incorrect,9.88,24,243,mr,LL
+Beginning Sound Ba/Ra/Na,7,Correct,60.47,78,129,hi,LL
+Beginning Sound Ba/Ra/Na,7,Correct,81.89,199,243,mr,LL
+Beginning Sound Ba/Ra/Na,7,Incorrect,44.96,58,129,hi,LL
+Beginning Sound Ba/Ra/Na,7,Incorrect,20.99,51,243,mr,LL
+Beginning Sound Ba/Ra/Na,8,Correct,89.31,117,131,hi,LL
+Beginning Sound Ba/Ra/Na,8,Correct,84.03,200,238,mr,LL
+Beginning Sound Ba/Ra/Na,8,Incorrect,15.27,20,131,hi,LL
+Beginning Sound Ba/Ra/Na,8,Incorrect,19.33,46,238,mr,LL
+Beginning Sound Ba/Ra/Na,9,Correct,92.31,120,130,hi,LL
+Beginning Sound Ba/Ra/Na,9,Correct,91.32,221,242,mr,LL
+Beginning Sound Ba/Ra/Na,9,Incorrect,10.77,14,130,hi,LL
+Beginning Sound Ba/Ra/Na,9,Incorrect,9.5,23,242,mr,LL
+Beginning Sound Ba/Ra/Na,10,Correct,80.15,105,131,hi,LL
+Beginning Sound Ba/Ra/Na,10,Correct,82.72,201,243,mr,LL
+Beginning Sound Ba/Ra/Na,10,Incorrect,22.9,30,131,hi,LL
+Beginning Sound Ba/Ra/Na,10,Incorrect,19.75,48,243,mr,LL
+Beginning Sound Ba/Ra/Na,11,Correct,90.08,118,131,hi,LL
+Beginning Sound Ba/Ra/Na,11,Correct,89.75,219,244,mr,LL
+Beginning Sound Ba/Ra/Na,11,Incorrect,11.45,15,131,hi,LL
+Beginning Sound Ba/Ra/Na,11,Incorrect,12.3,30,244,mr,LL
+Beginning Sound Ba/Ra/Na,12,Correct,90.77,118,130,hi,LL
+Beginning Sound Ba/Ra/Na,12,Correct,87.08,209,240,mr,LL
+Beginning Sound Ba/Ra/Na,12,Incorrect,10.77,14,130,hi,LL
+Beginning Sound Ba/Ra/Na,12,Incorrect,13.75,33,240,mr,LL
+Beginning Sounds Ka/Na/Ta,1,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ma/Ka/La,1,Correct,54.89,1946,3545,hi,LL
+Beginning Sounds Ma/Ka/La,1,Correct,53.01,3102,5852,mr,LL
+Beginning Sounds Ma/Ka/La,1,Incorrect,56.19,1992,3545,hi,LL
+Beginning Sounds Ma/Ka/La,1,Incorrect,57.42,3360,5852,mr,LL
+Beginning Sounds Ma/Ka/La,2,Correct,39.01,1343,3443,hi,LL
+Beginning Sounds Ma/Ka/La,2,Correct,37.75,2115,5602,mr,LL
+Beginning Sounds Ma/Ka/La,2,Incorrect,70.52,2428,3443,hi,LL
+Beginning Sounds Ma/Ka/La,2,Incorrect,70.67,3959,5602,mr,LL
+Beginning Sounds Ma/Ka/La,3,Correct,55.71,1864,3346,hi,LL
+Beginning Sounds Ma/Ka/La,3,Correct,53.82,2931,5446,mr,LL
+Beginning Sounds Ma/Ka/La,3,Incorrect,54.42,1821,3346,hi,LL
+Beginning Sounds Ma/Ka/La,3,Incorrect,55.2,3006,5446,mr,LL
+Beginning Sounds Ma/Ka/La,4,Correct,38.23,1257,3288,hi,LL
+Beginning Sounds Ma/Ka/La,4,Correct,37.44,1990,5315,mr,LL
+Beginning Sounds Ma/Ka/La,4,Incorrect,70.44,2316,3288,hi,LL
+Beginning Sounds Ma/Ka/La,4,Incorrect,70.22,3732,5315,mr,LL
+Beginning Sounds Ma/Ka/La,5,Correct,52.49,1695,3229,hi,LL
+Beginning Sounds Ma/Ka/La,5,Correct,54.24,2834,5225,mr,LL
+Beginning Sounds Ma/Ka/La,5,Incorrect,56.55,1826,3229,hi,LL
+Beginning Sounds Ma/Ka/La,5,Incorrect,54.87,2867,5225,mr,LL
+Beginning Sounds Ma/Ka/La,6,Correct,37.62,1197,3182,hi,LL
+Beginning Sounds Ma/Ka/La,6,Correct,37.44,1928,5150,mr,LL
+Beginning Sounds Ma/Ka/La,6,Incorrect,71.02,2260,3182,hi,LL
+Beginning Sounds Ma/Ka/La,6,Incorrect,69.86,3598,5150,mr,LL
+Beginning Sounds Ma/Ka/La,7,Correct,37.21,1167,3136,hi,LL
+Beginning Sounds Ma/Ka/La,7,Correct,36.58,1849,5055,mr,LL
+Beginning Sounds Ma/Ka/La,7,Incorrect,70.85,2222,3136,hi,LL
+Beginning Sounds Ma/Ka/La,7,Incorrect,70.11,3544,5055,mr,LL
+Beginning Sounds Ma/Ka/La,8,Correct,38.93,1210,3108,hi,LL
+Beginning Sounds Ma/Ka/La,8,Correct,36.17,1800,4976,mr,LL
+Beginning Sounds Ma/Ka/La,8,Incorrect,68.98,2144,3108,hi,LL
+Beginning Sounds Ma/Ka/La,8,Incorrect,70.82,3524,4976,mr,LL
+Beginning Sounds Ma/Ka/La,9,Correct,36.88,1126,3053,hi,LL
+Beginning Sounds Ma/Ka/La,9,Correct,36.98,1808,4889,mr,LL
+Beginning Sounds Ma/Ka/La,9,Incorrect,70.36,2148,3053,hi,LL
+Beginning Sounds Ma/Ka/La,9,Incorrect,69.13,3380,4889,mr,LL
+Beginning Sounds Ma/Ka/La,10,Correct,27.02,815,3016,hi,LL
+Beginning Sounds Ma/Ka/La,10,Correct,28.91,1394,4822,mr,LL
+Beginning Sounds Ma/Ka/La,10,Incorrect,79.11,2386,3016,hi,LL
+Beginning Sounds Ma/Ka/La,10,Incorrect,76.92,3709,4822,mr,LL
+Beginning Sounds Ma/Ka/La,11,Correct,30.37,905,2980,hi,LL
+Beginning Sounds Ma/Ka/La,11,Correct,28.08,1332,4744,mr,LL
+Beginning Sounds Ma/Ka/La,11,Incorrect,76.44,2278,2980,hi,LL
+Beginning Sounds Ma/Ka/La,11,Incorrect,77.49,3676,4744,mr,LL
+Beginning Sounds Ma/Ka/La,12,Correct,27.33,801,2931,hi,LL
+Beginning Sounds Ma/Ka/La,12,Correct,27.47,1285,4677,mr,LL
+Beginning Sounds Ma/Ka/La,12,Incorrect,78.44,2299,2931,hi,LL
+Beginning Sounds Ma/Ka/La,12,Incorrect,78.0,3648,4677,mr,LL
+Beginning Sounds Sa/La/Va,1,Incorrect,100.0,3129,3129,hi,LL
+Beginning Sounds Sa/La/Va,1,Incorrect,100.0,6932,6932,mr,LL
+Beginning Sounds Sa/La/Va,2,Incorrect,100.0,3022,3022,hi,LL
+Beginning Sounds Sa/La/Va,2,Incorrect,100.0,6742,6742,mr,LL
+Beginning Sounds Sa/La/Va,3,Incorrect,100.0,2976,2976,hi,LL
+Beginning Sounds Sa/La/Va,3,Incorrect,100.0,6630,6630,mr,LL
+Beginning Sounds Sa/La/Va,4,Incorrect,100.0,2883,2883,hi,LL
+Beginning Sounds Sa/La/Va,4,Incorrect,100.0,6468,6468,mr,LL
+Beginning Sounds Sa/La/Va,5,Incorrect,100.0,2800,2800,hi,LL
+Beginning Sounds Sa/La/Va,5,Incorrect,100.0,6333,6333,mr,LL
+Beginning Sounds Sa/La/Va,6,Incorrect,100.0,2744,2744,hi,LL
+Beginning Sounds Sa/La/Va,6,Incorrect,100.0,6233,6233,mr,LL
+Beginning Sounds Sa/La/Va,7,Incorrect,100.0,1,1,mr,LL
+Beginning Sounds Ta/Va/Ga,1,Incorrect,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,2,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,3,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,4,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,5,Incorrect,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,6,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,7,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,8,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,9,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,10,Incorrect,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,11,Correct,100.0,1,1,hi,LL
+Beginning Sounds Ta/Va/Ga,12,Correct,100.0,1,1,hi,LL
+Color Blue,1,Correct,27.68,1404,5072,hi,CG
+Color Blue,1,Correct,29.28,2562,8751,mr,CG
+Color Blue,1,Incorrect,80.9,4103,5072,hi,CG
+Color Blue,1,Incorrect,80.47,7042,8751,mr,CG
+Color Blue,2,Correct,29.28,1440,4918,hi,CG
+Color Blue,2,Correct,30.65,2603,8493,mr,CG
+Color Blue,2,Incorrect,78.79,3875,4918,hi,CG
+Color Blue,2,Incorrect,78.56,6672,8493,mr,CG
+Color Blue,3,Correct,29.11,1401,4813,hi,CG
+Color Blue,3,Correct,29.45,2449,8316,mr,CG
+Color Blue,3,Incorrect,79.02,3803,4813,hi,CG
+Color Blue,3,Incorrect,79.39,6602,8316,mr,CG
+Color Blue,4,Correct,37.99,1801,4741,hi,CG
+Color Blue,4,Correct,38.29,3135,8187,mr,CG
+Color Blue,4,Incorrect,71.52,3391,4741,hi,CG
+Color Blue,4,Incorrect,71.28,5836,8187,mr,CG
+Color Blue,5,Correct,28.02,1314,4689,hi,CG
+Color Blue,5,Correct,30.19,2436,8069,mr,CG
+Color Blue,5,Incorrect,79.44,3725,4689,hi,CG
+Color Blue,5,Incorrect,78.67,6348,8069,mr,CG
+Color Blue,6,Correct,27.76,1289,4643,hi,CG
+Color Blue,6,Correct,29.58,2359,7976,mr,CG
+Color Blue,6,Incorrect,79.54,3693,4643,hi,CG
+Color Blue,6,Incorrect,78.91,6294,7976,mr,CG
+Color Blue,7,Correct,37.22,1720,4621,hi,CG
+Color Blue,7,Correct,38.85,3053,7859,mr,CG
+Color Blue,7,Incorrect,71.33,3296,4621,hi,CG
+Color Blue,7,Incorrect,70.89,5571,7859,mr,CG
+Color Blue,8,Correct,28.54,1300,4555,hi,CG
+Color Blue,8,Correct,29.59,2295,7757,mr,CG
+Color Blue,8,Incorrect,78.4,3571,4555,hi,CG
+Color Blue,8,Incorrect,78.21,6067,7757,mr,CG
+Color Blue,9,Correct,22.45,1013,4512,hi,CG
+Color Blue,9,Correct,23.57,1815,7701,mr,CG
+Color Blue,9,Incorrect,83.84,3783,4512,hi,CG
+Color Blue,9,Incorrect,83.04,6395,7701,mr,CG
+Color Blue,10,Correct,35.91,1610,4483,hi,CG
+Color Blue,10,Correct,38.51,2919,7580,mr,CG
+Color Blue,10,Incorrect,72.41,3246,4483,hi,CG
+Color Blue,10,Incorrect,70.62,5353,7580,mr,CG
+Color Blue,11,Correct,29.65,1316,4438,hi,CG
+Color Blue,11,Correct,29.74,2236,7519,mr,CG
+Color Blue,11,Incorrect,77.29,3430,4438,hi,CG
+Color Blue,11,Incorrect,78.06,5869,7519,mr,CG
+Color Red,1,Correct,45.65,5620,12312,hi,CG
+Color Red,1,Correct,47.5,9924,20892,mr,CG
+Color Red,1,Incorrect,76.62,9434,12312,hi,CG
+Color Red,1,Incorrect,77.73,16240,20892,mr,CG
+Color Red,2,Correct,34.76,4161,11972,hi,CG
+Color Red,2,Correct,36.54,7435,20346,mr,CG
+Color Red,2,Incorrect,83.22,9963,11972,hi,CG
+Color Red,2,Incorrect,84.16,17123,20346,mr,CG
+Color Red,3,Correct,35.62,4169,11704,hi,CG
+Color Red,3,Correct,37.97,7610,20044,mr,CG
+Color Red,3,Incorrect,82.67,9676,11704,hi,CG
+Color Red,3,Incorrect,82.92,16621,20044,mr,CG
+Color Red,4,Correct,45.26,5214,11520,hi,CG
+Color Red,4,Correct,45.86,9087,19815,mr,CG
+Color Red,4,Incorrect,76.23,8782,11520,hi,CG
+Color Red,4,Incorrect,77.76,15409,19815,mr,CG
+Color Red,5,Correct,35.59,4043,11361,hi,CG
+Color Red,5,Correct,36.85,7220,19594,mr,CG
+Color Red,5,Incorrect,82.47,9369,11361,hi,CG
+Color Red,5,Incorrect,83.54,16369,19594,mr,CG
+Color Red,6,Correct,34.35,3861,11239,hi,CG
+Color Red,6,Correct,35.65,6904,19368,mr,CG
+Color Red,6,Incorrect,83.16,9346,11239,hi,CG
+Color Red,6,Incorrect,83.67,16206,19368,mr,CG
+Color Red,7,Correct,43.49,4805,11048,hi,CG
+Color Red,7,Correct,45.52,8738,19197,mr,CG
+Color Red,7,Incorrect,76.52,8454,11048,hi,CG
+Color Red,7,Incorrect,76.97,14776,19197,mr,CG
+Color Red,8,Correct,34.26,3738,10911,hi,CG
+Color Red,8,Correct,36.44,6943,19052,mr,CG
+Color Red,8,Incorrect,82.71,9025,10911,hi,CG
+Color Red,8,Incorrect,83.24,15858,19052,mr,CG
+Color Red,9,Correct,28.5,3082,10814,hi,CG
+Color Red,9,Correct,29.46,5572,18912,mr,CG
+Color Red,9,Incorrect,86.51,9355,10814,hi,CG
+Color Red,9,Incorrect,87.09,16470,18912,mr,CG
+Color Red,10,Correct,43.11,4622,10721,hi,CG
+Color Red,10,Correct,45.67,8559,18742,mr,CG
+Color Red,10,Incorrect,76.56,8208,10721,hi,CG
+Color Red,10,Incorrect,76.81,14396,18742,mr,CG
+Color Red,11,Correct,34.1,3613,10594,hi,CG
+Color Red,11,Correct,35.74,6633,18557,mr,CG
+Color Red,11,Incorrect,82.25,8714,10594,hi,CG
+Color Red,11,Incorrect,82.96,15394,18557,mr,CG
+Color Red,12,Correct,33.88,3548,10473,hi,CG
+Color Red,12,Correct,35.2,6477,18402,mr,CG
+Color Red,12,Incorrect,82.5,8640,10473,hi,CG
+Color Red,12,Incorrect,83.51,15368,18402,mr,CG
+Color Yellow,1,Correct,41.24,2423,5875,hi,CG
+Color Yellow,1,Correct,42.08,4350,10338,mr,CG
+Color Yellow,1,Incorrect,73.16,4298,5875,hi,CG
+Color Yellow,1,Incorrect,74.0,7650,10338,mr,CG
+Color Yellow,2,Correct,30.8,1746,5668,hi,CG
+Color Yellow,2,Correct,32.99,3306,10021,mr,CG
+Color Yellow,2,Incorrect,81.09,4596,5668,hi,CG
+Color Yellow,2,Incorrect,80.65,8082,10021,mr,CG
+Color Yellow,3,Correct,30.47,1679,5511,hi,CG
+Color Yellow,3,Correct,31.6,3099,9807,mr,CG
+Color Yellow,3,Incorrect,81.64,4499,5511,hi,CG
+Color Yellow,3,Incorrect,80.96,7940,9807,mr,CG
+Color Yellow,4,Correct,39.87,2156,5407,hi,CG
+Color Yellow,4,Correct,40.64,3923,9653,mr,CG
+Color Yellow,4,Incorrect,73.4,3969,5407,hi,CG
+Color Yellow,4,Incorrect,73.86,7130,9653,mr,CG
+Color Yellow,5,Correct,31.57,1676,5309,hi,CG
+Color Yellow,5,Correct,31.7,3023,9535,mr,CG
+Color Yellow,5,Incorrect,79.49,4220,5309,hi,CG
+Color Yellow,5,Incorrect,80.85,7709,9535,mr,CG
+Color Yellow,6,Correct,31.28,1633,5220,hi,CG
+Color Yellow,6,Correct,31.64,2986,9436,mr,CG
+Color Yellow,6,Incorrect,79.46,4148,5220,hi,CG
+Color Yellow,6,Incorrect,80.46,7592,9436,mr,CG
+Color Yellow,7,Correct,40.69,2092,5141,hi,CG
+Color Yellow,7,Correct,41.45,3868,9331,mr,CG
+Color Yellow,7,Incorrect,71.48,3675,5141,hi,CG
+Color Yellow,7,Incorrect,72.59,6773,9331,mr,CG
+Color Yellow,8,Correct,30.24,1532,5066,hi,CG
+Color Yellow,8,Correct,31.41,2901,9235,mr,CG
+Color Yellow,8,Incorrect,80.26,4066,5066,hi,CG
+Color Yellow,8,Incorrect,80.64,7447,9235,mr,CG
+Color Yellow,9,Correct,23.82,1189,4991,hi,CG
+Color Yellow,9,Correct,25.34,2318,9147,mr,CG
+Color Yellow,9,Incorrect,84.17,4201,4991,hi,CG
+Color Yellow,9,Incorrect,84.36,7716,9147,mr,CG
+Color Yellow,10,Correct,39.63,1950,4921,hi,CG
+Color Yellow,10,Correct,40.23,3642,9052,mr,CG
+Color Yellow,10,Incorrect,72.55,3570,4921,hi,CG
+Color Yellow,10,Incorrect,72.95,6603,9052,mr,CG
+Color Yellow,11,Correct,28.15,1371,4871,hi,CG
+Color Yellow,11,Correct,30.87,2766,8960,mr,CG
+Color Yellow,11,Incorrect,81.09,3950,4871,hi,CG
+Color Yellow,11,Incorrect,80.49,7212,8960,mr,CG
+Color Yellow,12,Correct,30.67,1477,4815,hi,CG
+Color Yellow,12,Correct,31.37,2781,8866,mr,CG
+Color Yellow,12,Incorrect,79.25,3816,4815,hi,CG
+Color Yellow,12,Incorrect,79.64,7061,8866,mr,CG
+Numbers Comparison,1,Correct,93.83,2144,2285,hi,NM
+Numbers Comparison,1,Correct,90.12,2362,2621,mr,NM
+Numbers Comparison,1,Incorrect,8.18,187,2285,hi,NM
+Numbers Comparison,1,Incorrect,11.64,305,2621,mr,NM
+Numbers Comparison,2,Correct,92.38,2096,2269,hi,NM
+Numbers Comparison,2,Correct,90.7,2369,2612,mr,NM
+Numbers Comparison,2,Incorrect,10.0,227,2269,hi,NM
+Numbers Comparison,2,Incorrect,10.76,281,2612,mr,NM
+Numbers Comparison,3,Correct,90.21,2054,2277,hi,NM
+Numbers Comparison,3,Correct,87.39,2286,2616,mr,NM
+Numbers Comparison,3,Incorrect,12.87,293,2277,hi,NM
+Numbers Comparison,3,Incorrect,15.29,400,2616,mr,NM
+Numbers Comparison,4,Correct,92.02,2098,2280,hi,NM
+Numbers Comparison,4,Correct,91.13,2383,2615,mr,NM
+Numbers Comparison,4,Incorrect,10.18,232,2280,hi,NM
+Numbers Comparison,4,Incorrect,10.44,273,2615,mr,NM
+Numbers Comparison,5,Correct,91.88,2092,2277,hi,NM
+Numbers Comparison,5,Correct,91.01,2378,2613,mr,NM
+Numbers Comparison,5,Incorrect,10.5,239,2277,hi,NM
+Numbers Comparison,5,Incorrect,11.21,293,2613,mr,NM
+Numbers Comparison,6,Correct,86.89,1982,2281,hi,NM
+Numbers Comparison,6,Correct,85.33,2233,2617,mr,NM
+Numbers Comparison,6,Incorrect,16.18,369,2281,hi,NM
+Numbers Comparison,6,Incorrect,17.54,459,2617,mr,NM
+Numbers Comparison,7,Correct,90.32,2062,2283,hi,NM
+Numbers Comparison,7,Correct,88.82,2327,2620,mr,NM
+Numbers Comparison,7,Incorrect,12.66,289,2283,hi,NM
+Numbers Comparison,7,Incorrect,13.47,353,2620,mr,NM
+Numbers Comparison,8,Correct,91.63,2081,2271,hi,NM
+Numbers Comparison,8,Correct,91.02,2383,2618,mr,NM
+Numbers Comparison,8,Incorrect,11.1,252,2271,hi,NM
+Numbers Comparison,8,Incorrect,11.19,293,2618,mr,NM
+Numbers Comparison,9,Correct,91.13,2076,2278,hi,NM
+Numbers Comparison,9,Correct,90.36,2361,2613,mr,NM
+Numbers Comparison,9,Incorrect,11.02,251,2278,hi,NM
+Numbers Comparison,9,Incorrect,11.48,300,2613,mr,NM
+Numbers Comparison,10,Correct,89.51,2039,2278,hi,NM
+Numbers Comparison,10,Correct,87.27,2282,2615,mr,NM
+Numbers Comparison,10,Incorrect,12.99,296,2278,hi,NM
+Numbers Comparison,10,Incorrect,15.33,401,2615,mr,NM
+Numbers Comparison,11,Correct,89.17,2033,2280,hi,NM
+Numbers Comparison,11,Correct,86.92,2272,2614,mr,NM
+Numbers Comparison,11,Incorrect,13.64,311,2280,hi,NM
+Numbers Comparison,11,Incorrect,15.68,410,2614,mr,NM
+Numbers Comparison,12,Correct,91.98,2099,2282,hi,NM
+Numbers Comparison,12,Correct,88.66,2321,2618,mr,NM
+Numbers Comparison,12,Incorrect,10.52,240,2282,hi,NM
+Numbers Comparison,12,Incorrect,13.37,350,2618,mr,NM
+Numbers I,1,Correct,59.06,4662,7893,hi,NM
+Numbers I,1,Correct,60.02,8601,14330,mr,NM
+Numbers I,1,Incorrect,60.31,4760,7893,hi,NM
+Numbers I,1,Incorrect,61.47,8808,14330,mr,NM
+Numbers I,2,Correct,43.7,3365,7700,hi,NM
+Numbers I,2,Correct,43.32,6020,13898,mr,NM
+Numbers I,2,Incorrect,73.44,5655,7700,hi,NM
+Numbers I,2,Incorrect,75.4,10479,13898,mr,NM
+Numbers I,3,Correct,33.3,2508,7531,hi,NM
+Numbers I,3,Correct,34.12,4652,13636,mr,NM
+Numbers I,3,Incorrect,80.99,6099,7531,hi,NM
+Numbers I,3,Incorrect,81.67,11137,13636,mr,NM
+Numbers I,4,Correct,33.34,2470,7409,hi,NM
+Numbers I,4,Correct,33.78,4526,13399,mr,NM
+Numbers I,4,Incorrect,80.75,5983,7409,hi,NM
+Numbers I,4,Incorrect,81.74,10952,13399,mr,NM
+Numbers I,5,Correct,33.16,2420,7299,hi,NM
+Numbers I,5,Correct,33.54,4425,13192,mr,NM
+Numbers I,5,Incorrect,81.01,5913,7299,hi,NM
+Numbers I,5,Incorrect,81.41,10739,13192,mr,NM
+Numbers I,6,Correct,57.94,4185,7223,hi,NM
+Numbers I,6,Correct,58.03,7533,12982,mr,NM
+Numbers I,6,Incorrect,59.48,4296,7223,hi,NM
+Numbers I,6,Incorrect,60.88,7903,12982,mr,NM
+Numbers I,7,Correct,59.58,4265,7159,hi,NM
+Numbers I,7,Correct,58.89,7546,12814,mr,NM
+Numbers I,7,Incorrect,58.36,4178,7159,hi,NM
+Numbers I,7,Incorrect,60.16,7709,12814,mr,NM
+Numbers I,8,Correct,40.99,2904,7084,hi,NM
+Numbers I,8,Correct,41.84,5313,12697,mr,NM
+Numbers I,8,Incorrect,74.65,5288,7084,hi,NM
+Numbers I,8,Incorrect,75.25,9554,12697,mr,NM
+Numbers I,9,Correct,41.59,2919,7018,hi,NM
+Numbers I,9,Correct,41.84,5263,12580,mr,NM
+Numbers I,9,Incorrect,73.94,5189,7018,hi,NM
+Numbers I,9,Incorrect,74.58,9382,12580,mr,NM
+Numbers I,10,Correct,31.4,2185,6959,hi,NM
+Numbers I,10,Correct,32.54,4046,12433,mr,NM
+Numbers I,10,Incorrect,81.06,5641,6959,hi,NM
+Numbers I,10,Incorrect,81.26,10103,12433,mr,NM
+Numbers I,11,Correct,20.0,1,5,hi,NM
+Numbers I,11,Correct,25.0,1,4,mr,NM
+Numbers I,11,Incorrect,80.0,4,5,hi,NM
+Numbers I,11,Incorrect,75.0,3,4,mr,NM
+Numbers I,12,Incorrect,100.0,4,4,hi,NM
+Numbers II,1,Correct,56.0,4864,8686,hi,NM
+Numbers II,1,Correct,57.4,5662,9864,mr,NM
+Numbers II,1,Incorrect,57.77,5018,8686,hi,NM
+Numbers II,1,Incorrect,61.31,6048,9864,mr,NM
+Numbers II,2,Correct,55.82,4674,8374,hi,NM
+Numbers II,2,Correct,58.69,5614,9565,mr,NM
+Numbers II,2,Incorrect,57.49,4814,8374,hi,NM
+Numbers II,2,Incorrect,59.49,5690,9565,mr,NM
+Numbers II,3,Correct,39.41,3198,8115,hi,NM
+Numbers II,3,Correct,41.67,3904,9369,mr,NM
+Numbers II,3,Incorrect,72.53,5886,8115,hi,NM
+Numbers II,3,Incorrect,74.37,6968,9369,mr,NM
+Numbers II,4,Correct,39.01,3089,7918,hi,NM
+Numbers II,4,Correct,40.84,3745,9170,mr,NM
+Numbers II,4,Incorrect,72.92,5774,7918,hi,NM
+Numbers II,4,Incorrect,74.6,6841,9170,mr,NM
+Numbers II,5,Correct,29.9,2317,7749,hi,NM
+Numbers II,5,Correct,32.36,2938,9078,mr,NM
+Numbers II,5,Incorrect,79.56,6165,7749,hi,NM
+Numbers II,5,Incorrect,80.87,7341,9078,mr,NM
+Numbers II,6,Correct,56.02,4286,7651,hi,NM
+Numbers II,6,Correct,58.11,5219,8982,mr,NM
+Numbers II,6,Incorrect,56.58,4329,7651,hi,NM
+Numbers II,6,Incorrect,58.96,5296,8982,mr,NM
+Numbers II,7,Correct,56.76,4272,7526,hi,NM
+Numbers II,7,Correct,57.89,5147,8891,mr,NM
+Numbers II,7,Incorrect,56.1,4222,7526,hi,NM
+Numbers II,7,Incorrect,59.26,5269,8891,mr,NM
+Numbers II,8,Correct,38.53,2867,7441,hi,NM
+Numbers II,8,Correct,41.9,3678,8777,mr,NM
+Numbers II,8,Incorrect,72.56,5399,7441,hi,NM
+Numbers II,8,Incorrect,73.12,6418,8777,mr,NM
+Numbers II,9,Correct,37.3,2740,7345,hi,NM
+Numbers II,9,Correct,40.06,3493,8719,mr,NM
+Numbers II,9,Incorrect,73.48,5397,7345,hi,NM
+Numbers II,9,Incorrect,74.26,6475,8719,mr,NM
+Numbers II,10,Correct,29.99,2186,7289,hi,NM
+Numbers II,10,Correct,31.62,2724,8616,mr,NM
+Numbers II,10,Incorrect,79.64,5805,7289,hi,NM
+Numbers II,10,Incorrect,80.93,6973,8616,mr,NM
+Numbers II,11,Incorrect,100.0,4,4,hi,NM
+Numbers II,11,Incorrect,100.0,4,4,mr,NM
+Numbers II,12,Correct,33.33,1,3,hi,NM
+Numbers II,12,Correct,66.67,2,3,mr,NM
+Numbers II,12,Incorrect,66.67,2,3,hi,NM
+Numbers II,12,Incorrect,33.33,1,3,mr,NM
+Numerals 1-10,1,Correct,50.92,1654,3248,hi,NM
+Numerals 1-10,1,Correct,52.68,2661,5051,mr,NM
+Numerals 1-10,1,Incorrect,55.67,1808,3248,hi,NM
+Numerals 1-10,1,Incorrect,54.41,2748,5051,mr,NM
+Numerals 1-10,2,Correct,53.01,1672,3154,hi,NM
+Numerals 1-10,2,Correct,52.68,2585,4907,mr,NM
+Numerals 1-10,2,Incorrect,52.92,1669,3154,hi,NM
+Numerals 1-10,2,Incorrect,54.74,2686,4907,mr,NM
+Numerals 1-10,3,Correct,35.03,1087,3103,hi,NM
+Numerals 1-10,3,Correct,35.54,1698,4778,mr,NM
+Numerals 1-10,3,Incorrect,70.42,2185,3103,hi,NM
+Numerals 1-10,3,Incorrect,70.45,3366,4778,mr,NM
+Numerals 1-10,4,Correct,27.71,848,3060,hi,NM
+Numerals 1-10,4,Correct,26.84,1259,4691,mr,NM
+Numerals 1-10,4,Incorrect,77.06,2358,3060,hi,NM
+Numerals 1-10,4,Incorrect,77.89,3654,4691,mr,NM
+Numerals 1-10,5,Correct,52.58,1589,3022,hi,NM
+Numerals 1-10,5,Correct,52.38,2422,4624,mr,NM
+Numerals 1-10,5,Incorrect,53.11,1605,3022,hi,NM
+Numerals 1-10,5,Incorrect,53.76,2486,4624,mr,NM
+Numerals 1-10,6,Correct,52.03,1553,2985,hi,NM
+Numerals 1-10,6,Correct,51.16,2340,4574,mr,NM
+Numerals 1-10,6,Incorrect,53.6,1600,2985,hi,NM
+Numerals 1-10,6,Incorrect,54.18,2478,4574,mr,NM
+Numerals 1-10,7,Correct,52.33,1551,2964,hi,NM
+Numerals 1-10,7,Correct,52.68,2378,4514,mr,NM
+Numerals 1-10,7,Incorrect,52.87,1567,2964,hi,NM
+Numerals 1-10,7,Incorrect,53.08,2396,4514,mr,NM
+Numerals 1-10,8,Correct,33.74,992,2940,hi,NM
+Numerals 1-10,8,Correct,35.1,1570,4473,mr,NM
+Numerals 1-10,8,Incorrect,71.16,2092,2940,hi,NM
+Numerals 1-10,8,Incorrect,69.71,3118,4473,mr,NM
+Numerals 1-10,9,Correct,25.68,748,2913,hi,NM
+Numerals 1-10,9,Correct,28.19,1245,4416,mr,NM
+Numerals 1-10,9,Incorrect,78.1,2275,2913,hi,NM
+Numerals 1-10,9,Incorrect,76.54,3380,4416,mr,NM
+Numerals 1-10,10,Incorrect,100.0,2,2,hi,NM
+Numerals 1-10,10,Incorrect,100.0,2,2,mr,NM
+Numerals 1-10,11,Correct,25.0,1,4,mr,NM
+Numerals 1-10,11,Incorrect,75.0,3,4,mr,NM
+Numerals 1-10,12,Incorrect,100.0,1,1,mr,NM
+Positions,1,Correct,54.43,3198,5875,hi,CG
+Positions,1,Correct,54.24,6792,12521,mr,CG
+Positions,1,Incorrect,57.4,3372,5875,hi,CG
+Positions,1,Incorrect,57.7,7225,12521,mr,CG
+Positions,2,Correct,53.39,3043,5700,hi,CG
+Positions,2,Correct,52.72,6268,11889,mr,CG
+Positions,2,Incorrect,57.93,3302,5700,hi,CG
+Positions,2,Incorrect,58.83,6994,11889,mr,CG
+Positions,3,Correct,37.49,2092,5580,hi,CG
+Positions,3,Correct,37.5,4311,11495,mr,CG
+Positions,3,Incorrect,72.33,4036,5580,hi,CG
+Positions,3,Incorrect,72.35,8317,11495,mr,CG
+Positions,4,Correct,53.48,2942,5501,hi,CG
+Positions,4,Correct,53.91,6048,11219,mr,CG
+Positions,4,Incorrect,56.84,3127,5501,hi,CG
+Positions,4,Incorrect,57.14,6411,11219,mr,CG
+Positions,5,Correct,54.57,2955,5415,hi,CG
+Positions,5,Correct,52.77,5768,10931,mr,CG
+Positions,5,Incorrect,56.2,3043,5415,hi,CG
+Positions,5,Incorrect,58.18,6360,10931,mr,CG
+Positions,6,Correct,36.38,1941,5336,hi,CG
+Positions,6,Correct,38.43,4099,10665,mr,CG
+Positions,6,Incorrect,72.79,3884,5336,hi,CG
+Positions,6,Incorrect,70.79,7550,10665,mr,CG
+Positions,7,Correct,24.0,1261,5254,hi,CG
+Positions,7,Correct,24.89,2595,10424,mr,CG
+Positions,7,Incorrect,82.79,4350,5254,hi,CG
+Positions,7,Incorrect,81.97,8545,10424,mr,CG
+Positions,8,Correct,53.87,2793,5185,hi,CG
+Positions,8,Correct,53.87,5513,10234,mr,CG
+Positions,8,Incorrect,56.72,2941,5185,hi,CG
+Positions,8,Incorrect,56.73,5806,10234,mr,CG
+Positions,9,Correct,55.01,2822,5130,hi,CG
+Positions,9,Correct,53.97,5463,10123,mr,CG
+Positions,9,Incorrect,54.93,2818,5130,hi,CG
+Positions,9,Incorrect,56.2,5689,10123,mr,CG
+Positions,10,Correct,36.93,1871,5067,hi,CG
+Positions,10,Correct,36.99,3696,9992,mr,CG
+Positions,10,Incorrect,71.54,3625,5067,hi,CG
+Positions,10,Incorrect,71.73,7167,9992,mr,CG
+Positions,11,Correct,53.4,2681,5021,hi,CG
+Positions,11,Correct,52.91,5207,9842,mr,CG
+Positions,11,Incorrect,56.3,2827,5021,hi,CG
+Positions,11,Incorrect,57.13,5623,9842,mr,CG
+Positions,12,Correct,38.01,1886,4962,hi,CG
+Positions,12,Correct,37.16,3623,9749,mr,CG
+Positions,12,Incorrect,70.66,3506,4962,hi,CG
+Positions,12,Incorrect,71.54,6974,9749,mr,CG
+Positions,13,Correct,25.33,1242,4903,hi,CG
+Positions,13,Correct,25.56,2448,9578,mr,CG
+Positions,13,Incorrect,81.24,3983,4903,hi,CG
+Positions,13,Incorrect,81.04,7762,9578,mr,CG
+Positions,14,Incorrect,100.0,2,2,mr,CG
+Primary Emotion Labelling,1,Correct,93.5,2531,2707,hi,SEL
+Primary Emotion Labelling,1,Correct,89.76,2428,2705,mr,SEL
+Primary Emotion Labelling,1,Incorrect,8.94,242,2707,hi,SEL
+Primary Emotion Labelling,1,Incorrect,12.98,351,2705,mr,SEL
+Primary Emotion Labelling,2,Correct,93.56,2514,2687,hi,SEL
+Primary Emotion Labelling,2,Correct,92.1,2483,2696,mr,SEL
+Primary Emotion Labelling,2,Incorrect,9.04,243,2687,hi,SEL
+Primary Emotion Labelling,2,Incorrect,10.13,273,2696,mr,SEL
+Primary Emotion Labelling,3,Correct,96.66,2608,2698,hi,SEL
+Primary Emotion Labelling,3,Correct,93.89,2536,2701,mr,SEL
+Primary Emotion Labelling,3,Incorrect,5.52,149,2698,hi,SEL
+Primary Emotion Labelling,3,Incorrect,8.26,223,2701,mr,SEL
+Primary Emotion Labelling,4,Correct,93.56,2527,2701,hi,SEL
+Primary Emotion Labelling,4,Correct,90.97,2447,2690,mr,SEL
+Primary Emotion Labelling,4,Incorrect,9.22,249,2701,hi,SEL
+Primary Emotion Labelling,4,Incorrect,11.41,307,2690,mr,SEL
+Primary Emotion Labelling,5,Correct,94.1,2535,2694,hi,SEL
+Primary Emotion Labelling,5,Correct,89.74,2424,2701,mr,SEL
+Primary Emotion Labelling,5,Incorrect,8.72,235,2694,hi,SEL
+Primary Emotion Labelling,5,Incorrect,13.0,351,2701,mr,SEL
+Primary Emotion Labelling,6,Correct,88.43,2384,2696,hi,SEL
+Primary Emotion Labelling,6,Correct,84.48,2280,2699,mr,SEL
+Primary Emotion Labelling,6,Incorrect,15.5,418,2696,hi,SEL
+Primary Emotion Labelling,6,Incorrect,19.27,520,2699,mr,SEL
+Primary Emotion Labelling,7,Correct,95.44,2574,2697,hi,SEL
+Primary Emotion Labelling,7,Correct,92.86,2498,2690,mr,SEL
+Primary Emotion Labelling,7,Incorrect,6.64,179,2697,hi,SEL
+Primary Emotion Labelling,7,Incorrect,9.33,251,2690,mr,SEL
+Primary Emotion Labelling,8,Correct,77.0,2076,2696,hi,SEL
+Primary Emotion Labelling,8,Correct,80.16,2166,2702,mr,SEL
+Primary Emotion Labelling,8,Incorrect,28.41,766,2696,hi,SEL
+Primary Emotion Labelling,8,Incorrect,23.61,638,2702,mr,SEL
+Primary Emotion Labelling,9,Correct,95.71,2586,2702,hi,SEL
+Primary Emotion Labelling,9,Correct,94.03,2538,2699,mr,SEL
+Primary Emotion Labelling,9,Incorrect,6.29,170,2702,hi,SEL
+Primary Emotion Labelling,9,Incorrect,7.85,212,2699,mr,SEL
+Primary Emotion Labelling,10,Correct,94.26,2545,2700,hi,SEL
+Primary Emotion Labelling,10,Correct,92.92,2507,2698,mr,SEL
+Primary Emotion Labelling,10,Incorrect,8.19,221,2700,hi,SEL
+Primary Emotion Labelling,10,Incorrect,9.64,260,2698,mr,SEL
+Primary Emotion Labelling,11,Correct,95.21,2566,2695,hi,SEL
+Primary Emotion Labelling,11,Correct,93.84,2529,2695,mr,SEL
+Primary Emotion Labelling,11,Incorrect,6.75,182,2695,hi,SEL
+Primary Emotion Labelling,11,Incorrect,8.13,219,2695,mr,SEL
+Primary Emotion Labelling,12,Correct,95.34,2577,2703,hi,SEL
+Primary Emotion Labelling,12,Correct,88.98,2407,2705,mr,SEL
+Primary Emotion Labelling,12,Incorrect,7.66,207,2703,hi,SEL
+Primary Emotion Labelling,12,Incorrect,13.57,367,2705,mr,SEL
+Quantitative Comparison,1,Correct,94.55,3297,3487,hi,NM
+Quantitative Comparison,1,Correct,94.7,5021,5302,mr,NM
+Quantitative Comparison,1,Incorrect,7.34,256,3487,hi,NM
+Quantitative Comparison,1,Incorrect,7.45,395,5302,mr,NM
+Quantitative Comparison,2,Correct,89.33,3089,3458,hi,NM
+Quantitative Comparison,2,Correct,89.32,4727,5292,mr,NM
+Quantitative Comparison,2,Incorrect,14.26,493,3458,hi,NM
+Quantitative Comparison,2,Incorrect,13.81,731,5292,mr,NM
+Quantitative Comparison,3,Correct,95.08,3308,3479,hi,NM
+Quantitative Comparison,3,Correct,93.55,4949,5290,mr,NM
+Quantitative Comparison,3,Incorrect,7.07,246,3479,hi,NM
+Quantitative Comparison,3,Incorrect,9.3,492,5290,mr,NM
+Quantitative Comparison,4,Correct,92.92,3229,3475,hi,NM
+Quantitative Comparison,4,Correct,91.86,4854,5284,mr,NM
+Quantitative Comparison,4,Incorrect,10.47,364,3475,hi,NM
+Quantitative Comparison,4,Incorrect,10.75,568,5284,mr,NM
+Quantitative Comparison,5,Correct,95.14,3309,3478,hi,NM
+Quantitative Comparison,5,Correct,94.61,5004,5289,mr,NM
+Quantitative Comparison,5,Incorrect,7.39,257,3478,hi,NM
+Quantitative Comparison,5,Incorrect,7.56,400,5289,mr,NM
+Quantitative Comparison,6,Correct,88.58,3080,3477,hi,NM
+Quantitative Comparison,6,Correct,84.72,4484,5293,mr,NM
+Quantitative Comparison,6,Incorrect,14.98,521,3477,hi,NM
+Quantitative Comparison,6,Incorrect,19.04,1008,5293,mr,NM
+Quantitative Comparison,7,Correct,95.86,3334,3478,hi,NM
+Quantitative Comparison,7,Correct,93.87,4973,5298,mr,NM
+Quantitative Comparison,7,Incorrect,6.3,219,3478,hi,NM
+Quantitative Comparison,7,Incorrect,8.29,439,5298,mr,NM
+Quantitative Comparison,8,Correct,87.64,3043,3472,hi,NM
+Quantitative Comparison,8,Correct,84.46,4469,5291,mr,NM
+Quantitative Comparison,8,Incorrect,17.22,598,3472,hi,NM
+Quantitative Comparison,8,Incorrect,20.22,1070,5291,mr,NM
+Quantitative Comparison,9,Correct,91.17,3171,3478,hi,NM
+Quantitative Comparison,9,Correct,90.63,4790,5285,mr,NM
+Quantitative Comparison,9,Incorrect,12.36,430,3478,hi,NM
+Quantitative Comparison,9,Incorrect,12.41,656,5285,mr,NM
+Quantitative Comparison,10,Correct,91.34,3174,3475,hi,NM
+Quantitative Comparison,10,Correct,89.43,4731,5290,mr,NM
+Quantitative Comparison,10,Incorrect,11.94,415,3475,hi,NM
+Quantitative Comparison,10,Incorrect,14.14,748,5290,mr,NM
+Quantitative Comparison,11,Correct,95.54,3322,3477,hi,NM
+Quantitative Comparison,11,Correct,94.18,4984,5292,mr,NM
+Quantitative Comparison,11,Incorrect,6.59,229,3477,hi,NM
+Quantitative Comparison,11,Incorrect,8.07,427,5292,mr,NM
+Quantitative Comparison,12,Correct,93.93,3264,3475,hi,NM
+Quantitative Comparison,12,Correct,92.67,4907,5295,mr,NM
+Quantitative Comparison,12,Incorrect,9.21,320,3475,hi,NM
+Quantitative Comparison,12,Incorrect,10.42,552,5295,mr,NM
+Relational Comparison,1,Correct,93.96,2755,2932,hi,CG
+Relational Comparison,1,Correct,93.92,3088,3288,mr,CG
+Relational Comparison,1,Incorrect,7.84,230,2932,hi,CG
+Relational Comparison,1,Incorrect,8.39,276,3288,mr,CG
+Relational Comparison,2,Correct,87.02,2541,2920,hi,CG
+Relational Comparison,2,Correct,89.26,2934,3287,mr,CG
+Relational Comparison,2,Incorrect,17.43,509,2920,hi,CG
+Relational Comparison,2,Incorrect,15.52,510,3287,mr,CG
+Relational Comparison,3,Correct,95.39,2795,2930,hi,CG
+Relational Comparison,3,Correct,94.26,3104,3293,mr,CG
+Relational Comparison,3,Incorrect,6.52,191,2930,hi,CG
+Relational Comparison,3,Incorrect,8.93,294,3293,mr,CG
+Relational Comparison,4,Correct,93.75,2743,2926,hi,CG
+Relational Comparison,4,Correct,92.12,3029,3288,mr,CG
+Relational Comparison,4,Incorrect,8.65,253,2926,hi,CG
+Relational Comparison,4,Incorrect,11.62,382,3288,mr,CG
+Relational Comparison,5,Correct,95.22,2788,2928,hi,CG
+Relational Comparison,5,Correct,93.28,3068,3289,mr,CG
+Relational Comparison,5,Incorrect,6.97,204,2928,hi,CG
+Relational Comparison,5,Incorrect,9.85,324,3289,mr,CG
+Relational Comparison,6,Correct,89.36,2613,2924,hi,CG
+Relational Comparison,6,Correct,88.69,2918,3290,mr,CG
+Relational Comparison,6,Incorrect,14.88,435,2924,hi,CG
+Relational Comparison,6,Incorrect,16.41,540,3290,mr,CG
+Relational Comparison,7,Correct,92.0,2690,2924,hi,CG
+Relational Comparison,7,Correct,91.97,3023,3287,mr,CG
+Relational Comparison,7,Incorrect,10.7,313,2924,hi,CG
+Relational Comparison,7,Incorrect,11.9,391,3287,mr,CG
+Relational Comparison,8,Correct,92.25,2701,2928,hi,CG
+Relational Comparison,8,Correct,93.15,3062,3287,mr,CG
+Relational Comparison,8,Incorrect,10.55,309,2928,hi,CG
+Relational Comparison,8,Incorrect,10.04,330,3287,mr,CG
+Relational Comparison,9,Correct,90.8,2655,2924,hi,CG
+Relational Comparison,9,Correct,89.72,2949,3287,mr,CG
+Relational Comparison,9,Incorrect,12.45,364,2924,hi,CG
+Relational Comparison,9,Incorrect,14.63,481,3287,mr,CG
+Relational Comparison,10,Correct,91.74,2688,2930,hi,CG
+Relational Comparison,10,Correct,90.95,2993,3291,mr,CG
+Relational Comparison,10,Incorrect,10.89,319,2930,hi,CG
+Relational Comparison,10,Incorrect,12.76,420,3291,mr,CG
+Relational Comparison,11,Correct,87.63,2565,2927,hi,CG
+Relational Comparison,11,Correct,84.96,2797,3292,mr,CG
+Relational Comparison,11,Incorrect,16.77,491,2927,hi,CG
+Relational Comparison,11,Incorrect,20.5,675,3292,mr,CG
+Relational Comparison,12,Correct,93.51,2739,2929,hi,CG
+Relational Comparison,12,Correct,91.98,3026,3290,mr,CG
+Relational Comparison,12,Incorrect,8.84,259,2929,hi,CG
+Relational Comparison,12,Incorrect,11.03,363,3290,mr,CG
+Relational Comparison II,1,Correct,95.73,2312,2415,hi,CG
+Relational Comparison II,1,Correct,94.31,2951,3129,mr,CG
+Relational Comparison II,1,Incorrect,6.05,146,2415,hi,CG
+Relational Comparison II,1,Incorrect,8.63,270,3129,mr,CG
+Relational Comparison II,2,Correct,93.92,2257,2403,hi,CG
+Relational Comparison II,2,Correct,93.09,2912,3128,mr,CG
+Relational Comparison II,2,Incorrect,8.28,199,2403,hi,CG
+Relational Comparison II,2,Incorrect,11.03,345,3128,mr,CG
+Relational Comparison II,3,Correct,94.73,2285,2412,hi,CG
+Relational Comparison II,3,Correct,94.23,2940,3120,mr,CG
+Relational Comparison II,3,Incorrect,8.83,213,2412,hi,CG
+Relational Comparison II,3,Incorrect,9.01,281,3120,mr,CG
+Relational Comparison II,4,Correct,94.36,2274,2410,hi,CG
+Relational Comparison II,4,Correct,90.07,2813,3123,mr,CG
+Relational Comparison II,4,Incorrect,9.25,223,2410,hi,CG
+Relational Comparison II,4,Incorrect,15.24,476,3123,mr,CG
+Relational Comparison II,5,Correct,94.14,2267,2408,hi,CG
+Relational Comparison II,5,Correct,92.45,2888,3124,mr,CG
+Relational Comparison II,5,Incorrect,9.14,220,2408,hi,CG
+Relational Comparison II,5,Incorrect,10.95,342,3124,mr,CG
+Relational Comparison II,6,Correct,85.51,2059,2408,hi,CG
+Relational Comparison II,6,Correct,85.43,2667,3122,mr,CG
+Relational Comparison II,6,Incorrect,20.89,503,2408,hi,CG
+Relational Comparison II,6,Incorrect,21.17,661,3122,mr,CG
+Relational Comparison II,7,Correct,94.07,2269,2412,hi,CG
+Relational Comparison II,7,Correct,91.71,2867,3126,mr,CG
+Relational Comparison II,7,Incorrect,8.33,201,2412,hi,CG
+Relational Comparison II,7,Incorrect,12.22,382,3126,mr,CG
+Relational Comparison II,8,Correct,90.9,2188,2407,hi,CG
+Relational Comparison II,8,Correct,91.66,2859,3119,mr,CG
+Relational Comparison II,8,Incorrect,13.38,322,2407,hi,CG
+Relational Comparison II,8,Incorrect,12.95,404,3119,mr,CG
+Relational Comparison II,9,Correct,92.79,2240,2414,hi,CG
+Relational Comparison II,9,Correct,91.53,2862,3127,mr,CG
+Relational Comparison II,9,Incorrect,10.98,265,2414,hi,CG
+Relational Comparison II,9,Incorrect,13.14,411,3127,mr,CG
+Relational Comparison II,10,Correct,91.95,2215,2409,hi,CG
+Relational Comparison II,10,Correct,85.12,2661,3126,mr,CG
+Relational Comparison II,10,Incorrect,11.83,285,2409,hi,CG
+Relational Comparison II,10,Incorrect,21.15,661,3126,mr,CG
+Relational Comparison II,11,Correct,94.65,2282,2411,hi,CG
+Relational Comparison II,11,Correct,93.89,2933,3124,mr,CG
+Relational Comparison II,11,Incorrect,7.55,182,2411,hi,CG
+Relational Comparison II,11,Incorrect,9.12,285,3124,mr,CG
+Relational Comparison II,12,Correct,89.34,2154,2411,hi,CG
+Relational Comparison II,12,Correct,88.58,2768,3125,mr,CG
+Relational Comparison II,12,Incorrect,14.77,356,2411,hi,CG
+Relational Comparison II,12,Incorrect,16.26,508,3125,mr,CG
+Revision Colors,1,Correct,95.56,1486,1555,hi,CG
+Revision Colors,1,Correct,95.8,2620,2735,mr,CG
+Revision Colors,1,Incorrect,5.79,90,1555,hi,CG
+Revision Colors,1,Incorrect,4.97,136,2735,mr,CG
+Revision Colors,2,Correct,93.9,1462,1557,hi,CG
+Revision Colors,2,Correct,92.17,2543,2759,mr,CG
+Revision Colors,2,Incorrect,7.77,121,1557,hi,CG
+Revision Colors,2,Incorrect,9.21,254,2759,mr,CG
+Revision Colors,3,Correct,96.23,1504,1563,hi,CG
+Revision Colors,3,Correct,96.2,2656,2761,mr,CG
+Revision Colors,3,Incorrect,5.18,81,1563,hi,CG
+Revision Colors,3,Incorrect,5.0,138,2761,mr,CG
+Revision Colors,4,Correct,96.87,1517,1566,hi,CG
+Revision Colors,4,Correct,97.11,2687,2767,mr,CG
+Revision Colors,4,Incorrect,4.21,66,1566,hi,CG
+Revision Colors,4,Incorrect,4.08,113,2767,mr,CG
+Revision Colors,5,Correct,96.87,1517,1566,hi,CG
+Revision Colors,5,Correct,97.21,2685,2762,mr,CG
+Revision Colors,5,Incorrect,4.28,67,1566,hi,CG
+Revision Colors,5,Incorrect,3.98,110,2762,mr,CG
+Revision Colors,6,Correct,96.55,1510,1564,hi,CG
+Revision Colors,6,Correct,95.92,2656,2769,mr,CG
+Revision Colors,6,Incorrect,4.6,72,1564,hi,CG
+Revision Colors,6,Incorrect,5.53,153,2769,mr,CG
+Revision Colors,7,Correct,91.41,1426,1560,hi,CG
+Revision Colors,7,Correct,88.7,2434,2744,mr,CG
+Revision Colors,7,Incorrect,10.71,167,1560,hi,CG
+Revision Colors,7,Incorrect,13.78,378,2744,mr,CG
+Revision Colors,8,Correct,83.27,1299,1560,hi,CG
+Revision Colors,8,Correct,84.23,2312,2745,mr,CG
+Revision Colors,8,Incorrect,20.0,312,1560,hi,CG
+Revision Colors,8,Incorrect,18.69,513,2745,mr,CG
+Revision Colors,9,Correct,83.95,1308,1558,hi,CG
+Revision Colors,9,Correct,83.9,2303,2745,mr,CG
+Revision Colors,9,Incorrect,19.06,297,1558,hi,CG
+Revision Colors,9,Incorrect,18.51,508,2745,mr,CG
+Revision Colors,10,Correct,95.89,1468,1531,hi,CG
+Revision Colors,10,Correct,95.46,2605,2729,mr,CG
+Revision Colors,10,Incorrect,5.29,81,1531,hi,CG
+Revision Colors,10,Incorrect,5.61,153,2729,mr,CG
+Revision Colors,11,Correct,97.5,1522,1561,hi,CG
+Revision Colors,11,Correct,98.15,2709,2760,mr,CG
+Revision Colors,11,Incorrect,3.84,60,1561,hi,CG
+Revision Colors,11,Incorrect,2.36,65,2760,mr,CG
+Revision Colors,12,Correct,96.86,1511,1560,hi,CG
+Revision Colors,12,Correct,97.24,2678,2754,mr,CG
+Revision Colors,12,Incorrect,4.23,66,1560,hi,CG
+Revision Colors,12,Incorrect,3.63,100,2754,mr,CG
+Revision Shapes,1,Correct,95.85,1224,1277,hi,CG
+Revision Shapes,1,Correct,94.42,1592,1686,mr,CG
+Revision Shapes,1,Incorrect,5.32,68,1277,hi,CG
+Revision Shapes,1,Incorrect,7.59,128,1686,mr,CG
+Revision Shapes,2,Correct,95.02,1220,1284,hi,CG
+Revision Shapes,2,Correct,96.1,1628,1694,mr,CG
+Revision Shapes,2,Incorrect,6.31,81,1284,hi,CG
+Revision Shapes,2,Incorrect,6.08,103,1694,mr,CG
+Revision Shapes,3,Correct,95.56,1226,1283,hi,CG
+Revision Shapes,3,Correct,96.4,1632,1693,mr,CG
+Revision Shapes,3,Incorrect,5.53,71,1283,hi,CG
+Revision Shapes,3,Incorrect,5.49,93,1693,mr,CG
+Revision Shapes,4,Correct,94.99,1214,1278,hi,CG
+Revision Shapes,4,Correct,95.32,1608,1687,mr,CG
+Revision Shapes,4,Incorrect,6.57,84,1278,hi,CG
+Revision Shapes,4,Incorrect,7.05,119,1687,mr,CG
+Revision Shapes,5,Correct,96.1,1232,1282,hi,CG
+Revision Shapes,5,Correct,95.46,1619,1696,mr,CG
+Revision Shapes,5,Incorrect,5.69,73,1282,hi,CG
+Revision Shapes,5,Incorrect,6.78,115,1696,mr,CG
+Revision Shapes,6,Correct,91.41,1171,1281,hi,CG
+Revision Shapes,6,Correct,91.68,1554,1695,mr,CG
+Revision Shapes,6,Incorrect,10.77,138,1281,hi,CG
+Revision Shapes,6,Incorrect,11.09,188,1695,mr,CG
+Revision Shapes,7,Correct,80.25,1028,1281,hi,CG
+Revision Shapes,7,Correct,75.15,1255,1670,mr,CG
+Revision Shapes,7,Incorrect,23.81,305,1281,hi,CG
+Revision Shapes,7,Incorrect,31.8,531,1670,mr,CG
+Revision Shapes,8,Correct,89.32,1138,1274,hi,CG
+Revision Shapes,8,Correct,87.02,1462,1680,mr,CG
+Revision Shapes,8,Incorrect,13.58,173,1274,hi,CG
+Revision Shapes,8,Incorrect,17.08,287,1680,mr,CG
+Revision Shapes,9,Correct,85.9,1097,1277,hi,CG
+Revision Shapes,9,Correct,78.64,1325,1685,mr,CG
+Revision Shapes,9,Incorrect,18.48,236,1277,hi,CG
+Revision Shapes,9,Incorrect,28.25,476,1685,mr,CG
+Revision Shapes,10,Correct,83.85,1075,1282,hi,CG
+Revision Shapes,10,Correct,80.5,1354,1682,mr,CG
+Revision Shapes,10,Incorrect,19.19,246,1282,hi,CG
+Revision Shapes,10,Incorrect,25.39,427,1682,mr,CG
+Revision Shapes,11,Correct,93.75,1200,1280,hi,CG
+Revision Shapes,11,Correct,91.15,1535,1684,mr,CG
+Revision Shapes,11,Incorrect,7.73,99,1280,hi,CG
+Revision Shapes,11,Incorrect,12.29,207,1684,mr,CG
+Revision Shapes,12,Correct,86.16,1096,1272,hi,CG
+Revision Shapes,12,Correct,81.3,1361,1674,mr,CG
+Revision Shapes,12,Incorrect,17.3,220,1272,hi,CG
+Revision Shapes,12,Incorrect,24.19,405,1674,mr,CG
+Rhyming Words,1,Correct,80.49,2212,2748,hi,LL
+Rhyming Words,1,Correct,70.45,2334,3313,mr,LL
+Rhyming Words,1,Incorrect,25.0,687,2748,hi,LL
+Rhyming Words,1,Incorrect,33.17,1099,3313,mr,LL
+Rhyming Words,2,Correct,88.35,2465,2790,hi,LL
+Rhyming Words,2,Correct,55.36,1822,3291,mr,LL
+Rhyming Words,2,Incorrect,16.67,465,2790,hi,LL
+Rhyming Words,2,Incorrect,49.47,1628,3291,mr,LL
+Rhyming Words,3,Correct,52.4,1450,2767,hi,LL
+Rhyming Words,3,Correct,77.47,2624,3387,mr,LL
+Rhyming Words,3,Incorrect,55.08,1524,2767,hi,LL
+Rhyming Words,3,Incorrect,25.45,862,3387,mr,LL
+Rhyming Words,4,Correct,71.35,1990,2789,hi,LL
+Rhyming Words,4,Correct,75.37,2555,3390,mr,LL
+Rhyming Words,4,Incorrect,34.64,966,2789,hi,LL
+Rhyming Words,4,Incorrect,28.55,968,3390,mr,LL
+Rhyming Words,5,Correct,73.74,2058,2791,hi,LL
+Rhyming Words,5,Correct,78.82,2691,3414,mr,LL
+Rhyming Words,5,Incorrect,32.53,908,2791,hi,LL
+Rhyming Words,5,Incorrect,24.66,842,3414,mr,LL
+Rhyming Words,6,Correct,82.61,2314,2801,hi,LL
+Rhyming Words,6,Correct,79.92,2714,3396,mr,LL
+Rhyming Words,6,Incorrect,22.13,620,2801,hi,LL
+Rhyming Words,6,Incorrect,23.65,803,3396,mr,LL
+Rhyming Words,7,Correct,76.79,2144,2792,hi,LL
+Rhyming Words,7,Correct,51.37,1727,3362,mr,LL
+Rhyming Words,7,Incorrect,29.3,818,2792,hi,LL
+Rhyming Words,7,Incorrect,52.71,1772,3362,mr,LL
+Rhyming Words,8,Correct,58.82,1641,2790,hi,LL
+Rhyming Words,8,Correct,54.22,1832,3379,mr,LL
+Rhyming Words,8,Incorrect,49.03,1368,2790,hi,LL
+Rhyming Words,8,Incorrect,50.52,1707,3379,mr,LL
+Rhyming Words,9,Correct,39.9,1106,2772,hi,LL
+Rhyming Words,9,Correct,54.31,1834,3377,mr,LL
+Rhyming Words,9,Incorrect,67.75,1878,2772,hi,LL
+Rhyming Words,9,Incorrect,50.73,1713,3377,mr,LL
+Rhyming Words,10,Correct,56.82,1578,2777,hi,LL
+Rhyming Words,10,Correct,54.76,1839,3358,mr,LL
+Rhyming Words,10,Incorrect,51.17,1421,2777,hi,LL
+Rhyming Words,10,Incorrect,49.4,1659,3358,mr,LL
+Rhyming Words,11,Correct,63.45,1762,2777,hi,LL
+Rhyming Words,11,Correct,100.0,1,1,mr,LL
+Rhyming Words,11,Incorrect,43.36,1204,2777,hi,LL
+Shape Circle,1,Correct,51.38,9927,19319,hi,CG
+Shape Circle,1,Correct,55.29,14861,26876,mr,CG
+Shape Circle,1,Incorrect,80.46,15545,19319,hi,CG
+Shape Circle,1,Incorrect,83.99,22572,26876,mr,CG
+Shape Circle,2,Correct,40.4,7561,18715,hi,CG
+Shape Circle,2,Correct,44.63,11743,26311,mr,CG
+Shape Circle,2,Incorrect,86.51,16190,18715,hi,CG
+Shape Circle,2,Incorrect,88.86,23379,26311,mr,CG
+Shape Circle,3,Correct,50.64,9276,18319,hi,CG
+Shape Circle,3,Correct,55.11,14315,25974,mr,CG
+Shape Circle,3,Incorrect,80.17,14687,18319,hi,CG
+Shape Circle,3,Incorrect,83.47,21681,25974,mr,CG
+Shape Circle,4,Correct,41.04,7407,18047,hi,CG
+Shape Circle,4,Correct,45.99,11844,25755,mr,CG
+Shape Circle,4,Incorrect,85.67,15460,18047,hi,CG
+Shape Circle,4,Incorrect,87.63,22570,25755,mr,CG
+Shape Circle,5,Correct,50.39,8979,17819,hi,CG
+Shape Circle,5,Correct,55.26,14118,25547,mr,CG
+Shape Circle,5,Incorrect,79.83,14225,17819,hi,CG
+Shape Circle,5,Incorrect,82.55,21090,25547,mr,CG
+Shape Circle,6,Correct,39.42,6925,17568,hi,CG
+Shape Circle,6,Correct,43.9,11141,25376,mr,CG
+Shape Circle,6,Incorrect,85.84,15081,17568,hi,CG
+Shape Circle,6,Incorrect,88.37,22426,25376,mr,CG
+Shape Circle,7,Correct,49.39,8561,17332,hi,CG
+Shape Circle,7,Correct,53.83,13548,25170,mr,CG
+Shape Circle,7,Incorrect,80.1,13883,17332,hi,CG
+Shape Circle,7,Incorrect,83.05,20903,25170,mr,CG
+Shape Circle,8,Correct,39.87,6823,17114,hi,CG
+Shape Circle,8,Correct,44.09,11017,24985,mr,CG
+Shape Circle,8,Incorrect,85.85,14693,17114,hi,CG
+Shape Circle,8,Incorrect,88.02,21991,24985,mr,CG
+Shape Circle,9,Correct,33.65,5686,16897,hi,CG
+Shape Circle,9,Correct,38.12,9453,24796,mr,CG
+Shape Circle,9,Incorrect,88.67,14982,16897,hi,CG
+Shape Circle,9,Incorrect,90.23,22374,24796,mr,CG
+Shape Circle,10,Correct,49.32,8239,16705,hi,CG
+Shape Circle,10,Correct,53.76,13238,24626,mr,CG
+Shape Circle,10,Incorrect,79.72,13317,16705,hi,CG
+Shape Circle,10,Incorrect,82.63,20349,24626,mr,CG
+Shape Circle,11,Correct,40.33,6678,16557,hi,CG
+Shape Circle,11,Correct,44.83,10972,24472,mr,CG
+Shape Circle,11,Incorrect,84.85,14048,16557,hi,CG
+Shape Circle,11,Incorrect,87.17,21333,24472,mr,CG
+Shape Circle,12,Correct,34.23,5615,16404,hi,CG
+Shape Circle,12,Correct,38.48,9354,24310,mr,CG
+Shape Circle,12,Incorrect,87.87,14414,16404,hi,CG
+Shape Circle,12,Incorrect,89.72,21810,24310,mr,CG
+Shape Circle,13,Incorrect,100.0,1,1,hi,CG
+Shape Circle,13,Incorrect,100.0,1,1,mr,CG
+Shape Rectangle,1,Correct,35.73,1246,3487,hi,CG
+Shape Rectangle,1,Correct,35.14,2056,5851,mr,CG
+Shape Rectangle,1,Incorrect,68.97,2405,3487,hi,CG
+Shape Rectangle,1,Incorrect,70.12,4103,5851,mr,CG
+Shape Rectangle,2,Correct,34.04,1151,3381,hi,CG
+Shape Rectangle,2,Correct,34.86,1958,5616,mr,CG
+Shape Rectangle,2,Incorrect,70.36,2379,3381,hi,CG
+Shape Rectangle,2,Incorrect,70.25,3945,5616,mr,CG
+Shape Rectangle,3,Correct,35.3,1173,3323,hi,CG
+Shape Rectangle,3,Correct,35.3,1940,5496,mr,CG
+Shape Rectangle,3,Incorrect,69.24,2301,3323,hi,CG
+Shape Rectangle,3,Incorrect,69.47,3818,5496,mr,CG
+Shape Rectangle,4,Correct,35.31,1155,3271,hi,CG
+Shape Rectangle,4,Correct,36.35,1971,5423,mr,CG
+Shape Rectangle,4,Incorrect,68.66,2246,3271,hi,CG
+Shape Rectangle,4,Incorrect,68.65,3723,5423,mr,CG
+Shape Rectangle,5,Correct,36.06,1163,3225,hi,CG
+Shape Rectangle,5,Correct,36.48,1952,5351,mr,CG
+Shape Rectangle,5,Incorrect,68.31,2203,3225,hi,CG
+Shape Rectangle,5,Incorrect,68.17,3648,5351,mr,CG
+Shape Rectangle,6,Correct,35.61,1136,3190,hi,CG
+Shape Rectangle,6,Correct,35.39,1867,5276,mr,CG
+Shape Rectangle,6,Incorrect,68.4,2182,3190,hi,CG
+Shape Rectangle,6,Incorrect,68.67,3623,5276,mr,CG
+Shape Rectangle,7,Correct,34.0,1074,3159,hi,CG
+Shape Rectangle,7,Correct,34.11,1769,5186,mr,CG
+Shape Rectangle,7,Incorrect,69.55,2197,3159,hi,CG
+Shape Rectangle,7,Incorrect,70.19,3640,5186,mr,CG
+Shape Rectangle,8,Correct,34.8,1088,3126,hi,CG
+Shape Rectangle,8,Correct,33.55,1715,5112,mr,CG
+Shape Rectangle,8,Incorrect,68.52,2142,3126,hi,CG
+Shape Rectangle,8,Incorrect,70.31,3594,5112,mr,CG
+Shape Rectangle,9,Correct,34.25,1060,3095,hi,CG
+Shape Rectangle,9,Correct,34.79,1761,5062,mr,CG
+Shape Rectangle,9,Incorrect,69.11,2139,3095,hi,CG
+Shape Rectangle,9,Incorrect,69.1,3498,5062,mr,CG
+Shape Rectangle,10,Correct,34.37,1052,3061,hi,CG
+Shape Rectangle,10,Correct,34.44,1723,5003,mr,CG
+Shape Rectangle,10,Incorrect,69.29,2121,3061,hi,CG
+Shape Rectangle,10,Incorrect,69.02,3453,5003,mr,CG
+Shape Rectangle,11,Correct,34.47,1044,3029,hi,CG
+Shape Rectangle,11,Correct,33.2,1647,4961,mr,CG
+Shape Rectangle,11,Incorrect,68.93,2088,3029,hi,CG
+Shape Rectangle,11,Incorrect,70.27,3486,4961,mr,CG
+Shape Rectangle,12,Incorrect,100.0,1,1,mr,CG
+Shape Square,1,Correct,36.32,2988,8226,hi,CG
+Shape Square,1,Correct,37.39,2699,7218,mr,CG
+Shape Square,1,Incorrect,68.06,5599,8226,hi,CG
+Shape Square,1,Incorrect,71.72,5177,7218,mr,CG
+Shape Square,2,Correct,34.59,2767,8000,hi,CG
+Shape Square,2,Correct,35.82,2480,6923,mr,CG
+Shape Square,2,Incorrect,69.35,5548,8000,hi,CG
+Shape Square,2,Incorrect,72.34,5008,6923,mr,CG
+Shape Square,3,Correct,34.4,2690,7820,hi,CG
+Shape Square,3,Correct,36.11,2435,6743,mr,CG
+Shape Square,3,Incorrect,69.27,5417,7820,hi,CG
+Shape Square,3,Incorrect,71.57,4826,6743,mr,CG
+Shape Square,4,Correct,35.63,2731,7664,hi,CG
+Shape Square,4,Correct,37.98,2518,6630,mr,CG
+Shape Square,4,Incorrect,68.22,5228,7664,hi,CG
+Shape Square,4,Incorrect,69.94,4637,6630,mr,CG
+Shape Square,5,Correct,34.99,2643,7554,hi,CG
+Shape Square,5,Correct,36.35,2370,6520,mr,CG
+Shape Square,5,Incorrect,68.82,5199,7554,hi,CG
+Shape Square,5,Incorrect,71.41,4656,6520,mr,CG
+Shape Square,6,Correct,34.13,2548,7465,hi,CG
+Shape Square,6,Correct,36.35,2338,6432,mr,CG
+Shape Square,6,Incorrect,69.18,5164,7465,hi,CG
+Shape Square,6,Incorrect,70.83,4556,6432,mr,CG
+Shape Square,7,Correct,34.02,2509,7376,hi,CG
+Shape Square,7,Correct,37.26,2346,6296,mr,CG
+Shape Square,7,Incorrect,69.44,5122,7376,hi,CG
+Shape Square,7,Incorrect,70.66,4449,6296,mr,CG
+Shape Square,8,Correct,34.62,2524,7290,hi,CG
+Shape Square,8,Correct,36.85,2282,6192,mr,CG
+Shape Square,8,Incorrect,68.49,4993,7290,hi,CG
+Shape Square,8,Incorrect,70.62,4373,6192,mr,CG
+Shape Square,9,Correct,34.84,2515,7218,hi,CG
+Shape Square,9,Correct,35.88,2187,6095,mr,CG
+Shape Square,9,Incorrect,68.45,4941,7218,hi,CG
+Shape Square,9,Incorrect,70.93,4323,6095,mr,CG
+Shape Square,10,Correct,34.24,2445,7141,hi,CG
+Shape Square,10,Correct,35.81,2156,6020,mr,CG
+Shape Square,10,Incorrect,68.9,4920,7141,hi,CG
+Shape Square,10,Incorrect,70.71,4257,6020,mr,CG
+Shape Square,11,Correct,52.25,3693,7068,hi,CG
+Shape Square,11,Correct,52.83,3133,5930,mr,CG
+Shape Square,11,Incorrect,51.1,3612,7068,hi,CG
+Shape Square,11,Incorrect,55.04,3264,5930,mr,CG
+Shape Square,12,Correct,100.0,1,1,mr,CG
+Shape Square,12,Incorrect,100.0,1,1,hi,CG
+Shape Triangle,1,Correct,41.06,3150,7672,hi,CG
+Shape Triangle,1,Correct,43.49,6098,14022,mr,CG
+Shape Triangle,1,Incorrect,73.75,5658,7672,hi,CG
+Shape Triangle,1,Incorrect,75.0,10517,14022,mr,CG
+Shape Triangle,2,Correct,31.29,2314,7395,hi,CG
+Shape Triangle,2,Correct,33.24,4532,13633,mr,CG
+Shape Triangle,2,Incorrect,80.65,5964,7395,hi,CG
+Shape Triangle,2,Incorrect,82.34,11226,13633,mr,CG
+Shape Triangle,3,Correct,43.68,3157,7228,hi,CG
+Shape Triangle,3,Correct,44.7,5984,13386,mr,CG
+Shape Triangle,3,Incorrect,70.93,5127,7228,hi,CG
+Shape Triangle,3,Incorrect,73.76,9874,13386,mr,CG
+Shape Triangle,4,Correct,29.03,2058,7089,hi,CG
+Shape Triangle,4,Correct,32.7,4317,13202,mr,CG
+Shape Triangle,4,Incorrect,82.16,5824,7089,hi,CG
+Shape Triangle,4,Incorrect,82.34,10870,13202,mr,CG
+Shape Triangle,5,Correct,39.71,2772,6981,hi,CG
+Shape Triangle,5,Correct,42.23,5524,13081,mr,CG
+Shape Triangle,5,Incorrect,73.66,5142,6981,hi,CG
+Shape Triangle,5,Incorrect,75.42,9866,13081,mr,CG
+Shape Triangle,6,Correct,32.09,2201,6859,hi,CG
+Shape Triangle,6,Correct,33.61,4353,12951,mr,CG
+Shape Triangle,6,Incorrect,79.59,5459,6859,hi,CG
+Shape Triangle,6,Incorrect,81.07,10500,12951,mr,CG
+Shape Triangle,7,Correct,39.66,2685,6770,hi,CG
+Shape Triangle,7,Correct,41.43,5301,12795,mr,CG
+Shape Triangle,7,Incorrect,73.63,4985,6770,hi,CG
+Shape Triangle,7,Incorrect,75.0,9596,12795,mr,CG
+Shape Triangle,8,Correct,31.22,2078,6656,hi,CG
+Shape Triangle,8,Correct,33.08,4173,12613,mr,CG
+Shape Triangle,8,Incorrect,80.21,5339,6656,hi,CG
+Shape Triangle,8,Incorrect,81.34,10259,12613,mr,CG
+Shape Triangle,9,Correct,24.69,1614,6538,hi,CG
+Shape Triangle,9,Correct,26.43,3293,12460,mr,CG
+Shape Triangle,9,Incorrect,84.38,5517,6538,hi,CG
+Shape Triangle,9,Incorrect,85.19,10615,12460,mr,CG
+Shape Triangle,10,Correct,38.98,2513,6447,hi,CG
+Shape Triangle,10,Correct,41.59,5118,12306,mr,CG
+Shape Triangle,10,Incorrect,73.1,4713,6447,hi,CG
+Shape Triangle,10,Incorrect,74.62,9183,12306,mr,CG
+Shape Triangle,11,Correct,29.89,1901,6360,hi,CG
+Shape Triangle,11,Correct,31.66,3857,12182,mr,CG
+Shape Triangle,11,Incorrect,80.64,5129,6360,hi,CG
+Shape Triangle,11,Incorrect,82.01,9991,12182,mr,CG
+Shape Triangle,12,Correct,24.98,1566,6268,hi,CG
+Shape Triangle,12,Correct,26.92,3243,12047,mr,CG
+Shape Triangle,12,Incorrect,83.97,5263,6268,hi,CG
+Shape Triangle,12,Incorrect,84.92,10230,12047,mr,CG
+Sorting Primary Colors,1,Incorrect,100.0,4358,4358,hi,CG
+Sorting Primary Colors,1,Incorrect,100.0,7815,7815,mr,CG
+Sorting Primary Colors,2,Incorrect,100.0,4234,4234,hi,CG
+Sorting Primary Colors,2,Incorrect,100.0,7564,7564,mr,CG
+Sorting Primary Colors,3,Incorrect,100.0,4136,4136,hi,CG
+Sorting Primary Colors,3,Incorrect,100.0,7387,7387,mr,CG
+Sorting Primary Colors,4,Incorrect,100.0,4075,4075,hi,CG
+Sorting Primary Colors,4,Incorrect,100.0,7250,7250,mr,CG
+Sorting Primary Colors,5,Incorrect,100.0,4018,4018,hi,CG
+Sorting Primary Colors,5,Incorrect,100.0,7108,7108,mr,CG
+Sorting Primary Colors,6,Incorrect,100.0,3964,3964,hi,CG
+Sorting Primary Colors,6,Incorrect,100.0,7001,7001,mr,CG
+Sorting Primary Colors,7,Incorrect,100.0,3916,3916,hi,CG
+Sorting Primary Colors,7,Incorrect,100.0,6914,6914,mr,CG
+Sorting Primary Colors,8,Incorrect,100.0,3870,3870,hi,CG
+Sorting Primary Colors,8,Incorrect,100.0,6813,6813,mr,CG
+Sorting Primary Colors,9,Incorrect,100.0,3825,3825,hi,CG
+Sorting Primary Colors,9,Incorrect,100.0,6710,6710,mr,CG
+Sorting Primary Colors,10,Incorrect,100.0,3764,3764,hi,CG
+Sorting Primary Colors,10,Incorrect,100.0,6595,6595,mr,CG
+Sorting Primary Colors,11,Incorrect,100.0,3709,3709,hi,CG
+Sorting Primary Colors,11,Incorrect,100.0,6487,6487,mr,CG
+Sorting Primary Colors,12,Incorrect,100.0,3672,3672,hi,CG
+Sorting Primary Colors,12,Incorrect,100.0,6438,6438,mr,CG
+Sorting Primary Shapes,1,Incorrect,100.0,2235,2235,hi,CG
+Sorting Primary Shapes,1,Incorrect,100.0,4702,4702,mr,CG
+Sorting Primary Shapes,2,Incorrect,100.0,2181,2181,hi,CG
+Sorting Primary Shapes,2,Incorrect,100.0,4585,4585,mr,CG
+Sorting Primary Shapes,3,Incorrect,100.0,2082,2082,hi,CG
+Sorting Primary Shapes,3,Incorrect,100.0,4363,4363,mr,CG
+Sorting Primary Shapes,4,Incorrect,100.0,2055,2055,hi,CG
+Sorting Primary Shapes,4,Incorrect,100.0,4290,4290,mr,CG
+Sorting Primary Shapes,5,Incorrect,100.0,2033,2033,hi,CG
+Sorting Primary Shapes,5,Incorrect,100.0,4234,4234,mr,CG
+Sorting Primary Shapes,6,Incorrect,100.0,1994,1994,hi,CG
+Sorting Primary Shapes,6,Incorrect,100.0,4147,4147,mr,CG
+Sorting Primary Shapes,7,Incorrect,100.0,1971,1971,hi,CG
+Sorting Primary Shapes,7,Incorrect,100.0,4079,4079,mr,CG
+Sorting Primary Shapes,8,Incorrect,100.0,1949,1949,hi,CG
+Sorting Primary Shapes,8,Incorrect,100.0,4017,4017,mr,CG
+Sorting Primary Shapes,9,Incorrect,100.0,1933,1933,hi,CG
+Sorting Primary Shapes,9,Incorrect,100.0,3960,3960,mr,CG
+Sorting Primary Shapes,10,Incorrect,100.0,1893,1893,hi,CG
+Sorting Primary Shapes,10,Incorrect,100.0,3812,3812,mr,CG
+Sorting Primary Shapes,11,Incorrect,100.0,1872,1872,hi,CG
+Sorting Primary Shapes,11,Incorrect,100.0,3757,3757,mr,CG
+Sorting Primary Shapes,12,Incorrect,100.0,1852,1852,hi,CG
+Sorting Primary Shapes,12,Incorrect,100.0,3706,3706,mr,CG
