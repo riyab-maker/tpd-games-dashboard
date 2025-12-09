@@ -1906,6 +1906,19 @@ def main() -> None:
         """Apply domain, game, and language filters to a dataframe"""
         filtered_df = df.copy()
         
+        # Separate RM active users data (should always be preserved regardless of filters)
+        rm_active_users_df = pd.DataFrame()
+        if 'game_name' in filtered_df.columns and 'metric' in filtered_df.columns:
+            rm_active_users_df = filtered_df[
+                (filtered_df['game_name'] == 'All Games') & 
+                (filtered_df['metric'] == 'rm_active_users')
+            ].copy()
+            # Remove RM active users from main dataframe before filtering
+            filtered_df = filtered_df[
+                ~((filtered_df['game_name'] == 'All Games') & 
+                  (filtered_df['metric'] == 'rm_active_users'))
+            ].copy()
+        
         # Apply domain filter
         if has_domain_filter:
             if 'domain' in filtered_df.columns:
@@ -1932,6 +1945,10 @@ def main() -> None:
                     game_conversion_df['language'].isin(selected_languages)
                 ]['game_name'].unique()
                 filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_languages)]
+        
+        # Combine filtered data with RM active users data
+        if not rm_active_users_df.empty:
+            filtered_df = pd.concat([filtered_df, rm_active_users_df], ignore_index=True)
         
         return filtered_df
     
