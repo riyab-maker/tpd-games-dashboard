@@ -949,18 +949,28 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     - question_number: int (1-based)
     - is_correct: int (1 correct, 0 incorrect)
     """
+    # Check for optional columns (language and game_code)
+    has_language = 'language' in df_score.columns
+    has_game_code = 'game_code' in df_score.columns
+    
     if df_score.empty:
-        return pd.DataFrame(columns=[
-            'game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct'
-        ])
+        base_columns = ['game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct']
+        if has_language:
+            base_columns.append('language')
+        if has_game_code:
+            base_columns.append('game_code')
+        return pd.DataFrame(columns=base_columns)
 
     # Ensure expected columns exist
     cols_needed = ['game_name', 'idvisit', 'action_name', 'custom_dimension_1', 'idvisitor_converted', 'server_time']
     for c in cols_needed:
         if c not in df_score.columns:
-            return pd.DataFrame(columns=[
-                'game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct'
-            ])
+            base_columns = ['game_name', 'idvisitor_converted', 'idvisit', 'session_instance', 'question_number', 'is_correct']
+            if has_language:
+                base_columns.append('language')
+            if has_game_code:
+                base_columns.append('game_code')
+            return pd.DataFrame(columns=base_columns)
 
     # Parse timestamps
     df_score = df_score.copy()
@@ -970,9 +980,35 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
         pass
 
     # Note: We no longer exclude sorting games - they should be processed like other games
+    
+    # Helper function to create row dict with optional columns
+    def create_question_row(game_name_val, idvisitor, idvisit, session_instance, question_number, is_correct, row_tuple=None):
+        """Create a question row dict, including language and game_code (domain extracted) if available"""
+        row_dict = {
+            'game_name': game_name_val,
+            'idvisitor_converted': idvisitor,
+            'idvisit': idvisit,
+            'session_instance': session_instance,
+            'question_number': question_number,
+            'is_correct': is_correct
+        }
+        if has_language and row_tuple is not None:
+            row_dict['language'] = getattr(row_tuple, 'language', None)
+        if has_game_code and row_tuple is not None:
+            # Extract domain from game_code (e.g., HY-29-LL-06 -> LL)
+            full_game_code = getattr(row_tuple, 'game_code', None)
+            if full_game_code is not None and not pd.isna(full_game_code):
+                row_dict['game_code'] = extract_domain_from_game_code(full_game_code)
+            else:
+                row_dict['game_code'] = None
+        return row_dict
 
     print(f"\nProcessing per-question correctness for {df_score['game_name'].nunique()} unique games")
     print(f"  - Total records: {len(df_score):,}")
+    if has_language:
+        print(f"  - Language column found: will be preserved in output")
+    if has_game_code:
+        print(f"  - Game code column found: will be preserved in output")
 
     # Split by action types
     game_completed_data = df_score[df_score['action_name'].str.contains('game_completed|mcq_completed', na=False, case=False)].copy()
@@ -1127,14 +1163,11 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                             records_with_data += 1
                             questions_extracted += len(results)
                             for q_result in results:
-                                per_question_rows.append({
-                                    'game_name': game_name_val,
-                                    'idvisitor_converted': idvisitor,
-                                    'idvisit': idvisit,
-                                    'session_instance': 1,
-                                    'question_number': int(q_result['question_number']),
-                                    'is_correct': int(q_result['is_correct'])
-                                })
+                                per_question_rows.append(create_question_row(
+                                    game_name_val, idvisitor, idvisit, 1,
+                                    int(q_result['question_number']),
+                                    int(q_result['is_correct']), row_tuple
+                                ))
                         records_processed += 1
                     except Exception:
                         records_processed += 1
@@ -1148,14 +1181,11 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                             records_with_data += 1
                             questions_extracted += len(results)
                             for q_result in results:
-                                per_question_rows.append({
-                                    'game_name': game_name_val,
-                                    'idvisitor_converted': idvisitor,
-                                    'idvisit': idvisit,
-                                    'session_instance': 1,
-                                    'question_number': int(q_result['question_number']),
-                                    'is_correct': int(q_result['is_correct'])
-                                })
+                                per_question_rows.append(create_question_row(
+                                    game_name_val, idvisitor, idvisit, 1,
+                                    int(q_result['question_number']),
+                                    int(q_result['is_correct']), row_tuple
+                                ))
                         records_processed += 1
                     except Exception:
                         records_processed += 1
@@ -1304,37 +1334,40 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                     else:
                         incorrect_count += 1
                     
-                    per_question_rows.append({
-                        'game_name': game_name_val,
-                        'idvisitor_converted': getattr(row_tuple, 'idvisitor_converted', None),
-                        'idvisit': getattr(row_tuple, 'idvisit', None),
-                        'session_instance': int(getattr(row_tuple, 'session_instance', 1)),
-                        'question_number': question_num,
-                        'is_correct': int(is_correct)
-                    })
+                    per_question_rows.append(create_question_row(
+                        game_name_val,
+                        getattr(row_tuple, 'idvisitor_converted', None),
+                        getattr(row_tuple, 'idvisit', None),
+                        int(getattr(row_tuple, 'session_instance', 1)),
+                        question_num,
+                        int(is_correct),
+                        row_tuple
+                    ))
                 else:
                     incorrect_count += 1
                     # Still add record with is_correct=0 if no results
-                    per_question_rows.append({
-                        'game_name': game_name_val,
-                        'idvisitor_converted': getattr(row_tuple, 'idvisitor_converted', None),
-                        'idvisit': getattr(row_tuple, 'idvisit', None),
-                        'session_instance': int(getattr(row_tuple, 'session_instance', 1)),
-                        'question_number': question_num,
-                        'is_correct': 0
-                    })
+                    per_question_rows.append(create_question_row(
+                        game_name_val,
+                        getattr(row_tuple, 'idvisitor_converted', None),
+                        getattr(row_tuple, 'idvisit', None),
+                        int(getattr(row_tuple, 'session_instance', 1)),
+                        question_num,
+                        0,
+                        row_tuple
+                    ))
             except Exception:
                 incorrect_count += 1
                 # Still add record with is_correct=0 if parsing fails
                 try:
-                    per_question_rows.append({
-                        'game_name': getattr(row_tuple, 'game_name', None),
-                        'idvisitor_converted': getattr(row_tuple, 'idvisitor_converted', None),
-                        'idvisit': getattr(row_tuple, 'idvisit', None),
-                        'session_instance': int(getattr(row_tuple, 'session_instance', 1)),
-                        'question_number': int(getattr(row_tuple, 'question_number', 0)),
-                        'is_correct': 0
-                    })
+                    per_question_rows.append(create_question_row(
+                        getattr(row_tuple, 'game_name', None),
+                        getattr(row_tuple, 'idvisitor_converted', None),
+                        getattr(row_tuple, 'idvisit', None),
+                        int(getattr(row_tuple, 'session_instance', 1)),
+                        int(getattr(row_tuple, 'question_number', 0)),
+                        0,
+                        row_tuple
+                    ))
                 except:
                     pass
         
@@ -1366,13 +1399,22 @@ def calculate_score_distribution_combined(df_score):
         print("WARNING: No score distribution data found")
         return pd.DataFrame()
     
+    # Check for optional columns (language and game_code)
+    has_language = 'language' in df_score.columns
+    has_game_code = 'game_code' in df_score.columns
+    
+    if has_language:
+        print(f"  - Language column found: will be included in output")
+    if has_game_code:
+        print(f"  - Game code column found: will extract domain and include in output")
+    
     # The game_name is now directly available from the hybrid_games table
     # We need to determine the score calculation method based on the action_name
     combined_df = pd.DataFrame()
     
     # Separate data based on action type for different score calculation methods
-    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)]
-    action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)]
+    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
+    action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
     
     print(f"  - game_completed records: {len(game_completed_data)}")
     print(f"  - action_level records: {len(action_level_data)}")
@@ -1416,6 +1458,14 @@ def calculate_score_distribution_combined(df_score):
             # Filter out zero scores and add to combined data
             game_data = game_data[game_data['total_score'] > 0]
             if not game_data.empty:
+                # Select only needed columns for combined_df
+                cols_to_keep = ['game_name', 'idvisitor_converted', 'idvisit', 'total_score']
+                if has_language:
+                    cols_to_keep.append('language')
+                if has_game_code:
+                    cols_to_keep.append('game_code')
+                game_data = game_data[cols_to_keep].copy()
+                
                 valid_scores = len(game_data)
                 score_range = f"{game_data['total_score'].min()}-{game_data['total_score'].max()}"
                 print(f"      - Added {valid_scores} valid scores (range: {score_range})")
@@ -1498,8 +1548,14 @@ def calculate_score_distribution_combined(df_score):
         
         # Group by user, game, visit, and session_instance
         print("    - Grouping by session and calculating total scores...")
-        action_level_grouped = action_level_data.groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance'])['question_score'].sum().reset_index()
-        action_level_grouped.columns = ['idvisitor_converted', 'game_name', 'idvisit', 'session_instance', 'total_score']
+        groupby_cols = ['idvisitor_converted', 'game_name', 'idvisit', 'session_instance']
+        if has_language:
+            groupby_cols.append('language')
+        if has_game_code:
+            groupby_cols.append('game_code')
+        
+        action_level_grouped = action_level_data.groupby(groupby_cols)['question_score'].sum().reset_index()
+        action_level_grouped.columns = groupby_cols + ['total_score']
         
         # Log score distribution before capping
         print(f"    - Score range before capping: {action_level_grouped['total_score'].min()}-{action_level_grouped['total_score'].max()}")
@@ -1538,11 +1594,23 @@ def calculate_score_distribution_combined(df_score):
     print(f"    - Unique users: {combined_df['idvisitor_converted'].nunique()}")
     print(f"    - Score range: {combined_df['total_score'].min()}-{combined_df['total_score'].max()}")
     
-    # Group by game and total score, then count distinct users
+    # Extract domain from game_code if it exists
+    if has_game_code and 'game_code' in combined_df.columns:
+        print("  - Extracting domain from game_code...")
+        combined_df['game_code'] = combined_df['game_code'].apply(extract_domain_from_game_code)
+        print("  - Domain extraction complete")
+    
+    # Group by game and total score (and optionally language and game_code), then count distinct users
     # Each user-game-score combination is counted once
     print("\n  - Creating final score distribution...")
-    score_distribution = combined_df.groupby(['game_name', 'total_score'])['idvisitor_converted'].nunique().reset_index()
-    score_distribution.columns = ['game_name', 'total_score', 'user_count']
+    groupby_cols = ['game_name', 'total_score']
+    if has_language and 'language' in combined_df.columns:
+        groupby_cols.append('language')
+    if has_game_code and 'game_code' in combined_df.columns:
+        groupby_cols.append('game_code')
+    
+    score_distribution = combined_df.groupby(groupby_cols)['idvisitor_converted'].nunique().reset_index()
+    score_distribution.columns = groupby_cols + ['user_count']
     
     print(f"\nSUCCESS: Processed score distribution: {len(score_distribution)} records")
     print(f"  - Unique games in distribution: {score_distribution['game_name'].nunique()}")
@@ -2387,13 +2455,14 @@ def process_main_data() -> pd.DataFrame:
 
 
 def extract_domain_from_game_code(game_code):
-    """Extract domain from game code (e.g., HY-01-CG-01 -> CG)"""
+    """Extract domain from game code (e.g., HY-29-LL-06 -> LL)"""
     if pd.isna(game_code) or game_code is None or game_code == '':
         return None
     
     game_code_str = str(game_code)
     parts = game_code_str.split('-')
-    # Pattern: HY-01-CG-01 -> domain is CG (3rd element, index 2)
+    # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+    # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
     if len(parts) >= 3:
         return parts[2]
     return None
@@ -2503,17 +2572,85 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
 
 
 def process_score_distribution() -> pd.DataFrame:
-    """Process score distribution data"""
+    """Process score distribution data using scores_data.csv"""
     print("\n" + "=" * 60)
     print("PROCESSING: Score Distribution")
     print("=" * 60)
     
-    print("\nStep 1: Fetching score data from database...")
-    df_score = fetch_score_dataframe()
+    print("\nStep 1: Loading score data from scores_data.csv...")
+    csv_file = 'scores_data.csv'
+    
+    if not os.path.exists(csv_file):
+        print(f"  [ERROR] {csv_file} not found!")
+        print(f"  [ERROR] Please ensure scores_data.csv is in the current directory")
+        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        return score_distribution_df
+    
+    try:
+        # Read CSV file with encoding error handling
+        print(f"  [ACTION] Reading {csv_file}...")
+        print(f"  [INFO] This may take a moment for large files...")
+        try:
+            # Try UTF-8 first
+            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='utf-8')
+        except UnicodeDecodeError:
+            # If UTF-8 fails, try latin-1 (which can handle any byte)
+            print(f"  [WARNING] UTF-8 encoding failed, trying latin-1...")
+            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='latin-1')
+        print(f"  [OK] Loaded {len(df_score):,} records from CSV")
+        
+        # Check required columns
+        print(f"  [INFO] Checking required columns...")
+        required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisitor_hex', 'idvisit', 'server_time']
+        missing_cols = [col for col in required_cols if col not in df_score.columns]
+        if missing_cols:
+            print(f"  [ERROR] Missing required columns: {missing_cols}")
+            print(f"  [INFO] Available columns: {list(df_score.columns)}")
+            score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
+            score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+            return score_distribution_df
+        print(f"  [OK] All required columns present")
+        
+        # Convert idvisitor_hex to idvisitor_converted if needed
+        if 'idvisitor_hex' in df_score.columns and 'idvisitor_converted' not in df_score.columns:
+            print(f"  [ACTION] Converting idvisitor_hex to idvisitor_converted...")
+            df_score = convert_hex_to_int(df_score, 'idvisitor_hex', 'idvisitor_converted')
+            print(f"  [OK] Conversion complete")
+        
+        # Convert server_time to datetime if it's a string
+        if 'server_time' in df_score.columns:
+            try:
+                print(f"  [ACTION] Converting server_time to datetime...")
+                df_score['server_time'] = pd.to_datetime(df_score['server_time'])
+                print(f"  [OK] Datetime conversion complete")
+            except Exception as e:
+                print(f"  [WARNING] Could not convert server_time: {e}")
+        
+    except Exception as e:
+        print(f"  ERROR: Error loading CSV file: {e}")
+        import traceback
+        traceback.print_exc()
+        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        return score_distribution_df
     
     if df_score.empty:
-        print("ERROR: No data fetched from database")
-        return pd.DataFrame()
+        print("  [WARNING] No data found in scores_data.csv")
+        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        return score_distribution_df
+    
+    print(f"  [OK] Successfully loaded {len(df_score):,} records from {csv_file}")
+    print(f"  [INFO] Unique games in data: {df_score['game_name'].nunique()}")
+    
+    # Check for optional columns (language and game_code)
+    has_language = 'language' in df_score.columns
+    has_game_code = 'game_code' in df_score.columns
+    if has_language:
+        print(f"  [INFO] Language column found: will be included in output")
+    if has_game_code:
+        print(f"  [INFO] Game code column found: will extract domain and include in output")
     
     print(f"\nStep 2: Calculating score distribution...")
     score_distribution_df = calculate_score_distribution_combined(df_score)
@@ -3520,31 +3657,60 @@ def process_question_correctness() -> pd.DataFrame:
     print(f"  [INFO] Games: {sorted(per_question_df['game_name'].unique())}")
     
     print("\nStep 3: Aggregating correctness by game and question...")
+    
+    # Check if language and game_code columns exist
+    has_language_in_df = 'language' in per_question_df.columns
+    has_game_code_in_df = 'game_code' in per_question_df.columns
+    
+    if has_language_in_df:
+        print("  [INFO] Language column found: will be included in aggregation")
+    if has_game_code_in_df:
+        print("  [INFO] Game code column found: will be included in aggregation")
+    
     print("  [ACTION] Calculating total users per question...")
     # Calculate total users per question (users who attempted the question)
+    # Group by game_name, question_number, and optionally language and game_code
+    groupby_cols = ['game_name', 'question_number']
+    if has_language_in_df:
+        groupby_cols.append('language')
+    if has_game_code_in_df:
+        groupby_cols.append('game_code')
+    
     total_by_q = (
         per_question_df
-        .groupby(['game_name', 'question_number'])['idvisitor_converted']
+        .groupby(groupby_cols)['idvisitor_converted']
         .nunique()
         .reset_index(name='total_users')
     )
     
-    print(f"  [OK] Calculated total users for {len(total_by_q)} game-question combinations")
+    print(f"  [OK] Calculated total users for {len(total_by_q)} combinations")
     
     print("  [ACTION] Calculating correct and incorrect user counts...")
     # Calculate correct and incorrect user counts per question
+    # Group by game_name, question_number, is_correct, and optionally language and game_code
+    agg_groupby_cols = ['game_name', 'question_number', 'is_correct']
+    if has_language_in_df:
+        agg_groupby_cols.append('language')
+    if has_game_code_in_df:
+        agg_groupby_cols.append('game_code')
+    
     agg = (
         per_question_df
-        .groupby(['game_name', 'question_number', 'is_correct'])['idvisitor_converted']
+        .groupby(agg_groupby_cols)['idvisitor_converted']
         .nunique()
         .reset_index(name='user_count')
     )
     
-    print(f"  [OK] Calculated user counts for {len(agg)} game-question-correctness combinations")
+    print(f"  [OK] Calculated user counts for {len(agg)} combinations")
     
     # Merge to get total_users
     print("  [ACTION] Merging total users...")
-    agg = agg.merge(total_by_q, on=['game_name', 'question_number'], how='left')
+    merge_on_cols = ['game_name', 'question_number']
+    if has_language_in_df:
+        merge_on_cols.append('language')
+    if has_game_code_in_df:
+        merge_on_cols.append('game_code')
+    agg = agg.merge(total_by_q, on=merge_on_cols, how='left')
     
     # Calculate percentage
     print("  [ACTION] Calculating percentages...")
@@ -3554,12 +3720,22 @@ def process_question_correctness() -> pd.DataFrame:
     agg['correctness'] = agg['is_correct'].map({1: 'Correct', 0: 'Incorrect'})
     
     # Select and order columns
-    question_correctness_df = agg[['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']].copy()
+    output_cols = ['game_name', 'question_number', 'correctness', 'percent', 'user_count', 'total_users']
+    if has_language_in_df:
+        output_cols.append('language')
+    if has_game_code_in_df:
+        output_cols.append('game_code')
+    question_correctness_df = agg[output_cols].copy()
     print(f"  [OK] Aggregation complete")
     
-    # Sort by game_name and question_number
+    # Sort by game_name and question_number (and optionally language and game_code)
     print("  [ACTION] Sorting results...")
-    question_correctness_df = question_correctness_df.sort_values(['game_name', 'question_number', 'correctness'])
+    sort_cols = ['game_name', 'question_number', 'correctness']
+    if has_language_in_df:
+        sort_cols.append('language')
+    if has_game_code_in_df:
+        sort_cols.append('game_code')
+    question_correctness_df = question_correctness_df.sort_values(sort_cols)
     print(f"  [OK] Sorting complete")
     
     print("\nStep 4: Saving results to CSV...")

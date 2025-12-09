@@ -337,18 +337,34 @@ def load_processed_data():
         # Load score distribution data
         score_distribution_df = pd.read_csv(os.path.join(DATA_DIR, "score_distribution_data.csv"))
         
+        # Extract domain from game_code if available (similar to question_correctness_df)
+        if 'game_code' in score_distribution_df.columns and 'domain' not in score_distribution_df.columns:
+            def extract_domain_from_game_code(game_code):
+                """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                if pd.isna(game_code) or not isinstance(game_code, str):
+                    return None
+                parts = game_code.split('-')
+                # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+                # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
+                if len(parts) >= 3:
+                    return parts[2]
+                return None
+            score_distribution_df['domain'] = score_distribution_df['game_code'].apply(extract_domain_from_game_code)
+        
         # Load poll responses data
         poll_responses_df = pd.read_csv(os.path.join(DATA_DIR, "poll_responses_data.csv"))
         
         # Extract domain from game_code if available
         if 'game_code' in poll_responses_df.columns and 'domain' not in poll_responses_df.columns:
             def extract_domain_from_game_code(game_code):
-                """Extract domain from game_code (e.g., HY-01-CG-01 -> CG)"""
+                """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
                 if pd.isna(game_code) or not isinstance(game_code, str):
                     return None
                 parts = game_code.split('-')
+                # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+                # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
                 if len(parts) >= 3:
-                    return parts[2]  # Domain is typically the third part
+                    return parts[2]
                 return None
             poll_responses_df['domain'] = poll_responses_df['game_code'].apply(extract_domain_from_game_code)
 
@@ -356,6 +372,20 @@ def load_processed_data():
         qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
         if os.path.exists(qpath):
             question_correctness_df = pd.read_csv(qpath)
+            
+            # Extract domain from game_code if available (similar to poll_responses_df)
+            if 'game_code' in question_correctness_df.columns and 'domain' not in question_correctness_df.columns:
+                def extract_domain_from_game_code(game_code):
+                    """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                    if pd.isna(game_code) or not isinstance(game_code, str):
+                        return None
+                    parts = game_code.split('-')
+                    # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+                    # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
+                    if len(parts) >= 3:
+                        return parts[2]
+                    return None
+                question_correctness_df['domain'] = question_correctness_df['game_code'].apply(extract_domain_from_game_code)
         else:
             question_correctness_df = pd.DataFrame()
         
