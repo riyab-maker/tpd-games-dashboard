@@ -118,6 +118,7 @@ SQL_QUERY = (
 )
 
 # Score distribution query - Updated to use hybrid_games and hybrid_games_links tables
+# Includes game_completed, mcq_completed, and action_level (matching question correctness processing)
 SCORE_DISTRIBUTION_QUERY = """
 SELECT 
   mllva.idlink_va,
@@ -139,6 +140,7 @@ WHERE mllva.server_time >= '2025-07-01'
   AND hgl.activity_id IS NOT NULL
   AND (
     mla.name LIKE '%game_completed%' 
+    OR mla.name LIKE '%mcq_completed%'
     OR mla.name LIKE '%action_level%'
   )
 """
