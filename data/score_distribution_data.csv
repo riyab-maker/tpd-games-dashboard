@@ -1,354 +1,599 @@
-game_name,total_score,user_count
-Beginning Sound Ba/Ra/Na,1,11
-Beginning Sound Ba/Ra/Na,2,13
-Beginning Sound Ba/Ra/Na,3,47
-Beginning Sound Ba/Ra/Na,4,81
-Beginning Sound Ba/Ra/Na,5,127
-Beginning Sound Ba/Ra/Na,6,168
-Beginning Sound Ba/Ra/Na,7,248
-Beginning Sound Ba/Ra/Na,8,412
-Beginning Sound Ba/Ra/Na,9,700
-Beginning Sound Ba/Ra/Na,10,1569
-Beginning Sound Ba/Ra/Na,11,2944
-Beginning Sound Ba/Ra/Na,12,3351
-Beginning Sounds Ka/Na/Ta,1,27
-Beginning Sounds Ka/Na/Ta,2,52
-Beginning Sounds Ka/Na/Ta,3,99
-Beginning Sounds Ka/Na/Ta,4,278
-Beginning Sounds Ka/Na/Ta,5,864
-Beginning Sounds Ka/Na/Ta,6,2517
-Beginning Sounds Ka/Na/Ta,7,37
-Beginning Sounds Ka/Na/Ta,8,64
-Beginning Sounds Ka/Na/Ta,9,93
-Beginning Sounds Ka/Na/Ta,10,140
-Beginning Sounds Ka/Na/Ta,11,211
-Beginning Sounds Ka/Na/Ta,12,265
-Beginning Sounds Ka/Na/Ta,13,256
-Beginning Sounds Ka/Na/Ta,14,318
-Beginning Sounds Ka/Na/Ta,15,420
-Beginning Sounds Ka/Na/Ta,16,525
-Beginning Sounds Ka/Na/Ta,17,713
-Beginning Sounds Ka/Na/Ta,18,822
-Beginning Sounds Ka/Na/Ta,19,869
-Beginning Sounds Ka/Na/Ta,20,604
-Beginning Sounds Ka/Na/Ta,21,303
-Beginning Sounds Ka/Na/Ta,22,14
-Beginning Sounds Ka/Na/Ta,23,4
-Beginning Sounds Ka/Na/Ta,24,1
-Beginning Sounds Ka/Na/Ta,25,1
-Beginning Sounds Ka/Na/Ta,26,1
-Beginning Sounds Ma/Cha/Ba,1,8
-Beginning Sounds Ma/Cha/Ba,2,13
-Beginning Sounds Ma/Cha/Ba,3,23
-Beginning Sounds Ma/Cha/Ba,4,21
-Beginning Sounds Ma/Cha/Ba,5,53
-Beginning Sounds Ma/Cha/Ba,6,70
-Beginning Sounds Ma/Cha/Ba,7,128
-Beginning Sounds Ma/Cha/Ba,8,199
-Beginning Sounds Ma/Cha/Ba,9,336
-Beginning Sounds Ma/Cha/Ba,10,576
-Beginning Sounds Ma/Cha/Ba,11,824
-Beginning Sounds Ma/Cha/Ba,12,1045
-Beginning Sounds Ma/Cha/Ba,13,1188
-Beginning Sounds Ma/Cha/Ba,14,1305
-Beginning Sounds Ma/Cha/Ba,15,1396
-Beginning Sounds Ma/Cha/Ba,16,1361
-Beginning Sounds Ma/Cha/Ba,17,1220
-Beginning Sounds Ma/Cha/Ba,18,962
-Beginning Sounds Ma/Cha/Ba,19,812
-Beginning Sounds Ma/Cha/Ba,20,486
-Beginning Sounds Ma/Cha/Ba,21,119
-Beginning Sounds Ma/Ka/La,1,1078
-Beginning Sounds Ma/Ka/La,2,1467
-Beginning Sounds Ma/Ka/La,3,2161
-Beginning Sounds Ma/Ka/La,4,2480
-Beginning Sounds Ma/Ka/La,5,2253
-Beginning Sounds Ma/Ka/La,6,1528
-Beginning Sounds Ma/Ka/La,7,1012
-Beginning Sounds Ma/Ka/La,8,861
-Beginning Sounds Ma/Ka/La,9,1411
-Beginning Sounds Ma/Ka/La,10,2599
-Beginning Sounds Ma/Ka/La,11,4901
-Beginning Sounds Ma/Ka/La,12,6402
-Beginning Sounds Pa/Cha/Sa,1,1
-Beginning Sounds Pa/Cha/Sa,2,27
-Beginning Sounds Pa/Cha/Sa,3,54
-Beginning Sounds Pa/Cha/Sa,4,90
-Beginning Sounds Pa/Cha/Sa,5,119
-Beginning Sounds Pa/Cha/Sa,6,189
-Beginning Sounds Pa/Cha/Sa,7,254
-Beginning Sounds Pa/Cha/Sa,8,386
-Beginning Sounds Pa/Cha/Sa,9,645
-Beginning Sounds Pa/Cha/Sa,10,1342
-Beginning Sounds Pa/Cha/Sa,11,2808
-Beginning Sounds Pa/Cha/Sa,12,4036
-Beginning Sounds Sa/La/Va,1,106
-Beginning Sounds Sa/La/Va,2,234
-Beginning Sounds Sa/La/Va,3,497
-Beginning Sounds Sa/La/Va,4,1206
-Beginning Sounds Sa/La/Va,5,2655
-Beginning Sounds Sa/La/Va,6,4022
-Beginning Sounds Ta/Va/Ga,1,3
-Beginning Sounds Ta/Va/Ga,2,3
-Beginning Sounds Ta/Va/Ga,3,16
-Beginning Sounds Ta/Va/Ga,4,24
-Beginning Sounds Ta/Va/Ga,5,51
-Beginning Sounds Ta/Va/Ga,6,60
-Beginning Sounds Ta/Va/Ga,7,97
-Beginning Sounds Ta/Va/Ga,8,173
-Beginning Sounds Ta/Va/Ga,9,280
-Beginning Sounds Ta/Va/Ga,10,547
-Beginning Sounds Ta/Va/Ga,11,817
-Beginning Sounds Ta/Va/Ga,12,646
-Color Blue,1,2947
-Color Blue,2,4026
-Color Blue,3,4156
-Color Blue,4,2876
-Color Blue,5,1552
-Color Blue,6,614
-Color Blue,7,191
-Color Blue,8,50
-Color Blue,9,18
-Color Blue,10,16
-Color Blue,11,9
-Color Blue,12,12
-Color Red,1,7509
-Color Red,2,9864
-Color Red,3,10650
-Color Red,4,9013
-Color Red,5,5786
-Color Red,6,2879
-Color Red,7,1235
-Color Red,8,525
-Color Red,9,289
-Color Red,10,152
-Color Red,11,74
-Color Red,12,161
-Color Yellow,1,3200
-Color Yellow,2,4178
-Color Yellow,3,4562
-Color Yellow,4,3850
-Color Yellow,5,2392
-Color Yellow,6,1157
-Color Yellow,7,440
-Color Yellow,8,145
-Color Yellow,9,57
-Color Yellow,10,33
-Color Yellow,11,17
-Color Yellow,12,27
-Emotion Identification,1,5
-Emotion Identification,2,15
-Emotion Identification,3,24
-Emotion Identification,4,69
-Emotion Identification,5,118
-Emotion Identification,6,185
-Emotion Identification,7,300
-Emotion Identification,8,565
-Emotion Identification,9,1008
-Emotion Identification,10,1830
-Emotion Identification,11,3279
-Emotion Identification,12,4524
-Identification of all emotions,1,3
-Identification of all emotions,2,9
-Identification of all emotions,3,40
-Identification of all emotions,4,62
-Identification of all emotions,5,102
-Identification of all emotions,6,174
-Identification of all emotions,7,277
-Identification of all emotions,8,497
-Identification of all emotions,9,1013
-Identification of all emotions,10,2233
-Identification of all emotions,11,4732
-Identification of all emotions,12,7717
-Numbers Comparison,1,13
-Numbers Comparison,2,26
-Numbers Comparison,3,71
-Numbers Comparison,4,153
-Numbers Comparison,5,205
-Numbers Comparison,6,274
-Numbers Comparison,7,314
-Numbers Comparison,8,443
-Numbers Comparison,9,742
-Numbers Comparison,10,1486
-Numbers Comparison,11,3301
-Numbers Comparison,12,7405
-Numbers I,1,4097
-Numbers I,2,5846
-Numbers I,3,7123
-Numbers I,4,6528
-Numbers I,5,4395
-Numbers I,6,2052
-Numbers I,7,770
-Numbers I,8,261
-Numbers I,9,140
-Numbers I,10,84
-Numbers I,11,45
-Numbers I,12,62
-Numbers II,1,2530
-Numbers II,2,3709
-Numbers II,3,5249
-Numbers II,4,5375
-Numbers II,5,3826
-Numbers II,6,2013
-Numbers II,7,790
-Numbers II,8,287
-Numbers II,9,155
-Numbers II,10,97
-Numbers II,11,45
-Numbers II,12,75
-Numerals 1-10,1,925
-Numerals 1-10,2,1662
-Numerals 1-10,3,2284
-Numerals 1-10,4,2309
-Numerals 1-10,5,1589
-Numerals 1-10,6,713
-Numerals 1-10,7,233
-Numerals 1-10,8,56
-Numerals 1-10,9,35
-Numerals 1-10,10,9
-Numerals 1-10,11,9
-Numerals 1-10,12,11
-Positions,1,1765
-Positions,2,1885
-Positions,3,2624
-Positions,4,3644
-Positions,5,4007
-Positions,6,3491
-Positions,7,2491
-Positions,8,1295
-Positions,9,576
-Positions,10,262
-Positions,11,180
-Positions,12,343
-Primary Emotion Labelling,1,1
-Primary Emotion Labelling,2,6
-Primary Emotion Labelling,3,30
-Primary Emotion Labelling,4,60
-Primary Emotion Labelling,5,94
-Primary Emotion Labelling,6,143
-Primary Emotion Labelling,7,225
-Primary Emotion Labelling,8,364
-Primary Emotion Labelling,9,698
-Primary Emotion Labelling,10,1510
-Primary Emotion Labelling,11,3547
-Primary Emotion Labelling,12,6211
-Primary Emotion Labelling,13,1
-Quantitative Comparison,1,2
-Quantitative Comparison,2,13
-Quantitative Comparison,3,51
-Quantitative Comparison,4,96
-Quantitative Comparison,5,177
-Quantitative Comparison,6,248
-Quantitative Comparison,7,399
-Quantitative Comparison,8,655
-Quantitative Comparison,9,1188
-Quantitative Comparison,10,2409
-Quantitative Comparison,11,5338
-Quantitative Comparison,12,10691
-Relational Comparison,1,5
-Relational Comparison,2,28
-Relational Comparison,3,58
-Relational Comparison,4,85
-Relational Comparison,5,149
-Relational Comparison,6,210
-Relational Comparison,7,271
-Relational Comparison,8,415
-Relational Comparison,9,785
-Relational Comparison,10,1680
-Relational Comparison,11,3831
-Relational Comparison,12,7216
-Relational Comparison II,1,11
-Relational Comparison II,2,28
-Relational Comparison II,3,59
-Relational Comparison II,4,107
-Relational Comparison II,5,159
-Relational Comparison II,6,200
-Relational Comparison II,7,309
-Relational Comparison II,8,503
-Relational Comparison II,9,945
-Relational Comparison II,10,2187
-Relational Comparison II,11,4810
-Relational Comparison II,12,8956
-Revision Colors,1,14
-Revision Colors,2,18
-Revision Colors,3,17
-Revision Colors,4,29
-Revision Colors,5,44
-Revision Colors,6,73
-Revision Colors,7,102
-Revision Colors,8,203
-Revision Colors,9,474
-Revision Colors,10,1128
-Revision Colors,11,2730
-Revision Colors,12,6046
-Revision Shapes,1,9
-Revision Shapes,2,7
-Revision Shapes,3,17
-Revision Shapes,4,33
-Revision Shapes,5,59
-Revision Shapes,6,120
-Revision Shapes,7,206
-Revision Shapes,8,380
-Revision Shapes,9,605
-Revision Shapes,10,1031
-Revision Shapes,11,1930
-Revision Shapes,12,3065
-Rhyming Words,1,131
-Rhyming Words,2,371
-Rhyming Words,3,806
-Rhyming Words,4,1273
-Rhyming Words,5,1690
-Rhyming Words,6,1811
-Rhyming Words,7,2062
-Rhyming Words,8,2437
-Rhyming Words,9,2602
-Rhyming Words,10,2313
-Rhyming Words,11,768
-Shape Circle,1,12188
-Shape Circle,2,15716
-Shape Circle,3,17425
-Shape Circle,4,14993
-Shape Circle,5,10265
-Shape Circle,6,5722
-Shape Circle,7,3071
-Shape Circle,8,1613
-Shape Circle,9,895
-Shape Circle,10,507
-Shape Circle,11,359
-Shape Circle,12,579
-Shape Rectangle,1,1136
-Shape Rectangle,2,1916
-Shape Rectangle,3,2478
-Shape Rectangle,4,2439
-Shape Rectangle,5,1662
-Shape Rectangle,6,858
-Shape Rectangle,7,334
-Shape Rectangle,8,105
-Shape Rectangle,9,31
-Shape Rectangle,10,21
-Shape Rectangle,11,6
-Shape Rectangle,12,8
-Shape Square,1,1815
-Shape Square,2,2653
-Shape Square,3,3651
-Shape Square,4,3611
-Shape Square,5,2532
-Shape Square,6,1430
-Shape Square,7,542
-Shape Square,8,181
-Shape Square,9,66
-Shape Square,10,18
-Shape Square,11,16
-Shape Square,12,21
-Shape Triangle,1,4223
-Shape Triangle,2,5811
-Shape Triangle,3,6384
-Shape Triangle,4,5290
-Shape Triangle,5,3363
-Shape Triangle,6,1674
-Shape Triangle,7,625
-Shape Triangle,8,243
-Shape Triangle,9,105
-Shape Triangle,10,50
-Shape Triangle,11,39
-Shape Triangle,12,51
+game_name,total_score,language,game_code,user_count
+Beginning Sound Ba/Ra/Na,1,hi,LL,2
+Beginning Sound Ba/Ra/Na,1,mr,LL,6
+Beginning Sound Ba/Ra/Na,2,hi,LL,4
+Beginning Sound Ba/Ra/Na,2,mr,LL,8
+Beginning Sound Ba/Ra/Na,3,hi,LL,17
+Beginning Sound Ba/Ra/Na,3,mr,LL,25
+Beginning Sound Ba/Ra/Na,4,hi,LL,25
+Beginning Sound Ba/Ra/Na,4,mr,LL,45
+Beginning Sound Ba/Ra/Na,5,hi,LL,41
+Beginning Sound Ba/Ra/Na,5,mr,LL,65
+Beginning Sound Ba/Ra/Na,6,hi,LL,53
+Beginning Sound Ba/Ra/Na,6,mr,LL,94
+Beginning Sound Ba/Ra/Na,7,hi,LL,86
+Beginning Sound Ba/Ra/Na,7,mr,LL,127
+Beginning Sound Ba/Ra/Na,8,hi,LL,150
+Beginning Sound Ba/Ra/Na,8,mr,LL,222
+Beginning Sound Ba/Ra/Na,9,hi,LL,243
+Beginning Sound Ba/Ra/Na,9,mr,LL,372
+Beginning Sound Ba/Ra/Na,10,hi,LL,595
+Beginning Sound Ba/Ra/Na,10,mr,LL,776
+Beginning Sound Ba/Ra/Na,11,hi,LL,1087
+Beginning Sound Ba/Ra/Na,11,mr,LL,1506
+Beginning Sound Ba/Ra/Na,12,hi,LL,852
+Beginning Sound Ba/Ra/Na,12,mr,LL,2179
+Beginning Sounds Ka/Na/Ta,1,hi,LL,9
+Beginning Sounds Ka/Na/Ta,1,mr,LL,16
+Beginning Sounds Ka/Na/Ta,2,hi,LL,14
+Beginning Sounds Ka/Na/Ta,2,mr,LL,32
+Beginning Sounds Ka/Na/Ta,3,hi,LL,39
+Beginning Sounds Ka/Na/Ta,3,mr,LL,57
+Beginning Sounds Ka/Na/Ta,4,hi,LL,108
+Beginning Sounds Ka/Na/Ta,4,mr,LL,153
+Beginning Sounds Ka/Na/Ta,5,hi,LL,274
+Beginning Sounds Ka/Na/Ta,5,mr,LL,486
+Beginning Sounds Ka/Na/Ta,6,hi,LL,891
+Beginning Sounds Ka/Na/Ta,6,mr,LL,1318
+Beginning Sounds Ka/Na/Ta,7,hi,LL,28
+Beginning Sounds Ka/Na/Ta,7,mr,LL,106
+Beginning Sounds Ka/Na/Ta,8,hi,LL,48
+Beginning Sounds Ka/Na/Ta,8,mr,LL,173
+Beginning Sounds Ka/Na/Ta,9,hi,LL,66
+Beginning Sounds Ka/Na/Ta,9,mr,LL,344
+Beginning Sounds Ka/Na/Ta,10,hi,LL,126
+Beginning Sounds Ka/Na/Ta,10,mr,LL,545
+Beginning Sounds Ka/Na/Ta,11,hi,LL,230
+Beginning Sounds Ka/Na/Ta,11,mr,LL,1053
+Beginning Sounds Ka/Na/Ta,12,hi,LL,299
+Beginning Sounds Ka/Na/Ta,12,mr,LL,1381
+Beginning Sounds Ka/Na/Ta,13,hi,LL,16
+Beginning Sounds Ka/Na/Ta,13,mr,LL,34
+Beginning Sounds Ma/Cha/Ba,1,hi,LL,1
+Beginning Sounds Ma/Cha/Ba,1,mr,LL,8
+Beginning Sounds Ma/Cha/Ba,2,hi,LL,2
+Beginning Sounds Ma/Cha/Ba,2,mr,LL,20
+Beginning Sounds Ma/Cha/Ba,3,hi,LL,12
+Beginning Sounds Ma/Cha/Ba,3,mr,LL,33
+Beginning Sounds Ma/Cha/Ba,4,hi,LL,17
+Beginning Sounds Ma/Cha/Ba,4,mr,LL,59
+Beginning Sounds Ma/Cha/Ba,5,hi,LL,24
+Beginning Sounds Ma/Cha/Ba,5,mr,LL,131
+Beginning Sounds Ma/Cha/Ba,6,hi,LL,43
+Beginning Sounds Ma/Cha/Ba,6,mr,LL,188
+Beginning Sounds Ma/Cha/Ba,7,hi,LL,69
+Beginning Sounds Ma/Cha/Ba,7,mr,LL,375
+Beginning Sounds Ma/Cha/Ba,8,hi,LL,103
+Beginning Sounds Ma/Cha/Ba,8,mr,LL,736
+Beginning Sounds Ma/Cha/Ba,9,hi,LL,227
+Beginning Sounds Ma/Cha/Ba,9,mr,LL,1399
+Beginning Sounds Ma/Cha/Ba,10,hi,LL,412
+Beginning Sounds Ma/Cha/Ba,10,mr,LL,2271
+Beginning Sounds Ma/Cha/Ba,11,hi,LL,867
+Beginning Sounds Ma/Cha/Ba,11,mr,LL,2177
+Beginning Sounds Ma/Cha/Ba,12,hi,LL,930
+Beginning Sounds Ma/Ka/La,1,hi,LL,4
+Beginning Sounds Ma/Ka/La,1,mr,LL,2
+Beginning Sounds Ma/Ka/La,2,hi,LL,15
+Beginning Sounds Ma/Ka/La,2,mr,LL,16
+Beginning Sounds Ma/Ka/La,3,hi,LL,32
+Beginning Sounds Ma/Ka/La,3,mr,LL,31
+Beginning Sounds Ma/Ka/La,4,hi,LL,62
+Beginning Sounds Ma/Ka/La,4,mr,LL,55
+Beginning Sounds Ma/Ka/La,5,hi,LL,77
+Beginning Sounds Ma/Ka/La,5,mr,LL,85
+Beginning Sounds Ma/Ka/La,6,hi,LL,111
+Beginning Sounds Ma/Ka/La,6,mr,LL,124
+Beginning Sounds Ma/Ka/La,7,hi,LL,149
+Beginning Sounds Ma/Ka/La,7,mr,LL,166
+Beginning Sounds Ma/Ka/La,8,hi,LL,279
+Beginning Sounds Ma/Ka/La,8,mr,LL,275
+Beginning Sounds Ma/Ka/La,9,hi,LL,587
+Beginning Sounds Ma/Ka/La,9,mr,LL,592
+Beginning Sounds Ma/Ka/La,10,hi,LL,1068
+Beginning Sounds Ma/Ka/La,10,mr,LL,1206
+Beginning Sounds Ma/Ka/La,11,hi,LL,1507
+Beginning Sounds Ma/Ka/La,11,mr,LL,2840
+Beginning Sounds Ma/Ka/La,12,hi,LL,1545
+Beginning Sounds Ma/Ka/La,12,mr,LL,4128
+Beginning Sounds Pa/Cha/Sa,1,mr,LL,1
+Beginning Sounds Pa/Cha/Sa,2,hi,LL,5
+Beginning Sounds Pa/Cha/Sa,2,mr,LL,18
+Beginning Sounds Pa/Cha/Sa,3,hi,LL,16
+Beginning Sounds Pa/Cha/Sa,3,mr,LL,35
+Beginning Sounds Pa/Cha/Sa,4,hi,LL,34
+Beginning Sounds Pa/Cha/Sa,4,mr,LL,50
+Beginning Sounds Pa/Cha/Sa,5,hi,LL,37
+Beginning Sounds Pa/Cha/Sa,5,mr,LL,59
+Beginning Sounds Pa/Cha/Sa,6,hi,LL,62
+Beginning Sounds Pa/Cha/Sa,6,mr,LL,96
+Beginning Sounds Pa/Cha/Sa,7,hi,LL,77
+Beginning Sounds Pa/Cha/Sa,7,mr,LL,156
+Beginning Sounds Pa/Cha/Sa,8,hi,LL,110
+Beginning Sounds Pa/Cha/Sa,8,mr,LL,237
+Beginning Sounds Pa/Cha/Sa,9,hi,LL,170
+Beginning Sounds Pa/Cha/Sa,9,mr,LL,385
+Beginning Sounds Pa/Cha/Sa,10,hi,LL,354
+Beginning Sounds Pa/Cha/Sa,10,mr,LL,821
+Beginning Sounds Pa/Cha/Sa,11,hi,LL,809
+Beginning Sounds Pa/Cha/Sa,11,mr,LL,1686
+Beginning Sounds Pa/Cha/Sa,12,hi,LL,1632
+Beginning Sounds Pa/Cha/Sa,12,mr,LL,1963
+Beginning Sounds Sa/La/Va,1,hi,LL,26
+Beginning Sounds Sa/La/Va,1,mr,LL,66
+Beginning Sounds Sa/La/Va,2,hi,LL,60
+Beginning Sounds Sa/La/Va,2,mr,LL,150
+Beginning Sounds Sa/La/Va,3,hi,LL,92
+Beginning Sounds Sa/La/Va,3,mr,LL,343
+Beginning Sounds Sa/La/Va,4,hi,LL,222
+Beginning Sounds Sa/La/Va,4,mr,LL,838
+Beginning Sounds Sa/La/Va,5,hi,LL,614
+Beginning Sounds Sa/La/Va,5,mr,LL,1766
+Beginning Sounds Sa/La/Va,6,hi,LL,761
+Beginning Sounds Sa/La/Va,6,mr,LL,2857
+Beginning Sounds Ta/Va/Ga,1,hi,LL,3
+Beginning Sounds Ta/Va/Ga,2,hi,LL,3
+Beginning Sounds Ta/Va/Ga,3,hi,LL,16
+Beginning Sounds Ta/Va/Ga,4,hi,LL,22
+Beginning Sounds Ta/Va/Ga,5,hi,LL,46
+Beginning Sounds Ta/Va/Ga,6,hi,LL,55
+Beginning Sounds Ta/Va/Ga,7,hi,LL,87
+Beginning Sounds Ta/Va/Ga,8,hi,LL,166
+Beginning Sounds Ta/Va/Ga,9,hi,LL,255
+Beginning Sounds Ta/Va/Ga,10,hi,LL,499
+Beginning Sounds Ta/Va/Ga,11,hi,LL,759
+Beginning Sounds Ta/Va/Ga,12,hi,LL,594
+Color Blue,1,hi,CG,504
+Color Blue,1,mr,CG,809
+Color Blue,2,hi,CG,928
+Color Blue,2,mr,CG,1398
+Color Blue,3,hi,CG,963
+Color Blue,3,mr,CG,1650
+Color Blue,4,hi,CG,702
+Color Blue,4,mr,CG,1133
+Color Blue,5,hi,CG,346
+Color Blue,5,mr,CG,637
+Color Blue,6,hi,CG,144
+Color Blue,6,mr,CG,229
+Color Blue,7,hi,CG,42
+Color Blue,7,mr,CG,58
+Color Blue,8,hi,CG,4
+Color Blue,8,mr,CG,7
+Color Blue,9,mr,CG,2
+Color Blue,12,hi,CG,1
+Color Red,1,hi,CG,1587
+Color Red,1,mr,CG,2874
+Color Red,2,hi,CG,2889
+Color Red,2,mr,CG,5285
+Color Red,3,hi,CG,3430
+Color Red,3,mr,CG,6299
+Color Red,4,hi,CG,3028
+Color Red,4,mr,CG,5456
+Color Red,5,hi,CG,1833
+Color Red,5,mr,CG,3519
+Color Red,6,hi,CG,875
+Color Red,6,mr,CG,1648
+Color Red,7,hi,CG,293
+Color Red,7,mr,CG,544
+Color Red,8,hi,CG,56
+Color Red,8,mr,CG,123
+Color Red,9,hi,CG,11
+Color Red,9,mr,CG,16
+Color Red,10,hi,CG,2
+Color Red,10,mr,CG,1
+Color Yellow,1,hi,CG,566
+Color Yellow,1,mr,CG,1108
+Color Yellow,2,hi,CG,1115
+Color Yellow,2,mr,CG,2147
+Color Yellow,3,hi,CG,1340
+Color Yellow,3,mr,CG,2541
+Color Yellow,4,hi,CG,1182
+Color Yellow,4,mr,CG,2267
+Color Yellow,5,hi,CG,755
+Color Yellow,5,mr,CG,1404
+Color Yellow,6,hi,CG,322
+Color Yellow,6,mr,CG,668
+Color Yellow,7,hi,CG,114
+Color Yellow,7,mr,CG,223
+Color Yellow,8,hi,CG,29
+Color Yellow,8,mr,CG,48
+Color Yellow,9,hi,CG,3
+Color Yellow,9,mr,CG,2
+Color Yellow,10,hi,CG,1
+Color Yellow,10,mr,CG,1
+Emotion Identification,1,hi,SEL,2
+Emotion Identification,1,mr,SEL,3
+Emotion Identification,2,hi,SEL,2
+Emotion Identification,2,mr,SEL,11
+Emotion Identification,3,hi,SEL,5
+Emotion Identification,3,mr,SEL,15
+Emotion Identification,4,hi,SEL,15
+Emotion Identification,4,mr,SEL,46
+Emotion Identification,5,hi,SEL,28
+Emotion Identification,5,mr,SEL,82
+Emotion Identification,6,hi,SEL,61
+Emotion Identification,6,mr,SEL,115
+Emotion Identification,7,hi,SEL,56
+Emotion Identification,7,mr,SEL,216
+Emotion Identification,8,hi,SEL,120
+Emotion Identification,8,mr,SEL,403
+Emotion Identification,9,hi,SEL,235
+Emotion Identification,9,mr,SEL,700
+Emotion Identification,10,hi,SEL,474
+Emotion Identification,10,mr,SEL,1207
+Emotion Identification,11,hi,SEL,870
+Emotion Identification,11,mr,SEL,2123
+Emotion Identification,12,hi,SEL,1488
+Emotion Identification,12,mr,SEL,2680
+Identification of all emotions,1,hi,SEL,1
+Identification of all emotions,1,mr,SEL,2
+Identification of all emotions,2,hi,SEL,3
+Identification of all emotions,2,mr,SEL,5
+Identification of all emotions,3,hi,SEL,12
+Identification of all emotions,3,mr,SEL,24
+Identification of all emotions,4,hi,SEL,27
+Identification of all emotions,4,mr,SEL,30
+Identification of all emotions,5,hi,SEL,37
+Identification of all emotions,5,mr,SEL,51
+Identification of all emotions,6,hi,SEL,70
+Identification of all emotions,6,mr,SEL,83
+Identification of all emotions,7,hi,SEL,111
+Identification of all emotions,7,mr,SEL,124
+Identification of all emotions,8,hi,SEL,230
+Identification of all emotions,8,mr,SEL,215
+Identification of all emotions,9,hi,SEL,413
+Identification of all emotions,9,mr,SEL,473
+Identification of all emotions,10,hi,SEL,935
+Identification of all emotions,10,mr,SEL,1044
+Identification of all emotions,11,hi,SEL,1995
+Identification of all emotions,11,mr,SEL,2185
+Identification of all emotions,12,hi,SEL,3058
+Identification of all emotions,12,mr,SEL,3779
+Numbers Comparison,1,hi,NM,5
+Numbers Comparison,1,mr,NM,6
+Numbers Comparison,2,hi,NM,10
+Numbers Comparison,2,mr,NM,14
+Numbers Comparison,3,hi,NM,26
+Numbers Comparison,3,mr,NM,33
+Numbers Comparison,4,hi,NM,60
+Numbers Comparison,4,mr,NM,75
+Numbers Comparison,5,hi,NM,74
+Numbers Comparison,5,mr,NM,111
+Numbers Comparison,6,hi,NM,89
+Numbers Comparison,6,mr,NM,159
+Numbers Comparison,7,hi,NM,120
+Numbers Comparison,7,mr,NM,158
+Numbers Comparison,8,hi,NM,159
+Numbers Comparison,8,mr,NM,234
+Numbers Comparison,9,hi,NM,259
+Numbers Comparison,9,mr,NM,402
+Numbers Comparison,10,hi,NM,511
+Numbers Comparison,10,mr,NM,834
+Numbers Comparison,11,hi,NM,1060
+Numbers Comparison,11,mr,NM,1884
+Numbers Comparison,12,hi,NM,2645
+Numbers Comparison,12,mr,NM,3981
+Numbers I,1,hi,NM,437
+Numbers I,1,mr,NM,846
+Numbers I,2,hi,NM,1086
+Numbers I,2,mr,NM,2002
+Numbers I,3,hi,NM,1564
+Numbers I,3,mr,NM,2779
+Numbers I,4,hi,NM,1571
+Numbers I,4,mr,NM,2690
+Numbers I,5,hi,NM,1035
+Numbers I,5,mr,NM,1848
+Numbers I,6,hi,NM,453
+Numbers I,6,mr,NM,784
+Numbers I,7,hi,NM,121
+Numbers I,7,mr,NM,236
+Numbers I,8,hi,NM,25
+Numbers I,8,mr,NM,51
+Numbers I,9,hi,NM,2
+Numbers I,9,mr,NM,3
+Numbers I,11,mr,NM,1
+Numbers II,1,hi,NM,298
+Numbers II,1,mr,NM,401
+Numbers II,2,hi,NM,912
+Numbers II,2,mr,NM,1050
+Numbers II,3,hi,NM,1528
+Numbers II,3,mr,NM,1883
+Numbers II,4,hi,NM,1641
+Numbers II,4,mr,NM,1935
+Numbers II,5,hi,NM,1199
+Numbers II,5,mr,NM,1467
+Numbers II,6,hi,NM,603
+Numbers II,6,mr,NM,768
+Numbers II,7,hi,NM,187
+Numbers II,7,mr,NM,295
+Numbers II,8,hi,NM,52
+Numbers II,8,mr,NM,56
+Numbers II,9,hi,NM,9
+Numbers II,9,mr,NM,4
+Numbers II,10,hi,NM,1
+Numerals 1-10,1,hi,NM,144
+Numerals 1-10,1,mr,NM,226
+Numerals 1-10,2,hi,NM,449
+Numerals 1-10,2,mr,NM,669
+Numerals 1-10,3,hi,NM,622
+Numerals 1-10,3,mr,NM,1081
+Numerals 1-10,4,hi,NM,749
+Numerals 1-10,4,mr,NM,1075
+Numerals 1-10,5,hi,NM,487
+Numerals 1-10,5,mr,NM,771
+Numerals 1-10,6,hi,NM,217
+Numerals 1-10,6,mr,NM,341
+Numerals 1-10,7,hi,NM,57
+Numerals 1-10,7,mr,NM,86
+Numerals 1-10,8,hi,NM,5
+Numerals 1-10,8,mr,NM,21
+Numerals 1-10,9,hi,NM,1
+Numerals 1-10,9,mr,NM,4
+Positions,1,hi,CG,59
+Positions,1,mr,CG,123
+Positions,2,hi,CG,244
+Positions,2,mr,CG,478
+Positions,3,hi,CG,546
+Positions,3,mr,CG,1122
+Positions,4,hi,CG,968
+Positions,4,mr,CG,1861
+Positions,5,hi,CG,1161
+Positions,5,mr,CG,2196
+Positions,6,hi,CG,1015
+Positions,6,mr,CG,2008
+Positions,7,hi,CG,710
+Positions,7,mr,CG,1400
+Positions,8,hi,CG,371
+Positions,8,mr,CG,690
+Positions,9,hi,CG,137
+Positions,9,mr,CG,251
+Positions,10,hi,CG,28
+Positions,10,mr,CG,71
+Positions,11,hi,CG,7
+Positions,11,mr,CG,19
+Positions,12,hi,CG,2
+Positions,12,mr,CG,6
+Primary Emotion Labelling,1,hi,SEL,1
+Primary Emotion Labelling,2,hi,SEL,3
+Primary Emotion Labelling,2,mr,SEL,2
+Primary Emotion Labelling,3,hi,SEL,12
+Primary Emotion Labelling,3,mr,SEL,15
+Primary Emotion Labelling,4,hi,SEL,20
+Primary Emotion Labelling,4,mr,SEL,27
+Primary Emotion Labelling,5,hi,SEL,30
+Primary Emotion Labelling,5,mr,SEL,52
+Primary Emotion Labelling,6,hi,SEL,35
+Primary Emotion Labelling,6,mr,SEL,89
+Primary Emotion Labelling,7,hi,SEL,67
+Primary Emotion Labelling,7,mr,SEL,135
+Primary Emotion Labelling,8,hi,SEL,141
+Primary Emotion Labelling,8,mr,SEL,191
+Primary Emotion Labelling,9,hi,SEL,264
+Primary Emotion Labelling,9,mr,SEL,352
+Primary Emotion Labelling,10,hi,SEL,563
+Primary Emotion Labelling,10,mr,SEL,753
+Primary Emotion Labelling,11,hi,SEL,1501
+Primary Emotion Labelling,11,mr,SEL,1644
+Primary Emotion Labelling,12,hi,SEL,2492
+Primary Emotion Labelling,12,mr,SEL,2948
+Primary Emotion Labelling,13,hi,SEL,1
+Quantitative Comparison,1,hi,NM,1
+Quantitative Comparison,1,mr,NM,1
+Quantitative Comparison,2,hi,NM,4
+Quantitative Comparison,2,mr,NM,6
+Quantitative Comparison,3,hi,NM,12
+Quantitative Comparison,3,mr,NM,34
+Quantitative Comparison,4,hi,NM,26
+Quantitative Comparison,4,mr,NM,65
+Quantitative Comparison,5,hi,NM,45
+Quantitative Comparison,5,mr,NM,114
+Quantitative Comparison,6,hi,NM,77
+Quantitative Comparison,6,mr,NM,158
+Quantitative Comparison,7,hi,NM,117
+Quantitative Comparison,7,mr,NM,246
+Quantitative Comparison,8,hi,NM,210
+Quantitative Comparison,8,mr,NM,398
+Quantitative Comparison,9,hi,NM,402
+Quantitative Comparison,9,mr,NM,699
+Quantitative Comparison,10,hi,NM,811
+Quantitative Comparison,10,mr,NM,1420
+Quantitative Comparison,11,hi,NM,1729
+Quantitative Comparison,11,mr,NM,3082
+Quantitative Comparison,12,hi,NM,3520
+Quantitative Comparison,12,mr,NM,6241
+Relational Comparison,1,hi,CG,2
+Relational Comparison,1,mr,CG,4
+Relational Comparison,2,hi,CG,11
+Relational Comparison,2,mr,CG,14
+Relational Comparison,3,hi,CG,20
+Relational Comparison,3,mr,CG,33
+Relational Comparison,4,hi,CG,35
+Relational Comparison,4,mr,CG,44
+Relational Comparison,5,hi,CG,52
+Relational Comparison,5,mr,CG,84
+Relational Comparison,6,hi,CG,73
+Relational Comparison,6,mr,CG,119
+Relational Comparison,7,hi,CG,99
+Relational Comparison,7,mr,CG,156
+Relational Comparison,8,hi,CG,171
+Relational Comparison,8,mr,CG,222
+Relational Comparison,9,hi,CG,324
+Relational Comparison,9,mr,CG,395
+Relational Comparison,10,hi,CG,688
+Relational Comparison,10,mr,CG,870
+Relational Comparison,11,hi,CG,1571
+Relational Comparison,11,mr,CG,1955
+Relational Comparison,12,hi,CG,2992
+Relational Comparison,12,mr,CG,3747
+Relational Comparison II,1,hi,CG,5
+Relational Comparison II,1,mr,CG,6
+Relational Comparison II,2,hi,CG,10
+Relational Comparison II,2,mr,CG,17
+Relational Comparison II,3,hi,CG,25
+Relational Comparison II,3,mr,CG,29
+Relational Comparison II,4,hi,CG,25
+Relational Comparison II,4,mr,CG,64
+Relational Comparison II,5,hi,CG,49
+Relational Comparison II,5,mr,CG,92
+Relational Comparison II,6,hi,CG,49
+Relational Comparison II,6,mr,CG,123
+Relational Comparison II,7,hi,CG,87
+Relational Comparison II,7,mr,CG,183
+Relational Comparison II,8,hi,CG,168
+Relational Comparison II,8,mr,CG,279
+Relational Comparison II,9,hi,CG,310
+Relational Comparison II,9,mr,CG,521
+Relational Comparison II,10,hi,CG,654
+Relational Comparison II,10,mr,CG,1283
+Relational Comparison II,11,hi,CG,1500
+Relational Comparison II,11,mr,CG,2734
+Relational Comparison II,12,hi,CG,3174
+Relational Comparison II,12,mr,CG,4886
+Revision Colors,1,hi,CG,3
+Revision Colors,1,mr,CG,9
+Revision Colors,2,hi,CG,7
+Revision Colors,2,mr,CG,11
+Revision Colors,3,hi,CG,6
+Revision Colors,3,mr,CG,9
+Revision Colors,4,hi,CG,9
+Revision Colors,4,mr,CG,18
+Revision Colors,5,hi,CG,12
+Revision Colors,5,mr,CG,27
+Revision Colors,6,hi,CG,23
+Revision Colors,6,mr,CG,48
+Revision Colors,7,hi,CG,41
+Revision Colors,7,mr,CG,49
+Revision Colors,8,hi,CG,50
+Revision Colors,8,mr,CG,137
+Revision Colors,9,hi,CG,135
+Revision Colors,9,mr,CG,291
+Revision Colors,10,hi,CG,327
+Revision Colors,10,mr,CG,665
+Revision Colors,11,hi,CG,817
+Revision Colors,11,mr,CG,1579
+Revision Colors,12,hi,CG,1697
+Revision Colors,12,mr,CG,3539
+Revision Shapes,1,hi,CG,3
+Revision Shapes,1,mr,CG,5
+Revision Shapes,2,hi,CG,2
+Revision Shapes,2,mr,CG,5
+Revision Shapes,3,hi,CG,6
+Revision Shapes,3,mr,CG,11
+Revision Shapes,4,hi,CG,7
+Revision Shapes,4,mr,CG,22
+Revision Shapes,5,hi,CG,16
+Revision Shapes,5,mr,CG,39
+Revision Shapes,6,hi,CG,36
+Revision Shapes,6,mr,CG,73
+Revision Shapes,7,hi,CG,67
+Revision Shapes,7,mr,CG,132
+Revision Shapes,8,hi,CG,101
+Revision Shapes,8,mr,CG,245
+Revision Shapes,9,hi,CG,180
+Revision Shapes,9,mr,CG,392
+Revision Shapes,10,hi,CG,313
+Revision Shapes,10,mr,CG,638
+Revision Shapes,11,hi,CG,635
+Revision Shapes,11,mr,CG,1143
+Revision Shapes,12,hi,CG,1188
+Revision Shapes,12,mr,CG,1651
+Rhyming Words,1,hi,LL,38
+Rhyming Words,1,mr,LL,79
+Rhyming Words,2,hi,LL,93
+Rhyming Words,2,mr,LL,245
+Rhyming Words,3,hi,LL,221
+Rhyming Words,3,mr,LL,493
+Rhyming Words,4,hi,LL,425
+Rhyming Words,4,mr,LL,704
+Rhyming Words,5,hi,LL,552
+Rhyming Words,5,mr,LL,949
+Rhyming Words,6,hi,LL,593
+Rhyming Words,6,mr,LL,998
+Rhyming Words,7,hi,LL,732
+Rhyming Words,7,mr,LL,1067
+Rhyming Words,8,hi,LL,846
+Rhyming Words,8,mr,LL,1310
+Rhyming Words,9,hi,LL,848
+Rhyming Words,9,mr,LL,1464
+Rhyming Words,10,hi,LL,833
+Rhyming Words,10,mr,LL,1225
+Rhyming Words,11,hi,LL,704
+Shape Circle,1,hi,CG,2933
+Shape Circle,1,mr,CG,5035
+Shape Circle,2,hi,CG,5305
+Shape Circle,2,mr,CG,8950
+Shape Circle,3,hi,CG,6302
+Shape Circle,3,mr,CG,10666
+Shape Circle,4,hi,CG,5543
+Shape Circle,4,mr,CG,9506
+Shape Circle,5,hi,CG,3666
+Shape Circle,5,mr,CG,6321
+Shape Circle,6,hi,CG,1803
+Shape Circle,6,mr,CG,3071
+Shape Circle,7,hi,CG,672
+Shape Circle,7,mr,CG,1086
+Shape Circle,8,hi,CG,172
+Shape Circle,8,mr,CG,292
+Shape Circle,9,hi,CG,29
+Shape Circle,9,mr,CG,45
+Shape Circle,10,hi,CG,1
+Shape Circle,10,mr,CG,4
+Shape Rectangle,1,hi,CG,194
+Shape Rectangle,1,mr,CG,278
+Shape Rectangle,2,hi,CG,431
+Shape Rectangle,2,mr,CG,796
+Shape Rectangle,3,hi,CG,637
+Shape Rectangle,3,mr,CG,1100
+Shape Rectangle,4,hi,CG,704
+Shape Rectangle,4,mr,CG,1087
+Shape Rectangle,5,hi,CG,450
+Shape Rectangle,5,mr,CG,727
+Shape Rectangle,6,hi,CG,228
+Shape Rectangle,6,mr,CG,390
+Shape Rectangle,7,hi,CG,70
+Shape Rectangle,7,mr,CG,135
+Shape Rectangle,8,hi,CG,18
+Shape Rectangle,8,mr,CG,36
+Shape Rectangle,9,hi,CG,6
+Shape Rectangle,9,mr,CG,6
+Shape Rectangle,10,hi,CG,1
+Shape Square,1,hi,CG,301
+Shape Square,1,mr,CG,271
+Shape Square,2,hi,CG,771
+Shape Square,2,mr,CG,687
+Shape Square,3,hi,CG,1404
+Shape Square,3,mr,CG,1094
+Shape Square,4,hi,CG,1423
+Shape Square,4,mr,CG,1175
+Shape Square,5,hi,CG,1006
+Shape Square,5,mr,CG,866
+Shape Square,6,hi,CG,579
+Shape Square,6,mr,CG,465
+Shape Square,7,hi,CG,226
+Shape Square,7,mr,CG,139
+Shape Square,8,hi,CG,46
+Shape Square,8,mr,CG,61
+Shape Square,9,hi,CG,7
+Shape Square,9,mr,CG,11
+Shape Square,10,hi,CG,1
+Shape Square,10,mr,CG,1
+Shape Triangle,1,hi,CG,719
+Shape Triangle,1,mr,CG,1574
+Shape Triangle,2,hi,CG,1521
+Shape Triangle,2,mr,CG,2988
+Shape Triangle,3,hi,CG,1785
+Shape Triangle,3,mr,CG,3628
+Shape Triangle,4,hi,CG,1508
+Shape Triangle,4,mr,CG,3226
+Shape Triangle,5,hi,CG,1024
+Shape Triangle,5,mr,CG,2104
+Shape Triangle,6,hi,CG,460
+Shape Triangle,6,mr,CG,1008
+Shape Triangle,7,hi,CG,144
+Shape Triangle,7,mr,CG,342
+Shape Triangle,8,hi,CG,29
+Shape Triangle,8,mr,CG,84
+Shape Triangle,9,hi,CG,2
+Shape Triangle,9,mr,CG,15
+Shape Triangle,10,hi,CG,3
+Shape Triangle,11,hi,CG,1

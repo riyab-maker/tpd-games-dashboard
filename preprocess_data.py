@@ -868,6 +868,96 @@ def parse_custom_dimension_1_json_data(custom_dim_1):
         return 0
 
 
+def parse_custom_dimension_1_mcq_completed(custom_dim_1):
+    """Parse custom_dimension_1 JSON to extract total score from mcq_completed games
+    
+    Structure:
+    {
+      "section": "Action",
+      "gameData": [
+          {
+            "options": [
+                {"path": "o1.png", "isCorrect": false},
+                {"path": "o2.png", "isCorrect": true},
+                {"path": "o3.png", "isCorrect": false}
+            ],
+            "chosenOption": 2,
+            ...
+          },
+          ...
+      ]
+    }
+    
+    For each question:
+    - Find the correct option index (where isCorrect == true)
+    - Compare with chosenOption
+    - If match → score = 1, else → 0
+    - Sum all scores to get total score
+    """
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return 0
+        
+        # Parse JSON
+        data = json.loads(custom_dim_1)
+        
+        total_score = 0
+        
+        # Look for Action section - can be at top level or inside gameData array
+        action_section = None
+        
+        # Case 1: Action section at top level
+        if isinstance(data, dict) and 'section' in data and data['section'] == 'Action':
+            action_section = data
+        # Case 2: Action section inside gameData array (similar to other game types)
+        elif isinstance(data, dict) and 'gameData' in data and isinstance(data['gameData'], list):
+            for item in data['gameData']:
+                if isinstance(item, dict) and item.get('section') == 'Action':
+                    action_section = item
+                    break
+        
+        # Extract scores from Action section
+        if action_section and 'gameData' in action_section and isinstance(action_section['gameData'], list):
+            for question in action_section['gameData']:
+                if not isinstance(question, dict):
+                    continue
+                
+                # Get options and chosenOption
+                options = question.get('options', [])
+                chosen_option = question.get('chosenOption')
+                
+                # Skip if no options or chosenOption is None
+                if not isinstance(options, list) or len(options) == 0:
+                    continue
+                
+                # Handle chosenOption - convert to int if needed, skip if None
+                if chosen_option is None:
+                    continue
+                try:
+                    chosen_option = int(chosen_option)
+                except (ValueError, TypeError):
+                    continue
+                
+                # Find the correct option index (where isCorrect == true)
+                correct_option_index = None
+                for idx, option in enumerate(options):
+                    if isinstance(option, dict):
+                        # Check isCorrect - handle both boolean True and string "true"
+                        is_correct = option.get('isCorrect', False)
+                        if is_correct is True or (isinstance(is_correct, str) and is_correct.lower() == 'true'):
+                            correct_option_index = idx
+                            break
+                
+                # Compare chosenOption with correct option index
+                if correct_option_index is not None and chosen_option == correct_option_index:
+                    total_score += 1
+                # else: score = 0 (already initialized)
+        
+        return total_score
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError):
+        return 0
+
+
 def parse_custom_dimension_1_action_games(custom_dim_1):
     """Parse custom_dimension_1 JSON to extract total score from action games (for third query)"""
     try:
@@ -1419,21 +1509,34 @@ def calculate_score_distribution_combined(df_score):
     combined_df = pd.DataFrame()
     
     # Separate data based on action type for different score calculation methods
-    # Include both game_completed and mcq_completed (same as question correctness processing)
-    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed|mcq_completed', na=False, case=False)].copy()
-    action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
+    # Separate game_completed and mcq_completed (action_level is no longer used)
+    # Note: Some games like "Beginning Sounds Ma/Cha/Ba" should use flow/jsonData method (game_completed)
+    # even if they have mcq_completed records, so we exclude them from mcq_completed processing
+    games_to_use_game_completed_method = ['Beginning Sounds Ma/Cha/Ba']
+    
+    game_completed_data = df_score[
+        (df_score['action_name'].str.contains('game_completed', na=False, case=False) & 
+         ~df_score['action_name'].str.contains('mcq_completed', na=False, case=False)) |
+        (df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
+         df_score['game_name'].isin(games_to_use_game_completed_method))
+    ].copy()
+    
+    mcq_completed_data = df_score[
+        df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
+        ~df_score['game_name'].isin(games_to_use_game_completed_method)
+    ].copy()
     
     print(f"  - game_completed records: {len(game_completed_data)}")
-    print(f"  - action_level records: {len(action_level_data)}")
+    print(f"  - mcq_completed records: {len(mcq_completed_data)}")
     
     if len(game_completed_data) > 0:
         print(f"  - Unique games in game_completed: {game_completed_data['game_name'].nunique()}")
-    if len(action_level_data) > 0:
-        print(f"  - Unique games in action_level: {action_level_data['game_name'].nunique()}")
+    if len(mcq_completed_data) > 0:
+        print(f"  - Unique games in mcq_completed: {mcq_completed_data['game_name'].nunique()}")
     
-    # Process game_completed/mcq_completed data (correctSelections and jsonData games)
+    # Process game_completed data (correctSelections and jsonData games)
     if not game_completed_data.empty:
-        print("  - Processing game_completed/mcq_completed data...")
+        print("  - Processing game_completed data...")
         print(f"    - Processing {game_completed_data['game_name'].nunique()} unique games")
         
         # Process each game individually to determine the correct score calculation method
@@ -1480,116 +1583,60 @@ def calculate_score_distribution_combined(df_score):
             else:
                 print(f"      - No valid scores after filtering")
     
-    # Process action_level data (action games) - HANDLE MULTIPLE GAME SESSIONS PER VISIT
-    if not action_level_data.empty:
-        print("  - Processing action_level games...")
-        print(f"    - Processing {action_level_data['game_name'].nunique()} unique games")
+    # Process mcq_completed data (hybrid MCQ games with Action section)
+    if not mcq_completed_data.empty:
+        print("  - Processing mcq_completed data...")
+        print(f"    - Processing {mcq_completed_data['game_name'].nunique()} unique games")
+        print(f"    - Games in mcq_completed: {sorted(mcq_completed_data['game_name'].unique())}")
         
-        # Parse each record to get individual question scores (0 or 1)
-        action_level_data = action_level_data.copy()
-        print("    - Parsing question scores from custom_dimension_1...")
-        action_level_data['question_score'] = action_level_data['custom_dimension_1'].apply(parse_custom_dimension_1_action_games)
+        # Process each game individually to log results
+        for game_name in sorted(mcq_completed_data['game_name'].unique()):
+            game_records = len(mcq_completed_data[mcq_completed_data['game_name'] == game_name])
+            print(f"    - Processing {game_name}: {game_records} records")
         
-        # Log score parsing results
-        correct_answers = (action_level_data['question_score'] == 1).sum()
-        incorrect_answers = (action_level_data['question_score'] == 0).sum()
-        print(f"    - Parsed scores: {correct_answers} correct (1), {incorrect_answers} incorrect (0)")
+        # Parse scores from Action section using the new parser
+        print("    - Parsing scores from Action section...")
+        mcq_completed_data = mcq_completed_data.copy()
+        mcq_completed_data['total_score'] = mcq_completed_data['custom_dimension_1'].apply(parse_custom_dimension_1_mcq_completed)
         
-        # CRITICAL: Deduplicate records - remove exact duplicates based on key fields
-        # This fixes the issue where color/shape games show only even scores (questions being counted twice)
-        print("  - Deduplicating action_level records...")
-        before_dedup = len(action_level_data)
-        # Check if idlink_va is available (unique record identifier)
-        if 'idlink_va' in action_level_data.columns:
-            # Use idlink_va for deduplication (most reliable)
-            action_level_data = action_level_data.drop_duplicates(subset=['idlink_va'], keep='first')
-        else:
-            # Fallback: Deduplicate based on user, game, visit, server_time, and custom_dimension_1
-            action_level_data = action_level_data.drop_duplicates(
-                subset=['idvisitor_converted', 'game_name', 'idvisit', 'server_time', 'custom_dimension_1'],
-                keep='first'
-            )
-        after_dedup = len(action_level_data)
-        if before_dedup != after_dedup:
-            print(f"    - Removed {before_dedup - after_dedup} duplicate records ({before_dedup} -> {after_dedup})")
-        else:
-            print(f"    - No duplicates found ({before_dedup} records)")
+        # Log score parsing results by game
+        for game_name in sorted(mcq_completed_data['game_name'].unique()):
+            game_data = mcq_completed_data[mcq_completed_data['game_name'] == game_name]
+            valid_scores = (game_data['total_score'] > 0).sum()
+            zero_scores = (game_data['total_score'] == 0).sum()
+            if valid_scores > 0:
+                score_range = f"{game_data[game_data['total_score'] > 0]['total_score'].min()}-{game_data[game_data['total_score'] > 0]['total_score'].max()}"
+                print(f"      - {game_name}: {valid_scores} valid (>0), {zero_scores} zero, range: {score_range}")
+            else:
+                print(f"      - {game_name}: {valid_scores} valid (>0), {zero_scores} zero - WARNING: No valid scores!")
         
-        # CRITICAL: Handle multiple game sessions per user+game+visit
-        # Sort by user, game, visit, then by server_time to track session order
-        print("    - Sorting records and creating session instances...")
-        action_level_data = action_level_data.sort_values(['idvisitor_converted', 'game_name', 'idvisit', 'server_time'])
+        # Overall stats
+        valid_scores = (mcq_completed_data['total_score'] > 0).sum()
+        zero_scores = (mcq_completed_data['total_score'] == 0).sum()
+        print(f"    - Overall parsed scores: {valid_scores} valid (>0), {zero_scores} zero scores")
         
-        # Create session_instance to handle multiple plays of same game
-        session_instances = []
-        current_session = 1
-        prev_user = None
-        prev_game = None
-        prev_visit = None
-        prev_time = None
+        # Filter out zero scores
+        mcq_completed_data = mcq_completed_data[mcq_completed_data['total_score'] > 0]
         
-        for _, row in action_level_data.iterrows():
-            user = row['idvisitor_converted']
-            game = row['game_name']  # Use game_name instead of custom_dimension_2
-            visit = row['idvisit']
-            time = row['server_time']
+        if not mcq_completed_data.empty:
+            # Select only needed columns for combined_df
+            cols_to_keep = ['game_name', 'idvisitor_converted', 'idvisit', 'total_score']
+            if has_language:
+                cols_to_keep.append('language')
+            if has_game_code:
+                cols_to_keep.append('game_code')
+            mcq_completed_data = mcq_completed_data[cols_to_keep].copy()
             
-            # If new user, new game, or new visit, reset session
-            if user != prev_user or game != prev_game or visit != prev_visit:
-                current_session = 1
-            # If same user+game+visit but significant time gap, new session
-            elif prev_time is not None and (time - prev_time).total_seconds() > 300:  # 5 minutes gap
-                current_session += 1
-            
-            session_instances.append(current_session)
-            prev_user = user
-            prev_game = game
-            prev_visit = visit
-            prev_time = time
-        
-        action_level_data['session_instance'] = session_instances
-        
-        # Log session statistics
-        unique_sessions = action_level_data.groupby(['idvisitor_converted', 'game_name', 'idvisit', 'session_instance']).size()
-        print(f"    - Created {len(unique_sessions)} unique game sessions")
-        
-        # Group by user, game, visit, and session_instance
-        print("    - Grouping by session and calculating total scores...")
-        groupby_cols = ['idvisitor_converted', 'game_name', 'idvisit', 'session_instance']
-        if has_language:
-            groupby_cols.append('language')
-        if has_game_code:
-            groupby_cols.append('game_code')
-        
-        action_level_grouped = action_level_data.groupby(groupby_cols)['question_score'].sum().reset_index()
-        action_level_grouped.columns = groupby_cols + ['total_score']
-        
-        # Log score distribution before capping
-        print(f"    - Score range before capping: {action_level_grouped['total_score'].min()}-{action_level_grouped['total_score'].max()}")
-        scores_above_12 = (action_level_grouped['total_score'] > 12).sum()
-        if scores_above_12 > 0:
-            print(f"    - Warning: {scores_above_12} sessions have scores > 12, will be capped")
-        
-        # CRITICAL: Cap the total_score at 12 (max possible for one game session)
-        action_level_grouped['total_score'] = action_level_grouped['total_score'].clip(upper=12)
-        
-        # Only include sessions with total_score > 0
-        before_filter = len(action_level_grouped)
-        action_level_grouped = action_level_grouped[action_level_grouped['total_score'] > 0]
-        after_filter = len(action_level_grouped)
-        print(f"    - Filtered out {before_filter - after_filter} sessions with score 0")
-        print(f"    - Final action_level sessions: {after_filter}")
-        
-        # Log score distribution by game
-        if not action_level_grouped.empty:
-            print("    - Score distribution by game:")
-            for game in sorted(action_level_grouped['game_name'].unique()):
-                game_scores = action_level_grouped[action_level_grouped['game_name'] == game]['total_score']
-                score_range = f"{game_scores.min()}-{game_scores.max()}"
-                unique_scores = sorted(game_scores.unique().tolist())
-                print(f"      - {game}: {len(game_scores)} sessions, scores {score_range}, unique values: {unique_scores}")
-        
-        combined_df = pd.concat([combined_df, action_level_grouped], ignore_index=True)
+            valid_scores_count = len(mcq_completed_data)
+            score_range = f"{mcq_completed_data['total_score'].min()}-{mcq_completed_data['total_score'].max()}"
+            print(f"    - Added {valid_scores_count} valid scores (range: {score_range})")
+            print(f"    - Games with valid scores: {sorted(mcq_completed_data['game_name'].unique())}")
+            combined_df = pd.concat([combined_df, mcq_completed_data], ignore_index=True)
+        else:
+            print(f"    - No valid scores after filtering")
+    
+    # Process action_level data - REMOVED: No longer used
+    # Action level processing has been removed as scores_data.csv now only contains game_completed and mcq_completed
     
     if combined_df.empty:
         print("WARNING: No score distribution data found")
