@@ -850,7 +850,11 @@ def parse_custom_dimension_1_json_data(custom_dim_1):
                     if isinstance(json_data, list):
                         for level_data in json_data:
                             if 'userResponse' in level_data and isinstance(level_data['userResponse'], list):
-                                for response in level_data['userResponse']:
+                                # For flow games, use only the first userResponse (same as parse_flow_stop_go_questions)
+                                # This matches the question correctness processing logic
+                                user_responses = level_data['userResponse']
+                                if len(user_responses) > 0:
+                                    response = user_responses[0]
                                     if isinstance(response, dict) and 'isCorrect' in response:
                                         if response['isCorrect'] is True:
                                             total_score += 1
@@ -1413,7 +1417,8 @@ def calculate_score_distribution_combined(df_score):
     combined_df = pd.DataFrame()
     
     # Separate data based on action type for different score calculation methods
-    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed', na=False)].copy()
+    # Include both game_completed and mcq_completed (same as question correctness processing)
+    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed|mcq_completed', na=False, case=False)].copy()
     action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
     
     print(f"  - game_completed records: {len(game_completed_data)}")
@@ -1424,9 +1429,9 @@ def calculate_score_distribution_combined(df_score):
     if len(action_level_data) > 0:
         print(f"  - Unique games in action_level: {action_level_data['game_name'].nunique()}")
     
-    # Process game_completed data (correctSelections and jsonData games)
+    # Process game_completed/mcq_completed data (correctSelections and jsonData games)
     if not game_completed_data.empty:
-        print("  - Processing game_completed data...")
+        print("  - Processing game_completed/mcq_completed data...")
         print(f"    - Processing {game_completed_data['game_name'].nunique()} unique games")
         
         # Process each game individually to determine the correct score calculation method
