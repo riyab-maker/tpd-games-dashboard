@@ -331,6 +331,20 @@ def load_processed_data():
         # Load time series data
         time_series_df = pd.read_csv(os.path.join(DATA_DIR, "time_series_data.csv"))
         
+        # Extract domain from game_code if available (for time series data)
+        if 'game_code' in time_series_df.columns and 'domain' not in time_series_df.columns:
+            def extract_domain_from_game_code(game_code):
+                """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                if pd.isna(game_code) or not isinstance(game_code, str):
+                    return None
+                parts = game_code.split('-')
+                # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+                # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
+                if len(parts) >= 3:
+                    return parts[2]
+                return None
+            time_series_df['domain'] = time_series_df['game_code'].apply(extract_domain_from_game_code)
+        
         # Load repeatability data
         repeatability_df = pd.read_csv(os.path.join(DATA_DIR, "repeatability_data.csv"))
         
@@ -1969,6 +1983,18 @@ def main() -> None:
         # Apply domain filter
         if has_domain_filter:
             if 'domain' in filtered_df.columns:
+                filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
+            elif 'game_code' in filtered_df.columns:
+                # Extract domain from game_code and filter
+                def extract_domain_from_game_code(game_code):
+                    """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                    if pd.isna(game_code) or not isinstance(game_code, str):
+                        return None
+                    parts = game_code.split('-')
+                    if len(parts) >= 3:
+                        return parts[2]
+                    return None
+                filtered_df['domain'] = filtered_df['game_code'].apply(extract_domain_from_game_code)
                 filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
             elif 'game_name' in filtered_df.columns and 'domain' in game_conversion_df.columns:
                 # Filter by games in selected domains
