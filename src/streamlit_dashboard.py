@@ -1860,13 +1860,17 @@ def main() -> None:
     
     # Game Name filter - get unique games from game_conversion_df
     unique_games = sorted(game_conversion_df['game_name'].unique())
-    # Ensure at least one game is selected by default (first game)
-    default_games = [unique_games[0]] if unique_games else []
+    # If domain is selected, default to empty (show all games in domain)
+    # Otherwise, default to first game
+    if selected_domains and len(selected_domains) > 0:
+        default_games = []  # When domain is selected, show all games in that domain by default
+    else:
+        default_games = [unique_games[0]] if unique_games else []  # Otherwise, default to first game
     selected_games = st.multiselect(
         "🎮 Select Game Names to filter by:",
         options=unique_games,
-        default=default_games,  # Default to first game - at least one game must be selected
-        help="Select one or more games to filter all dashboard sections. At least one game is selected by default."
+        default=default_games,
+        help="Select one or more games to filter all dashboard sections. When domain is selected, leave empty to show all games in that domain."
     )
     
     # Language filter - get unique languages from game_conversion_df or processed_data_df (same pattern as domain filter)
@@ -1956,8 +1960,13 @@ def main() -> None:
     
     # Apply global filters (domain, game, and language) to all dataframes
     # Only consider a filter active if something is actually selected AND it's a subset of all options
-    has_game_filter = bool(selected_games) and len(selected_games) > 0 and len(selected_games) < len(unique_games)
     has_domain_filter = bool(selected_domains) and len(selected_domains) > 0 and len(selected_domains) < len(unique_domains) if unique_domains else False
+    # Game filter: only active if games are explicitly selected AND it's a subset
+    # If domain filter is active and no games are selected, don't apply game filter (show all games in domain)
+    has_game_filter = bool(selected_games) and len(selected_games) > 0 and len(selected_games) < len(unique_games)
+    # If domain filter is active and no games are selected, don't apply game filter
+    if has_domain_filter and len(selected_games) == 0:
+        has_game_filter = False  # Show all games within the selected domain
     # Language filter is active ONLY when languages are actually selected (not empty)
     # Unlike games/domains, we filter by language even if all languages are selected (to show explicit filtering)
     has_language_filter = bool(selected_languages) and len(selected_languages) > 0 if unique_languages else False
@@ -2004,6 +2013,7 @@ def main() -> None:
                 filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_domains)]
         
         # Apply game filter
+        # If domain filter is active and no games are selected, show all games within the domain
         if has_game_filter:
             if 'game_name' in filtered_df.columns:
                 filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
