@@ -1989,45 +1989,106 @@ def main() -> None:
                   (filtered_df['metric'] == 'rm_active_users'))
             ].copy()
         
-        # Apply domain filter
-        if has_domain_filter:
-            if 'domain' in filtered_df.columns:
-                filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
-            elif 'game_code' in filtered_df.columns:
-                # Extract domain from game_code and filter
-                def extract_domain_from_game_code(game_code):
-                    """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
-                    if pd.isna(game_code) or not isinstance(game_code, str):
+        # For time series data, use "All" combinations similar to conversion funnel
+        # Time series data uses 'game_code' column which contains domain codes (CG, LL, etc.) or 'All'
+        if 'game_code' in filtered_df.columns and 'language' in filtered_df.columns and 'period_type' in filtered_df.columns:
+            # Time series data has pre-calculated "All" combinations
+            # Determine which combination to use based on global filters
+            if not has_domain_filter and not has_language_filter:
+                # No filters - use overall totals (game_code='All', language='All')
+                filtered_df = filtered_df[
+                    (filtered_df['game_code'] == 'All') & (filtered_df['language'] == 'All')
+                ]
+            elif has_domain_filter and not has_language_filter:
+                # Domain filter only - use (game_code, language='All') combinations
+                if len(selected_domains) == 1:
+                    # Single domain - use exact combination
+                    filtered_df = filtered_df[
+                        (filtered_df['game_code'] == selected_domains[0]) & (filtered_df['language'] == 'All')
+                    ]
+                else:
+                    # Multiple domains - aggregate (game_code, language='All') rows
+                    filtered_df = filtered_df[
+                        (filtered_df['game_code'].isin(selected_domains)) & (filtered_df['language'] == 'All')
+                    ]
+                    # Group by period, game, metric, event, and game_code to aggregate counts
+                    group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type', 'game_code']
+                    filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
+                    filtered_df['language'] = 'All'
+            elif not has_domain_filter and has_language_filter:
+                # Language filter only - use (game_code='All', language) combinations
+                if len(selected_languages) == 1:
+                    # Single language - use exact combination
+                    filtered_df = filtered_df[
+                        (filtered_df['game_code'] == 'All') & (filtered_df['language'] == selected_languages[0])
+                    ]
+                else:
+                    # Multiple languages - aggregate (game_code='All', language) rows
+                    filtered_df = filtered_df[
+                        (filtered_df['game_code'] == 'All') & (filtered_df['language'].isin(selected_languages))
+                    ]
+                    # Group by period, game, metric, event, and language to aggregate counts
+                    group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type', 'language']
+                    filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
+                    filtered_df['game_code'] = 'All'
+            elif has_domain_filter and has_language_filter:
+                # Both domain and language filters - use (game_code, language) combinations
+                if len(selected_domains) == 1 and len(selected_languages) == 1:
+                    # Single domain and language - use exact combination
+                    filtered_df = filtered_df[
+                        (filtered_df['game_code'] == selected_domains[0]) & 
+                        (filtered_df['language'] == selected_languages[0])
+                    ]
+                else:
+                    # Multiple domains/languages - filter and aggregate
+                    filtered_df = filtered_df[
+                        (filtered_df['game_code'].isin(selected_domains)) & 
+                        (filtered_df['language'].isin(selected_languages))
+                    ]
+                    # Group by period, game, metric, event, game_code, and language to aggregate counts
+                    group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type', 'game_code', 'language']
+                    filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
+        else:
+            # For other dataframes, use the original filtering logic
+            # Apply domain filter
+            if has_domain_filter:
+                if 'domain' in filtered_df.columns:
+                    filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
+                elif 'game_code' in filtered_df.columns:
+                    # Extract domain from game_code and filter
+                    def extract_domain_from_game_code(game_code):
+                        """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                        if pd.isna(game_code) or not isinstance(game_code, str):
+                            return None
+                        parts = game_code.split('-')
+                        if len(parts) >= 3:
+                            return parts[2]
                         return None
-                    parts = game_code.split('-')
-                    if len(parts) >= 3:
-                        return parts[2]
-                    return None
-                filtered_df['domain'] = filtered_df['game_code'].apply(extract_domain_from_game_code)
-                filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
-            elif 'game_name' in filtered_df.columns and 'domain' in game_conversion_df.columns:
-                # Filter by games in selected domains
-                games_in_domains = game_conversion_df[
-                    game_conversion_df['domain'].isin(selected_domains)
-                ]['game_name'].unique()
-                filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_domains)]
-        
-        # Apply game filter
-        # If domain filter is active and no games are selected, show all games within the domain
-        if has_game_filter:
-            if 'game_name' in filtered_df.columns:
-                filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
-        
-        # Apply language filter - same pattern as domain filter
-        if has_language_filter:
-            if 'language' in filtered_df.columns:
-                filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
-            elif 'game_name' in filtered_df.columns and 'language' in game_conversion_df.columns:
-                # Filter by games in selected languages
-                games_in_languages = game_conversion_df[
-                    game_conversion_df['language'].isin(selected_languages)
-                ]['game_name'].unique()
-                filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_languages)]
+                    filtered_df['domain'] = filtered_df['game_code'].apply(extract_domain_from_game_code)
+                    filtered_df = filtered_df[filtered_df['domain'].isin(selected_domains)]
+                elif 'game_name' in filtered_df.columns and 'domain' in game_conversion_df.columns:
+                    # Filter by games in selected domains
+                    games_in_domains = game_conversion_df[
+                        game_conversion_df['domain'].isin(selected_domains)
+                    ]['game_name'].unique()
+                    filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_domains)]
+            
+            # Apply game filter
+            # If domain filter is active and no games are selected, show all games within the domain
+            if has_game_filter:
+                if 'game_name' in filtered_df.columns:
+                    filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
+            
+            # Apply language filter - same pattern as domain filter
+            if has_language_filter:
+                if 'language' in filtered_df.columns:
+                    filtered_df = filtered_df[filtered_df['language'].isin(selected_languages)]
+                elif 'game_name' in filtered_df.columns and 'language' in game_conversion_df.columns:
+                    # Filter by games in selected languages
+                    games_in_languages = game_conversion_df[
+                        game_conversion_df['language'].isin(selected_languages)
+                    ]['game_name'].unique()
+                    filtered_df = filtered_df[filtered_df['game_name'].isin(games_in_languages)]
         
         # Combine filtered data with RM active users data
         if not rm_active_users_df.empty:

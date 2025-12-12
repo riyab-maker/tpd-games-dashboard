@@ -118,31 +118,29 @@ SQL_QUERY = (
 )
 
 # Score distribution query - Updated to use hybrid_games and hybrid_games_links tables
-# Includes game_completed, mcq_completed, and action_level (matching question correctness processing)
+# Includes only game_completed and mcq_completed (action_level is no longer used)
 SCORE_DISTRIBUTION_QUERY = """
-SELECT 
-  mllva.idlink_va,
-  hg.game_name AS game_name,
-  mllva.idvisit,
-  mla.name AS action_name,
-  mllva.custom_dimension_1,
-  TO_HEX(mllva.idvisitor) AS idvisitor_hex,
-  mllva.server_time,
-  mllva.idaction_name,
-  mllva.custom_dimension_2,
-  mla.idaction,
-  mla.type
-FROM rl_dwh_prod.live.hybrid_games hg
-INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
-INNER JOIN rl_dwh_prod.live.matomo_log_link_visit_action mllva ON hgl.activity_id = mllva.custom_dimension_2
-INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
-WHERE mllva.server_time >= '2025-07-01'
-  AND hgl.activity_id IS NOT NULL
-  AND (
-    mla.name LIKE '%game_completed%' 
-    OR mla.name LIKE '%mcq_completed%'
-    OR mla.name LIKE '%action_level%'
-  )
+select "mllva"."idlink_va",
+	"hg"."game_name" as "game_name",
+	"mllva"."idvisit",
+	"mla"."name" as "action_name",
+	"mllva"."custom_dimension_1",
+	TO_HEX("mllva"."idvisitor") as "idvisitor_hex",
+	"mllva"."server_time",
+	"mllva"."idaction_name",
+	"mllva"."custom_dimension_2",
+	"mla"."idaction",
+	"mla"."type",
+	"hg"."game_code",
+	"rl_dwh_prod"."live"."matomo_log_action"."name" as "language"
+from "rl_dwh_prod"."live"."hybrid_games" "hg" 
+	inner join "rl_dwh_prod"."live"."hybrid_games_links" "hgl" on "hg"."id" = "hgl"."game_id" 
+	inner join "rl_dwh_prod"."live"."matomo_log_link_visit_action" "mllva" on "hgl"."activity_id" = "mllva"."custom_dimension_2" 
+	inner join "rl_dwh_prod"."live"."matomo_log_action" "mla" on "mllva"."idaction_name" = "mla"."idaction" 
+	inner join "rl_dwh_prod"."live"."matomo_log_action" on "mllva"."idaction_url_ref" = "rl_dwh_prod"."live"."matomo_log_action"."idaction" 
+where ("mla"."name" Like '%game_completed%' or "mla"."name" Like '%mcq_completed%') 
+	and "mllva"."server_time" >= '2025-07-01' 
+	and "hgl"."activity_id" is not NULL
 """
 
 # Note: Question Correctness now uses SCORE_DISTRIBUTION_QUERY (same as score distribution)
@@ -255,6 +253,7 @@ WHERE matomo_log_action.name LIKE '%_completed%'
 
 # Time Series Analysis Query - Uses same logic as conversion funnel query
 # Includes action_name and event classification (Started/Completed)
+# Includes game_code and language for aggregation
 TIME_SERIES_QUERY = """
 SELECT 
   mllva.idlink_va,
@@ -264,7 +263,9 @@ SELECT
   mllva.idaction_name,
   mllva.custom_dimension_2,
   hg.game_name,
+  hg.game_code,
   mla.name AS action_name,
+  matomo_log_action1.name AS language,
   CASE 
     WHEN mla.name LIKE '%hybrid_game_started%' OR mla.name LIKE '%hybrid_mcq_started%' THEN 'Started'
     WHEN mla.name LIKE '%hybrid_game_completed%' OR mla.name LIKE '%hybrid_mcq_completed%' THEN 'Completed'
@@ -274,6 +275,7 @@ FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
 INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
 INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
 INNER JOIN rl_dwh_prod.live.hybrid_games hg ON hgl.game_id = hg.id
+INNER JOIN rl_dwh_prod.live.matomo_log_action matomo_log_action1 ON mllva.idaction_url_ref = matomo_log_action1.idaction
 WHERE (mla.name LIKE '%hybrid_game_started%' 
        OR mla.name LIKE '%hybrid_mcq_started%' 
        OR mla.name LIKE '%hybrid_game_completed%' 
@@ -670,48 +672,232 @@ def parse_correct_selections_questions(custom_dim_1, game_name):
         return results
 
 
+def extract_action_section_from_string(json_str):
+    """Extract Action section from JSON string even if the rest is malformed.
+    
+    This function tries to find and extract just the Action section with its jsonData
+    by searching for the pattern: {"section":"Action","jsonData":[...]}
+    Uses bracket matching to properly extract nested JSON arrays.
+    
+    Tries multiple strategies:
+    1. Look for "section":"Action" followed by "jsonData"
+    2. Look for just "jsonData" (in case section key is malformed)
+    3. Try to extract jsonData array using bracket matching
+    """
+    import re
+    
+    if not isinstance(json_str, str):
+        return None
+    
+    # Strategy 1: Find "jsonData" that appears after "section":"Action"
+    # Look for pattern: "section":"Action" ... "jsonData":[
+    pattern1 = r'"section"\s*:\s*"Action"[^}]*?"jsonData"\s*:\s*\['
+    match1 = re.search(pattern1, json_str, re.DOTALL)
+    
+    # Strategy 2: Find any "jsonData" key (in case section is malformed or missing)
+    # Look for pattern: "jsonData":[
+    pattern2 = r'"jsonData"\s*:\s*\['
+    match2 = re.search(pattern2, json_str, re.DOTALL)
+    
+    # Use the first match found (prefer Strategy 1 if both match)
+    match = match1 if match1 else match2
+    
+    if match:
+        # Find the start of the jsonData array (the '[' character)
+        start_pos = match.end() - 1  # -1 because we want to include the '['
+        
+        # Now find the matching closing bracket ']' using bracket counting
+        bracket_count = 0
+        in_string = False
+        escape_next = False
+        
+        for i in range(start_pos, len(json_str)):
+            char = json_str[i]
+            
+            if escape_next:
+                escape_next = False
+                continue
+            
+            if char == '\\':
+                escape_next = True
+                continue
+            
+            if char == '"' and not escape_next:
+                in_string = not in_string
+                continue
+            
+            if not in_string:
+                if char == '[':
+                    bracket_count += 1
+                elif char == ']':
+                    bracket_count -= 1
+                    if bracket_count == 0:
+                        # Found the matching closing bracket
+                        end_pos = i + 1
+                        json_data_str = json_str[start_pos:end_pos]
+                        try:
+                            json_data = json.loads(json_data_str)
+                            return json_data
+                        except json.JSONDecodeError:
+                            # Try cleaning the extracted string
+                            try:
+                                # Remove any trailing commas before closing bracket
+                                json_data_str_clean = re.sub(r',\s*\]', ']', json_data_str)
+                                json_data = json.loads(json_data_str_clean)
+                                return json_data
+                            except:
+                                break
+                        except:
+                            break
+        
+        # If bracket matching failed, try a simpler regex approach as fallback
+        # This handles simpler cases without deeply nested structures
+        simple_pattern = r'"jsonData"\s*:\s*(\[[^\]]*(?:\[[^\]]*\][^\]]*)*\])'
+        simple_match = re.search(simple_pattern, json_str, re.DOTALL)
+        if simple_match:
+            try:
+                json_data_str = simple_match.group(1)
+                # Try to clean common JSON errors
+                json_data_str = re.sub(r',\s*\]', ']', json_data_str)  # Remove trailing commas
+                json_data = json.loads(json_data_str)
+                return json_data
+            except:
+                pass
+    
+    # Strategy 3: Try to find jsonData even if the format is slightly different
+    # Look for jsonData with various spacing/quote issues
+    pattern3 = r'["\']jsonData["\']\s*:\s*\['
+    match3 = re.search(pattern3, json_str, re.DOTALL | re.IGNORECASE)
+    if match3:
+        start_pos = match3.end() - 1
+        bracket_count = 0
+        in_string = False
+        escape_next = False
+        
+        for i in range(start_pos, len(json_str)):
+            char = json_str[i]
+            
+            if escape_next:
+                escape_next = False
+                continue
+            
+            if char == '\\':
+                escape_next = True
+                continue
+            
+            if char in ('"', "'") and not escape_next:
+                in_string = not in_string
+                continue
+            
+            if not in_string:
+                if char == '[':
+                    bracket_count += 1
+                elif char == ']':
+                    bracket_count -= 1
+                    if bracket_count == 0:
+                        end_pos = i + 1
+                        json_data_str = json_str[start_pos:end_pos]
+                        try:
+                            json_data_str = re.sub(r',\s*\]', ']', json_data_str)
+                            json_data = json.loads(json_data_str)
+                            return json_data
+                        except:
+                            break
+    
+    return None
+
+
 def parse_flow_stop_go_questions(custom_dim_1, game_name):
     """Parse flow structure to extract question correctness (for "Flow" games)
     
+    Handles two structures:
+    1. Nested: gameData[*] where section="Action" -> jsonData[*] -> userResponse[0].isCorrect
+    2. Root level: section="Action" -> jsonData[*] -> userResponse[0].isCorrect (for Beginning Sounds games: Ma/Cha/Ba, Ka/Na/Ta, Ta/Va/Ga)
+    
     This matches the logic used in score distribution's parse_custom_dimension_1_json_data
     but extracts per-question instead of total score.
+    
+    For each level in jsonData:
+    - Read userResponse[0].isCorrect
+    - If true → score = 1, if false → score = 0
+    
+    If JSON parsing fails, tries to extract Action section directly from the string.
     """
     results = []
     try:
         if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
             return results
         
-        data = json.loads(custom_dim_1)
+        data = None
+        json_data = None
         
-        # Check for gameData structure with Action section (same as score distribution)
-        if 'gameData' in data and isinstance(data['gameData'], list):
-            for game_data in data['gameData']:
-                if game_data.get('section') == 'Action' and 'jsonData' in game_data:
-                    json_data = game_data['jsonData']
-                    
-                    if isinstance(json_data, list):
-                        question_idx = 0
-                        for level_data in json_data:
-                            if not isinstance(level_data, dict):
-                                continue
-                            
-                            # Extract per-question from userResponse (same logic as score distribution)
-                            user_responses = level_data.get('userResponse', [])
-                            if isinstance(user_responses, list) and len(user_responses) > 0:
-                                # Use first userResponse (same as score distribution logic)
-                                response = user_responses[0]
-                                if isinstance(response, dict):
-                                    is_correct = response.get('isCorrect', False)
-                                    question_idx += 1
-                                    
-                                    # Get question number from level if available, otherwise use index
-                                    question_num = level_data.get('level', question_idx)
-                                    
-                                    results.append({
-                                        'question_number': int(question_num),
-                                        'is_correct': 1 if is_correct else 0,
-                                        'game_name': game_name
-                                    })
+        # Try to parse the full JSON first
+        try:
+            # Handle case where custom_dim_1 might already be a dict
+            if isinstance(custom_dim_1, dict):
+                data = custom_dim_1
+            else:
+                json_str = str(custom_dim_1).strip()
+                # Remove any leading/trailing quotes if present
+                if json_str.startswith('"') and json_str.endswith('"'):
+                    json_str = json_str[1:-1]
+                # Clean malformed JSON
+                json_str = clean_malformed_json(json_str)
+                data = json.loads(json_str)
+        except (json.JSONDecodeError, ValueError, TypeError):
+            # If full JSON parsing fails, try to extract just the Action section
+            json_str = str(custom_dim_1).strip()
+            if json_str.startswith('"') and json_str.endswith('"'):
+                json_str = json_str[1:-1]
+            json_str = clean_malformed_json(json_str)
+            json_data = extract_action_section_from_string(json_str)
+            if json_data:
+                # Successfully extracted Action section, skip to processing jsonData
+                pass
+            else:
+                # Could not extract Action section, return empty results
+                return results
+        
+        # If we successfully parsed the full JSON, look for Action section
+        if data is not None:
+            action_section = None
+            
+            # Case 1: Check if Action section is at root level (for Beginning Sounds Ma/Cha/Ba)
+            if isinstance(data, dict) and data.get('section') == 'Action' and 'jsonData' in data:
+                action_section = data
+                json_data = data['jsonData']
+            # Case 2: Check nested structure (gameData[*] where section="Action")
+            elif isinstance(data, dict) and 'gameData' in data and isinstance(data['gameData'], list):
+                for game_data in data['gameData']:
+                    if isinstance(game_data, dict) and game_data.get('section') == 'Action' and 'jsonData' in game_data:
+                        action_section = game_data
+                        json_data = game_data['jsonData']
+                        break
+        
+        # Extract per-question from jsonData
+        if json_data and isinstance(json_data, list):
+            question_idx = 0
+            for level_data in json_data:
+                if not isinstance(level_data, dict):
+                    continue
+                
+                # Extract per-question from userResponse
+                user_responses = level_data.get('userResponse', [])
+                if isinstance(user_responses, list) and len(user_responses) > 0:
+                    # Use first userResponse
+                    response = user_responses[0]
+                    if isinstance(response, dict):
+                        is_correct = response.get('isCorrect', False)
+                        question_idx += 1
+                        
+                        # Get question number from level if available, otherwise use index
+                        question_num = level_data.get('level', question_idx)
+                        
+                        results.append({
+                            'question_number': int(question_num),
+                            'is_correct': 1 if is_correct else 0,
+                            'game_name': game_name
+                        })
         
         return results
     except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError) as e:
@@ -755,6 +941,181 @@ def parse_action_level_questions(custom_dim_1, game_name, level_number):
         return results
 
 
+def parse_mcq_completed_questions(custom_dim_1, game_name):
+    """Parse mcq_completed structure to extract per-question correctness from Action section
+    
+    Structure:
+    {
+      "section": "Action",
+      "gameData": [
+          {
+            "options": [
+                {"path": "o1.png", "isCorrect": false},
+                {"path": "o2.png", "isCorrect": true},
+                {"path": "o3.png", "isCorrect": false}
+            ],
+            "chosenOption": 1,
+            ...
+          },
+          ...
+      ]
+    }
+    
+    For each question:
+    - Look at chosenOption (index chosen by the user)
+    - Look at options[chosenOption].isCorrect
+    - If isCorrect == true, score = 1, else score = 0
+    
+    Returns list of question results with question_number and is_correct.
+    """
+    results = []
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return results
+        
+        # Parse JSON
+        data = json.loads(custom_dim_1)
+        
+        # Look for Action section - can be at top level or inside gameData array
+        action_section = None
+        
+        # Case 1: Action section at top level
+        if isinstance(data, dict) and 'section' in data and data['section'] == 'Action':
+            action_section = data
+        # Case 2: Action section inside gameData array (similar to other game types)
+        elif isinstance(data, dict) and 'gameData' in data and isinstance(data['gameData'], list):
+            for item in data['gameData']:
+                if isinstance(item, dict) and item.get('section') == 'Action':
+                    action_section = item
+                    break
+        
+        # Extract per-question correctness from Action section
+        if action_section and 'gameData' in action_section and isinstance(action_section['gameData'], list):
+            for question_idx, question in enumerate(action_section['gameData'], 1):
+                if not isinstance(question, dict):
+                    continue
+                
+                # Get options and chosenOption
+                options = question.get('options', [])
+                chosen_option = question.get('chosenOption')
+                
+                # Skip if no options or chosenOption is None
+                if not isinstance(options, list) or len(options) == 0:
+                    continue
+                
+                # Handle chosenOption - convert to int if needed, skip if None
+                if chosen_option is None:
+                    is_correct = 0
+                else:
+                    try:
+                        chosen_option = int(chosen_option)
+                    except (ValueError, TypeError):
+                        is_correct = 0
+                    else:
+                        # Check if chosenOption is within bounds
+                        if 0 <= chosen_option < len(options):
+                            chosen_option_data = options[chosen_option]
+                            if isinstance(chosen_option_data, dict):
+                                # Check isCorrect - handle both boolean True and string "true"
+                                is_correct_val = chosen_option_data.get('isCorrect', False)
+                                is_correct = 1 if (is_correct_val is True or (isinstance(is_correct_val, str) and is_correct_val.lower() == 'true')) else 0
+                            else:
+                                is_correct = 0
+                        else:
+                            is_correct = 0
+                
+                results.append({
+                    'question_number': question_idx,
+                    'is_correct': is_correct,
+                    'game_name': game_name
+                })
+        
+        return results
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError):
+        return results
+
+
+def parse_mcq_completed_questions_with_correct_option(custom_dim_1, game_name):
+    """Parse mcq_completed structure to extract per-question correctness using correctOption
+    
+    This is for games like Positions that use chosenOption and correctOption instead of isCorrect.
+    
+    Structure:
+    {
+      "section": "Action",
+      "gameData": [
+          {
+            "options": [...],
+            "chosenOption": 1,
+            "correctOption": 2,
+            ...
+          },
+          ...
+      ]
+    }
+    
+    For each question:
+    - Look at chosenOption (index chosen by the user)
+    - Look at correctOption (the correct index)
+    - If chosenOption == correctOption, score = 1, else score = 0
+    
+    Returns list of question results with question_number and is_correct.
+    """
+    results = []
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return results
+        
+        # Parse JSON
+        data = json.loads(custom_dim_1)
+        
+        # Look for Action section - can be at top level or inside gameData array
+        action_section = None
+        
+        # Case 1: Action section at top level
+        if isinstance(data, dict) and 'section' in data and data['section'] == 'Action':
+            action_section = data
+        # Case 2: Action section inside gameData array (similar to other game types)
+        elif isinstance(data, dict) and 'gameData' in data and isinstance(data['gameData'], list):
+            for item in data['gameData']:
+                if isinstance(item, dict) and item.get('section') == 'Action':
+                    action_section = item
+                    break
+        
+        # Extract per-question correctness from Action section
+        if action_section and 'gameData' in action_section and isinstance(action_section['gameData'], list):
+            for question_idx, question in enumerate(action_section['gameData'], 1):
+                if not isinstance(question, dict):
+                    continue
+                
+                # Get chosenOption and correctOption
+                chosen_option = question.get('chosenOption')
+                correct_option = question.get('correctOption')
+                
+                # If either is None, score = 0
+                if chosen_option is None or correct_option is None:
+                    is_correct = 0
+                else:
+                    try:
+                        chosen_option = int(chosen_option)
+                        correct_option = int(correct_option)
+                    except (ValueError, TypeError):
+                        is_correct = 0
+                    else:
+                        # Compare chosenOption with correctOption
+                        is_correct = 1 if chosen_option == correct_option else 0
+                
+                results.append({
+                    'question_number': question_idx,
+                    'is_correct': is_correct,
+                    'game_name': game_name
+                })
+        
+        return results
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError):
+        return results
+
+
 def get_game_type(game_name):
     """Map game name to its processing type"""
     game_type_mapping = {
@@ -786,6 +1147,7 @@ def get_game_type(game_name):
         'Numerals 1-10': 'action_level',
         'Beginning Sound Ma Ka La': 'action_level',
         'Beginning Sound Ba Ra Na': 'action_level',
+        # Note: Beginning Sounds Ma/Cha/Ba is processed through game_completed (jsonData method)
     }
     return game_type_mapping.get(game_name, None)
 
@@ -830,20 +1192,119 @@ def parse_custom_dimension_1_correct_selections(custom_dim_1):
         return 0
 
 
+def clean_malformed_json(json_str):
+    """Clean malformed JSON strings by fixing common issues like consecutive double quotes"""
+    if not isinstance(json_str, str):
+        return json_str
+    
+    import re
+    
+    # Fix consecutive double quotes (common issue in the data)
+    # Pattern: "value""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    # This happens when quotes get duplicated inside a string value
+    # Replace all occurrences of 3+ consecutive quotes with a single quote
+    # This is safe because JSON doesn't allow unescaped quotes inside strings anyway
+    json_str = re.sub(r'"{3,}', '"', json_str)
+    
+    # Fix pattern where quotes appear right after a string value but before the closing quote
+    # Pattern: "value""""more" -> "value""more"
+    # This handles cases where quotes got duplicated between the value and the closing quote
+    json_str = re.sub(r'([^\\"])"{2,}([^"\\])', r'\1"\2', json_str)
+    
+    # Also handle cases where quotes might be at the end of a string value
+    # Pattern: "value"""" -> "value""
+    json_str = re.sub(r'([^\\"])"{4,}"', r'\1""', json_str)
+    
+    # Fix other common issues
+    # Remove any null bytes
+    json_str = json_str.replace('\x00', '')
+    
+    # Remove any control characters except newlines and tabs
+    json_str = re.sub(r'[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]', '', json_str)
+    
+    return json_str
+
+
 def parse_custom_dimension_1_json_data(custom_dim_1):
-    """Parse custom_dimension_1 JSON to extract total score from jsonData (for second query)"""
+    """Parse custom_dimension_1 JSON to extract total score from jsonData (for second query)
+    
+    Handles two structures:
+    1. Nested: gameData[*] where section="Action" -> jsonData[*] -> userResponse[0].isCorrect
+    2. Root level: section="Action" -> jsonData[*] -> userResponse[0].isCorrect (for Beginning Sounds games: Ma/Cha/Ba, Ka/Na/Ta, Ta/Va/Ga)
+    
+    For each level in jsonData:
+    - Read userResponse[0].isCorrect
+    - If true → score = 1, if false → score = 0
+    - Sum all level scores to get total_score
+    """
     try:
         if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
             return 0
         
-        # Parse JSON
-        data = json.loads(custom_dim_1)
-        
-        # Extract total score from jsonData structure
-        # Path: gameData[*] where section="Action" -> jsonData[*] -> userResponse[*] -> isCorrect
-        if 'gameData' in data and len(data['gameData']) > 0:
-            total_score = 0
+        # Handle case where custom_dim_1 might already be a dict
+        if isinstance(custom_dim_1, dict):
+            data = custom_dim_1
+        else:
+            # Parse JSON - try to handle malformed JSON
+            json_str = str(custom_dim_1).strip()
             
+            # Remove any leading/trailing quotes if present
+            if json_str.startswith('"') and json_str.endswith('"'):
+                json_str = json_str[1:-1]
+            
+            # Clean malformed JSON
+            json_str = clean_malformed_json(json_str)
+            
+            try:
+                data = json.loads(json_str)
+            except json.JSONDecodeError:
+                # Try additional fixes
+                try:
+                    # Try unescaping
+                    json_str = json_str.encode().decode('unicode_escape')
+                    data = json.loads(json_str)
+                except:
+                    # If full JSON parsing fails, try to extract just the Action section
+                    json_data = extract_action_section_from_string(json_str)
+                    if json_data:
+                        # Successfully extracted Action section, process it directly
+                        total_score = 0
+                        for level_data in json_data:
+                            if isinstance(level_data, dict) and 'userResponse' in level_data:
+                                user_responses = level_data.get('userResponse', [])
+                                if isinstance(user_responses, list) and len(user_responses) > 0:
+                                    # Use first userResponse
+                                    response = user_responses[0]
+                                    if isinstance(response, dict) and 'isCorrect' in response:
+                                        is_correct = response['isCorrect']
+                                        # Handle both boolean True and string "true"
+                                        if is_correct is True or (isinstance(is_correct, str) and is_correct.lower() == 'true'):
+                                            total_score += 1
+                        return total_score
+                    # If we can't extract Action section, return 0
+                    return 0
+        
+        total_score = 0
+        
+        # Case 1: Check if Action section is at root level (for Beginning Sounds Ma/Cha/Ba)
+        if isinstance(data, dict) and data.get('section') == 'Action' and 'jsonData' in data:
+            json_data = data['jsonData']
+            if isinstance(json_data, list):
+                for level_data in json_data:
+                            if isinstance(level_data, dict) and 'userResponse' in level_data:
+                                user_responses = level_data.get('userResponse', [])
+                                if isinstance(user_responses, list) and len(user_responses) > 0:
+                                    # Use first userResponse
+                                    response = user_responses[0]
+                                    if isinstance(response, dict) and 'isCorrect' in response:
+                                        is_correct = response['isCorrect']
+                                        # Handle both boolean True and string "true"
+                                        if is_correct is True or (isinstance(is_correct, str) and is_correct.lower() == 'true'):
+                                            total_score += 1
+            return total_score
+        
+        # Case 2: Check nested structure (gameData[*] where section="Action")
+        if 'gameData' in data and len(data['gameData']) > 0:
             for game_data in data['gameData']:
                 # Look for section = "Action"
                 if game_data.get('section') == 'Action' and 'jsonData' in game_data:
@@ -851,14 +1312,15 @@ def parse_custom_dimension_1_json_data(custom_dim_1):
                     
                     if isinstance(json_data, list):
                         for level_data in json_data:
-                            if 'userResponse' in level_data and isinstance(level_data['userResponse'], list):
-                                # For flow games, use only the first userResponse (same as parse_flow_stop_go_questions)
-                                # This matches the question correctness processing logic
-                                user_responses = level_data['userResponse']
-                                if len(user_responses) > 0:
+                            if isinstance(level_data, dict) and 'userResponse' in level_data:
+                                user_responses = level_data.get('userResponse', [])
+                                if isinstance(user_responses, list) and len(user_responses) > 0:
+                                    # Use first userResponse
                                     response = user_responses[0]
                                     if isinstance(response, dict) and 'isCorrect' in response:
-                                        if response['isCorrect'] is True:
+                                        is_correct = response['isCorrect']
+                                        # Handle both boolean True and string "true"
+                                        if is_correct is True or (isinstance(is_correct, str) and is_correct.lower() == 'true'):
                                             total_score += 1
             
             return total_score
@@ -881,7 +1343,7 @@ def parse_custom_dimension_1_mcq_completed(custom_dim_1):
                 {"path": "o2.png", "isCorrect": true},
                 {"path": "o3.png", "isCorrect": false}
             ],
-            "chosenOption": 2,
+            "chosenOption": 1,
             ...
           },
           ...
@@ -889,10 +1351,12 @@ def parse_custom_dimension_1_mcq_completed(custom_dim_1):
     }
     
     For each question:
-    - Find the correct option index (where isCorrect == true)
-    - Compare with chosenOption
-    - If match → score = 1, else → 0
+    - Look at chosenOption (index chosen by the user)
+    - Look at options[chosenOption].isCorrect
+    - If isCorrect == true, score = 1, else score = 0
     - Sum all scores to get total score
+    
+    Note: Different questions can have different numbers of options.
     """
     try:
         if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
@@ -938,18 +1402,92 @@ def parse_custom_dimension_1_mcq_completed(custom_dim_1):
                 except (ValueError, TypeError):
                     continue
                 
-                # Find the correct option index (where isCorrect == true)
-                correct_option_index = None
-                for idx, option in enumerate(options):
-                    if isinstance(option, dict):
+                # Check if chosenOption is within bounds
+                if 0 <= chosen_option < len(options):
+                    chosen_option_data = options[chosen_option]
+                    if isinstance(chosen_option_data, dict):
                         # Check isCorrect - handle both boolean True and string "true"
-                        is_correct = option.get('isCorrect', False)
+                        is_correct = chosen_option_data.get('isCorrect', False)
                         if is_correct is True or (isinstance(is_correct, str) and is_correct.lower() == 'true'):
-                            correct_option_index = idx
-                            break
+                            total_score += 1
+                        # else: score = 0 (already initialized)
+        
+        return total_score
+    except (json.JSONDecodeError, TypeError, AttributeError, KeyError, IndexError, ValueError):
+        return 0
+
+
+def parse_custom_dimension_1_mcq_completed_with_correct_option(custom_dim_1):
+    """Parse custom_dimension_1 JSON to extract total score from mcq_completed games using correctOption
+    
+    This is for games like Positions that use chosenOption and correctOption instead of isCorrect.
+    
+    Structure:
+    {
+      "section": "Action",
+      "gameData": [
+          {
+            "options": [...],
+            "chosenOption": 1,
+            "correctOption": 2,
+            ...
+          },
+          ...
+      ]
+    }
+    
+    For each question:
+    - Look at chosenOption (index chosen by the user)
+    - Look at correctOption (the correct index)
+    - If chosenOption == correctOption, score = 1, else score = 0
+    - Sum all scores to get total score
+    
+    Note: Different questions can have different numbers of options.
+    """
+    try:
+        if pd.isna(custom_dim_1) or custom_dim_1 is None or custom_dim_1 == '' or custom_dim_1 == 'null':
+            return 0
+        
+        # Parse JSON
+        data = json.loads(custom_dim_1)
+        
+        total_score = 0
+        
+        # Look for Action section - can be at top level or inside gameData array
+        action_section = None
+        
+        # Case 1: Action section at top level
+        if isinstance(data, dict) and 'section' in data and data['section'] == 'Action':
+            action_section = data
+        # Case 2: Action section inside gameData array (similar to other game types)
+        elif isinstance(data, dict) and 'gameData' in data and isinstance(data['gameData'], list):
+            for item in data['gameData']:
+                if isinstance(item, dict) and item.get('section') == 'Action':
+                    action_section = item
+                    break
+        
+        # Extract scores from Action section
+        if action_section and 'gameData' in action_section and isinstance(action_section['gameData'], list):
+            for question in action_section['gameData']:
+                if not isinstance(question, dict):
+                    continue
                 
-                # Compare chosenOption with correct option index
-                if correct_option_index is not None and chosen_option == correct_option_index:
+                # Get chosenOption and correctOption
+                chosen_option = question.get('chosenOption')
+                correct_option = question.get('correctOption')
+                
+                # Skip if either is None
+                if chosen_option is None or correct_option is None:
+                    continue
+                
+                try:
+                    chosen_option = int(chosen_option)
+                    correct_option = int(correct_option)
+                except (ValueError, TypeError):
+                    continue
+                
+                # Compare chosenOption with correctOption
+                if chosen_option == correct_option:
                     total_score += 1
                 # else: score = 0 (already initialized)
         
@@ -1106,14 +1644,75 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     if has_game_code:
         print(f"  - Game code column found: will be preserved in output")
 
-    # Split by action types
-    game_completed_data = df_score[df_score['action_name'].str.contains('game_completed|mcq_completed', na=False, case=False)].copy()
+    # Split by action types (same as score distribution)
+    # Separate game_completed and mcq_completed for different processing methods
+    # Games that should use mcq_completed method (Action section with gameData):
+    # - Shape Rectangle: uses chosenOption/isCorrect method
+    # - Numerals 1-10: uses chosenOption/isCorrect method
+    # - Positions: uses chosenOption/isCorrect method
+    # Note: "Beginning Sounds Ma/Cha/Ba", "Beginning Sounds Ka/Na/Ta", "Beginning Sounds Ta/Va/Ga"
+    #       and "Beginning Sound Ba/Ra/Na" all have action_name like "beginning_sound_ma_cha_ba_hindi_hybrid_game_completed"
+    #       (contains "hybrid_game_completed") and should use flow/jsonData method, so they go to game_completed_data
+    games_to_use_mcq_completed_method = ['Shape Rectangle', 'Numerals 1-10', 'Positions']
+    games_to_use_json_data_method = ['Beginning Sound Ba/Ra/Na', 'Beginning Sounds Ma/Cha/Ba', 'Beginning Sounds Ka/Na/Ta', 'Beginning Sounds Ta/Va/Ga']
+    
+    # Helper function for case-insensitive game name matching (handles whitespace and case variations)
+    def _is_game_in_list(game_name, game_list):
+        """Check if game_name matches any game in game_list (case-insensitive, handles whitespace)"""
+        if pd.isna(game_name):
+            return False
+        game_name_clean = str(game_name).strip().lower()
+        return any(game_name_clean == str(g).strip().lower() for g in game_list)
+    
+    # Create boolean masks for case-insensitive matching
+    is_json_data_game = df_score['game_name'].apply(lambda x: _is_game_in_list(x, games_to_use_json_data_method))
+    is_mcq_completed_game = df_score['game_name'].apply(lambda x: _is_game_in_list(x, games_to_use_mcq_completed_method))
+    
+    # Filter for game_completed_data:
+    # - Includes action_name containing 'game_completed' (matches "hybrid_game_completed" too)
+    # - Excludes action_name containing 'mcq_completed' (unless it's a jsonData game)
+    # - Also includes mcq_completed records for jsonData games (to route them correctly)
+    # - Excludes games that should use mcq_completed method
+    game_completed_data = df_score[
+        ((df_score['action_name'].str.contains('game_completed', na=False, case=False) & 
+          ~df_score['action_name'].str.contains('mcq_completed', na=False, case=False)) |
+         (df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
+          is_json_data_game)) &
+        ~is_mcq_completed_game
+    ].copy()
+    
+    mcq_completed_data = df_score[
+        (df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
+         ~is_json_data_game) |
+        (df_score['action_name'].str.contains('game_completed', na=False, case=False) &
+         is_mcq_completed_game)
+    ].copy()
+    
     action_level_data = df_score[df_score['action_name'].str.contains('action_level', na=False)].copy()
 
-    print(f"  - game_completed/mcq_completed records: {len(game_completed_data):,}")
+    print(f"  - game_completed records: {len(game_completed_data):,}")
+    print(f"  - mcq_completed records: {len(mcq_completed_data):,}")
     print(f"  - action_level records: {len(action_level_data):,}")
-    print(f"  - Unique games in game_completed/mcq_completed: {game_completed_data['game_name'].nunique()}")
+    print(f"  - Unique games in game_completed: {game_completed_data['game_name'].nunique()}")
+    print(f"  - Unique games in mcq_completed: {mcq_completed_data['game_name'].nunique()}")
     print(f"  - Unique games in action_level: {action_level_data['game_name'].nunique()}")
+    
+    # Debug: Check if Beginning Sounds games are in the data
+    beginning_sounds_games = ['Beginning Sound Ba/Ra/Na', 'Beginning Sounds Ma/Cha/Ba', 'Beginning Sounds Ka/Na/Ta', 'Beginning Sounds Ta/Va/Ga']
+    print(f"\n  [DEBUG] Checking Beginning Sounds games in data:")
+    for game in beginning_sounds_games:
+        in_game_completed = game_completed_data[game_completed_data['game_name'].str.strip().str.lower() == game.strip().lower()]
+        in_mcq_completed = mcq_completed_data[mcq_completed_data['game_name'].str.strip().str.lower() == game.strip().lower()]
+        in_all = df_score[df_score['game_name'].str.strip().str.lower() == game.strip().lower()]
+        print(f"    - {game}:")
+        print(f"      In all data: {len(in_all):,} records")
+        print(f"      In game_completed: {len(in_game_completed):,} records")
+        print(f"      In mcq_completed: {len(in_mcq_completed):,} records")
+        if len(in_all) > 0 and len(in_game_completed) == 0 and len(in_mcq_completed) == 0:
+            # Show sample game names to see what the actual names are
+            sample_names = in_all['game_name'].unique()[:3]
+            print(f"      WARNING: Game exists in data but not in filtered sets!")
+            print(f"      Sample actual game names: {list(sample_names)}")
 
     per_question_rows: list[dict] = []
 
@@ -1122,6 +1721,8 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
     def _find_game_method(game_name: str) -> str:
         """Find processing method for a game name (case-insensitive match) - used for action_level filtering only"""
         # Only check if it's action_level (games that should be in action_level_data)
+        # Note: Beginning Sound Ba/Ra/Na, Beginning Sounds Ma/Cha/Ba, Ka/Na/Ta, and Ta/Va/Ga are processed through game_completed
+        # (they come as game_completed records, not action_level records)
         action_level_games = {
             'Beginning Sounds Ma/Ka/La', 'Color Blue', 'Color Red', 'Color Yellow',
             'Numbers I', 'Numbers II', 'Numerals 1-10', 'Shape Circle', 'Shape Rectangle',
@@ -1198,9 +1799,21 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
                 except Exception:
                     pass
             
+            # Games that should prefer flow method (jsonData structure, same as Beginning Sound Ba/Ra/Na)
+            # These games have action_name like "beginning_sound_ma_cha_ba_hindi_hybrid_game_completed"
+            # Includes: Beginning Sound Ba/Ra/Na, Beginning Sounds Ma/Cha/Ba, Ka/Na/Ta, Ta/Va/Ga
+            games_prefer_flow = ['Beginning Sound Ba/Ra/Na', 'Beginning Sounds Ma/Cha/Ba', 'Beginning Sounds Ka/Na/Ta', 'Beginning Sounds Ta/Va/Ga']
+            
             # Choose the method that produces more valid results (same logic as score distribution)
             # Prefer the method that extracts more questions overall, not just more records
-            if correct_selections_total_questions >= flow_total_questions and correct_selections_count > 0:
+            # For specific games, prefer flow if both methods work
+            # Use case-insensitive matching to handle any name variations
+            game_name_normalized = str(game_name).strip().lower()
+            games_prefer_flow_normalized = [g.strip().lower() for g in games_prefer_flow]
+            if game_name_normalized in games_prefer_flow_normalized and flow_total_questions > 0:
+                processing_method = 'flow'
+                print(f"    - {game_name}: Using flow method (preferred for this game, {flow_count} valid records, {flow_total_questions} questions in sample)")
+            elif correct_selections_total_questions >= flow_total_questions and correct_selections_count > 0:
                 processing_method = 'correct_selections'
                 print(f"    - {game_name}: Using correct_selections method ({correct_selections_count} valid records, {correct_selections_total_questions} questions in sample)")
             elif flow_total_questions > 0:
@@ -1300,6 +1913,91 @@ def extract_per_question_correctness(df_score: pd.DataFrame) -> pd.DataFrame:
         print(f"    - Processed: {games_processed} games")
         print(f"    - Skipped: {games_skipped} games")
         print(f"    - Total per-question records extracted: {total_questions:,}")
+    
+    # 1.5) Handle mcq_completed data (Action section with gameData - same as score distribution)
+    if not mcq_completed_data.empty:
+        print(f"\n  [STEP 1.5] Processing {mcq_completed_data['game_name'].nunique()} unique games from mcq_completed")
+        print(f"    - Games: {sorted(mcq_completed_data['game_name'].unique())}")
+        
+        # Games that use correctOption instead of isCorrect
+        # Note: Positions now uses isCorrect method, so this list is empty
+        games_with_correct_option = []
+        
+        import time
+        step_start_time = time.time()
+        mcq_games_processed = 0
+        mcq_records_processed = 0
+        mcq_records_with_data = 0
+        mcq_questions_extracted = 0
+        
+        for game_name in sorted(mcq_completed_data['game_name'].unique()):
+            game_data = mcq_completed_data[mcq_completed_data['game_name'] == game_name].copy()
+            total_records = len(game_data)
+            print(f"\n    [GAME] Processing {game_name}: {total_records:,} records")
+            mcq_games_processed += 1
+            
+            # Choose the appropriate parsing method (same as score distribution)
+            if game_name in games_with_correct_option:
+                print(f"      - Using correctOption method (chosenOption vs correctOption)")
+                parse_func = parse_mcq_completed_questions_with_correct_option
+            else:
+                print(f"      - Using isCorrect method (options[chosenOption].isCorrect)")
+                parse_func = parse_mcq_completed_questions
+            
+            # Process records
+            progress_interval = max(1000, total_records // 10)
+            start_time = time.time()
+            game_records_processed = 0
+            game_records_with_data = 0
+            game_questions_extracted = 0
+            
+            for idx, row_tuple in enumerate(game_data.itertuples(index=False), 1):
+                if idx % progress_interval == 0 or idx == total_records:
+                    elapsed = time.time() - start_time
+                    rate = idx / elapsed if elapsed > 0 else 0
+                    remaining = (total_records - idx) / rate if rate > 0 else 0
+                    print(f"      [PROGRESS] {game_name}: {idx:,}/{total_records:,} records ({idx*100//total_records}%) | "
+                          f"Processed: {game_records_processed:,} | Questions: {game_questions_extracted:,} | "
+                          f"Rate: {rate:.0f} rec/s | ETA: {remaining:.0f}s", flush=True)
+                
+                raw = getattr(row_tuple, 'custom_dimension_1', None)
+                if pd.isna(raw) or raw in (None, '', 'null'):
+                    continue
+                
+                game_name_val = getattr(row_tuple, 'game_name', game_name)
+                idvisitor = getattr(row_tuple, 'idvisitor_converted', None)
+                idvisit = getattr(row_tuple, 'idvisit', None)
+                
+                try:
+                    results = parse_func(raw, game_name)
+                    if len(results) > 0:
+                        game_records_with_data += 1
+                        game_questions_extracted += len(results)
+                        for q_result in results:
+                            per_question_rows.append(create_question_row(
+                                game_name_val, idvisitor, idvisit, 1,
+                                int(q_result['question_number']),
+                                int(q_result['is_correct']), row_tuple
+                            ))
+                    game_records_processed += 1
+                except Exception:
+                    game_records_processed += 1
+                    pass
+            
+            mcq_records_processed += game_records_processed
+            mcq_records_with_data += game_records_with_data
+            mcq_questions_extracted += game_questions_extracted
+            
+            elapsed_total = time.time() - start_time
+            print(f"      [OK] {game_name}: Completed in {elapsed_total:.1f}s | "
+                  f"Records: {game_records_processed:,}/{total_records:,} | "
+                  f"With data: {game_records_with_data:,} | "
+                  f"Questions extracted: {game_questions_extracted:,}", flush=True)
+        
+        step_elapsed = time.time() - step_start_time
+        print(f"\n  [STEP 1.5 SUMMARY] Completed in {step_elapsed:.1f}s")
+        print(f"    - Processed: {mcq_games_processed} games")
+        print(f"    - Total per-question records extracted: {mcq_questions_extracted:,}")
     
     # 2) Handle action_level records (same as score distribution)
     if not action_level_data.empty:
@@ -1510,20 +2208,46 @@ def calculate_score_distribution_combined(df_score):
     
     # Separate data based on action type for different score calculation methods
     # Separate game_completed and mcq_completed (action_level is no longer used)
-    # Note: Some games like "Beginning Sounds Ma/Cha/Ba" should use flow/jsonData method (game_completed)
-    # even if they have mcq_completed records, so we exclude them from mcq_completed processing
-    games_to_use_game_completed_method = ['Beginning Sounds Ma/Cha/Ba']
+    # Note: Games that should use mcq_completed method (Action section with gameData):
+    # - Shape Rectangle: uses chosenOption/isCorrect method
+    # - Numerals 1-10: uses chosenOption/isCorrect method
+    # - Positions: uses chosenOption/isCorrect method
+    # Note: "Beginning Sounds Ma/Cha/Ba", "Beginning Sounds Ka/Na/Ta", "Beginning Sounds Ta/Va/Ga"
+    #       and "Beginning Sound Ba/Ra/Na" all have action_name like "beginning_sound_ma_cha_ba_hindi_hybrid_game_completed"
+    #       (contains "hybrid_game_completed") and should use jsonData method, so they go to game_completed_data
+    games_to_use_mcq_completed_method = ['Shape Rectangle', 'Numerals 1-10', 'Positions']
+    games_to_use_json_data_method = ['Beginning Sound Ba/Ra/Na', 'Beginning Sounds Ma/Cha/Ba', 'Beginning Sounds Ka/Na/Ta', 'Beginning Sounds Ta/Va/Ga']
     
+    # Helper function for case-insensitive game name matching (handles whitespace and case variations)
+    def _is_game_in_list(game_name, game_list):
+        """Check if game_name matches any game in game_list (case-insensitive, handles whitespace)"""
+        if pd.isna(game_name):
+            return False
+        game_name_clean = str(game_name).strip().lower()
+        return any(game_name_clean == str(g).strip().lower() for g in game_list)
+    
+    # Create boolean masks for case-insensitive matching
+    is_json_data_game = df_score['game_name'].apply(lambda x: _is_game_in_list(x, games_to_use_json_data_method))
+    is_mcq_completed_game = df_score['game_name'].apply(lambda x: _is_game_in_list(x, games_to_use_mcq_completed_method))
+    
+    # Filter for game_completed_data:
+    # - Includes action_name containing 'game_completed' (matches "hybrid_game_completed" too)
+    # - Excludes action_name containing 'mcq_completed' (unless it's a jsonData game)
+    # - Also includes mcq_completed records for jsonData games (to route them correctly)
+    # - Excludes games that should use mcq_completed method
     game_completed_data = df_score[
-        (df_score['action_name'].str.contains('game_completed', na=False, case=False) & 
-         ~df_score['action_name'].str.contains('mcq_completed', na=False, case=False)) |
-        (df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
-         df_score['game_name'].isin(games_to_use_game_completed_method))
+        ((df_score['action_name'].str.contains('game_completed', na=False, case=False) & 
+          ~df_score['action_name'].str.contains('mcq_completed', na=False, case=False)) |
+         (df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
+          is_json_data_game)) &
+        ~is_mcq_completed_game
     ].copy()
     
     mcq_completed_data = df_score[
-        df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
-        ~df_score['game_name'].isin(games_to_use_game_completed_method)
+        (df_score['action_name'].str.contains('mcq_completed', na=False, case=False) &
+         ~is_json_data_game) |
+        (df_score['action_name'].str.contains('game_completed', na=False, case=False) &
+         is_mcq_completed_game)
     ].copy()
     
     print(f"  - game_completed records: {len(game_completed_data)}")
@@ -1550,12 +2274,99 @@ def calculate_score_distribution_combined(df_score):
             game_data['total_score_correct'] = game_data['custom_dimension_1'].apply(parse_custom_dimension_1_correct_selections)
             correct_count = (game_data['total_score_correct'] > 0).sum()
             
-            # Method 2: jsonData (for Revision games, Rhyming Words, etc.)
+            # Method 2: jsonData (for Revision games, Rhyming Words, Beginning Sound Ba/Ra/Na, etc.)
             game_data['total_score_json'] = game_data['custom_dimension_1'].apply(parse_custom_dimension_1_json_data)
             json_count = (game_data['total_score_json'] > 0).sum()
             
+            # Games that should prefer jsonData method (same structure as Beginning Sound Ba/Ra/Na)
+            # These games have action_name like "beginning_sound_ma_cha_ba_hindi_hybrid_game_completed"
+            # Includes: Beginning Sound Ba/Ra/Na, Beginning Sounds Ma/Cha/Ba, Ka/Na/Ta, Ta/Va/Ga
+            games_prefer_json_data = ['Beginning Sound Ba/Ra/Na', 'Beginning Sounds Ma/Cha/Ba', 'Beginning Sounds Ka/Na/Ta', 'Beginning Sounds Ta/Va/Ga']
+            
+            # Debug: For Beginning Sounds games, check a sample record if no scores found
+            if game_name in games_prefer_json_data and json_count == 0 and correct_count == 0:
+                # Try to debug by checking a sample record
+                sample_records = game_data[game_data['custom_dimension_1'].notna()].head(5)
+                if len(sample_records) > 0:
+                    print(f"    - DEBUG: Checking sample record structure for {game_name}...")
+                    for idx, row in sample_records.iterrows():
+                        try:
+                            raw_json_str = str(row['custom_dimension_1'])
+                            # Try to clean the JSON string
+                            # Remove any leading/trailing whitespace
+                            raw_json_str = raw_json_str.strip()
+                            # Check if it's already a dict (sometimes pandas stores it as dict)
+                            if isinstance(row['custom_dimension_1'], dict):
+                                sample_json = row['custom_dimension_1']
+                            else:
+                                # Clean malformed JSON before parsing
+                                raw_json_str = clean_malformed_json(raw_json_str)
+                                # Remove any leading/trailing quotes if present
+                                if raw_json_str.startswith('"') and raw_json_str.endswith('"'):
+                                    raw_json_str = raw_json_str[1:-1]
+                                # Try parsing as JSON
+                                sample_json = json.loads(raw_json_str)
+                            
+                            print(f"      Sample root keys: {list(sample_json.keys())[:10]}")
+                            if 'gameData' in sample_json:
+                                gd = sample_json['gameData']
+                                print(f"      gameData found: {len(gd) if isinstance(gd, list) else 'not a list'} items")
+                                if isinstance(gd, list) and len(gd) > 0:
+                                    for i, item in enumerate(gd[:3]):
+                                        if isinstance(item, dict):
+                                            print(f"        Item {i}: section={item.get('section')}, has jsonData={'jsonData' in item}")
+                                            if item.get('section') == 'Action' and 'jsonData' in item:
+                                                json_data = item['jsonData']
+                                                print(f"          jsonData type: {type(json_data)}, length: {len(json_data) if isinstance(json_data, list) else 'N/A'}")
+                                                if isinstance(json_data, list) and len(json_data) > 0:
+                                                    first_level = json_data[0]
+                                                    print(f"          First level keys: {list(first_level.keys()) if isinstance(first_level, dict) else 'not a dict'}")
+                                                    if isinstance(first_level, dict) and 'userResponse' in first_level:
+                                                        ur = first_level['userResponse']
+                                                        print(f"          userResponse type: {type(ur)}, length: {len(ur) if isinstance(ur, list) else 'N/A'}")
+                            if 'section' in sample_json:
+                                print(f"      Root section: {sample_json.get('section')}, has jsonData: {'jsonData' in sample_json}")
+                                if sample_json.get('section') == 'Action' and 'jsonData' in sample_json:
+                                    json_data = sample_json['jsonData']
+                                    print(f"        Root jsonData type: {type(json_data)}, length: {len(json_data) if isinstance(json_data, list) else 'N/A'}")
+                        except json.JSONDecodeError as e:
+                            print(f"      JSON Parse Error at position {e.pos}: {str(e)[:200]}")
+                            # Show a snippet of the JSON around the error
+                            raw_str = str(row['custom_dimension_1'])
+                            if len(raw_str) > 500:
+                                # Show area around error if possible
+                                error_pos = min(e.pos if hasattr(e, 'pos') else 0, len(raw_str))
+                                start = max(0, error_pos - 100)
+                                end = min(len(raw_str), error_pos + 100)
+                                print(f"      JSON snippet around error (chars {start}-{end}): {raw_str[start:end]}")
+                            else:
+                                print(f"      Full JSON (first 500 chars): {raw_str[:500]}")
+                            # Try to see if it's already a dict
+                            if isinstance(row['custom_dimension_1'], dict):
+                                print(f"      Note: custom_dimension_1 is already a dict, not a JSON string")
+                                sample_json = row['custom_dimension_1']
+                                print(f"      Dict keys: {list(sample_json.keys())[:10]}")
+                        except Exception as e:
+                            print(f"      Error parsing sample: {type(e).__name__}: {str(e)[:200]}")
+                            # Check if it's already a dict
+                            if isinstance(row['custom_dimension_1'], dict):
+                                print(f"      Note: custom_dimension_1 is already a dict")
+                                try:
+                                    sample_json = row['custom_dimension_1']
+                                    print(f"      Dict keys: {list(sample_json.keys())[:10]}")
+                                except:
+                                    pass
+                        break  # Only check first sample
+            
             # Choose the method that produces more valid scores
-            if correct_count >= json_count and correct_count > 0:
+            # For specific games, prefer jsonData if both methods work
+            # Use case-insensitive matching to handle any name variations
+            game_name_normalized = str(game_name).strip().lower()
+            games_prefer_json_data_normalized = [g.strip().lower() for g in games_prefer_json_data]
+            if game_name_normalized in games_prefer_json_data_normalized and json_count > 0:
+                print(f"    - {game_name}: Using jsonData method (preferred for this game, {json_count} valid scores)")
+                game_data['total_score'] = game_data['total_score_json']
+            elif correct_count >= json_count and correct_count > 0:
                 print(f"    - {game_name}: Using correctSelections method ({correct_count} valid scores)")
                 game_data['total_score'] = game_data['total_score_correct']
             elif json_count > 0:
@@ -1589,15 +2400,31 @@ def calculate_score_distribution_combined(df_score):
         print(f"    - Processing {mcq_completed_data['game_name'].nunique()} unique games")
         print(f"    - Games in mcq_completed: {sorted(mcq_completed_data['game_name'].unique())}")
         
-        # Process each game individually to log results
+        # Games that use correctOption instead of isCorrect
+        # Note: Positions now uses isCorrect method, so this list is empty
+        games_with_correct_option = []
+        
+        # Process each game individually to determine the correct parsing method
+        mcq_completed_data = mcq_completed_data.copy()
+        mcq_completed_data['total_score'] = 0
+        
         for game_name in sorted(mcq_completed_data['game_name'].unique()):
             game_records = len(mcq_completed_data[mcq_completed_data['game_name'] == game_name])
             print(f"    - Processing {game_name}: {game_records} records")
-        
-        # Parse scores from Action section using the new parser
-        print("    - Parsing scores from Action section...")
-        mcq_completed_data = mcq_completed_data.copy()
-        mcq_completed_data['total_score'] = mcq_completed_data['custom_dimension_1'].apply(parse_custom_dimension_1_mcq_completed)
+            
+            game_mask = mcq_completed_data['game_name'] == game_name
+            
+            # Choose the appropriate parsing method
+            if game_name in games_with_correct_option:
+                print(f"      - {game_name}: Using correctOption method (chosenOption vs correctOption)")
+                mcq_completed_data.loc[game_mask, 'total_score'] = mcq_completed_data.loc[game_mask, 'custom_dimension_1'].apply(
+                    parse_custom_dimension_1_mcq_completed_with_correct_option
+                )
+            else:
+                print(f"      - {game_name}: Using isCorrect method (options[chosenOption].isCorrect)")
+                mcq_completed_data.loc[game_mask, 'total_score'] = mcq_completed_data.loc[game_mask, 'custom_dimension_1'].apply(
+                    parse_custom_dimension_1_mcq_completed
+                )
         
         # Log score parsing results by game
         for game_name in sorted(mcq_completed_data['game_name'].unique()):
@@ -1978,12 +2805,13 @@ def preprocess_time_series_data_instances(df_instances: pd.DataFrame) -> pd.Data
 
 def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> pd.DataFrame:
     """Preprocess time series data for instances, visits and users - using server_time
-    Calculates Started and Completed separately for each metric"""
+    Calculates Started and Completed separately for each metric
+    Aggregates by game_code and language"""
     print("Preprocessing time series data for instances, visits and users (with Started/Completed)...")
     
     if df_visits_users.empty:
         print("WARNING: No time series data to process")
-        return pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type'])
+        return pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type', 'game_code', 'language'])
     
     # Convert server_time to datetime
     df_visits_users['server_time'] = pd.to_datetime(df_visits_users['server_time'])
@@ -1998,7 +2826,43 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
     
     if df_visits_users.empty:
         print("WARNING: No time series data after filtering")
-        return pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type'])
+        return pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type', 'game_code', 'language'])
+    
+    # Check what columns we have
+    print(f"  [INFO] Available columns after query: {list(df_visits_users.columns)}")
+    
+    # Transform language: if contains "mr-IN" then "mr", else "hi"
+    if 'language' in df_visits_users.columns:
+        print("  [ACTION] Transforming language column...")
+        print(f"  [DEBUG] Language column sample values: {df_visits_users['language'].head(10).tolist()}")
+        df_visits_users['language'] = df_visits_users['language'].apply(
+            lambda x: 'mr' if pd.notna(x) and 'mr-IN' in str(x) else 'hi'
+        )
+        print(f"  [DEBUG] Language after transformation sample: {df_visits_users['language'].head(10).tolist()}")
+        print("  [OK] Language transformation complete")
+    else:
+        print("  [WARNING] Language column not found in time series data")
+        df_visits_users['language'] = 'hi'  # Default to 'hi' if not found
+    
+    # Extract game_code (domain) from full game_code
+    if 'game_code' in df_visits_users.columns:
+        print("  [ACTION] Extracting domain from game_code...")
+        print(f"  [DEBUG] Game code column sample values: {df_visits_users['game_code'].head(10).tolist()}")
+        df_visits_users['game_code'] = df_visits_users['game_code'].apply(extract_domain_from_game_code)
+        print(f"  [DEBUG] Game code after extraction sample: {df_visits_users['game_code'].head(10).tolist()}")
+        print("  [OK] Game code extraction complete")
+    else:
+        print("  [WARNING] Game code column not found in time series data")
+        df_visits_users['game_code'] = None
+    
+    # Ensure game_code and language are strings (not None) for proper grouping
+    # None values in groupby can cause issues, so we'll keep them as None but ensure they're handled
+    if 'game_code' in df_visits_users.columns:
+        # Keep None values but ensure they're properly typed
+        df_visits_users['game_code'] = df_visits_users['game_code'].where(pd.notna(df_visits_users['game_code']), None)
+    if 'language' in df_visits_users.columns:
+        # Keep None values but ensure they're properly typed
+        df_visits_users['language'] = df_visits_users['language'].where(pd.notna(df_visits_users['language']), None)
     
     # Get unique games
     unique_games = df_visits_users['game_name'].unique()
@@ -2024,49 +2888,125 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
         # Daily aggregation - format: YYYY-MM-DD
         game_df['date'] = game_df['server_time'].dt.date
         for period_type, group_col in [('Day', 'date'), ('Month', None), ('Week', None)]:
+            # Build group_by_cols including game_code and language
+            base_group_cols = ['event', 'game_code', 'language']
             if period_type == 'Day':
-                group_by_cols = ['date', 'event'] if game_name == 'All Games' else ['date', 'game_name', 'event']
+                if game_name == 'All Games':
+                    group_by_cols = ['date'] + base_group_cols
+                else:
+                    group_by_cols = ['date', 'game_name'] + base_group_cols
             elif period_type == 'Month':
                 game_df['year'] = game_df['server_time'].dt.year
                 game_df['month'] = game_df['server_time'].dt.month
                 game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['month'].astype(str).str.zfill(2)
-                group_by_cols = ['period_label', 'event'] if game_name == 'All Games' else ['period_label', 'game_name', 'event']
+                if game_name == 'All Games':
+                    group_by_cols = ['period_label'] + base_group_cols
+                else:
+                    group_by_cols = ['period_label', 'game_name'] + base_group_cols
             else:  # Week
                 game_df['shifted_date'] = game_df['server_time'] - pd.Timedelta(days=2)
                 game_df['year'] = game_df['shifted_date'].dt.year
                 game_df['week'] = game_df['shifted_date'].dt.strftime('%W').astype(int)
                 game_df['period_label'] = game_df['year'].astype(str) + '_' + game_df['week'].astype(str).str.zfill(2)
-                group_by_cols = ['period_label', 'event'] if game_name == 'All Games' else ['period_label', 'game_name', 'event']
+                if game_name == 'All Games':
+                    group_by_cols = ['period_label'] + base_group_cols
+                else:
+                    group_by_cols = ['period_label', 'game_name'] + base_group_cols
             
-            # Aggregate by event type (Started/Completed) for each metric
+            # Aggregate by event type, game_code, and language for each metric
+            agg_df = game_df.groupby(group_by_cols).agg({
+                'idlink_va': 'nunique',      # Instances
+                'idvisit': 'nunique',        # Visits
+                'idvisitor_converted': 'nunique'  # Users
+            }).reset_index()
+            
+            # Rename the aggregated columns to match our metric names
+            agg_df = agg_df.rename(columns={
+                'idlink_va': 'instances',
+                'idvisit': 'visits',
+                'idvisitor_converted': 'users'
+            })
+            
+            # Set period_label for Day period
             if period_type == 'Day':
-                agg_df = game_df.groupby(group_by_cols).agg({
-                    'idlink_va': 'nunique',      # Instances
-                    'idvisit': 'nunique',        # Visits
-                    'idvisitor_converted': 'nunique'  # Users
-                }).reset_index()
-                if game_name == 'All Games':
-                    agg_df.columns = ['period_label', 'event', 'instances', 'visits', 'users']
-                    agg_df['game_name'] = 'All Games'
-                else:
-                    agg_df.columns = ['period_label', 'game_name', 'event', 'instances', 'visits', 'users']
-                agg_df['period_label'] = agg_df['period_label'].astype(str)
+                agg_df['period_label'] = agg_df['date'].astype(str)
+                agg_df = agg_df.drop(columns=['date'])
+            
+            # Add game_name if it's not in the groupby (for All Games)
+            if 'game_name' not in agg_df.columns:
+                agg_df['game_name'] = game_name
+            
+            # Ensure game_code and language columns exist
+            if 'game_code' not in agg_df.columns:
+                agg_df['game_code'] = None
             else:
-                agg_df = game_df.groupby(group_by_cols).agg({
-                    'idlink_va': 'nunique',      # Instances
-                    'idvisit': 'nunique',        # Visits
-                    'idvisitor_converted': 'nunique'  # Users
-                }).reset_index()
-                if game_name == 'All Games':
-                    agg_df.columns = ['period_label', 'event', 'instances', 'visits', 'users']
-                    agg_df['game_name'] = 'All Games'
-                else:
-                    agg_df.columns = ['period_label', 'game_name', 'event', 'instances', 'visits', 'users']
+                # Keep None values as None (don't fill with 'Unknown')
+                agg_df['game_code'] = agg_df['game_code'].where(pd.notna(agg_df['game_code']), None)
+            
+            if 'language' not in agg_df.columns:
+                agg_df['language'] = None
+            else:
+                # Keep None values as None (don't fill with 'Unknown')
+                agg_df['language'] = agg_df['language'].where(pd.notna(agg_df['language']), None)
+            
+            # Debug: Check what columns we have before reshaping
+            print(f"    [DEBUG] Aggregated columns after rename: {list(agg_df.columns)}")
+            print(f"    [DEBUG] Sample game_code values: {agg_df['game_code'].head(5).tolist() if 'game_code' in agg_df.columns else 'N/A'}")
+            print(f"    [DEBUG] Sample language values: {agg_df['language'].head(5).tolist() if 'language' in agg_df.columns else 'N/A'}")
             
             # Reshape to long format: one row per metric-event combination
             for metric in ['instances', 'visits', 'users']:
-                metric_df = agg_df[['period_label', 'game_name', 'event', metric]].copy()
-                metric_df.columns = ['period_label', 'game_name', 'event', 'count']
+                # Check if the metric column exists in agg_df
+                if metric not in agg_df.columns:
+                    print(f"    [WARNING] Metric '{metric}' not found in aggregated data, skipping...")
+                    print(f"    [DEBUG] Available columns in agg_df: {list(agg_df.columns)}")
+                    continue
+                
+                # Select the columns we need (including the metric column)
+                base_cols = ['period_label', 'game_name', 'event', 'game_code', 'language']
+                # Only include columns that exist in agg_df
+                cols_to_select = [col for col in base_cols if col in agg_df.columns] + [metric]
+                print(f"    [DEBUG] Selecting columns for metric '{metric}': {cols_to_select}")
+                metric_df = agg_df[cols_to_select].copy()
+                print(f"    [DEBUG] Columns after selection: {list(metric_df.columns)}")
+                
+                # Rename the metric column to 'count'
+                if metric in metric_df.columns:
+                    metric_df = metric_df.rename(columns={metric: 'count'})
+                    print(f"    [DEBUG] Columns after rename: {list(metric_df.columns)}")
+                else:
+                    print(f"    [ERROR] Metric '{metric}' not in metric_df after selection!")
+                    continue
+                
+                # Add any missing columns (should already be there from groupby, but just in case)
+                if 'game_code' not in metric_df.columns:
+                    metric_df['game_code'] = None
+                if 'language' not in metric_df.columns:
+                    metric_df['language'] = None
+                if 'game_name' not in metric_df.columns:
+                    metric_df['game_name'] = game_name
+                if 'period_label' not in metric_df.columns:
+                    metric_df['period_label'] = None
+                if 'event' not in metric_df.columns:
+                    metric_df['event'] = None
+                
+                # Ensure all required columns exist and in correct order
+                # After rename, 'count' should exist, but verify
+                if 'count' not in metric_df.columns:
+                    print(f"    [ERROR] 'count' column not found after renaming '{metric}'")
+                    continue
+                
+                # Reorder columns to ensure consistent structure
+                final_cols = ['period_label', 'game_name', 'event', 'game_code', 'language', 'count']
+                # Make sure all columns exist (they should after the checks above)
+                missing_cols = [col for col in final_cols if col not in metric_df.columns]
+                if missing_cols:
+                    print(f"    [WARNING] Missing columns: {missing_cols}, adding with None values")
+                    for col in missing_cols:
+                        metric_df[col] = None
+                
+                metric_df = metric_df[final_cols]
+                
                 metric_df['metric'] = metric
                 metric_df['period_type'] = period_type
                 time_series_data.extend(metric_df.to_dict('records'))
@@ -2076,6 +3016,95 @@ def preprocess_time_series_data_visits_users(df_visits_users: pd.DataFrame) -> p
     print(f"  Daily records: {len(time_series_df[time_series_df['period_type'] == 'Day'])}")
     print(f"  Weekly records: {len(time_series_df[time_series_df['period_type'] == 'Week'])}")
     print(f"  Monthly records: {len(time_series_df[time_series_df['period_type'] == 'Month'])}")
+    
+    # Now create "All" aggregations for domain (game_code) and language, similar to conversion funnel
+    print("\n  [ACTION] Creating 'All' aggregations for domain and language...")
+    all_combinations = []
+    
+    # Filter out None values for aggregation
+    time_series_df_clean = time_series_df[
+        (time_series_df['game_code'].notna()) & 
+        (time_series_df['language'].notna())
+    ].copy()
+    
+    if not time_series_df_clean.empty:
+        # 1. Overall summary (game_code='All', language='All')
+        print("    [1/4] Calculating overall totals (game_code='All', language='All')...")
+        overall = time_series_df_clean.groupby(['period_label', 'game_name', 'metric', 'event', 'period_type']).agg({
+            'count': 'sum'
+        }).reset_index()
+        overall['game_code'] = 'All'
+        overall['language'] = 'All'
+        all_combinations.append(overall)
+        print(f"      Generated {len(overall):,} overall records")
+        
+        # 2. By game_code only (language='All')
+        if 'game_code' in time_series_df_clean.columns:
+            print("    [2/4] Calculating by game_code (language='All')...")
+            by_game_code = time_series_df_clean.groupby(['period_label', 'game_name', 'metric', 'event', 'period_type', 'game_code']).agg({
+                'count': 'sum'
+            }).reset_index()
+            by_game_code['language'] = 'All'
+            all_combinations.append(by_game_code)
+            print(f"      Generated {len(by_game_code):,} game_code records")
+        
+        # 3. By language only (game_code='All')
+        if 'language' in time_series_df_clean.columns:
+            print("    [3/4] Calculating by language (game_code='All')...")
+            by_language = time_series_df_clean.groupby(['period_label', 'game_name', 'metric', 'event', 'period_type', 'language']).agg({
+                'count': 'sum'
+            }).reset_index()
+            by_language['game_code'] = 'All'
+            all_combinations.append(by_language)
+            print(f"      Generated {len(by_language):,} language records")
+        
+        # 4. By both game_code and language (already exists in time_series_df_clean)
+        print("    [4/4] Using existing game_code+language combinations...")
+        by_both = time_series_df_clean.copy()
+        all_combinations.append(by_both)
+        print(f"      Using {len(by_both):,} existing game_code+language records")
+        
+        # Combine all combinations
+        if all_combinations:
+            # Ensure all dataframes have the same columns in the same order
+            base_cols = ['period_label', 'game_name', 'event', 'game_code', 'language', 'count', 'metric', 'period_type']
+            reordered_combinations = []
+            for df in all_combinations:
+                # Only include columns that exist
+                available_cols = [col for col in base_cols if col in df.columns]
+                reordered_df = df[available_cols].copy()
+                # Add missing columns with default values
+                for col in base_cols:
+                    if col not in reordered_df.columns:
+                        if col == 'game_code':
+                            reordered_df['game_code'] = 'All'
+                        elif col == 'language':
+                            reordered_df['language'] = 'All'
+                # Reorder to match base_cols
+                reordered_df = reordered_df[base_cols]
+                reordered_combinations.append(reordered_df)
+            
+            time_series_df = pd.concat(reordered_combinations, ignore_index=True)
+            print(f"  [OK] Combined all combinations: {len(time_series_df):,} total records")
+        else:
+            print("  [WARNING] No combinations generated, using original data")
+    else:
+        print("  [WARNING] No clean data for 'All' aggregations, using original data")
+    
+    # Debug: Check game_code and language values in final output
+    if 'game_code' in time_series_df.columns:
+        unique_game_codes = time_series_df['game_code'].unique()
+        print(f"  [DEBUG] Unique game_code values in output: {sorted([str(x) for x in unique_game_codes if x is not None])}")
+        print(f"  [DEBUG] Game_code value counts: {time_series_df['game_code'].value_counts().head(10).to_dict()}")
+    else:
+        print(f"  [WARNING] game_code column not in final output!")
+    
+    if 'language' in time_series_df.columns:
+        unique_languages = time_series_df['language'].unique()
+        print(f"  [DEBUG] Unique language values in output: {sorted([str(x) for x in unique_languages if x is not None])}")
+        print(f"  [DEBUG] Language value counts: {time_series_df['language'].value_counts().head(10).to_dict()}")
+    else:
+        print(f"  [WARNING] language column not in final output!")
     
     return time_series_df
 
@@ -2625,77 +3654,68 @@ def process_summary_data(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame
     return summary_df
 
 
-def process_score_distribution() -> pd.DataFrame:
-    """Process score distribution data using scores_data.csv"""
+def process_score_distribution(use_database: bool = False) -> pd.DataFrame:
+    """Process score distribution data by fetching from Redshift database
+    
+    Args:
+        use_database: If True, fetch directly from Redshift (always True now, CSV removed)
+    """
     print("\n" + "=" * 60)
     print("PROCESSING: Score Distribution")
     print("=" * 60)
     
-    print("\nStep 1: Loading score data from scores_data.csv...")
-    csv_file = 'scores_data.csv'
+    df_score = pd.DataFrame()
     
-    if not os.path.exists(csv_file):
-        print(f"  [ERROR] {csv_file} not found!")
-        print(f"  [ERROR] Please ensure scores_data.csv is in the current directory")
-        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
-        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
-        return score_distribution_df
-    
-    try:
-        # Read CSV file with encoding error handling
-        print(f"  [ACTION] Reading {csv_file}...")
-        print(f"  [INFO] This may take a moment for large files...")
-        try:
-            # Try UTF-8 first
-            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='utf-8')
-        except UnicodeDecodeError:
-            # If UTF-8 fails, try latin-1 (which can handle any byte)
-            print(f"  [WARNING] UTF-8 encoding failed, trying latin-1...")
-            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='latin-1')
-        print(f"  [OK] Loaded {len(df_score):,} records from CSV")
-        
-        # Check required columns
-        print(f"  [INFO] Checking required columns...")
-        required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisitor_hex', 'idvisit', 'server_time']
-        missing_cols = [col for col in required_cols if col not in df_score.columns]
-        if missing_cols:
-            print(f"  [ERROR] Missing required columns: {missing_cols}")
-            print(f"  [INFO] Available columns: {list(df_score.columns)}")
-            score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
-            score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
-            return score_distribution_df
-        print(f"  [OK] All required columns present")
-        
-        # Convert idvisitor_hex to idvisitor_converted if needed
-        if 'idvisitor_hex' in df_score.columns and 'idvisitor_converted' not in df_score.columns:
-            print(f"  [ACTION] Converting idvisitor_hex to idvisitor_converted...")
-            df_score = convert_hex_to_int(df_score, 'idvisitor_hex', 'idvisitor_converted')
-            print(f"  [OK] Conversion complete")
-        
-        # Convert server_time to datetime if it's a string
-        if 'server_time' in df_score.columns:
-            try:
-                print(f"  [ACTION] Converting server_time to datetime...")
-                df_score['server_time'] = pd.to_datetime(df_score['server_time'])
-                print(f"  [OK] Datetime conversion complete")
-            except Exception as e:
-                print(f"  [WARNING] Could not convert server_time: {e}")
-        
-    except Exception as e:
-        print(f"  ERROR: Error loading CSV file: {e}")
-        import traceback
-        traceback.print_exc()
-        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
-        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
-        return score_distribution_df
+    print("\nStep 1: Fetching score data from Redshift database...")
+    df_score = fetch_score_dataframe()
     
     if df_score.empty:
-        print("  [WARNING] No data found in scores_data.csv")
+        print(f"  [ERROR] No data fetched from Redshift")
+        print(f"  [ERROR] Please ensure Redshift is accessible and the query returns data")
+        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        return score_distribution_df
+        
+    # Check required columns
+    print(f"  [INFO] Checking required columns...")
+    required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisit', 'server_time']
+    # idvisitor_hex OR idvisitor_converted must be present (database already converts it)
+    has_visitor_id = 'idvisitor_hex' in df_score.columns or 'idvisitor_converted' in df_score.columns
+    missing_cols = [col for col in required_cols if col not in df_score.columns]
+    if missing_cols or not has_visitor_id:
+        if missing_cols:
+            print(f"  [ERROR] Missing required columns: {missing_cols}")
+        if not has_visitor_id:
+            print(f"  [ERROR] Missing visitor ID column (need either 'idvisitor_hex' or 'idvisitor_converted')")
+        print(f"  [INFO] Available columns: {list(df_score.columns)}")
+        score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
+        score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
+        return score_distribution_df
+    print(f"  [OK] All required columns present")
+    
+    # Convert idvisitor_hex to idvisitor_converted if needed (only if hex exists and converted doesn't)
+    if 'idvisitor_hex' in df_score.columns and 'idvisitor_converted' not in df_score.columns:
+        print(f"  [ACTION] Converting idvisitor_hex to idvisitor_converted...")
+        df_score = convert_hex_to_int(df_score, 'idvisitor_hex', 'idvisitor_converted')
+        print(f"  [OK] Conversion complete")
+    
+    # Convert server_time to datetime if it's a string
+    if 'server_time' in df_score.columns:
+        try:
+            print(f"  [ACTION] Converting server_time to datetime...")
+            df_score['server_time'] = pd.to_datetime(df_score['server_time'])
+            print(f"  [OK] Datetime conversion complete")
+        except Exception as e:
+            print(f"  [WARNING] Could not convert server_time: {e}")
+    
+    if df_score.empty:
+        print("  [WARNING] No data found")
         score_distribution_df = pd.DataFrame(columns=['game_name', 'total_score', 'user_count'])
         score_distribution_df.to_csv('data/score_distribution_data.csv', index=False)
         return score_distribution_df
     
-    print(f"  [OK] Successfully loaded {len(df_score):,} records from {csv_file}")
+    # Print success message
+    print(f"  [OK] Successfully loaded {len(df_score):,} records from Redshift database")
     print(f"  [INFO] Unique games in data: {df_score['game_name'].nunique()}")
     
     # Check for optional columns (language and game_code)
@@ -2703,6 +3723,12 @@ def process_score_distribution() -> pd.DataFrame:
     has_game_code = 'game_code' in df_score.columns
     if has_language:
         print(f"  [INFO] Language column found: will be included in output")
+        # Transform language column: if contains "mr-IN" then "mr", else "hi"
+        print(f"  [ACTION] Transforming language column...")
+        df_score['language'] = df_score['language'].apply(
+            lambda x: 'mr' if pd.notna(x) and 'mr-IN' in str(x) else 'hi'
+        )
+        print(f"  [OK] Language transformation complete")
     if has_game_code:
         print(f"  [INFO] Game code column found: will extract domain and include in output")
     
@@ -2862,7 +3888,9 @@ def process_rm_active_users_time_series(rm_df: pd.DataFrame) -> pd.DataFrame:
             'metric': row['metric'],
             'event': row['event'],
             'count': int(row['rm_active_users']),
-            'period_type': row['period_type']
+            'period_type': row['period_type'],
+            'game_code': None,  # RM active users are not game-specific
+            'language': None    # RM active users are not language-specific
         })
     
     # Weekly aggregation
@@ -2885,7 +3913,9 @@ def process_rm_active_users_time_series(rm_df: pd.DataFrame) -> pd.DataFrame:
             'metric': row['metric'],
             'event': row['event'],
             'count': int(row['rm_active_users']),
-            'period_type': row['period_type']
+            'period_type': row['period_type'],
+            'game_code': None,  # RM active users are not game-specific
+            'language': None    # RM active users are not language-specific
         })
     
     # Monthly aggregation
@@ -2907,7 +3937,9 @@ def process_rm_active_users_time_series(rm_df: pd.DataFrame) -> pd.DataFrame:
             'metric': row['metric'],
             'event': row['event'],
             'count': int(row['rm_active_users']),
-            'period_type': row['period_type']
+            'period_type': row['period_type'],
+            'game_code': None,  # RM active users are not game-specific
+            'language': None    # RM active users are not language-specific
         })
     
     rm_time_series_df = pd.DataFrame(time_series_data)
@@ -3037,7 +4069,7 @@ def process_time_series(df_main: Optional[pd.DataFrame] = None) -> pd.DataFrame:
         print(f"  Sample row: {time_series_df.iloc[0].to_dict() if len(time_series_df) > 0 else 'N/A'}")
     else:
         print("WARNING: No time series data to save")
-        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type'])
+        empty_df = pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count', 'period_type', 'game_code', 'language'])
         empty_df.to_csv('data/time_series_data.csv', index=False)
     
     return time_series_df
@@ -3615,81 +4647,111 @@ def process_parent_poll() -> pd.DataFrame:
     return agg_df
 
 
-def process_question_correctness() -> pd.DataFrame:
-    """Process question correctness data using scores_data.csv as the data source.
+def process_question_correctness(use_database: bool = False) -> pd.DataFrame:
+    """Process question correctness data using scores_data.csv or fetch from Redshift.
     
     Uses the same processing method as score distribution for each game.
+    
+    Args:
+        use_database: If True, fetch directly from Redshift. If False, use scores_data.csv (default)
     """
     print("\n" + "=" * 60)
     print("PROCESSING: Question Correctness Data")
     print("=" * 60)
     
-    # Use scores_data.csv as the data source (same as score distribution)
-    print("Step 1: Loading data from scores_data.csv...")
-    csv_file = 'scores_data.csv'
+    df_score = pd.DataFrame()
+    data_source = "database"  # Track where data came from
     
-    if not os.path.exists(csv_file):
-        print(f"  [ERROR] {csv_file} not found!")
-        print(f"  [ERROR] Please ensure scores_data.csv is in the current directory")
-        question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
-        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
-        return question_correctness_df
+    if use_database:
+        print("Step 1: Fetching data from Redshift database...")
+        df_score = fetch_score_dataframe()
+        if df_score.empty:
+            print(f"  [WARNING] No data fetched from Redshift, trying CSV fallback...")
+            use_database = False  # Fall back to CSV
+            data_source = "CSV"
     
-    try:
-        # Read CSV file with encoding error handling
-        print(f"  [ACTION] Reading {csv_file}...")
-        print(f"  [INFO] This may take a moment for large files...")
-        try:
-            # Try UTF-8 first
-            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='utf-8')
-        except UnicodeDecodeError:
-            # If UTF-8 fails, try latin-1 (which can handle any byte)
-            print(f"  [WARNING] UTF-8 encoding failed, trying latin-1...")
-            df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='latin-1')
-        print(f"  [OK] Loaded {len(df_score):,} records from CSV")
+    if not use_database:
+        # Use scores_data.csv as the data source (same as score distribution)
+        print("Step 1: Loading data from scores_data.csv...")
+        csv_file = 'scores_data.csv'
+        data_source = "CSV"  # Track that we're using CSV
         
-        # Check required columns
-        print(f"  [INFO] Checking required columns...")
-        required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisitor_hex', 'idvisit', 'server_time']
-        missing_cols = [col for col in required_cols if col not in df_score.columns]
+        if not os.path.exists(csv_file):
+            print(f"  [WARNING] {csv_file} not found!")
+            print(f"  [INFO] Attempting to fetch from Redshift database instead...")
+            df_score = fetch_score_dataframe()
+            if df_score.empty:
+                print(f"  [ERROR] Could not load from CSV or Redshift")
+                print(f"  [ERROR] Please ensure scores_data.csv is in the current directory or Redshift is accessible")
+                question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+                question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+                return question_correctness_df
+        else:
+            try:
+                # Read CSV file with encoding error handling
+                print(f"  [ACTION] Reading {csv_file}...")
+                print(f"  [INFO] This may take a moment for large files...")
+                try:
+                    # Try UTF-8 first
+                    df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='utf-8')
+                except UnicodeDecodeError:
+                    # If UTF-8 fails, try latin-1 (which can handle any byte)
+                    print(f"  [WARNING] UTF-8 encoding failed, trying latin-1...")
+                    df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='latin-1')
+                print(f"  [OK] Loaded {len(df_score):,} records from CSV")
+            except Exception as e:
+                print(f"  [WARNING] Error reading CSV: {e}")
+                print(f"  [INFO] Attempting to fetch from Redshift database instead...")
+                df_score = fetch_score_dataframe()
+                if df_score.empty:
+                    print(f"  [ERROR] Could not load from CSV or Redshift")
+                    question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+                    question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+                    return question_correctness_df
+    
+    # Check required columns (for both CSV and database sources)
+    print(f"  [INFO] Checking required columns...")
+    required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisit', 'server_time']
+    # idvisitor_hex OR idvisitor_converted must be present (database already converts it)
+    has_visitor_id = 'idvisitor_hex' in df_score.columns or 'idvisitor_converted' in df_score.columns
+    missing_cols = [col for col in required_cols if col not in df_score.columns]
+    if missing_cols or not has_visitor_id:
         if missing_cols:
             print(f"  [ERROR] Missing required columns: {missing_cols}")
-            print(f"  [INFO] Available columns: {list(df_score.columns)}")
-            question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
-            question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
-            return question_correctness_df
-        print(f"  [OK] All required columns present")
-        
-        # Convert idvisitor_hex to idvisitor_converted if needed
-        if 'idvisitor_hex' in df_score.columns and 'idvisitor_converted' not in df_score.columns:
-            print(f"  [ACTION] Converting idvisitor_hex to idvisitor_converted...")
-            df_score = convert_hex_to_int(df_score, 'idvisitor_hex', 'idvisitor_converted')
-            print(f"  [OK] Conversion complete")
-        
-        # Convert server_time to datetime if it's a string
-        if 'server_time' in df_score.columns:
-            try:
-                print(f"  [ACTION] Converting server_time to datetime...")
-                df_score['server_time'] = pd.to_datetime(df_score['server_time'])
-                print(f"  [OK] Datetime conversion complete")
-            except Exception as e:
-                print(f"  [WARNING] Could not convert server_time: {e}")
-        
-    except Exception as e:
-        print(f"  ERROR: Error loading CSV file: {e}")
-        import traceback
-        traceback.print_exc()
+        if not has_visitor_id:
+            print(f"  [ERROR] Missing visitor ID column (need either 'idvisitor_hex' or 'idvisitor_converted')")
+        print(f"  [INFO] Available columns: {list(df_score.columns)}")
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
         return question_correctness_df
+    print(f"  [OK] All required columns present")
+    
+    # Convert idvisitor_hex to idvisitor_converted if needed (only if hex exists and converted doesn't)
+    if 'idvisitor_hex' in df_score.columns and 'idvisitor_converted' not in df_score.columns:
+        print(f"  [ACTION] Converting idvisitor_hex to idvisitor_converted...")
+        df_score = convert_hex_to_int(df_score, 'idvisitor_hex', 'idvisitor_converted')
+        print(f"  [OK] Conversion complete")
+    
+    # Convert server_time to datetime if it's a string
+    if 'server_time' in df_score.columns:
+        try:
+            print(f"  [ACTION] Converting server_time to datetime...")
+            df_score['server_time'] = pd.to_datetime(df_score['server_time'])
+            print(f"  [OK] Datetime conversion complete")
+        except Exception as e:
+            print(f"  [WARNING] Could not convert server_time: {e}")
     
     if df_score.empty:
-        print("  [WARNING] No data found in scores_data.csv")
+        print("  [WARNING] No data found")
         question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
         return question_correctness_df
     
-    print(f"  [OK] Successfully loaded {len(df_score):,} records from {csv_file}")
+    # Print success message with appropriate source
+    if data_source == "database":
+        print(f"  [OK] Successfully loaded {len(df_score):,} records from Redshift database")
+    else:
+        print(f"  [OK] Successfully loaded {len(df_score):,} records from scores_data.csv")
     print(f"  [INFO] Unique games in data: {df_score['game_name'].nunique()}")
     print(f"  [INFO] Action types: {df_score['action_name'].str[:30].unique().tolist()}")
     
@@ -3941,6 +5003,7 @@ Available visuals:
     parser.add_argument('--parent-poll', action='store_true', help='Process parent poll responses data')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
+    parser.add_argument('--use-database', action='store_true', help='Fetch score data directly from Redshift instead of using scores_data.csv')
     
     args = parser.parse_args()
     
@@ -3975,7 +5038,7 @@ Available visuals:
         
         # Process score distribution if requested or if processing all
         if args.score_distribution or process_all:
-            process_score_distribution()
+            process_score_distribution(use_database=args.use_database)
         
         # Process time series if requested or if processing all
         if args.time_series or process_all:
@@ -3987,7 +5050,7 @@ Available visuals:
         
         # Process question correctness if requested or if processing all
         if args.question_correctness or process_all:
-            process_question_correctness()
+            process_question_correctness(use_database=args.use_database)
         
         # Process parent poll if requested or if processing all
         if args.parent_poll or process_all:
