@@ -1523,93 +1523,104 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
     st.markdown("### 📊 Parent Poll Responses")
     st.info("ℹ️ This section uses the global game, domain, and language filters from above.")
     
-    # Use global filters - function receives selected_games, selected_domains, selected_languages as parameters
-    if not selected_games:
-        st.warning("Please select at least one game in the global filters above.")
-        return
-    
-    # Show which games are being displayed
-    available_games = sorted(poll_responses_df['game_name'].unique()) if 'game_name' in poll_responses_df.columns else []
-    display_games = [g for g in selected_games if g in available_games]
-    if display_games:
-        if len(display_games) == 1:
-            st.info(f"📊 Showing poll responses for: **{display_games[0]}**")
-        else:
-            st.info(f"📊 Showing poll responses for: **{', '.join(display_games)}** ({len(display_games)} games)")
-    
     # Apply filters to poll data - use pre-calculated combinations
-    # Data is already filtered by global filters, but we need to apply game filter explicitly
+    # Follow the same filter logic as conversion funnel:
+    # No filters → (game_code='All', language='All')
+    # Domain only → (game_code=selected, language='All')
+    # Language only → (game_code='All', language=selected)
+    # Both → (game_code=selected, language=selected)
     filtered_df = poll_responses_df.copy()
     
-    # Apply game filter (data should already be filtered, but ensure it)
+    # Apply game filter if games are selected (optional - not required)
     if selected_games and 'game_name' in filtered_df.columns:
         filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
     
+    # Determine which column to use for domain/game_code filtering
+    # Prefer 'game_code' if available (like conversion funnel), otherwise use 'domain'
+    domain_col = 'game_code' if 'game_code' in filtered_df.columns else 'domain'
+    
     # Use pre-calculated combinations based on global domain and language filters
-    # The data has all combinations: (All, All), (domain, All), (All, language), (domain, language)
-    if 'domain' in filtered_df.columns and 'language' in filtered_df.columns:
-        # Determine which combination to use based on global filters
+    # The data has all combinations: (All, All), (game_code/domain, All), (All, language), (game_code/domain, language)
+    if domain_col in filtered_df.columns and 'language' in filtered_df.columns:
+        # Determine which combination to use based on global filters (same logic as conversion funnel)
         if not has_domain_filter and not has_language_filter:
-            # No filters - use overall totals (All, All)
+            # No filters - use overall totals (game_code='All', language='All')
             filtered_df = filtered_df[
-                (filtered_df['domain'] == 'All') & (filtered_df['language'] == 'All')
+                (filtered_df[domain_col] == 'All') & (filtered_df['language'] == 'All')
             ]
-        elif selected_domains and not selected_languages:
-            # Domain filter only - use (domain, All) combinations
+        elif has_domain_filter and not has_language_filter:
+            # Domain filter only - use (game_code=selected, language='All') combinations
             if len(selected_domains) == 1:
                 # Single domain - use exact combination
                 filtered_df = filtered_df[
-                    (filtered_df['domain'] == selected_domains[0]) & (filtered_df['language'] == 'All')
+                    (filtered_df[domain_col] == selected_domains[0]) & (filtered_df['language'] == 'All')
                 ]
             else:
-                # Multiple domains - aggregate (domain, All) rows
+                # Multiple domains - aggregate (game_code, language='All') rows
                 filtered_df = filtered_df[
-                    (filtered_df['domain'].isin(selected_domains)) & (filtered_df['language'] == 'All')
+                    (filtered_df[domain_col].isin(selected_domains)) & (filtered_df['language'] == 'All')
                 ]
-                filtered_df = filtered_df.groupby(['game_name', 'question', 'option', 'domain'])['count'].sum().reset_index()
+                groupby_cols = ['game_name', 'question', 'option']
+                if len(selected_domains) > 1:
+                    groupby_cols.append(domain_col)
+                filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
                 filtered_df['language'] = 'All'
-        elif not selected_domains and selected_languages:
-            # Language filter only - use (All, language) combinations
+        elif not has_domain_filter and has_language_filter:
+            # Language filter only - use (game_code='All', language=selected) combinations
             if len(selected_languages) == 1:
                 # Single language - use exact combination
                 filtered_df = filtered_df[
-                    (filtered_df['domain'] == 'All') & (filtered_df['language'] == selected_languages[0])
+                    (filtered_df[domain_col] == 'All') & (filtered_df['language'] == selected_languages[0])
                 ]
             else:
-                # Multiple languages - aggregate (All, language) rows
+                # Multiple languages - aggregate (game_code='All', language) rows
                 filtered_df = filtered_df[
-                    (filtered_df['domain'] == 'All') & (filtered_df['language'].isin(selected_languages))
+                    (filtered_df[domain_col] == 'All') & (filtered_df['language'].isin(selected_languages))
                 ]
-                filtered_df = filtered_df.groupby(['game_name', 'question', 'option', 'language'])['count'].sum().reset_index()
-                filtered_df['domain'] = 'All'
+                groupby_cols = ['game_name', 'question', 'option']
+                if len(selected_languages) > 1:
+                    groupby_cols.append('language')
+                filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
+                filtered_df[domain_col] = 'All'
         else:
-            # Both domain and language filters - use (domain, language) combinations
+            # Both domain and language filters - use (game_code=selected, language=selected) combinations
             if len(selected_domains) == 1 and len(selected_languages) == 1:
                 # Single domain and language - use exact combination
                 filtered_df = filtered_df[
-                    (filtered_df['domain'] == selected_domains[0]) & 
+                    (filtered_df[domain_col] == selected_domains[0]) & 
                     (filtered_df['language'] == selected_languages[0])
                 ]
             else:
                 # Multiple domains or languages - aggregate matching rows
                 filtered_df = filtered_df[
-                    (filtered_df['domain'].isin(selected_domains)) & 
+                    (filtered_df[domain_col].isin(selected_domains)) & 
                     (filtered_df['language'].isin(selected_languages))
                 ]
                 groupby_cols = ['game_name', 'question', 'option']
                 if len(selected_domains) > 1:
-                    groupby_cols.append('domain')
+                    groupby_cols.append(domain_col)
                 if len(selected_languages) > 1:
                     groupby_cols.append('language')
                 filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
                 # Fill in fixed values for single selections
                 if len(selected_domains) == 1:
-                    filtered_df['domain'] = selected_domains[0]
+                    filtered_df[domain_col] = selected_domains[0]
                 if len(selected_languages) == 1:
                     filtered_df['language'] = selected_languages[0]
     
     if filtered_df.empty:
-        st.warning("No data available for the selected games.")
+        # Provide more specific message based on what filters were applied
+        if has_domain_filter or has_language_filter:
+            filter_desc = []
+            if has_domain_filter:
+                filter_desc.append(f"domain(s): {', '.join(selected_domains)}")
+            if has_language_filter:
+                filter_desc.append(f"language(s): {', '.join(selected_languages)}")
+            st.warning(f"No data available for the selected {', '.join(filter_desc)}.")
+        elif selected_games:
+            st.warning("No data available for the selected games.")
+        else:
+            st.warning("No data available.")
         return
     
     # Get unique questions
@@ -1991,15 +2002,16 @@ def main() -> None:
         
         # For time series data, use "All" combinations similar to conversion funnel
         # Time series data uses 'game_code' column which contains domain codes (CG, LL, etc.) or 'All'
+        # Use the same pattern as conversion funnel and parent poll responses
         if 'game_code' in filtered_df.columns and 'language' in filtered_df.columns and 'period_type' in filtered_df.columns:
             # Time series data has pre-calculated "All" combinations
-            # Determine which combination to use based on global filters
-            if not has_domain_filter and not has_language_filter:
+            # Determine which combination to use based on global filters (same logic as conversion funnel)
+            if not selected_domains and not selected_languages:
                 # No filters - use overall totals (game_code='All', language='All')
                 filtered_df = filtered_df[
                     (filtered_df['game_code'] == 'All') & (filtered_df['language'] == 'All')
                 ]
-            elif has_domain_filter and not has_language_filter:
+            elif selected_domains and not selected_languages:
                 # Domain filter only - use (game_code, language='All') combinations
                 if len(selected_domains) == 1:
                     # Single domain - use exact combination
@@ -2015,7 +2027,7 @@ def main() -> None:
                     group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type', 'game_code']
                     filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
                     filtered_df['language'] = 'All'
-            elif not has_domain_filter and has_language_filter:
+            elif not selected_domains and selected_languages:
                 # Language filter only - use (game_code='All', language) combinations
                 if len(selected_languages) == 1:
                     # Single language - use exact combination
@@ -2031,7 +2043,7 @@ def main() -> None:
                     group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type', 'language']
                     filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
                     filtered_df['game_code'] = 'All'
-            elif has_domain_filter and has_language_filter:
+            else:
                 # Both domain and language filters - use (game_code, language) combinations
                 if len(selected_domains) == 1 and len(selected_languages) == 1:
                     # Single domain and language - use exact combination
