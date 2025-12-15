@@ -40,7 +40,7 @@ REDSHIFT_PASSWORD = os.getenv("REDSHIFT_PASSWORD", "Rlproduct@1234")
 SCHEMA_PREFIX = "rl_dwh_prod.live"
 
 # Print database configuration at startup (only if psycopg2 is available)
-# Note: Question correctness uses scores_data.csv and doesn't need Redshift
+# Note: Question correctness now uses Redshift (same query as score distribution)
 if PSYCOPG2_AVAILABLE:
     print("\n" + "=" * 60)
     print("DATABASE CONFIGURATION (for functions that need Redshift)")
@@ -57,11 +57,11 @@ else:
     print("\n" + "=" * 60)
     print("NOTE: psycopg2 not available - Redshift functions will be disabled")
     print("=" * 60)
-    print("  Question correctness uses scores_data.csv (no Redshift needed)")
-    print("  Other functions that need Redshift will show errors")
+    print("  All functions including question correctness require Redshift")
+    print("  Functions that need Redshift will show errors")
     print("=" * 60 + "\n")
 
-# Validate psycopg2 only when needed (not required for question correctness which uses CSV)
+# Validate psycopg2 only when needed (all functions now use Redshift)
 # The validation will happen in functions that actually need Redshift connection
 
 # SQL Queries - Updated with new event categorization
@@ -4648,68 +4648,31 @@ def process_parent_poll() -> pd.DataFrame:
 
 
 def process_question_correctness(use_database: bool = False) -> pd.DataFrame:
-    """Process question correctness data using scores_data.csv or fetch from Redshift.
+    """Process question correctness data by fetching from Redshift database
     
-    Uses the same processing method as score distribution for each game.
+    Uses the same query and processing method as score distribution for each game.
+    Always fetches from Redshift (same as score distribution).
     
     Args:
-        use_database: If True, fetch directly from Redshift. If False, use scores_data.csv (default)
+        use_database: If True, fetch directly from Redshift (always True now, CSV removed)
     """
     print("\n" + "=" * 60)
     print("PROCESSING: Question Correctness Data")
     print("=" * 60)
     
     df_score = pd.DataFrame()
-    data_source = "database"  # Track where data came from
     
-    if use_database:
-        print("Step 1: Fetching data from Redshift database...")
-        df_score = fetch_score_dataframe()
-        if df_score.empty:
-            print(f"  [WARNING] No data fetched from Redshift, trying CSV fallback...")
-            use_database = False  # Fall back to CSV
-            data_source = "CSV"
+    print("\nStep 1: Fetching data from Redshift database...")
+    df_score = fetch_score_dataframe()
     
-    if not use_database:
-        # Use scores_data.csv as the data source (same as score distribution)
-        print("Step 1: Loading data from scores_data.csv...")
-        csv_file = 'scores_data.csv'
-        data_source = "CSV"  # Track that we're using CSV
+    if df_score.empty:
+        print(f"  [ERROR] No data fetched from Redshift")
+        print(f"  [ERROR] Please ensure Redshift is accessible and the query returns data")
+        question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
+        question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
+        return question_correctness_df
         
-        if not os.path.exists(csv_file):
-            print(f"  [WARNING] {csv_file} not found!")
-            print(f"  [INFO] Attempting to fetch from Redshift database instead...")
-            df_score = fetch_score_dataframe()
-            if df_score.empty:
-                print(f"  [ERROR] Could not load from CSV or Redshift")
-                print(f"  [ERROR] Please ensure scores_data.csv is in the current directory or Redshift is accessible")
-                question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
-                question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
-                return question_correctness_df
-        else:
-            try:
-                # Read CSV file with encoding error handling
-                print(f"  [ACTION] Reading {csv_file}...")
-                print(f"  [INFO] This may take a moment for large files...")
-                try:
-                    # Try UTF-8 first
-                    df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='utf-8')
-                except UnicodeDecodeError:
-                    # If UTF-8 fails, try latin-1 (which can handle any byte)
-                    print(f"  [WARNING] UTF-8 encoding failed, trying latin-1...")
-                    df_score = pd.read_csv(csv_file, engine='python', on_bad_lines='skip', encoding='latin-1')
-                print(f"  [OK] Loaded {len(df_score):,} records from CSV")
-            except Exception as e:
-                print(f"  [WARNING] Error reading CSV: {e}")
-                print(f"  [INFO] Attempting to fetch from Redshift database instead...")
-                df_score = fetch_score_dataframe()
-                if df_score.empty:
-                    print(f"  [ERROR] Could not load from CSV or Redshift")
-                    question_correctness_df = pd.DataFrame(columns=['game_name','question_number','correctness','percent','user_count','total_users'])
-                    question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
-                    return question_correctness_df
-    
-    # Check required columns (for both CSV and database sources)
+    # Check required columns
     print(f"  [INFO] Checking required columns...")
     required_cols = ['game_name', 'action_name', 'custom_dimension_1', 'idvisit', 'server_time']
     # idvisitor_hex OR idvisitor_converted must be present (database already converts it)
@@ -4747,13 +4710,23 @@ def process_question_correctness(use_database: bool = False) -> pd.DataFrame:
         question_correctness_df.to_csv('data/question_correctness_data.csv', index=False)
         return question_correctness_df
     
-    # Print success message with appropriate source
-    if data_source == "database":
-        print(f"  [OK] Successfully loaded {len(df_score):,} records from Redshift database")
-    else:
-        print(f"  [OK] Successfully loaded {len(df_score):,} records from scores_data.csv")
+    # Print success message
+    print(f"  [OK] Successfully loaded {len(df_score):,} records from Redshift database")
     print(f"  [INFO] Unique games in data: {df_score['game_name'].nunique()}")
-    print(f"  [INFO] Action types: {df_score['action_name'].str[:30].unique().tolist()}")
+    
+    # Check for optional columns (language and game_code) - same as score distribution
+    has_language = 'language' in df_score.columns
+    has_game_code = 'game_code' in df_score.columns
+    if has_language:
+        print(f"  [INFO] Language column found: will be included in output")
+        # Transform language column: if contains "mr-IN" then "mr", else "hi" (same as score distribution)
+        print(f"  [ACTION] Transforming language column...")
+        df_score['language'] = df_score['language'].apply(
+            lambda x: 'mr' if pd.notna(x) and 'mr-IN' in str(x) else 'hi'
+        )
+        print(f"  [OK] Language transformation complete")
+    if has_game_code:
+        print(f"  [INFO] Game code column found: will be included in output")
     
     print("\nStep 2: Extracting per-question correctness from score data...")
     print("  [INFO] Using same processing method as score distribution for each game...")
