@@ -480,7 +480,10 @@ def fetch_dataframe() -> pd.DataFrame:
 
 
 def fetch_score_dataframe() -> pd.DataFrame:
-    """Fetch data for score distribution analysis using hybrid_games and hybrid_games_links tables"""
+    """Fetch data for score distribution analysis using hybrid_games and hybrid_games_links tables
+    
+    Includes retry logic and extended timeouts for large queries.
+    """
     if not PSYCOPG2_AVAILABLE:
         print("ERROR: psycopg2 not available. Cannot fetch score data from Redshift.")
         print("  Install with: pip install psycopg2-binary")
@@ -496,49 +499,98 @@ def fetch_score_dataframe() -> pd.DataFrame:
     print(f"  User: {REDSHIFT_USER}")
     print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
     
-    try:
-        print(f"\n  [ACTION] Connecting to REDSHIFT...")
-        conn = psycopg2.connect(
-            host=REDSHIFT_HOST,
-            database=REDSHIFT_DATABASE,
-            port=REDSHIFT_PORT,
-            user=REDSHIFT_USER,
-            password=REDSHIFT_PASSWORD,
-            connect_timeout=30
-        )
-        print(f"  ✓ Successfully connected to REDSHIFT")
-        print(f"  [ACTION] Executing query on REDSHIFT...")
-        df = pd.read_sql(SCORE_DISTRIBUTION_QUERY, conn)
-        conn.close()
-        print(f"  ✓ Query executed successfully on REDSHIFT")
-        print(f"  ✓ Connection closed")
-        
-        # Convert hex to int in Python (handles large values)
-        if 'idvisitor_hex' in df.columns:
-            print(f"  [ACTION] Converting hex to integer in Python...")
-            df = convert_hex_to_int(df, 'idvisitor_hex', 'idvisitor_converted')
-            print(f"  ✓ Converted idvisitor_hex to idvisitor_converted")
-        
-        print(f"SUCCESS: Fetched {len(df)} records from REDSHIFT")
-        return df
-    except psycopg2.OperationalError as e:
-        print(f"\nERROR: Failed to connect to REDSHIFT:")
-        print(f"  Error Type: OperationalError (connection issue)")
-        print(f"  Error Message: {str(e)}")
-        print(f"  Check:")
-        print(f"    - REDSHIFT credentials are correct in .env file")
-        print(f"    - Network connectivity to Redshift cluster")
-        print(f"    - Redshift cluster is running and accessible")
-        import traceback
-        traceback.print_exc()
-        return pd.DataFrame()
-    except Exception as e:
-        print(f"\nERROR: Failed to fetch score data from REDSHIFT:")
-        print(f"  Error Type: {type(e).__name__}")
-        print(f"  Error Message: {str(e)}")
-        import traceback
-        traceback.print_exc()
-        return pd.DataFrame()
+    # Retry configuration
+    import time
+    max_retries = 3
+    retry_delay = 5  # seconds
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            print(f"\n  [ACTION] Connecting to REDSHIFT (Attempt {attempt}/{max_retries})...")
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=60,  # Increased from 30 to 60 seconds
+                keepalives=1,  # Enable TCP keepalive
+                keepalives_idle=30,  # Start keepalive after 30 seconds of idle
+                keepalives_interval=10,  # Send keepalive every 10 seconds
+                keepalives_count=5  # Number of keepalive packets before considering connection dead
+            )
+            print(f"  ✓ Successfully connected to REDSHIFT")
+            
+            # Set statement timeout (in milliseconds) - 30 minutes for large queries
+            print(f"  [ACTION] Setting statement timeout to 30 minutes...")
+            with conn.cursor() as cur:
+                cur.execute("SET statement_timeout = '1800000'")  # 30 minutes in milliseconds
+            conn.commit()
+            print(f"  ✓ Statement timeout set")
+            
+            print(f"  [ACTION] Executing query on REDSHIFT...")
+            print(f"  [INFO] This may take several minutes for large datasets...")
+            df = pd.read_sql(SCORE_DISTRIBUTION_QUERY, conn)
+            conn.close()
+            print(f"  ✓ Query executed successfully on REDSHIFT")
+            print(f"  ✓ Connection closed")
+            
+            # Convert hex to int in Python (handles large values)
+            if 'idvisitor_hex' in df.columns:
+                print(f"  [ACTION] Converting hex to integer in Python...")
+                df = convert_hex_to_int(df, 'idvisitor_hex', 'idvisitor_converted')
+                print(f"  ✓ Converted idvisitor_hex to idvisitor_converted")
+            
+            print(f"SUCCESS: Fetched {len(df)} records from REDSHIFT")
+            return df
+            
+        except (psycopg2.OperationalError, psycopg2.InterfaceError) as e:
+            error_msg = str(e)
+            is_connection_error = (
+                "server closed the connection" in error_msg.lower() or
+                "connection already closed" in error_msg.lower() or
+                "connection timeout" in error_msg.lower() or
+                "terminated abnormally" in error_msg.lower()
+            )
+            
+            if is_connection_error and attempt < max_retries:
+                print(f"\n  [WARNING] Connection error on attempt {attempt}:")
+                print(f"    {error_msg}")
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+                continue
+            else:
+                print(f"\nERROR: Failed to connect/execute on REDSHIFT:")
+                print(f"  Error Type: {type(e).__name__}")
+                print(f"  Error Message: {error_msg}")
+                if attempt >= max_retries:
+                    print(f"  [ERROR] Max retries ({max_retries}) reached. Giving up.")
+                print(f"  Check:")
+                print(f"    - REDSHIFT credentials are correct in .env file")
+                print(f"    - Network connectivity to Redshift cluster")
+                print(f"    - Redshift cluster is running and accessible")
+                print(f"    - Query may be too large - consider adding date filters")
+                import traceback
+                traceback.print_exc()
+                return pd.DataFrame()
+                
+        except Exception as e:
+            print(f"\nERROR: Failed to fetch score data from REDSHIFT:")
+            print(f"  Error Type: {type(e).__name__}")
+            print(f"  Error Message: {str(e)}")
+            if attempt < max_retries:
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2
+                continue
+            else:
+                import traceback
+                traceback.print_exc()
+                return pd.DataFrame()
+    
+    # Should not reach here, but return empty dataframe if we do
+    return pd.DataFrame()
 
 
 def parse_correct_selections_questions(custom_dim_1, game_name):
