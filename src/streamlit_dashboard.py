@@ -437,7 +437,7 @@ def _render_altair_chart(chart, use_container_width=True):
     # (Newer versions show deprecation warnings but it still works)
     return st.altair_chart(chart, use_container_width=use_container_width)
 
-def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame) -> None:
+def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame, selected_games: list = None) -> None:
     """Render a modern, professional dashboard with multiple chart types"""
     import altair as alt
     
@@ -564,8 +564,42 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     # Add note about Parent Poll being optional
     st.info("ℹ️ **Note:** Parent Poll is an optional step in the conversion funnel.")
     
-    # Mapped users data (summary totals across all games)
-    mapped_users_data = {
+    # Game-specific mapped users data
+    game_mapped_users = {
+        'Shape Circle': {'started': 23733, 'introduction': 23226, 'mid_introduction': 20401, 'parent_poll': 16475, 'validation': 20218, 'rewards': 19667, 'completed': 21246, 'questions': 21626},
+        'Shape Triangle': {'started': 11449, 'introduction': 11242, 'mid_introduction': 9463, 'parent_poll': 6867, 'validation': 9357, 'rewards': 9038, 'completed': 9862, 'questions': 10207},
+        'Color Red': {'started': 17238, 'introduction': 16865, 'mid_introduction': 14531, 'parent_poll': 10839, 'validation': 14308, 'rewards': 13654, 'completed': 14902, 'questions': 15498},
+        'Color Yellow': {'started': 8786, 'introduction': 8552, 'mid_introduction': 6903, 'parent_poll': 4999, 'validation': 6825, 'rewards': 6652, 'completed': 7554, 'questions': 7468},
+        'Numbers I': {'started': 10326, 'introduction': 10156, 'mid_introduction': 8760, 'parent_poll': 6299, 'validation': 8631, 'rewards': 8315, 'completed': 8917, 'questions': 9298},
+        'Numbers II': {'started': 7406, 'introduction': 7295, 'mid_introduction': 6307, 'parent_poll': 4479, 'validation': 6231, 'rewards': 6046, 'completed': 6437, 'questions': 6681},
+        'Relational Comparison': {'started': 5540, 'introduction': 5448, 'mid_introduction': 4428, 'parent_poll': 3087, 'validation': 4373, 'rewards': 4149, 'completed': 4553, 'questions': 4683},
+        'Sorting Primary Colors': {'started': 5221, 'introduction': 5181, 'mid_introduction': 4077, 'parent_poll': 3174, 'validation': 4008, 'rewards': 3893, 'completed': 4355, 'questions': 4354},
+        'Quantitative Comparison': {'started': 7483, 'introduction': 7405, 'mid_introduction': 6083, 'parent_poll': 4081, 'validation': 5992, 'rewards': 5772, 'completed': 6235, 'questions': 6395},
+        'Relational Comparison II': {'started': 6871, 'introduction': 6669, 'mid_introduction': 5540, 'parent_poll': 4343, 'validation': 5412, 'rewards': 5187, 'completed': 5561, 'questions': 5766},
+        'Sorting Primary Shapes': {'started': 4067, 'introduction': 3949, 'mid_introduction': 2326, 'parent_poll': 3264, 'validation': 2270, 'rewards': 2228, 'completed': 2762, 'questions': 2560},
+        'Numbers Comparison': {'started': 6559, 'introduction': 6475, 'mid_introduction': 5176, 'parent_poll': 4065, 'validation': 5045, 'rewards': 4755, 'completed': 5225, 'questions': 5514},
+        'Color Blue': {'started': 6378, 'introduction': 6352, 'mid_introduction': 5297, 'parent_poll': 3692, 'validation': 5227, 'rewards': 5103, 'completed': 5567, 'questions': 5671},
+        'Rhyming Words': {'started': 8278, 'introduction': 8103, 'mid_introduction': 5923, 'parent_poll': 4081, 'validation': 5807, 'rewards': 5430, 'completed': 6247, 'questions': 6568},
+        'Shape Square': {'started': 3785, 'introduction': 3709, 'mid_introduction': 2885, 'parent_poll': 2138, 'validation': 2850, 'rewards': 2820, 'completed': 3288, 'questions': 3222},
+        'Revision Colors': {'started': 4787, 'introduction': 4703, 'mid_introduction': 3839, 'parent_poll': 2475, 'validation': 3773, 'rewards': 3564, 'completed': 3967, 'questions': 4058},
+        'Revision Shapes': {'started': 3782, 'introduction': 3721, 'mid_introduction': 2958, 'parent_poll': 1986, 'validation': 2902, 'rewards': 2813, 'completed': 3144, 'questions': 3183},
+        'Beginning Sounds Ma/Ka/La': {'started': 10878, 'introduction': 10159, 'mid_introduction': 7379, 'parent_poll': 5106, 'validation': 7238, 'rewards': 7052, 'completed': 7737, 'questions': 7804},
+        'Primary Emotion Labelling': {'started': 4632, 'introduction': 4586, 'mid_introduction': 3712, 'parent_poll': 2390, 'validation': 3634, 'rewards': 3530, 'completed': 3765, 'questions': 3899},
+        'Identification of all emotions': {'started': 5816, 'introduction': 5717, 'mid_introduction': 4530, 'parent_poll': 3623, 'validation': 4422, 'rewards': 4298, 'completed': 4740, 'questions': 4776},
+        'Beginning Sounds Pa/Cha/Sa': {'started': 8246, 'introduction': 7841, 'mid_introduction': 5698, 'parent_poll': 3906, 'validation': 5572, 'rewards': 5303, 'completed': 6030, 'questions': 6158},
+        'Shape Rectangle': {'started': 3518, 'introduction': 3497, 'mid_introduction': 2763, 'parent_poll': 1929, 'validation': 2727, 'rewards': 2667, 'completed': 2983, 'questions': 2975},
+        'Numerals 1-10': {'started': 3524, 'introduction': 3396, 'mid_introduction': 2750, 'parent_poll': 1992, 'validation': 2706, 'rewards': 2642, 'completed': 2850, 'questions': 2939},
+        'Emotion Identification': {'started': 6510, 'introduction': 6254, 'mid_introduction': 4958, 'parent_poll': 4015, 'validation': 4824, 'rewards': 4492, 'completed': 5071, 'questions': 5305},
+        'Beginning Sound Ba/Ra/Na': {'started': 5359, 'introduction': 5191, 'mid_introduction': 3902, 'parent_poll': 4921, 'validation': 3844, 'rewards': 3529, 'completed': 4033, 'questions': 4261},
+        'Positions': {'started': 6984, 'introduction': 6584, 'mid_introduction': 5228, 'parent_poll': 6696, 'validation': 5095, 'rewards': 4950, 'completed': 5441, 'questions': 5558},
+        'Beginning Sounds Ta/Va/Ga': {'started': 1468, 'introduction': 1401, 'mid_introduction': 1051, 'parent_poll': 1436, 'validation': 1021, 'rewards': 1001, 'completed': 1160, 'questions': 1173},
+        'Beginning Sounds Ka/Na/Ta': {'started': 4981, 'introduction': 4719, 'mid_introduction': 3265, 'parent_poll': 4855, 'validation': 3122, 'rewards': 3087, 'completed': 3132, 'questions': 3441},
+        'Beginning Sounds Ma/Cha/Ba': {'started': 5718, 'introduction': 5392, 'mid_introduction': 4224, 'parent_poll': 5544, 'validation': 4060, 'rewards': 4020, 'completed': 4186, 'questions': 4411},
+        'Beginning Sounds Sa/La/Va': {'started': 5170, 'introduction': 5026, 'mid_introduction': 3787, 'parent_poll': 5140, 'validation': 3663, 'rewards': 3633, 'completed': 3803, 'questions': 4450}
+    }
+    
+    # Summary mapped users data (totals across all games)
+    summary_mapped_users_data = {
         'started': 56766,
         'introduction': 54415,
         'mid_introduction': 46967,
@@ -575,6 +609,19 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         'validation': 46481,
         'completed': 38495
     }
+    
+    # Determine which mapped users data to use
+    # If a single game is selected, use game-specific data; otherwise use summary totals
+    if selected_games and len(selected_games) == 1:
+        game_name = selected_games[0]
+        if game_name in game_mapped_users:
+            mapped_users_data = game_mapped_users[game_name]
+        else:
+            # Game not found in data, use summary totals
+            mapped_users_data = summary_mapped_users_data
+    else:
+        # Multiple games or no game selected - use summary totals
+        mapped_users_data = summary_mapped_users_data
     
     # Create data for selected funnel
     funnel_data_df = pd.DataFrame([
@@ -2581,7 +2628,7 @@ def main() -> None:
             filtered_summary_df = summary_df.copy()
     
     # Render conversion funnel with date and game filters applied
-    render_modern_dashboard(filtered_summary_df, filtered_summary_df)
+    render_modern_dashboard(filtered_summary_df, filtered_summary_df, selected_games)
     
     # Add Time Series Analysis - right after conversion funnels
     st.markdown("---")
