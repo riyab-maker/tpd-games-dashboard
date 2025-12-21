@@ -1298,7 +1298,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
         
     # Create grouped (side-by-side) bar chart
-    bar_width = 20  # Bar width for Started/Completed grouping
+    # Adjust bar width based on time period to ensure bars are adjacent but not overlapping
+    if time_period == "Monthly":
+        bar_width = 15  # Smaller width for monthly to keep bars close together
+    elif time_period == "Daily":
+        bar_width = 12  # Even smaller for daily view
+    else:
+        bar_width = 20  # Default for weekly
         
     bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
@@ -1334,7 +1340,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         xOffset=alt.XOffset('Event:N',
                            sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
                            scale=alt.Scale(
-                               paddingInner=0.05 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.2)
+                               paddingInner=0.0 if time_period == "Monthly" else (0.0 if time_period == "Daily" else 0.2)
                            )),
         color=alt.Color('Event:N',
                           scale=alt.Scale(
@@ -1377,7 +1383,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         xOffset=alt.XOffset('Event:N',
                            sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
                            scale=alt.Scale(
-                               paddingInner=0.05 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.2)
+                               paddingInner=0.0 if time_period == "Monthly" else (0.0 if time_period == "Daily" else 0.2)
                            )),
         y=alt.Y('Count:Q'),
         text=alt.Text('Count:Q', format=',.0f')
