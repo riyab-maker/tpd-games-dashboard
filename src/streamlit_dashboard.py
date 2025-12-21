@@ -1571,9 +1571,9 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filtered_df = filtered_df.groupby(['question', 'option'])['count'].sum().reset_index()
         elif has_domain_filter and not has_language_filter:
             # Domain filter only - use (game_code=selected, language='All') combinations
-                filtered_df = filtered_df[
+            filtered_df = filtered_df[
                 (filtered_df[domain_col].isin(selected_domains)) & (filtered_df['language'] == 'All')
-                ]
+            ]
             # Aggregate: if game filter applied, keep game_name; otherwise aggregate across all games
             if has_game_filter:
                 # Keep game_name in groupby when game filter is applied
@@ -1592,7 +1592,7 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filtered_df['language'] = 'All'
         elif not has_domain_filter and has_language_filter:
             # Language filter only - use (game_code='All', language=selected) combinations
-                filtered_df = filtered_df[
+            filtered_df = filtered_df[
                 (filtered_df[domain_col] == 'All') & (filtered_df['language'].isin(selected_languages))
             ]
             # Aggregate: if game filter applied, keep game_name; otherwise aggregate across all games
@@ -1613,10 +1613,10 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
             filtered_df[domain_col] = 'All'
         else:
             # Both domain and language filters - use (game_code=selected, language=selected) combinations
-                filtered_df = filtered_df[
+            filtered_df = filtered_df[
                 (filtered_df[domain_col].isin(selected_domains)) & 
-                    (filtered_df['language'].isin(selected_languages))
-                ]
+                (filtered_df['language'].isin(selected_languages))
+            ]
             # Aggregate: if game filter applied, keep game_name; otherwise aggregate across all games
             if has_game_filter:
                 # Keep game_name in groupby when game filter is applied
