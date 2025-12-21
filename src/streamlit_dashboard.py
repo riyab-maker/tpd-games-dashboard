@@ -1636,7 +1636,7 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
                 # Fill in fixed values for single selections
                 if len(selected_domains) == 1:
-                filtered_df[domain_col] = selected_domains[0]
+                    filtered_df[domain_col] = selected_domains[0]
                 if len(selected_languages) == 1:
                     filtered_df['language'] = selected_languages[0]
     
