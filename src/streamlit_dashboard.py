@@ -1650,7 +1650,7 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filter_desc.append(f"language(s): {', '.join(selected_languages)}")
             st.warning(f"No data available for the selected {', '.join(filter_desc)}.")
         elif selected_games:
-        st.warning("No data available for the selected games.")
+            st.warning("No data available for the selected games.")
         else:
             st.warning("No data available.")
         return
