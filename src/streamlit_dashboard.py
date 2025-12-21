@@ -564,16 +564,44 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
     # Add note about Parent Poll being optional
     st.info("ℹ️ **Note:** Parent Poll is an optional step in the conversion funnel.")
     
+    # Mapped users data (summary totals across all games)
+    mapped_users_data = {
+        'started': 56766,
+        'introduction': 54415,
+        'mid_introduction': 46967,
+        'parent_poll': 38550,
+        'questions': 48250,
+        'rewards': 37561,
+        'validation': 46481,
+        'completed': 38495
+    }
+    
     # Create data for selected funnel
     funnel_data_df = pd.DataFrame([
         {
             'Stage': stage_labels[stage], 
             'Count': funnel_data.get(f'{stage}_{data_key}', 0), 
             'Order': idx,
-            'IsOptional': (stage == 'parent_poll')  # Mark parent_poll as optional
+            'IsOptional': (stage == 'parent_poll'),  # Mark parent_poll as optional
+            'MappedUsers': mapped_users_data.get(stage, 0) if funnel_type == 'Users' else 0,
+            'Percentage': 0.0  # Will be calculated below
         }
             for idx, stage in enumerate(funnel_stages)
         ])
+    
+    # Calculate percentages for Started and Completed in Users view
+    if funnel_type == 'Users':
+        for idx, row in funnel_data_df.iterrows():
+            stage_key = [k for k, v in stage_labels.items() if v == row['Stage']][0]
+            total_users = row['Count']
+            mapped_users = row['MappedUsers']
+            
+            # Only calculate percentage for Started and Completed
+            if stage_key in ['started', 'completed'] and total_users > 0:
+                percentage = (mapped_users / total_users) * 100
+                funnel_data_df.at[idx, 'Percentage'] = percentage
+            else:
+                funnel_data_df.at[idx, 'Percentage'] = 0.0
         
     # Define lighter colors for parent_poll (optional step)
     lighter_colors = {
@@ -613,18 +641,42 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         )
         
         # Add labels with complete numbers - positioned at the start of bars
-    funnel_labels = alt.Chart(funnel_data_df).mark_text(
-            align='left',
-            baseline='middle',
-            color='white',
-            fontSize=22,
-            fontWeight='bold',
-            dx=10
-        ).encode(
-            x=alt.value(10),  # Fixed position at the start
-            y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
-            text=alt.Text('Count:Q', format='.0f')
+    # For Users view, show percentage for Started and Completed
+    if funnel_type == 'Users':
+        # Create label text with count and percentage for Started/Completed
+        funnel_data_df['LabelText'] = funnel_data_df.apply(
+            lambda row: f"{int(row['Count']):,} ({row['Percentage']:.1f}% mapped)" 
+            if row['Percentage'] > 0 
+            else f"{int(row['Count']):,}", 
+            axis=1
         )
+    
+    if funnel_type == 'Users':
+        funnel_labels = alt.Chart(funnel_data_df).mark_text(
+                align='left',
+                baseline='middle',
+                color='white',
+                fontSize=22,
+                fontWeight='bold',
+                dx=10
+            ).encode(
+                x=alt.value(10),  # Fixed position at the start
+                y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
+                text=alt.Text('LabelText:N')
+            )
+    else:
+        funnel_labels = alt.Chart(funnel_data_df).mark_text(
+                align='left',
+                baseline='middle',
+                color='white',
+                fontSize=22,
+                fontWeight='bold',
+                dx=10
+            ).encode(
+                x=alt.value(10),  # Fixed position at the start
+                y=alt.Y('Stage:N', sort=alt.SortField(field='Order', order='ascending')),
+                text=alt.Text('Count:Q', format='.0f')
+            )
         
     funnel_display = alt.layer(funnel_chart, funnel_labels).configure_view(
             strokeWidth=0
