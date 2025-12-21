@@ -1318,7 +1318,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                    ),
                    sort=time_order,
                    scale=alt.Scale(
-                   paddingInner=0.2 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.1),
+                   paddingInner=0.3 if time_period == "Monthly" else (0.02 if time_period == "Daily" else 0.1),
                    paddingOuter=0.1 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.1)
                    )),
             y=alt.Y('Count:Q',
@@ -1334,7 +1334,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         xOffset=alt.XOffset('Event:N',
                            sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
                            scale=alt.Scale(
-                               paddingInner=0.1 if time_period == "Monthly" else (0.1 if time_period == "Daily" else 0.2)
+                               paddingInner=0.05 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.2)
                            )),
         color=alt.Color('Event:N',
                           scale=alt.Scale(
@@ -1377,7 +1377,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         xOffset=alt.XOffset('Event:N',
                            sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
                            scale=alt.Scale(
-                               paddingInner=0.1 if time_period == "Monthly" else (0.1 if time_period == "Daily" else 0.2)
+                               paddingInner=0.05 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.2)
                            )),
         y=alt.Y('Count:Q'),
         text=alt.Text('Count:Q', format=',.0f')
