@@ -1199,9 +1199,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             time_order_df['year'] = time_order_df['time_display'].str.extract(r'\((\d{4})\)').astype(int)
             time_order_df['week'] = time_order_df['time_display'].str.extract(r'Week (\d+)').astype(int)
             time_order_df = time_order_df.sort_values(['year', 'week'])
+            # Filter out Week 25
+            time_order_df = time_order_df[time_order_df['week'] != 25]
             time_order = time_order_df['time_display'].tolist()
         except:
             time_order = sorted(aggregated_df['time_display'].unique().tolist())
+            # Filter out Week 25 even if extraction fails
+            time_order = [t for t in time_order if 'Week 25' not in str(t)]
     elif time_period == "Daily":
         # Sort by date for chronological order
         try:
@@ -1221,6 +1225,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         (aggregated_df['metric'] == metric_name_lower) | 
         (aggregated_df['metric'] == 'rm_active_users')
     ].copy()
+    
+    # Filter out Week 25 from weekly view
+    if time_period == "Weekly":
+        filtered_metric_df = filtered_metric_df[~filtered_metric_df['time_display'].str.contains('Week 25', na=False)]
     
     if filtered_metric_df.empty:
         st.warning(f"No {selected_metric.lower()} data available for the selected time period.")
@@ -1310,8 +1318,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                    ),
                    sort=time_order,
                    scale=alt.Scale(
-                   paddingInner=0.1,
-                   paddingOuter=0.1
+                   paddingInner=0.2 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.1),
+                   paddingOuter=0.1 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.1)
                    )),
             y=alt.Y('Count:Q',
                title=f'{selected_metric} Count',
@@ -1324,7 +1332,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                    ),
                    scale=alt.Scale(zero=True)),
         xOffset=alt.XOffset('Event:N',
-                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
+                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
+                           scale=alt.Scale(
+                               paddingInner=0.1 if time_period == "Monthly" else (0.1 if time_period == "Daily" else 0.2)
+                           )),
         color=alt.Color('Event:N',
                           scale=alt.Scale(
                           domain=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
@@ -1364,7 +1375,10 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     ).encode(
         x=alt.X('Time:O', sort=time_order),
         xOffset=alt.XOffset('Event:N',
-                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
+                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
+                           scale=alt.Scale(
+                               paddingInner=0.1 if time_period == "Monthly" else (0.1 if time_period == "Daily" else 0.2)
+                           )),
         y=alt.Y('Count:Q'),
         text=alt.Text('Count:Q', format=',.0f')
     ).transform_filter(
@@ -1557,9 +1571,9 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filtered_df = filtered_df.groupby(['question', 'option'])['count'].sum().reset_index()
         elif has_domain_filter and not has_language_filter:
             # Domain filter only - use (game_code=selected, language='All') combinations
-            filtered_df = filtered_df[
+                filtered_df = filtered_df[
                 (filtered_df[domain_col].isin(selected_domains)) & (filtered_df['language'] == 'All')
-            ]
+                ]
             # Aggregate: if game filter applied, keep game_name; otherwise aggregate across all games
             if has_game_filter:
                 # Keep game_name in groupby when game filter is applied
@@ -1575,10 +1589,10 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
                 if len(selected_domains) == 1:
                     filtered_df[domain_col] = selected_domains[0]
-            filtered_df['language'] = 'All'
+                filtered_df['language'] = 'All'
         elif not has_domain_filter and has_language_filter:
             # Language filter only - use (game_code='All', language=selected) combinations
-            filtered_df = filtered_df[
+                filtered_df = filtered_df[
                 (filtered_df[domain_col] == 'All') & (filtered_df['language'].isin(selected_languages))
             ]
             # Aggregate: if game filter applied, keep game_name; otherwise aggregate across all games
@@ -1599,10 +1613,10 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
             filtered_df[domain_col] = 'All'
         else:
             # Both domain and language filters - use (game_code=selected, language=selected) combinations
-            filtered_df = filtered_df[
+                filtered_df = filtered_df[
                 (filtered_df[domain_col].isin(selected_domains)) & 
-                (filtered_df['language'].isin(selected_languages))
-            ]
+                    (filtered_df['language'].isin(selected_languages))
+                ]
             # Aggregate: if game filter applied, keep game_name; otherwise aggregate across all games
             if has_game_filter:
                 # Keep game_name in groupby when game filter is applied
@@ -1620,11 +1634,11 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 if len(selected_languages) > 1:
                     groupby_cols.append('language')
                 filtered_df = filtered_df.groupby(groupby_cols)['count'].sum().reset_index()
-            # Fill in fixed values for single selections
-            if len(selected_domains) == 1:
+                # Fill in fixed values for single selections
+                if len(selected_domains) == 1:
                 filtered_df[domain_col] = selected_domains[0]
-            if len(selected_languages) == 1:
-                filtered_df['language'] = selected_languages[0]
+                if len(selected_languages) == 1:
+                    filtered_df['language'] = selected_languages[0]
     
     if filtered_df.empty:
         # Provide more specific message based on what filters were applied
@@ -1636,7 +1650,7 @@ def render_parent_poll_responses(poll_responses_df: pd.DataFrame, game_conversio
                 filter_desc.append(f"language(s): {', '.join(selected_languages)}")
             st.warning(f"No data available for the selected {', '.join(filter_desc)}.")
         elif selected_games:
-            st.warning("No data available for the selected games.")
+        st.warning("No data available for the selected games.")
         else:
             st.warning("No data available.")
         return
