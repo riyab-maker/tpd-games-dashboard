@@ -1,12 +1,12 @@
-game_name,lanuagae,Started,Questions,Rewards,Video Started,Average,Min,Max,total duration
-Primary Emotion Labelling : Happy,hi,3313,2127,932,237,58.80636429,95,86,132.481332
-Primary Emotion Labelling : Sad,hi,5958,3790,1419,528,51.10156165,213,151,131.306667
-Beginning Sounds Sa/La/Va,hi,7002,4486,1686,565,82.80579157,219,192,205.44
-Primary Emotion Labelling : Sad,mr,13782,8421,3098,1329,62.6813841,440,560,124.629333
-Primary Emotion Labelling : Happy,mr,6110,3729,1636,497,59.44740745,183,208,122.197333
-Primary Emotion Labelling : Anger,mr,23241,14035,5753,2326,59.90564124,926,951,125.162661
-Beginning Sounds Pa/Ga/Ra,hi,11103,6240,2166,650,77.56723478,263,169,227.797328
-Beginning Sounds Ma/Cha/Ba,hi,4836,1614,1343,554,27.1813902,174,322,39.703223
-Beginning Sounds Ka/Na/Ta,hi,7424,2318,1902,674,92.09971449,212,249,203.546101
-Numerals 1-10,hi,504,217,192,62,71.59431116,26,6,323.029318
-Primary Emotion Labelling : Anger,hi,7974,4971,2052,801,52.97717236,332,273,126.869333
+game_name,lanuagae,Started,Questions,Rewards,Video Started,game_id,Right_game_id,Average,Right_game_id2,Min,Max,total duration
+Relational Comparison,hi,11103,6240,2166,650,9,9,77.56723478,9,263,169,227.797328
+Numerals 1-10,hi,504,217,192,62,27,27,71.59431116,27,26,6,323.029318
+Beginning Sounds Ka/Na/Ta,hi,7424,2318,1902,674,32,32,92.09971449,32,212,249,203.546101
+Beginning Sounds Ma/Cha/Ba,hi,4836,1614,1343,554,33,33,27.1813902,33,174,322,39.703223
+Beginning Sounds Sa/La/Va,hi,7002,4486,1686,565,34,34,82.80579157,34,219,192,205.44
+Primary Emotion Labelling : Happy,hi,3313,2127,932,237,37,37,58.80636429,37,95,86,132.481332
+Primary Emotion Labelling : Happy,mr,6110,3729,1636,497,37,37,59.44740745,37,183,208,122.197333
+Primary Emotion Labelling : Sad,hi,5958,3790,1419,528,38,38,51.10156165,38,213,151,131.306667
+Primary Emotion Labelling : Sad,mr,13782,8421,3098,1329,38,38,62.6813841,38,440,560,124.629333
+Primary Emotion Labelling : Anger,mr,23241,14035,5753,2326,39,39,59.90564124,39,926,951,125.162661
+Primary Emotion Labelling : Anger,hi,7974,4971,2052,801,39,39,52.97717236,39,332,273,126.869333
