@@ -254,7 +254,60 @@ WHERE matomo_log_action.name LIKE '%_completed%'
 # Time Series Analysis Query - Uses same logic as conversion funnel query
 # Includes action_name and event classification (Started/Completed)
 # Includes game_code and language for aggregation
+# Appends missing game-activity mappings before joining
 TIME_SERIES_QUERY = """
+WITH game_activity_mappings AS (
+  -- Existing mappings from hybrid_games and hybrid_games_links
+  SELECT 
+    hg.game_name,
+    hg.game_code,
+    hgl.activity_id
+  FROM rl_dwh_prod.live.hybrid_games hg
+  INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+  
+  UNION ALL
+  
+  -- Missing game-activity mappings
+  SELECT 
+    'Primary Emotion Labelling : Happy' AS game_name,
+    NULL AS game_code,
+    140 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Happy' AS game_name,
+    NULL AS game_code,
+    140 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Sad' AS game_name,
+    NULL AS game_code,
+    130 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Sad' AS game_name,
+    NULL AS game_code,
+    130 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Anger' AS game_name,
+    NULL AS game_code,
+    131 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Anger' AS game_name,
+    NULL AS game_code,
+    132 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Fear' AS game_name,
+    NULL AS game_code,
+    132 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Fear' AS game_name,
+    NULL AS game_code,
+    132 AS activity_id
+)
 SELECT 
   mllva.idlink_va,
   TO_HEX(mllva.idvisitor) AS idvisitor_hex,
@@ -262,8 +315,8 @@ SELECT
   DATEADD(minute, 330, mllva.server_time) AS server_time,
   mllva.idaction_name,
   mllva.custom_dimension_2,
-  hg.game_name,
-  hg.game_code,
+  gam.game_name,
+  gam.game_code,
   mla.name AS action_name,
   matomo_log_action1.name AS language,
   CASE 
@@ -273,16 +326,147 @@ SELECT
   END AS event
 FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
 INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
-INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON mllva.custom_dimension_2 = hgl.activity_id
-INNER JOIN rl_dwh_prod.live.hybrid_games hg ON hgl.game_id = hg.id
+INNER JOIN game_activity_mappings gam ON mllva.custom_dimension_2 = gam.activity_id
 INNER JOIN rl_dwh_prod.live.matomo_log_action matomo_log_action1 ON mllva.idaction_url_ref = matomo_log_action1.idaction
 WHERE (mla.name LIKE '%hybrid_game_started%' 
        OR mla.name LIKE '%hybrid_mcq_started%' 
        OR mla.name LIKE '%hybrid_game_completed%' 
        OR mla.name LIKE '%hybrid_mcq_completed%')
-  AND hgl.activity_id IS NOT NULL
+  AND gam.activity_id IS NOT NULL
   AND DATEADD(minute, 330, mllva.server_time) >= '2025-07-02'
 """
+
+
+# Queries for mapped users calculation
+MAPPED_USERS_QUERY_1 = """
+SELECT DISTINCT "rl_dwh_prod"."live"."hybrid_users"."phone" 
+FROM "rl_dwh_prod"."live"."hybrid_profiles" 
+INNER JOIN "rl_dwh_prod"."live"."hybrid_profile_devices" ON "rl_dwh_prod"."live"."hybrid_profiles"."id" = "rl_dwh_prod"."live"."hybrid_profile_devices"."profile_id" 
+INNER JOIN "rl_dwh_prod"."live"."hybrid_users" ON "rl_dwh_prod"."live"."hybrid_profiles"."hybrid_user_id" = "rl_dwh_prod"."live"."hybrid_users"."id", "rl_dwh_prod"."live"."activity_intervention" 
+WHERE "rl_dwh_prod"."live"."hybrid_users"."phone" IS NOT NULL
+"""
+
+MAPPED_USERS_QUERY_2 = """
+SELECT "rl_dwh_prod"."live"."covered_guardians"."group_id",
+	"rl_dwh_prod"."live"."guardians"."phone" 
+FROM "rl_dwh_prod"."live"."covered_guardians" 
+INNER JOIN "rl_dwh_prod"."live"."guardians" ON "rl_dwh_prod"."live"."covered_guardians"."guardian_id" = "rl_dwh_prod"."live"."guardians"."id" 
+WHERE "rl_dwh_prod"."live"."covered_guardians"."group_id" IS NOT NULL 
+	AND "rl_dwh_prod"."live"."guardians"."deleted_at" IS NULL 
+	AND "rl_dwh_prod"."live"."covered_guardians"."deleted_at" IS NULL 
+	AND "rl_dwh_prod"."live"."covered_guardians"."covered" = 1
+"""
+
+# Query to get phone numbers for users in conversion funnel
+# This joins matomo visitor data to hybrid_users to get phone numbers
+USER_PHONE_QUERY = """
+SELECT DISTINCT
+    TO_HEX(mllva.idvisitor) AS idvisitor_hex,
+    hu.phone
+FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+INNER JOIN rl_dwh_prod.live.hybrid_profile_devices hpd ON CAST(TO_HEX(mllva.idvisitor) AS VARCHAR) = CAST(hpd.device_id AS VARCHAR)
+INNER JOIN rl_dwh_prod.live.hybrid_profiles hp ON hpd.profile_id = hp.id
+INNER JOIN rl_dwh_prod.live.hybrid_users hu ON hp.hybrid_user_id = hu.id
+WHERE hu.phone IS NOT NULL
+  AND DATEADD(minute, 330, mllva.server_time) >= '2025-07-02'
+"""
+
+
+def fetch_mapped_users_data() -> set:
+    """Fetch mapped users (phones that appear in both queries) from Redshift
+    
+    Returns:
+        set: Set of phone numbers that are mapped (appear in both queries)
+    """
+    if not PSYCOPG2_AVAILABLE:
+        print("WARNING: psycopg2 not available. Cannot fetch mapped users data from Redshift.")
+        print("  Install with: pip install psycopg2-binary")
+        return set()
+    
+    print("=" * 60)
+    print("FETCHING: Mapped Users Data from REDSHIFT")
+    print("=" * 60)
+    print(f"  Database Type: REDSHIFT (NOT MySQL/SQL)")
+    print(f"  Host: {REDSHIFT_HOST}")
+    print(f"  Database: {REDSHIFT_DATABASE}")
+    print(f"  Port: {REDSHIFT_PORT}")
+    print(f"  User: {REDSHIFT_USER}")
+    print(f"  Connection Library: psycopg2 (PostgreSQL/Redshift driver)")
+    
+    # Retry configuration
+    import time
+    max_retries = 3
+    retry_delay = 5  # seconds
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            print(f"\n  [ACTION] Connecting to REDSHIFT (Attempt {attempt}/{max_retries})...")
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=60,
+                keepalives=1,
+                keepalives_idle=30,
+                keepalives_interval=10,
+                keepalives_count=5
+            )
+            
+            # Set statement timeout to 30 minutes for large queries
+            with conn.cursor() as cur:
+                cur.execute("SET statement_timeout = '1800000'")  # 30 minutes in milliseconds
+                conn.commit()
+            
+            print(f"  ✓ Successfully connected to REDSHIFT")
+            
+            # Fetch phones from query 1 (hybrid_users)
+            print(f"  [ACTION] Executing query 1 (hybrid_users phones)...")
+            df_query1 = pd.read_sql(MAPPED_USERS_QUERY_1, conn)
+            phones_query1 = set(df_query1['phone'].dropna().astype(str).str.strip())
+            print(f"  ✓ Query 1 returned {len(phones_query1)} unique phones from hybrid_users")
+            
+            # Fetch phones from query 2 (guardians)
+            print(f"  [ACTION] Executing query 2 (guardians phones)...")
+            df_query2 = pd.read_sql(MAPPED_USERS_QUERY_2, conn)
+            phones_query2 = set(df_query2['phone'].dropna().astype(str).str.strip())
+            print(f"  ✓ Query 2 returned {len(phones_query2)} unique phones from guardians")
+            
+            # Find mapped phones (phones that appear in both queries)
+            mapped_phones = phones_query1.intersection(phones_query2)
+            print(f"  ✓ Found {len(mapped_phones)} mapped phones (appear in both queries)")
+            
+            conn.close()
+            print(f"  ✓ Connection closed")
+            
+            return mapped_phones
+            
+        except psycopg2.OperationalError as e:
+            error_msg = str(e)
+            if attempt < max_retries:
+                print(f"\n  [WARNING] Connection error on attempt {attempt}:")
+                print(f"    {error_msg}")
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+            else:
+                print(f"\n  ERROR: Failed to connect to REDSHIFT after {max_retries} attempts:")
+                print(f"    Error Type: OperationalError (connection issue)")
+                print(f"    Error Message: {error_msg}")
+                return set()
+        except Exception as e:
+            print(f"\n  ERROR: Failed to fetch mapped users data from REDSHIFT:")
+            print(f"    Error Type: {type(e).__name__}")
+            print(f"    Error Message: {str(e)}")
+            if attempt < max_retries:
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+            else:
+                return set()
+    
+    return set()
 
 
 def convert_hex_to_int(df: pd.DataFrame, hex_column: str = 'idvisitor_hex', output_column: str = 'idvisitor_converted') -> pd.DataFrame:
@@ -2636,9 +2820,101 @@ def build_summary(df: pd.DataFrame) -> pd.DataFrame:
     return grouped
 
 
+def fetch_user_phone_mapping() -> pd.DataFrame:
+    """Fetch mapping between idvisitor_converted and phone numbers from Redshift
+    
+    Returns:
+        pd.DataFrame: DataFrame with columns 'idvisitor_converted' and 'phone'
+    """
+    if not PSYCOPG2_AVAILABLE:
+        print("WARNING: psycopg2 not available. Cannot fetch user phone mapping from Redshift.")
+        return pd.DataFrame(columns=['idvisitor_converted', 'phone'])
+    
+    print("=" * 60)
+    print("FETCHING: User Phone Mapping from REDSHIFT")
+    print("=" * 60)
+    
+    # Retry configuration
+    import time
+    max_retries = 3
+    retry_delay = 5  # seconds
+    
+    for attempt in range(1, max_retries + 1):
+        try:
+            print(f"\n  [ACTION] Connecting to REDSHIFT (Attempt {attempt}/{max_retries})...")
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=60,
+                keepalives=1,
+                keepalives_idle=30,
+                keepalives_interval=10,
+                keepalives_count=5
+            )
+            
+            # Set statement timeout to 30 minutes for large queries
+            with conn.cursor() as cur:
+                cur.execute("SET statement_timeout = '1800000'")  # 30 minutes in milliseconds
+                conn.commit()
+            
+            print(f"  ✓ Successfully connected to REDSHIFT")
+            
+            # Fetch user phone mapping
+            print(f"  [ACTION] Executing user phone mapping query...")
+            df_mapping = pd.read_sql(USER_PHONE_QUERY, conn)
+            
+            # Convert hex to int
+            if 'idvisitor_hex' in df_mapping.columns:
+                df_mapping = convert_hex_to_int(df_mapping, 'idvisitor_hex', 'idvisitor_converted')
+            
+            # Clean phone numbers (remove whitespace, convert to string)
+            if 'phone' in df_mapping.columns:
+                df_mapping['phone'] = df_mapping['phone'].astype(str).str.strip()
+                df_mapping = df_mapping[df_mapping['phone'] != '']
+                df_mapping = df_mapping[df_mapping['phone'] != 'None']
+                df_mapping = df_mapping[df_mapping['phone'].notna()]
+            
+            print(f"  ✓ Query returned {len(df_mapping)} user-phone mappings")
+            
+            conn.close()
+            print(f"  ✓ Connection closed")
+            
+            return df_mapping
+            
+        except psycopg2.OperationalError as e:
+            error_msg = str(e)
+            if attempt < max_retries:
+                print(f"\n  [WARNING] Connection error on attempt {attempt}:")
+                print(f"    {error_msg}")
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+            else:
+                print(f"\n  ERROR: Failed to connect to REDSHIFT after {max_retries} attempts:")
+                print(f"    Error Type: OperationalError (connection issue)")
+                print(f"    Error Message: {error_msg}")
+                return pd.DataFrame(columns=['idvisitor_converted', 'phone'])
+        except Exception as e:
+            print(f"\n  ERROR: Failed to fetch user phone mapping from REDSHIFT:")
+            print(f"    Error Type: {type(e).__name__}")
+            print(f"    Error Message: {str(e)}")
+            if attempt < max_retries:
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2  # Exponential backoff
+            else:
+                return pd.DataFrame(columns=['idvisitor_converted', 'phone'])
+    
+    return pd.DataFrame(columns=['idvisitor_converted', 'phone'])
+
+
 def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
     """Build summary table with all combinations: overall, by domain, by language, and by both
     This allows the dashboard to filter by domain/language and get accurate distinct counts
+    Also calculates percentage of mapped users for each event
     """
     print("Building summary statistics with domain and language grouping...")
     
@@ -2655,7 +2931,38 @@ def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
     
     print(f"Filtered to {len(df_filtered)} records with valid events")
     
+    # Skip fetching mapped users data from Redshift - using hardcoded values in dashboard instead
+    # This saves time and avoids unnecessary Redshift queries
+    print("Skipping mapped users data fetch (using hardcoded values in dashboard)...")
+    mapped_phones = set()
+    user_phone_mapping = pd.DataFrame()
+    
+    # Create empty mappings since we're not using them
+    phone_to_mapped = {}
+    idvisitor_to_phone = {}
+    
     all_summaries = []
+    
+    # Helper function to calculate mapped users percentage for a group
+    def calculate_mapped_users_percentage(group_df):
+        """Calculate percentage of mapped users for a group"""
+        if idvisitor_to_phone:
+            users_with_phone = set()
+            mapped_users = set()
+            
+            for idvisitor in group_df['idvisitor_converted'].dropna().unique():
+                if idvisitor in idvisitor_to_phone:
+                    phones = idvisitor_to_phone[idvisitor]
+                    users_with_phone.add(idvisitor)
+                    # Check if any phone is mapped
+                    for phone in phones:
+                        if phone in phone_to_mapped:
+                            mapped_users.add(idvisitor)
+                            break
+            
+            if len(users_with_phone) > 0:
+                return (len(mapped_users) / len(users_with_phone)) * 100
+        return 0.0
     
     # 1. Overall summary (domain='All', language='All')
     print("Calculating overall summary (domain='All', language='All')...")
@@ -2669,6 +2976,9 @@ def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
     overall.rename(columns={'event': 'Event'}, inplace=True)
     overall['domain'] = 'All'
     overall['language'] = 'All'
+    
+    # Skip mapped users percentage calculation (using hardcoded values in dashboard)
+    overall['Mapped_Users_Percentage'] = 0.0
     all_summaries.append(overall)
     
     # 2. By domain only (language='All')
@@ -2685,6 +2995,9 @@ def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
         by_domain['language'] = 'All'
         # Remove rows where domain is null
         by_domain = by_domain[by_domain['domain'].notna()]
+        
+        # Skip mapped users percentage calculation (using hardcoded values in dashboard)
+        by_domain['Mapped_Users_Percentage'] = 0.0
         all_summaries.append(by_domain)
     
     # 3. By language only (domain='All')
@@ -2701,6 +3014,9 @@ def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
         by_language['domain'] = 'All'
         # Remove rows where language is null
         by_language = by_language[by_language['language'].notna()]
+        
+        # Skip mapped users percentage calculation (using hardcoded values in dashboard)
+        by_language['Mapped_Users_Percentage'] = 0.0
         all_summaries.append(by_language)
     
     # 4. By both domain and language
@@ -2716,6 +3032,10 @@ def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
         by_both.rename(columns={'event': 'Event'}, inplace=True)
         # Remove rows where domain or language is null
         by_both = by_both[by_both['domain'].notna() & by_both['language'].notna()]
+        
+        # Calculate mapped users percentage
+        # Skip mapped users percentage calculation (using hardcoded values in dashboard)
+        by_both['Mapped_Users_Percentage'] = 0.0
         all_summaries.append(by_both)
     
     # Combine all summaries
@@ -2725,6 +3045,10 @@ def build_summary_with_filters(df: pd.DataFrame) -> pd.DataFrame:
         # Convert to int
         for col in ['Users', 'Visits', 'Instances']:
             combined[col] = combined[col].astype(int)
+        
+        # Round mapped users percentage to 2 decimal places
+        if 'Mapped_Users_Percentage' in combined.columns:
+            combined['Mapped_Users_Percentage'] = combined['Mapped_Users_Percentage'].round(2)
         
         # Sort
         sort_cols = ['Event']
@@ -4979,6 +5303,475 @@ def update_metadata(df_main: Optional[pd.DataFrame] = None):
     sys.stdout.flush()
         
 
+# Video Viewership Queries
+VIDEO_BASE_QUERY = """
+SELECT 
+  mla.name,
+  mla_ref.name AS name1,
+  mllva.idvisitor,
+  mllva.idvisit,
+  mllva.idlink_va,
+  mllva.server_time,
+  mllva.custom_dimension_1,
+  mllva.custom_dimension_2
+FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+INNER JOIN rl_dwh_prod.live.matomo_log_action mla
+  ON mllva.idaction_name = mla.idaction
+INNER JOIN rl_dwh_prod.live.matomo_log_action mla_ref
+  ON mllva.idaction_url_ref = mla_ref.idaction
+WHERE (mla.name LIKE '%started' OR mla.name LIKE '%completed')
+  AND mllva.server_time >= '2025-11-17'
+"""
+
+VIDEO_GAME_MAPPING_QUERY = """
+SELECT 
+  hg.game_name,
+  hgl.activity_id
+FROM rl_dwh_prod.live.hybrid_games hg
+INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl
+  ON hgl.game_id = hg.id
+"""
+
+
+def process_video_viewership() -> pd.DataFrame:
+    """Process video viewership metrics by replicating Alteryx workflow
+    
+    Returns:
+        pd.DataFrame: Final video viewership metrics with event counts, video engagement, and watch time analysis
+    """
+    print("\n" + "=" * 60)
+    print("PROCESSING: Video Viewership Metrics")
+    print("=" * 60)
+    
+    if not PSYCOPG2_AVAILABLE:
+        print("ERROR: psycopg2 not available. Cannot fetch video viewership data from Redshift.")
+        print("  Install with: pip install psycopg2-binary")
+        return pd.DataFrame()
+    
+    # Step 1: Base interactions data
+    print("\nStep 1: Fetching base interactions data...")
+    import time
+    max_retries = 3
+    retry_delay = 5
+    
+    df_base = pd.DataFrame()
+    for attempt in range(1, max_retries + 1):
+        try:
+            print(f"  [ACTION] Connecting to REDSHIFT (Attempt {attempt}/{max_retries})...")
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=60,
+                keepalives=1,
+                keepalives_idle=30,
+                keepalives_interval=10,
+                keepalives_count=5
+            )
+            
+            with conn.cursor() as cur:
+                cur.execute("SET statement_timeout = '1800000'")
+                conn.commit()
+            
+            print(f"  ✓ Successfully connected to REDSHIFT")
+            print(f"  [ACTION] Executing base interactions query...")
+            df_base = pd.read_sql(VIDEO_BASE_QUERY, conn)
+            print(f"  ✓ Fetched {len(df_base)} records")
+            
+            conn.close()
+            break
+            
+        except Exception as e:
+            if attempt < max_retries:
+                print(f"  [WARNING] Error on attempt {attempt}: {str(e)}")
+                print(f"  [ACTION] Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                retry_delay *= 2
+            else:
+                print(f"  ERROR: Failed to fetch base interactions data: {str(e)}")
+                return pd.DataFrame()
+    
+    if df_base.empty:
+        print("  ERROR: No base interactions data fetched")
+        return pd.DataFrame()
+    
+    # Apply DISTINCT across all selected columns
+    print("  [ACTION] Applying DISTINCT...")
+    initial_count = len(df_base)
+    df_base = df_base.drop_duplicates()
+    print(f"  ✓ Removed {initial_count - len(df_base)} duplicate rows")
+    
+    # Filter out rows where name contains 'mid_intro'
+    print("  [ACTION] Filtering out 'mid_intro' rows...")
+    before_filter = len(df_base)
+    df_base = df_base[~df_base['name'].str.contains('mid_intro', case=False, na=False)]
+    print(f"  ✓ Removed {before_filter - len(df_base)} rows containing 'mid_intro'")
+    print(f"  ✓ Remaining records: {len(df_base)}")
+    
+    # Step 2: Standardize language
+    print("\nStep 2: Standardizing language...")
+    df_base['language'] = df_base['name1'].apply(
+        lambda x: 'mr' if pd.notna(x) and 'mr-IN' in str(x) else 'hi'
+    )
+    print(f"  ✓ Language standardized: {df_base['language'].value_counts().to_dict()}")
+    
+    # Step 3: Standardize event names
+    print("\nStep 3: Standardizing event names...")
+    def standardize_event_name(name):
+        """Standardize event name based on patterns"""
+        if pd.isna(name):
+            return name
+        name_str = str(name)
+        if 'introduction' in name_str:
+            return 'Intro'
+        elif 'question_completed' in name_str:
+            return 'Validation'
+        elif 'action_completed' in name_str:
+            return 'Questions'
+        elif 'reward_completed' in name_str:
+            return 'Rewards'
+        elif 'game_completed' in name_str:
+            return 'Completed'
+        return name_str
+    
+    df_base['name'] = df_base['name'].apply(standardize_event_name)
+    
+    # Remove rows where name still contains '_'
+    before_filter = len(df_base)
+    df_base = df_base[~df_base['name'].str.contains('_', na=False)]
+    print(f"  ✓ Removed {before_filter - len(df_base)} rows with '_' in name")
+    print(f"  ✓ Event names standardized: {df_base['name'].value_counts().to_dict()}")
+    
+    # Step 4: Game mapping
+    print("\nStep 4: Fetching game mapping...")
+    df_game_mapping = pd.DataFrame()
+    for attempt in range(1, max_retries + 1):
+        try:
+            conn = psycopg2.connect(
+                host=REDSHIFT_HOST,
+                database=REDSHIFT_DATABASE,
+                port=REDSHIFT_PORT,
+                user=REDSHIFT_USER,
+                password=REDSHIFT_PASSWORD,
+                connect_timeout=60,
+                keepalives=1,
+                keepalives_idle=30,
+                keepalives_interval=10,
+                keepalives_count=5
+            )
+            
+            with conn.cursor() as cur:
+                cur.execute("SET statement_timeout = '1800000'")
+                conn.commit()
+            
+            df_game_mapping = pd.read_sql(VIDEO_GAME_MAPPING_QUERY, conn)
+            print(f"  ✓ Fetched {len(df_game_mapping)} game mappings")
+            
+            conn.close()
+            break
+            
+        except Exception as e:
+            if attempt < max_retries:
+                print(f"  [WARNING] Error on attempt {attempt}: {str(e)}")
+                time.sleep(retry_delay)
+                retry_delay *= 2
+            else:
+                print(f"  ERROR: Failed to fetch game mapping: {str(e)}")
+                return pd.DataFrame()
+    
+    if df_game_mapping.empty:
+        print("  ERROR: No game mapping data fetched")
+        return pd.DataFrame()
+    
+    # Special handling for "Beginning Sounds Pa/Ga/Ra" where activity_id is null
+    # Set first null activity_id to 121 and second null activity_id to 122
+    print("  [ACTION] Applying special handling for 'Beginning Sounds Pa/Ga/Ra' with null activity_id...")
+    df_game_mapping = df_game_mapping.reset_index(drop=True)
+    
+    # Find rows where game_name is "Beginning Sounds Pa/Ga/Ra" and activity_id is null
+    target_game_rows = df_game_mapping[
+        (df_game_mapping['game_name'] == 'Beginning Sounds Pa/Ga/Ra') & 
+        (df_game_mapping['activity_id'].isna())
+    ].copy()
+    
+    print(f"  [DEBUG] Found {len(target_game_rows)} rows with 'Beginning Sounds Pa/Ga/Ra' and null activity_id")
+    
+    if len(target_game_rows) >= 1:
+        # Get the index of the first row
+        first_idx = target_game_rows.index[0]
+        print(f"  [DEBUG] Setting first row (index {first_idx}) activity_id to 121")
+        df_game_mapping.loc[first_idx, 'activity_id'] = 121
+    
+    if len(target_game_rows) >= 2:
+        # Get the index of the second row
+        second_idx = target_game_rows.index[1]
+        print(f"  [DEBUG] Setting second row (index {second_idx}) activity_id to 122")
+        df_game_mapping.loc[second_idx, 'activity_id'] = 122
+    
+    if len(target_game_rows) > 2:
+        print(f"  [WARNING] Found {len(target_game_rows)} rows with null activity_id for 'Beginning Sounds Pa/Ga/Ra', only updated first 2")
+    
+    print(f"  ✓ Applied special handling: set activity_id to 121 and 122 for 'Beginning Sounds Pa/Ga/Ra' with null activity_id")
+    
+    # Debug: Check if there are duplicate activity_ids after modification
+    duplicate_activity_ids = df_game_mapping[df_game_mapping.duplicated(subset=['activity_id'], keep=False)]
+    if not duplicate_activity_ids.empty:
+        print(f"  [WARNING] Found duplicate activity_ids after modification:")
+        print(f"    {duplicate_activity_ids[['game_name', 'activity_id']].to_string()}")
+    
+    # Join with base data
+    print("  [ACTION] Joining game mapping with base data...")
+    before_join = len(df_base)
+    
+    # Debug: Check original data types and sample values
+    print(f"  [DEBUG] df_base['custom_dimension_2'] dtype: {df_base['custom_dimension_2'].dtype}")
+    print(f"  [DEBUG] df_game_mapping['activity_id'] dtype: {df_game_mapping['activity_id'].dtype}")
+    print(f"  [DEBUG] Sample custom_dimension_2 values: {df_base['custom_dimension_2'].dropna().head(10).tolist()}")
+    print(f"  [DEBUG] Sample activity_id values: {df_game_mapping['activity_id'].head(10).tolist()}")
+    print(f"  [DEBUG] Unique custom_dimension_2 count: {df_base['custom_dimension_2'].nunique()}")
+    print(f"  [DEBUG] Unique activity_id count: {df_game_mapping['activity_id'].nunique()}")
+    
+    # Convert both columns to the same type (string) for merging
+    # First, convert to numeric if possible, then to string to ensure exact match
+    # This handles cases where one might be "121" and the other 121.0
+    df_base['custom_dimension_2'] = pd.to_numeric(df_base['custom_dimension_2'], errors='coerce')
+    df_base = df_base[df_base['custom_dimension_2'].notna()]  # Remove NaN after conversion
+    df_base['custom_dimension_2'] = df_base['custom_dimension_2'].astype(int).astype(str)
+    
+    df_game_mapping['activity_id'] = pd.to_numeric(df_game_mapping['activity_id'], errors='coerce')
+    df_game_mapping = df_game_mapping[df_game_mapping['activity_id'].notna()]  # Remove NaN after conversion
+    df_game_mapping['activity_id'] = df_game_mapping['activity_id'].astype(int).astype(str)
+    
+    # Debug: Check converted values
+    print(f"  [DEBUG] After conversion - Sample custom_dimension_2: {df_base['custom_dimension_2'].head(10).tolist()}")
+    print(f"  [DEBUG] After conversion - Sample activity_id: {df_game_mapping['activity_id'].head(10).tolist()}")
+    
+    # Check for overlapping values
+    base_values = set(df_base['custom_dimension_2'].unique())
+    mapping_values = set(df_game_mapping['activity_id'].unique())
+    overlap = base_values.intersection(mapping_values)
+    print(f"  [DEBUG] Overlapping values count: {len(overlap)}")
+    if len(overlap) > 0:
+        print(f"  [DEBUG] Sample overlapping values: {list(overlap)[:10]}")
+    else:
+        print(f"  [WARNING] No overlapping values found!")
+        print(f"  [DEBUG] Sample base values: {list(base_values)[:10]}")
+        print(f"  [DEBUG] Sample mapping values: {list(mapping_values)[:10]}")
+    
+    df_base = df_base.merge(
+        df_game_mapping,
+        left_on='custom_dimension_2',
+        right_on='activity_id',
+        how='inner'
+    )
+    print(f"  ✓ Joined: {before_join} -> {len(df_base)} records")
+    
+    # Metric Block A (Point 1): Event counts
+    print("\nMetric Block A: Calculating event counts...")
+    # Deduplicate on idlink_va
+    df_dedup = df_base.drop_duplicates(subset=['idlink_va'])
+    print(f"  ✓ Deduplicated: {len(df_base)} -> {len(df_dedup)} records")
+    
+    # Pivot (cross-tab): Rows (game_name, language), Columns (name), Values (COUNT(idlink_va))
+    print("  [ACTION] Creating pivot table...")
+    metric_a = df_dedup.groupby(['game_name', 'language', 'name']).size().reset_index(name='count')
+    metric_a_pivot = metric_a.pivot_table(
+        index=['game_name', 'language'],
+        columns='name',
+        values='count',
+        fill_value=0
+    ).reset_index()
+    print(f"  ✓ Pivot created: {len(metric_a_pivot)} rows")
+    print(f"  ✓ Columns: {list(metric_a_pivot.columns)}")
+    
+    # Metric Block B (Point 2): Video engagement
+    print("\nMetric Block B: Calculating video engagement...")
+    import json
+    
+    def parse_json_for_video(custom_dim_1):
+        """Check if custom_dimension_1 contains 'video' in JSON"""
+        if pd.isna(custom_dim_1) or custom_dim_1 is None:
+            return False
+        try:
+            data = json.loads(custom_dim_1)
+            # Check if any value in the JSON contains 'video'
+            json_str = json.dumps(data).lower()
+            return 'video' in json_str
+        except:
+            return False
+    
+    df_video = df_base[df_base['custom_dimension_1'].apply(parse_json_for_video)].copy()
+    print(f"  ✓ Filtered to {len(df_video)} records with 'video' in JSON")
+    
+    if not df_video.empty:
+        metric_b = df_video.groupby(['game_name', 'language'])['idlink_va'].nunique().reset_index(name='Video Started')
+        print(f"  ✓ Video engagement calculated: {len(metric_b)} rows")
+    else:
+        metric_b = pd.DataFrame(columns=['game_name', 'language', 'Video Started'])
+        print(f"  ⚠ No video engagement data found")
+    
+    # Point 3: Join Metric Block A and B
+    print("\nPoint 3: Joining Metric Block A and B...")
+    print(f"  [DEBUG] Metric A games: {sorted(metric_a_pivot['game_name'].unique().tolist())}")
+    print(f"  [DEBUG] Metric B games: {sorted(metric_b['game_name'].unique().tolist()) if not metric_b.empty else 'N/A'}")
+    point_3 = metric_a_pivot.merge(metric_b, on=['game_name', 'language'], how='left')
+    point_3['Video Started'] = point_3['Video Started'].fillna(0).astype(int)
+    print(f"  ✓ Joined on game_name and language: {len(point_3)} rows")
+    print(f"  [DEBUG] Point 3 games: {sorted(point_3['game_name'].unique().tolist())}")
+    
+    # Metric Block C (Point 4): Watch time analysis
+    print("\nMetric Block C: Calculating watch time analysis...")
+    
+    def extract_watch_time(custom_dim_1):
+        """Extract watch time value from JSON where key contains 'spentwatching'"""
+        if pd.isna(custom_dim_1) or custom_dim_1 is None:
+            return None
+        try:
+            data = json.loads(custom_dim_1)
+            json_str = json.dumps(data).lower()
+            if 'spentwatching' in json_str:
+                # Recursively search for the value
+                def find_value(obj, target_key):
+                    """Recursively find value for key containing target_key"""
+                    if isinstance(obj, dict):
+                        for key, value in obj.items():
+                            if target_key.lower() in str(key).lower():
+                                if isinstance(value, (int, float)):
+                                    return float(value)
+                                elif isinstance(value, str):
+                                    try:
+                                        return float(value)
+                                    except:
+                                        pass
+                            if isinstance(value, (dict, list)):
+                                result = find_value(value, target_key)
+                                if result is not None:
+                                    return result
+                    elif isinstance(obj, list):
+                        for item in obj:
+                            result = find_value(item, target_key)
+                            if result is not None:
+                                return result
+                    return None
+                
+                value = find_value(data, 'spentwatching')
+                if value is not None:
+                    return float(value)
+                
+                # Fallback: use regex to find numeric value after spentwatching
+                import re
+                matches = re.findall(r'spentwatching["\']?\s*:\s*(\d+\.?\d*)', json_str, re.IGNORECASE)
+                if matches:
+                    return float(matches[0])
+            return None
+        except:
+            return None
+    
+    df_watch_time = df_base.copy()
+    df_watch_time['watch_time_value'] = df_watch_time['custom_dimension_1'].apply(extract_watch_time)
+    df_watch_time = df_watch_time[df_watch_time['watch_time_value'].notna()].copy()
+    print(f"  ✓ Filtered to {len(df_watch_time)} records with watch time data")
+    
+    # Debug: Check which games have watch time data
+    if not df_watch_time.empty:
+        print(f"  [DEBUG] Games with watch time data: {sorted(df_watch_time['game_name'].unique().tolist())}")
+        print(f"  [DEBUG] Languages with watch time data: {sorted(df_watch_time['language'].unique().tolist())}")
+        
+        # Check specifically for "Beginning Sounds Pa/Ga/Ra"
+        target_game = 'Beginning Sounds Pa/Ga/Ra'
+        if target_game in df_watch_time['game_name'].values:
+            print(f"  [DEBUG] Found '{target_game}' in watch time data: {len(df_watch_time[df_watch_time['game_name'] == target_game])} records")
+        else:
+            print(f"  [WARNING] '{target_game}' NOT found in watch time data!")
+            # Check for similar names
+            similar_games = [g for g in df_watch_time['game_name'].unique() if 'Pa' in str(g) or 'Ga' in str(g) or 'Ra' in str(g)]
+            if similar_games:
+                print(f"  [DEBUG] Similar game names found: {similar_games}")
+    
+    if not df_watch_time.empty:
+        # Average watch time - group by game_name and language
+        metric_c_avg = df_watch_time.groupby(['game_name', 'language'])['watch_time_value'].mean().reset_index(name='Average')
+        print(f"  [DEBUG] Metric C Avg: {len(metric_c_avg)} rows, games: {sorted(metric_c_avg['game_name'].unique().tolist())}")
+        
+        # Count distinct idlink_va where value <= 10 (min) - group by game_name and language
+        metric_c_min = df_watch_time[df_watch_time['watch_time_value'] <= 10].groupby(['game_name', 'language'])['idlink_va'].nunique().reset_index(name='Min')
+        print(f"  [DEBUG] Metric C Min: {len(metric_c_min)} rows, games: {sorted(metric_c_min['game_name'].unique().tolist())}")
+        
+        # Count distinct idlink_va where value >= 200 (max) - group by game_name and language
+        metric_c_max = df_watch_time[df_watch_time['watch_time_value'] >= 200].groupby(['game_name', 'language'])['idlink_va'].nunique().reset_index(name='Max')
+        print(f"  [DEBUG] Metric C Max: {len(metric_c_max)} rows, games: {sorted(metric_c_max['game_name'].unique().tolist())}")
+        
+        # Join all three metrics on game_name and language
+        print(f"  [ACTION] Joining Metric C components on game_name and language...")
+        metric_c = metric_c_avg.merge(metric_c_min, on=['game_name', 'language'], how='left')
+        metric_c = metric_c.merge(metric_c_max, on=['game_name', 'language'], how='left')
+        metric_c['Min'] = metric_c['Min'].fillna(0).astype(int)
+        metric_c['Max'] = metric_c['Max'].fillna(0).astype(int)
+        print(f"  ✓ Watch time analysis calculated: {len(metric_c)} rows")
+        print(f"  [DEBUG] Final Metric C games: {sorted(metric_c['game_name'].unique().tolist())}")
+        print(f"  [DEBUG] Final Metric C languages: {sorted(metric_c['language'].unique().tolist())}")
+    else:
+        metric_c = pd.DataFrame(columns=['game_name', 'language', 'Average', 'Min', 'Max'])
+        print(f"  ⚠ No watch time data found")
+    
+    # Final Output: Join Point 3 and Point 4
+    # Use INNER join so we only get games that are in both Point 3 and Metric C
+    # This naturally filters to only games with watch time data
+    print("\nFinal Output: Joining Point 3 and Point 4...")
+    print(f"  [DEBUG] Games in Point 3: {len(point_3)} rows, unique games: {sorted(point_3['game_name'].unique().tolist())}")
+    print(f"  [DEBUG] Games in Metric C: {len(metric_c)} rows, unique games: {sorted(metric_c['game_name'].unique().tolist()) if not metric_c.empty else 'N/A'}")
+    final_output = point_3.merge(metric_c, on=['game_name', 'language'], how='inner')
+    final_output['Average'] = final_output['Average'].fillna(0)
+    final_output['Min'] = final_output['Min'].fillna(0).astype(int)
+    final_output['Max'] = final_output['Max'].fillna(0).astype(int)
+    
+    # Ensure all expected columns exist (fill missing event columns with 0)
+    expected_event_cols = ['Intro', 'Validation', 'Questions', 'Rewards', 'Completed']
+    for col in expected_event_cols:
+        if col not in final_output.columns:
+            final_output[col] = 0
+    
+    # Rename columns to match expected format (Started, Questions, Rewards)
+    # Based on the existing CSV, it seems 'Intro' should be 'Started'
+    if 'Intro' in final_output.columns:
+        final_output = final_output.rename(columns={'Intro': 'Started'})
+    
+    # The INNER join should naturally filter to only games in Metric C
+    # Filter to only 'hi' language (as per expected output)
+    print(f"\nFiltering to 'hi' language only (INNER join already filtered games)...")
+    before_lang_filter = len(final_output)
+    final_output = final_output[final_output['language'] == 'hi']
+    print(f"  ✓ Language filter: {before_lang_filter} -> {len(final_output)} rows")
+    print(f"  ✓ Games in final output: {sorted(final_output['game_name'].unique().tolist())}")
+    
+    # Select only required columns: game_name, language, Started, Questions, Rewards, Video Started, Average, Min, Max
+    required_cols = ['game_name', 'language', 'Started', 'Questions', 'Rewards', 'Video Started', 'Average', 'Min', 'Max']
+    # Check which columns exist
+    available_cols = [col for col in required_cols if col in final_output.columns]
+    final_output = final_output[available_cols]
+    
+    # Rename 'language' to 'lanuagae' (typo as per expected output)
+    if 'language' in final_output.columns:
+        final_output = final_output.rename(columns={'language': 'lanuagae'})
+    
+    # Sort by game_name
+    final_output = final_output.sort_values(['game_name']).reset_index(drop=True)
+    
+    print(f"  ✓ Final output: {len(final_output)} rows")
+    print(f"  ✓ Columns: {list(final_output.columns)}")
+    print(f"  ✓ Games: {final_output['game_name'].unique().tolist()}")
+    
+    # Save to CSV
+    output_path = 'data/video_viewership_data.csv'
+    print(f"\nSaving video viewership data to {output_path}...")
+    final_output.to_csv(output_path, index=False)
+    print(f"✓ SUCCESS: Saved {output_path} ({len(final_output)} records)")
+    
+    return final_output
+
+
 def main():
     """Main preprocessing function with modular processing options"""
     print("=" * 60)
@@ -5014,6 +5807,7 @@ Available visuals:
   --repeatability      Repeatability data
   --question-correctness Question correctness data
   --parent-poll        Parent poll responses data
+  --video-viewership   Video viewership metrics
   --all                Process all visuals (default if no flags provided)
   --metadata           Update metadata file
         """
@@ -5026,6 +5820,7 @@ Available visuals:
     parser.add_argument('--repeatability', action='store_true', help='Process repeatability data')
     parser.add_argument('--question-correctness', action='store_true', help='Process question correctness data')
     parser.add_argument('--parent-poll', action='store_true', help='Process parent poll responses data')
+    parser.add_argument('--video-viewership', action='store_true', help='Process video viewership metrics')
     parser.add_argument('--all', action='store_true', help='Process all visuals (default)')
     parser.add_argument('--metadata', action='store_true', help='Update metadata file')
     parser.add_argument('--use-database', action='store_true', help='Fetch score data directly from Redshift instead of using scores_data.csv')
@@ -5038,7 +5833,7 @@ Available visuals:
     # Determine what to process
     process_all = args.all or not any([
         args.main, args.summary, args.score_distribution,
-        args.time_series, args.repeatability, args.question_correctness, args.parent_poll
+        args.time_series, args.repeatability, args.question_correctness, args.parent_poll, args.video_viewership
     ])
     
     if process_all:
@@ -5080,6 +5875,10 @@ Available visuals:
         # Process parent poll if requested or if processing all
         if args.parent_poll or process_all:
             process_parent_poll()
+        
+        # Process video viewership if requested or if processing all
+        if args.video_viewership or process_all:
+            process_video_viewership()
         
         # Update metadata if requested or if processing all
         if args.metadata or process_all:
