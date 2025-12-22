@@ -1,6 +1,12 @@
-game_name,lanuagae,Started,Questions,Rewards,Video Started,Average,Min,Max
-Beginning Sounds Sa/La/Va,hi,6591,4150,1553,526,83.31037746,200,177
-Beginning Sounds Pa/Ga/Ra,hi,9487,5105,1718,614,77.15885084,248,166
-Beginning Sounds Ma/Cha/Ba,hi,4322,1389,1172,501,28.03976337,149,6
-Beginning Sounds Ka/Na/Ta,hi,7000,2131,1770,632,93.29869716,194,227
-Numerals 1-10,hi,336,139,118,43,81.47891407,15,7
+game_name,lanuagae,Started,Questions,Rewards,Video Started,Average,Min,Max,total duration
+Primary Emotion Labelling : Happy,hi,3313,2127,932,237,58.80636429,95,86,132.481332
+Primary Emotion Labelling : Sad,hi,5958,3790,1419,528,51.10156165,213,151,131.306667
+Beginning Sounds Sa/La/Va,hi,7002,4486,1686,565,82.80579157,219,192,205.44
+Primary Emotion Labelling : Sad,mr,13782,8421,3098,1329,62.6813841,440,560,124.629333
+Primary Emotion Labelling : Happy,mr,6110,3729,1636,497,59.44740745,183,208,122.197333
+Primary Emotion Labelling : Anger,mr,23241,14035,5753,2326,59.90564124,926,951,125.162661
+Beginning Sounds Pa/Ga/Ra,hi,11103,6240,2166,650,77.56723478,263,169,227.797328
+Beginning Sounds Ma/Cha/Ba,hi,4836,1614,1343,554,27.1813902,174,322,39.703223
+Beginning Sounds Ka/Na/Ta,hi,7424,2318,1902,674,92.09971449,212,249,203.546101
+Numerals 1-10,hi,504,217,192,62,71.59431116,26,6,323.029318
+Primary Emotion Labelling : Anger,hi,7974,4971,2052,801,52.97717236,332,273,126.869333
