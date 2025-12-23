@@ -1003,6 +1003,105 @@ def render_repeatability_analysis(repeatability_df: pd.DataFrame) -> None:
             help="Maximum number of distinct games completed by a single hybrid_profile_id"
         )
 
+def render_monthly_new_users() -> None:
+    """Render monthly new users chart"""
+    import altair as alt
+    
+    # Month number to month name mapping
+    month_names = {
+        7: 'July',
+        8: 'August',
+        9: 'September',
+        10: 'October',
+        11: 'November',
+        12: 'December'
+    }
+    
+    # Monthly new users data
+    monthly_new_users_data = {
+        'month': [7, 8, 9, 10, 11, 12],
+        'new_users': [74059, 55024, 66493, 46135, 51637, 26341]
+    }
+    
+    monthly_df = pd.DataFrame(monthly_new_users_data)
+    # Add month name column
+    monthly_df['month_name'] = monthly_df['month'].map(month_names)
+    
+    st.markdown("### 👥 Monthly New Users")
+    
+    # Create the monthly new users chart with explicit axis configuration
+    chart = alt.Chart(monthly_df).mark_bar(
+            cornerRadius=6,
+            stroke='white',
+            strokeWidth=2,
+            color='#4A90E2'
+        ).encode(
+        x=alt.X('month_name:O', 
+                title='Month', 
+                axis=alt.Axis(labelAngle=0, titleFontSize=24, labelFontSize=22)),
+        y=alt.Y('new_users:Q', 
+                title='Number of New Users', 
+                axis=alt.Axis(format='~s', titleFontSize=24, labelFontSize=22)),
+            tooltip=['month_name:O', 'new_users:Q']
+        ).properties(
+            width=800,
+            height=400,
+        title='New Users by Month'
+        )
+        
+    # Add text labels
+    text = alt.Chart(monthly_df).mark_text(
+            align='center',
+            baseline='bottom',
+            color='#2E8B57',
+            fontSize=20,
+            fontWeight='bold',
+            dy=-10
+        ).encode(
+            x=alt.X('month_name:O'),
+            y=alt.Y('new_users:Q'),
+            text=alt.Text('new_users:Q', format='.0f')
+        )
+        
+    # Combine chart and text
+    monthly_chart = (chart + text).configure_axis(
+            grid=True
+        ).configure_title(
+            fontSize=28,
+            fontWeight='bold'
+        )
+    
+    _render_altair_chart(monthly_chart, use_container_width=True)
+    
+    # Add summary statistics
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        total_new_users = monthly_df['new_users'].sum()
+        st.metric(
+            label="👥 Total New Users",
+            value=f"{total_new_users:,}",
+            help="Total number of new users across all months"
+        )
+    
+    with col2:
+        avg_new_users = monthly_df['new_users'].mean()
+        st.metric(
+            label="📊 Average New Users per Month",
+            value=f"{avg_new_users:,.0f}",
+            help="Average number of new users per month"
+        )
+    
+    with col3:
+        max_month_idx = monthly_df['new_users'].idxmax()
+        max_month_name = monthly_df.loc[max_month_idx, 'month_name']
+        max_users = monthly_df['new_users'].max()
+        st.metric(
+            label="🏆 Peak Month",
+            value=f"{max_month_name} ({max_users:,})",
+            help=f"Month with the highest number of new users: {max_users:,}"
+        )
+
 def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -> pd.DataFrame:
     """Recalculate time series data for selected games"""
     if df_main.empty:
@@ -2674,6 +2773,9 @@ def main() -> None:
         render_repeatability_analysis(filtered_repeatability_df)
     else:
         st.warning("No repeatability data available.")
+    
+    # Add Monthly New Users Chart
+    render_monthly_new_users()
     
     # Add Video Viewership Analysis
     st.markdown("---")
