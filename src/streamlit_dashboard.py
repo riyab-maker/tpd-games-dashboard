@@ -437,7 +437,7 @@ def _render_altair_chart(chart, use_container_width=True):
     # (Newer versions show deprecation warnings but it still works)
     return st.altair_chart(chart, use_container_width=use_container_width)
 
-def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame, selected_games: list = None) -> None:
+def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFrame, selected_games: list = None, has_date_filter: bool = False) -> None:
     """Render a modern, professional dashboard with multiple chart types"""
     import altair as alt
     
@@ -637,7 +637,8 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         ])
     
     # Calculate percentages for Started and Completed in Users view
-    if funnel_type == 'Users':
+    # Skip percentage calculation if date filter is applied (no mapped users data available)
+    if funnel_type == 'Users' and not has_date_filter:
         for idx, row in funnel_data_df.iterrows():
             stage_key = [k for k, v in stage_labels.items() if v == row['Stage']][0]
             total_users = row['Count']
@@ -649,6 +650,9 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
                 funnel_data_df.at[idx, 'Percentage'] = percentage
             else:
                 funnel_data_df.at[idx, 'Percentage'] = 0.0
+    else:
+        # Set percentage to 0 when date filter is applied or not Users view
+        funnel_data_df['Percentage'] = 0.0
         
     # Define lighter colors for parent_poll (optional step)
     lighter_colors = {
@@ -688,13 +692,19 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         )
         
         # Add labels with complete numbers - positioned at the start of bars
-    # For Users view, show percentage for Started and Completed
-    if funnel_type == 'Users':
+    # For Users view, show percentage for Started and Completed (only if date filter is not applied)
+    if funnel_type == 'Users' and not has_date_filter:
         # Create label text with count and percentage for Started/Completed
         funnel_data_df['LabelText'] = funnel_data_df.apply(
             lambda row: f"{int(row['Count']):,} ({row['Percentage']:.1f}% mapped)" 
             if row['Percentage'] > 0 
             else f"{int(row['Count']):,}", 
+            axis=1
+        )
+    else:
+        # For non-Users view or when date filter is applied, show only count
+        funnel_data_df['LabelText'] = funnel_data_df.apply(
+            lambda row: f"{int(row['Count']):,}", 
             axis=1
         )
     
@@ -2101,8 +2111,14 @@ def main() -> None:
             help="Select one or more domains to filter all dashboard sections. Leave empty to show all domains. Domain is extracted from game_code (e.g., HY-01-CG-01 -> CG)."
         )
     
-    # Game Name filter - get unique games from game_conversion_df
-    unique_games = sorted(game_conversion_df['game_name'].unique())
+    # Game Name filter - get unique games from game_conversion_df and poll_responses_df
+    # Include games from poll data to ensure all games in poll analysis are available
+    unique_games_from_conversion = set(game_conversion_df['game_name'].unique())
+    unique_games_from_poll = set()
+    if not poll_responses_df.empty and 'game_name' in poll_responses_df.columns:
+        unique_games_from_poll = set(poll_responses_df['game_name'].dropna().unique())
+    # Combine both sets to include all games
+    unique_games = sorted(list(unique_games_from_conversion | unique_games_from_poll))
     # If domain is selected, default to empty (show all games in domain)
     # Otherwise, default to first game
     if selected_domains and len(selected_domains) > 0:
@@ -2729,7 +2745,7 @@ def main() -> None:
             filtered_summary_df = summary_df.copy()
     
     # Render conversion funnel with date and game filters applied
-    render_modern_dashboard(filtered_summary_df, filtered_summary_df, selected_games)
+    render_modern_dashboard(filtered_summary_df, filtered_summary_df, selected_games, has_date_filter)
     
     # Add Time Series Analysis - right after conversion funnels
     st.markdown("---")

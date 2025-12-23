@@ -119,28 +119,81 @@ SQL_QUERY = (
 
 # Score distribution query - Updated to use hybrid_games and hybrid_games_links tables
 # Includes only game_completed and mcq_completed (action_level is no longer used)
+# Appends missing game-activity mappings before joining
 SCORE_DISTRIBUTION_QUERY = """
-select "mllva"."idlink_va",
-	"hg"."game_name" as "game_name",
-	"mllva"."idvisit",
-	"mla"."name" as "action_name",
-	"mllva"."custom_dimension_1",
-	TO_HEX("mllva"."idvisitor") as "idvisitor_hex",
-	"mllva"."server_time",
-	"mllva"."idaction_name",
-	"mllva"."custom_dimension_2",
-	"mla"."idaction",
-	"mla"."type",
-	"hg"."game_code",
-	"rl_dwh_prod"."live"."matomo_log_action"."name" as "language"
-from "rl_dwh_prod"."live"."hybrid_games" "hg" 
-	inner join "rl_dwh_prod"."live"."hybrid_games_links" "hgl" on "hg"."id" = "hgl"."game_id" 
-	inner join "rl_dwh_prod"."live"."matomo_log_link_visit_action" "mllva" on "hgl"."activity_id" = "mllva"."custom_dimension_2" 
-	inner join "rl_dwh_prod"."live"."matomo_log_action" "mla" on "mllva"."idaction_name" = "mla"."idaction" 
-	inner join "rl_dwh_prod"."live"."matomo_log_action" on "mllva"."idaction_url_ref" = "rl_dwh_prod"."live"."matomo_log_action"."idaction" 
-where ("mla"."name" Like '%game_completed%' or "mla"."name" Like '%mcq_completed%') 
-	and "mllva"."server_time" >= '2025-07-01' 
-	and "hgl"."activity_id" is not NULL
+WITH game_activity_mappings AS (
+  -- Existing mappings from hybrid_games and hybrid_games_links
+  SELECT 
+    hg.game_name,
+    hg.game_code,
+    hgl.activity_id
+  FROM rl_dwh_prod.live.hybrid_games hg
+  INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+  
+  UNION ALL
+  
+  -- Missing game-activity mappings (Primary Emotion Labelling games)
+  SELECT 
+    'Primary Emotion Labelling : Happy' AS game_name,
+    'HY-37-SEL-08' AS game_code,
+    140 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Happy' AS game_name,
+    'HY-37-SEL-08' AS game_code,
+    140 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Sad' AS game_name,
+    'HY-38-SEL-08' AS game_code,
+    130 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Sad' AS game_name,
+    'HY-38-SEL-08' AS game_code,
+    130 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Anger' AS game_name,
+    'HY-39-SEL-08' AS game_code,
+    131 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Anger' AS game_name,
+    'HY-39-SEL-08' AS game_code,
+    131 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Fear' AS game_name,
+    'HY-40-SEL-08' AS game_code,
+    132 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Fear' AS game_name,
+    'HY-40-SEL-08' AS game_code,
+    132 AS activity_id
+)
+SELECT 
+  mllva.idlink_va,
+  gam.game_name,
+  mllva.idvisit,
+  mla.name AS action_name,
+  mllva.custom_dimension_1,
+  TO_HEX(mllva.idvisitor) AS idvisitor_hex,
+  mllva.server_time,
+  mllva.idaction_name,
+  mllva.custom_dimension_2,
+  mla.idaction,
+  mla.type,
+  gam.game_code,
+  matomo_log_action1.name AS language
+FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
+INNER JOIN game_activity_mappings gam ON mllva.custom_dimension_2 = gam.activity_id
+INNER JOIN rl_dwh_prod.live.matomo_log_action matomo_log_action1 ON mllva.idaction_url_ref = matomo_log_action1.idaction
+WHERE (mla.name LIKE '%game_completed%' OR mla.name LIKE '%mcq_completed%')
+  AND mllva.server_time >= '2025-07-01'
+  AND gam.activity_id IS NOT NULL
 """
 
 # Note: Question Correctness now uses SCORE_DISTRIBUTION_QUERY (same as score distribution)
@@ -267,45 +320,45 @@ WITH game_activity_mappings AS (
   
   UNION ALL
   
-  -- Missing game-activity mappings
+  -- Missing game-activity mappings (Primary Emotion Labelling games)
   SELECT 
     'Primary Emotion Labelling : Happy' AS game_name,
-    NULL AS game_code,
+    'HY-37-SEL-08' AS game_code,
     140 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Happy' AS game_name,
-    NULL AS game_code,
+    'HY-37-SEL-08' AS game_code,
     140 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Sad' AS game_name,
-    NULL AS game_code,
+    'HY-38-SEL-08' AS game_code,
     130 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Sad' AS game_name,
-    NULL AS game_code,
+    'HY-38-SEL-08' AS game_code,
     130 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Anger' AS game_name,
-    NULL AS game_code,
+    'HY-39-SEL-08' AS game_code,
     131 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Anger' AS game_name,
-    NULL AS game_code,
+    'HY-39-SEL-08' AS game_code,
+    131 AS activity_id
+  UNION ALL
+  SELECT 
+    'Primary Emotion Labelling : Fear' AS game_name,
+    'HY-40-SEL-08' AS game_code,
     132 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Fear' AS game_name,
-    NULL AS game_code,
-    132 AS activity_id
-  UNION ALL
-  SELECT 
-    'Primary Emotion Labelling : Fear' AS game_name,
-    NULL AS game_code,
+    'HY-40-SEL-08' AS game_code,
     132 AS activity_id
 )
 SELECT 
@@ -4646,6 +4699,11 @@ def process_parent_poll() -> pd.DataFrame:
             # Get columns using normalized mapping or direct access
             custom_dim_1 = row.get(column_mapping.get('custom_dimension_1', 'custom_dimension_1'))
             game_name = row.get(column_mapping.get('game_name', 'game_name'))
+            # Ensure game_name is a string and handle NaN/None values
+            if pd.isna(game_name) or game_name is None:
+                game_name = 'Unknown Game'
+            else:
+                game_name = str(game_name).strip()
             idvisit = row.get('idvisit')
             
             # Get language and game_code using normalized column names
