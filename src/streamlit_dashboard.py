@@ -1030,6 +1030,7 @@ def render_monthly_new_users() -> None:
     st.markdown("### 👥 Monthly New Users")
     
     # Create the monthly new users chart with explicit axis configuration
+    # Sort by month number to ensure chronological order
     chart = alt.Chart(monthly_df).mark_bar(
             cornerRadius=6,
             stroke='white',
@@ -1037,7 +1038,8 @@ def render_monthly_new_users() -> None:
             color='#4A90E2'
         ).encode(
         x=alt.X('month_name:O', 
-                title='Month', 
+                title='Month',
+                sort=alt.SortField('month', order='ascending'),
                 axis=alt.Axis(labelAngle=0, titleFontSize=24, labelFontSize=22)),
         y=alt.Y('new_users:Q', 
                 title='Number of New Users', 
@@ -1058,7 +1060,7 @@ def render_monthly_new_users() -> None:
             fontWeight='bold',
             dy=-10
         ).encode(
-            x=alt.X('month_name:O'),
+            x=alt.X('month_name:O', sort=alt.SortField('month', order='ascending')),
             y=alt.Y('new_users:Q'),
             text=alt.Text('new_users:Q', format='.0f')
         )
