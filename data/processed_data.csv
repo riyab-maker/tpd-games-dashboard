@@ -257,7 +257,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-07-07,Color Yellow,started,CG,mr,599,448,426
 2025-07-07,Color Yellow,validation,CG,hi,110,105,105
 2025-07-07,Shape Circle,completed,CG,hi,620,485,477
-2025-07-07,Shape Circle,completed,CG,mr,1502,1044,1023
+2025-07-07,Shape Circle,completed,CG,mr,1502,1045,1024
 2025-07-07,Shape Circle,introduction,CG,hi,769,596,582
 2025-07-07,Shape Circle,introduction,CG,mr,1788,1207,1180
 2025-07-07,Shape Circle,mid_introduction,CG,hi,440,387,382
@@ -269,7 +269,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-07-07,Shape Circle,rewards,CG,hi,425,365,362
 2025-07-07,Shape Circle,rewards,CG,mr,1108,895,882
 2025-07-07,Shape Circle,started,CG,hi,830,637,621
-2025-07-07,Shape Circle,started,CG,mr,1914,1255,1225
+2025-07-07,Shape Circle,started,CG,mr,1914,1254,1224
 2025-07-07,Shape Circle,validation,CG,hi,422,372,370
 2025-07-07,Shape Circle,validation,CG,mr,1140,931,919
 2025-07-07,Shape Triangle,completed,CG,hi,328,259,254
@@ -1896,7 +1896,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-07-25,Numbers I,completed,NM,hi,224,136,112
 2025-07-25,Numbers I,completed,NM,mr,210,136,100
 2025-07-25,Numbers I,introduction,NM,hi,281,169,140
-2025-07-25,Numbers I,introduction,NM,mr,288,178,144
+2025-07-25,Numbers I,introduction,NM,mr,288,179,144
 2025-07-25,Numbers I,mid_introduction,NM,hi,214,145,120
 2025-07-25,Numbers I,mid_introduction,NM,mr,220,136,102
 2025-07-25,Numbers I,parent_poll,NM,hi,118,86,66
@@ -2047,7 +2047,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-07-26,Numbers I,completed,NM,mr,364,193,154
 2025-07-26,Numbers I,introduction,NM,hi,275,142,108
 2025-07-26,Numbers I,introduction,NM,mr,413,220,180
-2025-07-26,Numbers I,mid_introduction,NM,hi,217,117,87
+2025-07-26,Numbers I,mid_introduction,NM,hi,217,116,87
 2025-07-26,Numbers I,mid_introduction,NM,mr,309,185,149
 2025-07-26,Numbers I,parent_poll,NM,hi,116,74,48
 2025-07-26,Numbers I,parent_poll,NM,mr,173,122,91
@@ -4313,7 +4313,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-08-08,Revision Colors,started,CG,hi,810,706,719
 2025-08-08,Revision Colors,started,CG,mr,2629,2205,2296
 2025-08-08,Revision Colors,validation,CG,hi,440,431,429
-2025-08-08,Revision Colors,validation,CG,mr,1291,1228,1242
+2025-08-08,Revision Colors,validation,CG,mr,1291,1229,1243
 2025-08-08,Revision Shapes,completed,CG,hi,559,535,534
 2025-08-08,Revision Shapes,completed,CG,mr,410,328,323
 2025-08-08,Revision Shapes,introduction,CG,hi,894,800,803
@@ -13565,7 +13565,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-09-12,Beginning Sounds Pa/Cha/Sa,completed,LL,hi,755,724,725
 2025-09-12,Beginning Sounds Pa/Cha/Sa,completed,LL,mr,1283,1220,1212
 2025-09-12,Beginning Sounds Pa/Cha/Sa,introduction,LL,hi,1413,1234,1257
-2025-09-12,Beginning Sounds Pa/Cha/Sa,introduction,LL,mr,2609,2179,2237
+2025-09-12,Beginning Sounds Pa/Cha/Sa,introduction,LL,mr,2609,2180,2238
 2025-09-12,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,hi,709,697,697
 2025-09-12,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,mr,1126,1107,1106
 2025-09-12,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,hi,284,282,284
@@ -24341,7 +24341,7 @@ date,game_name,event,domain,language,instances,visits,users
 2025-10-10,Numbers Comparison,introduction,NM,mr,2217,1903,1926
 2025-10-10,Numbers Comparison,mid_introduction,NM,hi,587,535,539
 2025-10-10,Numbers Comparison,mid_introduction,NM,mr,1376,1313,1315
-2025-10-10,Numbers Comparison,parent_poll,NM,hi,965,655,665
+2025-10-10,Numbers Comparison,parent_poll,NM,hi,965,654,664
 2025-10-10,Numbers Comparison,parent_poll,NM,mr,2805,1885,1920
 2025-10-10,Numbers Comparison,questions,NM,hi,631,558,564
 2025-10-10,Numbers Comparison,questions,NM,mr,1488,1386,1390
@@ -47387,6 +47387,15 @@ date,game_name,event,domain,language,instances,visits,users
 2025-11-28,Primary Emotion Labelling,started,SEL,mr,20,19,19
 2025-11-28,Primary Emotion Labelling,validation,SEL,hi,7,7,7
 2025-11-28,Primary Emotion Labelling,validation,SEL,mr,16,15,15
+2025-11-28,Primary Emotion Labelling : Sad,completed,SEL,hi,1,1,1
+2025-11-28,Primary Emotion Labelling : Sad,completed,SEL,mr,2,1,1
+2025-11-28,Primary Emotion Labelling : Sad,introduction,SEL,hi,3,2,2
+2025-11-28,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,1,1,1
+2025-11-28,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,3,2,2
+2025-11-28,Primary Emotion Labelling : Sad,questions,SEL,hi,1,1,1
+2025-11-28,Primary Emotion Labelling : Sad,started,SEL,hi,4,3,3
+2025-11-28,Primary Emotion Labelling : Sad,started,SEL,mr,3,1,1
+2025-11-28,Primary Emotion Labelling : Sad,validation,SEL,hi,1,1,1
 2025-11-28,Quantitative Comparison,completed,NM,hi,4,4,4
 2025-11-28,Quantitative Comparison,completed,NM,mr,33,32,32
 2025-11-28,Quantitative Comparison,introduction,NM,hi,7,7,7
@@ -49442,6 +49451,22 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-02,Primary Emotion Labelling,started,SEL,mr,13,13,13
 2025-12-02,Primary Emotion Labelling,validation,SEL,hi,7,7,7
 2025-12-02,Primary Emotion Labelling,validation,SEL,mr,9,9,9
+2025-12-02,Primary Emotion Labelling : Sad,completed,SEL,hi,5,5,5
+2025-12-02,Primary Emotion Labelling : Sad,completed,SEL,mr,7,7,7
+2025-12-02,Primary Emotion Labelling : Sad,introduction,SEL,hi,10,10,10
+2025-12-02,Primary Emotion Labelling : Sad,introduction,SEL,mr,17,16,16
+2025-12-02,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,6,6,6
+2025-12-02,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,7,7,7
+2025-12-02,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,20,12,12
+2025-12-02,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,24,16,16
+2025-12-02,Primary Emotion Labelling : Sad,questions,SEL,hi,14,8,8
+2025-12-02,Primary Emotion Labelling : Sad,questions,SEL,mr,22,12,12
+2025-12-02,Primary Emotion Labelling : Sad,rewards,SEL,hi,6,6,6
+2025-12-02,Primary Emotion Labelling : Sad,rewards,SEL,mr,6,6,6
+2025-12-02,Primary Emotion Labelling : Sad,started,SEL,hi,14,12,12
+2025-12-02,Primary Emotion Labelling : Sad,started,SEL,mr,19,17,17
+2025-12-02,Primary Emotion Labelling : Sad,validation,SEL,hi,6,6,6
+2025-12-02,Primary Emotion Labelling : Sad,validation,SEL,mr,7,7,7
 2025-12-02,Quantitative Comparison,completed,NM,hi,14,10,10
 2025-12-02,Quantitative Comparison,completed,NM,mr,28,25,25
 2025-12-02,Quantitative Comparison,introduction,NM,hi,14,10,10
@@ -49950,6 +49975,34 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-03,Primary Emotion Labelling,started,SEL,mr,20,19,19
 2025-12-03,Primary Emotion Labelling,validation,SEL,hi,3,3,3
 2025-12-03,Primary Emotion Labelling,validation,SEL,mr,12,12,12
+2025-12-03,Primary Emotion Labelling : Anger,completed,SEL,hi,1,1,1
+2025-12-03,Primary Emotion Labelling : Anger,completed,SEL,mr,2,2,2
+2025-12-03,Primary Emotion Labelling : Anger,introduction,SEL,hi,1,1,1
+2025-12-03,Primary Emotion Labelling : Anger,introduction,SEL,mr,2,2,2
+2025-12-03,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,1,1,1
+2025-12-03,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,2,2,2
+2025-12-03,Primary Emotion Labelling : Anger,started,SEL,hi,1,1,1
+2025-12-03,Primary Emotion Labelling : Anger,started,SEL,mr,2,2,2
+2025-12-03,Primary Emotion Labelling : Fear,completed,SEL,mr,2,1,1
+2025-12-03,Primary Emotion Labelling : Fear,introduction,SEL,mr,2,1,1
+2025-12-03,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,2,1,1
+2025-12-03,Primary Emotion Labelling : Fear,started,SEL,mr,2,1,1
+2025-12-03,Primary Emotion Labelling : Sad,completed,SEL,hi,184,161,161
+2025-12-03,Primary Emotion Labelling : Sad,completed,SEL,mr,641,540,534
+2025-12-03,Primary Emotion Labelling : Sad,introduction,SEL,hi,714,553,546
+2025-12-03,Primary Emotion Labelling : Sad,introduction,SEL,mr,1771,1311,1277
+2025-12-03,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,374,350,349
+2025-12-03,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,872,825,817
+2025-12-03,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,1108,585,574
+2025-12-03,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,2770,1386,1345
+2025-12-03,Primary Emotion Labelling : Sad,questions,SEL,hi,859,414,412
+2025-12-03,Primary Emotion Labelling : Sad,questions,SEL,mr,2076,1015,996
+2025-12-03,Primary Emotion Labelling : Sad,rewards,SEL,hi,315,302,301
+2025-12-03,Primary Emotion Labelling : Sad,rewards,SEL,mr,776,733,726
+2025-12-03,Primary Emotion Labelling : Sad,started,SEL,hi,817,614,601
+2025-12-03,Primary Emotion Labelling : Sad,started,SEL,mr,2055,1408,1369
+2025-12-03,Primary Emotion Labelling : Sad,validation,SEL,hi,354,332,331
+2025-12-03,Primary Emotion Labelling : Sad,validation,SEL,mr,832,788,781
 2025-12-03,Quantitative Comparison,completed,NM,hi,9,9,9
 2025-12-03,Quantitative Comparison,completed,NM,mr,13,8,8
 2025-12-03,Quantitative Comparison,introduction,NM,hi,14,14,14
@@ -50460,6 +50513,40 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-04,Primary Emotion Labelling,started,SEL,mr,14,10,10
 2025-12-04,Primary Emotion Labelling,validation,SEL,hi,5,5,5
 2025-12-04,Primary Emotion Labelling,validation,SEL,mr,5,5,5
+2025-12-04,Primary Emotion Labelling : Anger,completed,SEL,hi,85,74,74
+2025-12-04,Primary Emotion Labelling : Anger,completed,SEL,mr,222,173,171
+2025-12-04,Primary Emotion Labelling : Anger,introduction,SEL,hi,83,72,72
+2025-12-04,Primary Emotion Labelling : Anger,introduction,SEL,mr,220,172,170
+2025-12-04,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,85,74,74
+2025-12-04,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,221,172,170
+2025-12-04,Primary Emotion Labelling : Anger,started,SEL,hi,85,74,74
+2025-12-04,Primary Emotion Labelling : Anger,started,SEL,mr,223,172,170
+2025-12-04,Primary Emotion Labelling : Fear,completed,SEL,hi,14,13,13
+2025-12-04,Primary Emotion Labelling : Fear,completed,SEL,mr,29,28,28
+2025-12-04,Primary Emotion Labelling : Fear,introduction,SEL,hi,27,21,21
+2025-12-04,Primary Emotion Labelling : Fear,introduction,SEL,mr,41,34,34
+2025-12-04,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,27,21,21
+2025-12-04,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,44,36,36
+2025-12-04,Primary Emotion Labelling : Fear,questions,SEL,hi,8,7,7
+2025-12-04,Primary Emotion Labelling : Fear,questions,SEL,mr,15,14,14
+2025-12-04,Primary Emotion Labelling : Fear,started,SEL,hi,27,21,21
+2025-12-04,Primary Emotion Labelling : Fear,started,SEL,mr,47,38,38
+2025-12-04,Primary Emotion Labelling : Sad,completed,SEL,hi,109,96,92
+2025-12-04,Primary Emotion Labelling : Sad,completed,SEL,mr,302,268,258
+2025-12-04,Primary Emotion Labelling : Sad,introduction,SEL,hi,302,246,238
+2025-12-04,Primary Emotion Labelling : Sad,introduction,SEL,mr,736,587,564
+2025-12-04,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,155,150,147
+2025-12-04,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,364,348,344
+2025-12-04,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,470,262,250
+2025-12-04,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,1145,639,610
+2025-12-04,Primary Emotion Labelling : Sad,questions,SEL,hi,381,192,189
+2025-12-04,Primary Emotion Labelling : Sad,questions,SEL,mr,860,437,430
+2025-12-04,Primary Emotion Labelling : Sad,rewards,SEL,hi,136,132,129
+2025-12-04,Primary Emotion Labelling : Sad,rewards,SEL,mr,314,299,295
+2025-12-04,Primary Emotion Labelling : Sad,started,SEL,hi,342,272,262
+2025-12-04,Primary Emotion Labelling : Sad,started,SEL,mr,829,641,608
+2025-12-04,Primary Emotion Labelling : Sad,validation,SEL,hi,146,141,138
+2025-12-04,Primary Emotion Labelling : Sad,validation,SEL,mr,338,322,318
 2025-12-04,Quantitative Comparison,completed,NM,hi,3,3,3
 2025-12-04,Quantitative Comparison,completed,NM,mr,18,15,15
 2025-12-04,Quantitative Comparison,introduction,NM,hi,5,5,5
@@ -50973,6 +51060,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-05,Primary Emotion Labelling,started,SEL,mr,8,8,8
 2025-12-05,Primary Emotion Labelling,validation,SEL,hi,1,1,1
 2025-12-05,Primary Emotion Labelling,validation,SEL,mr,7,7,7
+2025-12-05,Primary Emotion Labelling : Anger,completed,SEL,hi,116,104,103
+2025-12-05,Primary Emotion Labelling : Anger,completed,SEL,mr,389,345,341
+2025-12-05,Primary Emotion Labelling : Anger,introduction,SEL,hi,188,161,156
+2025-12-05,Primary Emotion Labelling : Anger,introduction,SEL,mr,598,499,492
+2025-12-05,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,122,116,116
+2025-12-05,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,398,367,366
+2025-12-05,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,312,165,160
+2025-12-05,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,1006,515,506
+2025-12-05,Primary Emotion Labelling : Anger,questions,SEL,hi,277,134,133
+2025-12-05,Primary Emotion Labelling : Anger,questions,SEL,mr,898,430,427
+2025-12-05,Primary Emotion Labelling : Anger,rewards,SEL,hi,114,110,110
+2025-12-05,Primary Emotion Labelling : Anger,rewards,SEL,mr,372,346,345
+2025-12-05,Primary Emotion Labelling : Anger,started,SEL,hi,200,166,160
+2025-12-05,Primary Emotion Labelling : Anger,started,SEL,mr,643,523,512
+2025-12-05,Primary Emotion Labelling : Anger,validation,SEL,hi,118,113,113
+2025-12-05,Primary Emotion Labelling : Anger,validation,SEL,mr,390,361,360
+2025-12-05,Primary Emotion Labelling : Fear,completed,SEL,hi,39,30,30
+2025-12-05,Primary Emotion Labelling : Fear,completed,SEL,mr,84,81,81
+2025-12-05,Primary Emotion Labelling : Fear,introduction,SEL,hi,75,60,60
+2025-12-05,Primary Emotion Labelling : Fear,introduction,SEL,mr,149,131,130
+2025-12-05,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,44,37,37
+2025-12-05,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,86,82,82
+2025-12-05,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,119,63,63
+2025-12-05,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,237,133,132
+2025-12-05,Primary Emotion Labelling : Fear,questions,SEL,hi,107,47,47
+2025-12-05,Primary Emotion Labelling : Fear,questions,SEL,mr,202,106,106
+2025-12-05,Primary Emotion Labelling : Fear,rewards,SEL,hi,41,33,33
+2025-12-05,Primary Emotion Labelling : Fear,rewards,SEL,mr,77,74,74
+2025-12-05,Primary Emotion Labelling : Fear,started,SEL,hi,84,66,65
+2025-12-05,Primary Emotion Labelling : Fear,started,SEL,mr,163,135,134
+2025-12-05,Primary Emotion Labelling : Fear,validation,SEL,hi,41,34,34
+2025-12-05,Primary Emotion Labelling : Fear,validation,SEL,mr,82,78,78
+2025-12-05,Primary Emotion Labelling : Sad,completed,SEL,hi,297,261,254
+2025-12-05,Primary Emotion Labelling : Sad,completed,SEL,mr,749,643,636
+2025-12-05,Primary Emotion Labelling : Sad,introduction,SEL,hi,673,556,542
+2025-12-05,Primary Emotion Labelling : Sad,introduction,SEL,mr,1619,1295,1263
+2025-12-05,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,365,346,344
+2025-12-05,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,824,785,781
+2025-12-05,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,1073,597,580
+2025-12-05,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,2596,1399,1358
+2025-12-05,Primary Emotion Labelling : Sad,questions,SEL,hi,855,426,418
+2025-12-05,Primary Emotion Labelling : Sad,questions,SEL,mr,1941,968,958
+2025-12-05,Primary Emotion Labelling : Sad,rewards,SEL,hi,309,292,290
+2025-12-05,Primary Emotion Labelling : Sad,rewards,SEL,mr,717,687,685
+2025-12-05,Primary Emotion Labelling : Sad,started,SEL,hi,765,608,591
+2025-12-05,Primary Emotion Labelling : Sad,started,SEL,mr,1882,1389,1352
+2025-12-05,Primary Emotion Labelling : Sad,validation,SEL,hi,342,323,321
+2025-12-05,Primary Emotion Labelling : Sad,validation,SEL,mr,783,749,745
 2025-12-05,Quantitative Comparison,completed,NM,hi,5,4,4
 2025-12-05,Quantitative Comparison,completed,NM,mr,8,8,8
 2025-12-05,Quantitative Comparison,introduction,NM,hi,9,7,7
@@ -51489,6 +51624,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-06,Primary Emotion Labelling,started,SEL,mr,5,5,5
 2025-12-06,Primary Emotion Labelling,validation,SEL,hi,1,1,1
 2025-12-06,Primary Emotion Labelling,validation,SEL,mr,1,1,1
+2025-12-06,Primary Emotion Labelling : Anger,completed,SEL,hi,241,212,212
+2025-12-06,Primary Emotion Labelling : Anger,completed,SEL,mr,612,538,532
+2025-12-06,Primary Emotion Labelling : Anger,introduction,SEL,hi,714,604,597
+2025-12-06,Primary Emotion Labelling : Anger,introduction,SEL,mr,1536,1249,1233
+2025-12-06,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,412,399,398
+2025-12-06,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,878,837,834
+2025-12-06,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,1146,643,636
+2025-12-06,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,2513,1351,1331
+2025-12-06,Primary Emotion Labelling : Anger,questions,SEL,hi,929,476,474
+2025-12-06,Primary Emotion Labelling : Anger,questions,SEL,mr,2046,1024,1016
+2025-12-06,Primary Emotion Labelling : Anger,rewards,SEL,hi,359,350,349
+2025-12-06,Primary Emotion Labelling : Anger,rewards,SEL,mr,785,756,754
+2025-12-06,Primary Emotion Labelling : Anger,started,SEL,hi,855,670,662
+2025-12-06,Primary Emotion Labelling : Anger,started,SEL,mr,1777,1362,1341
+2025-12-06,Primary Emotion Labelling : Anger,validation,SEL,hi,389,378,377
+2025-12-06,Primary Emotion Labelling : Anger,validation,SEL,mr,842,804,802
+2025-12-06,Primary Emotion Labelling : Fear,completed,SEL,hi,73,66,66
+2025-12-06,Primary Emotion Labelling : Fear,completed,SEL,mr,262,236,235
+2025-12-06,Primary Emotion Labelling : Fear,introduction,SEL,hi,124,110,109
+2025-12-06,Primary Emotion Labelling : Fear,introduction,SEL,mr,452,368,365
+2025-12-06,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,69,66,66
+2025-12-06,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,276,253,253
+2025-12-06,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,199,117,116
+2025-12-06,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,728,382,379
+2025-12-06,Primary Emotion Labelling : Fear,questions,SEL,hi,171,87,87
+2025-12-06,Primary Emotion Labelling : Fear,questions,SEL,mr,643,311,310
+2025-12-06,Primary Emotion Labelling : Fear,rewards,SEL,hi,64,61,61
+2025-12-06,Primary Emotion Labelling : Fear,rewards,SEL,mr,255,238,238
+2025-12-06,Primary Emotion Labelling : Fear,started,SEL,hi,134,118,117
+2025-12-06,Primary Emotion Labelling : Fear,started,SEL,mr,476,382,379
+2025-12-06,Primary Emotion Labelling : Fear,validation,SEL,hi,70,67,67
+2025-12-06,Primary Emotion Labelling : Fear,validation,SEL,mr,267,245,245
+2025-12-06,Primary Emotion Labelling : Sad,completed,SEL,hi,140,126,126
+2025-12-06,Primary Emotion Labelling : Sad,completed,SEL,mr,323,290,284
+2025-12-06,Primary Emotion Labelling : Sad,introduction,SEL,hi,297,264,261
+2025-12-06,Primary Emotion Labelling : Sad,introduction,SEL,mr,717,601,593
+2025-12-06,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,173,166,166
+2025-12-06,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,361,348,346
+2025-12-06,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,500,289,284
+2025-12-06,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,1134,654,642
+2025-12-06,Primary Emotion Labelling : Sad,questions,SEL,hi,417,211,209
+2025-12-06,Primary Emotion Labelling : Sad,questions,SEL,mr,877,459,454
+2025-12-06,Primary Emotion Labelling : Sad,rewards,SEL,hi,151,145,145
+2025-12-06,Primary Emotion Labelling : Sad,rewards,SEL,mr,296,289,287
+2025-12-06,Primary Emotion Labelling : Sad,started,SEL,hi,352,299,295
+2025-12-06,Primary Emotion Labelling : Sad,started,SEL,mr,850,675,660
+2025-12-06,Primary Emotion Labelling : Sad,validation,SEL,hi,164,158,158
+2025-12-06,Primary Emotion Labelling : Sad,validation,SEL,mr,340,329,327
 2025-12-06,Quantitative Comparison,completed,NM,hi,5,4,4
 2025-12-06,Quantitative Comparison,completed,NM,mr,10,7,7
 2025-12-06,Quantitative Comparison,introduction,NM,hi,6,5,5
@@ -51978,6 +52161,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-07,Primary Emotion Labelling,started,SEL,mr,3,3,3
 2025-12-07,Primary Emotion Labelling,validation,SEL,hi,5,5,5
 2025-12-07,Primary Emotion Labelling,validation,SEL,mr,3,3,3
+2025-12-07,Primary Emotion Labelling : Anger,completed,SEL,hi,117,103,102
+2025-12-07,Primary Emotion Labelling : Anger,completed,SEL,mr,223,204,198
+2025-12-07,Primary Emotion Labelling : Anger,introduction,SEL,hi,309,262,256
+2025-12-07,Primary Emotion Labelling : Anger,introduction,SEL,mr,588,502,486
+2025-12-07,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,172,166,164
+2025-12-07,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,341,327,324
+2025-12-07,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,484,274,268
+2025-12-07,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,916,528,511
+2025-12-07,Primary Emotion Labelling : Anger,questions,SEL,hi,399,198,194
+2025-12-07,Primary Emotion Labelling : Anger,questions,SEL,mr,779,392,382
+2025-12-07,Primary Emotion Labelling : Anger,rewards,SEL,hi,148,143,141
+2025-12-07,Primary Emotion Labelling : Anger,rewards,SEL,mr,279,269,268
+2025-12-07,Primary Emotion Labelling : Anger,started,SEL,hi,346,288,279
+2025-12-07,Primary Emotion Labelling : Anger,started,SEL,mr,646,535,515
+2025-12-07,Primary Emotion Labelling : Anger,validation,SEL,hi,164,159,157
+2025-12-07,Primary Emotion Labelling : Anger,validation,SEL,mr,309,297,296
+2025-12-07,Primary Emotion Labelling : Fear,completed,SEL,hi,58,50,50
+2025-12-07,Primary Emotion Labelling : Fear,completed,SEL,mr,111,94,92
+2025-12-07,Primary Emotion Labelling : Fear,introduction,SEL,hi,94,71,69
+2025-12-07,Primary Emotion Labelling : Fear,introduction,SEL,mr,184,152,148
+2025-12-07,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,56,53,51
+2025-12-07,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,115,106,103
+2025-12-07,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,154,73,71
+2025-12-07,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,296,154,150
+2025-12-07,Primary Emotion Labelling : Fear,questions,SEL,hi,138,63,61
+2025-12-07,Primary Emotion Labelling : Fear,questions,SEL,mr,278,131,128
+2025-12-07,Primary Emotion Labelling : Fear,rewards,SEL,hi,54,51,50
+2025-12-07,Primary Emotion Labelling : Fear,rewards,SEL,mr,106,97,94
+2025-12-07,Primary Emotion Labelling : Fear,started,SEL,hi,103,74,72
+2025-12-07,Primary Emotion Labelling : Fear,started,SEL,mr,192,155,151
+2025-12-07,Primary Emotion Labelling : Fear,validation,SEL,hi,56,53,51
+2025-12-07,Primary Emotion Labelling : Fear,validation,SEL,mr,108,99,96
+2025-12-07,Primary Emotion Labelling : Sad,completed,SEL,hi,41,38,36
+2025-12-07,Primary Emotion Labelling : Sad,completed,SEL,mr,89,80,80
+2025-12-07,Primary Emotion Labelling : Sad,introduction,SEL,hi,79,73,70
+2025-12-07,Primary Emotion Labelling : Sad,introduction,SEL,mr,186,166,166
+2025-12-07,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,39,39,39
+2025-12-07,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,96,92,92
+2025-12-07,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,123,79,76
+2025-12-07,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,289,176,176
+2025-12-07,Primary Emotion Labelling : Sad,questions,SEL,hi,98,54,54
+2025-12-07,Primary Emotion Labelling : Sad,questions,SEL,mr,253,134,134
+2025-12-07,Primary Emotion Labelling : Sad,rewards,SEL,hi,33,33,33
+2025-12-07,Primary Emotion Labelling : Sad,rewards,SEL,mr,80,76,76
+2025-12-07,Primary Emotion Labelling : Sad,started,SEL,hi,105,88,84
+2025-12-07,Primary Emotion Labelling : Sad,started,SEL,mr,213,184,184
+2025-12-07,Primary Emotion Labelling : Sad,validation,SEL,hi,38,38,38
+2025-12-07,Primary Emotion Labelling : Sad,validation,SEL,mr,93,89,89
 2025-12-07,Quantitative Comparison,completed,NM,hi,4,3,3
 2025-12-07,Quantitative Comparison,completed,NM,mr,3,3,3
 2025-12-07,Quantitative Comparison,introduction,NM,hi,5,4,4
@@ -52494,6 +52725,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-08,Primary Emotion Labelling,started,SEL,mr,9,9,9
 2025-12-08,Primary Emotion Labelling,validation,SEL,hi,2,2,2
 2025-12-08,Primary Emotion Labelling,validation,SEL,mr,6,6,6
+2025-12-08,Primary Emotion Labelling : Anger,completed,SEL,hi,65,57,56
+2025-12-08,Primary Emotion Labelling : Anger,completed,SEL,mr,612,530,521
+2025-12-08,Primary Emotion Labelling : Anger,introduction,SEL,hi,165,134,132
+2025-12-08,Primary Emotion Labelling : Anger,introduction,SEL,mr,1529,1298,1276
+2025-12-08,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,90,81,81
+2025-12-08,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,779,745,741
+2025-12-08,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,273,148,145
+2025-12-08,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,2433,1423,1393
+2025-12-08,Primary Emotion Labelling : Anger,questions,SEL,hi,217,104,103
+2025-12-08,Primary Emotion Labelling : Anger,questions,SEL,mr,1769,888,880
+2025-12-08,Primary Emotion Labelling : Anger,rewards,SEL,hi,83,76,76
+2025-12-08,Primary Emotion Labelling : Anger,rewards,SEL,mr,675,649,646
+2025-12-08,Primary Emotion Labelling : Anger,started,SEL,hi,201,152,145
+2025-12-08,Primary Emotion Labelling : Anger,started,SEL,mr,1823,1476,1438
+2025-12-08,Primary Emotion Labelling : Anger,validation,SEL,hi,86,79,79
+2025-12-08,Primary Emotion Labelling : Anger,validation,SEL,mr,736,708,705
+2025-12-08,Primary Emotion Labelling : Fear,completed,SEL,hi,38,32,31
+2025-12-08,Primary Emotion Labelling : Fear,completed,SEL,mr,332,292,290
+2025-12-08,Primary Emotion Labelling : Fear,introduction,SEL,hi,99,76,69
+2025-12-08,Primary Emotion Labelling : Fear,introduction,SEL,mr,550,448,435
+2025-12-08,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,49,42,42
+2025-12-08,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,319,297,292
+2025-12-08,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,149,79,72
+2025-12-08,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,871,458,444
+2025-12-08,Primary Emotion Labelling : Fear,questions,SEL,hi,119,56,55
+2025-12-08,Primary Emotion Labelling : Fear,questions,SEL,mr,802,390,380
+2025-12-08,Primary Emotion Labelling : Fear,rewards,SEL,hi,43,39,39
+2025-12-08,Primary Emotion Labelling : Fear,rewards,SEL,mr,295,276,271
+2025-12-08,Primary Emotion Labelling : Fear,started,SEL,hi,106,79,72
+2025-12-08,Primary Emotion Labelling : Fear,started,SEL,mr,579,464,450
+2025-12-08,Primary Emotion Labelling : Fear,validation,SEL,hi,44,40,40
+2025-12-08,Primary Emotion Labelling : Fear,validation,SEL,mr,312,291,286
+2025-12-08,Primary Emotion Labelling : Sad,completed,SEL,hi,32,27,26
+2025-12-08,Primary Emotion Labelling : Sad,completed,SEL,mr,125,112,111
+2025-12-08,Primary Emotion Labelling : Sad,introduction,SEL,hi,81,69,67
+2025-12-08,Primary Emotion Labelling : Sad,introduction,SEL,mr,236,207,204
+2025-12-08,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,43,39,39
+2025-12-08,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,129,125,123
+2025-12-08,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,125,72,69
+2025-12-08,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,376,216,212
+2025-12-08,Primary Emotion Labelling : Sad,questions,SEL,hi,97,48,48
+2025-12-08,Primary Emotion Labelling : Sad,questions,SEL,mr,341,176,174
+2025-12-08,Primary Emotion Labelling : Sad,rewards,SEL,hi,36,34,34
+2025-12-08,Primary Emotion Labelling : Sad,rewards,SEL,mr,118,114,114
+2025-12-08,Primary Emotion Labelling : Sad,started,SEL,hi,88,74,72
+2025-12-08,Primary Emotion Labelling : Sad,started,SEL,mr,254,219,215
+2025-12-08,Primary Emotion Labelling : Sad,validation,SEL,hi,41,38,38
+2025-12-08,Primary Emotion Labelling : Sad,validation,SEL,mr,128,124,122
 2025-12-08,Quantitative Comparison,completed,NM,hi,8,8,8
 2025-12-08,Quantitative Comparison,completed,NM,mr,13,12,12
 2025-12-08,Quantitative Comparison,introduction,NM,hi,9,9,9
@@ -53004,6 +53283,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-09,Primary Emotion Labelling,started,SEL,mr,5,5,5
 2025-12-09,Primary Emotion Labelling,validation,SEL,hi,2,2,2
 2025-12-09,Primary Emotion Labelling,validation,SEL,mr,3,3,3
+2025-12-09,Primary Emotion Labelling : Anger,completed,SEL,hi,34,30,30
+2025-12-09,Primary Emotion Labelling : Anger,completed,SEL,mr,227,201,198
+2025-12-09,Primary Emotion Labelling : Anger,introduction,SEL,hi,75,58,58
+2025-12-09,Primary Emotion Labelling : Anger,introduction,SEL,mr,519,452,444
+2025-12-09,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,30,27,27
+2025-12-09,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,263,245,243
+2025-12-09,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,110,65,64
+2025-12-09,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,832,519,508
+2025-12-09,Primary Emotion Labelling : Anger,questions,SEL,hi,83,42,42
+2025-12-09,Primary Emotion Labelling : Anger,questions,SEL,mr,620,308,305
+2025-12-09,Primary Emotion Labelling : Anger,rewards,SEL,hi,36,26,26
+2025-12-09,Primary Emotion Labelling : Anger,rewards,SEL,mr,237,211,209
+2025-12-09,Primary Emotion Labelling : Anger,started,SEL,hi,90,65,64
+2025-12-09,Primary Emotion Labelling : Anger,started,SEL,mr,624,532,514
+2025-12-09,Primary Emotion Labelling : Anger,validation,SEL,hi,25,23,23
+2025-12-09,Primary Emotion Labelling : Anger,validation,SEL,mr,230,216,214
+2025-12-09,Primary Emotion Labelling : Fear,completed,SEL,hi,15,14,14
+2025-12-09,Primary Emotion Labelling : Fear,completed,SEL,mr,146,133,132
+2025-12-09,Primary Emotion Labelling : Fear,introduction,SEL,hi,36,31,30
+2025-12-09,Primary Emotion Labelling : Fear,introduction,SEL,mr,263,222,213
+2025-12-09,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,18,17,17
+2025-12-09,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,169,155,151
+2025-12-09,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,49,33,32
+2025-12-09,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,412,226,217
+2025-12-09,Primary Emotion Labelling : Fear,questions,SEL,hi,46,25,25
+2025-12-09,Primary Emotion Labelling : Fear,questions,SEL,mr,396,192,186
+2025-12-09,Primary Emotion Labelling : Fear,rewards,SEL,hi,18,17,17
+2025-12-09,Primary Emotion Labelling : Fear,rewards,SEL,mr,153,141,137
+2025-12-09,Primary Emotion Labelling : Fear,started,SEL,hi,41,34,33
+2025-12-09,Primary Emotion Labelling : Fear,started,SEL,mr,282,230,220
+2025-12-09,Primary Emotion Labelling : Fear,validation,SEL,hi,12,11,11
+2025-12-09,Primary Emotion Labelling : Fear,validation,SEL,mr,148,136,134
+2025-12-09,Primary Emotion Labelling : Sad,completed,SEL,hi,18,18,18
+2025-12-09,Primary Emotion Labelling : Sad,completed,SEL,mr,69,65,64
+2025-12-09,Primary Emotion Labelling : Sad,introduction,SEL,hi,41,35,34
+2025-12-09,Primary Emotion Labelling : Sad,introduction,SEL,mr,145,123,122
+2025-12-09,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,19,19,19
+2025-12-09,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,76,72,72
+2025-12-09,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,56,37,36
+2025-12-09,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,211,129,129
+2025-12-09,Primary Emotion Labelling : Sad,questions,SEL,hi,43,23,23
+2025-12-09,Primary Emotion Labelling : Sad,questions,SEL,mr,190,96,96
+2025-12-09,Primary Emotion Labelling : Sad,rewards,SEL,hi,18,18,18
+2025-12-09,Primary Emotion Labelling : Sad,rewards,SEL,mr,59,55,55
+2025-12-09,Primary Emotion Labelling : Sad,started,SEL,hi,46,38,37
+2025-12-09,Primary Emotion Labelling : Sad,started,SEL,mr,157,128,128
+2025-12-09,Primary Emotion Labelling : Sad,validation,SEL,hi,11,11,11
+2025-12-09,Primary Emotion Labelling : Sad,validation,SEL,mr,59,56,56
 2025-12-09,Quantitative Comparison,completed,NM,hi,10,9,9
 2025-12-09,Quantitative Comparison,completed,NM,mr,5,5,5
 2025-12-09,Quantitative Comparison,introduction,NM,hi,13,10,10
@@ -53429,6 +53756,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-10,Primary Emotion Labelling,rewards,SEL,mr,1,1,1
 2025-12-10,Primary Emotion Labelling,started,SEL,hi,7,3,3
 2025-12-10,Primary Emotion Labelling,started,SEL,mr,1,1,1
+2025-12-10,Primary Emotion Labelling : Anger,completed,SEL,hi,26,22,22
+2025-12-10,Primary Emotion Labelling : Anger,completed,SEL,mr,64,59,58
+2025-12-10,Primary Emotion Labelling : Anger,introduction,SEL,hi,49,46,46
+2025-12-10,Primary Emotion Labelling : Anger,introduction,SEL,mr,160,144,141
+2025-12-10,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,30,28,28
+2025-12-10,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,70,70,69
+2025-12-10,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,69,48,48
+2025-12-10,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,221,164,159
+2025-12-10,Primary Emotion Labelling : Anger,questions,SEL,hi,72,36,36
+2025-12-10,Primary Emotion Labelling : Anger,questions,SEL,mr,179,99,97
+2025-12-10,Primary Emotion Labelling : Anger,rewards,SEL,hi,44,30,30
+2025-12-10,Primary Emotion Labelling : Anger,rewards,SEL,mr,106,73,72
+2025-12-10,Primary Emotion Labelling : Anger,started,SEL,hi,61,50,50
+2025-12-10,Primary Emotion Labelling : Anger,started,SEL,mr,198,174,168
+2025-12-10,Primary Emotion Labelling : Anger,validation,SEL,hi,14,14,14
+2025-12-10,Primary Emotion Labelling : Anger,validation,SEL,mr,35,35,35
+2025-12-10,Primary Emotion Labelling : Fear,completed,SEL,hi,156,141,141
+2025-12-10,Primary Emotion Labelling : Fear,completed,SEL,mr,462,417,410
+2025-12-10,Primary Emotion Labelling : Fear,introduction,SEL,hi,438,367,363
+2025-12-10,Primary Emotion Labelling : Fear,introduction,SEL,mr,981,820,811
+2025-12-10,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,232,225,225
+2025-12-10,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,504,498,498
+2025-12-10,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,582,398,393
+2025-12-10,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,1330,906,889
+2025-12-10,Primary Emotion Labelling : Fear,questions,SEL,hi,521,272,272
+2025-12-10,Primary Emotion Labelling : Fear,questions,SEL,mr,1127,603,598
+2025-12-10,Primary Emotion Labelling : Fear,rewards,SEL,hi,233,226,226
+2025-12-10,Primary Emotion Labelling : Fear,rewards,SEL,mr,504,498,498
+2025-12-10,Primary Emotion Labelling : Fear,started,SEL,hi,518,402,394
+2025-12-10,Primary Emotion Labelling : Fear,started,SEL,mr,1147,894,872
+2025-12-10,Primary Emotion Labelling : Fear,validation,SEL,hi,90,87,87
+2025-12-10,Primary Emotion Labelling : Fear,validation,SEL,mr,220,217,217
+2025-12-10,Primary Emotion Labelling : Sad,completed,SEL,hi,39,37,37
+2025-12-10,Primary Emotion Labelling : Sad,completed,SEL,mr,78,74,74
+2025-12-10,Primary Emotion Labelling : Sad,introduction,SEL,hi,75,70,70
+2025-12-10,Primary Emotion Labelling : Sad,introduction,SEL,mr,151,132,131
+2025-12-10,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,38,36,36
+2025-12-10,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,72,70,70
+2025-12-10,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,97,76,76
+2025-12-10,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,204,141,140
+2025-12-10,Primary Emotion Labelling : Sad,questions,SEL,hi,90,47,47
+2025-12-10,Primary Emotion Labelling : Sad,questions,SEL,mr,183,101,101
+2025-12-10,Primary Emotion Labelling : Sad,rewards,SEL,hi,38,36,36
+2025-12-10,Primary Emotion Labelling : Sad,rewards,SEL,mr,73,71,71
+2025-12-10,Primary Emotion Labelling : Sad,started,SEL,hi,87,80,80
+2025-12-10,Primary Emotion Labelling : Sad,started,SEL,mr,165,142,140
+2025-12-10,Primary Emotion Labelling : Sad,validation,SEL,hi,16,15,15
+2025-12-10,Primary Emotion Labelling : Sad,validation,SEL,mr,41,40,40
 2025-12-10,Relational Comparison,completed,CG,hi,1,1,1
 2025-12-10,Relational Comparison,introduction,CG,hi,1,1,1
 2025-12-10,Relational Comparison,introduction,CG,mr,1,1,1
@@ -53779,6 +54154,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-11,Primary Emotion Labelling,questions,SEL,hi,4,2,2
 2025-12-11,Primary Emotion Labelling,rewards,SEL,hi,2,1,1
 2025-12-11,Primary Emotion Labelling,started,SEL,hi,5,2,2
+2025-12-11,Primary Emotion Labelling : Anger,completed,SEL,hi,15,13,13
+2025-12-11,Primary Emotion Labelling : Anger,completed,SEL,mr,27,27,27
+2025-12-11,Primary Emotion Labelling : Anger,introduction,SEL,hi,33,32,31
+2025-12-11,Primary Emotion Labelling : Anger,introduction,SEL,mr,69,62,62
+2025-12-11,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,19,19,19
+2025-12-11,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,48,46,46
+2025-12-11,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,49,34,33
+2025-12-11,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,103,72,72
+2025-12-11,Primary Emotion Labelling : Anger,questions,SEL,hi,58,28,27
+2025-12-11,Primary Emotion Labelling : Anger,questions,SEL,mr,103,50,50
+2025-12-11,Primary Emotion Labelling : Anger,rewards,SEL,hi,31,20,20
+2025-12-11,Primary Emotion Labelling : Anger,rewards,SEL,mr,67,47,47
+2025-12-11,Primary Emotion Labelling : Anger,started,SEL,hi,40,35,34
+2025-12-11,Primary Emotion Labelling : Anger,started,SEL,mr,86,76,75
+2025-12-11,Primary Emotion Labelling : Anger,validation,SEL,hi,12,12,12
+2025-12-11,Primary Emotion Labelling : Anger,validation,SEL,mr,24,23,23
+2025-12-11,Primary Emotion Labelling : Fear,completed,SEL,hi,88,75,69
+2025-12-11,Primary Emotion Labelling : Fear,completed,SEL,mr,181,173,170
+2025-12-11,Primary Emotion Labelling : Fear,introduction,SEL,hi,170,155,153
+2025-12-11,Primary Emotion Labelling : Fear,introduction,SEL,mr,417,368,355
+2025-12-11,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,94,92,92
+2025-12-11,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,208,208,206
+2025-12-11,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,250,178,172
+2025-12-11,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,570,412,397
+2025-12-11,Primary Emotion Labelling : Fear,questions,SEL,hi,220,114,114
+2025-12-11,Primary Emotion Labelling : Fear,questions,SEL,mr,495,264,262
+2025-12-11,Primary Emotion Labelling : Fear,rewards,SEL,hi,94,92,92
+2025-12-11,Primary Emotion Labelling : Fear,rewards,SEL,mr,210,210,209
+2025-12-11,Primary Emotion Labelling : Fear,started,SEL,hi,219,181,178
+2025-12-11,Primary Emotion Labelling : Fear,started,SEL,mr,491,409,394
+2025-12-11,Primary Emotion Labelling : Fear,validation,SEL,hi,40,39,39
+2025-12-11,Primary Emotion Labelling : Fear,validation,SEL,mr,89,89,88
+2025-12-11,Primary Emotion Labelling : Sad,completed,SEL,hi,26,25,25
+2025-12-11,Primary Emotion Labelling : Sad,completed,SEL,mr,58,58,58
+2025-12-11,Primary Emotion Labelling : Sad,introduction,SEL,hi,48,44,44
+2025-12-11,Primary Emotion Labelling : Sad,introduction,SEL,mr,98,89,85
+2025-12-11,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,27,27,27
+2025-12-11,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,56,55,54
+2025-12-11,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,65,47,47
+2025-12-11,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,136,97,93
+2025-12-11,Primary Emotion Labelling : Sad,questions,SEL,hi,68,38,38
+2025-12-11,Primary Emotion Labelling : Sad,questions,SEL,mr,145,75,73
+2025-12-11,Primary Emotion Labelling : Sad,rewards,SEL,hi,27,27,27
+2025-12-11,Primary Emotion Labelling : Sad,rewards,SEL,mr,57,56,55
+2025-12-11,Primary Emotion Labelling : Sad,started,SEL,hi,54,50,50
+2025-12-11,Primary Emotion Labelling : Sad,started,SEL,mr,112,98,94
+2025-12-11,Primary Emotion Labelling : Sad,validation,SEL,hi,15,15,15
+2025-12-11,Primary Emotion Labelling : Sad,validation,SEL,mr,29,29,29
 2025-12-11,Quantitative Comparison,completed,NM,hi,2,2,2
 2025-12-11,Quantitative Comparison,introduction,NM,hi,2,2,2
 2025-12-11,Quantitative Comparison,mid_introduction,NM,hi,2,2,2
@@ -54087,6 +54510,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-12,Primary Emotion Labelling,rewards,SEL,hi,9,7,7
 2025-12-12,Primary Emotion Labelling,started,SEL,hi,11,8,8
 2025-12-12,Primary Emotion Labelling,validation,SEL,hi,8,7,7
+2025-12-12,Primary Emotion Labelling : Anger,completed,SEL,hi,22,21,21
+2025-12-12,Primary Emotion Labelling : Anger,completed,SEL,mr,42,41,41
+2025-12-12,Primary Emotion Labelling : Anger,introduction,SEL,hi,42,38,38
+2025-12-12,Primary Emotion Labelling : Anger,introduction,SEL,mr,78,70,70
+2025-12-12,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,23,22,22
+2025-12-12,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,49,48,48
+2025-12-12,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,58,41,41
+2025-12-12,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,110,78,78
+2025-12-12,Primary Emotion Labelling : Anger,questions,SEL,hi,55,28,28
+2025-12-12,Primary Emotion Labelling : Anger,questions,SEL,mr,110,57,57
+2025-12-12,Primary Emotion Labelling : Anger,rewards,SEL,hi,34,22,22
+2025-12-12,Primary Emotion Labelling : Anger,rewards,SEL,mr,71,48,48
+2025-12-12,Primary Emotion Labelling : Anger,started,SEL,hi,47,39,39
+2025-12-12,Primary Emotion Labelling : Anger,started,SEL,mr,92,80,80
+2025-12-12,Primary Emotion Labelling : Anger,validation,SEL,hi,11,11,11
+2025-12-12,Primary Emotion Labelling : Anger,validation,SEL,mr,23,23,23
+2025-12-12,Primary Emotion Labelling : Fear,completed,SEL,hi,142,129,127
+2025-12-12,Primary Emotion Labelling : Fear,completed,SEL,mr,395,363,357
+2025-12-12,Primary Emotion Labelling : Fear,introduction,SEL,hi,419,362,359
+2025-12-12,Primary Emotion Labelling : Fear,introduction,SEL,mr,754,643,631
+2025-12-12,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,198,198,198
+2025-12-12,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,346,345,345
+2025-12-12,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,544,402,396
+2025-12-12,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,1069,786,771
+2025-12-12,Primary Emotion Labelling : Fear,questions,SEL,hi,497,260,260
+2025-12-12,Primary Emotion Labelling : Fear,questions,SEL,mr,809,433,431
+2025-12-12,Primary Emotion Labelling : Fear,rewards,SEL,hi,203,203,203
+2025-12-12,Primary Emotion Labelling : Fear,rewards,SEL,mr,350,348,348
+2025-12-12,Primary Emotion Labelling : Fear,started,SEL,hi,516,418,410
+2025-12-12,Primary Emotion Labelling : Fear,started,SEL,mr,910,737,720
+2025-12-12,Primary Emotion Labelling : Fear,validation,SEL,hi,70,70,70
+2025-12-12,Primary Emotion Labelling : Fear,validation,SEL,mr,132,132,132
+2025-12-12,Primary Emotion Labelling : Sad,completed,SEL,hi,27,27,27
+2025-12-12,Primary Emotion Labelling : Sad,completed,SEL,mr,79,77,75
+2025-12-12,Primary Emotion Labelling : Sad,introduction,SEL,hi,48,43,43
+2025-12-12,Primary Emotion Labelling : Sad,introduction,SEL,mr,118,108,105
+2025-12-12,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,24,23,23
+2025-12-12,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,64,63,61
+2025-12-12,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,61,46,46
+2025-12-12,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,159,111,108
+2025-12-12,Primary Emotion Labelling : Sad,questions,SEL,hi,66,33,33
+2025-12-12,Primary Emotion Labelling : Sad,questions,SEL,mr,161,85,83
+2025-12-12,Primary Emotion Labelling : Sad,rewards,SEL,hi,24,23,23
+2025-12-12,Primary Emotion Labelling : Sad,rewards,SEL,mr,64,63,61
+2025-12-12,Primary Emotion Labelling : Sad,started,SEL,hi,53,48,48
+2025-12-12,Primary Emotion Labelling : Sad,started,SEL,mr,129,115,112
+2025-12-12,Primary Emotion Labelling : Sad,validation,SEL,hi,10,10,10
+2025-12-12,Primary Emotion Labelling : Sad,validation,SEL,mr,37,37,36
 2025-12-12,Quantitative Comparison,started,NM,hi,1,1,1
 2025-12-12,Relational Comparison,completed,CG,hi,3,2,2
 2025-12-12,Relational Comparison,introduction,CG,hi,4,3,3
@@ -54163,7 +54634,6 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-12,Sorting Primary Shapes,rewards,CG,hi,20,10,10
 2025-12-12,Sorting Primary Shapes,started,CG,hi,14,14,14
 2025-12-12,Sorting Primary Shapes,validation,CG,hi,10,10,10
-2025-12-13,Akshar Ma,completed,LL,mr,1,1,1
 2025-12-13,Beginning Sound Ba/Ra/Na,completed,LL,hi,11,9,9
 2025-12-13,Beginning Sound Ba/Ra/Na,completed,LL,mr,1,1,1
 2025-12-13,Beginning Sound Ba/Ra/Na,introduction,LL,hi,16,14,14
@@ -54406,6 +54876,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-13,Primary Emotion Labelling,rewards,SEL,hi,3,3,3
 2025-12-13,Primary Emotion Labelling,started,SEL,hi,3,3,3
 2025-12-13,Primary Emotion Labelling,validation,SEL,hi,3,3,3
+2025-12-13,Primary Emotion Labelling : Anger,completed,SEL,hi,18,18,18
+2025-12-13,Primary Emotion Labelling : Anger,completed,SEL,mr,31,31,30
+2025-12-13,Primary Emotion Labelling : Anger,introduction,SEL,hi,30,28,28
+2025-12-13,Primary Emotion Labelling : Anger,introduction,SEL,mr,87,77,76
+2025-12-13,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,15,15,15
+2025-12-13,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,50,50,49
+2025-12-13,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,42,30,30
+2025-12-13,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,117,77,76
+2025-12-13,Primary Emotion Labelling : Anger,questions,SEL,hi,43,24,24
+2025-12-13,Primary Emotion Labelling : Anger,questions,SEL,mr,113,60,59
+2025-12-13,Primary Emotion Labelling : Anger,rewards,SEL,hi,21,15,15
+2025-12-13,Primary Emotion Labelling : Anger,rewards,SEL,mr,75,50,49
+2025-12-13,Primary Emotion Labelling : Anger,started,SEL,hi,33,30,30
+2025-12-13,Primary Emotion Labelling : Anger,started,SEL,mr,92,78,76
+2025-12-13,Primary Emotion Labelling : Anger,validation,SEL,hi,9,9,9
+2025-12-13,Primary Emotion Labelling : Anger,validation,SEL,mr,28,28,27
+2025-12-13,Primary Emotion Labelling : Fear,completed,SEL,hi,65,63,63
+2025-12-13,Primary Emotion Labelling : Fear,completed,SEL,mr,166,157,155
+2025-12-13,Primary Emotion Labelling : Fear,introduction,SEL,hi,180,158,156
+2025-12-13,Primary Emotion Labelling : Fear,introduction,SEL,mr,399,363,358
+2025-12-13,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,99,99,99
+2025-12-13,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,200,199,198
+2025-12-13,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,240,175,173
+2025-12-13,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,552,429,420
+2025-12-13,Primary Emotion Labelling : Fear,questions,SEL,hi,221,116,116
+2025-12-13,Primary Emotion Labelling : Fear,questions,SEL,mr,485,250,249
+2025-12-13,Primary Emotion Labelling : Fear,rewards,SEL,hi,102,102,102
+2025-12-13,Primary Emotion Labelling : Fear,rewards,SEL,mr,204,203,202
+2025-12-13,Primary Emotion Labelling : Fear,started,SEL,hi,226,189,185
+2025-12-13,Primary Emotion Labelling : Fear,started,SEL,mr,483,419,409
+2025-12-13,Primary Emotion Labelling : Fear,validation,SEL,hi,39,39,39
+2025-12-13,Primary Emotion Labelling : Fear,validation,SEL,mr,71,71,71
+2025-12-13,Primary Emotion Labelling : Sad,completed,SEL,hi,29,27,27
+2025-12-13,Primary Emotion Labelling : Sad,completed,SEL,mr,66,64,64
+2025-12-13,Primary Emotion Labelling : Sad,introduction,SEL,hi,47,42,42
+2025-12-13,Primary Emotion Labelling : Sad,introduction,SEL,mr,121,107,106
+2025-12-13,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,29,27,27
+2025-12-13,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,70,66,66
+2025-12-13,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,65,46,46
+2025-12-13,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,155,109,108
+2025-12-13,Primary Emotion Labelling : Sad,questions,SEL,hi,74,35,35
+2025-12-13,Primary Emotion Labelling : Sad,questions,SEL,mr,179,92,92
+2025-12-13,Primary Emotion Labelling : Sad,rewards,SEL,hi,29,27,27
+2025-12-13,Primary Emotion Labelling : Sad,rewards,SEL,mr,71,67,67
+2025-12-13,Primary Emotion Labelling : Sad,started,SEL,hi,57,50,50
+2025-12-13,Primary Emotion Labelling : Sad,started,SEL,mr,131,111,110
+2025-12-13,Primary Emotion Labelling : Sad,validation,SEL,hi,12,12,12
+2025-12-13,Primary Emotion Labelling : Sad,validation,SEL,mr,29,27,27
 2025-12-13,Relational Comparison,completed,CG,hi,1,1,1
 2025-12-13,Relational Comparison,introduction,CG,hi,1,1,1
 2025-12-13,Relational Comparison,mid_introduction,CG,hi,1,1,1
@@ -54709,6 +55227,54 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-14,Primary Emotion Labelling,rewards,SEL,hi,1,1,1
 2025-12-14,Primary Emotion Labelling,started,SEL,hi,1,1,1
 2025-12-14,Primary Emotion Labelling,validation,SEL,hi,1,1,1
+2025-12-14,Primary Emotion Labelling : Anger,completed,SEL,hi,3,3,3
+2025-12-14,Primary Emotion Labelling : Anger,completed,SEL,mr,16,16,16
+2025-12-14,Primary Emotion Labelling : Anger,introduction,SEL,hi,10,10,10
+2025-12-14,Primary Emotion Labelling : Anger,introduction,SEL,mr,33,29,27
+2025-12-14,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,6,6,6
+2025-12-14,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,17,16,16
+2025-12-14,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,11,10,10
+2025-12-14,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,46,32,30
+2025-12-14,Primary Emotion Labelling : Anger,questions,SEL,hi,15,9,9
+2025-12-14,Primary Emotion Labelling : Anger,questions,SEL,mr,43,24,24
+2025-12-14,Primary Emotion Labelling : Anger,rewards,SEL,hi,7,6,6
+2025-12-14,Primary Emotion Labelling : Anger,rewards,SEL,mr,27,16,16
+2025-12-14,Primary Emotion Labelling : Anger,started,SEL,hi,10,10,10
+2025-12-14,Primary Emotion Labelling : Anger,started,SEL,mr,33,29,27
+2025-12-14,Primary Emotion Labelling : Anger,validation,SEL,hi,1,1,1
+2025-12-14,Primary Emotion Labelling : Anger,validation,SEL,mr,10,10,10
+2025-12-14,Primary Emotion Labelling : Fear,completed,SEL,hi,15,15,15
+2025-12-14,Primary Emotion Labelling : Fear,completed,SEL,mr,42,40,39
+2025-12-14,Primary Emotion Labelling : Fear,introduction,SEL,hi,37,35,35
+2025-12-14,Primary Emotion Labelling : Fear,introduction,SEL,mr,82,74,73
+2025-12-14,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,17,16,16
+2025-12-14,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,42,41,40
+2025-12-14,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,55,44,44
+2025-12-14,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,115,83,82
+2025-12-14,Primary Emotion Labelling : Fear,questions,SEL,hi,38,19,19
+2025-12-14,Primary Emotion Labelling : Fear,questions,SEL,mr,99,52,51
+2025-12-14,Primary Emotion Labelling : Fear,rewards,SEL,hi,17,16,16
+2025-12-14,Primary Emotion Labelling : Fear,rewards,SEL,mr,43,42,41
+2025-12-14,Primary Emotion Labelling : Fear,started,SEL,hi,47,43,43
+2025-12-14,Primary Emotion Labelling : Fear,started,SEL,mr,94,83,82
+2025-12-14,Primary Emotion Labelling : Fear,validation,SEL,hi,8,8,8
+2025-12-14,Primary Emotion Labelling : Fear,validation,SEL,mr,21,20,19
+2025-12-14,Primary Emotion Labelling : Sad,completed,SEL,hi,12,12,12
+2025-12-14,Primary Emotion Labelling : Sad,completed,SEL,mr,28,27,27
+2025-12-14,Primary Emotion Labelling : Sad,introduction,SEL,hi,23,19,18
+2025-12-14,Primary Emotion Labelling : Sad,introduction,SEL,mr,51,44,44
+2025-12-14,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,10,10,9
+2025-12-14,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,20,19,19
+2025-12-14,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,29,20,19
+2025-12-14,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,61,47,47
+2025-12-14,Primary Emotion Labelling : Sad,questions,SEL,hi,25,15,14
+2025-12-14,Primary Emotion Labelling : Sad,questions,SEL,mr,60,34,34
+2025-12-14,Primary Emotion Labelling : Sad,rewards,SEL,hi,10,10,9
+2025-12-14,Primary Emotion Labelling : Sad,rewards,SEL,mr,20,19,19
+2025-12-14,Primary Emotion Labelling : Sad,started,SEL,hi,25,21,20
+2025-12-14,Primary Emotion Labelling : Sad,started,SEL,mr,55,49,49
+2025-12-14,Primary Emotion Labelling : Sad,validation,SEL,hi,5,5,5
+2025-12-14,Primary Emotion Labelling : Sad,validation,SEL,mr,8,8,8
 2025-12-14,Quantitative Comparison,introduction,NM,mr,1,1,1
 2025-12-14,Quantitative Comparison,parent_poll,NM,mr,1,1,1
 2025-12-14,Quantitative Comparison,started,NM,mr,3,2,2
@@ -54986,6 +55552,60 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-15,Primary Emotion Labelling,rewards,SEL,hi,3,3,3
 2025-12-15,Primary Emotion Labelling,started,SEL,hi,4,4,4
 2025-12-15,Primary Emotion Labelling,validation,SEL,hi,2,2,2
+2025-12-15,Primary Emotion Labelling : Anger,completed,SEL,hi,12,12,12
+2025-12-15,Primary Emotion Labelling : Anger,completed,SEL,mr,22,22,22
+2025-12-15,Primary Emotion Labelling : Anger,introduction,SEL,hi,20,19,19
+2025-12-15,Primary Emotion Labelling : Anger,introduction,SEL,mr,51,44,42
+2025-12-15,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,13,13,13
+2025-12-15,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,33,31,30
+2025-12-15,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,22,19,19
+2025-12-15,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,57,49,47
+2025-12-15,Primary Emotion Labelling : Anger,questions,SEL,hi,32,16,16
+2025-12-15,Primary Emotion Labelling : Anger,questions,SEL,mr,76,37,36
+2025-12-15,Primary Emotion Labelling : Anger,rewards,SEL,hi,13,13,13
+2025-12-15,Primary Emotion Labelling : Anger,rewards,SEL,mr,34,31,30
+2025-12-15,Primary Emotion Labelling : Anger,started,SEL,hi,22,19,19
+2025-12-15,Primary Emotion Labelling : Anger,started,SEL,mr,55,48,46
+2025-12-15,Primary Emotion Labelling : Anger,validation,SEL,mr,1,1,1
+2025-12-15,Primary Emotion Labelling : Fear,completed,SEL,hi,12,10,10
+2025-12-15,Primary Emotion Labelling : Fear,completed,SEL,mr,123,108,107
+2025-12-15,Primary Emotion Labelling : Fear,introduction,SEL,hi,36,33,33
+2025-12-15,Primary Emotion Labelling : Fear,introduction,SEL,mr,688,588,583
+2025-12-15,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,20,20,20
+2025-12-15,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,280,277,276
+2025-12-15,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,37,35,35
+2025-12-15,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,823,682,676
+2025-12-15,Primary Emotion Labelling : Fear,questions,SEL,hi,53,31,31
+2025-12-15,Primary Emotion Labelling : Fear,questions,SEL,mr,627,332,331
+2025-12-15,Primary Emotion Labelling : Fear,rewards,SEL,hi,21,21,21
+2025-12-15,Primary Emotion Labelling : Fear,rewards,SEL,mr,282,279,278
+2025-12-15,Primary Emotion Labelling : Fear,started,SEL,hi,43,40,37
+2025-12-15,Primary Emotion Labelling : Fear,started,SEL,mr,887,714,704
+2025-12-15,Primary Emotion Labelling : Fear,validation,SEL,hi,1,1,1
+2025-12-15,Primary Emotion Labelling : Fear,validation,SEL,mr,7,6,6
+2025-12-15,Primary Emotion Labelling : Happy,completed,SEL,hi,3,3,3
+2025-12-15,Primary Emotion Labelling : Happy,introduction,SEL,hi,7,6,6
+2025-12-15,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,1,1,1
+2025-12-15,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,8,6,6
+2025-12-15,Primary Emotion Labelling : Happy,questions,SEL,hi,2,2,2
+2025-12-15,Primary Emotion Labelling : Happy,rewards,SEL,hi,2,2,2
+2025-12-15,Primary Emotion Labelling : Happy,started,SEL,hi,9,6,6
+2025-12-15,Primary Emotion Labelling : Happy,validation,SEL,hi,1,1,1
+2025-12-15,Primary Emotion Labelling : Sad,completed,SEL,hi,23,23,23
+2025-12-15,Primary Emotion Labelling : Sad,completed,SEL,mr,42,42,42
+2025-12-15,Primary Emotion Labelling : Sad,introduction,SEL,hi,44,40,40
+2025-12-15,Primary Emotion Labelling : Sad,introduction,SEL,mr,91,80,80
+2025-12-15,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,26,26,26
+2025-12-15,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,48,44,44
+2025-12-15,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,46,40,40
+2025-12-15,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,99,86,86
+2025-12-15,Primary Emotion Labelling : Sad,questions,SEL,hi,65,35,35
+2025-12-15,Primary Emotion Labelling : Sad,questions,SEL,mr,119,64,64
+2025-12-15,Primary Emotion Labelling : Sad,rewards,SEL,hi,26,26,26
+2025-12-15,Primary Emotion Labelling : Sad,rewards,SEL,mr,48,44,44
+2025-12-15,Primary Emotion Labelling : Sad,started,SEL,hi,47,43,43
+2025-12-15,Primary Emotion Labelling : Sad,started,SEL,mr,101,87,87
+2025-12-15,Primary Emotion Labelling : Sad,validation,SEL,hi,3,3,3
 2025-12-15,Quantitative Comparison,completed,NM,mr,1,1,1
 2025-12-15,Quantitative Comparison,introduction,NM,mr,3,3,3
 2025-12-15,Quantitative Comparison,parent_poll,NM,mr,2,2,2
@@ -55287,6 +55907,48 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-16,Primary Emotion Labelling,parent_poll,SEL,hi,2,2,2
 2025-12-16,Primary Emotion Labelling,questions,SEL,hi,2,1,1
 2025-12-16,Primary Emotion Labelling,started,SEL,hi,2,2,2
+2025-12-16,Primary Emotion Labelling : Anger,completed,SEL,hi,4,4,4
+2025-12-16,Primary Emotion Labelling : Anger,completed,SEL,mr,17,17,17
+2025-12-16,Primary Emotion Labelling : Anger,introduction,SEL,hi,18,15,15
+2025-12-16,Primary Emotion Labelling : Anger,introduction,SEL,mr,37,35,34
+2025-12-16,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,12,11,11
+2025-12-16,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,32,31,30
+2025-12-16,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,18,15,15
+2025-12-16,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,44,38,37
+2025-12-16,Primary Emotion Labelling : Anger,questions,SEL,hi,27,13,13
+2025-12-16,Primary Emotion Labelling : Anger,questions,SEL,mr,65,32,31
+2025-12-16,Primary Emotion Labelling : Anger,rewards,SEL,hi,12,11,11
+2025-12-16,Primary Emotion Labelling : Anger,rewards,SEL,mr,32,31,30
+2025-12-16,Primary Emotion Labelling : Anger,started,SEL,hi,19,16,16
+2025-12-16,Primary Emotion Labelling : Anger,started,SEL,mr,45,39,38
+2025-12-16,Primary Emotion Labelling : Fear,completed,SEL,hi,8,7,7
+2025-12-16,Primary Emotion Labelling : Fear,completed,SEL,mr,61,47,46
+2025-12-16,Primary Emotion Labelling : Fear,introduction,SEL,hi,33,28,28
+2025-12-16,Primary Emotion Labelling : Fear,introduction,SEL,mr,301,260,256
+2025-12-16,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,20,20,20
+2025-12-16,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,128,128,127
+2025-12-16,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,37,31,31
+2025-12-16,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,357,295,290
+2025-12-16,Primary Emotion Labelling : Fear,questions,SEL,hi,42,22,22
+2025-12-16,Primary Emotion Labelling : Fear,questions,SEL,mr,319,167,166
+2025-12-16,Primary Emotion Labelling : Fear,rewards,SEL,hi,20,20,20
+2025-12-16,Primary Emotion Labelling : Fear,rewards,SEL,mr,128,128,127
+2025-12-16,Primary Emotion Labelling : Fear,started,SEL,hi,38,31,31
+2025-12-16,Primary Emotion Labelling : Fear,started,SEL,mr,374,308,300
+2025-12-16,Primary Emotion Labelling : Sad,completed,SEL,hi,20,20,20
+2025-12-16,Primary Emotion Labelling : Sad,completed,SEL,mr,28,28,28
+2025-12-16,Primary Emotion Labelling : Sad,introduction,SEL,hi,33,30,29
+2025-12-16,Primary Emotion Labelling : Sad,introduction,SEL,mr,66,61,61
+2025-12-16,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,24,23,23
+2025-12-16,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,38,38,38
+2025-12-16,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,34,31,30
+2025-12-16,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,73,66,66
+2025-12-16,Primary Emotion Labelling : Sad,questions,SEL,hi,53,27,27
+2025-12-16,Primary Emotion Labelling : Sad,questions,SEL,mr,88,48,48
+2025-12-16,Primary Emotion Labelling : Sad,rewards,SEL,hi,24,23,23
+2025-12-16,Primary Emotion Labelling : Sad,rewards,SEL,mr,38,38,38
+2025-12-16,Primary Emotion Labelling : Sad,started,SEL,hi,36,33,32
+2025-12-16,Primary Emotion Labelling : Sad,started,SEL,mr,75,67,67
 2025-12-16,Quantitative Comparison,completed,NM,hi,1,1,1
 2025-12-16,Quantitative Comparison,introduction,NM,hi,1,1,1
 2025-12-16,Quantitative Comparison,mid_introduction,NM,hi,1,1,1
@@ -55634,6 +56296,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-17,Primary Emotion Labelling,started,SEL,mr,1,1,1
 2025-12-17,Primary Emotion Labelling,validation,SEL,hi,5,5,5
 2025-12-17,Primary Emotion Labelling,validation,SEL,mr,1,1,1
+2025-12-17,Primary Emotion Labelling : Anger,completed,SEL,hi,22,21,21
+2025-12-17,Primary Emotion Labelling : Anger,completed,SEL,mr,24,23,23
+2025-12-17,Primary Emotion Labelling : Anger,introduction,SEL,hi,34,31,31
+2025-12-17,Primary Emotion Labelling : Anger,introduction,SEL,mr,44,41,40
+2025-12-17,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,22,20,20
+2025-12-17,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,24,24,23
+2025-12-17,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,47,34,34
+2025-12-17,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,59,42,41
+2025-12-17,Primary Emotion Labelling : Anger,questions,SEL,hi,51,27,27
+2025-12-17,Primary Emotion Labelling : Anger,questions,SEL,mr,66,34,33
+2025-12-17,Primary Emotion Labelling : Anger,rewards,SEL,hi,22,20,20
+2025-12-17,Primary Emotion Labelling : Anger,rewards,SEL,mr,24,24,23
+2025-12-17,Primary Emotion Labelling : Anger,started,SEL,hi,38,35,34
+2025-12-17,Primary Emotion Labelling : Anger,started,SEL,mr,48,42,41
+2025-12-17,Primary Emotion Labelling : Anger,validation,SEL,hi,10,9,9
+2025-12-17,Primary Emotion Labelling : Anger,validation,SEL,mr,12,12,12
+2025-12-17,Primary Emotion Labelling : Fear,completed,SEL,hi,10,10,10
+2025-12-17,Primary Emotion Labelling : Fear,completed,SEL,mr,43,38,38
+2025-12-17,Primary Emotion Labelling : Fear,introduction,SEL,hi,25,23,23
+2025-12-17,Primary Emotion Labelling : Fear,introduction,SEL,mr,85,79,78
+2025-12-17,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,15,15,15
+2025-12-17,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,47,47,46
+2025-12-17,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,32,25,25
+2025-12-17,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,122,97,96
+2025-12-17,Primary Emotion Labelling : Fear,questions,SEL,hi,35,19,19
+2025-12-17,Primary Emotion Labelling : Fear,questions,SEL,mr,112,58,57
+2025-12-17,Primary Emotion Labelling : Fear,rewards,SEL,hi,16,16,16
+2025-12-17,Primary Emotion Labelling : Fear,rewards,SEL,mr,48,48,47
+2025-12-17,Primary Emotion Labelling : Fear,started,SEL,hi,26,24,24
+2025-12-17,Primary Emotion Labelling : Fear,started,SEL,mr,109,99,98
+2025-12-17,Primary Emotion Labelling : Fear,validation,SEL,hi,5,5,5
+2025-12-17,Primary Emotion Labelling : Fear,validation,SEL,mr,17,17,17
+2025-12-17,Primary Emotion Labelling : Happy,completed,SEL,hi,116,115,115
+2025-12-17,Primary Emotion Labelling : Happy,completed,SEL,mr,283,267,265
+2025-12-17,Primary Emotion Labelling : Happy,introduction,SEL,hi,570,492,485
+2025-12-17,Primary Emotion Labelling : Happy,introduction,SEL,mr,993,837,829
+2025-12-17,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,324,323,323
+2025-12-17,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,584,577,577
+2025-12-17,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,660,506,498
+2025-12-17,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,1215,886,876
+2025-12-17,Primary Emotion Labelling : Happy,questions,SEL,hi,722,382,381
+2025-12-17,Primary Emotion Labelling : Happy,questions,SEL,mr,1297,681,680
+2025-12-17,Primary Emotion Labelling : Happy,rewards,SEL,hi,327,326,326
+2025-12-17,Primary Emotion Labelling : Happy,rewards,SEL,mr,590,583,583
+2025-12-17,Primary Emotion Labelling : Happy,started,SEL,hi,629,524,515
+2025-12-17,Primary Emotion Labelling : Happy,started,SEL,mr,1150,903,889
+2025-12-17,Primary Emotion Labelling : Happy,validation,SEL,hi,66,65,65
+2025-12-17,Primary Emotion Labelling : Happy,validation,SEL,mr,127,126,126
+2025-12-17,Primary Emotion Labelling : Sad,completed,SEL,hi,33,33,33
+2025-12-17,Primary Emotion Labelling : Sad,completed,SEL,mr,38,37,37
+2025-12-17,Primary Emotion Labelling : Sad,introduction,SEL,hi,50,46,46
+2025-12-17,Primary Emotion Labelling : Sad,introduction,SEL,mr,82,74,74
+2025-12-17,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,31,31,31
+2025-12-17,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,46,44,44
+2025-12-17,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,72,48,48
+2025-12-17,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,99,74,74
+2025-12-17,Primary Emotion Labelling : Sad,questions,SEL,hi,74,39,39
+2025-12-17,Primary Emotion Labelling : Sad,questions,SEL,mr,134,66,66
+2025-12-17,Primary Emotion Labelling : Sad,rewards,SEL,hi,31,31,31
+2025-12-17,Primary Emotion Labelling : Sad,rewards,SEL,mr,46,44,44
+2025-12-17,Primary Emotion Labelling : Sad,started,SEL,hi,56,48,48
+2025-12-17,Primary Emotion Labelling : Sad,started,SEL,mr,86,76,76
+2025-12-17,Primary Emotion Labelling : Sad,validation,SEL,hi,19,19,19
+2025-12-17,Primary Emotion Labelling : Sad,validation,SEL,mr,17,17,17
 2025-12-17,Quantitative Comparison,introduction,NM,hi,1,1,1
 2025-12-17,Quantitative Comparison,introduction,NM,mr,1,1,1
 2025-12-17,Quantitative Comparison,parent_poll,NM,hi,1,1,1
@@ -55996,6 +56722,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-18,Primary Emotion Labelling,rewards,SEL,hi,2,2,2
 2025-12-18,Primary Emotion Labelling,started,SEL,hi,2,2,2
 2025-12-18,Primary Emotion Labelling,validation,SEL,hi,2,2,2
+2025-12-18,Primary Emotion Labelling : Anger,completed,SEL,hi,15,15,14
+2025-12-18,Primary Emotion Labelling : Anger,completed,SEL,mr,20,19,19
+2025-12-18,Primary Emotion Labelling : Anger,introduction,SEL,hi,28,24,23
+2025-12-18,Primary Emotion Labelling : Anger,introduction,SEL,mr,33,30,30
+2025-12-18,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,14,14,14
+2025-12-18,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,21,20,20
+2025-12-18,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,36,25,24
+2025-12-18,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,47,33,33
+2025-12-18,Primary Emotion Labelling : Anger,questions,SEL,hi,38,20,20
+2025-12-18,Primary Emotion Labelling : Anger,questions,SEL,mr,51,25,25
+2025-12-18,Primary Emotion Labelling : Anger,rewards,SEL,hi,14,14,14
+2025-12-18,Primary Emotion Labelling : Anger,rewards,SEL,mr,21,20,20
+2025-12-18,Primary Emotion Labelling : Anger,started,SEL,hi,30,25,24
+2025-12-18,Primary Emotion Labelling : Anger,started,SEL,mr,40,35,34
+2025-12-18,Primary Emotion Labelling : Anger,validation,SEL,hi,8,8,8
+2025-12-18,Primary Emotion Labelling : Anger,validation,SEL,mr,10,10,10
+2025-12-18,Primary Emotion Labelling : Fear,completed,SEL,hi,16,14,13
+2025-12-18,Primary Emotion Labelling : Fear,completed,SEL,mr,20,15,15
+2025-12-18,Primary Emotion Labelling : Fear,introduction,SEL,hi,22,20,18
+2025-12-18,Primary Emotion Labelling : Fear,introduction,SEL,mr,35,31,31
+2025-12-18,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,14,13,12
+2025-12-18,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,17,16,16
+2025-12-18,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,35,22,20
+2025-12-18,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,55,38,38
+2025-12-18,Primary Emotion Labelling : Fear,questions,SEL,hi,32,17,16
+2025-12-18,Primary Emotion Labelling : Fear,questions,SEL,mr,42,19,19
+2025-12-18,Primary Emotion Labelling : Fear,rewards,SEL,hi,14,13,12
+2025-12-18,Primary Emotion Labelling : Fear,rewards,SEL,mr,18,17,17
+2025-12-18,Primary Emotion Labelling : Fear,started,SEL,hi,25,22,20
+2025-12-18,Primary Emotion Labelling : Fear,started,SEL,mr,48,39,39
+2025-12-18,Primary Emotion Labelling : Fear,validation,SEL,hi,10,9,8
+2025-12-18,Primary Emotion Labelling : Fear,validation,SEL,mr,8,8,8
+2025-12-18,Primary Emotion Labelling : Happy,completed,SEL,hi,75,65,65
+2025-12-18,Primary Emotion Labelling : Happy,completed,SEL,mr,177,158,155
+2025-12-18,Primary Emotion Labelling : Happy,introduction,SEL,hi,231,210,204
+2025-12-18,Primary Emotion Labelling : Happy,introduction,SEL,mr,493,434,414
+2025-12-18,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,137,136,135
+2025-12-18,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,254,252,251
+2025-12-18,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,281,222,214
+2025-12-18,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,611,476,451
+2025-12-18,Primary Emotion Labelling : Happy,questions,SEL,hi,319,168,167
+2025-12-18,Primary Emotion Labelling : Happy,questions,SEL,mr,615,335,334
+2025-12-18,Primary Emotion Labelling : Happy,rewards,SEL,hi,138,137,136
+2025-12-18,Primary Emotion Labelling : Happy,rewards,SEL,mr,256,254,253
+2025-12-18,Primary Emotion Labelling : Happy,started,SEL,hi,256,228,218
+2025-12-18,Primary Emotion Labelling : Happy,started,SEL,mr,557,473,450
+2025-12-18,Primary Emotion Labelling : Happy,validation,SEL,hi,31,30,30
+2025-12-18,Primary Emotion Labelling : Happy,validation,SEL,mr,57,56,56
+2025-12-18,Primary Emotion Labelling : Sad,completed,SEL,hi,21,21,21
+2025-12-18,Primary Emotion Labelling : Sad,completed,SEL,mr,41,38,37
+2025-12-18,Primary Emotion Labelling : Sad,introduction,SEL,hi,53,45,45
+2025-12-18,Primary Emotion Labelling : Sad,introduction,SEL,mr,78,66,64
+2025-12-18,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,23,21,21
+2025-12-18,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,49,43,41
+2025-12-18,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,65,47,47
+2025-12-18,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,104,69,67
+2025-12-18,Primary Emotion Labelling : Sad,questions,SEL,hi,64,34,34
+2025-12-18,Primary Emotion Labelling : Sad,questions,SEL,mr,115,56,54
+2025-12-18,Primary Emotion Labelling : Sad,rewards,SEL,hi,24,22,22
+2025-12-18,Primary Emotion Labelling : Sad,rewards,SEL,mr,49,43,41
+2025-12-18,Primary Emotion Labelling : Sad,started,SEL,hi,57,48,48
+2025-12-18,Primary Emotion Labelling : Sad,started,SEL,mr,86,73,70
+2025-12-18,Primary Emotion Labelling : Sad,validation,SEL,hi,11,10,10
+2025-12-18,Primary Emotion Labelling : Sad,validation,SEL,mr,24,20,19
 2025-12-18,Quantitative Comparison,completed,NM,hi,3,3,3
 2025-12-18,Quantitative Comparison,completed,NM,mr,1,1,1
 2025-12-18,Quantitative Comparison,introduction,NM,hi,3,3,3
@@ -56330,6 +57120,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-19,Primary Emotion Labelling,rewards,SEL,hi,7,7,7
 2025-12-19,Primary Emotion Labelling,started,SEL,hi,9,7,7
 2025-12-19,Primary Emotion Labelling,validation,SEL,hi,7,7,7
+2025-12-19,Primary Emotion Labelling : Anger,completed,SEL,hi,23,22,22
+2025-12-19,Primary Emotion Labelling : Anger,completed,SEL,mr,34,33,32
+2025-12-19,Primary Emotion Labelling : Anger,introduction,SEL,hi,46,42,38
+2025-12-19,Primary Emotion Labelling : Anger,introduction,SEL,mr,64,60,56
+2025-12-19,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,33,32,31
+2025-12-19,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,42,41,39
+2025-12-19,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,63,44,40
+2025-12-19,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,80,61,58
+2025-12-19,Primary Emotion Labelling : Anger,questions,SEL,hi,74,37,34
+2025-12-19,Primary Emotion Labelling : Anger,questions,SEL,mr,99,52,49
+2025-12-19,Primary Emotion Labelling : Anger,rewards,SEL,hi,33,32,31
+2025-12-19,Primary Emotion Labelling : Anger,rewards,SEL,mr,41,40,39
+2025-12-19,Primary Emotion Labelling : Anger,started,SEL,hi,51,46,42
+2025-12-19,Primary Emotion Labelling : Anger,started,SEL,mr,67,63,59
+2025-12-19,Primary Emotion Labelling : Anger,validation,SEL,hi,16,16,16
+2025-12-19,Primary Emotion Labelling : Anger,validation,SEL,mr,18,18,17
+2025-12-19,Primary Emotion Labelling : Fear,completed,SEL,hi,16,16,16
+2025-12-19,Primary Emotion Labelling : Fear,completed,SEL,mr,32,29,29
+2025-12-19,Primary Emotion Labelling : Fear,introduction,SEL,hi,35,33,33
+2025-12-19,Primary Emotion Labelling : Fear,introduction,SEL,mr,63,55,55
+2025-12-19,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,18,18,18
+2025-12-19,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,41,41,41
+2025-12-19,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,39,33,33
+2025-12-19,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,80,56,56
+2025-12-19,Primary Emotion Labelling : Fear,questions,SEL,hi,46,24,24
+2025-12-19,Primary Emotion Labelling : Fear,questions,SEL,mr,87,46,46
+2025-12-19,Primary Emotion Labelling : Fear,rewards,SEL,hi,18,18,18
+2025-12-19,Primary Emotion Labelling : Fear,rewards,SEL,mr,41,41,41
+2025-12-19,Primary Emotion Labelling : Fear,started,SEL,hi,36,34,34
+2025-12-19,Primary Emotion Labelling : Fear,started,SEL,mr,66,57,57
+2025-12-19,Primary Emotion Labelling : Fear,validation,SEL,hi,4,4,4
+2025-12-19,Primary Emotion Labelling : Fear,validation,SEL,mr,16,16,16
+2025-12-19,Primary Emotion Labelling : Happy,completed,SEL,hi,193,169,167
+2025-12-19,Primary Emotion Labelling : Happy,completed,SEL,mr,445,371,360
+2025-12-19,Primary Emotion Labelling : Happy,introduction,SEL,hi,529,472,469
+2025-12-19,Primary Emotion Labelling : Happy,introduction,SEL,mr,999,865,851
+2025-12-19,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,267,267,267
+2025-12-19,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,489,488,488
+2025-12-19,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,655,523,519
+2025-12-19,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,1347,1015,992
+2025-12-19,Primary Emotion Labelling : Happy,questions,SEL,hi,648,347,346
+2025-12-19,Primary Emotion Labelling : Happy,questions,SEL,mr,1147,627,627
+2025-12-19,Primary Emotion Labelling : Happy,rewards,SEL,hi,274,274,274
+2025-12-19,Primary Emotion Labelling : Happy,rewards,SEL,mr,499,498,498
+2025-12-19,Primary Emotion Labelling : Happy,started,SEL,hi,641,529,523
+2025-12-19,Primary Emotion Labelling : Happy,started,SEL,mr,1224,965,946
+2025-12-19,Primary Emotion Labelling : Happy,validation,SEL,hi,58,58,58
+2025-12-19,Primary Emotion Labelling : Happy,validation,SEL,mr,115,114,114
+2025-12-19,Primary Emotion Labelling : Sad,completed,SEL,hi,40,39,39
+2025-12-19,Primary Emotion Labelling : Sad,completed,SEL,mr,86,82,81
+2025-12-19,Primary Emotion Labelling : Sad,introduction,SEL,hi,69,65,65
+2025-12-19,Primary Emotion Labelling : Sad,introduction,SEL,mr,147,132,126
+2025-12-19,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,40,40,40
+2025-12-19,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,87,85,83
+2025-12-19,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,88,71,71
+2025-12-19,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,194,135,129
+2025-12-19,Primary Emotion Labelling : Sad,questions,SEL,hi,106,53,53
+2025-12-19,Primary Emotion Labelling : Sad,questions,SEL,mr,217,112,109
+2025-12-19,Primary Emotion Labelling : Sad,rewards,SEL,hi,41,41,41
+2025-12-19,Primary Emotion Labelling : Sad,rewards,SEL,mr,88,86,84
+2025-12-19,Primary Emotion Labelling : Sad,started,SEL,hi,82,74,74
+2025-12-19,Primary Emotion Labelling : Sad,started,SEL,mr,155,138,131
+2025-12-19,Primary Emotion Labelling : Sad,validation,SEL,hi,12,12,12
+2025-12-19,Primary Emotion Labelling : Sad,validation,SEL,mr,46,45,45
 2025-12-19,Quantitative Comparison,completed,NM,hi,3,3,3
 2025-12-19,Quantitative Comparison,completed,NM,mr,1,1,1
 2025-12-19,Quantitative Comparison,introduction,NM,hi,3,3,3
@@ -56672,6 +57526,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-20,Primary Emotion Labelling,rewards,SEL,hi,13,13,12
 2025-12-20,Primary Emotion Labelling,started,SEL,hi,18,16,15
 2025-12-20,Primary Emotion Labelling,validation,SEL,hi,13,13,12
+2025-12-20,Primary Emotion Labelling : Anger,completed,SEL,hi,48,43,42
+2025-12-20,Primary Emotion Labelling : Anger,completed,SEL,mr,80,76,76
+2025-12-20,Primary Emotion Labelling : Anger,introduction,SEL,hi,80,71,69
+2025-12-20,Primary Emotion Labelling : Anger,introduction,SEL,mr,128,118,115
+2025-12-20,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,43,39,37
+2025-12-20,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,82,79,79
+2025-12-20,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,102,72,70
+2025-12-20,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,180,121,117
+2025-12-20,Primary Emotion Labelling : Anger,questions,SEL,hi,113,59,57
+2025-12-20,Primary Emotion Labelling : Anger,questions,SEL,mr,196,102,102
+2025-12-20,Primary Emotion Labelling : Anger,rewards,SEL,hi,43,39,37
+2025-12-20,Primary Emotion Labelling : Anger,rewards,SEL,mr,82,79,79
+2025-12-20,Primary Emotion Labelling : Anger,started,SEL,hi,86,74,72
+2025-12-20,Primary Emotion Labelling : Anger,started,SEL,mr,136,124,120
+2025-12-20,Primary Emotion Labelling : Anger,validation,SEL,hi,21,19,18
+2025-12-20,Primary Emotion Labelling : Anger,validation,SEL,mr,49,47,47
+2025-12-20,Primary Emotion Labelling : Fear,completed,SEL,hi,27,25,25
+2025-12-20,Primary Emotion Labelling : Fear,completed,SEL,mr,26,25,25
+2025-12-20,Primary Emotion Labelling : Fear,introduction,SEL,hi,43,37,37
+2025-12-20,Primary Emotion Labelling : Fear,introduction,SEL,mr,70,59,59
+2025-12-20,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,24,22,22
+2025-12-20,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,29,27,27
+2025-12-20,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,56,37,37
+2025-12-20,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,81,60,60
+2025-12-20,Primary Emotion Labelling : Fear,questions,SEL,hi,60,31,31
+2025-12-20,Primary Emotion Labelling : Fear,questions,SEL,mr,82,47,47
+2025-12-20,Primary Emotion Labelling : Fear,rewards,SEL,hi,24,22,22
+2025-12-20,Primary Emotion Labelling : Fear,rewards,SEL,mr,30,28,28
+2025-12-20,Primary Emotion Labelling : Fear,started,SEL,hi,44,38,38
+2025-12-20,Primary Emotion Labelling : Fear,started,SEL,mr,72,59,59
+2025-12-20,Primary Emotion Labelling : Fear,validation,SEL,hi,14,13,13
+2025-12-20,Primary Emotion Labelling : Fear,validation,SEL,mr,8,8,8
+2025-12-20,Primary Emotion Labelling : Happy,completed,SEL,hi,77,73,70
+2025-12-20,Primary Emotion Labelling : Happy,completed,SEL,mr,137,129,127
+2025-12-20,Primary Emotion Labelling : Happy,introduction,SEL,hi,242,217,214
+2025-12-20,Primary Emotion Labelling : Happy,introduction,SEL,mr,396,345,339
+2025-12-20,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,140,139,139
+2025-12-20,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,199,198,198
+2025-12-20,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,294,239,236
+2025-12-20,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,494,386,378
+2025-12-20,Primary Emotion Labelling : Happy,questions,SEL,hi,329,166,166
+2025-12-20,Primary Emotion Labelling : Happy,questions,SEL,mr,474,255,255
+2025-12-20,Primary Emotion Labelling : Happy,rewards,SEL,hi,143,142,142
+2025-12-20,Primary Emotion Labelling : Happy,rewards,SEL,mr,205,204,204
+2025-12-20,Primary Emotion Labelling : Happy,started,SEL,hi,276,247,240
+2025-12-20,Primary Emotion Labelling : Happy,started,SEL,mr,446,384,375
+2025-12-20,Primary Emotion Labelling : Happy,validation,SEL,hi,29,29,29
+2025-12-20,Primary Emotion Labelling : Happy,validation,SEL,mr,51,51,51
+2025-12-20,Primary Emotion Labelling : Sad,completed,SEL,hi,88,83,83
+2025-12-20,Primary Emotion Labelling : Sad,completed,SEL,mr,116,110,110
+2025-12-20,Primary Emotion Labelling : Sad,introduction,SEL,hi,146,127,124
+2025-12-20,Primary Emotion Labelling : Sad,introduction,SEL,mr,195,176,174
+2025-12-20,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,86,80,80
+2025-12-20,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,98,94,93
+2025-12-20,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,199,129,126
+2025-12-20,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,252,188,186
+2025-12-20,Primary Emotion Labelling : Sad,questions,SEL,hi,210,108,107
+2025-12-20,Primary Emotion Labelling : Sad,questions,SEL,mr,264,143,142
+2025-12-20,Primary Emotion Labelling : Sad,rewards,SEL,hi,87,80,80
+2025-12-20,Primary Emotion Labelling : Sad,rewards,SEL,mr,101,97,96
+2025-12-20,Primary Emotion Labelling : Sad,started,SEL,hi,155,132,129
+2025-12-20,Primary Emotion Labelling : Sad,started,SEL,mr,213,189,187
+2025-12-20,Primary Emotion Labelling : Sad,validation,SEL,hi,48,45,45
+2025-12-20,Primary Emotion Labelling : Sad,validation,SEL,mr,42,40,40
 2025-12-20,Quantitative Comparison,completed,NM,hi,4,4,4
 2025-12-20,Quantitative Comparison,introduction,NM,hi,4,4,4
 2025-12-20,Quantitative Comparison,mid_introduction,NM,hi,4,4,4
@@ -57021,6 +57939,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-21,Primary Emotion Labelling,rewards,SEL,hi,12,11,11
 2025-12-21,Primary Emotion Labelling,started,SEL,hi,22,14,14
 2025-12-21,Primary Emotion Labelling,validation,SEL,hi,12,11,11
+2025-12-21,Primary Emotion Labelling : Anger,completed,SEL,hi,33,31,31
+2025-12-21,Primary Emotion Labelling : Anger,completed,SEL,mr,45,45,45
+2025-12-21,Primary Emotion Labelling : Anger,introduction,SEL,hi,56,46,45
+2025-12-21,Primary Emotion Labelling : Anger,introduction,SEL,mr,71,65,63
+2025-12-21,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,34,33,33
+2025-12-21,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,46,45,44
+2025-12-21,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,77,46,45
+2025-12-21,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,99,68,66
+2025-12-21,Primary Emotion Labelling : Anger,questions,SEL,hi,80,40,40
+2025-12-21,Primary Emotion Labelling : Anger,questions,SEL,mr,111,59,58
+2025-12-21,Primary Emotion Labelling : Anger,rewards,SEL,hi,34,33,33
+2025-12-21,Primary Emotion Labelling : Anger,rewards,SEL,mr,46,45,44
+2025-12-21,Primary Emotion Labelling : Anger,started,SEL,hi,62,48,47
+2025-12-21,Primary Emotion Labelling : Anger,started,SEL,mr,80,71,69
+2025-12-21,Primary Emotion Labelling : Anger,validation,SEL,hi,19,18,18
+2025-12-21,Primary Emotion Labelling : Anger,validation,SEL,mr,26,25,25
+2025-12-21,Primary Emotion Labelling : Fear,completed,SEL,hi,18,18,18
+2025-12-21,Primary Emotion Labelling : Fear,completed,SEL,mr,27,27,27
+2025-12-21,Primary Emotion Labelling : Fear,introduction,SEL,hi,28,27,27
+2025-12-21,Primary Emotion Labelling : Fear,introduction,SEL,mr,46,45,44
+2025-12-21,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,16,16,16
+2025-12-21,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,27,27,27
+2025-12-21,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,34,27,27
+2025-12-21,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,60,49,48
+2025-12-21,Primary Emotion Labelling : Fear,questions,SEL,hi,38,21,21
+2025-12-21,Primary Emotion Labelling : Fear,questions,SEL,mr,69,39,39
+2025-12-21,Primary Emotion Labelling : Fear,rewards,SEL,hi,16,16,16
+2025-12-21,Primary Emotion Labelling : Fear,rewards,SEL,mr,27,27,27
+2025-12-21,Primary Emotion Labelling : Fear,started,SEL,hi,29,28,28
+2025-12-21,Primary Emotion Labelling : Fear,started,SEL,mr,52,50,49
+2025-12-21,Primary Emotion Labelling : Fear,validation,SEL,hi,7,7,7
+2025-12-21,Primary Emotion Labelling : Fear,validation,SEL,mr,9,9,9
+2025-12-21,Primary Emotion Labelling : Happy,completed,SEL,hi,31,31,31
+2025-12-21,Primary Emotion Labelling : Happy,completed,SEL,mr,62,57,55
+2025-12-21,Primary Emotion Labelling : Happy,introduction,SEL,hi,56,52,52
+2025-12-21,Primary Emotion Labelling : Happy,introduction,SEL,mr,133,118,118
+2025-12-21,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,42,40,40
+2025-12-21,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,74,73,73
+2025-12-21,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,80,61,61
+2025-12-21,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,181,134,132
+2025-12-21,Primary Emotion Labelling : Happy,questions,SEL,hi,91,47,47
+2025-12-21,Primary Emotion Labelling : Happy,questions,SEL,mr,173,91,91
+2025-12-21,Primary Emotion Labelling : Happy,rewards,SEL,hi,42,40,40
+2025-12-21,Primary Emotion Labelling : Happy,rewards,SEL,mr,75,74,74
+2025-12-21,Primary Emotion Labelling : Happy,started,SEL,hi,65,59,59
+2025-12-21,Primary Emotion Labelling : Happy,started,SEL,mr,161,136,134
+2025-12-21,Primary Emotion Labelling : Happy,validation,SEL,hi,14,14,14
+2025-12-21,Primary Emotion Labelling : Happy,validation,SEL,mr,26,25,25
+2025-12-21,Primary Emotion Labelling : Sad,completed,SEL,hi,47,46,46
+2025-12-21,Primary Emotion Labelling : Sad,completed,SEL,mr,71,65,65
+2025-12-21,Primary Emotion Labelling : Sad,introduction,SEL,hi,78,72,69
+2025-12-21,Primary Emotion Labelling : Sad,introduction,SEL,mr,117,100,99
+2025-12-21,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,46,45,43
+2025-12-21,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,64,58,58
+2025-12-21,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,107,76,73
+2025-12-21,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,156,105,104
+2025-12-21,Primary Emotion Labelling : Sad,questions,SEL,hi,112,61,58
+2025-12-21,Primary Emotion Labelling : Sad,questions,SEL,mr,168,84,84
+2025-12-21,Primary Emotion Labelling : Sad,rewards,SEL,hi,46,45,43
+2025-12-21,Primary Emotion Labelling : Sad,rewards,SEL,mr,65,59,59
+2025-12-21,Primary Emotion Labelling : Sad,started,SEL,hi,86,77,74
+2025-12-21,Primary Emotion Labelling : Sad,started,SEL,mr,125,106,105
+2025-12-21,Primary Emotion Labelling : Sad,validation,SEL,hi,24,24,24
+2025-12-21,Primary Emotion Labelling : Sad,validation,SEL,mr,32,28,28
 2025-12-21,Relational Comparison,completed,CG,hi,2,2,2
 2025-12-21,Relational Comparison,introduction,CG,hi,2,2,2
 2025-12-21,Relational Comparison,mid_introduction,CG,hi,1,1,1
@@ -57364,6 +58346,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-22,Primary Emotion Labelling,rewards,SEL,hi,3,3,3
 2025-12-22,Primary Emotion Labelling,started,SEL,hi,4,4,4
 2025-12-22,Primary Emotion Labelling,validation,SEL,hi,2,2,2
+2025-12-22,Primary Emotion Labelling : Anger,completed,SEL,hi,36,36,36
+2025-12-22,Primary Emotion Labelling : Anger,completed,SEL,mr,145,136,136
+2025-12-22,Primary Emotion Labelling : Anger,introduction,SEL,hi,55,51,49
+2025-12-22,Primary Emotion Labelling : Anger,introduction,SEL,mr,230,206,206
+2025-12-22,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,34,33,33
+2025-12-22,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,147,140,140
+2025-12-22,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,76,54,52
+2025-12-22,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,304,213,213
+2025-12-22,Primary Emotion Labelling : Anger,questions,SEL,hi,80,41,41
+2025-12-22,Primary Emotion Labelling : Anger,questions,SEL,mr,361,187,187
+2025-12-22,Primary Emotion Labelling : Anger,rewards,SEL,hi,34,33,33
+2025-12-22,Primary Emotion Labelling : Anger,rewards,SEL,mr,148,141,141
+2025-12-22,Primary Emotion Labelling : Anger,started,SEL,hi,58,54,52
+2025-12-22,Primary Emotion Labelling : Anger,started,SEL,mr,251,215,215
+2025-12-22,Primary Emotion Labelling : Anger,validation,SEL,hi,19,19,19
+2025-12-22,Primary Emotion Labelling : Anger,validation,SEL,mr,70,67,67
+2025-12-22,Primary Emotion Labelling : Fear,completed,SEL,hi,15,15,15
+2025-12-22,Primary Emotion Labelling : Fear,completed,SEL,mr,48,47,47
+2025-12-22,Primary Emotion Labelling : Fear,introduction,SEL,hi,24,24,24
+2025-12-22,Primary Emotion Labelling : Fear,introduction,SEL,mr,86,75,75
+2025-12-22,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,14,14,14
+2025-12-22,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,51,50,50
+2025-12-22,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,35,25,25
+2025-12-22,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,114,77,77
+2025-12-22,Primary Emotion Labelling : Fear,questions,SEL,hi,39,19,19
+2025-12-22,Primary Emotion Labelling : Fear,questions,SEL,mr,124,65,65
+2025-12-22,Primary Emotion Labelling : Fear,rewards,SEL,hi,14,14,14
+2025-12-22,Primary Emotion Labelling : Fear,rewards,SEL,mr,53,51,51
+2025-12-22,Primary Emotion Labelling : Fear,started,SEL,hi,26,25,25
+2025-12-22,Primary Emotion Labelling : Fear,started,SEL,mr,93,81,80
+2025-12-22,Primary Emotion Labelling : Fear,validation,SEL,hi,9,9,9
+2025-12-22,Primary Emotion Labelling : Fear,validation,SEL,mr,27,26,26
+2025-12-22,Primary Emotion Labelling : Happy,completed,SEL,hi,30,28,28
+2025-12-22,Primary Emotion Labelling : Happy,completed,SEL,mr,63,57,56
+2025-12-22,Primary Emotion Labelling : Happy,introduction,SEL,hi,68,63,61
+2025-12-22,Primary Emotion Labelling : Happy,introduction,SEL,mr,121,113,113
+2025-12-22,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,37,37,37
+2025-12-22,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,75,75,75
+2025-12-22,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,84,66,64
+2025-12-22,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,155,119,118
+2025-12-22,Primary Emotion Labelling : Happy,questions,SEL,hi,89,48,48
+2025-12-22,Primary Emotion Labelling : Happy,questions,SEL,mr,172,93,93
+2025-12-22,Primary Emotion Labelling : Happy,rewards,SEL,hi,39,39,39
+2025-12-22,Primary Emotion Labelling : Happy,rewards,SEL,mr,78,78,78
+2025-12-22,Primary Emotion Labelling : Happy,started,SEL,hi,73,66,64
+2025-12-22,Primary Emotion Labelling : Happy,started,SEL,mr,132,119,118
+2025-12-22,Primary Emotion Labelling : Happy,validation,SEL,hi,13,13,13
+2025-12-22,Primary Emotion Labelling : Happy,validation,SEL,mr,23,23,23
+2025-12-22,Primary Emotion Labelling : Sad,completed,SEL,hi,39,39,39
+2025-12-22,Primary Emotion Labelling : Sad,completed,SEL,mr,88,79,79
+2025-12-22,Primary Emotion Labelling : Sad,introduction,SEL,hi,59,56,55
+2025-12-22,Primary Emotion Labelling : Sad,introduction,SEL,mr,146,126,126
+2025-12-22,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,37,37,37
+2025-12-22,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,87,78,78
+2025-12-22,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,82,59,58
+2025-12-22,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,189,128,128
+2025-12-22,Primary Emotion Labelling : Sad,questions,SEL,hi,82,44,44
+2025-12-22,Primary Emotion Labelling : Sad,questions,SEL,mr,215,106,106
+2025-12-22,Primary Emotion Labelling : Sad,rewards,SEL,hi,38,38,38
+2025-12-22,Primary Emotion Labelling : Sad,rewards,SEL,mr,89,80,80
+2025-12-22,Primary Emotion Labelling : Sad,started,SEL,hi,66,61,60
+2025-12-22,Primary Emotion Labelling : Sad,started,SEL,mr,156,130,130
+2025-12-22,Primary Emotion Labelling : Sad,validation,SEL,hi,21,21,21
+2025-12-22,Primary Emotion Labelling : Sad,validation,SEL,mr,38,34,34
 2025-12-22,Quantitative Comparison,completed,NM,hi,3,3,3
 2025-12-22,Quantitative Comparison,introduction,NM,hi,2,2,2
 2025-12-22,Quantitative Comparison,mid_introduction,NM,hi,1,1,1
@@ -57713,6 +58759,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-23,Primary Emotion Labelling,started,SEL,hi,5,5,4
 2025-12-23,Primary Emotion Labelling,started,SEL,mr,1,1,1
 2025-12-23,Primary Emotion Labelling,validation,SEL,hi,2,2,2
+2025-12-23,Primary Emotion Labelling : Anger,completed,SEL,hi,26,25,25
+2025-12-23,Primary Emotion Labelling : Anger,completed,SEL,mr,101,98,98
+2025-12-23,Primary Emotion Labelling : Anger,introduction,SEL,hi,46,38,37
+2025-12-23,Primary Emotion Labelling : Anger,introduction,SEL,mr,199,169,167
+2025-12-23,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,31,28,27
+2025-12-23,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,118,115,115
+2025-12-23,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,67,41,40
+2025-12-23,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,253,171,169
+2025-12-23,Primary Emotion Labelling : Anger,questions,SEL,hi,73,35,34
+2025-12-23,Primary Emotion Labelling : Anger,questions,SEL,mr,299,151,151
+2025-12-23,Primary Emotion Labelling : Anger,rewards,SEL,hi,33,29,28
+2025-12-23,Primary Emotion Labelling : Anger,rewards,SEL,mr,120,117,117
+2025-12-23,Primary Emotion Labelling : Anger,started,SEL,hi,49,41,40
+2025-12-23,Primary Emotion Labelling : Anger,started,SEL,mr,209,174,172
+2025-12-23,Primary Emotion Labelling : Anger,validation,SEL,hi,18,17,17
+2025-12-23,Primary Emotion Labelling : Anger,validation,SEL,mr,55,55,55
+2025-12-23,Primary Emotion Labelling : Fear,completed,SEL,hi,25,23,23
+2025-12-23,Primary Emotion Labelling : Fear,completed,SEL,mr,140,130,130
+2025-12-23,Primary Emotion Labelling : Fear,introduction,SEL,hi,46,39,39
+2025-12-23,Primary Emotion Labelling : Fear,introduction,SEL,mr,226,201,199
+2025-12-23,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,32,30,30
+2025-12-23,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,144,135,135
+2025-12-23,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,68,41,41
+2025-12-23,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,304,206,204
+2025-12-23,Primary Emotion Labelling : Fear,questions,SEL,hi,69,33,33
+2025-12-23,Primary Emotion Labelling : Fear,questions,SEL,mr,338,170,170
+2025-12-23,Primary Emotion Labelling : Fear,rewards,SEL,hi,33,31,31
+2025-12-23,Primary Emotion Labelling : Fear,rewards,SEL,mr,147,137,137
+2025-12-23,Primary Emotion Labelling : Fear,started,SEL,hi,50,42,42
+2025-12-23,Primary Emotion Labelling : Fear,started,SEL,mr,241,212,210
+2025-12-23,Primary Emotion Labelling : Fear,validation,SEL,hi,20,19,19
+2025-12-23,Primary Emotion Labelling : Fear,validation,SEL,mr,74,70,70
+2025-12-23,Primary Emotion Labelling : Happy,completed,SEL,hi,26,24,24
+2025-12-23,Primary Emotion Labelling : Happy,completed,SEL,mr,78,73,73
+2025-12-23,Primary Emotion Labelling : Happy,introduction,SEL,hi,50,46,46
+2025-12-23,Primary Emotion Labelling : Happy,introduction,SEL,mr,136,127,127
+2025-12-23,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,32,32,32
+2025-12-23,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,80,80,80
+2025-12-23,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,66,48,48
+2025-12-23,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,169,133,133
+2025-12-23,Primary Emotion Labelling : Happy,questions,SEL,hi,72,37,37
+2025-12-23,Primary Emotion Labelling : Happy,questions,SEL,mr,218,114,114
+2025-12-23,Primary Emotion Labelling : Happy,rewards,SEL,hi,32,32,32
+2025-12-23,Primary Emotion Labelling : Happy,rewards,SEL,mr,81,81,81
+2025-12-23,Primary Emotion Labelling : Happy,started,SEL,hi,52,47,47
+2025-12-23,Primary Emotion Labelling : Happy,started,SEL,mr,149,137,137
+2025-12-23,Primary Emotion Labelling : Happy,validation,SEL,hi,13,13,13
+2025-12-23,Primary Emotion Labelling : Happy,validation,SEL,mr,27,27,27
+2025-12-23,Primary Emotion Labelling : Sad,completed,SEL,hi,22,20,20
+2025-12-23,Primary Emotion Labelling : Sad,completed,SEL,mr,79,75,75
+2025-12-23,Primary Emotion Labelling : Sad,introduction,SEL,hi,39,34,33
+2025-12-23,Primary Emotion Labelling : Sad,introduction,SEL,mr,134,116,116
+2025-12-23,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,20,20,19
+2025-12-23,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,79,76,76
+2025-12-23,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,50,33,32
+2025-12-23,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,167,118,118
+2025-12-23,Primary Emotion Labelling : Sad,questions,SEL,hi,51,28,27
+2025-12-23,Primary Emotion Labelling : Sad,questions,SEL,mr,192,101,101
+2025-12-23,Primary Emotion Labelling : Sad,rewards,SEL,hi,21,21,20
+2025-12-23,Primary Emotion Labelling : Sad,rewards,SEL,mr,79,76,76
+2025-12-23,Primary Emotion Labelling : Sad,started,SEL,hi,40,33,32
+2025-12-23,Primary Emotion Labelling : Sad,started,SEL,mr,144,120,120
+2025-12-23,Primary Emotion Labelling : Sad,validation,SEL,hi,11,11,11
+2025-12-23,Primary Emotion Labelling : Sad,validation,SEL,mr,30,30,30
 2025-12-23,Quantitative Comparison,completed,NM,hi,1,1,1
 2025-12-23,Quantitative Comparison,introduction,NM,hi,2,2,2
 2025-12-23,Quantitative Comparison,mid_introduction,NM,hi,1,1,1
@@ -58048,6 +59158,70 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-24,Primary Emotion Labelling,rewards,SEL,hi,6,6,4
 2025-12-24,Primary Emotion Labelling,started,SEL,hi,16,8,5
 2025-12-24,Primary Emotion Labelling,validation,SEL,hi,6,6,4
+2025-12-24,Primary Emotion Labelling : Anger,completed,SEL,hi,33,31,30
+2025-12-24,Primary Emotion Labelling : Anger,completed,SEL,mr,65,62,62
+2025-12-24,Primary Emotion Labelling : Anger,introduction,SEL,hi,56,47,44
+2025-12-24,Primary Emotion Labelling : Anger,introduction,SEL,mr,108,95,95
+2025-12-24,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,33,33,32
+2025-12-24,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,71,69,69
+2025-12-24,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,81,49,46
+2025-12-24,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,150,98,98
+2025-12-24,Primary Emotion Labelling : Anger,questions,SEL,hi,82,43,40
+2025-12-24,Primary Emotion Labelling : Anger,questions,SEL,mr,165,83,83
+2025-12-24,Primary Emotion Labelling : Anger,rewards,SEL,hi,34,34,33
+2025-12-24,Primary Emotion Labelling : Anger,rewards,SEL,mr,71,69,69
+2025-12-24,Primary Emotion Labelling : Anger,started,SEL,hi,62,51,48
+2025-12-24,Primary Emotion Labelling : Anger,started,SEL,mr,118,101,101
+2025-12-24,Primary Emotion Labelling : Anger,validation,SEL,hi,21,21,20
+2025-12-24,Primary Emotion Labelling : Anger,validation,SEL,mr,39,37,37
+2025-12-24,Primary Emotion Labelling : Fear,completed,SEL,hi,50,42,42
+2025-12-24,Primary Emotion Labelling : Fear,completed,SEL,mr,95,89,87
+2025-12-24,Primary Emotion Labelling : Fear,introduction,SEL,hi,76,58,58
+2025-12-24,Primary Emotion Labelling : Fear,introduction,SEL,mr,164,138,135
+2025-12-24,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,49,43,43
+2025-12-24,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,102,94,93
+2025-12-24,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,115,63,63
+2025-12-24,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,222,143,140
+2025-12-24,Primary Emotion Labelling : Fear,questions,SEL,hi,110,52,52
+2025-12-24,Primary Emotion Labelling : Fear,questions,SEL,mr,243,120,118
+2025-12-24,Primary Emotion Labelling : Fear,rewards,SEL,hi,49,43,43
+2025-12-24,Primary Emotion Labelling : Fear,rewards,SEL,mr,102,94,93
+2025-12-24,Primary Emotion Labelling : Fear,started,SEL,hi,91,67,66
+2025-12-24,Primary Emotion Labelling : Fear,started,SEL,mr,182,146,143
+2025-12-24,Primary Emotion Labelling : Fear,validation,SEL,hi,31,28,28
+2025-12-24,Primary Emotion Labelling : Fear,validation,SEL,mr,51,47,46
+2025-12-24,Primary Emotion Labelling : Happy,completed,SEL,hi,29,26,26
+2025-12-24,Primary Emotion Labelling : Happy,completed,SEL,mr,165,156,156
+2025-12-24,Primary Emotion Labelling : Happy,introduction,SEL,hi,53,42,42
+2025-12-24,Primary Emotion Labelling : Happy,introduction,SEL,mr,301,263,262
+2025-12-24,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,9,9,9
+2025-12-24,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,199,188,188
+2025-12-24,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,58,44,44
+2025-12-24,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,371,272,271
+2025-12-24,Primary Emotion Labelling : Happy,questions,SEL,hi,41,28,28
+2025-12-24,Primary Emotion Labelling : Happy,questions,SEL,mr,478,236,236
+2025-12-24,Primary Emotion Labelling : Happy,rewards,SEL,hi,10,10,10
+2025-12-24,Primary Emotion Labelling : Happy,rewards,SEL,mr,203,191,191
+2025-12-24,Primary Emotion Labelling : Happy,started,SEL,hi,56,45,45
+2025-12-24,Primary Emotion Labelling : Happy,started,SEL,mr,319,278,276
+2025-12-24,Primary Emotion Labelling : Happy,validation,SEL,hi,3,3,3
+2025-12-24,Primary Emotion Labelling : Happy,validation,SEL,mr,61,56,56
+2025-12-24,Primary Emotion Labelling : Sad,completed,SEL,hi,11,11,11
+2025-12-24,Primary Emotion Labelling : Sad,completed,SEL,mr,34,32,32
+2025-12-24,Primary Emotion Labelling : Sad,introduction,SEL,hi,27,25,24
+2025-12-24,Primary Emotion Labelling : Sad,introduction,SEL,mr,65,58,58
+2025-12-24,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,17,16,16
+2025-12-24,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,36,34,34
+2025-12-24,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,33,25,24
+2025-12-24,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,85,61,61
+2025-12-24,Primary Emotion Labelling : Sad,questions,SEL,hi,36,17,17
+2025-12-24,Primary Emotion Labelling : Sad,questions,SEL,mr,85,45,45
+2025-12-24,Primary Emotion Labelling : Sad,rewards,SEL,hi,17,16,16
+2025-12-24,Primary Emotion Labelling : Sad,rewards,SEL,mr,36,34,34
+2025-12-24,Primary Emotion Labelling : Sad,started,SEL,hi,33,30,29
+2025-12-24,Primary Emotion Labelling : Sad,started,SEL,mr,70,61,61
+2025-12-24,Primary Emotion Labelling : Sad,validation,SEL,hi,6,6,6
+2025-12-24,Primary Emotion Labelling : Sad,validation,SEL,mr,16,16,16
 2025-12-24,Quantitative Comparison,completed,NM,hi,3,2,2
 2025-12-24,Quantitative Comparison,introduction,NM,hi,3,2,2
 2025-12-24,Quantitative Comparison,introduction,NM,mr,1,1,1
@@ -58397,6 +59571,67 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-25,Primary Emotion Labelling,rewards,SEL,hi,3,3,3
 2025-12-25,Primary Emotion Labelling,started,SEL,hi,3,3,3
 2025-12-25,Primary Emotion Labelling,validation,SEL,hi,3,3,3
+2025-12-25,Primary Emotion Labelling : Anger,completed,SEL,hi,15,15,15
+2025-12-25,Primary Emotion Labelling : Anger,completed,SEL,mr,17,16,16
+2025-12-25,Primary Emotion Labelling : Anger,introduction,SEL,hi,23,21,21
+2025-12-25,Primary Emotion Labelling : Anger,introduction,SEL,mr,27,25,25
+2025-12-25,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,14,14,14
+2025-12-25,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,21,20,20
+2025-12-25,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,37,22,22
+2025-12-25,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,37,28,28
+2025-12-25,Primary Emotion Labelling : Anger,questions,SEL,hi,30,16,16
+2025-12-25,Primary Emotion Labelling : Anger,questions,SEL,mr,46,24,24
+2025-12-25,Primary Emotion Labelling : Anger,rewards,SEL,hi,14,14,14
+2025-12-25,Primary Emotion Labelling : Anger,rewards,SEL,mr,21,20,20
+2025-12-25,Primary Emotion Labelling : Anger,started,SEL,hi,26,23,23
+2025-12-25,Primary Emotion Labelling : Anger,started,SEL,mr,30,27,27
+2025-12-25,Primary Emotion Labelling : Anger,validation,SEL,hi,13,13,13
+2025-12-25,Primary Emotion Labelling : Anger,validation,SEL,mr,7,6,6
+2025-12-25,Primary Emotion Labelling : Fear,completed,SEL,hi,22,22,22
+2025-12-25,Primary Emotion Labelling : Fear,completed,SEL,mr,40,40,40
+2025-12-25,Primary Emotion Labelling : Fear,introduction,SEL,hi,36,33,33
+2025-12-25,Primary Emotion Labelling : Fear,introduction,SEL,mr,64,62,58
+2025-12-25,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,24,24,24
+2025-12-25,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,43,42,41
+2025-12-25,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,53,35,35
+2025-12-25,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,88,63,58
+2025-12-25,Primary Emotion Labelling : Fear,questions,SEL,hi,54,30,30
+2025-12-25,Primary Emotion Labelling : Fear,questions,SEL,mr,100,53,51
+2025-12-25,Primary Emotion Labelling : Fear,rewards,SEL,hi,24,24,24
+2025-12-25,Primary Emotion Labelling : Fear,rewards,SEL,mr,43,42,41
+2025-12-25,Primary Emotion Labelling : Fear,started,SEL,hi,40,35,35
+2025-12-25,Primary Emotion Labelling : Fear,started,SEL,mr,70,67,62
+2025-12-25,Primary Emotion Labelling : Fear,validation,SEL,hi,15,15,15
+2025-12-25,Primary Emotion Labelling : Fear,validation,SEL,mr,23,23,23
+2025-12-25,Primary Emotion Labelling : Happy,completed,SEL,hi,25,23,23
+2025-12-25,Primary Emotion Labelling : Happy,completed,SEL,mr,72,70,70
+2025-12-25,Primary Emotion Labelling : Happy,introduction,SEL,hi,54,39,38
+2025-12-25,Primary Emotion Labelling : Happy,introduction,SEL,mr,131,115,112
+2025-12-25,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,88,82,80
+2025-12-25,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,57,42,41
+2025-12-25,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,168,117,114
+2025-12-25,Primary Emotion Labelling : Happy,questions,SEL,hi,24,21,21
+2025-12-25,Primary Emotion Labelling : Happy,questions,SEL,mr,198,99,97
+2025-12-25,Primary Emotion Labelling : Happy,rewards,SEL,mr,89,83,81
+2025-12-25,Primary Emotion Labelling : Happy,started,SEL,hi,58,42,41
+2025-12-25,Primary Emotion Labelling : Happy,started,SEL,mr,139,121,118
+2025-12-25,Primary Emotion Labelling : Happy,validation,SEL,mr,36,36,36
+2025-12-25,Primary Emotion Labelling : Sad,completed,SEL,hi,7,6,6
+2025-12-25,Primary Emotion Labelling : Sad,completed,SEL,mr,8,8,8
+2025-12-25,Primary Emotion Labelling : Sad,introduction,SEL,hi,11,11,11
+2025-12-25,Primary Emotion Labelling : Sad,introduction,SEL,mr,16,16,16
+2025-12-25,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,6,6,6
+2025-12-25,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,12,12,12
+2025-12-25,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,15,11,11
+2025-12-25,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,22,17,17
+2025-12-25,Primary Emotion Labelling : Sad,questions,SEL,hi,15,9,9
+2025-12-25,Primary Emotion Labelling : Sad,questions,SEL,mr,25,13,13
+2025-12-25,Primary Emotion Labelling : Sad,rewards,SEL,hi,6,6,6
+2025-12-25,Primary Emotion Labelling : Sad,rewards,SEL,mr,12,12,12
+2025-12-25,Primary Emotion Labelling : Sad,started,SEL,hi,12,11,11
+2025-12-25,Primary Emotion Labelling : Sad,started,SEL,mr,18,18,18
+2025-12-25,Primary Emotion Labelling : Sad,validation,SEL,hi,3,3,3
+2025-12-25,Primary Emotion Labelling : Sad,validation,SEL,mr,5,5,5
 2025-12-25,Quantitative Comparison,completed,NM,hi,1,1,1
 2025-12-25,Quantitative Comparison,introduction,NM,hi,1,1,1
 2025-12-25,Quantitative Comparison,mid_introduction,NM,hi,1,1,1
@@ -58510,140 +59745,1206 @@ date,game_name,event,domain,language,instances,visits,users
 2025-12-25,Sorting Primary Shapes,rewards,CG,hi,2,2,2
 2025-12-25,Sorting Primary Shapes,started,CG,hi,2,2,2
 2025-12-25,Sorting Primary Shapes,validation,CG,hi,2,2,2
-2025-12-26,Beginning Sound Ba/Ra/Na,completed,LL,hi,1,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,introduction,LL,hi,1,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,mid_introduction,LL,hi,1,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,parent_poll,LL,hi,2,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,questions,LL,hi,1,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,rewards,LL,hi,1,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,started,LL,hi,1,1,1
-2025-12-26,Beginning Sound Ba/Ra/Na,validation,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Ma/Ka/La,introduction,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Ma/Ka/La,parent_poll,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Ma/Ka/La,started,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Ma/Ka/La,started,LL,mr,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,completed,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,introduction,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,hi,2,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,questions,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,rewards,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,started,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Cha/Sa,validation,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Ga/Ra,completed,LL,hi,2,2,2
-2025-12-26,Beginning Sounds Pa/Ga/Ra,completed,LL,mr,7,7,7
-2025-12-26,Beginning Sounds Pa/Ga/Ra,introduction,LL,hi,5,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,introduction,LL,mr,8,7,7
-2025-12-26,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,hi,4,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,mr,4,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,hi,6,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,mr,10,8,8
-2025-12-26,Beginning Sounds Pa/Ga/Ra,questions,LL,hi,8,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,questions,LL,mr,14,7,7
-2025-12-26,Beginning Sounds Pa/Ga/Ra,rewards,LL,hi,4,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,rewards,LL,mr,5,5,5
-2025-12-26,Beginning Sounds Pa/Ga/Ra,started,LL,hi,6,4,4
-2025-12-26,Beginning Sounds Pa/Ga/Ra,started,LL,mr,9,8,8
-2025-12-26,Beginning Sounds Pa/Ga/Ra,validation,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Pa/Ga/Ra,validation,LL,mr,4,4,4
-2025-12-26,Beginning Sounds Sa/La/Va,completed,LL,mr,4,3,3
-2025-12-26,Beginning Sounds Sa/La/Va,introduction,LL,hi,2,2,2
-2025-12-26,Beginning Sounds Sa/La/Va,introduction,LL,mr,5,4,4
-2025-12-26,Beginning Sounds Sa/La/Va,mid_introduction,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Sa/La/Va,mid_introduction,LL,mr,3,3,3
-2025-12-26,Beginning Sounds Sa/La/Va,parent_poll,LL,hi,2,2,2
-2025-12-26,Beginning Sounds Sa/La/Va,parent_poll,LL,mr,5,4,4
-2025-12-26,Beginning Sounds Sa/La/Va,questions,LL,hi,2,1,1
-2025-12-26,Beginning Sounds Sa/La/Va,questions,LL,mr,9,4,4
-2025-12-26,Beginning Sounds Sa/La/Va,rewards,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Sa/La/Va,rewards,LL,mr,3,3,3
-2025-12-26,Beginning Sounds Sa/La/Va,started,LL,hi,1,1,1
-2025-12-26,Beginning Sounds Sa/La/Va,started,LL,mr,5,4,4
-2025-12-26,Beginning Sounds Sa/La/Va,validation,LL,mr,3,3,3
-2025-12-26,Color Red,completed,CG,mr,5,4,4
-2025-12-26,Color Red,introduction,CG,mr,10,10,10
-2025-12-26,Color Red,mid_introduction,CG,mr,6,6,6
-2025-12-26,Color Red,parent_poll,CG,mr,13,11,11
-2025-12-26,Color Red,questions,CG,mr,7,7,7
-2025-12-26,Color Red,rewards,CG,mr,7,7,7
-2025-12-26,Color Red,started,CG,mr,11,11,11
-2025-12-26,Color Red,validation,CG,mr,2,2,2
-2025-12-26,Color Yellow,completed,CG,mr,59,55,55
-2025-12-26,Color Yellow,introduction,CG,mr,171,155,154
-2025-12-26,Color Yellow,mid_introduction,CG,mr,111,110,110
-2025-12-26,Color Yellow,parent_poll,CG,mr,210,166,165
-2025-12-26,Color Yellow,questions,CG,mr,129,127,127
-2025-12-26,Color Yellow,rewards,CG,mr,124,122,122
-2025-12-26,Color Yellow,started,CG,mr,197,167,166
-2025-12-26,Color Yellow,validation,CG,mr,36,35,35
-2025-12-26,Emotion Identification,completed,SEL,hi,1,1,1
-2025-12-26,Emotion Identification,introduction,SEL,hi,1,1,1
-2025-12-26,Emotion Identification,mid_introduction,SEL,hi,1,1,1
-2025-12-26,Emotion Identification,parent_poll,SEL,hi,2,1,1
-2025-12-26,Emotion Identification,questions,SEL,hi,1,1,1
-2025-12-26,Emotion Identification,rewards,SEL,hi,1,1,1
-2025-12-26,Emotion Identification,started,SEL,hi,1,1,1
-2025-12-26,Emotion Identification,validation,SEL,hi,1,1,1
+2025-12-26,Beginning Sound Ba/Ra/Na,completed,LL,hi,5,5,5
+2025-12-26,Beginning Sound Ba/Ra/Na,introduction,LL,hi,9,7,6
+2025-12-26,Beginning Sound Ba/Ra/Na,mid_introduction,LL,hi,5,5,4
+2025-12-26,Beginning Sound Ba/Ra/Na,parent_poll,LL,hi,20,7,6
+2025-12-26,Beginning Sound Ba/Ra/Na,questions,LL,hi,7,6,5
+2025-12-26,Beginning Sound Ba/Ra/Na,rewards,LL,hi,5,5,4
+2025-12-26,Beginning Sound Ba/Ra/Na,started,LL,hi,9,7,6
+2025-12-26,Beginning Sound Ba/Ra/Na,validation,LL,hi,4,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,completed,LL,hi,5,5,5
+2025-12-26,Beginning Sounds Ka/Na/Ta,completed,LL,mr,4,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,introduction,LL,hi,6,5,5
+2025-12-26,Beginning Sounds Ka/Na/Ta,introduction,LL,mr,8,8,8
+2025-12-26,Beginning Sounds Ka/Na/Ta,mid_introduction,LL,hi,5,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,mid_introduction,LL,mr,4,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,parent_poll,LL,hi,9,6,6
+2025-12-26,Beginning Sounds Ka/Na/Ta,parent_poll,LL,mr,10,8,8
+2025-12-26,Beginning Sounds Ka/Na/Ta,questions,LL,hi,5,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,questions,LL,mr,6,5,5
+2025-12-26,Beginning Sounds Ka/Na/Ta,rewards,LL,hi,5,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,rewards,LL,mr,4,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,started,LL,hi,6,5,5
+2025-12-26,Beginning Sounds Ka/Na/Ta,started,LL,mr,10,9,9
+2025-12-26,Beginning Sounds Ka/Na/Ta,validation,LL,hi,4,4,4
+2025-12-26,Beginning Sounds Ka/Na/Ta,validation,LL,mr,3,3,3
+2025-12-26,Beginning Sounds Ma/Cha/Ba,completed,LL,hi,2,2,2
+2025-12-26,Beginning Sounds Ma/Cha/Ba,completed,LL,mr,5,5,5
+2025-12-26,Beginning Sounds Ma/Cha/Ba,introduction,LL,hi,6,4,4
+2025-12-26,Beginning Sounds Ma/Cha/Ba,introduction,LL,mr,5,5,5
+2025-12-26,Beginning Sounds Ma/Cha/Ba,mid_introduction,LL,hi,1,1,1
+2025-12-26,Beginning Sounds Ma/Cha/Ba,mid_introduction,LL,mr,3,3,3
+2025-12-26,Beginning Sounds Ma/Cha/Ba,parent_poll,LL,hi,6,4,4
+2025-12-26,Beginning Sounds Ma/Cha/Ba,parent_poll,LL,mr,7,6,6
+2025-12-26,Beginning Sounds Ma/Cha/Ba,questions,LL,hi,7,3,3
+2025-12-26,Beginning Sounds Ma/Cha/Ba,questions,LL,mr,6,4,4
+2025-12-26,Beginning Sounds Ma/Cha/Ba,rewards,LL,hi,1,1,1
+2025-12-26,Beginning Sounds Ma/Cha/Ba,rewards,LL,mr,3,3,3
+2025-12-26,Beginning Sounds Ma/Cha/Ba,started,LL,hi,7,5,5
+2025-12-26,Beginning Sounds Ma/Cha/Ba,started,LL,mr,7,7,6
+2025-12-26,Beginning Sounds Ma/Cha/Ba,validation,LL,hi,1,1,1
+2025-12-26,Beginning Sounds Ma/Cha/Ba,validation,LL,mr,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,completed,LL,hi,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,completed,LL,mr,2,2,2
+2025-12-26,Beginning Sounds Ma/Ka/La,introduction,LL,hi,5,4,4
+2025-12-26,Beginning Sounds Ma/Ka/La,introduction,LL,mr,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,mid_introduction,LL,hi,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,mid_introduction,LL,mr,2,2,2
+2025-12-26,Beginning Sounds Ma/Ka/La,parent_poll,LL,hi,7,4,4
+2025-12-26,Beginning Sounds Ma/Ka/La,parent_poll,LL,mr,6,4,4
+2025-12-26,Beginning Sounds Ma/Ka/La,questions,LL,hi,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,questions,LL,mr,2,2,2
+2025-12-26,Beginning Sounds Ma/Ka/La,rewards,LL,hi,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,rewards,LL,mr,2,2,2
+2025-12-26,Beginning Sounds Ma/Ka/La,started,LL,hi,5,4,4
+2025-12-26,Beginning Sounds Ma/Ka/La,started,LL,mr,6,6,6
+2025-12-26,Beginning Sounds Ma/Ka/La,validation,LL,hi,3,3,3
+2025-12-26,Beginning Sounds Ma/Ka/La,validation,LL,mr,2,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,completed,LL,hi,3,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,introduction,LL,hi,5,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,hi,4,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,hi,9,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,questions,LL,hi,4,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,rewards,LL,hi,4,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,started,LL,hi,6,2,2
+2025-12-26,Beginning Sounds Pa/Cha/Sa,validation,LL,hi,3,2,2
+2025-12-26,Beginning Sounds Pa/Ga/Ra,completed,LL,hi,7,7,7
+2025-12-26,Beginning Sounds Pa/Ga/Ra,completed,LL,mr,41,34,34
+2025-12-26,Beginning Sounds Pa/Ga/Ra,introduction,LL,hi,14,13,13
+2025-12-26,Beginning Sounds Pa/Ga/Ra,introduction,LL,mr,46,35,35
+2025-12-26,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,hi,9,9,9
+2025-12-26,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,mr,27,24,24
+2025-12-26,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,hi,17,13,13
+2025-12-26,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,mr,64,37,37
+2025-12-26,Beginning Sounds Pa/Ga/Ra,questions,LL,hi,20,10,10
+2025-12-26,Beginning Sounds Pa/Ga/Ra,questions,LL,mr,83,32,32
+2025-12-26,Beginning Sounds Pa/Ga/Ra,rewards,LL,hi,9,9,9
+2025-12-26,Beginning Sounds Pa/Ga/Ra,rewards,LL,mr,28,25,25
+2025-12-26,Beginning Sounds Pa/Ga/Ra,started,LL,hi,15,13,13
+2025-12-26,Beginning Sounds Pa/Ga/Ra,started,LL,mr,49,37,37
+2025-12-26,Beginning Sounds Pa/Ga/Ra,validation,LL,hi,4,4,4
+2025-12-26,Beginning Sounds Pa/Ga/Ra,validation,LL,mr,27,24,24
+2025-12-26,Beginning Sounds Sa/La/Va,completed,LL,hi,6,6,6
+2025-12-26,Beginning Sounds Sa/La/Va,completed,LL,mr,17,15,15
+2025-12-26,Beginning Sounds Sa/La/Va,introduction,LL,hi,10,10,10
+2025-12-26,Beginning Sounds Sa/La/Va,introduction,LL,mr,23,18,18
+2025-12-26,Beginning Sounds Sa/La/Va,mid_introduction,LL,hi,5,5,5
+2025-12-26,Beginning Sounds Sa/La/Va,mid_introduction,LL,mr,13,12,12
+2025-12-26,Beginning Sounds Sa/La/Va,parent_poll,LL,hi,13,10,10
+2025-12-26,Beginning Sounds Sa/La/Va,parent_poll,LL,mr,27,18,18
+2025-12-26,Beginning Sounds Sa/La/Va,questions,LL,hi,15,8,8
+2025-12-26,Beginning Sounds Sa/La/Va,questions,LL,mr,36,17,17
+2025-12-26,Beginning Sounds Sa/La/Va,rewards,LL,hi,5,5,5
+2025-12-26,Beginning Sounds Sa/La/Va,rewards,LL,mr,13,12,12
+2025-12-26,Beginning Sounds Sa/La/Va,started,LL,hi,10,10,10
+2025-12-26,Beginning Sounds Sa/La/Va,started,LL,mr,23,18,18
+2025-12-26,Beginning Sounds Sa/La/Va,validation,LL,hi,3,3,3
+2025-12-26,Beginning Sounds Sa/La/Va,validation,LL,mr,13,12,12
+2025-12-26,Beginning Sounds Ta/Va/Ga,completed,LL,hi,2,2,2
+2025-12-26,Beginning Sounds Ta/Va/Ga,introduction,LL,hi,8,6,4
+2025-12-26,Beginning Sounds Ta/Va/Ga,mid_introduction,LL,hi,1,1,1
+2025-12-26,Beginning Sounds Ta/Va/Ga,parent_poll,LL,hi,10,6,4
+2025-12-26,Beginning Sounds Ta/Va/Ga,questions,LL,hi,4,3,3
+2025-12-26,Beginning Sounds Ta/Va/Ga,rewards,LL,hi,2,2,2
+2025-12-26,Beginning Sounds Ta/Va/Ga,started,LL,hi,9,6,4
+2025-12-26,Beginning Sounds Ta/Va/Ga,validation,LL,hi,1,1,1
+2025-12-26,Color Blue,completed,CG,mr,1,1,1
+2025-12-26,Color Blue,introduction,CG,mr,2,2,2
+2025-12-26,Color Blue,mid_introduction,CG,mr,1,1,1
+2025-12-26,Color Blue,parent_poll,CG,mr,3,2,2
+2025-12-26,Color Blue,questions,CG,mr,1,1,1
+2025-12-26,Color Blue,rewards,CG,mr,1,1,1
+2025-12-26,Color Blue,started,CG,mr,2,2,2
+2025-12-26,Color Blue,validation,CG,mr,1,1,1
+2025-12-26,Color Red,completed,CG,mr,20,15,15
+2025-12-26,Color Red,introduction,CG,hi,1,1,1
+2025-12-26,Color Red,introduction,CG,mr,47,46,46
+2025-12-26,Color Red,mid_introduction,CG,hi,1,1,1
+2025-12-26,Color Red,mid_introduction,CG,mr,24,24,24
+2025-12-26,Color Red,parent_poll,CG,hi,2,2,2
+2025-12-26,Color Red,parent_poll,CG,mr,63,52,52
+2025-12-26,Color Red,questions,CG,hi,1,1,1
+2025-12-26,Color Red,questions,CG,mr,32,32,32
+2025-12-26,Color Red,rewards,CG,hi,1,1,1
+2025-12-26,Color Red,rewards,CG,mr,32,32,32
+2025-12-26,Color Red,started,CG,hi,3,3,3
+2025-12-26,Color Red,started,CG,mr,61,51,51
+2025-12-26,Color Red,validation,CG,mr,7,7,7
+2025-12-26,Color Yellow,completed,CG,hi,1,1,1
+2025-12-26,Color Yellow,completed,CG,mr,197,186,184
+2025-12-26,Color Yellow,introduction,CG,hi,1,1,1
+2025-12-26,Color Yellow,introduction,CG,mr,690,619,607
+2025-12-26,Color Yellow,mid_introduction,CG,hi,1,1,1
+2025-12-26,Color Yellow,mid_introduction,CG,mr,423,421,421
+2025-12-26,Color Yellow,parent_poll,CG,hi,2,1,1
+2025-12-26,Color Yellow,parent_poll,CG,mr,817,668,653
+2025-12-26,Color Yellow,questions,CG,hi,1,1,1
+2025-12-26,Color Yellow,questions,CG,mr,499,494,492
+2025-12-26,Color Yellow,rewards,CG,hi,1,1,1
+2025-12-26,Color Yellow,rewards,CG,mr,476,472,471
+2025-12-26,Color Yellow,started,CG,hi,4,4,4
+2025-12-26,Color Yellow,started,CG,mr,788,679,660
+2025-12-26,Color Yellow,validation,CG,hi,1,1,1
+2025-12-26,Color Yellow,validation,CG,mr,116,115,115
+2025-12-26,Emotion Identification,completed,SEL,hi,11,5,4
+2025-12-26,Emotion Identification,introduction,SEL,hi,14,7,6
+2025-12-26,Emotion Identification,mid_introduction,SEL,hi,10,5,4
+2025-12-26,Emotion Identification,parent_poll,SEL,hi,25,7,6
+2025-12-26,Emotion Identification,questions,SEL,hi,18,5,4
+2025-12-26,Emotion Identification,rewards,SEL,hi,10,5,4
+2025-12-26,Emotion Identification,started,SEL,hi,16,7,6
+2025-12-26,Emotion Identification,validation,SEL,hi,10,5,4
 2025-12-26,Identification of all emotions,introduction,SEL,mr,1,1,1
 2025-12-26,Identification of all emotions,mid_introduction,SEL,mr,1,1,1
 2025-12-26,Identification of all emotions,parent_poll,SEL,mr,1,1,1
 2025-12-26,Identification of all emotions,questions,SEL,mr,1,1,1
 2025-12-26,Identification of all emotions,rewards,SEL,mr,1,1,1
 2025-12-26,Identification of all emotions,started,SEL,mr,1,1,1
-2025-12-26,Patterns AB,completed,CG,hi,1,1,1
-2025-12-26,Patterns AB,introduction,CG,hi,1,1,1
-2025-12-26,Patterns AB,mid_introduction,CG,hi,1,1,1
-2025-12-26,Patterns AB,parent_poll,CG,hi,2,1,1
-2025-12-26,Patterns AB,rewards,CG,hi,1,1,1
-2025-12-26,Patterns AB,started,CG,hi,1,1,1
-2025-12-26,Patterns AB,validation,CG,hi,1,1,1
-2025-12-26,"Patterns ABC, AAB",introduction,CG,hi,1,1,1
-2025-12-26,"Patterns ABC, AAB",introduction,CG,mr,1,1,1
-2025-12-26,"Patterns ABC, AAB",parent_poll,CG,hi,1,1,1
-2025-12-26,"Patterns ABC, AAB",parent_poll,CG,mr,1,1,1
-2025-12-26,"Patterns ABC, AAB",started,CG,hi,3,3,3
-2025-12-26,"Patterns ABC, AAB",started,CG,mr,1,1,1
-2025-12-26,Positions,introduction,CG,mr,1,1,1
-2025-12-26,Positions,mid_introduction,CG,mr,1,1,1
-2025-12-26,Positions,parent_poll,CG,mr,1,1,1
-2025-12-26,Positions,questions,CG,mr,1,1,1
-2025-12-26,Positions,rewards,CG,mr,1,1,1
-2025-12-26,Positions,started,CG,mr,2,2,2
-2025-12-26,Primary Emotion Labelling,completed,SEL,hi,1,1,1
-2025-12-26,Primary Emotion Labelling,introduction,SEL,hi,1,1,1
-2025-12-26,Primary Emotion Labelling,mid_introduction,SEL,hi,1,1,1
-2025-12-26,Primary Emotion Labelling,parent_poll,SEL,hi,2,1,1
-2025-12-26,Primary Emotion Labelling,questions,SEL,hi,1,1,1
-2025-12-26,Primary Emotion Labelling,rewards,SEL,hi,1,1,1
-2025-12-26,Primary Emotion Labelling,started,SEL,hi,1,1,1
-2025-12-26,Primary Emotion Labelling,validation,SEL,hi,1,1,1
-2025-12-26,Relational Comparison II,completed,CG,hi,2,2,2
-2025-12-26,Relational Comparison II,introduction,CG,hi,2,2,2
-2025-12-26,Relational Comparison II,mid_introduction,CG,hi,2,2,2
-2025-12-26,Relational Comparison II,parent_poll,CG,hi,4,2,2
-2025-12-26,Relational Comparison II,questions,CG,hi,2,2,2
-2025-12-26,Relational Comparison II,rewards,CG,hi,2,2,2
-2025-12-26,Relational Comparison II,started,CG,hi,2,2,2
-2025-12-26,Relational Comparison II,validation,CG,hi,2,2,2
-2025-12-26,Rhyming Words,completed,LL,hi,2,2,2
-2025-12-26,Rhyming Words,introduction,LL,hi,1,1,1
-2025-12-26,Rhyming Words,mid_introduction,LL,hi,1,1,1
-2025-12-26,Rhyming Words,parent_poll,LL,hi,3,2,2
-2025-12-26,Rhyming Words,questions,LL,hi,1,1,1
-2025-12-26,Rhyming Words,rewards,LL,hi,1,1,1
-2025-12-26,Rhyming Words,started,LL,hi,2,2,2
-2025-12-26,Rhyming Words,validation,LL,hi,1,1,1
-2025-12-26,Shape Circle,introduction,CG,mr,4,4,4
-2025-12-26,Shape Circle,mid_introduction,CG,mr,3,3,3
-2025-12-26,Shape Circle,parent_poll,CG,mr,4,4,4
-2025-12-26,Shape Circle,questions,CG,mr,4,4,4
-2025-12-26,Shape Circle,rewards,CG,mr,4,4,4
-2025-12-26,Shape Circle,started,CG,mr,4,4,4
-2025-12-26,Shape Triangle,completed,CG,mr,5,5,5
-2025-12-26,Shape Triangle,introduction,CG,mr,26,22,22
-2025-12-26,Shape Triangle,mid_introduction,CG,mr,15,14,14
-2025-12-26,Shape Triangle,parent_poll,CG,mr,28,21,21
-2025-12-26,Shape Triangle,questions,CG,mr,18,17,17
-2025-12-26,Shape Triangle,rewards,CG,mr,18,17,17
-2025-12-26,Shape Triangle,started,CG,mr,25,21,21
-2025-12-26,Shape Triangle,validation,CG,mr,5,5,5
+2025-12-26,Numbers Comparison,completed,NM,hi,2,2,2
+2025-12-26,Numbers Comparison,completed,NM,mr,1,1,1
+2025-12-26,Numbers Comparison,introduction,NM,hi,2,2,2
+2025-12-26,Numbers Comparison,mid_introduction,NM,hi,2,2,2
+2025-12-26,Numbers Comparison,parent_poll,NM,hi,4,2,2
+2025-12-26,Numbers Comparison,parent_poll,NM,mr,1,1,1
+2025-12-26,Numbers Comparison,questions,NM,hi,2,2,2
+2025-12-26,Numbers Comparison,rewards,NM,hi,2,2,2
+2025-12-26,Numbers Comparison,started,NM,hi,2,2,2
+2025-12-26,Numbers Comparison,started,NM,mr,1,1,1
+2025-12-26,Numbers Comparison,validation,NM,hi,2,2,2
+2025-12-26,Numbers I,completed,NM,hi,1,1,1
+2025-12-26,Numbers I,completed,NM,mr,1,1,1
+2025-12-26,Numbers I,introduction,NM,hi,1,1,1
+2025-12-26,Numbers I,introduction,NM,mr,1,1,1
+2025-12-26,Numbers I,mid_introduction,NM,hi,1,1,1
+2025-12-26,Numbers I,mid_introduction,NM,mr,1,1,1
+2025-12-26,Numbers I,parent_poll,NM,hi,1,1,1
+2025-12-26,Numbers I,parent_poll,NM,mr,1,1,1
+2025-12-26,Numbers I,questions,NM,hi,1,1,1
+2025-12-26,Numbers I,questions,NM,mr,1,1,1
+2025-12-26,Numbers I,rewards,NM,hi,1,1,1
+2025-12-26,Numbers I,rewards,NM,mr,1,1,1
+2025-12-26,Numbers I,started,NM,hi,1,1,1
+2025-12-26,Numbers I,started,NM,mr,1,1,1
+2025-12-26,Numbers I,validation,NM,hi,1,1,1
+2025-12-26,Numbers I,validation,NM,mr,1,1,1
+2025-12-26,Numbers II,completed,NM,hi,1,1,1
+2025-12-26,Numbers II,introduction,NM,hi,1,1,1
+2025-12-26,Numbers II,mid_introduction,NM,hi,1,1,1
+2025-12-26,Numbers II,parent_poll,NM,hi,1,1,1
+2025-12-26,Numbers II,questions,NM,hi,1,1,1
+2025-12-26,Numbers II,rewards,NM,hi,1,1,1
+2025-12-26,Numbers II,started,NM,hi,3,3,3
+2025-12-26,Numbers II,validation,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,completed,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,completed,NM,mr,1,1,1
+2025-12-26,Numerals 1-10,introduction,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,introduction,NM,mr,2,2,2
+2025-12-26,Numerals 1-10,mid_introduction,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,mid_introduction,NM,mr,2,2,2
+2025-12-26,Numerals 1-10,parent_poll,NM,hi,2,1,1
+2025-12-26,Numerals 1-10,parent_poll,NM,mr,2,2,2
+2025-12-26,Numerals 1-10,questions,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,questions,NM,mr,2,2,2
+2025-12-26,Numerals 1-10,rewards,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,rewards,NM,mr,2,2,2
+2025-12-26,Numerals 1-10,started,NM,hi,3,3,3
+2025-12-26,Numerals 1-10,started,NM,mr,3,3,3
+2025-12-26,Numerals 1-10,validation,NM,hi,1,1,1
+2025-12-26,Numerals 1-10,validation,NM,mr,1,1,1
+2025-12-26,Patterns AB,completed,CG,hi,6,5,5
+2025-12-26,Patterns AB,completed,CG,mr,349,337,336
+2025-12-26,Patterns AB,introduction,CG,hi,23,14,14
+2025-12-26,Patterns AB,introduction,CG,mr,2535,1736,1709
+2025-12-26,Patterns AB,mid_introduction,CG,hi,6,6,6
+2025-12-26,Patterns AB,mid_introduction,CG,mr,947,884,882
+2025-12-26,Patterns AB,parent_poll,CG,hi,27,15,15
+2025-12-26,Patterns AB,parent_poll,CG,mr,2856,1811,1777
+2025-12-26,Patterns AB,rewards,CG,hi,6,6,6
+2025-12-26,Patterns AB,rewards,CG,mr,988,921,919
+2025-12-26,Patterns AB,started,CG,hi,30,17,16
+2025-12-26,Patterns AB,started,CG,mr,2756,1816,1779
+2025-12-26,Patterns AB,validation,CG,hi,4,4,4
+2025-12-26,Patterns AB,validation,CG,mr,269,268,268
+2025-12-26,"Patterns ABC, AAB",completed,CG,hi,6,6,6
+2025-12-26,"Patterns ABC, AAB",completed,CG,mr,4,4,4
+2025-12-26,"Patterns ABC, AAB",introduction,CG,hi,20,13,12
+2025-12-26,"Patterns ABC, AAB",introduction,CG,mr,17,12,11
+2025-12-26,"Patterns ABC, AAB",mid_introduction,CG,hi,3,3,3
+2025-12-26,"Patterns ABC, AAB",mid_introduction,CG,mr,3,3,3
+2025-12-26,"Patterns ABC, AAB",parent_poll,CG,hi,21,13,12
+2025-12-26,"Patterns ABC, AAB",parent_poll,CG,mr,20,14,13
+2025-12-26,"Patterns ABC, AAB",rewards,CG,hi,3,3,3
+2025-12-26,"Patterns ABC, AAB",rewards,CG,mr,3,3,3
+2025-12-26,"Patterns ABC, AAB",started,CG,hi,34,26,25
+2025-12-26,"Patterns ABC, AAB",started,CG,mr,26,21,19
+2025-12-26,"Patterns ABC, AAB",validation,CG,hi,3,3,3
+2025-12-26,"Patterns ABC, AAB",validation,CG,mr,2,2,2
+2025-12-26,Positions,completed,CG,hi,8,7,7
+2025-12-26,Positions,completed,CG,mr,1,1,1
+2025-12-26,Positions,introduction,CG,hi,10,7,7
+2025-12-26,Positions,introduction,CG,mr,4,4,4
+2025-12-26,Positions,mid_introduction,CG,hi,8,7,7
+2025-12-26,Positions,mid_introduction,CG,mr,3,3,3
+2025-12-26,Positions,parent_poll,CG,hi,14,7,7
+2025-12-26,Positions,parent_poll,CG,mr,5,4,4
+2025-12-26,Positions,questions,CG,hi,8,7,7
+2025-12-26,Positions,questions,CG,mr,3,3,3
+2025-12-26,Positions,rewards,CG,hi,8,7,7
+2025-12-26,Positions,rewards,CG,mr,3,3,3
+2025-12-26,Positions,started,CG,hi,12,9,9
+2025-12-26,Positions,started,CG,mr,8,8,8
+2025-12-26,Positions,validation,CG,hi,8,7,7
+2025-12-26,Positions,validation,CG,mr,1,1,1
+2025-12-26,Primary Emotion Labelling,completed,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling,introduction,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling,mid_introduction,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling,parent_poll,SEL,hi,8,4,4
+2025-12-26,Primary Emotion Labelling,questions,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling,rewards,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling,started,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling,validation,SEL,hi,4,4,4
+2025-12-26,Primary Emotion Labelling : Anger,completed,SEL,hi,5,5,5
+2025-12-26,Primary Emotion Labelling : Anger,completed,SEL,mr,5,5,5
+2025-12-26,Primary Emotion Labelling : Anger,introduction,SEL,hi,11,9,8
+2025-12-26,Primary Emotion Labelling : Anger,introduction,SEL,mr,7,7,7
+2025-12-26,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,4,4,3
+2025-12-26,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,3,3,3
+2025-12-26,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,14,9,8
+2025-12-26,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,8,7,7
+2025-12-26,Primary Emotion Labelling : Anger,questions,SEL,hi,12,7,6
+2025-12-26,Primary Emotion Labelling : Anger,questions,SEL,mr,9,6,6
+2025-12-26,Primary Emotion Labelling : Anger,rewards,SEL,hi,5,5,4
+2025-12-26,Primary Emotion Labelling : Anger,rewards,SEL,mr,3,3,3
+2025-12-26,Primary Emotion Labelling : Anger,started,SEL,hi,12,9,8
+2025-12-26,Primary Emotion Labelling : Anger,started,SEL,mr,7,7,7
+2025-12-26,Primary Emotion Labelling : Anger,validation,SEL,hi,2,2,2
+2025-12-26,Primary Emotion Labelling : Anger,validation,SEL,mr,1,1,1
+2025-12-26,Primary Emotion Labelling : Fear,completed,SEL,hi,11,11,11
+2025-12-26,Primary Emotion Labelling : Fear,completed,SEL,mr,9,9,9
+2025-12-26,Primary Emotion Labelling : Fear,introduction,SEL,hi,23,19,19
+2025-12-26,Primary Emotion Labelling : Fear,introduction,SEL,mr,16,16,16
+2025-12-26,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,14,14,14
+2025-12-26,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,12,12,12
+2025-12-26,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,29,19,19
+2025-12-26,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,22,17,16
+2025-12-26,Primary Emotion Labelling : Fear,questions,SEL,hi,35,18,18
+2025-12-26,Primary Emotion Labelling : Fear,questions,SEL,mr,29,15,15
+2025-12-26,Primary Emotion Labelling : Fear,rewards,SEL,hi,14,14,14
+2025-12-26,Primary Emotion Labelling : Fear,rewards,SEL,mr,12,12,12
+2025-12-26,Primary Emotion Labelling : Fear,started,SEL,hi,26,20,20
+2025-12-26,Primary Emotion Labelling : Fear,started,SEL,mr,17,17,16
+2025-12-26,Primary Emotion Labelling : Fear,validation,SEL,hi,6,6,6
+2025-12-26,Primary Emotion Labelling : Fear,validation,SEL,mr,5,5,5
+2025-12-26,Primary Emotion Labelling : Happy,completed,SEL,hi,11,10,10
+2025-12-26,Primary Emotion Labelling : Happy,completed,SEL,mr,14,14,13
+2025-12-26,Primary Emotion Labelling : Happy,introduction,SEL,hi,32,21,21
+2025-12-26,Primary Emotion Labelling : Happy,introduction,SEL,mr,28,27,25
+2025-12-26,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,14,14,13
+2025-12-26,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,34,23,23
+2025-12-26,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,37,29,27
+2025-12-26,Primary Emotion Labelling : Happy,questions,SEL,hi,10,9,9
+2025-12-26,Primary Emotion Labelling : Happy,questions,SEL,mr,36,21,20
+2025-12-26,Primary Emotion Labelling : Happy,rewards,SEL,mr,15,15,14
+2025-12-26,Primary Emotion Labelling : Happy,started,SEL,hi,35,23,23
+2025-12-26,Primary Emotion Labelling : Happy,started,SEL,mr,32,30,28
+2025-12-26,Primary Emotion Labelling : Happy,validation,SEL,mr,9,9,8
+2025-12-26,Primary Emotion Labelling : Sad,completed,SEL,hi,2,2,2
+2025-12-26,Primary Emotion Labelling : Sad,completed,SEL,mr,2,2,2
+2025-12-26,Primary Emotion Labelling : Sad,introduction,SEL,hi,3,3,3
+2025-12-26,Primary Emotion Labelling : Sad,introduction,SEL,mr,4,3,3
+2025-12-26,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,3,3,3
+2025-12-26,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,5,3,3
+2025-12-26,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,6,3,3
+2025-12-26,Primary Emotion Labelling : Sad,questions,SEL,hi,6,3,3
+2025-12-26,Primary Emotion Labelling : Sad,questions,SEL,mr,3,2,2
+2025-12-26,Primary Emotion Labelling : Sad,rewards,SEL,hi,3,3,3
+2025-12-26,Primary Emotion Labelling : Sad,rewards,SEL,mr,1,1,1
+2025-12-26,Primary Emotion Labelling : Sad,started,SEL,hi,3,3,3
+2025-12-26,Primary Emotion Labelling : Sad,started,SEL,mr,6,3,3
+2025-12-26,Primary Emotion Labelling : Sad,validation,SEL,hi,2,2,2
+2025-12-26,Quantitative Comparison,completed,NM,hi,1,1,1
+2025-12-26,Quantitative Comparison,introduction,NM,hi,1,1,1
+2025-12-26,Quantitative Comparison,mid_introduction,NM,hi,1,1,1
+2025-12-26,Quantitative Comparison,parent_poll,NM,hi,2,1,1
+2025-12-26,Quantitative Comparison,questions,NM,hi,1,1,1
+2025-12-26,Quantitative Comparison,rewards,NM,hi,1,1,1
+2025-12-26,Quantitative Comparison,started,NM,hi,1,1,1
+2025-12-26,Quantitative Comparison,validation,NM,hi,1,1,1
+2025-12-26,Relational Comparison,completed,CG,hi,3,3,3
+2025-12-26,Relational Comparison,completed,CG,mr,1,1,1
+2025-12-26,Relational Comparison,introduction,CG,hi,3,3,3
+2025-12-26,Relational Comparison,introduction,CG,mr,1,1,1
+2025-12-26,Relational Comparison,mid_introduction,CG,hi,3,3,3
+2025-12-26,Relational Comparison,mid_introduction,CG,mr,1,1,1
+2025-12-26,Relational Comparison,parent_poll,CG,hi,6,3,3
+2025-12-26,Relational Comparison,parent_poll,CG,mr,2,1,1
+2025-12-26,Relational Comparison,questions,CG,hi,3,3,3
+2025-12-26,Relational Comparison,questions,CG,mr,1,1,1
+2025-12-26,Relational Comparison,rewards,CG,hi,3,3,3
+2025-12-26,Relational Comparison,rewards,CG,mr,1,1,1
+2025-12-26,Relational Comparison,started,CG,hi,3,3,3
+2025-12-26,Relational Comparison,started,CG,mr,1,1,1
+2025-12-26,Relational Comparison,validation,CG,hi,3,3,3
+2025-12-26,Relational Comparison,validation,CG,mr,1,1,1
+2025-12-26,Relational Comparison II,completed,CG,hi,4,3,3
+2025-12-26,Relational Comparison II,introduction,CG,hi,4,3,3
+2025-12-26,Relational Comparison II,mid_introduction,CG,hi,3,3,3
+2025-12-26,Relational Comparison II,parent_poll,CG,hi,7,3,3
+2025-12-26,Relational Comparison II,questions,CG,hi,4,3,3
+2025-12-26,Relational Comparison II,rewards,CG,hi,3,3,3
+2025-12-26,Relational Comparison II,started,CG,hi,4,3,3
+2025-12-26,Relational Comparison II,validation,CG,hi,3,3,3
+2025-12-26,Revision Colors,completed,CG,hi,2,2,2
+2025-12-26,Revision Colors,introduction,CG,hi,2,2,2
+2025-12-26,Revision Colors,mid_introduction,CG,hi,2,2,2
+2025-12-26,Revision Colors,parent_poll,CG,hi,3,2,2
+2025-12-26,Revision Colors,questions,CG,hi,2,2,2
+2025-12-26,Revision Colors,rewards,CG,hi,2,2,2
+2025-12-26,Revision Colors,started,CG,hi,2,2,2
+2025-12-26,Revision Colors,validation,CG,hi,2,2,2
+2025-12-26,Revision Shapes,completed,CG,hi,1,1,1
+2025-12-26,Revision Shapes,introduction,CG,hi,2,2,2
+2025-12-26,Revision Shapes,mid_introduction,CG,hi,1,1,1
+2025-12-26,Revision Shapes,parent_poll,CG,hi,2,2,2
+2025-12-26,Revision Shapes,questions,CG,hi,3,2,2
+2025-12-26,Revision Shapes,rewards,CG,hi,1,1,1
+2025-12-26,Revision Shapes,started,CG,hi,2,2,2
+2025-12-26,Rhyming Words,completed,LL,hi,3,3,3
+2025-12-26,Rhyming Words,completed,LL,mr,1,1,1
+2025-12-26,Rhyming Words,introduction,LL,hi,2,2,2
+2025-12-26,Rhyming Words,introduction,LL,mr,1,1,1
+2025-12-26,Rhyming Words,mid_introduction,LL,hi,2,2,2
+2025-12-26,Rhyming Words,mid_introduction,LL,mr,1,1,1
+2025-12-26,Rhyming Words,parent_poll,LL,hi,4,3,3
+2025-12-26,Rhyming Words,parent_poll,LL,mr,1,1,1
+2025-12-26,Rhyming Words,questions,LL,hi,2,2,2
+2025-12-26,Rhyming Words,questions,LL,mr,1,1,1
+2025-12-26,Rhyming Words,rewards,LL,hi,2,2,2
+2025-12-26,Rhyming Words,rewards,LL,mr,1,1,1
+2025-12-26,Rhyming Words,started,LL,hi,3,3,3
+2025-12-26,Rhyming Words,started,LL,mr,1,1,1
+2025-12-26,Rhyming Words,validation,LL,hi,2,2,2
+2025-12-26,Rhyming Words,validation,LL,mr,1,1,1
+2025-12-26,Shape Circle,completed,CG,hi,1,1,1
+2025-12-26,Shape Circle,completed,CG,mr,6,6,6
+2025-12-26,Shape Circle,introduction,CG,hi,2,2,2
+2025-12-26,Shape Circle,introduction,CG,mr,25,25,25
+2025-12-26,Shape Circle,mid_introduction,CG,hi,1,1,1
+2025-12-26,Shape Circle,mid_introduction,CG,mr,14,14,14
+2025-12-26,Shape Circle,parent_poll,CG,hi,3,2,2
+2025-12-26,Shape Circle,parent_poll,CG,mr,28,28,28
+2025-12-26,Shape Circle,questions,CG,hi,1,1,1
+2025-12-26,Shape Circle,questions,CG,mr,17,17,17
+2025-12-26,Shape Circle,rewards,CG,hi,1,1,1
+2025-12-26,Shape Circle,rewards,CG,mr,17,17,17
+2025-12-26,Shape Circle,started,CG,hi,2,2,2
+2025-12-26,Shape Circle,started,CG,mr,31,30,30
+2025-12-26,Shape Circle,validation,CG,hi,1,1,1
+2025-12-26,Shape Circle,validation,CG,mr,2,2,2
+2025-12-26,Shape Rectangle,completed,CG,hi,3,3,3
+2025-12-26,Shape Rectangle,introduction,CG,hi,3,3,3
+2025-12-26,Shape Rectangle,mid_introduction,CG,hi,3,3,3
+2025-12-26,Shape Rectangle,parent_poll,CG,hi,6,3,3
+2025-12-26,Shape Rectangle,questions,CG,hi,3,3,3
+2025-12-26,Shape Rectangle,rewards,CG,hi,3,3,3
+2025-12-26,Shape Rectangle,started,CG,hi,3,3,3
+2025-12-26,Shape Rectangle,validation,CG,hi,3,3,3
+2025-12-26,Shape Triangle,completed,CG,hi,1,1,1
+2025-12-26,Shape Triangle,completed,CG,mr,33,31,31
+2025-12-26,Shape Triangle,introduction,CG,hi,1,1,1
+2025-12-26,Shape Triangle,introduction,CG,mr,137,120,119
+2025-12-26,Shape Triangle,mid_introduction,CG,hi,1,1,1
+2025-12-26,Shape Triangle,mid_introduction,CG,mr,81,80,80
+2025-12-26,Shape Triangle,parent_poll,CG,hi,2,2,2
+2025-12-26,Shape Triangle,parent_poll,CG,mr,158,130,129
+2025-12-26,Shape Triangle,questions,CG,hi,1,1,1
+2025-12-26,Shape Triangle,questions,CG,mr,96,95,95
+2025-12-26,Shape Triangle,rewards,CG,hi,1,1,1
+2025-12-26,Shape Triangle,rewards,CG,mr,94,93,93
+2025-12-26,Shape Triangle,started,CG,hi,2,2,2
+2025-12-26,Shape Triangle,started,CG,mr,151,134,133
+2025-12-26,Shape Triangle,validation,CG,hi,1,1,1
+2025-12-26,Shape Triangle,validation,CG,mr,18,18,18
+2025-12-26,Sorting Primary Colors,completed,CG,hi,2,2,2
+2025-12-26,Sorting Primary Colors,introduction,CG,hi,3,3,3
+2025-12-26,Sorting Primary Colors,mid_introduction,CG,hi,2,2,2
+2025-12-26,Sorting Primary Colors,parent_poll,CG,hi,5,3,3
+2025-12-26,Sorting Primary Colors,questions,CG,hi,3,3,3
+2025-12-26,Sorting Primary Colors,rewards,CG,hi,3,3,3
+2025-12-26,Sorting Primary Colors,started,CG,hi,3,3,3
+2025-12-26,Sorting Primary Colors,validation,CG,hi,2,2,2
+2025-12-26,Sorting Primary Shapes,completed,CG,hi,3,3,3
+2025-12-26,Sorting Primary Shapes,introduction,CG,hi,3,3,3
+2025-12-26,Sorting Primary Shapes,mid_introduction,CG,hi,3,3,3
+2025-12-26,Sorting Primary Shapes,parent_poll,CG,hi,5,3,3
+2025-12-26,Sorting Primary Shapes,questions,CG,hi,3,3,3
+2025-12-26,Sorting Primary Shapes,rewards,CG,hi,3,3,3
+2025-12-26,Sorting Primary Shapes,started,CG,hi,3,3,3
+2025-12-26,Sorting Primary Shapes,validation,CG,hi,3,3,3
+2025-12-27,Beginning Sound Ba/Ra/Na,completed,LL,hi,5,4,4
+2025-12-27,Beginning Sound Ba/Ra/Na,introduction,LL,hi,5,4,4
+2025-12-27,Beginning Sound Ba/Ra/Na,mid_introduction,LL,hi,4,4,4
+2025-12-27,Beginning Sound Ba/Ra/Na,parent_poll,LL,hi,12,4,4
+2025-12-27,Beginning Sound Ba/Ra/Na,questions,LL,hi,6,4,4
+2025-12-27,Beginning Sound Ba/Ra/Na,rewards,LL,hi,4,4,4
+2025-12-27,Beginning Sound Ba/Ra/Na,started,LL,hi,7,6,5
+2025-12-27,Beginning Sound Ba/Ra/Na,started,LL,mr,2,1,1
+2025-12-27,Beginning Sound Ba/Ra/Na,validation,LL,hi,4,4,4
+2025-12-27,Beginning Sounds Ka/Na/Ta,completed,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,completed,LL,mr,2,2,2
+2025-12-27,Beginning Sounds Ka/Na/Ta,introduction,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,introduction,LL,mr,4,4,4
+2025-12-27,Beginning Sounds Ka/Na/Ta,mid_introduction,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,mid_introduction,LL,mr,2,2,2
+2025-12-27,Beginning Sounds Ka/Na/Ta,parent_poll,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,parent_poll,LL,mr,5,4,4
+2025-12-27,Beginning Sounds Ka/Na/Ta,questions,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,questions,LL,mr,3,3,3
+2025-12-27,Beginning Sounds Ka/Na/Ta,rewards,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,rewards,LL,mr,2,2,2
+2025-12-27,Beginning Sounds Ka/Na/Ta,started,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,started,LL,mr,5,5,5
+2025-12-27,Beginning Sounds Ka/Na/Ta,validation,LL,hi,3,3,3
+2025-12-27,Beginning Sounds Ka/Na/Ta,validation,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Ma/Cha/Ba,completed,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ma/Cha/Ba,introduction,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ma/Cha/Ba,introduction,LL,mr,5,3,3
+2025-12-27,Beginning Sounds Ma/Cha/Ba,mid_introduction,LL,hi,3,3,3
+2025-12-27,Beginning Sounds Ma/Cha/Ba,parent_poll,LL,hi,7,5,5
+2025-12-27,Beginning Sounds Ma/Cha/Ba,parent_poll,LL,mr,6,4,4
+2025-12-27,Beginning Sounds Ma/Cha/Ba,questions,LL,hi,3,3,3
+2025-12-27,Beginning Sounds Ma/Cha/Ba,rewards,LL,hi,3,3,3
+2025-12-27,Beginning Sounds Ma/Cha/Ba,started,LL,hi,7,7,7
+2025-12-27,Beginning Sounds Ma/Cha/Ba,started,LL,mr,11,9,9
+2025-12-27,Beginning Sounds Ma/Cha/Ba,validation,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ma/Ka/La,completed,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Ma/Ka/La,completed,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Ma/Ka/La,introduction,LL,hi,7,6,6
+2025-12-27,Beginning Sounds Ma/Ka/La,introduction,LL,mr,2,2,2
+2025-12-27,Beginning Sounds Ma/Ka/La,mid_introduction,LL,hi,6,6,6
+2025-12-27,Beginning Sounds Ma/Ka/La,mid_introduction,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Ma/Ka/La,parent_poll,LL,hi,12,6,6
+2025-12-27,Beginning Sounds Ma/Ka/La,parent_poll,LL,mr,4,3,3
+2025-12-27,Beginning Sounds Ma/Ka/La,questions,LL,hi,6,6,6
+2025-12-27,Beginning Sounds Ma/Ka/La,questions,LL,mr,2,2,2
+2025-12-27,Beginning Sounds Ma/Ka/La,rewards,LL,hi,6,6,6
+2025-12-27,Beginning Sounds Ma/Ka/La,rewards,LL,mr,2,2,2
+2025-12-27,Beginning Sounds Ma/Ka/La,started,LL,hi,11,10,10
+2025-12-27,Beginning Sounds Ma/Ka/La,started,LL,mr,4,4,4
+2025-12-27,Beginning Sounds Ma/Ka/La,validation,LL,hi,6,6,6
+2025-12-27,Beginning Sounds Ma/Ka/La,validation,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,completed,LL,hi,4,4,4
+2025-12-27,Beginning Sounds Pa/Cha/Sa,completed,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,introduction,LL,hi,10,8,8
+2025-12-27,Beginning Sounds Pa/Cha/Sa,introduction,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,hi,13,8,8
+2025-12-27,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,mr,2,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,questions,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Pa/Cha/Sa,questions,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,rewards,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Pa/Cha/Sa,rewards,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,started,LL,hi,12,10,10
+2025-12-27,Beginning Sounds Pa/Cha/Sa,started,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Cha/Sa,validation,LL,hi,5,5,5
+2025-12-27,Beginning Sounds Pa/Cha/Sa,validation,LL,mr,1,1,1
+2025-12-27,Beginning Sounds Pa/Ga/Ra,completed,LL,hi,9,9,9
+2025-12-27,Beginning Sounds Pa/Ga/Ra,completed,LL,mr,47,43,43
+2025-12-27,Beginning Sounds Pa/Ga/Ra,introduction,LL,hi,9,9,9
+2025-12-27,Beginning Sounds Pa/Ga/Ra,introduction,LL,mr,62,52,51
+2025-12-27,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,hi,7,7,7
+2025-12-27,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,mr,36,34,34
+2025-12-27,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,hi,10,9,9
+2025-12-27,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,mr,89,54,53
+2025-12-27,Beginning Sounds Pa/Ga/Ra,questions,LL,hi,18,9,9
+2025-12-27,Beginning Sounds Pa/Ga/Ra,questions,LL,mr,93,44,44
+2025-12-27,Beginning Sounds Pa/Ga/Ra,rewards,LL,hi,7,7,7
+2025-12-27,Beginning Sounds Pa/Ga/Ra,rewards,LL,mr,37,35,35
+2025-12-27,Beginning Sounds Pa/Ga/Ra,started,LL,hi,9,9,9
+2025-12-27,Beginning Sounds Pa/Ga/Ra,started,LL,mr,64,54,53
+2025-12-27,Beginning Sounds Pa/Ga/Ra,validation,LL,hi,6,6,6
+2025-12-27,Beginning Sounds Pa/Ga/Ra,validation,LL,mr,33,33,33
+2025-12-27,Beginning Sounds Sa/La/Va,completed,LL,hi,6,5,5
+2025-12-27,Beginning Sounds Sa/La/Va,completed,LL,mr,18,16,16
+2025-12-27,Beginning Sounds Sa/La/Va,introduction,LL,hi,7,6,6
+2025-12-27,Beginning Sounds Sa/La/Va,introduction,LL,mr,19,16,15
+2025-12-27,Beginning Sounds Sa/La/Va,mid_introduction,LL,hi,5,4,4
+2025-12-27,Beginning Sounds Sa/La/Va,mid_introduction,LL,mr,14,13,13
+2025-12-27,Beginning Sounds Sa/La/Va,parent_poll,LL,hi,8,6,6
+2025-12-27,Beginning Sounds Sa/La/Va,parent_poll,LL,mr,28,18,17
+2025-12-27,Beginning Sounds Sa/La/Va,questions,LL,hi,14,7,7
+2025-12-27,Beginning Sounds Sa/La/Va,questions,LL,mr,33,16,15
+2025-12-27,Beginning Sounds Sa/La/Va,rewards,LL,hi,5,4,4
+2025-12-27,Beginning Sounds Sa/La/Va,rewards,LL,mr,14,13,13
+2025-12-27,Beginning Sounds Sa/La/Va,started,LL,hi,7,6,6
+2025-12-27,Beginning Sounds Sa/La/Va,started,LL,mr,21,18,17
+2025-12-27,Beginning Sounds Sa/La/Va,validation,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Sa/La/Va,validation,LL,mr,14,13,13
+2025-12-27,Beginning Sounds Ta/Va/Ga,completed,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ta/Va/Ga,introduction,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ta/Va/Ga,mid_introduction,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ta/Va/Ga,parent_poll,LL,hi,4,2,2
+2025-12-27,Beginning Sounds Ta/Va/Ga,questions,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ta/Va/Ga,rewards,LL,hi,2,2,2
+2025-12-27,Beginning Sounds Ta/Va/Ga,started,LL,hi,3,3,3
+2025-12-27,Beginning Sounds Ta/Va/Ga,validation,LL,hi,2,2,2
+2025-12-27,Color Blue,completed,CG,hi,1,1,1
+2025-12-27,Color Blue,completed,CG,mr,485,450,444
+2025-12-27,Color Blue,introduction,CG,hi,3,3,3
+2025-12-27,Color Blue,introduction,CG,mr,1589,1357,1338
+2025-12-27,Color Blue,mid_introduction,CG,hi,4,4,4
+2025-12-27,Color Blue,mid_introduction,CG,mr,1009,1006,1005
+2025-12-27,Color Blue,parent_poll,CG,hi,4,4,4
+2025-12-27,Color Blue,parent_poll,CG,mr,1870,1388,1368
+2025-12-27,Color Blue,questions,CG,hi,3,3,3
+2025-12-27,Color Blue,questions,CG,mr,1155,1144,1143
+2025-12-27,Color Blue,rewards,CG,hi,3,3,3
+2025-12-27,Color Blue,rewards,CG,mr,1132,1128,1127
+2025-12-27,Color Blue,started,CG,hi,17,12,10
+2025-12-27,Color Blue,started,CG,mr,1713,1397,1373
+2025-12-27,Color Blue,validation,CG,hi,2,2,2
+2025-12-27,Color Blue,validation,CG,mr,315,314,314
+2025-12-27,Color Red,completed,CG,hi,1,1,1
+2025-12-27,Color Red,completed,CG,mr,5,4,4
+2025-12-27,Color Red,introduction,CG,hi,1,1,1
+2025-12-27,Color Red,introduction,CG,mr,27,26,26
+2025-12-27,Color Red,mid_introduction,CG,hi,1,1,1
+2025-12-27,Color Red,mid_introduction,CG,mr,13,13,13
+2025-12-27,Color Red,parent_poll,CG,hi,2,1,1
+2025-12-27,Color Red,parent_poll,CG,mr,29,27,27
+2025-12-27,Color Red,questions,CG,hi,1,1,1
+2025-12-27,Color Red,questions,CG,mr,20,20,20
+2025-12-27,Color Red,rewards,CG,hi,1,1,1
+2025-12-27,Color Red,rewards,CG,mr,18,18,18
+2025-12-27,Color Red,started,CG,hi,1,1,1
+2025-12-27,Color Red,started,CG,mr,31,29,29
+2025-12-27,Color Red,validation,CG,hi,1,1,1
+2025-12-27,Color Red,validation,CG,mr,1,1,1
+2025-12-27,Color Yellow,completed,CG,mr,34,33,33
+2025-12-27,Color Yellow,introduction,CG,hi,1,1,1
+2025-12-27,Color Yellow,introduction,CG,mr,179,150,149
+2025-12-27,Color Yellow,mid_introduction,CG,hi,1,1,1
+2025-12-27,Color Yellow,mid_introduction,CG,mr,102,102,102
+2025-12-27,Color Yellow,parent_poll,CG,hi,1,1,1
+2025-12-27,Color Yellow,parent_poll,CG,mr,191,154,152
+2025-12-27,Color Yellow,questions,CG,hi,1,1,1
+2025-12-27,Color Yellow,questions,CG,mr,119,118,118
+2025-12-27,Color Yellow,rewards,CG,hi,1,1,1
+2025-12-27,Color Yellow,rewards,CG,mr,115,115,115
+2025-12-27,Color Yellow,started,CG,hi,1,1,1
+2025-12-27,Color Yellow,started,CG,mr,185,153,151
+2025-12-27,Color Yellow,validation,CG,hi,1,1,1
+2025-12-27,Color Yellow,validation,CG,mr,19,19,19
+2025-12-27,Emotion Identification,completed,SEL,hi,13,7,4
+2025-12-27,Emotion Identification,completed,SEL,mr,1,1,1
+2025-12-27,Emotion Identification,introduction,SEL,hi,19,7,4
+2025-12-27,Emotion Identification,introduction,SEL,mr,1,1,1
+2025-12-27,Emotion Identification,mid_introduction,SEL,hi,14,7,4
+2025-12-27,Emotion Identification,mid_introduction,SEL,mr,1,1,1
+2025-12-27,Emotion Identification,parent_poll,SEL,hi,31,7,4
+2025-12-27,Emotion Identification,parent_poll,SEL,mr,2,1,1
+2025-12-27,Emotion Identification,questions,SEL,hi,16,7,4
+2025-12-27,Emotion Identification,questions,SEL,mr,1,1,1
+2025-12-27,Emotion Identification,rewards,SEL,hi,14,7,4
+2025-12-27,Emotion Identification,rewards,SEL,mr,1,1,1
+2025-12-27,Emotion Identification,started,SEL,hi,19,7,4
+2025-12-27,Emotion Identification,started,SEL,mr,2,2,2
+2025-12-27,Emotion Identification,validation,SEL,hi,13,6,3
+2025-12-27,Emotion Identification,validation,SEL,mr,1,1,1
+2025-12-27,Identification of all emotions,completed,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,completed,SEL,mr,2,2,2
+2025-12-27,Identification of all emotions,introduction,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,introduction,SEL,mr,3,3,3
+2025-12-27,Identification of all emotions,mid_introduction,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,mid_introduction,SEL,mr,3,3,3
+2025-12-27,Identification of all emotions,parent_poll,SEL,hi,8,4,4
+2025-12-27,Identification of all emotions,parent_poll,SEL,mr,5,3,3
+2025-12-27,Identification of all emotions,questions,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,questions,SEL,mr,3,3,3
+2025-12-27,Identification of all emotions,rewards,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,rewards,SEL,mr,3,3,3
+2025-12-27,Identification of all emotions,started,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,started,SEL,mr,3,3,3
+2025-12-27,Identification of all emotions,validation,SEL,hi,4,4,4
+2025-12-27,Identification of all emotions,validation,SEL,mr,2,2,2
+2025-12-27,Numbers Comparison,completed,NM,hi,1,1,1
+2025-12-27,Numbers Comparison,introduction,NM,hi,2,1,1
+2025-12-27,Numbers Comparison,mid_introduction,NM,hi,1,1,1
+2025-12-27,Numbers Comparison,parent_poll,NM,hi,3,1,1
+2025-12-27,Numbers Comparison,questions,NM,hi,1,1,1
+2025-12-27,Numbers Comparison,rewards,NM,hi,1,1,1
+2025-12-27,Numbers Comparison,started,NM,hi,3,1,1
+2025-12-27,Numbers Comparison,validation,NM,hi,1,1,1
+2025-12-27,Numbers I,introduction,NM,hi,1,1,1
+2025-12-27,Numbers I,parent_poll,NM,hi,1,1,1
+2025-12-27,Numbers I,questions,NM,hi,1,1,1
+2025-12-27,Numbers I,rewards,NM,hi,1,1,1
+2025-12-27,Numbers I,started,NM,hi,1,1,1
+2025-12-27,Numbers II,completed,NM,hi,2,2,2
+2025-12-27,Numbers II,introduction,NM,hi,1,1,1
+2025-12-27,Numbers II,mid_introduction,NM,hi,1,1,1
+2025-12-27,Numbers II,parent_poll,NM,hi,2,2,2
+2025-12-27,Numbers II,questions,NM,hi,1,1,1
+2025-12-27,Numbers II,rewards,NM,hi,1,1,1
+2025-12-27,Numbers II,started,NM,hi,3,3,3
+2025-12-27,Numbers II,validation,NM,hi,1,1,1
+2025-12-27,Numerals 1-10,completed,NM,hi,5,5,5
+2025-12-27,Numerals 1-10,introduction,NM,hi,4,4,4
+2025-12-27,Numerals 1-10,mid_introduction,NM,hi,4,4,4
+2025-12-27,Numerals 1-10,parent_poll,NM,hi,7,5,5
+2025-12-27,Numerals 1-10,questions,NM,hi,4,4,4
+2025-12-27,Numerals 1-10,rewards,NM,hi,4,4,4
+2025-12-27,Numerals 1-10,started,NM,hi,4,4,4
+2025-12-27,Numerals 1-10,validation,NM,hi,4,4,4
+2025-12-27,Patterns AB,completed,CG,hi,1,1,1
+2025-12-27,Patterns AB,completed,CG,mr,158,149,147
+2025-12-27,Patterns AB,introduction,CG,hi,10,9,9
+2025-12-27,Patterns AB,introduction,CG,mr,1212,895,848
+2025-12-27,Patterns AB,mid_introduction,CG,hi,3,3,3
+2025-12-27,Patterns AB,mid_introduction,CG,mr,414,394,391
+2025-12-27,Patterns AB,parent_poll,CG,hi,10,9,9
+2025-12-27,Patterns AB,parent_poll,CG,mr,1329,919,870
+2025-12-27,Patterns AB,rewards,CG,hi,4,4,4
+2025-12-27,Patterns AB,rewards,CG,mr,437,412,406
+2025-12-27,Patterns AB,started,CG,hi,11,10,10
+2025-12-27,Patterns AB,started,CG,mr,1293,940,885
+2025-12-27,Patterns AB,validation,CG,hi,1,1,1
+2025-12-27,Patterns AB,validation,CG,mr,114,114,114
+2025-12-27,"Patterns ABC, AAB",completed,CG,hi,5,5,5
+2025-12-27,"Patterns ABC, AAB",completed,CG,mr,6,6,6
+2025-12-27,"Patterns ABC, AAB",introduction,CG,hi,6,6,6
+2025-12-27,"Patterns ABC, AAB",introduction,CG,mr,16,13,13
+2025-12-27,"Patterns ABC, AAB",mid_introduction,CG,hi,4,4,4
+2025-12-27,"Patterns ABC, AAB",mid_introduction,CG,mr,4,4,4
+2025-12-27,"Patterns ABC, AAB",parent_poll,CG,hi,8,7,7
+2025-12-27,"Patterns ABC, AAB",parent_poll,CG,mr,20,16,16
+2025-12-27,"Patterns ABC, AAB",rewards,CG,hi,4,4,4
+2025-12-27,"Patterns ABC, AAB",rewards,CG,mr,4,4,4
+2025-12-27,"Patterns ABC, AAB",started,CG,hi,13,12,12
+2025-12-27,"Patterns ABC, AAB",started,CG,mr,33,30,29
+2025-12-27,"Patterns ABC, AAB",validation,CG,hi,4,4,4
+2025-12-27,"Patterns ABC, AAB",validation,CG,mr,1,1,1
+2025-12-27,Positions,completed,CG,hi,5,5,5
+2025-12-27,Positions,completed,CG,mr,2,2,2
+2025-12-27,Positions,introduction,CG,hi,6,6,6
+2025-12-27,Positions,introduction,CG,mr,3,3,3
+2025-12-27,Positions,mid_introduction,CG,hi,4,4,4
+2025-12-27,Positions,mid_introduction,CG,mr,3,3,3
+2025-12-27,Positions,parent_poll,CG,hi,9,6,6
+2025-12-27,Positions,parent_poll,CG,mr,5,4,4
+2025-12-27,Positions,questions,CG,hi,4,4,4
+2025-12-27,Positions,questions,CG,mr,3,3,3
+2025-12-27,Positions,rewards,CG,hi,4,4,4
+2025-12-27,Positions,rewards,CG,mr,3,3,3
+2025-12-27,Positions,started,CG,hi,9,9,9
+2025-12-27,Positions,started,CG,mr,7,6,6
+2025-12-27,Positions,validation,CG,hi,4,4,4
+2025-12-27,Positions,validation,CG,mr,1,1,1
+2025-12-27,Primary Emotion Labelling,completed,SEL,hi,1,1,1
+2025-12-27,Primary Emotion Labelling,introduction,SEL,hi,2,2,2
+2025-12-27,Primary Emotion Labelling,mid_introduction,SEL,hi,2,2,2
+2025-12-27,Primary Emotion Labelling,parent_poll,SEL,hi,3,2,2
+2025-12-27,Primary Emotion Labelling,questions,SEL,hi,2,2,2
+2025-12-27,Primary Emotion Labelling,rewards,SEL,hi,2,2,2
+2025-12-27,Primary Emotion Labelling,started,SEL,hi,2,2,2
+2025-12-27,Primary Emotion Labelling,validation,SEL,hi,1,1,1
+2025-12-27,Primary Emotion Labelling : Anger,completed,SEL,hi,6,6,6
+2025-12-27,Primary Emotion Labelling : Anger,completed,SEL,mr,5,5,5
+2025-12-27,Primary Emotion Labelling : Anger,introduction,SEL,hi,9,9,9
+2025-12-27,Primary Emotion Labelling : Anger,introduction,SEL,mr,13,12,12
+2025-12-27,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,6,6,6
+2025-12-27,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,7,6,6
+2025-12-27,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,15,9,9
+2025-12-27,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,18,12,12
+2025-12-27,Primary Emotion Labelling : Anger,questions,SEL,hi,14,8,8
+2025-12-27,Primary Emotion Labelling : Anger,questions,SEL,mr,17,8,8
+2025-12-27,Primary Emotion Labelling : Anger,rewards,SEL,hi,6,6,6
+2025-12-27,Primary Emotion Labelling : Anger,rewards,SEL,mr,8,7,7
+2025-12-27,Primary Emotion Labelling : Anger,started,SEL,hi,9,9,9
+2025-12-27,Primary Emotion Labelling : Anger,started,SEL,mr,14,12,12
+2025-12-27,Primary Emotion Labelling : Anger,validation,SEL,hi,6,6,6
+2025-12-27,Primary Emotion Labelling : Anger,validation,SEL,mr,4,4,4
+2025-12-27,Primary Emotion Labelling : Fear,completed,SEL,hi,8,8,8
+2025-12-27,Primary Emotion Labelling : Fear,completed,SEL,mr,3,3,3
+2025-12-27,Primary Emotion Labelling : Fear,introduction,SEL,hi,14,11,11
+2025-12-27,Primary Emotion Labelling : Fear,introduction,SEL,mr,8,6,6
+2025-12-27,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,10,9,9
+2025-12-27,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,6,5,5
+2025-12-27,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,22,12,12
+2025-12-27,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,12,8,8
+2025-12-27,Primary Emotion Labelling : Fear,questions,SEL,hi,20,9,9
+2025-12-27,Primary Emotion Labelling : Fear,questions,SEL,mr,13,5,5
+2025-12-27,Primary Emotion Labelling : Fear,rewards,SEL,hi,10,9,9
+2025-12-27,Primary Emotion Labelling : Fear,rewards,SEL,mr,6,5,5
+2025-12-27,Primary Emotion Labelling : Fear,started,SEL,hi,15,12,12
+2025-12-27,Primary Emotion Labelling : Fear,started,SEL,mr,11,9,9
+2025-12-27,Primary Emotion Labelling : Fear,validation,SEL,hi,7,7,7
+2025-12-27,Primary Emotion Labelling : Fear,validation,SEL,mr,2,2,2
+2025-12-27,Primary Emotion Labelling : Happy,completed,SEL,hi,4,4,4
+2025-12-27,Primary Emotion Labelling : Happy,completed,SEL,mr,10,8,7
+2025-12-27,Primary Emotion Labelling : Happy,introduction,SEL,hi,17,13,13
+2025-12-27,Primary Emotion Labelling : Happy,introduction,SEL,mr,21,16,15
+2025-12-27,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,1,1,1
+2025-12-27,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,15,12,11
+2025-12-27,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,18,13,13
+2025-12-27,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,32,16,15
+2025-12-27,Primary Emotion Labelling : Happy,questions,SEL,hi,5,4,4
+2025-12-27,Primary Emotion Labelling : Happy,questions,SEL,mr,33,14,13
+2025-12-27,Primary Emotion Labelling : Happy,rewards,SEL,hi,1,1,1
+2025-12-27,Primary Emotion Labelling : Happy,rewards,SEL,mr,15,12,11
+2025-12-27,Primary Emotion Labelling : Happy,started,SEL,hi,17,13,13
+2025-12-27,Primary Emotion Labelling : Happy,started,SEL,mr,25,17,16
+2025-12-27,Primary Emotion Labelling : Happy,validation,SEL,hi,1,1,1
+2025-12-27,Primary Emotion Labelling : Happy,validation,SEL,mr,8,6,5
+2025-12-27,Primary Emotion Labelling : Sad,completed,SEL,hi,3,3,3
+2025-12-27,Primary Emotion Labelling : Sad,completed,SEL,mr,3,3,3
+2025-12-27,Primary Emotion Labelling : Sad,introduction,SEL,hi,8,8,8
+2025-12-27,Primary Emotion Labelling : Sad,introduction,SEL,mr,7,5,5
+2025-12-27,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,6,6,6
+2025-12-27,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,4,3,3
+2025-12-27,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,11,8,8
+2025-12-27,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,9,5,5
+2025-12-27,Primary Emotion Labelling : Sad,questions,SEL,hi,12,6,6
+2025-12-27,Primary Emotion Labelling : Sad,questions,SEL,mr,8,3,3
+2025-12-27,Primary Emotion Labelling : Sad,rewards,SEL,hi,6,6,6
+2025-12-27,Primary Emotion Labelling : Sad,rewards,SEL,mr,4,3,3
+2025-12-27,Primary Emotion Labelling : Sad,started,SEL,hi,8,8,8
+2025-12-27,Primary Emotion Labelling : Sad,started,SEL,mr,7,5,5
+2025-12-27,Primary Emotion Labelling : Sad,validation,SEL,hi,4,4,4
+2025-12-27,Primary Emotion Labelling : Sad,validation,SEL,mr,2,2,2
+2025-12-27,Quantitative Comparison,completed,NM,mr,1,1,1
+2025-12-27,Quantitative Comparison,introduction,NM,mr,1,1,1
+2025-12-27,Quantitative Comparison,mid_introduction,NM,mr,1,1,1
+2025-12-27,Quantitative Comparison,parent_poll,NM,mr,2,1,1
+2025-12-27,Quantitative Comparison,questions,NM,mr,1,1,1
+2025-12-27,Quantitative Comparison,rewards,NM,mr,1,1,1
+2025-12-27,Quantitative Comparison,started,NM,mr,1,1,1
+2025-12-27,Quantitative Comparison,validation,NM,mr,1,1,1
+2025-12-27,Relational Comparison,completed,CG,hi,2,2,2
+2025-12-27,Relational Comparison,introduction,CG,hi,2,2,2
+2025-12-27,Relational Comparison,mid_introduction,CG,hi,2,2,2
+2025-12-27,Relational Comparison,parent_poll,CG,hi,4,2,2
+2025-12-27,Relational Comparison,questions,CG,hi,2,2,2
+2025-12-27,Relational Comparison,rewards,CG,hi,2,2,2
+2025-12-27,Relational Comparison,started,CG,hi,2,2,2
+2025-12-27,Relational Comparison,validation,CG,hi,2,2,2
+2025-12-27,Relational Comparison II,completed,CG,hi,3,3,3
+2025-12-27,Relational Comparison II,introduction,CG,hi,3,3,3
+2025-12-27,Relational Comparison II,mid_introduction,CG,hi,3,3,3
+2025-12-27,Relational Comparison II,parent_poll,CG,hi,6,3,3
+2025-12-27,Relational Comparison II,questions,CG,hi,3,3,3
+2025-12-27,Relational Comparison II,rewards,CG,hi,3,3,3
+2025-12-27,Relational Comparison II,started,CG,hi,3,3,3
+2025-12-27,Relational Comparison II,validation,CG,hi,3,3,3
+2025-12-27,Revision Colors,completed,CG,hi,1,1,1
+2025-12-27,Revision Colors,introduction,CG,hi,1,1,1
+2025-12-27,Revision Colors,introduction,CG,mr,1,1,1
+2025-12-27,Revision Colors,mid_introduction,CG,mr,1,1,1
+2025-12-27,Revision Colors,parent_poll,CG,hi,1,1,1
+2025-12-27,Revision Colors,parent_poll,CG,mr,1,1,1
+2025-12-27,Revision Colors,questions,CG,hi,2,1,1
+2025-12-27,Revision Colors,questions,CG,mr,1,1,1
+2025-12-27,Revision Colors,rewards,CG,mr,1,1,1
+2025-12-27,Revision Colors,started,CG,hi,1,1,1
+2025-12-27,Revision Colors,started,CG,mr,1,1,1
+2025-12-27,Revision Shapes,completed,CG,hi,4,3,3
+2025-12-27,Revision Shapes,introduction,CG,hi,4,3,3
+2025-12-27,Revision Shapes,mid_introduction,CG,hi,3,3,3
+2025-12-27,Revision Shapes,parent_poll,CG,hi,4,3,3
+2025-12-27,Revision Shapes,questions,CG,hi,3,3,3
+2025-12-27,Revision Shapes,rewards,CG,hi,3,3,3
+2025-12-27,Revision Shapes,started,CG,hi,4,3,3
+2025-12-27,Revision Shapes,validation,CG,hi,3,3,3
+2025-12-27,Rhyming Words,completed,LL,hi,1,1,1
+2025-12-27,Rhyming Words,introduction,LL,hi,2,2,2
+2025-12-27,Rhyming Words,mid_introduction,LL,hi,1,1,1
+2025-12-27,Rhyming Words,parent_poll,LL,hi,2,2,2
+2025-12-27,Rhyming Words,questions,LL,hi,1,1,1
+2025-12-27,Rhyming Words,rewards,LL,hi,1,1,1
+2025-12-27,Rhyming Words,started,LL,hi,2,2,2
+2025-12-27,Rhyming Words,validation,LL,hi,1,1,1
+2025-12-27,Shape Circle,completed,CG,hi,1,1,1
+2025-12-27,Shape Circle,completed,CG,mr,7,5,5
+2025-12-27,Shape Circle,introduction,CG,hi,1,1,1
+2025-12-27,Shape Circle,introduction,CG,mr,22,22,22
+2025-12-27,Shape Circle,mid_introduction,CG,hi,1,1,1
+2025-12-27,Shape Circle,mid_introduction,CG,mr,12,12,12
+2025-12-27,Shape Circle,parent_poll,CG,hi,1,1,1
+2025-12-27,Shape Circle,parent_poll,CG,mr,24,22,22
+2025-12-27,Shape Circle,questions,CG,hi,1,1,1
+2025-12-27,Shape Circle,questions,CG,mr,18,18,18
+2025-12-27,Shape Circle,rewards,CG,hi,1,1,1
+2025-12-27,Shape Circle,rewards,CG,mr,17,17,17
+2025-12-27,Shape Circle,started,CG,hi,1,1,1
+2025-12-27,Shape Circle,started,CG,mr,25,22,22
+2025-12-27,Shape Circle,validation,CG,hi,1,1,1
+2025-12-27,Shape Circle,validation,CG,mr,3,3,3
+2025-12-27,Shape Rectangle,introduction,CG,hi,1,1,1
+2025-12-27,Shape Rectangle,parent_poll,CG,hi,1,1,1
+2025-12-27,Shape Rectangle,started,CG,hi,1,1,1
+2025-12-27,Shape Triangle,completed,CG,mr,15,13,13
+2025-12-27,Shape Triangle,introduction,CG,mr,52,49,49
+2025-12-27,Shape Triangle,mid_introduction,CG,mr,31,31,31
+2025-12-27,Shape Triangle,parent_poll,CG,mr,58,52,52
+2025-12-27,Shape Triangle,questions,CG,mr,41,41,41
+2025-12-27,Shape Triangle,rewards,CG,mr,39,39,39
+2025-12-27,Shape Triangle,started,CG,mr,55,51,51
+2025-12-27,Shape Triangle,validation,CG,mr,4,4,4
+2025-12-27,Sorting Primary Shapes,completed,CG,hi,3,3,3
+2025-12-27,Sorting Primary Shapes,introduction,CG,hi,3,3,3
+2025-12-27,Sorting Primary Shapes,mid_introduction,CG,hi,3,3,3
+2025-12-27,Sorting Primary Shapes,parent_poll,CG,hi,6,3,3
+2025-12-27,Sorting Primary Shapes,questions,CG,hi,3,3,3
+2025-12-27,Sorting Primary Shapes,rewards,CG,hi,3,3,3
+2025-12-27,Sorting Primary Shapes,started,CG,hi,3,3,3
+2025-12-27,Sorting Primary Shapes,validation,CG,hi,3,3,3
+2025-12-28,Beginning Sounds Ka/Na/Ta,completed,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,introduction,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,introduction,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,mid_introduction,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,mid_introduction,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,parent_poll,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,parent_poll,LL,mr,2,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,questions,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,questions,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,rewards,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,rewards,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,started,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ka/Na/Ta,started,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,validation,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ka/Na/Ta,validation,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ma/Cha/Ba,completed,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Ma/Cha/Ba,completed,LL,mr,6,4,4
+2025-12-28,Beginning Sounds Ma/Cha/Ba,introduction,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,introduction,LL,mr,5,3,3
+2025-12-28,Beginning Sounds Ma/Cha/Ba,mid_introduction,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,mid_introduction,LL,mr,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,parent_poll,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,parent_poll,LL,mr,7,4,4
+2025-12-28,Beginning Sounds Ma/Cha/Ba,questions,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,questions,LL,mr,8,3,3
+2025-12-28,Beginning Sounds Ma/Cha/Ba,rewards,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,rewards,LL,mr,2,2,2
+2025-12-28,Beginning Sounds Ma/Cha/Ba,started,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Ma/Cha/Ba,started,LL,mr,7,5,5
+2025-12-28,Beginning Sounds Ma/Cha/Ba,validation,LL,mr,2,2,2
+2025-12-28,Beginning Sounds Ma/Ka/La,completed,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,introduction,LL,hi,4,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,mid_introduction,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,parent_poll,LL,hi,7,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,questions,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,rewards,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,started,LL,hi,4,3,3
+2025-12-28,Beginning Sounds Ma/Ka/La,started,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Ma/Ka/La,validation,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Pa/Cha/Sa,completed,LL,hi,6,5,5
+2025-12-28,Beginning Sounds Pa/Cha/Sa,introduction,LL,hi,8,7,7
+2025-12-28,Beginning Sounds Pa/Cha/Sa,introduction,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Pa/Cha/Sa,mid_introduction,LL,hi,5,4,4
+2025-12-28,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,hi,12,7,7
+2025-12-28,Beginning Sounds Pa/Cha/Sa,parent_poll,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Pa/Cha/Sa,questions,LL,hi,7,5,5
+2025-12-28,Beginning Sounds Pa/Cha/Sa,rewards,LL,hi,5,4,4
+2025-12-28,Beginning Sounds Pa/Cha/Sa,started,LL,hi,8,7,7
+2025-12-28,Beginning Sounds Pa/Cha/Sa,started,LL,mr,1,1,1
+2025-12-28,Beginning Sounds Pa/Cha/Sa,validation,LL,hi,5,4,4
+2025-12-28,Beginning Sounds Pa/Ga/Ra,completed,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Pa/Ga/Ra,completed,LL,mr,29,26,26
+2025-12-28,Beginning Sounds Pa/Ga/Ra,introduction,LL,hi,6,6,5
+2025-12-28,Beginning Sounds Pa/Ga/Ra,introduction,LL,mr,36,31,30
+2025-12-28,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,hi,4,4,4
+2025-12-28,Beginning Sounds Pa/Ga/Ra,mid_introduction,LL,mr,23,20,19
+2025-12-28,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,hi,6,6,5
+2025-12-28,Beginning Sounds Pa/Ga/Ra,parent_poll,LL,mr,47,31,30
+2025-12-28,Beginning Sounds Pa/Ga/Ra,questions,LL,hi,8,4,4
+2025-12-28,Beginning Sounds Pa/Ga/Ra,questions,LL,mr,62,28,27
+2025-12-28,Beginning Sounds Pa/Ga/Ra,rewards,LL,hi,4,4,4
+2025-12-28,Beginning Sounds Pa/Ga/Ra,rewards,LL,mr,24,21,20
+2025-12-28,Beginning Sounds Pa/Ga/Ra,started,LL,hi,6,6,5
+2025-12-28,Beginning Sounds Pa/Ga/Ra,started,LL,mr,36,31,30
+2025-12-28,Beginning Sounds Pa/Ga/Ra,validation,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Pa/Ga/Ra,validation,LL,mr,21,18,18
+2025-12-28,Beginning Sounds Sa/La/Va,completed,LL,mr,12,11,11
+2025-12-28,Beginning Sounds Sa/La/Va,introduction,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Sa/La/Va,introduction,LL,mr,17,15,15
+2025-12-28,Beginning Sounds Sa/La/Va,mid_introduction,LL,mr,11,10,10
+2025-12-28,Beginning Sounds Sa/La/Va,parent_poll,LL,hi,1,1,1
+2025-12-28,Beginning Sounds Sa/La/Va,parent_poll,LL,mr,21,15,15
+2025-12-28,Beginning Sounds Sa/La/Va,questions,LL,mr,27,13,13
+2025-12-28,Beginning Sounds Sa/La/Va,rewards,LL,mr,11,10,10
+2025-12-28,Beginning Sounds Sa/La/Va,started,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Sa/La/Va,started,LL,mr,17,15,15
+2025-12-28,Beginning Sounds Sa/La/Va,validation,LL,mr,10,9,9
+2025-12-28,Beginning Sounds Ta/Va/Ga,completed,LL,hi,3,3,3
+2025-12-28,Beginning Sounds Ta/Va/Ga,introduction,LL,hi,4,4,4
+2025-12-28,Beginning Sounds Ta/Va/Ga,mid_introduction,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ta/Va/Ga,parent_poll,LL,hi,6,5,5
+2025-12-28,Beginning Sounds Ta/Va/Ga,questions,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ta/Va/Ga,rewards,LL,hi,2,2,2
+2025-12-28,Beginning Sounds Ta/Va/Ga,started,LL,hi,5,5,5
+2025-12-28,Beginning Sounds Ta/Va/Ga,validation,LL,hi,2,2,2
+2025-12-28,Color Blue,completed,CG,hi,2,2,2
+2025-12-28,Color Blue,completed,CG,mr,201,175,170
+2025-12-28,Color Blue,introduction,CG,hi,5,5,5
+2025-12-28,Color Blue,introduction,CG,mr,503,445,438
+2025-12-28,Color Blue,mid_introduction,CG,hi,3,3,3
+2025-12-28,Color Blue,mid_introduction,CG,mr,305,305,305
+2025-12-28,Color Blue,parent_poll,CG,hi,9,7,7
+2025-12-28,Color Blue,parent_poll,CG,mr,631,475,463
+2025-12-28,Color Blue,questions,CG,hi,5,5,5
+2025-12-28,Color Blue,questions,CG,mr,363,359,357
+2025-12-28,Color Blue,rewards,CG,hi,5,5,5
+2025-12-28,Color Blue,rewards,CG,mr,348,348,348
+2025-12-28,Color Blue,started,CG,hi,10,10,10
+2025-12-28,Color Blue,started,CG,mr,555,470,456
+2025-12-28,Color Blue,validation,CG,hi,3,3,3
+2025-12-28,Color Blue,validation,CG,mr,93,93,93
+2025-12-28,Color Red,completed,CG,mr,6,6,6
+2025-12-28,Color Red,introduction,CG,mr,14,13,13
+2025-12-28,Color Red,mid_introduction,CG,mr,10,10,10
+2025-12-28,Color Red,parent_poll,CG,mr,21,16,16
+2025-12-28,Color Red,questions,CG,mr,11,11,11
+2025-12-28,Color Red,rewards,CG,mr,11,11,11
+2025-12-28,Color Red,started,CG,mr,17,15,15
+2025-12-28,Color Red,validation,CG,mr,4,4,4
+2025-12-28,Color Yellow,completed,CG,hi,2,2,2
+2025-12-28,Color Yellow,completed,CG,mr,14,14,14
+2025-12-28,Color Yellow,introduction,CG,hi,3,3,3
+2025-12-28,Color Yellow,introduction,CG,mr,42,38,38
+2025-12-28,Color Yellow,mid_introduction,CG,hi,2,2,2
+2025-12-28,Color Yellow,mid_introduction,CG,mr,27,27,27
+2025-12-28,Color Yellow,parent_poll,CG,hi,3,3,3
+2025-12-28,Color Yellow,parent_poll,CG,mr,52,42,42
+2025-12-28,Color Yellow,questions,CG,hi,2,2,2
+2025-12-28,Color Yellow,questions,CG,mr,32,32,32
+2025-12-28,Color Yellow,rewards,CG,hi,2,2,2
+2025-12-28,Color Yellow,rewards,CG,mr,30,30,30
+2025-12-28,Color Yellow,started,CG,hi,3,3,3
+2025-12-28,Color Yellow,started,CG,mr,48,44,44
+2025-12-28,Color Yellow,validation,CG,hi,2,2,2
+2025-12-28,Color Yellow,validation,CG,mr,8,8,8
+2025-12-28,Emotion Identification,completed,SEL,hi,10,4,2
+2025-12-28,Emotion Identification,introduction,SEL,hi,15,5,3
+2025-12-28,Emotion Identification,mid_introduction,SEL,hi,12,4,2
+2025-12-28,Emotion Identification,parent_poll,SEL,hi,26,5,3
+2025-12-28,Emotion Identification,questions,SEL,hi,12,4,2
+2025-12-28,Emotion Identification,rewards,SEL,hi,12,4,2
+2025-12-28,Emotion Identification,started,SEL,hi,16,5,3
+2025-12-28,Emotion Identification,validation,SEL,hi,12,4,2
+2025-12-28,Identification of all emotions,completed,SEL,hi,3,2,2
+2025-12-28,Identification of all emotions,introduction,SEL,hi,3,2,2
+2025-12-28,Identification of all emotions,mid_introduction,SEL,hi,2,2,2
+2025-12-28,Identification of all emotions,parent_poll,SEL,hi,5,2,2
+2025-12-28,Identification of all emotions,questions,SEL,hi,2,2,2
+2025-12-28,Identification of all emotions,rewards,SEL,hi,2,2,2
+2025-12-28,Identification of all emotions,started,SEL,hi,3,2,2
+2025-12-28,Identification of all emotions,validation,SEL,hi,2,2,2
+2025-12-28,Numbers II,completed,NM,hi,1,1,1
+2025-12-28,Numbers II,introduction,NM,hi,1,1,1
+2025-12-28,Numbers II,mid_introduction,NM,hi,1,1,1
+2025-12-28,Numbers II,parent_poll,NM,hi,1,1,1
+2025-12-28,Numbers II,questions,NM,hi,1,1,1
+2025-12-28,Numbers II,rewards,NM,hi,1,1,1
+2025-12-28,Numbers II,started,NM,hi,1,1,1
+2025-12-28,Numbers II,validation,NM,hi,1,1,1
+2025-12-28,Numerals 1-10,completed,NM,hi,6,6,6
+2025-12-28,Numerals 1-10,introduction,NM,hi,7,6,6
+2025-12-28,Numerals 1-10,mid_introduction,NM,hi,6,5,5
+2025-12-28,Numerals 1-10,parent_poll,NM,hi,12,7,7
+2025-12-28,Numerals 1-10,questions,NM,hi,6,5,5
+2025-12-28,Numerals 1-10,rewards,NM,hi,6,5,5
+2025-12-28,Numerals 1-10,started,NM,hi,8,6,6
+2025-12-28,Numerals 1-10,validation,NM,hi,5,5,5
+2025-12-28,Patterns AB,completed,CG,hi,2,2,2
+2025-12-28,Patterns AB,completed,CG,mr,35,33,33
+2025-12-28,Patterns AB,introduction,CG,hi,5,5,5
+2025-12-28,Patterns AB,introduction,CG,mr,214,168,162
+2025-12-28,Patterns AB,mid_introduction,CG,hi,1,1,1
+2025-12-28,Patterns AB,mid_introduction,CG,mr,84,79,78
+2025-12-28,Patterns AB,parent_poll,CG,hi,6,5,5
+2025-12-28,Patterns AB,parent_poll,CG,mr,240,177,171
+2025-12-28,Patterns AB,rewards,CG,hi,1,1,1
+2025-12-28,Patterns AB,rewards,CG,mr,88,82,80
+2025-12-28,Patterns AB,started,CG,hi,5,5,5
+2025-12-28,Patterns AB,started,CG,mr,239,180,174
+2025-12-28,Patterns AB,validation,CG,hi,1,1,1
+2025-12-28,Patterns AB,validation,CG,mr,24,24,24
+2025-12-28,"Patterns ABC, AAB",completed,CG,hi,3,3,3
+2025-12-28,"Patterns ABC, AAB",completed,CG,mr,3,3,3
+2025-12-28,"Patterns ABC, AAB",introduction,CG,hi,9,7,6
+2025-12-28,"Patterns ABC, AAB",introduction,CG,mr,14,10,9
+2025-12-28,"Patterns ABC, AAB",mid_introduction,CG,hi,4,4,4
+2025-12-28,"Patterns ABC, AAB",mid_introduction,CG,mr,7,6,6
+2025-12-28,"Patterns ABC, AAB",parent_poll,CG,hi,13,8,7
+2025-12-28,"Patterns ABC, AAB",parent_poll,CG,mr,15,10,9
+2025-12-28,"Patterns ABC, AAB",rewards,CG,hi,4,4,4
+2025-12-28,"Patterns ABC, AAB",rewards,CG,mr,7,6,6
+2025-12-28,"Patterns ABC, AAB",started,CG,hi,17,14,13
+2025-12-28,"Patterns ABC, AAB",started,CG,mr,22,18,17
+2025-12-28,"Patterns ABC, AAB",validation,CG,hi,3,3,3
+2025-12-28,"Patterns ABC, AAB",validation,CG,mr,2,2,2
+2025-12-28,Positions,completed,CG,hi,1,1,1
+2025-12-28,Positions,introduction,CG,hi,2,2,2
+2025-12-28,Positions,introduction,CG,mr,2,2,2
+2025-12-28,Positions,mid_introduction,CG,hi,1,1,1
+2025-12-28,Positions,mid_introduction,CG,mr,2,2,2
+2025-12-28,Positions,parent_poll,CG,hi,2,2,2
+2025-12-28,Positions,parent_poll,CG,mr,2,2,2
+2025-12-28,Positions,questions,CG,hi,1,1,1
+2025-12-28,Positions,questions,CG,mr,2,2,2
+2025-12-28,Positions,rewards,CG,hi,1,1,1
+2025-12-28,Positions,rewards,CG,mr,2,2,2
+2025-12-28,Positions,started,CG,hi,3,3,3
+2025-12-28,Positions,started,CG,mr,4,4,4
+2025-12-28,Positions,validation,CG,hi,1,1,1
+2025-12-28,Primary Emotion Labelling,completed,SEL,hi,4,3,3
+2025-12-28,Primary Emotion Labelling,introduction,SEL,hi,5,4,4
+2025-12-28,Primary Emotion Labelling,mid_introduction,SEL,hi,3,3,3
+2025-12-28,Primary Emotion Labelling,parent_poll,SEL,hi,8,4,4
+2025-12-28,Primary Emotion Labelling,questions,SEL,hi,5,3,3
+2025-12-28,Primary Emotion Labelling,rewards,SEL,hi,3,3,3
+2025-12-28,Primary Emotion Labelling,started,SEL,hi,5,4,4
+2025-12-28,Primary Emotion Labelling,validation,SEL,hi,3,3,3
+2025-12-28,Primary Emotion Labelling : Anger,completed,SEL,hi,2,2,2
+2025-12-28,Primary Emotion Labelling : Anger,completed,SEL,mr,5,5,5
+2025-12-28,Primary Emotion Labelling : Anger,introduction,SEL,hi,7,6,6
+2025-12-28,Primary Emotion Labelling : Anger,introduction,SEL,mr,6,6,6
+2025-12-28,Primary Emotion Labelling : Anger,mid_introduction,SEL,hi,5,5,5
+2025-12-28,Primary Emotion Labelling : Anger,mid_introduction,SEL,mr,6,6,6
+2025-12-28,Primary Emotion Labelling : Anger,parent_poll,SEL,hi,10,6,6
+2025-12-28,Primary Emotion Labelling : Anger,parent_poll,SEL,mr,10,6,6
+2025-12-28,Primary Emotion Labelling : Anger,questions,SEL,hi,12,6,6
+2025-12-28,Primary Emotion Labelling : Anger,questions,SEL,mr,12,6,6
+2025-12-28,Primary Emotion Labelling : Anger,rewards,SEL,hi,6,6,6
+2025-12-28,Primary Emotion Labelling : Anger,rewards,SEL,mr,6,6,6
+2025-12-28,Primary Emotion Labelling : Anger,started,SEL,hi,8,6,6
+2025-12-28,Primary Emotion Labelling : Anger,started,SEL,mr,6,6,6
+2025-12-28,Primary Emotion Labelling : Anger,validation,SEL,hi,3,3,3
+2025-12-28,Primary Emotion Labelling : Anger,validation,SEL,mr,4,4,4
+2025-12-28,Primary Emotion Labelling : Fear,completed,SEL,hi,3,3,3
+2025-12-28,Primary Emotion Labelling : Fear,completed,SEL,mr,7,7,7
+2025-12-28,Primary Emotion Labelling : Fear,introduction,SEL,hi,8,7,7
+2025-12-28,Primary Emotion Labelling : Fear,introduction,SEL,mr,13,12,12
+2025-12-28,Primary Emotion Labelling : Fear,mid_introduction,SEL,hi,4,4,4
+2025-12-28,Primary Emotion Labelling : Fear,mid_introduction,SEL,mr,6,6,6
+2025-12-28,Primary Emotion Labelling : Fear,parent_poll,SEL,hi,9,7,7
+2025-12-28,Primary Emotion Labelling : Fear,parent_poll,SEL,mr,16,12,12
+2025-12-28,Primary Emotion Labelling : Fear,questions,SEL,hi,10,6,6
+2025-12-28,Primary Emotion Labelling : Fear,questions,SEL,mr,13,7,7
+2025-12-28,Primary Emotion Labelling : Fear,rewards,SEL,hi,4,4,4
+2025-12-28,Primary Emotion Labelling : Fear,rewards,SEL,mr,6,6,6
+2025-12-28,Primary Emotion Labelling : Fear,started,SEL,hi,8,7,7
+2025-12-28,Primary Emotion Labelling : Fear,started,SEL,mr,13,12,12
+2025-12-28,Primary Emotion Labelling : Fear,validation,SEL,hi,1,1,1
+2025-12-28,Primary Emotion Labelling : Fear,validation,SEL,mr,3,3,3
+2025-12-28,Primary Emotion Labelling : Happy,completed,SEL,hi,3,3,3
+2025-12-28,Primary Emotion Labelling : Happy,completed,SEL,mr,8,8,8
+2025-12-28,Primary Emotion Labelling : Happy,introduction,SEL,hi,7,6,6
+2025-12-28,Primary Emotion Labelling : Happy,introduction,SEL,mr,11,10,10
+2025-12-28,Primary Emotion Labelling : Happy,mid_introduction,SEL,hi,1,1,1
+2025-12-28,Primary Emotion Labelling : Happy,mid_introduction,SEL,mr,8,7,7
+2025-12-28,Primary Emotion Labelling : Happy,parent_poll,SEL,hi,7,6,6
+2025-12-28,Primary Emotion Labelling : Happy,parent_poll,SEL,mr,17,11,11
+2025-12-28,Primary Emotion Labelling : Happy,questions,SEL,hi,5,4,4
+2025-12-28,Primary Emotion Labelling : Happy,questions,SEL,mr,20,9,9
+2025-12-28,Primary Emotion Labelling : Happy,rewards,SEL,hi,1,1,1
+2025-12-28,Primary Emotion Labelling : Happy,rewards,SEL,mr,8,7,7
+2025-12-28,Primary Emotion Labelling : Happy,started,SEL,hi,7,6,6
+2025-12-28,Primary Emotion Labelling : Happy,started,SEL,mr,13,11,11
+2025-12-28,Primary Emotion Labelling : Happy,validation,SEL,mr,4,4,4
+2025-12-28,Primary Emotion Labelling : Sad,completed,SEL,hi,4,4,4
+2025-12-28,Primary Emotion Labelling : Sad,completed,SEL,mr,6,5,5
+2025-12-28,Primary Emotion Labelling : Sad,introduction,SEL,hi,5,5,5
+2025-12-28,Primary Emotion Labelling : Sad,introduction,SEL,mr,12,10,9
+2025-12-28,Primary Emotion Labelling : Sad,mid_introduction,SEL,hi,5,5,5
+2025-12-28,Primary Emotion Labelling : Sad,mid_introduction,SEL,mr,7,7,6
+2025-12-28,Primary Emotion Labelling : Sad,parent_poll,SEL,hi,9,5,5
+2025-12-28,Primary Emotion Labelling : Sad,parent_poll,SEL,mr,16,10,9
+2025-12-28,Primary Emotion Labelling : Sad,questions,SEL,hi,12,6,6
+2025-12-28,Primary Emotion Labelling : Sad,questions,SEL,mr,15,8,7
+2025-12-28,Primary Emotion Labelling : Sad,rewards,SEL,hi,6,6,6
+2025-12-28,Primary Emotion Labelling : Sad,rewards,SEL,mr,7,7,6
+2025-12-28,Primary Emotion Labelling : Sad,started,SEL,hi,6,6,6
+2025-12-28,Primary Emotion Labelling : Sad,started,SEL,mr,12,10,9
+2025-12-28,Primary Emotion Labelling : Sad,validation,SEL,hi,4,4,4
+2025-12-28,Primary Emotion Labelling : Sad,validation,SEL,mr,4,4,4
+2025-12-28,Quantitative Comparison,introduction,NM,mr,1,1,1
+2025-12-28,Quantitative Comparison,parent_poll,NM,mr,1,1,1
+2025-12-28,Quantitative Comparison,started,NM,mr,1,1,1
+2025-12-28,Relational Comparison,completed,CG,hi,1,1,1
+2025-12-28,Relational Comparison,introduction,CG,hi,1,1,1
+2025-12-28,Relational Comparison,mid_introduction,CG,hi,1,1,1
+2025-12-28,Relational Comparison,parent_poll,CG,hi,2,1,1
+2025-12-28,Relational Comparison,questions,CG,hi,1,1,1
+2025-12-28,Relational Comparison,rewards,CG,hi,1,1,1
+2025-12-28,Relational Comparison,started,CG,hi,1,1,1
+2025-12-28,Relational Comparison,validation,CG,hi,1,1,1
+2025-12-28,Revision Colors,completed,CG,hi,2,2,2
+2025-12-28,Revision Colors,introduction,CG,hi,2,2,2
+2025-12-28,Revision Colors,mid_introduction,CG,hi,2,2,2
+2025-12-28,Revision Colors,parent_poll,CG,hi,3,2,2
+2025-12-28,Revision Colors,questions,CG,hi,2,2,2
+2025-12-28,Revision Colors,rewards,CG,hi,2,2,2
+2025-12-28,Revision Colors,started,CG,hi,2,2,2
+2025-12-28,Revision Colors,validation,CG,hi,2,2,2
+2025-12-28,Revision Shapes,completed,CG,hi,2,2,2
+2025-12-28,Revision Shapes,introduction,CG,hi,2,2,2
+2025-12-28,Revision Shapes,mid_introduction,CG,hi,2,2,2
+2025-12-28,Revision Shapes,parent_poll,CG,hi,2,2,2
+2025-12-28,Revision Shapes,questions,CG,hi,2,2,2
+2025-12-28,Revision Shapes,rewards,CG,hi,2,2,2
+2025-12-28,Revision Shapes,started,CG,hi,2,2,2
+2025-12-28,Revision Shapes,validation,CG,hi,2,2,2
+2025-12-28,Shape Circle,completed,CG,mr,3,3,3
+2025-12-28,Shape Circle,introduction,CG,mr,9,9,9
+2025-12-28,Shape Circle,mid_introduction,CG,mr,4,4,4
+2025-12-28,Shape Circle,parent_poll,CG,mr,10,9,9
+2025-12-28,Shape Circle,questions,CG,mr,5,5,5
+2025-12-28,Shape Circle,rewards,CG,mr,5,5,5
+2025-12-28,Shape Circle,started,CG,mr,11,11,11
+2025-12-28,Shape Circle,validation,CG,mr,2,2,2
+2025-12-28,Shape Rectangle,completed,CG,hi,2,2,2
+2025-12-28,Shape Rectangle,introduction,CG,hi,2,2,2
+2025-12-28,Shape Rectangle,mid_introduction,CG,hi,2,2,2
+2025-12-28,Shape Rectangle,parent_poll,CG,hi,3,2,2
+2025-12-28,Shape Rectangle,questions,CG,hi,2,2,2
+2025-12-28,Shape Rectangle,rewards,CG,hi,2,2,2
+2025-12-28,Shape Rectangle,started,CG,hi,2,2,2
+2025-12-28,Shape Rectangle,validation,CG,hi,2,2,2
+2025-12-28,Shape Square,completed,CG,hi,4,2,2
+2025-12-28,Shape Square,introduction,CG,hi,4,2,2
+2025-12-28,Shape Square,mid_introduction,CG,hi,4,2,2
+2025-12-28,Shape Square,parent_poll,CG,hi,4,2,2
+2025-12-28,Shape Square,questions,CG,hi,4,2,2
+2025-12-28,Shape Square,rewards,CG,hi,4,2,2
+2025-12-28,Shape Square,started,CG,hi,4,2,2
+2025-12-28,Shape Square,validation,CG,hi,4,2,2
+2025-12-28,Shape Triangle,completed,CG,mr,7,7,7
+2025-12-28,Shape Triangle,introduction,CG,hi,1,1,1
+2025-12-28,Shape Triangle,introduction,CG,mr,29,27,27
+2025-12-28,Shape Triangle,mid_introduction,CG,mr,18,18,18
+2025-12-28,Shape Triangle,parent_poll,CG,hi,1,1,1
+2025-12-28,Shape Triangle,parent_poll,CG,mr,36,30,30
+2025-12-28,Shape Triangle,questions,CG,mr,23,23,23
+2025-12-28,Shape Triangle,rewards,CG,mr,23,23,23
+2025-12-28,Shape Triangle,started,CG,hi,1,1,1
+2025-12-28,Shape Triangle,started,CG,mr,33,31,31
+2025-12-28,Shape Triangle,validation,CG,mr,7,7,7
+2025-12-28,Sorting Primary Colors,completed,CG,hi,2,1,1
+2025-12-28,Sorting Primary Colors,introduction,CG,hi,2,1,1
+2025-12-28,Sorting Primary Colors,mid_introduction,CG,hi,2,1,1
+2025-12-28,Sorting Primary Colors,parent_poll,CG,hi,4,1,1
+2025-12-28,Sorting Primary Colors,questions,CG,hi,2,1,1
+2025-12-28,Sorting Primary Colors,rewards,CG,hi,2,1,1
+2025-12-28,Sorting Primary Colors,started,CG,hi,2,1,1
+2025-12-28,Sorting Primary Colors,validation,CG,hi,2,1,1
+2025-12-28,Sorting Primary Shapes,completed,CG,hi,1,1,1
+2025-12-28,Sorting Primary Shapes,introduction,CG,hi,1,1,1
+2025-12-28,Sorting Primary Shapes,mid_introduction,CG,hi,1,1,1
+2025-12-28,Sorting Primary Shapes,parent_poll,CG,hi,2,1,1
+2025-12-28,Sorting Primary Shapes,questions,CG,hi,1,1,1
+2025-12-28,Sorting Primary Shapes,rewards,CG,hi,1,1,1
+2025-12-28,Sorting Primary Shapes,started,CG,hi,1,1,1
+2025-12-28,Sorting Primary Shapes,validation,CG,hi,1,1,1
