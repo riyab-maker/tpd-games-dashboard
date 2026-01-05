@@ -1019,7 +1019,7 @@ def render_monthly_new_users() -> None:
     
     # Month number to month name mapping
     month_names = {
-        1: 'January 2026',
+        1: 'January',
         7: 'July',
         8: 'August',
         9: 'September',
