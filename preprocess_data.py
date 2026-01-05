@@ -120,33 +120,96 @@ SQL_QUERY = (
 # Score distribution query - Updated to use hybrid_games and hybrid_games_links tables
 # Includes only game_completed and mcq_completed (action_level is no longer used)
 # Appends missing game-activity mappings before joining
+# Excludes Primary Emotion Labelling games from main query (only in unmapped section)
+# Normalizes activity_id for Patterns AB, Patterns ABC/AAB, and Beginning Sounds Pa/Cha/Sa before joining
 SCORE_DISTRIBUTION_QUERY = """
-WITH game_activity_mappings AS (
-  -- Existing mappings from hybrid_games and hybrid_games_links
+WITH raw_data AS (
+  -- Get raw data with language information
   SELECT 
+    mllva.idlink_va,
+    mllva.idvisit,
+    mllva.custom_dimension_1,
+    TO_HEX(mllva.idvisitor) AS idvisitor_hex,
+    mllva.server_time,
+    mllva.idaction_name,
+    mllva.custom_dimension_2 AS original_activity_id,
+    mla.name AS action_name,
+    mla.idaction,
+    mla.type,
+    matomo_log_action1.name AS language
+  FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+  INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
+  INNER JOIN rl_dwh_prod.live.matomo_log_action matomo_log_action1 ON mllva.idaction_url_ref = matomo_log_action1.idaction
+  WHERE (mla.name LIKE '%game_completed%' OR mla.name LIKE '%mcq_completed%')
+    AND mllva.server_time >= '2025-07-01'
+),
+normalized_activity_ids AS (
+  -- Normalize activity_id based on original activity_id and language
+  -- Cast original_activity_id to INTEGER for consistent type handling
+  SELECT 
+    idlink_va,
+    idvisit,
+    custom_dimension_1,
+    idvisitor_hex,
+    server_time,
+    idaction_name,
+    action_name,
+    idaction,
+    type,
+    language,
+    CASE 
+      -- Patterns AB: set to 123 for both hi and mr
+      WHEN CAST(original_activity_id AS INTEGER) IN (
+        SELECT DISTINCT hgl.activity_id 
+        FROM rl_dwh_prod.live.hybrid_games hg
+        INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+        WHERE hg.game_name = 'Patterns AB'
+      ) THEN 123
+      -- Patterns ABC, AAB: set to 125 for both hi and mr
+      WHEN CAST(original_activity_id AS INTEGER) IN (
+        SELECT DISTINCT hgl.activity_id 
+        FROM rl_dwh_prod.live.hybrid_games hg
+        INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+        WHERE hg.game_name = 'Patterns ABC, AAB'
+      ) THEN 125
+      -- Beginning Sounds Pa/Cha/Sa: hi -> 121, mr -> 122
+      WHEN CAST(original_activity_id AS INTEGER) IN (
+        SELECT DISTINCT hgl.activity_id 
+        FROM rl_dwh_prod.live.hybrid_games hg
+        INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+        WHERE hg.game_name = 'Beginning Sound Pa Cha Sa'
+      ) AND language = 'hi' THEN 121
+      WHEN CAST(original_activity_id AS INTEGER) IN (
+        SELECT DISTINCT hgl.activity_id 
+        FROM rl_dwh_prod.live.hybrid_games hg
+        INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+        WHERE hg.game_name = 'Beginning Sound Pa Cha Sa'
+      ) AND language = 'mr' THEN 122
+      -- Keep original activity_id for all other cases (cast to INTEGER)
+      ELSE CAST(original_activity_id AS INTEGER)
+    END AS normalized_activity_id
+  FROM raw_data
+  WHERE original_activity_id IS NOT NULL 
+    AND original_activity_id != ''
+),
+game_activity_mappings AS (
+  -- Existing mappings from hybrid_games and hybrid_games_links
+  -- Exclude Primary Emotion Labelling games (game_ids 37, 38, 39, 40) from main query
+  SELECT DISTINCT
     hg.game_name,
     hg.game_code,
     hgl.activity_id
   FROM rl_dwh_prod.live.hybrid_games hg
   INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+  WHERE hg.id NOT IN (37, 38, 39, 40)  -- Exclude Primary Emotion Labelling games
   
   UNION ALL
   
-  -- Missing game-activity mappings (Primary Emotion Labelling games)
+  -- Missing game-activity mappings (Primary Emotion Labelling games - only in unmapped section)
   SELECT 
     'Primary Emotion Labelling : Happy' AS game_name,
     'HY-37-SEL-08' AS game_code,
     140 AS activity_id
-  UNION ALL
-  SELECT 
-    'Primary Emotion Labelling : Happy' AS game_name,
-    'HY-37-SEL-08' AS game_code,
-    140 AS activity_id
-  UNION ALL
-  SELECT 
-    'Primary Emotion Labelling : Sad' AS game_name,
-    'HY-38-SEL-08' AS game_code,
-    130 AS activity_id
   UNION ALL
   SELECT 
     'Primary Emotion Labelling : Sad' AS game_name,
@@ -159,41 +222,60 @@ WITH game_activity_mappings AS (
     131 AS activity_id
   UNION ALL
   SELECT 
-    'Primary Emotion Labelling : Anger' AS game_name,
-    'HY-39-SEL-08' AS game_code,
-    131 AS activity_id
-  UNION ALL
-  SELECT 
     'Primary Emotion Labelling : Fear' AS game_name,
     'HY-40-SEL-08' AS game_code,
     132 AS activity_id
   UNION ALL
+  
+  -- Normalized activity_id mappings for renamed games
+  -- These ensure the normalized activity_ids exist in game_activity_mappings
+  -- Patterns AB: normalized to 123 (for both hi and mr)
   SELECT 
-    'Primary Emotion Labelling : Fear' AS game_name,
-    'HY-40-SEL-08' AS game_code,
-    132 AS activity_id
+    'Patterns AB' AS game_name,
+    'HY-12-CG-07' AS game_code,
+    123 AS activity_id
+  UNION ALL
+  -- Patterns ABC, AAB: normalized to 125 (for both hi and mr)
+  SELECT 
+    'Patterns ABC, AAB' AS game_name,
+    'HY-16-CG-10' AS game_code,
+    125 AS activity_id
+  UNION ALL
+  -- Beginning Sounds Pa/Cha/Sa: normalized to 121 (hi) and 122 (mr)
+  -- Get game_code from hybrid_games table
+  SELECT 
+    'Beginning Sound Pa Cha Sa' AS game_name,
+    (SELECT hg.game_code 
+     FROM rl_dwh_prod.live.hybrid_games hg 
+     WHERE hg.game_name = 'Beginning Sound Pa Cha Sa' 
+     LIMIT 1) AS game_code,
+    121 AS activity_id
+  UNION ALL
+  SELECT 
+    'Beginning Sound Pa Cha Sa' AS game_name,
+    (SELECT hg.game_code 
+     FROM rl_dwh_prod.live.hybrid_games hg 
+     WHERE hg.game_name = 'Beginning Sound Pa Cha Sa' 
+     LIMIT 1) AS game_code,
+    122 AS activity_id
 )
-SELECT 
-  mllva.idlink_va,
+SELECT DISTINCT
+  nai.idlink_va,
   gam.game_name,
-  mllva.idvisit,
-  mla.name AS action_name,
-  mllva.custom_dimension_1,
-  TO_HEX(mllva.idvisitor) AS idvisitor_hex,
-  mllva.server_time,
-  mllva.idaction_name,
-  mllva.custom_dimension_2,
-  mla.idaction,
-  mla.type,
+  nai.idvisit,
+  nai.action_name,
+  nai.custom_dimension_1,
+  nai.idvisitor_hex,
+  nai.server_time,
+  nai.idaction_name,
+  nai.normalized_activity_id AS custom_dimension_2,
+  nai.idaction,
+  nai.type,
   gam.game_code,
-  matomo_log_action1.name AS language
-FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
-INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
-INNER JOIN game_activity_mappings gam ON mllva.custom_dimension_2 = gam.activity_id
-INNER JOIN rl_dwh_prod.live.matomo_log_action matomo_log_action1 ON mllva.idaction_url_ref = matomo_log_action1.idaction
-WHERE (mla.name LIKE '%game_completed%' OR mla.name LIKE '%mcq_completed%')
-  AND mllva.server_time >= '2025-07-01'
-  AND gam.activity_id IS NOT NULL
+  nai.language
+FROM normalized_activity_ids nai
+INNER JOIN game_activity_mappings gam ON nai.normalized_activity_id = gam.activity_id
+WHERE gam.activity_id IS NOT NULL
 """
 
 # Note: Question Correctness now uses SCORE_DISTRIBUTION_QUERY (same as score distribution)
@@ -360,6 +442,28 @@ WITH game_activity_mappings AS (
     'Primary Emotion Labelling : Fear' AS game_name,
     'HY-40-SEL-08' AS game_code,
     132 AS activity_id
+  UNION ALL
+  
+  -- Missing game-activity mappings (Patterns games)
+  SELECT 
+    'Patterns AB' AS game_name,
+    'HY-12-CG-07' AS game_code,
+    123 AS activity_id
+  UNION ALL
+  SELECT 
+    'Patterns AB' AS game_name,
+    'HY-12-CG-07' AS game_code,
+    123 AS activity_id
+  UNION ALL
+  SELECT 
+    'Patterns ABC, AAB' AS game_name,
+    'HY-16-CG-10' AS game_code,
+    125 AS activity_id
+  UNION ALL
+  SELECT 
+    'Patterns ABC, AAB' AS game_name,
+    'HY-16-CG-10' AS game_code,
+    125 AS activity_id
 )
 SELECT 
   mllva.idlink_va,
@@ -3574,16 +3678,133 @@ def fetch_hybrid_repeatability_data() -> pd.DataFrame:
         print(f"\n[STEP 2] Executing repeatability query...")
         print(f"  Query: Fetching completed game events from Redshift")
         repeatability_query = """
-        SELECT 
+        WITH raw_data AS (
+          -- Get raw data with language information
+          SELECT 
+            mllva.custom_dimension_2 AS original_activity_id,
+            TO_HEX(mllva.idvisitor) AS idvisitor_hex,
+            matomo_log_action1.name AS language
+          FROM rl_dwh_prod.live.matomo_log_link_visit_action mllva
+          INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
+          INNER JOIN rl_dwh_prod.live.matomo_log_action matomo_log_action1 ON mllva.idaction_url_ref = matomo_log_action1.idaction
+          WHERE (mla.name LIKE '%hybrid_game_completed%'
+                 OR mla.name LIKE '%hybrid_mcq_completed%')
+            AND mllva.server_time >= '2025-07-01'
+            AND mllva.custom_dimension_2 IS NOT NULL 
+            AND mllva.custom_dimension_2 != ''
+        ),
+        normalized_activity_ids AS (
+          -- Normalize activity_id based on original activity_id and language
+          -- Cast original_activity_id to INTEGER for consistent type handling
+          SELECT 
+            idvisitor_hex,
+            language,
+            CASE 
+              -- Patterns AB: set to 123 for both hi and mr
+              WHEN CAST(original_activity_id AS INTEGER) IN (
+                SELECT DISTINCT hgl.activity_id 
+                FROM rl_dwh_prod.live.hybrid_games hg
+                INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+                WHERE hg.game_name = 'Patterns AB'
+              ) THEN 123
+              -- Patterns ABC, AAB: set to 125 for both hi and mr
+              WHEN CAST(original_activity_id AS INTEGER) IN (
+                SELECT DISTINCT hgl.activity_id 
+                FROM rl_dwh_prod.live.hybrid_games hg
+                INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+                WHERE hg.game_name = 'Patterns ABC, AAB'
+              ) THEN 125
+              -- Beginning Sounds Pa/Cha/Sa: hi -> 121, mr -> 122
+              WHEN CAST(original_activity_id AS INTEGER) IN (
+                SELECT DISTINCT hgl.activity_id 
+                FROM rl_dwh_prod.live.hybrid_games hg
+                INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+                WHERE hg.game_name = 'Beginning Sound Pa Cha Sa'
+              ) AND language = 'hi' THEN 121
+              WHEN CAST(original_activity_id AS INTEGER) IN (
+                SELECT DISTINCT hgl.activity_id 
+                FROM rl_dwh_prod.live.hybrid_games hg
+                INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+                WHERE hg.game_name = 'Beginning Sound Pa Cha Sa'
+              ) AND language = 'mr' THEN 122
+              -- Keep original activity_id for all other cases (cast to INTEGER)
+              ELSE CAST(original_activity_id AS INTEGER)
+            END AS normalized_activity_id
+          FROM raw_data
+        ),
+        game_activity_mappings AS (
+          -- Existing mappings from hybrid_games and hybrid_games_links
+          -- Exclude Primary Emotion Labelling games (game_ids 37, 38, 39, 40) from main query
+          SELECT DISTINCT
             hg.game_name,
-            TO_HEX(mllva.idvisitor) AS idvisitor_hex
-        FROM rl_dwh_prod.live.hybrid_games hg
-        INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
-        INNER JOIN rl_dwh_prod.live.matomo_log_link_visit_action mllva ON hgl.activity_id = mllva.custom_dimension_2
-        INNER JOIN rl_dwh_prod.live.matomo_log_action mla ON mllva.idaction_name = mla.idaction
-        WHERE (mla.name LIKE '%hybrid_game_completed%'
-               OR mla.name LIKE '%hybrid_mcq_completed%')
-          AND hgl.activity_id IS NOT NULL
+            hg.game_code,
+            hgl.activity_id
+          FROM rl_dwh_prod.live.hybrid_games hg
+          INNER JOIN rl_dwh_prod.live.hybrid_games_links hgl ON hg.id = hgl.game_id
+          WHERE hg.id NOT IN (37, 38, 39, 40)  -- Exclude Primary Emotion Labelling games
+          
+          UNION ALL
+          
+          -- Missing game-activity mappings (Primary Emotion Labelling games - only in unmapped section)
+          SELECT 
+            'Primary Emotion Labelling : Happy' AS game_name,
+            'HY-37-SEL-08' AS game_code,
+            140 AS activity_id
+          UNION ALL
+          SELECT 
+            'Primary Emotion Labelling : Sad' AS game_name,
+            'HY-38-SEL-08' AS game_code,
+            130 AS activity_id
+          UNION ALL
+          SELECT 
+            'Primary Emotion Labelling : Anger' AS game_name,
+            'HY-39-SEL-08' AS game_code,
+            131 AS activity_id
+          UNION ALL
+          SELECT 
+            'Primary Emotion Labelling : Fear' AS game_name,
+            'HY-40-SEL-08' AS game_code,
+            132 AS activity_id
+          UNION ALL
+          
+          -- Normalized activity_id mappings for renamed games
+          -- These ensure the normalized activity_ids exist in game_activity_mappings
+          -- Patterns AB: normalized to 123 (for both hi and mr)
+          SELECT 
+            'Patterns AB' AS game_name,
+            'HY-12-CG-07' AS game_code,
+            123 AS activity_id
+          UNION ALL
+          -- Patterns ABC, AAB: normalized to 125 (for both hi and mr)
+          SELECT 
+            'Patterns ABC, AAB' AS game_name,
+            'HY-16-CG-10' AS game_code,
+            125 AS activity_id
+          UNION ALL
+          -- Beginning Sounds Pa/Cha/Sa: normalized to 121 (hi) and 122 (mr)
+          -- Get game_code from hybrid_games table
+          SELECT 
+            'Beginning Sound Pa Cha Sa' AS game_name,
+            (SELECT hg.game_code 
+             FROM rl_dwh_prod.live.hybrid_games hg 
+             WHERE hg.game_name = 'Beginning Sound Pa Cha Sa' 
+             LIMIT 1) AS game_code,
+            121 AS activity_id
+          UNION ALL
+          SELECT 
+            'Beginning Sound Pa Cha Sa' AS game_name,
+            (SELECT hg.game_code 
+             FROM rl_dwh_prod.live.hybrid_games hg 
+             WHERE hg.game_name = 'Beginning Sound Pa Cha Sa' 
+             LIMIT 1) AS game_code,
+            122 AS activity_id
+        )
+        SELECT DISTINCT
+            gam.game_name,
+            nai.idvisitor_hex
+        FROM normalized_activity_ids nai
+        INNER JOIN game_activity_mappings gam ON nai.normalized_activity_id = gam.activity_id
+        WHERE gam.activity_id IS NOT NULL
         """
         
         print(f"  [DEBUG] Query to execute:")
@@ -3641,8 +3862,19 @@ def fetch_hybrid_repeatability_data() -> pd.DataFrame:
                 traceback.print_exc()
                 return pd.DataFrame()
         
+        # Additional deduplication step to ensure no duplicate user-game combinations
+        print(f"  [ACTION] Deduplicating user-game combinations...")
+        before_dedup = len(hybrid_df)
+        hybrid_df = hybrid_df.drop_duplicates(subset=['idvisitor_converted', 'game_name'], keep='first')
+        after_dedup = len(hybrid_df)
+        if before_dedup != after_dedup:
+            print(f"  ⚠ Removed {before_dedup - after_dedup:,} duplicate user-game combinations")
+        else:
+            print(f"  ✓ No duplicate user-game combinations found")
+        
         print(f"  ✓ Unique users: {hybrid_df['idvisitor_converted'].nunique():,}")
         print(f"  ✓ Unique games: {hybrid_df['game_name'].nunique()}")
+        print(f"  ✓ Total user-game combinations: {len(hybrid_df):,}")
         print(f"  ✓ Sample data (first 5 rows):")
         print(hybrid_df.head(5).to_string())
         
@@ -4802,7 +5034,8 @@ def process_parent_poll() -> pd.DataFrame:
                         nested_game_data = game_item.get('gameData', [])
                         if isinstance(nested_game_data, list):
                             for question_idx, nested_item in enumerate(nested_game_data):
-                                if isinstance(nested_item, dict) and 'options' in nested_item and 'chosenOption' in nested_item:
+                                # Check for both chosenOption and chosenAnswer (Primary Emotion Labelling games use chosenAnswer)
+                                if isinstance(nested_item, dict) and 'options' in nested_item and ('chosenOption' in nested_item or 'chosenAnswer' in nested_item):
                                     # Add question number (1, 2, or 3) to the poll item
                                     nested_item['_poll_question_number'] = question_idx + 1
                                     poll_items.append(nested_item)
@@ -4833,8 +5066,11 @@ def process_parent_poll() -> pd.DataFrame:
                     continue
                 
                 options = poll_item.get('options', [])
+                # Check for both 'chosenOption' (index-based) and 'chosenAnswer' (text-based)
                 chosen_option = poll_item.get('chosenOption')
+                chosen_answer = poll_item.get('chosenAnswer')
                 
+                # Handle chosenOption (index-based selection)
                 if isinstance(options, list) and len(options) > 0 and chosen_option is not None:
                     try:
                         chosen_option_idx = int(chosen_option)
@@ -4927,6 +5163,114 @@ def process_parent_poll() -> pd.DataFrame:
                                 
                                 processed_records.append(record)
                     except (ValueError, IndexError, TypeError):
+                        continue
+                
+                # Handle chosenAnswer (text-based or index-based selection for Primary Emotion Labelling games)
+                elif isinstance(options, list) and len(options) > 0 and chosen_answer is not None:
+                    try:
+                        option_message = None
+                        chosen_answer_str = str(chosen_answer).strip()
+                        
+                        # Try to interpret chosenAnswer as an index first
+                        try:
+                            chosen_option_idx = int(chosen_answer)
+                            if 0 <= chosen_option_idx < len(options):
+                                selected_option = options[chosen_option_idx]
+                                # Extract option message from selected option
+                                message_field = selected_option.get('message', '') if isinstance(selected_option, dict) else ''
+                                if isinstance(message_field, dict):
+                                    option_message = (
+                                        message_field.get('en', '') or
+                                        message_field.get('en_US', '') or
+                                        message_field.get('en_IN', '') or
+                                        (list(message_field.values())[0] if message_field else '')
+                                    )
+                                elif message_field:
+                                    option_message = message_field
+                                else:
+                                    if isinstance(selected_option, dict):
+                                        option_message = (
+                                            selected_option.get('text', '') or 
+                                            selected_option.get('label', '') or
+                                            chosen_answer_str
+                                        )
+                                    else:
+                                        option_message = str(selected_option)
+                        except (ValueError, TypeError):
+                            # chosenAnswer is text, try to find matching option or use it directly
+                            selected_option = None
+                            for opt in options:
+                                if isinstance(opt, dict):
+                                    opt_text = opt.get('text', '') or opt.get('message', '') or opt.get('label', '')
+                                    if str(opt_text).strip() == chosen_answer_str:
+                                        selected_option = opt
+                                        break
+                            
+                            if selected_option:
+                                # Extract from matching option
+                                message_field = selected_option.get('message', '')
+                                if isinstance(message_field, dict):
+                                    option_message = (
+                                        message_field.get('en', '') or
+                                        message_field.get('en_US', '') or
+                                        message_field.get('en_IN', '') or
+                                        (list(message_field.values())[0] if message_field else '')
+                                    )
+                                elif message_field:
+                                    option_message = message_field
+                                else:
+                                    option_message = (
+                                        selected_option.get('text', '') or 
+                                        selected_option.get('label', '') or
+                                        chosen_answer_str
+                                    )
+                            else:
+                                # Use chosenAnswer as the option text directly
+                                option_message = chosen_answer_str
+                        
+                        # Ensure it's a string and clean it up
+                        if option_message:
+                            if isinstance(option_message, bytes):
+                                option_message = option_message.decode('utf-8', errors='replace')
+                            else:
+                                option_message = str(option_message)
+                            
+                            option_message = option_message.strip()
+                            
+                            if not option_message or option_message.startswith('{') or option_message.startswith('['):
+                                option_message = chosen_answer_str
+                            
+                            if option_message:
+                                # Get question number from poll item
+                                question_number = poll_item.get('_poll_question_number')
+                                if not question_number:
+                                    question_number = poll_item.get('questionNo')
+                                
+                                if question_number:
+                                    question_text = f"Question {question_number}"
+                                else:
+                                    question_text = (
+                                        poll_item.get('question', '') or 
+                                        poll_item.get('questionText', '') or
+                                        "Question (unknown)"
+                                    )
+                                
+                                record = {
+                                    'game_name': game_name,
+                                    'question': question_text,
+                                    'option': option_message
+                                }
+                                if language is not None:
+                                    record['language'] = language
+                                if domain is not None:
+                                    record['domain'] = domain
+                                
+                                processed_records.append(record)
+                    except Exception as e:
+                        encoding_errors += 1
+                        if debug_count < 3:
+                            print(f"      [ERROR] Record {idx+1}, Poll Item {poll_item_idx+1} (chosenAnswer): {str(e)[:50]}")
+                            debug_count += 1
                         continue
                 
         except Exception as e:

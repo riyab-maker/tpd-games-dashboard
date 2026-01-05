@@ -1019,6 +1019,7 @@ def render_monthly_new_users() -> None:
     
     # Month number to month name mapping
     month_names = {
+        1: 'January 2026',
         7: 'July',
         8: 'August',
         9: 'September',
@@ -1028,14 +1029,19 @@ def render_monthly_new_users() -> None:
     }
     
     # Monthly new users data
+    # Month 1 (January 2026) should appear after December in the graph
     monthly_new_users_data = {
-        'month': [7, 8, 9, 10, 11, 12],
-        'new_users': [74059, 55024, 66493, 46135, 51637, 26341]
+        'month': [7, 8, 9, 10, 11, 12, 1],
+        'new_users': [74059, 55024, 66493, 46135, 51637, 38677, 10898]
     }
     
     monthly_df = pd.DataFrame(monthly_new_users_data)
     # Add month name column
     monthly_df['month_name'] = monthly_df['month'].map(month_names)
+    # Create sort order: months 7-12 stay as is, month 1 becomes 13 (after December)
+    monthly_df['sort_order'] = monthly_df['month'].apply(lambda x: 13 if x == 1 else x)
+    # Sort by sort_order to ensure correct chronological order
+    monthly_df = monthly_df.sort_values('sort_order').reset_index(drop=True)
     
     st.markdown("### 👥 Monthly New Users")
     
@@ -1049,7 +1055,7 @@ def render_monthly_new_users() -> None:
         ).encode(
         x=alt.X('month_name:O', 
                 title='Month',
-                sort=alt.SortField('month', order='ascending'),
+                sort=alt.SortField('sort_order', order='ascending'),
                 axis=alt.Axis(labelAngle=0, titleFontSize=24, labelFontSize=22)),
         y=alt.Y('new_users:Q', 
                 title='Number of New Users', 
@@ -1070,7 +1076,7 @@ def render_monthly_new_users() -> None:
             fontWeight='bold',
             dy=-10
         ).encode(
-            x=alt.X('month_name:O', sort=alt.SortField('month', order='ascending')),
+            x=alt.X('month_name:O', sort=alt.SortField('sort_order', order='ascending')),
             y=alt.Y('new_users:Q'),
             text=alt.Text('new_users:Q', format='.0f')
         )
