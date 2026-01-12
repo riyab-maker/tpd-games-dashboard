@@ -473,15 +473,11 @@ def render_modern_dashboard(conversion_df: pd.DataFrame, df_filtered: pd.DataFra
         completed_count = 0
 
     # Get data for each funnel from conversion data
-    # Funnel stages order: started, introduction, questions, mid_introduction, validation, parent_poll, rewards, completed
-    funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+    # TPD Dashboard: Only show started, questions, and completed events
+    funnel_stages = ['started', 'questions', 'completed']
+    # TPD Dashboard: Only show started, questions, and completed
     stage_labels = {
         'started': 'Started',
-        'introduction': 'Introduction',
-        'mid_introduction': 'Mid Introduction',
-        'parent_poll': 'Parent Poll',
-        'validation': 'Validation',  # validation event (from question_completed) displays as "Validation"
-        'rewards': 'Rewards',
         'questions': 'Questions',  # questions event (from action_completed) displays as "Questions"
         'completed': 'Completed'
     }
@@ -1598,12 +1594,14 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     
     # Create grouped (side-by-side) bar chart
     # Remove fixed width to let Altair auto-size bars based on spacing settings
+    # Create base encoding without column facet for layering
+    bars_base_encoding = {k: v for k, v in base_encoding.items() if k != 'column'}
     bars = alt.Chart(chart_df).mark_bar(
             cornerRadius=6,
             stroke='white',
             strokeWidth=2,
             opacity=1.0
-        ).encode(**base_encoding).properties(
+        ).encode(**bars_base_encoding).properties(
             width=chart_width,
             height=450,
             title=alt.TitleParams(
@@ -1614,7 +1612,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
             )
         )
         
-    # Add data labels above bars
+    # Add data labels above bars (without column facet for layering)
     label_encoding = {
         'x': alt.X('Time:O', sort=time_order),
         'xOffset': alt.XOffset('Event:N',
@@ -1627,16 +1625,6 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         'text': alt.Text('Count:Q', format=',.0f')
     }
     
-    # Add column facet to labels if we have multiple games
-    if has_multiple_games:
-        label_encoding['column'] = alt.Column('Game:N',
-                             header=alt.Header(
-                                 title='',
-                                 labelFontSize=12,
-                                 labelAngle=0
-                             ),
-                             spacing=20)
-    
     labels = alt.Chart(chart_df).mark_text(
         align='center',
         baseline='bottom',
@@ -1648,12 +1636,24 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         alt.datum.Count > 0
     )
         
-    # Combine bars and labels
+    # Layer first, then facet if needed
     chart = alt.layer(bars, labels).resolve_scale(
         x='shared',
         y='shared',
         color='shared'
     )
+    
+    # Add column facet after layering if we have multiple games
+    if has_multiple_games:
+        chart = chart.facet(
+            column=alt.Column('Game:N',
+                             header=alt.Header(
+                                 title='',
+                                 labelFontSize=12,
+                                 labelAngle=0
+                             ),
+                             spacing=20)
+        )
         
     chart = chart.configure_axis(
         labelFontSize=12,
@@ -2523,7 +2523,8 @@ def main() -> None:
         
         # Convert game_conversion_numbers format to summary format
         if not filtered_game_df.empty:
-            funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+            # TPD Dashboard: Only show started, questions, and completed
+            funnel_stages = ['started', 'questions', 'completed']
             summary_data = []
             for stage in funnel_stages:
                 users_col = f'{stage}_users'
@@ -2543,12 +2544,13 @@ def main() -> None:
             filtered_summary_df = pd.DataFrame(summary_data)
         else:
             # No matching games - return empty summary
-            all_events = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+            # TPD Dashboard: Only show started, questions, and completed
+            all_events = ['started', 'questions', 'completed']
             filtered_summary_df = pd.DataFrame({
                 'Event': all_events,
-                'Users': [0] * 8,
-                'Visits': [0] * 8,
-                'Instances': [0] * 8
+                'Users': [0] * 3,
+                'Visits': [0] * 3,
+                'Instances': [0] * 3
             })
     elif has_date_filter:
         # Date filter requires recalculating from conversion_funnel_data
@@ -2660,7 +2662,8 @@ def main() -> None:
             # If we have raw data, use it (even if aggregated columns also exist)
             if has_raw_data:
                 # Use raw data format - calculate distinct counts
-                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+                # TPD Dashboard: Only show started, questions, and completed
+                funnel_stages = ['started', 'questions', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
@@ -2764,7 +2767,8 @@ def main() -> None:
                             continue
                 
                 # Calculate metrics from aggregated data
-                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+                # TPD Dashboard: Only show started, questions, and completed
+                funnel_stages = ['started', 'questions', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
@@ -2806,7 +2810,8 @@ def main() -> None:
                 filtered_summary_df = pd.DataFrame(filtered_summary_data)
             else:
                 # Old format: calculate from raw data (idvisitor_converted, idvisit, idlink_va)
-                funnel_stages = ['started', 'introduction', 'questions', 'mid_introduction', 'validation', 'parent_poll', 'rewards', 'completed']
+                # TPD Dashboard: Only show started, questions, and completed
+                funnel_stages = ['started', 'questions', 'completed']
                 filtered_summary_data = []
                 for stage in funnel_stages:
                     stage_data = filtered_conversion_funnel_data[filtered_conversion_funnel_data['event'] == stage]
