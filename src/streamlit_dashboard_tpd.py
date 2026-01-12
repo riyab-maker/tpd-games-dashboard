@@ -1651,8 +1651,8 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                                  title='',
                                  labelFontSize=12,
                                  labelAngle=0
-                             ),
-                             spacing=20)
+                             )),
+            spacing=20
         )
         
     chart = chart.configure_axis(
