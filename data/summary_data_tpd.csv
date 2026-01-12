@@ -1,0 +1,10 @@
+Event,Users,Visits,Instances,domain,language,Mapped_Users_Percentage
+completed,8387,11064,20053,All,All,0.0
+completed,8387,11063,20051,All,hi,0.0
+completed,1,2,2,All,mr,0.0
+questions,9732,12801,25176,All,All,0.0
+questions,9732,12800,25173,All,hi,0.0
+questions,1,3,3,All,mr,0.0
+started,11903,15621,101352,All,All,0.0
+started,11903,15616,101264,All,hi,0.0
+started,1,17,88,All,mr,0.0
