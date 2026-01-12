@@ -1032,7 +1032,7 @@ def render_monthly_new_users() -> None:
     # Month 1 (January 2026) should appear after December in the graph
     monthly_new_users_data = {
         'month': [7, 8, 9, 10, 11, 12, 1],
-        'new_users': [74059, 55024, 66493, 46135, 51637, 38677, 10898]
+        'new_users': [74059, 55024, 66493, 46135, 51637, 38677, 43660]
     }
     
     monthly_df = pd.DataFrame(monthly_new_users_data)
