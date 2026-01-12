@@ -1,15 +1,355 @@
 game_name,question,option,count,domain,language
-Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,1196,All,All
-Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,422,All,hi
+Akshar ba,Question 1,ख़ुद से,115,All,All
+Akshar ba,Question 1,ख़ुद से,114,All,hi
+Akshar ba,Question 1,ख़ुद से,1,All,mr
+Akshar ba,Question 1,ख़ुद से,115,LL,All
+Akshar ba,Question 1,ख़ुद से,114,LL,hi
+Akshar ba,Question 1,ख़ुद से,1,LL,mr
+Akshar ba,Question 1,भाई बहन,47,All,All
+Akshar ba,Question 1,भाई बहन,47,All,hi
+Akshar ba,Question 1,भाई बहन,47,LL,All
+Akshar ba,Question 1,भाई बहन,47,LL,hi
+Akshar ba,Question 1,माता-पिता,281,All,All
+Akshar ba,Question 1,माता-पिता,274,All,hi
+Akshar ba,Question 1,माता-पिता,7,All,mr
+Akshar ba,Question 1,माता-पिता,281,LL,All
+Akshar ba,Question 1,माता-पिता,274,LL,hi
+Akshar ba,Question 1,माता-पिता,7,LL,mr
+Akshar ba,Question 2,आधे,92,All,All
+Akshar ba,Question 2,आधे,91,All,hi
+Akshar ba,Question 2,आधे,1,All,mr
+Akshar ba,Question 2,आधे,92,LL,All
+Akshar ba,Question 2,आधे,91,LL,hi
+Akshar ba,Question 2,आधे,1,LL,mr
+Akshar ba,Question 2,आधे से कम,20,All,All
+Akshar ba,Question 2,आधे से कम,20,All,hi
+Akshar ba,Question 2,आधे से कम,20,LL,All
+Akshar ba,Question 2,आधे से कम,20,LL,hi
+Akshar ba,Question 2,सभी,331,All,All
+Akshar ba,Question 2,सभी,324,All,hi
+Akshar ba,Question 2,सभी,7,All,mr
+Akshar ba,Question 2,सभी,331,LL,All
+Akshar ba,Question 2,सभी,324,LL,hi
+Akshar ba,Question 2,सभी,7,LL,mr
+Akshar ba,Question 3,नहीं,17,All,All
+Akshar ba,Question 3,नहीं,17,All,hi
+Akshar ba,Question 3,नहीं,17,LL,All
+Akshar ba,Question 3,नहीं,17,LL,hi
+Akshar ba,Question 3,मदद से,122,All,All
+Akshar ba,Question 3,मदद से,119,All,hi
+Akshar ba,Question 3,मदद से,3,All,mr
+Akshar ba,Question 3,मदद से,122,LL,All
+Akshar ba,Question 3,मदद से,119,LL,hi
+Akshar ba,Question 3,मदद से,3,LL,mr
+Akshar ba,Question 3,हाँ,304,All,All
+Akshar ba,Question 3,हाँ,299,All,hi
+Akshar ba,Question 3,हाँ,5,All,mr
+Akshar ba,Question 3,हाँ,304,LL,All
+Akshar ba,Question 3,हाँ,299,LL,hi
+Akshar ba,Question 3,हाँ,5,LL,mr
+Akshar ba V2,Question 1,ख़ुद से,29,All,All
+Akshar ba V2,Question 1,ख़ुद से,28,All,hi
+Akshar ba V2,Question 1,ख़ुद से,1,All,mr
+Akshar ba V2,Question 1,ख़ुद से,29,LL,All
+Akshar ba V2,Question 1,ख़ुद से,28,LL,hi
+Akshar ba V2,Question 1,ख़ुद से,1,LL,mr
+Akshar ba V2,Question 1,भाई बहन,7,All,All
+Akshar ba V2,Question 1,भाई बहन,7,All,hi
+Akshar ba V2,Question 1,भाई बहन,7,LL,All
+Akshar ba V2,Question 1,भाई बहन,7,LL,hi
+Akshar ba V2,Question 1,माता-पिता,49,All,All
+Akshar ba V2,Question 1,माता-पिता,48,All,hi
+Akshar ba V2,Question 1,माता-पिता,1,All,mr
+Akshar ba V2,Question 1,माता-पिता,49,LL,All
+Akshar ba V2,Question 1,माता-पिता,48,LL,hi
+Akshar ba V2,Question 1,माता-पिता,1,LL,mr
+Akshar ba V2,Question 2,आधे,13,All,All
+Akshar ba V2,Question 2,आधे,13,All,hi
+Akshar ba V2,Question 2,आधे,13,LL,All
+Akshar ba V2,Question 2,आधे,13,LL,hi
+Akshar ba V2,Question 2,आधे से कम,3,All,All
+Akshar ba V2,Question 2,आधे से कम,3,All,hi
+Akshar ba V2,Question 2,आधे से कम,3,LL,All
+Akshar ba V2,Question 2,आधे से कम,3,LL,hi
+Akshar ba V2,Question 2,सभी,69,All,All
+Akshar ba V2,Question 2,सभी,67,All,hi
+Akshar ba V2,Question 2,सभी,2,All,mr
+Akshar ba V2,Question 2,सभी,69,LL,All
+Akshar ba V2,Question 2,सभी,67,LL,hi
+Akshar ba V2,Question 2,सभी,2,LL,mr
+Akshar ba V2,Question 3,नहीं,3,All,All
+Akshar ba V2,Question 3,नहीं,3,All,hi
+Akshar ba V2,Question 3,नहीं,3,LL,All
+Akshar ba V2,Question 3,नहीं,3,LL,hi
+Akshar ba V2,Question 3,मदद से,20,All,All
+Akshar ba V2,Question 3,मदद से,20,All,hi
+Akshar ba V2,Question 3,मदद से,20,LL,All
+Akshar ba V2,Question 3,मदद से,20,LL,hi
+Akshar ba V2,Question 3,हाँ,62,All,All
+Akshar ba V2,Question 3,हाँ,60,All,hi
+Akshar ba V2,Question 3,हाँ,2,All,mr
+Akshar ba V2,Question 3,हाँ,62,LL,All
+Akshar ba V2,Question 3,हाँ,60,LL,hi
+Akshar ba V2,Question 3,हाँ,2,LL,mr
+Akshar cha,Question 1,ख़ुद से,173,All,All
+Akshar cha,Question 1,ख़ुद से,170,All,hi
+Akshar cha,Question 1,ख़ुद से,3,All,mr
+Akshar cha,Question 1,ख़ुद से,173,LL,All
+Akshar cha,Question 1,ख़ुद से,170,LL,hi
+Akshar cha,Question 1,ख़ुद से,3,LL,mr
+Akshar cha,Question 1,भाई बहन,59,All,All
+Akshar cha,Question 1,भाई बहन,59,All,hi
+Akshar cha,Question 1,भाई बहन,59,LL,All
+Akshar cha,Question 1,भाई बहन,59,LL,hi
+Akshar cha,Question 1,माता-पिता,281,All,All
+Akshar cha,Question 1,माता-पिता,272,All,hi
+Akshar cha,Question 1,माता-पिता,9,All,mr
+Akshar cha,Question 1,माता-पिता,281,LL,All
+Akshar cha,Question 1,माता-पिता,272,LL,hi
+Akshar cha,Question 1,माता-पिता,9,LL,mr
+Akshar cha,Question 2,आधे,88,All,All
+Akshar cha,Question 2,आधे,86,All,hi
+Akshar cha,Question 2,आधे,2,All,mr
+Akshar cha,Question 2,आधे,88,LL,All
+Akshar cha,Question 2,आधे,86,LL,hi
+Akshar cha,Question 2,आधे,2,LL,mr
+Akshar cha,Question 2,आधे से कम,8,All,All
+Akshar cha,Question 2,आधे से कम,7,All,hi
+Akshar cha,Question 2,आधे से कम,1,All,mr
+Akshar cha,Question 2,आधे से कम,8,LL,All
+Akshar cha,Question 2,आधे से कम,7,LL,hi
+Akshar cha,Question 2,आधे से कम,1,LL,mr
+Akshar cha,Question 2,सभी,417,All,All
+Akshar cha,Question 2,सभी,408,All,hi
+Akshar cha,Question 2,सभी,9,All,mr
+Akshar cha,Question 2,सभी,417,LL,All
+Akshar cha,Question 2,सभी,408,LL,hi
+Akshar cha,Question 2,सभी,9,LL,mr
+Akshar cha,Question 3,नहीं,7,All,All
+Akshar cha,Question 3,नहीं,6,All,hi
+Akshar cha,Question 3,नहीं,1,All,mr
+Akshar cha,Question 3,नहीं,7,LL,All
+Akshar cha,Question 3,नहीं,6,LL,hi
+Akshar cha,Question 3,नहीं,1,LL,mr
+Akshar cha,Question 3,मदद से,111,All,All
+Akshar cha,Question 3,मदद से,110,All,hi
+Akshar cha,Question 3,मदद से,1,All,mr
+Akshar cha,Question 3,मदद से,111,LL,All
+Akshar cha,Question 3,मदद से,110,LL,hi
+Akshar cha,Question 3,मदद से,1,LL,mr
+Akshar cha,Question 3,हाँ,395,All,All
+Akshar cha,Question 3,हाँ,385,All,hi
+Akshar cha,Question 3,हाँ,10,All,mr
+Akshar cha,Question 3,हाँ,395,LL,All
+Akshar cha,Question 3,हाँ,385,LL,hi
+Akshar cha,Question 3,हाँ,10,LL,mr
+Akshar cha V2,Question 1,ख़ुद से,50,All,All
+Akshar cha V2,Question 1,ख़ुद से,48,All,hi
+Akshar cha V2,Question 1,ख़ुद से,2,All,mr
+Akshar cha V2,Question 1,ख़ुद से,50,LL,All
+Akshar cha V2,Question 1,ख़ुद से,48,LL,hi
+Akshar cha V2,Question 1,ख़ुद से,2,LL,mr
+Akshar cha V2,Question 1,भाई बहन,22,All,All
+Akshar cha V2,Question 1,भाई बहन,22,All,hi
+Akshar cha V2,Question 1,भाई बहन,22,LL,All
+Akshar cha V2,Question 1,भाई बहन,22,LL,hi
+Akshar cha V2,Question 1,माता-पिता,111,All,All
+Akshar cha V2,Question 1,माता-पिता,109,All,hi
+Akshar cha V2,Question 1,माता-पिता,2,All,mr
+Akshar cha V2,Question 1,माता-पिता,111,LL,All
+Akshar cha V2,Question 1,माता-पिता,109,LL,hi
+Akshar cha V2,Question 1,माता-पिता,2,LL,mr
+Akshar cha V2,Question 2,आधे,37,All,All
+Akshar cha V2,Question 2,आधे,36,All,hi
+Akshar cha V2,Question 2,आधे,1,All,mr
+Akshar cha V2,Question 2,आधे,37,LL,All
+Akshar cha V2,Question 2,आधे,36,LL,hi
+Akshar cha V2,Question 2,आधे,1,LL,mr
+Akshar cha V2,Question 2,आधे से कम,2,All,All
+Akshar cha V2,Question 2,आधे से कम,2,All,hi
+Akshar cha V2,Question 2,आधे से कम,2,LL,All
+Akshar cha V2,Question 2,आधे से कम,2,LL,hi
+Akshar cha V2,Question 2,सभी,144,All,All
+Akshar cha V2,Question 2,सभी,141,All,hi
+Akshar cha V2,Question 2,सभी,3,All,mr
+Akshar cha V2,Question 2,सभी,144,LL,All
+Akshar cha V2,Question 2,सभी,141,LL,hi
+Akshar cha V2,Question 2,सभी,3,LL,mr
+Akshar cha V2,Question 3,नहीं,5,All,All
+Akshar cha V2,Question 3,नहीं,5,All,hi
+Akshar cha V2,Question 3,नहीं,5,LL,All
+Akshar cha V2,Question 3,नहीं,5,LL,hi
+Akshar cha V2,Question 3,मदद से,46,All,All
+Akshar cha V2,Question 3,मदद से,45,All,hi
+Akshar cha V2,Question 3,मदद से,1,All,mr
+Akshar cha V2,Question 3,मदद से,46,LL,All
+Akshar cha V2,Question 3,मदद से,45,LL,hi
+Akshar cha V2,Question 3,मदद से,1,LL,mr
+Akshar cha V2,Question 3,हाँ,132,All,All
+Akshar cha V2,Question 3,हाँ,129,All,hi
+Akshar cha V2,Question 3,हाँ,3,All,mr
+Akshar cha V2,Question 3,हाँ,132,LL,All
+Akshar cha V2,Question 3,हाँ,129,LL,hi
+Akshar cha V2,Question 3,हाँ,3,LL,mr
+Akshar ka V2,Question 1,ख़ुद से,98,All,All
+Akshar ka V2,Question 1,ख़ुद से,96,All,hi
+Akshar ka V2,Question 1,ख़ुद से,2,All,mr
+Akshar ka V2,Question 1,ख़ुद से,98,LL,All
+Akshar ka V2,Question 1,ख़ुद से,96,LL,hi
+Akshar ka V2,Question 1,ख़ुद से,2,LL,mr
+Akshar ka V2,Question 1,भाई बहन,38,All,All
+Akshar ka V2,Question 1,भाई बहन,38,All,hi
+Akshar ka V2,Question 1,भाई बहन,38,LL,All
+Akshar ka V2,Question 1,भाई बहन,38,LL,hi
+Akshar ka V2,Question 1,माता-पिता,229,All,All
+Akshar ka V2,Question 1,माता-पिता,223,All,hi
+Akshar ka V2,Question 1,माता-पिता,6,All,mr
+Akshar ka V2,Question 1,माता-पिता,229,LL,All
+Akshar ka V2,Question 1,माता-पिता,223,LL,hi
+Akshar ka V2,Question 1,माता-पिता,6,LL,mr
+Akshar ka V2,Question 2,आधे,73,All,All
+Akshar ka V2,Question 2,आधे,72,All,hi
+Akshar ka V2,Question 2,आधे,1,All,mr
+Akshar ka V2,Question 2,आधे,73,LL,All
+Akshar ka V2,Question 2,आधे,72,LL,hi
+Akshar ka V2,Question 2,आधे,1,LL,mr
+Akshar ka V2,Question 2,आधे से कम,10,All,All
+Akshar ka V2,Question 2,आधे से कम,10,All,hi
+Akshar ka V2,Question 2,आधे से कम,10,LL,All
+Akshar ka V2,Question 2,आधे से कम,10,LL,hi
+Akshar ka V2,Question 2,सभी,282,All,All
+Akshar ka V2,Question 2,सभी,275,All,hi
+Akshar ka V2,Question 2,सभी,7,All,mr
+Akshar ka V2,Question 2,सभी,282,LL,All
+Akshar ka V2,Question 2,सभी,275,LL,hi
+Akshar ka V2,Question 2,सभी,7,LL,mr
+Akshar ka V2,Question 3,नहीं,8,All,All
+Akshar ka V2,Question 3,नहीं,8,All,hi
+Akshar ka V2,Question 3,नहीं,8,LL,All
+Akshar ka V2,Question 3,नहीं,8,LL,hi
+Akshar ka V2,Question 3,मदद से,90,All,All
+Akshar ka V2,Question 3,मदद से,88,All,hi
+Akshar ka V2,Question 3,मदद से,2,All,mr
+Akshar ka V2,Question 3,मदद से,90,LL,All
+Akshar ka V2,Question 3,मदद से,88,LL,hi
+Akshar ka V2,Question 3,मदद से,2,LL,mr
+Akshar ka V2,Question 3,हाँ,267,All,All
+Akshar ka V2,Question 3,हाँ,261,All,hi
+Akshar ka V2,Question 3,हाँ,6,All,mr
+Akshar ka V2,Question 3,हाँ,267,LL,All
+Akshar ka V2,Question 3,हाँ,261,LL,hi
+Akshar ka V2,Question 3,हाँ,6,LL,mr
+Akshar ma,Question 1,ख़ुद से,168,All,All
+Akshar ma,Question 1,ख़ुद से,162,All,hi
+Akshar ma,Question 1,ख़ुद से,6,All,mr
+Akshar ma,Question 1,ख़ुद से,168,LL,All
+Akshar ma,Question 1,ख़ुद से,162,LL,hi
+Akshar ma,Question 1,ख़ुद से,6,LL,mr
+Akshar ma,Question 1,भाई बहन,52,All,All
+Akshar ma,Question 1,भाई बहन,50,All,hi
+Akshar ma,Question 1,भाई बहन,2,All,mr
+Akshar ma,Question 1,भाई बहन,52,LL,All
+Akshar ma,Question 1,भाई बहन,50,LL,hi
+Akshar ma,Question 1,भाई बहन,2,LL,mr
+Akshar ma,Question 1,माता-पिता,292,All,All
+Akshar ma,Question 1,माता-पिता,287,All,hi
+Akshar ma,Question 1,माता-पिता,5,All,mr
+Akshar ma,Question 1,माता-पिता,292,LL,All
+Akshar ma,Question 1,माता-पिता,287,LL,hi
+Akshar ma,Question 1,माता-पिता,5,LL,mr
+Akshar ma,Question 2,आधे,95,All,All
+Akshar ma,Question 2,आधे,92,All,hi
+Akshar ma,Question 2,आधे,3,All,mr
+Akshar ma,Question 2,आधे,95,LL,All
+Akshar ma,Question 2,आधे,92,LL,hi
+Akshar ma,Question 2,आधे,3,LL,mr
+Akshar ma,Question 2,आधे से कम,15,All,All
+Akshar ma,Question 2,आधे से कम,15,All,hi
+Akshar ma,Question 2,आधे से कम,15,LL,All
+Akshar ma,Question 2,आधे से कम,15,LL,hi
+Akshar ma,Question 2,सभी,402,All,All
+Akshar ma,Question 2,सभी,392,All,hi
+Akshar ma,Question 2,सभी,10,All,mr
+Akshar ma,Question 2,सभी,402,LL,All
+Akshar ma,Question 2,सभी,392,LL,hi
+Akshar ma,Question 2,सभी,10,LL,mr
+Akshar ma,Question 3,नहीं,8,All,All
+Akshar ma,Question 3,नहीं,8,All,hi
+Akshar ma,Question 3,नहीं,8,LL,All
+Akshar ma,Question 3,नहीं,8,LL,hi
+Akshar ma,Question 3,मदद से,132,All,All
+Akshar ma,Question 3,मदद से,131,All,hi
+Akshar ma,Question 3,मदद से,1,All,mr
+Akshar ma,Question 3,मदद से,132,LL,All
+Akshar ma,Question 3,मदद से,131,LL,hi
+Akshar ma,Question 3,मदद से,1,LL,mr
+Akshar ma,Question 3,हाँ,372,All,All
+Akshar ma,Question 3,हाँ,360,All,hi
+Akshar ma,Question 3,हाँ,12,All,mr
+Akshar ma,Question 3,हाँ,372,LL,All
+Akshar ma,Question 3,हाँ,360,LL,hi
+Akshar ma,Question 3,हाँ,12,LL,mr
+Akshar ma V2,Question 1,ख़ुद से,107,All,All
+Akshar ma V2,Question 1,ख़ुद से,105,All,hi
+Akshar ma V2,Question 1,ख़ुद से,2,All,mr
+Akshar ma V2,Question 1,ख़ुद से,107,LL,All
+Akshar ma V2,Question 1,ख़ुद से,105,LL,hi
+Akshar ma V2,Question 1,ख़ुद से,2,LL,mr
+Akshar ma V2,Question 1,भाई बहन,43,All,All
+Akshar ma V2,Question 1,भाई बहन,41,All,hi
+Akshar ma V2,Question 1,भाई बहन,2,All,mr
+Akshar ma V2,Question 1,भाई बहन,43,LL,All
+Akshar ma V2,Question 1,भाई बहन,41,LL,hi
+Akshar ma V2,Question 1,भाई बहन,2,LL,mr
+Akshar ma V2,Question 1,माता-पिता,227,All,All
+Akshar ma V2,Question 1,माता-पिता,224,All,hi
+Akshar ma V2,Question 1,माता-पिता,3,All,mr
+Akshar ma V2,Question 1,माता-पिता,227,LL,All
+Akshar ma V2,Question 1,माता-पिता,224,LL,hi
+Akshar ma V2,Question 1,माता-पिता,3,LL,mr
+Akshar ma V2,Question 2,आधे,74,All,All
+Akshar ma V2,Question 2,आधे,73,All,hi
+Akshar ma V2,Question 2,आधे,1,All,mr
+Akshar ma V2,Question 2,आधे,74,LL,All
+Akshar ma V2,Question 2,आधे,73,LL,hi
+Akshar ma V2,Question 2,आधे,1,LL,mr
+Akshar ma V2,Question 2,आधे से कम,10,All,All
+Akshar ma V2,Question 2,आधे से कम,10,All,hi
+Akshar ma V2,Question 2,आधे से कम,10,LL,All
+Akshar ma V2,Question 2,आधे से कम,10,LL,hi
+Akshar ma V2,Question 2,सभी,293,All,All
+Akshar ma V2,Question 2,सभी,287,All,hi
+Akshar ma V2,Question 2,सभी,6,All,mr
+Akshar ma V2,Question 2,सभी,293,LL,All
+Akshar ma V2,Question 2,सभी,287,LL,hi
+Akshar ma V2,Question 2,सभी,6,LL,mr
+Akshar ma V2,Question 3,नहीं,10,All,All
+Akshar ma V2,Question 3,नहीं,10,All,hi
+Akshar ma V2,Question 3,नहीं,10,LL,All
+Akshar ma V2,Question 3,नहीं,10,LL,hi
+Akshar ma V2,Question 3,मदद से,84,All,All
+Akshar ma V2,Question 3,मदद से,83,All,hi
+Akshar ma V2,Question 3,मदद से,1,All,mr
+Akshar ma V2,Question 3,मदद से,84,LL,All
+Akshar ma V2,Question 3,मदद से,83,LL,hi
+Akshar ma V2,Question 3,मदद से,1,LL,mr
+Akshar ma V2,Question 3,हाँ,283,All,All
+Akshar ma V2,Question 3,हाँ,277,All,hi
+Akshar ma V2,Question 3,हाँ,6,All,mr
+Akshar ma V2,Question 3,हाँ,283,LL,All
+Akshar ma V2,Question 3,हाँ,277,LL,hi
+Akshar ma V2,Question 3,हाँ,6,LL,mr
+Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,1197,All,All
+Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,423,All,hi
 Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,774,All,mr
-Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,1196,LL,All
-Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,422,LL,hi
+Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,1197,LL,All
+Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,423,LL,hi
 Beginning Sound Ba/Ra/Na,Question 1,ख़ुद से,774,LL,mr
-Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,502,All,All
-Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,190,All,hi
+Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,503,All,All
+Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,191,All,hi
 Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,312,All,mr
-Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,502,LL,All
-Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,190,LL,hi
+Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,503,LL,All
+Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,191,LL,hi
 Beginning Sound Ba/Ra/Na,Question 1,भाई बहन,312,LL,mr
 Beginning Sound Ba/Ra/Na,Question 1,माता-पिता,2197,All,All
 Beginning Sound Ba/Ra/Na,Question 1,माता-पिता,639,All,hi
@@ -29,17 +369,17 @@ Beginning Sound Ba/Ra/Na,Question 2,आधे से कम,109,All,mr
 Beginning Sound Ba/Ra/Na,Question 2,आधे से कम,174,LL,All
 Beginning Sound Ba/Ra/Na,Question 2,आधे से कम,65,LL,hi
 Beginning Sound Ba/Ra/Na,Question 2,आधे से कम,109,LL,mr
-Beginning Sound Ba/Ra/Na,Question 2,सभी,2848,All,All
-Beginning Sound Ba/Ra/Na,Question 2,सभी,897,All,hi
+Beginning Sound Ba/Ra/Na,Question 2,सभी,2850,All,All
+Beginning Sound Ba/Ra/Na,Question 2,सभी,899,All,hi
 Beginning Sound Ba/Ra/Na,Question 2,सभी,1951,All,mr
-Beginning Sound Ba/Ra/Na,Question 2,सभी,2848,LL,All
-Beginning Sound Ba/Ra/Na,Question 2,सभी,897,LL,hi
+Beginning Sound Ba/Ra/Na,Question 2,सभी,2850,LL,All
+Beginning Sound Ba/Ra/Na,Question 2,सभी,899,LL,hi
 Beginning Sound Ba/Ra/Na,Question 2,सभी,1951,LL,mr
-Beginning Sound Ba/Ra/Na,Question 3,नहीं,119,All,All
-Beginning Sound Ba/Ra/Na,Question 3,नहीं,49,All,hi
+Beginning Sound Ba/Ra/Na,Question 3,नहीं,120,All,All
+Beginning Sound Ba/Ra/Na,Question 3,नहीं,50,All,hi
 Beginning Sound Ba/Ra/Na,Question 3,नहीं,70,All,mr
-Beginning Sound Ba/Ra/Na,Question 3,नहीं,119,LL,All
-Beginning Sound Ba/Ra/Na,Question 3,नहीं,49,LL,hi
+Beginning Sound Ba/Ra/Na,Question 3,नहीं,120,LL,All
+Beginning Sound Ba/Ra/Na,Question 3,नहीं,50,LL,hi
 Beginning Sound Ba/Ra/Na,Question 3,नहीं,70,LL,mr
 Beginning Sound Ba/Ra/Na,Question 3,मदद से,977,All,All
 Beginning Sound Ba/Ra/Na,Question 3,मदद से,313,All,hi
@@ -47,24 +387,180 @@ Beginning Sound Ba/Ra/Na,Question 3,मदद से,664,All,mr
 Beginning Sound Ba/Ra/Na,Question 3,मदद से,977,LL,All
 Beginning Sound Ba/Ra/Na,Question 3,मदद से,313,LL,hi
 Beginning Sound Ba/Ra/Na,Question 3,मदद से,664,LL,mr
-Beginning Sound Ba/Ra/Na,Question 3,हाँ,2798,All,All
-Beginning Sound Ba/Ra/Na,Question 3,हाँ,890,All,hi
+Beginning Sound Ba/Ra/Na,Question 3,हाँ,2799,All,All
+Beginning Sound Ba/Ra/Na,Question 3,हाँ,891,All,hi
 Beginning Sound Ba/Ra/Na,Question 3,हाँ,1908,All,mr
-Beginning Sound Ba/Ra/Na,Question 3,हाँ,2798,LL,All
-Beginning Sound Ba/Ra/Na,Question 3,हाँ,890,LL,hi
+Beginning Sound Ba/Ra/Na,Question 3,हाँ,2799,LL,All
+Beginning Sound Ba/Ra/Na,Question 3,हाँ,891,LL,hi
 Beginning Sound Ba/Ra/Na,Question 3,हाँ,1908,LL,mr
-Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,1401,All,All
-Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,325,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,ख़ुद से,91,All,All
+Beginning Sounds Ba/Pa/Sa,Question 1,ख़ुद से,90,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,ख़ुद से,1,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 1,ख़ुद से,91,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 1,ख़ुद से,90,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,ख़ुद से,1,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 1,भाई बहन,33,All,All
+Beginning Sounds Ba/Pa/Sa,Question 1,भाई बहन,31,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,भाई बहन,2,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 1,भाई बहन,33,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 1,भाई बहन,31,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,भाई बहन,2,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 1,माता-पिता,205,All,All
+Beginning Sounds Ba/Pa/Sa,Question 1,माता-पिता,201,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,माता-पिता,4,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 1,माता-पिता,205,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 1,माता-पिता,201,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 1,माता-पिता,4,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे,68,All,All
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे,67,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे,1,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे,68,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे,67,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे,1,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे से कम,18,All,All
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे से कम,17,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे से कम,1,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे से कम,18,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे से कम,17,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 2,आधे से कम,1,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 2,सभी,243,All,All
+Beginning Sounds Ba/Pa/Sa,Question 2,सभी,238,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 2,सभी,5,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 2,सभी,243,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 2,सभी,238,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 2,सभी,5,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 3,नहीं,7,All,All
+Beginning Sounds Ba/Pa/Sa,Question 3,नहीं,7,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 3,नहीं,7,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 3,नहीं,7,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 3,मदद से,87,All,All
+Beginning Sounds Ba/Pa/Sa,Question 3,मदद से,84,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 3,मदद से,3,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 3,मदद से,87,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 3,मदद से,84,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 3,मदद से,3,LL,mr
+Beginning Sounds Ba/Pa/Sa,Question 3,हाँ,235,All,All
+Beginning Sounds Ba/Pa/Sa,Question 3,हाँ,231,All,hi
+Beginning Sounds Ba/Pa/Sa,Question 3,हाँ,4,All,mr
+Beginning Sounds Ba/Pa/Sa,Question 3,हाँ,235,LL,All
+Beginning Sounds Ba/Pa/Sa,Question 3,हाँ,231,LL,hi
+Beginning Sounds Ba/Pa/Sa,Question 3,हाँ,4,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 1,ख़ुद से,249,All,All
+Beginning Sounds Ba/Ra/Na,Question 1,ख़ुद से,247,All,hi
+Beginning Sounds Ba/Ra/Na,Question 1,ख़ुद से,2,All,mr
+Beginning Sounds Ba/Ra/Na,Question 1,ख़ुद से,249,LL,All
+Beginning Sounds Ba/Ra/Na,Question 1,ख़ुद से,247,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 1,ख़ुद से,2,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 1,भाई बहन,167,All,All
+Beginning Sounds Ba/Ra/Na,Question 1,भाई बहन,166,All,hi
+Beginning Sounds Ba/Ra/Na,Question 1,भाई बहन,1,All,mr
+Beginning Sounds Ba/Ra/Na,Question 1,भाई बहन,167,LL,All
+Beginning Sounds Ba/Ra/Na,Question 1,भाई बहन,166,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 1,भाई बहन,1,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 1,माता-पिता,528,All,All
+Beginning Sounds Ba/Ra/Na,Question 1,माता-पिता,521,All,hi
+Beginning Sounds Ba/Ra/Na,Question 1,माता-पिता,7,All,mr
+Beginning Sounds Ba/Ra/Na,Question 1,माता-पिता,528,LL,All
+Beginning Sounds Ba/Ra/Na,Question 1,माता-पिता,521,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 1,माता-पिता,7,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 2,आधे,258,All,All
+Beginning Sounds Ba/Ra/Na,Question 2,आधे,255,All,hi
+Beginning Sounds Ba/Ra/Na,Question 2,आधे,3,All,mr
+Beginning Sounds Ba/Ra/Na,Question 2,आधे,258,LL,All
+Beginning Sounds Ba/Ra/Na,Question 2,आधे,255,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 2,आधे,3,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 2,आधे से कम,55,All,All
+Beginning Sounds Ba/Ra/Na,Question 2,आधे से कम,54,All,hi
+Beginning Sounds Ba/Ra/Na,Question 2,आधे से कम,1,All,mr
+Beginning Sounds Ba/Ra/Na,Question 2,आधे से कम,55,LL,All
+Beginning Sounds Ba/Ra/Na,Question 2,आधे से कम,54,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 2,आधे से कम,1,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 2,सभी,631,All,All
+Beginning Sounds Ba/Ra/Na,Question 2,सभी,625,All,hi
+Beginning Sounds Ba/Ra/Na,Question 2,सभी,6,All,mr
+Beginning Sounds Ba/Ra/Na,Question 2,सभी,631,LL,All
+Beginning Sounds Ba/Ra/Na,Question 2,सभी,625,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 2,सभी,6,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 3,नहीं,52,All,All
+Beginning Sounds Ba/Ra/Na,Question 3,नहीं,52,All,hi
+Beginning Sounds Ba/Ra/Na,Question 3,नहीं,52,LL,All
+Beginning Sounds Ba/Ra/Na,Question 3,नहीं,52,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 3,मदद से,275,All,All
+Beginning Sounds Ba/Ra/Na,Question 3,मदद से,273,All,hi
+Beginning Sounds Ba/Ra/Na,Question 3,मदद से,2,All,mr
+Beginning Sounds Ba/Ra/Na,Question 3,मदद से,275,LL,All
+Beginning Sounds Ba/Ra/Na,Question 3,मदद से,273,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 3,मदद से,2,LL,mr
+Beginning Sounds Ba/Ra/Na,Question 3,हाँ,617,All,All
+Beginning Sounds Ba/Ra/Na,Question 3,हाँ,609,All,hi
+Beginning Sounds Ba/Ra/Na,Question 3,हाँ,8,All,mr
+Beginning Sounds Ba/Ra/Na,Question 3,हाँ,617,LL,All
+Beginning Sounds Ba/Ra/Na,Question 3,हाँ,609,LL,hi
+Beginning Sounds Ba/Ra/Na,Question 3,हाँ,8,LL,mr
+Beginning Sounds Ka/Ma/La,Question 1,ख़ुद से,280,All,All
+Beginning Sounds Ka/Ma/La,Question 1,ख़ुद से,279,All,hi
+Beginning Sounds Ka/Ma/La,Question 1,ख़ुद से,1,All,mr
+Beginning Sounds Ka/Ma/La,Question 1,ख़ुद से,280,LL,All
+Beginning Sounds Ka/Ma/La,Question 1,ख़ुद से,279,LL,hi
+Beginning Sounds Ka/Ma/La,Question 1,ख़ुद से,1,LL,mr
+Beginning Sounds Ka/Ma/La,Question 1,भाई बहन,149,All,All
+Beginning Sounds Ka/Ma/La,Question 1,भाई बहन,145,All,hi
+Beginning Sounds Ka/Ma/La,Question 1,भाई बहन,4,All,mr
+Beginning Sounds Ka/Ma/La,Question 1,भाई बहन,149,LL,All
+Beginning Sounds Ka/Ma/La,Question 1,भाई बहन,145,LL,hi
+Beginning Sounds Ka/Ma/La,Question 1,भाई बहन,4,LL,mr
+Beginning Sounds Ka/Ma/La,Question 1,माता-पिता,559,All,All
+Beginning Sounds Ka/Ma/La,Question 1,माता-पिता,546,All,hi
+Beginning Sounds Ka/Ma/La,Question 1,माता-पिता,13,All,mr
+Beginning Sounds Ka/Ma/La,Question 1,माता-पिता,559,LL,All
+Beginning Sounds Ka/Ma/La,Question 1,माता-पिता,546,LL,hi
+Beginning Sounds Ka/Ma/La,Question 1,माता-पिता,13,LL,mr
+Beginning Sounds Ka/Ma/La,Question 2,आधे,275,All,All
+Beginning Sounds Ka/Ma/La,Question 2,आधे,265,All,hi
+Beginning Sounds Ka/Ma/La,Question 2,आधे,10,All,mr
+Beginning Sounds Ka/Ma/La,Question 2,आधे,275,LL,All
+Beginning Sounds Ka/Ma/La,Question 2,आधे,265,LL,hi
+Beginning Sounds Ka/Ma/La,Question 2,आधे,10,LL,mr
+Beginning Sounds Ka/Ma/La,Question 2,आधे से कम,58,All,All
+Beginning Sounds Ka/Ma/La,Question 2,आधे से कम,58,All,hi
+Beginning Sounds Ka/Ma/La,Question 2,आधे से कम,58,LL,All
+Beginning Sounds Ka/Ma/La,Question 2,आधे से कम,58,LL,hi
+Beginning Sounds Ka/Ma/La,Question 2,सभी,656,All,All
+Beginning Sounds Ka/Ma/La,Question 2,सभी,648,All,hi
+Beginning Sounds Ka/Ma/La,Question 2,सभी,8,All,mr
+Beginning Sounds Ka/Ma/La,Question 2,सभी,656,LL,All
+Beginning Sounds Ka/Ma/La,Question 2,सभी,648,LL,hi
+Beginning Sounds Ka/Ma/La,Question 2,सभी,8,LL,mr
+Beginning Sounds Ka/Ma/La,Question 3,नहीं,51,All,All
+Beginning Sounds Ka/Ma/La,Question 3,नहीं,50,All,hi
+Beginning Sounds Ka/Ma/La,Question 3,नहीं,1,All,mr
+Beginning Sounds Ka/Ma/La,Question 3,नहीं,51,LL,All
+Beginning Sounds Ka/Ma/La,Question 3,नहीं,50,LL,hi
+Beginning Sounds Ka/Ma/La,Question 3,नहीं,1,LL,mr
+Beginning Sounds Ka/Ma/La,Question 3,मदद से,261,All,All
+Beginning Sounds Ka/Ma/La,Question 3,मदद से,255,All,hi
+Beginning Sounds Ka/Ma/La,Question 3,मदद से,6,All,mr
+Beginning Sounds Ka/Ma/La,Question 3,मदद से,261,LL,All
+Beginning Sounds Ka/Ma/La,Question 3,मदद से,255,LL,hi
+Beginning Sounds Ka/Ma/La,Question 3,मदद से,6,LL,mr
+Beginning Sounds Ka/Ma/La,Question 3,हाँ,677,All,All
+Beginning Sounds Ka/Ma/La,Question 3,हाँ,666,All,hi
+Beginning Sounds Ka/Ma/La,Question 3,हाँ,11,All,mr
+Beginning Sounds Ka/Ma/La,Question 3,हाँ,677,LL,All
+Beginning Sounds Ka/Ma/La,Question 3,हाँ,666,LL,hi
+Beginning Sounds Ka/Ma/La,Question 3,हाँ,11,LL,mr
+Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,1403,All,All
+Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,327,All,hi
 Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,1076,All,mr
-Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,1401,LL,All
-Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,325,LL,hi
+Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,1403,LL,All
+Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,327,LL,hi
 Beginning Sounds Ka/Na/Ta,Question 1,ख़ुद से,1076,LL,mr
-Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,570,All,All
+Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,571,All,All
 Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,138,All,hi
-Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,432,All,mr
-Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,570,LL,All
+Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,433,All,mr
+Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,571,LL,All
 Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,138,LL,hi
-Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,432,LL,mr
+Beginning Sounds Ka/Na/Ta,Question 1,भाई बहन,433,LL,mr
 Beginning Sounds Ka/Na/Ta,Question 1,माता-पिता,2654,All,All
 Beginning Sounds Ka/Na/Ta,Question 1,माता-पिता,527,All,hi
 Beginning Sounds Ka/Na/Ta,Question 1,माता-पिता,2127,All,mr
@@ -83,336 +579,536 @@ Beginning Sounds Ka/Na/Ta,Question 2,आधे से कम,160,All,mr
 Beginning Sounds Ka/Na/Ta,Question 2,आधे से कम,242,LL,All
 Beginning Sounds Ka/Na/Ta,Question 2,आधे से कम,82,LL,hi
 Beginning Sounds Ka/Na/Ta,Question 2,आधे से कम,160,LL,mr
-Beginning Sounds Ka/Na/Ta,Question 2,सभी,3285,All,All
-Beginning Sounds Ka/Na/Ta,Question 2,सभी,650,All,hi
-Beginning Sounds Ka/Na/Ta,Question 2,सभी,2635,All,mr
-Beginning Sounds Ka/Na/Ta,Question 2,सभी,3285,LL,All
-Beginning Sounds Ka/Na/Ta,Question 2,सभी,650,LL,hi
-Beginning Sounds Ka/Na/Ta,Question 2,सभी,2635,LL,mr
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,3288,All,All
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,652,All,hi
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,2636,All,mr
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,3288,LL,All
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,652,LL,hi
+Beginning Sounds Ka/Na/Ta,Question 2,सभी,2636,LL,mr
 Beginning Sounds Ka/Na/Ta,Question 3,नहीं,136,All,All
 Beginning Sounds Ka/Na/Ta,Question 3,नहीं,51,All,hi
 Beginning Sounds Ka/Na/Ta,Question 3,नहीं,85,All,mr
 Beginning Sounds Ka/Na/Ta,Question 3,नहीं,136,LL,All
 Beginning Sounds Ka/Na/Ta,Question 3,नहीं,51,LL,hi
 Beginning Sounds Ka/Na/Ta,Question 3,नहीं,85,LL,mr
-Beginning Sounds Ka/Na/Ta,Question 3,मदद से,1234,All,All
+Beginning Sounds Ka/Na/Ta,Question 3,मदद से,1235,All,All
 Beginning Sounds Ka/Na/Ta,Question 3,मदद से,284,All,hi
-Beginning Sounds Ka/Na/Ta,Question 3,मदद से,950,All,mr
-Beginning Sounds Ka/Na/Ta,Question 3,मदद से,1234,LL,All
+Beginning Sounds Ka/Na/Ta,Question 3,मदद से,951,All,mr
+Beginning Sounds Ka/Na/Ta,Question 3,मदद से,1235,LL,All
 Beginning Sounds Ka/Na/Ta,Question 3,मदद से,284,LL,hi
-Beginning Sounds Ka/Na/Ta,Question 3,मदद से,950,LL,mr
-Beginning Sounds Ka/Na/Ta,Question 3,हाँ,3256,All,All
-Beginning Sounds Ka/Na/Ta,Question 3,हाँ,655,All,hi
+Beginning Sounds Ka/Na/Ta,Question 3,मदद से,951,LL,mr
+Beginning Sounds Ka/Na/Ta,Question 3,हाँ,3258,All,All
+Beginning Sounds Ka/Na/Ta,Question 3,हाँ,657,All,hi
 Beginning Sounds Ka/Na/Ta,Question 3,हाँ,2601,All,mr
-Beginning Sounds Ka/Na/Ta,Question 3,हाँ,3256,LL,All
-Beginning Sounds Ka/Na/Ta,Question 3,हाँ,655,LL,hi
+Beginning Sounds Ka/Na/Ta,Question 3,हाँ,3258,LL,All
+Beginning Sounds Ka/Na/Ta,Question 3,हाँ,657,LL,hi
 Beginning Sounds Ka/Na/Ta,Question 3,हाँ,2601,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1689,All,All
-Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,353,All,hi
-Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1336,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1689,LL,All
-Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,353,LL,hi
-Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1336,LL,mr
+Beginning Sounds La/Ta/Va,Question 1,ख़ुद से,113,All,All
+Beginning Sounds La/Ta/Va,Question 1,ख़ुद से,112,All,hi
+Beginning Sounds La/Ta/Va,Question 1,ख़ुद से,1,All,mr
+Beginning Sounds La/Ta/Va,Question 1,ख़ुद से,113,LL,All
+Beginning Sounds La/Ta/Va,Question 1,ख़ुद से,112,LL,hi
+Beginning Sounds La/Ta/Va,Question 1,ख़ुद से,1,LL,mr
+Beginning Sounds La/Ta/Va,Question 1,भाई बहन,50,All,All
+Beginning Sounds La/Ta/Va,Question 1,भाई बहन,49,All,hi
+Beginning Sounds La/Ta/Va,Question 1,भाई बहन,1,All,mr
+Beginning Sounds La/Ta/Va,Question 1,भाई बहन,50,LL,All
+Beginning Sounds La/Ta/Va,Question 1,भाई बहन,49,LL,hi
+Beginning Sounds La/Ta/Va,Question 1,भाई बहन,1,LL,mr
+Beginning Sounds La/Ta/Va,Question 1,माता-पिता,211,All,All
+Beginning Sounds La/Ta/Va,Question 1,माता-पिता,209,All,hi
+Beginning Sounds La/Ta/Va,Question 1,माता-पिता,2,All,mr
+Beginning Sounds La/Ta/Va,Question 1,माता-पिता,211,LL,All
+Beginning Sounds La/Ta/Va,Question 1,माता-पिता,209,LL,hi
+Beginning Sounds La/Ta/Va,Question 1,माता-पिता,2,LL,mr
+Beginning Sounds La/Ta/Va,Question 2,आधे,73,All,All
+Beginning Sounds La/Ta/Va,Question 2,आधे,73,All,hi
+Beginning Sounds La/Ta/Va,Question 2,आधे,73,LL,All
+Beginning Sounds La/Ta/Va,Question 2,आधे,73,LL,hi
+Beginning Sounds La/Ta/Va,Question 2,आधे से कम,15,All,All
+Beginning Sounds La/Ta/Va,Question 2,आधे से कम,15,All,hi
+Beginning Sounds La/Ta/Va,Question 2,आधे से कम,15,LL,All
+Beginning Sounds La/Ta/Va,Question 2,आधे से कम,15,LL,hi
+Beginning Sounds La/Ta/Va,Question 2,सभी,286,All,All
+Beginning Sounds La/Ta/Va,Question 2,सभी,282,All,hi
+Beginning Sounds La/Ta/Va,Question 2,सभी,4,All,mr
+Beginning Sounds La/Ta/Va,Question 2,सभी,286,LL,All
+Beginning Sounds La/Ta/Va,Question 2,सभी,282,LL,hi
+Beginning Sounds La/Ta/Va,Question 2,सभी,4,LL,mr
+Beginning Sounds La/Ta/Va,Question 3,नहीं,16,All,All
+Beginning Sounds La/Ta/Va,Question 3,नहीं,16,All,hi
+Beginning Sounds La/Ta/Va,Question 3,नहीं,16,LL,All
+Beginning Sounds La/Ta/Va,Question 3,नहीं,16,LL,hi
+Beginning Sounds La/Ta/Va,Question 3,मदद से,91,All,All
+Beginning Sounds La/Ta/Va,Question 3,मदद से,90,All,hi
+Beginning Sounds La/Ta/Va,Question 3,मदद से,1,All,mr
+Beginning Sounds La/Ta/Va,Question 3,मदद से,91,LL,All
+Beginning Sounds La/Ta/Va,Question 3,मदद से,90,LL,hi
+Beginning Sounds La/Ta/Va,Question 3,मदद से,1,LL,mr
+Beginning Sounds La/Ta/Va,Question 3,हाँ,266,All,All
+Beginning Sounds La/Ta/Va,Question 3,हाँ,263,All,hi
+Beginning Sounds La/Ta/Va,Question 3,हाँ,3,All,mr
+Beginning Sounds La/Ta/Va,Question 3,हाँ,266,LL,All
+Beginning Sounds La/Ta/Va,Question 3,हाँ,263,LL,hi
+Beginning Sounds La/Ta/Va,Question 3,हाँ,3,LL,mr
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1693,All,All
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,355,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1338,All,mr
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1693,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,355,LL,hi
+Beginning Sounds Ma/Cha/Ba,Question 1,ख़ुद से,1338,LL,mr
 Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,758,All,All
 Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,196,All,hi
 Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,562,All,mr
 Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,758,LL,All
 Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,196,LL,hi
 Beginning Sounds Ma/Cha/Ba,Question 1,भाई बहन,562,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,3621,All,All
-Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,700,All,hi
-Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,2921,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,3621,LL,All
-Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,700,LL,hi
-Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,2921,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1630,All,All
-Beginning Sounds Ma/Cha/Ba,Question 2,आधे,374,All,hi
-Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1256,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1630,LL,All
-Beginning Sounds Ma/Cha/Ba,Question 2,आधे,374,LL,hi
-Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1256,LL,mr
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,3627,All,All
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,703,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,2924,All,mr
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,3627,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,703,LL,hi
+Beginning Sounds Ma/Cha/Ba,Question 1,माता-पिता,2924,LL,mr
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1632,All,All
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,375,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1257,All,mr
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1632,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,375,LL,hi
+Beginning Sounds Ma/Cha/Ba,Question 2,आधे,1257,LL,mr
 Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,373,All,All
 Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,106,All,hi
 Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,267,All,mr
 Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,373,LL,All
 Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,106,LL,hi
 Beginning Sounds Ma/Cha/Ba,Question 2,आधे से कम,267,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 2,सभी,4064,All,All
-Beginning Sounds Ma/Cha/Ba,Question 2,सभी,769,All,hi
-Beginning Sounds Ma/Cha/Ba,Question 2,सभी,3295,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 2,सभी,4064,LL,All
-Beginning Sounds Ma/Cha/Ba,Question 2,सभी,769,LL,hi
-Beginning Sounds Ma/Cha/Ba,Question 2,सभी,3295,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,181,All,All
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,4072,All,All
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,773,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,3299,All,mr
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,4072,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,773,LL,hi
+Beginning Sounds Ma/Cha/Ba,Question 2,सभी,3299,LL,mr
+Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,182,All,All
 Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,48,All,hi
-Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,133,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,181,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,134,All,mr
+Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,182,LL,All
 Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,48,LL,hi
-Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,133,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1689,All,All
-Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,422,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 3,नहीं,134,LL,mr
+Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1690,All,All
+Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,423,All,hi
 Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1267,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1689,LL,All
-Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,422,LL,hi
+Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1690,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,423,LL,hi
 Beginning Sounds Ma/Cha/Ba,Question 3,मदद से,1267,LL,mr
-Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,4197,All,All
-Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,779,All,hi
-Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,3418,All,mr
-Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,4197,LL,All
-Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,779,LL,hi
-Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,3418,LL,mr
-Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,451,All,All
-Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,165,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,4205,All,All
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,783,All,hi
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,3422,All,mr
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,4205,LL,All
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,783,LL,hi
+Beginning Sounds Ma/Cha/Ba,Question 3,हाँ,3422,LL,mr
+Beginning Sounds Ma/Ka/Cha,Question 1,ख़ुद से,112,All,All
+Beginning Sounds Ma/Ka/Cha,Question 1,ख़ुद से,109,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 1,ख़ुद से,3,All,mr
+Beginning Sounds Ma/Ka/Cha,Question 1,ख़ुद से,112,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 1,ख़ुद से,109,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 1,ख़ुद से,3,LL,mr
+Beginning Sounds Ma/Ka/Cha,Question 1,भाई बहन,41,All,All
+Beginning Sounds Ma/Ka/Cha,Question 1,भाई बहन,41,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 1,भाई बहन,41,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 1,भाई बहन,41,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 1,माता-पिता,238,All,All
+Beginning Sounds Ma/Ka/Cha,Question 1,माता-पिता,235,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 1,माता-पिता,3,All,mr
+Beginning Sounds Ma/Ka/Cha,Question 1,माता-पिता,238,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 1,माता-पिता,235,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 1,माता-पिता,3,LL,mr
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे,86,All,All
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे,84,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे,2,All,mr
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे,86,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे,84,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे,2,LL,mr
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे से कम,11,All,All
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे से कम,11,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे से कम,11,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 2,आधे से कम,11,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 2,सभी,294,All,All
+Beginning Sounds Ma/Ka/Cha,Question 2,सभी,290,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 2,सभी,4,All,mr
+Beginning Sounds Ma/Ka/Cha,Question 2,सभी,294,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 2,सभी,290,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 2,सभी,4,LL,mr
+Beginning Sounds Ma/Ka/Cha,Question 3,नहीं,7,All,All
+Beginning Sounds Ma/Ka/Cha,Question 3,नहीं,7,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 3,नहीं,7,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 3,नहीं,7,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 3,मदद से,108,All,All
+Beginning Sounds Ma/Ka/Cha,Question 3,मदद से,107,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 3,मदद से,1,All,mr
+Beginning Sounds Ma/Ka/Cha,Question 3,मदद से,108,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 3,मदद से,107,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 3,मदद से,1,LL,mr
+Beginning Sounds Ma/Ka/Cha,Question 3,हाँ,276,All,All
+Beginning Sounds Ma/Ka/Cha,Question 3,हाँ,271,All,hi
+Beginning Sounds Ma/Ka/Cha,Question 3,हाँ,5,All,mr
+Beginning Sounds Ma/Ka/Cha,Question 3,हाँ,276,LL,All
+Beginning Sounds Ma/Ka/Cha,Question 3,हाँ,271,LL,hi
+Beginning Sounds Ma/Ka/Cha,Question 3,हाँ,5,LL,mr
+Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,455,All,All
+Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,169,All,hi
 Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,286,All,mr
-Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,451,LL,All
-Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,165,LL,hi
+Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,455,LL,All
+Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,169,LL,hi
 Beginning Sounds Ma/Ka/La,Question 1,ख़ुद से,286,LL,mr
-Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,194,All,All
-Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,79,All,hi
-Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,115,All,mr
-Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,194,LL,All
-Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,79,LL,hi
-Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,115,LL,mr
-Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,753,All,All
-Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,245,All,hi
-Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,508,All,mr
-Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,753,LL,All
-Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,245,LL,hi
-Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,508,LL,mr
-Beginning Sounds Ma/Ka/La,Question 2,आधे,354,All,All
-Beginning Sounds Ma/Ka/La,Question 2,आधे,123,All,hi
-Beginning Sounds Ma/Ka/La,Question 2,आधे,231,All,mr
-Beginning Sounds Ma/Ka/La,Question 2,आधे,354,LL,All
-Beginning Sounds Ma/Ka/La,Question 2,आधे,123,LL,hi
-Beginning Sounds Ma/Ka/La,Question 2,आधे,231,LL,mr
-Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,81,All,All
-Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,38,All,hi
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,200,All,All
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,82,All,hi
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,118,All,mr
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,200,LL,All
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,82,LL,hi
+Beginning Sounds Ma/Ka/La,Question 1,भाई बहन,118,LL,mr
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,770,All,All
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,256,All,hi
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,514,All,mr
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,770,LL,All
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,256,LL,hi
+Beginning Sounds Ma/Ka/La,Question 1,माता-पिता,514,LL,mr
+Beginning Sounds Ma/Ka/La,Question 2,आधे,361,All,All
+Beginning Sounds Ma/Ka/La,Question 2,आधे,128,All,hi
+Beginning Sounds Ma/Ka/La,Question 2,आधे,233,All,mr
+Beginning Sounds Ma/Ka/La,Question 2,आधे,361,LL,All
+Beginning Sounds Ma/Ka/La,Question 2,आधे,128,LL,hi
+Beginning Sounds Ma/Ka/La,Question 2,आधे,233,LL,mr
+Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,83,All,All
+Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,40,All,hi
 Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,43,All,mr
-Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,81,LL,All
-Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,38,LL,hi
+Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,83,LL,All
+Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,40,LL,hi
 Beginning Sounds Ma/Ka/La,Question 2,आधे से कम,43,LL,mr
-Beginning Sounds Ma/Ka/La,Question 2,सभी,963,All,All
-Beginning Sounds Ma/Ka/La,Question 2,सभी,328,All,hi
-Beginning Sounds Ma/Ka/La,Question 2,सभी,635,All,mr
-Beginning Sounds Ma/Ka/La,Question 2,सभी,963,LL,All
-Beginning Sounds Ma/Ka/La,Question 2,सभी,328,LL,hi
-Beginning Sounds Ma/Ka/La,Question 2,सभी,635,LL,mr
-Beginning Sounds Ma/Ka/La,Question 3,नहीं,50,All,All
-Beginning Sounds Ma/Ka/La,Question 3,नहीं,17,All,hi
-Beginning Sounds Ma/Ka/La,Question 3,नहीं,33,All,mr
-Beginning Sounds Ma/Ka/La,Question 3,नहीं,50,LL,All
-Beginning Sounds Ma/Ka/La,Question 3,नहीं,17,LL,hi
-Beginning Sounds Ma/Ka/La,Question 3,नहीं,33,LL,mr
-Beginning Sounds Ma/Ka/La,Question 3,मदद से,318,All,All
-Beginning Sounds Ma/Ka/La,Question 3,मदद से,114,All,hi
-Beginning Sounds Ma/Ka/La,Question 3,मदद से,204,All,mr
-Beginning Sounds Ma/Ka/La,Question 3,मदद से,318,LL,All
-Beginning Sounds Ma/Ka/La,Question 3,मदद से,114,LL,hi
-Beginning Sounds Ma/Ka/La,Question 3,मदद से,204,LL,mr
-Beginning Sounds Ma/Ka/La,Question 3,हाँ,1029,All,All
-Beginning Sounds Ma/Ka/La,Question 3,हाँ,357,All,hi
-Beginning Sounds Ma/Ka/La,Question 3,हाँ,672,All,mr
-Beginning Sounds Ma/Ka/La,Question 3,हाँ,1029,LL,All
-Beginning Sounds Ma/Ka/La,Question 3,हाँ,357,LL,hi
-Beginning Sounds Ma/Ka/La,Question 3,हाँ,672,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,286,All,All
-Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,145,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,141,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,286,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,145,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,141,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,105,All,All
-Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,55,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,50,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,105,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,55,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,50,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,421,All,All
-Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,189,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,232,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,421,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,189,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,232,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे,180,All,All
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे,84,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे,96,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे,180,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे,84,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे,96,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,35,All,All
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,25,All,hi
+Beginning Sounds Ma/Ka/La,Question 2,सभी,981,All,All
+Beginning Sounds Ma/Ka/La,Question 2,सभी,339,All,hi
+Beginning Sounds Ma/Ka/La,Question 2,सभी,642,All,mr
+Beginning Sounds Ma/Ka/La,Question 2,सभी,981,LL,All
+Beginning Sounds Ma/Ka/La,Question 2,सभी,339,LL,hi
+Beginning Sounds Ma/Ka/La,Question 2,सभी,642,LL,mr
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,54,All,All
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,19,All,hi
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,35,All,mr
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,54,LL,All
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,19,LL,hi
+Beginning Sounds Ma/Ka/La,Question 3,नहीं,35,LL,mr
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,327,All,All
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,121,All,hi
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,206,All,mr
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,327,LL,All
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,121,LL,hi
+Beginning Sounds Ma/Ka/La,Question 3,मदद से,206,LL,mr
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,1042,All,All
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,365,All,hi
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,677,All,mr
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,1042,LL,All
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,365,LL,hi
+Beginning Sounds Ma/Ka/La,Question 3,हाँ,677,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,560,All,All
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,414,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,146,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,560,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,414,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 1,ख़ुद से,146,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,244,All,All
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,193,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,51,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,244,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,193,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 1,भाई बहन,51,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,1009,All,All
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,768,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,241,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,1009,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,768,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 1,माता-पिता,241,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,430,All,All
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,331,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,99,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,430,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,331,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे,99,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,90,All,All
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,80,All,hi
 Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,10,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,35,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,25,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,90,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,80,LL,hi
 Beginning Sounds Pa/Cha/Sa,Question 2,आधे से कम,10,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 2,सभी,598,All,All
-Beginning Sounds Pa/Cha/Sa,Question 2,सभी,281,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 2,सभी,317,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 2,सभी,598,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 2,सभी,281,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 2,सभी,317,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,43,All,All
-Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,25,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,18,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,43,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,25,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,18,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,209,All,All
-Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,114,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,95,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,209,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,114,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,95,LL,mr
-Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,560,All,All
-Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,250,All,hi
-Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,310,All,mr
-Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,560,LL,All
-Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,250,LL,hi
-Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,310,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1582,All,All
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,1294,All,All
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,965,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,329,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,1294,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,965,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 2,सभी,329,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,80,All,All
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,61,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,19,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,80,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,61,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 3,नहीं,19,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,481,All,All
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,384,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,97,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,481,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,384,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 3,मदद से,97,LL,mr
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,1251,All,All
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,929,All,hi
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,322,All,mr
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,1251,LL,All
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,929,LL,hi
+Beginning Sounds Pa/Cha/Sa,Question 3,हाँ,322,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1583,All,All
 Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,305,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1277,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1582,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1278,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1583,LL,All
 Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,305,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1277,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,665,All,All
+Beginning Sounds Pa/Ga/Ra,Question 1,ख़ुद से,1278,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,666,All,All
 Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,122,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,543,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,665,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,544,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,666,LL,All
 Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,122,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,543,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3656,All,All
-Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,601,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3055,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3656,LL,All
-Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,601,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3055,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1466,All,All
+Beginning Sounds Pa/Ga/Ra,Question 1,भाई बहन,544,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3665,All,All
+Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,602,All,hi
+Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3063,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3665,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,602,LL,hi
+Beginning Sounds Pa/Ga/Ra,Question 1,माता-पिता,3063,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1468,All,All
 Beginning Sounds Pa/Ga/Ra,Question 2,आधे,272,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1194,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1466,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1196,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1468,LL,All
 Beginning Sounds Pa/Ga/Ra,Question 2,आधे,272,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1194,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,324,All,All
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे,1196,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,325,All,All
 Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,70,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,254,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,324,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,255,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,325,LL,All
 Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,70,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,254,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 2,सभी,4114,All,All
-Beginning Sounds Pa/Ga/Ra,Question 2,सभी,686,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 2,सभी,3428,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 2,सभी,4114,LL,All
-Beginning Sounds Pa/Ga/Ra,Question 2,सभी,686,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 2,सभी,3428,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,आधे से कम,255,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,सभी,4122,All,All
+Beginning Sounds Pa/Ga/Ra,Question 2,सभी,687,All,hi
+Beginning Sounds Pa/Ga/Ra,Question 2,सभी,3435,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 2,सभी,4122,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 2,सभी,687,LL,hi
+Beginning Sounds Pa/Ga/Ra,Question 2,सभी,3435,LL,mr
 Beginning Sounds Pa/Ga/Ra,Question 3,नहीं,174,All,All
 Beginning Sounds Pa/Ga/Ra,Question 3,नहीं,45,All,hi
 Beginning Sounds Pa/Ga/Ra,Question 3,नहीं,129,All,mr
 Beginning Sounds Pa/Ga/Ra,Question 3,नहीं,174,LL,All
 Beginning Sounds Pa/Ga/Ra,Question 3,नहीं,45,LL,hi
 Beginning Sounds Pa/Ga/Ra,Question 3,नहीं,129,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1615,All,All
+Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1616,All,All
 Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,300,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1315,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1615,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1316,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1616,LL,All
 Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,300,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1315,LL,mr
-Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,4113,All,All
-Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,683,All,hi
-Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,3430,All,mr
-Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,4113,LL,All
-Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,683,LL,hi
-Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,3430,LL,mr
-Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1415,All,All
+Beginning Sounds Pa/Ga/Ra,Question 3,मदद से,1316,LL,mr
+Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,4123,All,All
+Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,684,All,hi
+Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,3439,All,mr
+Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,4123,LL,All
+Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,684,LL,hi
+Beginning Sounds Pa/Ga/Ra,Question 3,हाँ,3439,LL,mr
+Beginning Sounds Ra/Na/Ga,Question 1,ख़ुद से,60,All,All
+Beginning Sounds Ra/Na/Ga,Question 1,ख़ुद से,60,All,hi
+Beginning Sounds Ra/Na/Ga,Question 1,ख़ुद से,60,LL,All
+Beginning Sounds Ra/Na/Ga,Question 1,ख़ुद से,60,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 1,भाई बहन,26,All,All
+Beginning Sounds Ra/Na/Ga,Question 1,भाई बहन,25,All,hi
+Beginning Sounds Ra/Na/Ga,Question 1,भाई बहन,1,All,mr
+Beginning Sounds Ra/Na/Ga,Question 1,भाई बहन,26,LL,All
+Beginning Sounds Ra/Na/Ga,Question 1,भाई बहन,25,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 1,भाई बहन,1,LL,mr
+Beginning Sounds Ra/Na/Ga,Question 1,माता-पिता,116,All,All
+Beginning Sounds Ra/Na/Ga,Question 1,माता-पिता,116,All,hi
+Beginning Sounds Ra/Na/Ga,Question 1,माता-पिता,116,LL,All
+Beginning Sounds Ra/Na/Ga,Question 1,माता-पिता,116,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 2,आधे,47,All,All
+Beginning Sounds Ra/Na/Ga,Question 2,आधे,47,All,hi
+Beginning Sounds Ra/Na/Ga,Question 2,आधे,47,LL,All
+Beginning Sounds Ra/Na/Ga,Question 2,आधे,47,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 2,आधे से कम,10,All,All
+Beginning Sounds Ra/Na/Ga,Question 2,आधे से कम,10,All,hi
+Beginning Sounds Ra/Na/Ga,Question 2,आधे से कम,10,LL,All
+Beginning Sounds Ra/Na/Ga,Question 2,आधे से कम,10,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 2,सभी,145,All,All
+Beginning Sounds Ra/Na/Ga,Question 2,सभी,144,All,hi
+Beginning Sounds Ra/Na/Ga,Question 2,सभी,1,All,mr
+Beginning Sounds Ra/Na/Ga,Question 2,सभी,145,LL,All
+Beginning Sounds Ra/Na/Ga,Question 2,सभी,144,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 2,सभी,1,LL,mr
+Beginning Sounds Ra/Na/Ga,Question 3,नहीं,5,All,All
+Beginning Sounds Ra/Na/Ga,Question 3,नहीं,5,All,hi
+Beginning Sounds Ra/Na/Ga,Question 3,नहीं,5,LL,All
+Beginning Sounds Ra/Na/Ga,Question 3,नहीं,5,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 3,मदद से,54,All,All
+Beginning Sounds Ra/Na/Ga,Question 3,मदद से,54,All,hi
+Beginning Sounds Ra/Na/Ga,Question 3,मदद से,54,LL,All
+Beginning Sounds Ra/Na/Ga,Question 3,मदद से,54,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 3,हाँ,143,All,All
+Beginning Sounds Ra/Na/Ga,Question 3,हाँ,142,All,hi
+Beginning Sounds Ra/Na/Ga,Question 3,हाँ,1,All,mr
+Beginning Sounds Ra/Na/Ga,Question 3,हाँ,143,LL,All
+Beginning Sounds Ra/Na/Ga,Question 3,हाँ,142,LL,hi
+Beginning Sounds Ra/Na/Ga,Question 3,हाँ,1,LL,mr
+Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1417,All,All
 Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,234,All,hi
-Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1181,All,mr
-Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1415,LL,All
+Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1183,All,mr
+Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1417,LL,All
 Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,234,LL,hi
-Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1181,LL,mr
-Beginning Sounds Sa/La/Va,Question 1,भाई बहन,615,All,All
+Beginning Sounds Sa/La/Va,Question 1,ख़ुद से,1183,LL,mr
+Beginning Sounds Sa/La/Va,Question 1,भाई बहन,616,All,All
 Beginning Sounds Sa/La/Va,Question 1,भाई बहन,109,All,hi
-Beginning Sounds Sa/La/Va,Question 1,भाई बहन,506,All,mr
-Beginning Sounds Sa/La/Va,Question 1,भाई बहन,615,LL,All
+Beginning Sounds Sa/La/Va,Question 1,भाई बहन,507,All,mr
+Beginning Sounds Sa/La/Va,Question 1,भाई बहन,616,LL,All
 Beginning Sounds Sa/La/Va,Question 1,भाई बहन,109,LL,hi
-Beginning Sounds Sa/La/Va,Question 1,भाई बहन,506,LL,mr
-Beginning Sounds Sa/La/Va,Question 1,माता-पिता,3290,All,All
-Beginning Sounds Sa/La/Va,Question 1,माता-पिता,464,All,hi
-Beginning Sounds Sa/La/Va,Question 1,माता-पिता,2826,All,mr
-Beginning Sounds Sa/La/Va,Question 1,माता-पिता,3290,LL,All
-Beginning Sounds Sa/La/Va,Question 1,माता-पिता,464,LL,hi
-Beginning Sounds Sa/La/Va,Question 1,माता-पिता,2826,LL,mr
-Beginning Sounds Sa/La/Va,Question 2,आधे,1376,All,All
-Beginning Sounds Sa/La/Va,Question 2,आधे,220,All,hi
-Beginning Sounds Sa/La/Va,Question 2,आधे,1156,All,mr
-Beginning Sounds Sa/La/Va,Question 2,आधे,1376,LL,All
-Beginning Sounds Sa/La/Va,Question 2,आधे,220,LL,hi
-Beginning Sounds Sa/La/Va,Question 2,आधे,1156,LL,mr
-Beginning Sounds Sa/La/Va,Question 2,आधे से कम,279,All,All
+Beginning Sounds Sa/La/Va,Question 1,भाई बहन,507,LL,mr
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,3296,All,All
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,466,All,hi
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,2830,All,mr
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,3296,LL,All
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,466,LL,hi
+Beginning Sounds Sa/La/Va,Question 1,माता-पिता,2830,LL,mr
+Beginning Sounds Sa/La/Va,Question 2,आधे,1380,All,All
+Beginning Sounds Sa/La/Va,Question 2,आधे,222,All,hi
+Beginning Sounds Sa/La/Va,Question 2,आधे,1158,All,mr
+Beginning Sounds Sa/La/Va,Question 2,आधे,1380,LL,All
+Beginning Sounds Sa/La/Va,Question 2,आधे,222,LL,hi
+Beginning Sounds Sa/La/Va,Question 2,आधे,1158,LL,mr
+Beginning Sounds Sa/La/Va,Question 2,आधे से कम,280,All,All
 Beginning Sounds Sa/La/Va,Question 2,आधे से कम,51,All,hi
-Beginning Sounds Sa/La/Va,Question 2,आधे से कम,228,All,mr
-Beginning Sounds Sa/La/Va,Question 2,आधे से कम,279,LL,All
+Beginning Sounds Sa/La/Va,Question 2,आधे से कम,229,All,mr
+Beginning Sounds Sa/La/Va,Question 2,आधे से कम,280,LL,All
 Beginning Sounds Sa/La/Va,Question 2,आधे से कम,51,LL,hi
-Beginning Sounds Sa/La/Va,Question 2,आधे से कम,228,LL,mr
-Beginning Sounds Sa/La/Va,Question 2,सभी,3666,All,All
+Beginning Sounds Sa/La/Va,Question 2,आधे से कम,229,LL,mr
+Beginning Sounds Sa/La/Va,Question 2,सभी,3670,All,All
 Beginning Sounds Sa/La/Va,Question 2,सभी,536,All,hi
-Beginning Sounds Sa/La/Va,Question 2,सभी,3130,All,mr
-Beginning Sounds Sa/La/Va,Question 2,सभी,3666,LL,All
+Beginning Sounds Sa/La/Va,Question 2,सभी,3134,All,mr
+Beginning Sounds Sa/La/Va,Question 2,सभी,3670,LL,All
 Beginning Sounds Sa/La/Va,Question 2,सभी,536,LL,hi
-Beginning Sounds Sa/La/Va,Question 2,सभी,3130,LL,mr
+Beginning Sounds Sa/La/Va,Question 2,सभी,3134,LL,mr
 Beginning Sounds Sa/La/Va,Question 3,नहीं,161,All,All
 Beginning Sounds Sa/La/Va,Question 3,नहीं,38,All,hi
 Beginning Sounds Sa/La/Va,Question 3,नहीं,123,All,mr
 Beginning Sounds Sa/La/Va,Question 3,नहीं,161,LL,All
 Beginning Sounds Sa/La/Va,Question 3,नहीं,38,LL,hi
 Beginning Sounds Sa/La/Va,Question 3,नहीं,123,LL,mr
-Beginning Sounds Sa/La/Va,Question 3,मदद से,1545,All,All
-Beginning Sounds Sa/La/Va,Question 3,मदद से,253,All,hi
-Beginning Sounds Sa/La/Va,Question 3,मदद से,1292,All,mr
-Beginning Sounds Sa/La/Va,Question 3,मदद से,1545,LL,All
-Beginning Sounds Sa/La/Va,Question 3,मदद से,253,LL,hi
-Beginning Sounds Sa/La/Va,Question 3,मदद से,1292,LL,mr
-Beginning Sounds Sa/La/Va,Question 3,हाँ,3613,All,All
-Beginning Sounds Sa/La/Va,Question 3,हाँ,515,All,hi
-Beginning Sounds Sa/La/Va,Question 3,हाँ,3098,All,mr
-Beginning Sounds Sa/La/Va,Question 3,हाँ,3613,LL,All
-Beginning Sounds Sa/La/Va,Question 3,हाँ,515,LL,hi
-Beginning Sounds Sa/La/Va,Question 3,हाँ,3098,LL,mr
-Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,422,All,All
-Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,422,All,hi
-Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,422,LL,All
-Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,422,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,148,All,All
-Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,148,All,hi
-Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,148,LL,All
-Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,148,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,585,All,All
-Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,585,All,hi
-Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,585,LL,All
-Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,585,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 2,आधे,265,All,All
-Beginning Sounds Ta/Va/Ga,Question 2,आधे,265,All,hi
-Beginning Sounds Ta/Va/Ga,Question 2,आधे,265,LL,All
-Beginning Sounds Ta/Va/Ga,Question 2,आधे,265,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,84,All,All
-Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,84,All,hi
-Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,84,LL,All
-Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,84,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 2,सभी,806,All,All
-Beginning Sounds Ta/Va/Ga,Question 2,सभी,806,All,hi
-Beginning Sounds Ta/Va/Ga,Question 2,सभी,806,LL,All
-Beginning Sounds Ta/Va/Ga,Question 2,सभी,806,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 3,नहीं,37,All,All
-Beginning Sounds Ta/Va/Ga,Question 3,नहीं,37,All,hi
-Beginning Sounds Ta/Va/Ga,Question 3,नहीं,37,LL,All
-Beginning Sounds Ta/Va/Ga,Question 3,नहीं,37,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 3,मदद से,301,All,All
-Beginning Sounds Ta/Va/Ga,Question 3,मदद से,301,All,hi
-Beginning Sounds Ta/Va/Ga,Question 3,मदद से,301,LL,All
-Beginning Sounds Ta/Va/Ga,Question 3,मदद से,301,LL,hi
-Beginning Sounds Ta/Va/Ga,Question 3,हाँ,817,All,All
-Beginning Sounds Ta/Va/Ga,Question 3,हाँ,817,All,hi
-Beginning Sounds Ta/Va/Ga,Question 3,हाँ,817,LL,All
-Beginning Sounds Ta/Va/Ga,Question 3,हाँ,817,LL,hi
+Beginning Sounds Sa/La/Va,Question 3,मदद से,1547,All,All
+Beginning Sounds Sa/La/Va,Question 3,मदद से,254,All,hi
+Beginning Sounds Sa/La/Va,Question 3,मदद से,1293,All,mr
+Beginning Sounds Sa/La/Va,Question 3,मदद से,1547,LL,All
+Beginning Sounds Sa/La/Va,Question 3,मदद से,254,LL,hi
+Beginning Sounds Sa/La/Va,Question 3,मदद से,1293,LL,mr
+Beginning Sounds Sa/La/Va,Question 3,हाँ,3620,All,All
+Beginning Sounds Sa/La/Va,Question 3,हाँ,516,All,hi
+Beginning Sounds Sa/La/Va,Question 3,हाँ,3104,All,mr
+Beginning Sounds Sa/La/Va,Question 3,हाँ,3620,LL,All
+Beginning Sounds Sa/La/Va,Question 3,हाँ,516,LL,hi
+Beginning Sounds Sa/La/Va,Question 3,हाँ,3104,LL,mr
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,552,All,All
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,547,All,hi
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,5,All,mr
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,552,LL,All
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,547,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 1,ख़ुद से,5,LL,mr
+Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,190,All,All
+Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,190,All,hi
+Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,190,LL,All
+Beginning Sounds Ta/Va/Ga,Question 1,भाई बहन,190,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,807,All,All
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,798,All,hi
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,9,All,mr
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,807,LL,All
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,798,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 1,माता-पिता,9,LL,mr
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,335,All,All
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,333,All,hi
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,2,All,mr
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,335,LL,All
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,333,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 2,आधे,2,LL,mr
+Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,99,All,All
+Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,99,All,hi
+Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,99,LL,All
+Beginning Sounds Ta/Va/Ga,Question 2,आधे से कम,99,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,1115,All,All
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,1103,All,hi
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,12,All,mr
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,1115,LL,All
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,1103,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 2,सभी,12,LL,mr
+Beginning Sounds Ta/Va/Ga,Question 3,नहीं,56,All,All
+Beginning Sounds Ta/Va/Ga,Question 3,नहीं,56,All,hi
+Beginning Sounds Ta/Va/Ga,Question 3,नहीं,56,LL,All
+Beginning Sounds Ta/Va/Ga,Question 3,नहीं,56,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,404,All,All
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,400,All,hi
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,4,All,mr
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,404,LL,All
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,400,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 3,मदद से,4,LL,mr
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,1089,All,All
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,1079,All,hi
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,10,All,mr
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,1089,LL,All
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,1079,LL,hi
+Beginning Sounds Ta/Va/Ga,Question 3,हाँ,10,LL,mr
+Cognitive Flexbility,Question 1,ख़ुद से,96,All,All
+Cognitive Flexbility,Question 1,ख़ुद से,1,All,hi
+Cognitive Flexbility,Question 1,ख़ुद से,95,All,mr
+Cognitive Flexbility,Question 1,ख़ुद से,96,CG,All
+Cognitive Flexbility,Question 1,ख़ुद से,1,CG,hi
+Cognitive Flexbility,Question 1,ख़ुद से,95,CG,mr
+Cognitive Flexbility,Question 1,भाई बहन,22,All,All
+Cognitive Flexbility,Question 1,भाई बहन,22,All,mr
+Cognitive Flexbility,Question 1,भाई बहन,22,CG,All
+Cognitive Flexbility,Question 1,भाई बहन,22,CG,mr
+Cognitive Flexbility,Question 1,माता-पिता,237,All,All
+Cognitive Flexbility,Question 1,माता-पिता,5,All,hi
+Cognitive Flexbility,Question 1,माता-पिता,232,All,mr
+Cognitive Flexbility,Question 1,माता-पिता,237,CG,All
+Cognitive Flexbility,Question 1,माता-पिता,5,CG,hi
+Cognitive Flexbility,Question 1,माता-पिता,232,CG,mr
+Cognitive Flexbility,Question 2,आधे,58,All,All
+Cognitive Flexbility,Question 2,आधे,1,All,hi
+Cognitive Flexbility,Question 2,आधे,57,All,mr
+Cognitive Flexbility,Question 2,आधे,58,CG,All
+Cognitive Flexbility,Question 2,आधे,1,CG,hi
+Cognitive Flexbility,Question 2,आधे,57,CG,mr
+Cognitive Flexbility,Question 2,आधे से कम,7,All,All
+Cognitive Flexbility,Question 2,आधे से कम,1,All,hi
+Cognitive Flexbility,Question 2,आधे से कम,6,All,mr
+Cognitive Flexbility,Question 2,आधे से कम,7,CG,All
+Cognitive Flexbility,Question 2,आधे से कम,1,CG,hi
+Cognitive Flexbility,Question 2,आधे से कम,6,CG,mr
+Cognitive Flexbility,Question 2,सभी,290,All,All
+Cognitive Flexbility,Question 2,सभी,4,All,hi
+Cognitive Flexbility,Question 2,सभी,286,All,mr
+Cognitive Flexbility,Question 2,सभी,290,CG,All
+Cognitive Flexbility,Question 2,सभी,4,CG,hi
+Cognitive Flexbility,Question 2,सभी,286,CG,mr
+Cognitive Flexbility,Question 3,नहीं,5,All,All
+Cognitive Flexbility,Question 3,नहीं,5,All,mr
+Cognitive Flexbility,Question 3,नहीं,5,CG,All
+Cognitive Flexbility,Question 3,नहीं,5,CG,mr
+Cognitive Flexbility,Question 3,मदद से,86,All,All
+Cognitive Flexbility,Question 3,मदद से,2,All,hi
+Cognitive Flexbility,Question 3,मदद से,84,All,mr
+Cognitive Flexbility,Question 3,मदद से,86,CG,All
+Cognitive Flexbility,Question 3,मदद से,2,CG,hi
+Cognitive Flexbility,Question 3,मदद से,84,CG,mr
+Cognitive Flexbility,Question 3,हाँ,264,All,All
+Cognitive Flexbility,Question 3,हाँ,4,All,hi
+Cognitive Flexbility,Question 3,हाँ,260,All,mr
+Cognitive Flexbility,Question 3,हाँ,264,CG,All
+Cognitive Flexbility,Question 3,हाँ,4,CG,hi
+Cognitive Flexbility,Question 3,हाँ,260,CG,mr
 Color Blue,Question 1,ख़ुद से,898,All,All
 Color Blue,Question 1,ख़ुद से,194,All,hi
 Color Blue,Question 1,ख़ुद से,704,All,mr
@@ -425,11 +1121,11 @@ Color Blue,Question 1,भाई बहन,188,All,mr
 Color Blue,Question 1,भाई बहन,244,CG,All
 Color Blue,Question 1,भाई बहन,56,CG,hi
 Color Blue,Question 1,भाई बहन,188,CG,mr
-Color Blue,Question 1,माता-पिता,1040,All,All
-Color Blue,Question 1,माता-पिता,154,All,hi
+Color Blue,Question 1,माता-पिता,1048,All,All
+Color Blue,Question 1,माता-पिता,162,All,hi
 Color Blue,Question 1,माता-पिता,886,All,mr
-Color Blue,Question 1,माता-पिता,1040,CG,All
-Color Blue,Question 1,माता-पिता,154,CG,hi
+Color Blue,Question 1,माता-पिता,1048,CG,All
+Color Blue,Question 1,माता-पिता,162,CG,hi
 Color Blue,Question 1,माता-पिता,886,CG,mr
 Color Blue,Question 2,आधे,164,All,All
 Color Blue,Question 2,आधे,22,All,hi
@@ -443,11 +1139,11 @@ Color Blue,Question 2,आधे से कम,42,All,mr
 Color Blue,Question 2,आधे से कम,46,CG,All
 Color Blue,Question 2,आधे से कम,4,CG,hi
 Color Blue,Question 2,आधे से कम,42,CG,mr
-Color Blue,Question 2,सभी,1970,All,All
-Color Blue,Question 2,सभी,378,All,hi
+Color Blue,Question 2,सभी,1978,All,All
+Color Blue,Question 2,सभी,386,All,hi
 Color Blue,Question 2,सभी,1592,All,mr
-Color Blue,Question 2,सभी,1970,CG,All
-Color Blue,Question 2,सभी,378,CG,hi
+Color Blue,Question 2,सभी,1978,CG,All
+Color Blue,Question 2,सभी,386,CG,hi
 Color Blue,Question 2,सभी,1592,CG,mr
 Color Blue,Question 3,नहीं,42,All,All
 Color Blue,Question 3,नहीं,18,All,hi
@@ -461,11 +1157,11 @@ Color Blue,Question 3,मदद से,192,All,mr
 Color Blue,Question 3,मदद से,228,CG,All
 Color Blue,Question 3,मदद से,36,CG,hi
 Color Blue,Question 3,मदद से,192,CG,mr
-Color Blue,Question 3,हाँ,1912,All,All
-Color Blue,Question 3,हाँ,350,All,hi
+Color Blue,Question 3,हाँ,1920,All,All
+Color Blue,Question 3,हाँ,358,All,hi
 Color Blue,Question 3,हाँ,1562,All,mr
-Color Blue,Question 3,हाँ,1912,CG,All
-Color Blue,Question 3,हाँ,350,CG,hi
+Color Blue,Question 3,हाँ,1920,CG,All
+Color Blue,Question 3,हाँ,358,CG,hi
 Color Blue,Question 3,हाँ,1562,CG,mr
 Color Red,Question 1,ख़ुद से,3038,All,All
 Color Red,Question 1,ख़ुद से,752,All,hi
@@ -533,11 +1229,11 @@ Color Yellow,Question 1,भाई बहन,170,All,mr
 Color Yellow,Question 1,भाई बहन,218,CG,All
 Color Yellow,Question 1,भाई बहन,48,CG,hi
 Color Yellow,Question 1,भाई बहन,170,CG,mr
-Color Yellow,Question 1,माता-पिता,1268,All,All
-Color Yellow,Question 1,माता-पिता,216,All,hi
+Color Yellow,Question 1,माता-पिता,1270,All,All
+Color Yellow,Question 1,माता-पिता,218,All,hi
 Color Yellow,Question 1,माता-पिता,1052,All,mr
-Color Yellow,Question 1,माता-पिता,1268,CG,All
-Color Yellow,Question 1,माता-पिता,216,CG,hi
+Color Yellow,Question 1,माता-पिता,1270,CG,All
+Color Yellow,Question 1,माता-पिता,218,CG,hi
 Color Yellow,Question 1,माता-पिता,1052,CG,mr
 Color Yellow,Question 2,आधे,208,All,All
 Color Yellow,Question 2,आधे,32,All,hi
@@ -551,11 +1247,11 @@ Color Yellow,Question 2,आधे से कम,30,All,mr
 Color Yellow,Question 2,आधे से कम,42,CG,All
 Color Yellow,Question 2,आधे से कम,12,CG,hi
 Color Yellow,Question 2,आधे से कम,30,CG,mr
-Color Yellow,Question 2,सभी,2130,All,All
-Color Yellow,Question 2,सभी,376,All,hi
+Color Yellow,Question 2,सभी,2132,All,All
+Color Yellow,Question 2,सभी,378,All,hi
 Color Yellow,Question 2,सभी,1754,All,mr
-Color Yellow,Question 2,सभी,2130,CG,All
-Color Yellow,Question 2,सभी,376,CG,hi
+Color Yellow,Question 2,सभी,2132,CG,All
+Color Yellow,Question 2,सभी,378,CG,hi
 Color Yellow,Question 2,सभी,1754,CG,mr
 Color Yellow,Question 3,नहीं,64,All,All
 Color Yellow,Question 3,नहीं,20,All,hi
@@ -569,30 +1265,30 @@ Color Yellow,Question 3,मदद से,144,All,mr
 Color Yellow,Question 3,मदद से,184,CG,All
 Color Yellow,Question 3,मदद से,40,CG,hi
 Color Yellow,Question 3,मदद से,144,CG,mr
-Color Yellow,Question 3,हाँ,2130,All,All
-Color Yellow,Question 3,हाँ,360,All,hi
+Color Yellow,Question 3,हाँ,2132,All,All
+Color Yellow,Question 3,हाँ,362,All,hi
 Color Yellow,Question 3,हाँ,1770,All,mr
-Color Yellow,Question 3,हाँ,2130,CG,All
-Color Yellow,Question 3,हाँ,360,CG,hi
+Color Yellow,Question 3,हाँ,2132,CG,All
+Color Yellow,Question 3,हाँ,362,CG,hi
 Color Yellow,Question 3,हाँ,1770,CG,mr
-Emotion Identification,Question 1,ख़ुद से,1152,All,All
-Emotion Identification,Question 1,ख़ुद से,458,All,hi
-Emotion Identification,Question 1,ख़ुद से,694,All,mr
-Emotion Identification,Question 1,ख़ुद से,1152,SEL,All
-Emotion Identification,Question 1,ख़ुद से,458,SEL,hi
-Emotion Identification,Question 1,ख़ुद से,694,SEL,mr
-Emotion Identification,Question 1,भाई बहन,466,All,All
-Emotion Identification,Question 1,भाई बहन,210,All,hi
-Emotion Identification,Question 1,भाई बहन,256,All,mr
-Emotion Identification,Question 1,भाई बहन,466,SEL,All
-Emotion Identification,Question 1,भाई बहन,210,SEL,hi
-Emotion Identification,Question 1,भाई बहन,256,SEL,mr
-Emotion Identification,Question 1,माता-पिता,1490,All,All
-Emotion Identification,Question 1,माता-पिता,606,All,hi
-Emotion Identification,Question 1,माता-पिता,884,All,mr
-Emotion Identification,Question 1,माता-पिता,1490,SEL,All
-Emotion Identification,Question 1,माता-पिता,606,SEL,hi
-Emotion Identification,Question 1,माता-पिता,884,SEL,mr
+Emotion Identification,Question 1,ख़ुद से,1162,All,All
+Emotion Identification,Question 1,ख़ुद से,464,All,hi
+Emotion Identification,Question 1,ख़ुद से,698,All,mr
+Emotion Identification,Question 1,ख़ुद से,1162,SEL,All
+Emotion Identification,Question 1,ख़ुद से,464,SEL,hi
+Emotion Identification,Question 1,ख़ुद से,698,SEL,mr
+Emotion Identification,Question 1,भाई बहन,470,All,All
+Emotion Identification,Question 1,भाई बहन,212,All,hi
+Emotion Identification,Question 1,भाई बहन,258,All,mr
+Emotion Identification,Question 1,भाई बहन,470,SEL,All
+Emotion Identification,Question 1,भाई बहन,212,SEL,hi
+Emotion Identification,Question 1,भाई बहन,258,SEL,mr
+Emotion Identification,Question 1,माता-पिता,1494,All,All
+Emotion Identification,Question 1,माता-पिता,608,All,hi
+Emotion Identification,Question 1,माता-पिता,886,All,mr
+Emotion Identification,Question 1,माता-पिता,1494,SEL,All
+Emotion Identification,Question 1,माता-पिता,608,SEL,hi
+Emotion Identification,Question 1,माता-पिता,886,SEL,mr
 Emotion Identification,Question 2,आधे,446,All,All
 Emotion Identification,Question 2,आधे,178,All,hi
 Emotion Identification,Question 2,आधे,268,All,mr
@@ -605,107 +1301,107 @@ Emotion Identification,Question 2,आधे से कम,64,All,mr
 Emotion Identification,Question 2,आधे से कम,146,SEL,All
 Emotion Identification,Question 2,आधे से कम,82,SEL,hi
 Emotion Identification,Question 2,आधे से कम,64,SEL,mr
-Emotion Identification,Question 2,सभी,2516,All,All
-Emotion Identification,Question 2,सभी,1014,All,hi
-Emotion Identification,Question 2,सभी,1502,All,mr
-Emotion Identification,Question 2,सभी,2516,SEL,All
-Emotion Identification,Question 2,सभी,1014,SEL,hi
-Emotion Identification,Question 2,सभी,1502,SEL,mr
-Emotion Identification,Question 3,नहीं,150,All,All
+Emotion Identification,Question 2,सभी,2534,All,All
+Emotion Identification,Question 2,सभी,1024,All,hi
+Emotion Identification,Question 2,सभी,1510,All,mr
+Emotion Identification,Question 2,सभी,2534,SEL,All
+Emotion Identification,Question 2,सभी,1024,SEL,hi
+Emotion Identification,Question 2,सभी,1510,SEL,mr
+Emotion Identification,Question 3,नहीं,152,All,All
 Emotion Identification,Question 3,नहीं,78,All,hi
-Emotion Identification,Question 3,नहीं,72,All,mr
-Emotion Identification,Question 3,नहीं,150,SEL,All
+Emotion Identification,Question 3,नहीं,74,All,mr
+Emotion Identification,Question 3,नहीं,152,SEL,All
 Emotion Identification,Question 3,नहीं,78,SEL,hi
-Emotion Identification,Question 3,नहीं,72,SEL,mr
+Emotion Identification,Question 3,नहीं,74,SEL,mr
 Emotion Identification,Question 3,मदद से,486,All,All
 Emotion Identification,Question 3,मदद से,178,All,hi
 Emotion Identification,Question 3,मदद से,308,All,mr
 Emotion Identification,Question 3,मदद से,486,SEL,All
 Emotion Identification,Question 3,मदद से,178,SEL,hi
 Emotion Identification,Question 3,मदद से,308,SEL,mr
-Emotion Identification,Question 3,हाँ,2472,All,All
-Emotion Identification,Question 3,हाँ,1018,All,hi
-Emotion Identification,Question 3,हाँ,1454,All,mr
-Emotion Identification,Question 3,हाँ,2472,SEL,All
-Emotion Identification,Question 3,हाँ,1018,SEL,hi
-Emotion Identification,Question 3,हाँ,1454,SEL,mr
-Identification of all emotions,Question 1,ख़ुद से,1716,All,All
-Identification of all emotions,Question 1,ख़ुद से,588,All,hi
-Identification of all emotions,Question 1,ख़ुद से,1128,All,mr
-Identification of all emotions,Question 1,ख़ुद से,1716,SEL,All
-Identification of all emotions,Question 1,ख़ुद से,588,SEL,hi
-Identification of all emotions,Question 1,ख़ुद से,1128,SEL,mr
-Identification of all emotions,Question 1,भाई बहन,668,All,All
-Identification of all emotions,Question 1,भाई बहन,232,All,hi
-Identification of all emotions,Question 1,भाई बहन,436,All,mr
-Identification of all emotions,Question 1,भाई बहन,668,SEL,All
-Identification of all emotions,Question 1,भाई बहन,232,SEL,hi
-Identification of all emotions,Question 1,भाई बहन,436,SEL,mr
-Identification of all emotions,Question 1,माता-पिता,2228,All,All
-Identification of all emotions,Question 1,माता-पिता,744,All,hi
+Emotion Identification,Question 3,हाँ,2488,All,All
+Emotion Identification,Question 3,हाँ,1028,All,hi
+Emotion Identification,Question 3,हाँ,1460,All,mr
+Emotion Identification,Question 3,हाँ,2488,SEL,All
+Emotion Identification,Question 3,हाँ,1028,SEL,hi
+Emotion Identification,Question 3,हाँ,1460,SEL,mr
+Identification of all emotions,Question 1,ख़ुद से,1720,All,All
+Identification of all emotions,Question 1,ख़ुद से,590,All,hi
+Identification of all emotions,Question 1,ख़ुद से,1130,All,mr
+Identification of all emotions,Question 1,ख़ुद से,1720,SEL,All
+Identification of all emotions,Question 1,ख़ुद से,590,SEL,hi
+Identification of all emotions,Question 1,ख़ुद से,1130,SEL,mr
+Identification of all emotions,Question 1,भाई बहन,674,All,All
+Identification of all emotions,Question 1,भाई बहन,234,All,hi
+Identification of all emotions,Question 1,भाई बहन,440,All,mr
+Identification of all emotions,Question 1,भाई बहन,674,SEL,All
+Identification of all emotions,Question 1,भाई बहन,234,SEL,hi
+Identification of all emotions,Question 1,भाई बहन,440,SEL,mr
+Identification of all emotions,Question 1,माता-पिता,2232,All,All
+Identification of all emotions,Question 1,माता-पिता,748,All,hi
 Identification of all emotions,Question 1,माता-पिता,1484,All,mr
-Identification of all emotions,Question 1,माता-पिता,2228,SEL,All
-Identification of all emotions,Question 1,माता-पिता,744,SEL,hi
+Identification of all emotions,Question 1,माता-पिता,2232,SEL,All
+Identification of all emotions,Question 1,माता-पिता,748,SEL,hi
 Identification of all emotions,Question 1,माता-पिता,1484,SEL,mr
-Identification of all emotions,Question 2,आधे,776,All,All
+Identification of all emotions,Question 2,आधे,780,All,All
 Identification of all emotions,Question 2,आधे,286,All,hi
-Identification of all emotions,Question 2,आधे,490,All,mr
-Identification of all emotions,Question 2,आधे,776,SEL,All
+Identification of all emotions,Question 2,आधे,494,All,mr
+Identification of all emotions,Question 2,आधे,780,SEL,All
 Identification of all emotions,Question 2,आधे,286,SEL,hi
-Identification of all emotions,Question 2,आधे,490,SEL,mr
+Identification of all emotions,Question 2,आधे,494,SEL,mr
 Identification of all emotions,Question 2,आधे से कम,174,All,All
 Identification of all emotions,Question 2,आधे से कम,80,All,hi
 Identification of all emotions,Question 2,आधे से कम,94,All,mr
 Identification of all emotions,Question 2,आधे से कम,174,SEL,All
 Identification of all emotions,Question 2,आधे से कम,80,SEL,hi
 Identification of all emotions,Question 2,आधे से कम,94,SEL,mr
-Identification of all emotions,Question 2,सभी,3664,All,All
-Identification of all emotions,Question 2,सभी,1198,All,hi
-Identification of all emotions,Question 2,सभी,2466,All,mr
-Identification of all emotions,Question 2,सभी,3664,SEL,All
-Identification of all emotions,Question 2,सभी,1198,SEL,hi
-Identification of all emotions,Question 2,सभी,2466,SEL,mr
-Identification of all emotions,Question 3,नहीं,198,All,All
+Identification of all emotions,Question 2,सभी,3674,All,All
+Identification of all emotions,Question 2,सभी,1206,All,hi
+Identification of all emotions,Question 2,सभी,2468,All,mr
+Identification of all emotions,Question 2,सभी,3674,SEL,All
+Identification of all emotions,Question 2,सभी,1206,SEL,hi
+Identification of all emotions,Question 2,सभी,2468,SEL,mr
+Identification of all emotions,Question 3,नहीं,200,All,All
 Identification of all emotions,Question 3,नहीं,72,All,hi
-Identification of all emotions,Question 3,नहीं,126,All,mr
-Identification of all emotions,Question 3,नहीं,198,SEL,All
+Identification of all emotions,Question 3,नहीं,128,All,mr
+Identification of all emotions,Question 3,नहीं,200,SEL,All
 Identification of all emotions,Question 3,नहीं,72,SEL,hi
-Identification of all emotions,Question 3,नहीं,126,SEL,mr
-Identification of all emotions,Question 3,मदद से,720,All,All
+Identification of all emotions,Question 3,नहीं,128,SEL,mr
+Identification of all emotions,Question 3,मदद से,722,All,All
 Identification of all emotions,Question 3,मदद से,248,All,hi
-Identification of all emotions,Question 3,मदद से,472,All,mr
-Identification of all emotions,Question 3,मदद से,720,SEL,All
+Identification of all emotions,Question 3,मदद से,474,All,mr
+Identification of all emotions,Question 3,मदद से,722,SEL,All
 Identification of all emotions,Question 3,मदद से,248,SEL,hi
-Identification of all emotions,Question 3,मदद से,472,SEL,mr
-Identification of all emotions,Question 3,हाँ,3694,All,All
-Identification of all emotions,Question 3,हाँ,1242,All,hi
-Identification of all emotions,Question 3,हाँ,2452,All,mr
-Identification of all emotions,Question 3,हाँ,3694,SEL,All
-Identification of all emotions,Question 3,हाँ,1242,SEL,hi
-Identification of all emotions,Question 3,हाँ,2452,SEL,mr
-Numbers Comparison,Question 1,ख़ुद से,860,All,All
-Numbers Comparison,Question 1,ख़ुद से,296,All,hi
+Identification of all emotions,Question 3,मदद से,474,SEL,mr
+Identification of all emotions,Question 3,हाँ,3704,All,All
+Identification of all emotions,Question 3,हाँ,1250,All,hi
+Identification of all emotions,Question 3,हाँ,2454,All,mr
+Identification of all emotions,Question 3,हाँ,3704,SEL,All
+Identification of all emotions,Question 3,हाँ,1250,SEL,hi
+Identification of all emotions,Question 3,हाँ,2454,SEL,mr
+Numbers Comparison,Question 1,ख़ुद से,862,All,All
+Numbers Comparison,Question 1,ख़ुद से,298,All,hi
 Numbers Comparison,Question 1,ख़ुद से,564,All,mr
-Numbers Comparison,Question 1,ख़ुद से,860,NM,All
-Numbers Comparison,Question 1,ख़ुद से,296,NM,hi
+Numbers Comparison,Question 1,ख़ुद से,862,NM,All
+Numbers Comparison,Question 1,ख़ुद से,298,NM,hi
 Numbers Comparison,Question 1,ख़ुद से,564,NM,mr
-Numbers Comparison,Question 1,भाई बहन,456,All,All
+Numbers Comparison,Question 1,भाई बहन,458,All,All
 Numbers Comparison,Question 1,भाई बहन,132,All,hi
-Numbers Comparison,Question 1,भाई बहन,324,All,mr
-Numbers Comparison,Question 1,भाई बहन,456,NM,All
+Numbers Comparison,Question 1,भाई बहन,326,All,mr
+Numbers Comparison,Question 1,भाई बहन,458,NM,All
 Numbers Comparison,Question 1,भाई बहन,132,NM,hi
-Numbers Comparison,Question 1,भाई बहन,324,NM,mr
-Numbers Comparison,Question 1,माता-पिता,1754,All,All
-Numbers Comparison,Question 1,माता-पिता,446,All,hi
+Numbers Comparison,Question 1,भाई बहन,326,NM,mr
+Numbers Comparison,Question 1,माता-पिता,1760,All,All
+Numbers Comparison,Question 1,माता-पिता,452,All,hi
 Numbers Comparison,Question 1,माता-पिता,1308,All,mr
-Numbers Comparison,Question 1,माता-पिता,1754,NM,All
-Numbers Comparison,Question 1,माता-पिता,446,NM,hi
+Numbers Comparison,Question 1,माता-पिता,1760,NM,All
+Numbers Comparison,Question 1,माता-पिता,452,NM,hi
 Numbers Comparison,Question 1,माता-पिता,1308,NM,mr
-Numbers Comparison,Question 2,आधे,774,All,All
-Numbers Comparison,Question 2,आधे,208,All,hi
+Numbers Comparison,Question 2,आधे,778,All,All
+Numbers Comparison,Question 2,आधे,212,All,hi
 Numbers Comparison,Question 2,आधे,566,All,mr
-Numbers Comparison,Question 2,आधे,774,NM,All
-Numbers Comparison,Question 2,आधे,208,NM,hi
+Numbers Comparison,Question 2,आधे,778,NM,All
+Numbers Comparison,Question 2,आधे,212,NM,hi
 Numbers Comparison,Question 2,आधे,566,NM,mr
 Numbers Comparison,Question 2,आधे से कम,218,All,All
 Numbers Comparison,Question 2,आधे से कम,80,All,hi
@@ -713,30 +1409,30 @@ Numbers Comparison,Question 2,आधे से कम,138,All,mr
 Numbers Comparison,Question 2,आधे से कम,218,NM,All
 Numbers Comparison,Question 2,आधे से कम,80,NM,hi
 Numbers Comparison,Question 2,आधे से कम,138,NM,mr
-Numbers Comparison,Question 2,सभी,2078,All,All
-Numbers Comparison,Question 2,सभी,586,All,hi
-Numbers Comparison,Question 2,सभी,1492,All,mr
-Numbers Comparison,Question 2,सभी,2078,NM,All
-Numbers Comparison,Question 2,सभी,586,NM,hi
-Numbers Comparison,Question 2,सभी,1492,NM,mr
-Numbers Comparison,Question 3,नहीं,142,All,All
-Numbers Comparison,Question 3,नहीं,58,All,hi
+Numbers Comparison,Question 2,सभी,2084,All,All
+Numbers Comparison,Question 2,सभी,590,All,hi
+Numbers Comparison,Question 2,सभी,1494,All,mr
+Numbers Comparison,Question 2,सभी,2084,NM,All
+Numbers Comparison,Question 2,सभी,590,NM,hi
+Numbers Comparison,Question 2,सभी,1494,NM,mr
+Numbers Comparison,Question 3,नहीं,144,All,All
+Numbers Comparison,Question 3,नहीं,60,All,hi
 Numbers Comparison,Question 3,नहीं,84,All,mr
-Numbers Comparison,Question 3,नहीं,142,NM,All
-Numbers Comparison,Question 3,नहीं,58,NM,hi
+Numbers Comparison,Question 3,नहीं,144,NM,All
+Numbers Comparison,Question 3,नहीं,60,NM,hi
 Numbers Comparison,Question 3,नहीं,84,NM,mr
-Numbers Comparison,Question 3,मदद से,996,All,All
-Numbers Comparison,Question 3,मदद से,242,All,hi
+Numbers Comparison,Question 3,मदद से,1000,All,All
+Numbers Comparison,Question 3,मदद से,246,All,hi
 Numbers Comparison,Question 3,मदद से,754,All,mr
-Numbers Comparison,Question 3,मदद से,996,NM,All
-Numbers Comparison,Question 3,मदद से,242,NM,hi
+Numbers Comparison,Question 3,मदद से,1000,NM,All
+Numbers Comparison,Question 3,मदद से,246,NM,hi
 Numbers Comparison,Question 3,मदद से,754,NM,mr
-Numbers Comparison,Question 3,हाँ,1932,All,All
-Numbers Comparison,Question 3,हाँ,574,All,hi
-Numbers Comparison,Question 3,हाँ,1358,All,mr
-Numbers Comparison,Question 3,हाँ,1932,NM,All
-Numbers Comparison,Question 3,हाँ,574,NM,hi
-Numbers Comparison,Question 3,हाँ,1358,NM,mr
+Numbers Comparison,Question 3,हाँ,1936,All,All
+Numbers Comparison,Question 3,हाँ,576,All,hi
+Numbers Comparison,Question 3,हाँ,1360,All,mr
+Numbers Comparison,Question 3,हाँ,1936,NM,All
+Numbers Comparison,Question 3,हाँ,576,NM,hi
+Numbers Comparison,Question 3,हाँ,1360,NM,mr
 Numbers I,Question 1,ख़ुद से,1120,All,All
 Numbers I,Question 1,ख़ुद से,312,All,hi
 Numbers I,Question 1,ख़ुद से,808,All,mr
@@ -791,11 +1487,11 @@ Numbers I,Question 3,हाँ,1816,All,mr
 Numbers I,Question 3,हाँ,2490,NM,All
 Numbers I,Question 3,हाँ,674,NM,hi
 Numbers I,Question 3,हाँ,1816,NM,mr
-Numbers II,Question 1,ख़ुद से,714,All,All
-Numbers II,Question 1,ख़ुद से,266,All,hi
+Numbers II,Question 1,ख़ुद से,716,All,All
+Numbers II,Question 1,ख़ुद से,268,All,hi
 Numbers II,Question 1,ख़ुद से,448,All,mr
-Numbers II,Question 1,ख़ुद से,714,NM,All
-Numbers II,Question 1,ख़ुद से,266,NM,hi
+Numbers II,Question 1,ख़ुद से,716,NM,All
+Numbers II,Question 1,ख़ुद से,268,NM,hi
 Numbers II,Question 1,ख़ुद से,448,NM,mr
 Numbers II,Question 1,भाई बहन,298,All,All
 Numbers II,Question 1,भाई बहन,78,All,hi
@@ -803,11 +1499,11 @@ Numbers II,Question 1,भाई बहन,220,All,mr
 Numbers II,Question 1,भाई बहन,298,NM,All
 Numbers II,Question 1,भाई बहन,78,NM,hi
 Numbers II,Question 1,भाई बहन,220,NM,mr
-Numbers II,Question 1,माता-पिता,1108,All,All
-Numbers II,Question 1,माता-पिता,336,All,hi
+Numbers II,Question 1,माता-पिता,1112,All,All
+Numbers II,Question 1,माता-पिता,340,All,hi
 Numbers II,Question 1,माता-पिता,772,All,mr
-Numbers II,Question 1,माता-पिता,1108,NM,All
-Numbers II,Question 1,माता-पिता,336,NM,hi
+Numbers II,Question 1,माता-पिता,1112,NM,All
+Numbers II,Question 1,माता-पिता,340,NM,hi
 Numbers II,Question 1,माता-पिता,772,NM,mr
 Numbers II,Question 2,आधे,400,All,All
 Numbers II,Question 2,आधे,114,All,hi
@@ -815,23 +1511,23 @@ Numbers II,Question 2,आधे,286,All,mr
 Numbers II,Question 2,आधे,400,NM,All
 Numbers II,Question 2,आधे,114,NM,hi
 Numbers II,Question 2,आधे,286,NM,mr
-Numbers II,Question 2,आधे से कम,94,All,All
-Numbers II,Question 2,आधे से कम,46,All,hi
+Numbers II,Question 2,आधे से कम,96,All,All
+Numbers II,Question 2,आधे से कम,48,All,hi
 Numbers II,Question 2,आधे से कम,48,All,mr
-Numbers II,Question 2,आधे से कम,94,NM,All
-Numbers II,Question 2,आधे से कम,46,NM,hi
+Numbers II,Question 2,आधे से कम,96,NM,All
+Numbers II,Question 2,आधे से कम,48,NM,hi
 Numbers II,Question 2,आधे से कम,48,NM,mr
-Numbers II,Question 2,सभी,1626,All,All
-Numbers II,Question 2,सभी,520,All,hi
+Numbers II,Question 2,सभी,1630,All,All
+Numbers II,Question 2,सभी,524,All,hi
 Numbers II,Question 2,सभी,1106,All,mr
-Numbers II,Question 2,सभी,1626,NM,All
-Numbers II,Question 2,सभी,520,NM,hi
+Numbers II,Question 2,सभी,1630,NM,All
+Numbers II,Question 2,सभी,524,NM,hi
 Numbers II,Question 2,सभी,1106,NM,mr
-Numbers II,Question 3,नहीं,102,All,All
-Numbers II,Question 3,नहीं,40,All,hi
+Numbers II,Question 3,नहीं,104,All,All
+Numbers II,Question 3,नहीं,42,All,hi
 Numbers II,Question 3,नहीं,62,All,mr
-Numbers II,Question 3,नहीं,102,NM,All
-Numbers II,Question 3,नहीं,40,NM,hi
+Numbers II,Question 3,नहीं,104,NM,All
+Numbers II,Question 3,नहीं,42,NM,hi
 Numbers II,Question 3,नहीं,62,NM,mr
 Numbers II,Question 3,मदद से,574,All,All
 Numbers II,Question 3,मदद से,198,All,hi
@@ -839,23 +1535,23 @@ Numbers II,Question 3,मदद से,376,All,mr
 Numbers II,Question 3,मदद से,574,NM,All
 Numbers II,Question 3,मदद से,198,NM,hi
 Numbers II,Question 3,मदद से,376,NM,mr
-Numbers II,Question 3,हाँ,1444,All,All
-Numbers II,Question 3,हाँ,442,All,hi
+Numbers II,Question 3,हाँ,1448,All,All
+Numbers II,Question 3,हाँ,446,All,hi
 Numbers II,Question 3,हाँ,1002,All,mr
-Numbers II,Question 3,हाँ,1444,NM,All
-Numbers II,Question 3,हाँ,442,NM,hi
+Numbers II,Question 3,हाँ,1448,NM,All
+Numbers II,Question 3,हाँ,446,NM,hi
 Numbers II,Question 3,हाँ,1002,NM,mr
-Numerals 1-10,Question 1,ख़ुद से,390,All,All
+Numerals 1-10,Question 1,ख़ुद से,392,All,All
 Numerals 1-10,Question 1,ख़ुद से,148,All,hi
-Numerals 1-10,Question 1,ख़ुद से,242,All,mr
-Numerals 1-10,Question 1,ख़ुद से,390,NM,All
+Numerals 1-10,Question 1,ख़ुद से,244,All,mr
+Numerals 1-10,Question 1,ख़ुद से,392,NM,All
 Numerals 1-10,Question 1,ख़ुद से,148,NM,hi
-Numerals 1-10,Question 1,ख़ुद से,242,NM,mr
-Numerals 1-10,Question 1,भाई बहन,138,All,All
-Numerals 1-10,Question 1,भाई बहन,62,All,hi
+Numerals 1-10,Question 1,ख़ुद से,244,NM,mr
+Numerals 1-10,Question 1,भाई बहन,140,All,All
+Numerals 1-10,Question 1,भाई बहन,64,All,hi
 Numerals 1-10,Question 1,भाई बहन,76,All,mr
-Numerals 1-10,Question 1,भाई बहन,138,NM,All
-Numerals 1-10,Question 1,भाई बहन,62,NM,hi
+Numerals 1-10,Question 1,भाई बहन,140,NM,All
+Numerals 1-10,Question 1,भाई बहन,64,NM,hi
 Numerals 1-10,Question 1,भाई बहन,76,NM,mr
 Numerals 1-10,Question 1,माता-पिता,582,All,All
 Numerals 1-10,Question 1,माता-पिता,190,All,hi
@@ -863,11 +1559,11 @@ Numerals 1-10,Question 1,माता-पिता,392,All,mr
 Numerals 1-10,Question 1,माता-पिता,582,NM,All
 Numerals 1-10,Question 1,माता-पिता,190,NM,hi
 Numerals 1-10,Question 1,माता-पिता,392,NM,mr
-Numerals 1-10,Question 2,आधे,196,All,All
-Numerals 1-10,Question 2,आधे,80,All,hi
+Numerals 1-10,Question 2,आधे,198,All,All
+Numerals 1-10,Question 2,आधे,82,All,hi
 Numerals 1-10,Question 2,आधे,116,All,mr
-Numerals 1-10,Question 2,आधे,196,NM,All
-Numerals 1-10,Question 2,आधे,80,NM,hi
+Numerals 1-10,Question 2,आधे,198,NM,All
+Numerals 1-10,Question 2,आधे,82,NM,hi
 Numerals 1-10,Question 2,आधे,116,NM,mr
 Numerals 1-10,Question 2,आधे से कम,64,All,All
 Numerals 1-10,Question 2,आधे से कम,28,All,hi
@@ -875,197 +1571,197 @@ Numerals 1-10,Question 2,आधे से कम,36,All,mr
 Numerals 1-10,Question 2,आधे से कम,64,NM,All
 Numerals 1-10,Question 2,आधे से कम,28,NM,hi
 Numerals 1-10,Question 2,आधे से कम,36,NM,mr
-Numerals 1-10,Question 2,सभी,852,All,All
+Numerals 1-10,Question 2,सभी,854,All,All
 Numerals 1-10,Question 2,सभी,292,All,hi
-Numerals 1-10,Question 2,सभी,560,All,mr
-Numerals 1-10,Question 2,सभी,852,NM,All
+Numerals 1-10,Question 2,सभी,562,All,mr
+Numerals 1-10,Question 2,सभी,854,NM,All
 Numerals 1-10,Question 2,सभी,292,NM,hi
-Numerals 1-10,Question 2,सभी,560,NM,mr
+Numerals 1-10,Question 2,सभी,562,NM,mr
 Numerals 1-10,Question 3,नहीं,72,All,All
 Numerals 1-10,Question 3,नहीं,26,All,hi
 Numerals 1-10,Question 3,नहीं,46,All,mr
 Numerals 1-10,Question 3,नहीं,72,NM,All
 Numerals 1-10,Question 3,नहीं,26,NM,hi
 Numerals 1-10,Question 3,नहीं,46,NM,mr
-Numerals 1-10,Question 3,मदद से,272,All,All
-Numerals 1-10,Question 3,मदद से,108,All,hi
+Numerals 1-10,Question 3,मदद से,274,All,All
+Numerals 1-10,Question 3,मदद से,110,All,hi
 Numerals 1-10,Question 3,मदद से,164,All,mr
-Numerals 1-10,Question 3,मदद से,272,NM,All
-Numerals 1-10,Question 3,मदद से,108,NM,hi
+Numerals 1-10,Question 3,मदद से,274,NM,All
+Numerals 1-10,Question 3,मदद से,110,NM,hi
 Numerals 1-10,Question 3,मदद से,164,NM,mr
-Numerals 1-10,Question 3,हाँ,768,All,All
+Numerals 1-10,Question 3,हाँ,770,All,All
 Numerals 1-10,Question 3,हाँ,266,All,hi
-Numerals 1-10,Question 3,हाँ,502,All,mr
-Numerals 1-10,Question 3,हाँ,768,NM,All
+Numerals 1-10,Question 3,हाँ,504,All,mr
+Numerals 1-10,Question 3,हाँ,770,NM,All
 Numerals 1-10,Question 3,हाँ,266,NM,hi
-Numerals 1-10,Question 3,हाँ,502,NM,mr
-Patterns AB,Question 1,ख़ुद से,2552,All,All
-Patterns AB,Question 1,ख़ुद से,712,All,hi
-Patterns AB,Question 1,ख़ुद से,1840,All,mr
-Patterns AB,Question 1,ख़ुद से,2552,CG,All
-Patterns AB,Question 1,ख़ुद से,712,CG,hi
-Patterns AB,Question 1,ख़ुद से,1840,CG,mr
-Patterns AB,Question 1,भाई बहन,812,All,All
-Patterns AB,Question 1,भाई बहन,214,All,hi
+Numerals 1-10,Question 3,हाँ,504,NM,mr
+Patterns AB,Question 1,ख़ुद से,2558,All,All
+Patterns AB,Question 1,ख़ुद से,714,All,hi
+Patterns AB,Question 1,ख़ुद से,1844,All,mr
+Patterns AB,Question 1,ख़ुद से,2558,CG,All
+Patterns AB,Question 1,ख़ुद से,714,CG,hi
+Patterns AB,Question 1,ख़ुद से,1844,CG,mr
+Patterns AB,Question 1,भाई बहन,818,All,All
+Patterns AB,Question 1,भाई बहन,220,All,hi
 Patterns AB,Question 1,भाई बहन,598,All,mr
-Patterns AB,Question 1,भाई बहन,812,CG,All
-Patterns AB,Question 1,भाई बहन,214,CG,hi
+Patterns AB,Question 1,भाई बहन,818,CG,All
+Patterns AB,Question 1,भाई बहन,220,CG,hi
 Patterns AB,Question 1,भाई बहन,598,CG,mr
-Patterns AB,Question 1,माता-पिता,3936,All,All
-Patterns AB,Question 1,माता-पिता,968,All,hi
-Patterns AB,Question 1,माता-पिता,2968,All,mr
-Patterns AB,Question 1,माता-पिता,3936,CG,All
-Patterns AB,Question 1,माता-पिता,968,CG,hi
-Patterns AB,Question 1,माता-पिता,2968,CG,mr
-Patterns AB,Question 2,आधे,1192,All,All
+Patterns AB,Question 1,माता-पिता,3948,All,All
+Patterns AB,Question 1,माता-पिता,974,All,hi
+Patterns AB,Question 1,माता-पिता,2974,All,mr
+Patterns AB,Question 1,माता-पिता,3948,CG,All
+Patterns AB,Question 1,माता-पिता,974,CG,hi
+Patterns AB,Question 1,माता-पिता,2974,CG,mr
+Patterns AB,Question 2,आधे,1196,All,All
 Patterns AB,Question 2,आधे,344,All,hi
-Patterns AB,Question 2,आधे,848,All,mr
-Patterns AB,Question 2,आधे,1192,CG,All
+Patterns AB,Question 2,आधे,852,All,mr
+Patterns AB,Question 2,आधे,1196,CG,All
 Patterns AB,Question 2,आधे,344,CG,hi
-Patterns AB,Question 2,आधे,848,CG,mr
-Patterns AB,Question 2,आधे से कम,196,All,All
-Patterns AB,Question 2,आधे से कम,74,All,hi
+Patterns AB,Question 2,आधे,852,CG,mr
+Patterns AB,Question 2,आधे से कम,200,All,All
+Patterns AB,Question 2,आधे से कम,78,All,hi
 Patterns AB,Question 2,आधे से कम,122,All,mr
-Patterns AB,Question 2,आधे से कम,196,CG,All
-Patterns AB,Question 2,आधे से कम,74,CG,hi
+Patterns AB,Question 2,आधे से कम,200,CG,All
+Patterns AB,Question 2,आधे से कम,78,CG,hi
 Patterns AB,Question 2,आधे से कम,122,CG,mr
-Patterns AB,Question 2,सभी,5912,All,All
-Patterns AB,Question 2,सभी,1476,All,hi
-Patterns AB,Question 2,सभी,4436,All,mr
-Patterns AB,Question 2,सभी,5912,CG,All
-Patterns AB,Question 2,सभी,1476,CG,hi
-Patterns AB,Question 2,सभी,4436,CG,mr
-Patterns AB,Question 3,नहीं,112,All,All
-Patterns AB,Question 3,नहीं,30,All,hi
+Patterns AB,Question 2,सभी,5928,All,All
+Patterns AB,Question 2,सभी,1486,All,hi
+Patterns AB,Question 2,सभी,4442,All,mr
+Patterns AB,Question 2,सभी,5928,CG,All
+Patterns AB,Question 2,सभी,1486,CG,hi
+Patterns AB,Question 2,सभी,4442,CG,mr
+Patterns AB,Question 3,नहीं,114,All,All
+Patterns AB,Question 3,नहीं,32,All,hi
 Patterns AB,Question 3,नहीं,82,All,mr
-Patterns AB,Question 3,नहीं,112,CG,All
-Patterns AB,Question 3,नहीं,30,CG,hi
+Patterns AB,Question 3,नहीं,114,CG,All
+Patterns AB,Question 3,नहीं,32,CG,hi
 Patterns AB,Question 3,नहीं,82,CG,mr
-Patterns AB,Question 3,मदद से,1430,All,All
-Patterns AB,Question 3,मदद से,370,All,hi
+Patterns AB,Question 3,मदद से,1434,All,All
+Patterns AB,Question 3,मदद से,374,All,hi
 Patterns AB,Question 3,मदद से,1060,All,mr
-Patterns AB,Question 3,मदद से,1430,CG,All
-Patterns AB,Question 3,मदद से,370,CG,hi
+Patterns AB,Question 3,मदद से,1434,CG,All
+Patterns AB,Question 3,मदद से,374,CG,hi
 Patterns AB,Question 3,मदद से,1060,CG,mr
-Patterns AB,Question 3,हाँ,5754,All,All
-Patterns AB,Question 3,हाँ,1494,All,hi
-Patterns AB,Question 3,हाँ,4260,All,mr
-Patterns AB,Question 3,हाँ,5754,CG,All
-Patterns AB,Question 3,हाँ,1494,CG,hi
-Patterns AB,Question 3,हाँ,4260,CG,mr
-"Patterns ABC, AAB",Question 1,ख़ुद से,2818,All,All
-"Patterns ABC, AAB",Question 1,ख़ुद से,828,All,hi
-"Patterns ABC, AAB",Question 1,ख़ुद से,1990,All,mr
-"Patterns ABC, AAB",Question 1,ख़ुद से,2818,CG,All
-"Patterns ABC, AAB",Question 1,ख़ुद से,828,CG,hi
-"Patterns ABC, AAB",Question 1,ख़ुद से,1990,CG,mr
-"Patterns ABC, AAB",Question 1,भाई बहन,1164,All,All
-"Patterns ABC, AAB",Question 1,भाई बहन,342,All,hi
-"Patterns ABC, AAB",Question 1,भाई बहन,822,All,mr
-"Patterns ABC, AAB",Question 1,भाई बहन,1164,CG,All
-"Patterns ABC, AAB",Question 1,भाई बहन,342,CG,hi
-"Patterns ABC, AAB",Question 1,भाई बहन,822,CG,mr
-"Patterns ABC, AAB",Question 1,माता-पिता,5364,All,All
-"Patterns ABC, AAB",Question 1,माता-पिता,1500,All,hi
-"Patterns ABC, AAB",Question 1,माता-पिता,3864,All,mr
-"Patterns ABC, AAB",Question 1,माता-पिता,5364,CG,All
-"Patterns ABC, AAB",Question 1,माता-पिता,1500,CG,hi
-"Patterns ABC, AAB",Question 1,माता-पिता,3864,CG,mr
-"Patterns ABC, AAB",Question 2,आधे,2450,All,All
-"Patterns ABC, AAB",Question 2,आधे,774,All,hi
-"Patterns ABC, AAB",Question 2,आधे,1676,All,mr
-"Patterns ABC, AAB",Question 2,आधे,2450,CG,All
-"Patterns ABC, AAB",Question 2,आधे,774,CG,hi
-"Patterns ABC, AAB",Question 2,आधे,1676,CG,mr
-"Patterns ABC, AAB",Question 2,आधे से कम,416,All,All
-"Patterns ABC, AAB",Question 2,आधे से कम,178,All,hi
-"Patterns ABC, AAB",Question 2,आधे से कम,238,All,mr
-"Patterns ABC, AAB",Question 2,आधे से कम,416,CG,All
-"Patterns ABC, AAB",Question 2,आधे से कम,178,CG,hi
-"Patterns ABC, AAB",Question 2,आधे से कम,238,CG,mr
-"Patterns ABC, AAB",Question 2,सभी,6478,All,All
-"Patterns ABC, AAB",Question 2,सभी,1718,All,hi
-"Patterns ABC, AAB",Question 2,सभी,4760,All,mr
-"Patterns ABC, AAB",Question 2,सभी,6478,CG,All
-"Patterns ABC, AAB",Question 2,सभी,1718,CG,hi
-"Patterns ABC, AAB",Question 2,सभी,4760,CG,mr
-"Patterns ABC, AAB",Question 3,नहीं,252,All,All
-"Patterns ABC, AAB",Question 3,नहीं,94,All,hi
-"Patterns ABC, AAB",Question 3,नहीं,158,All,mr
-"Patterns ABC, AAB",Question 3,नहीं,252,CG,All
-"Patterns ABC, AAB",Question 3,नहीं,94,CG,hi
-"Patterns ABC, AAB",Question 3,नहीं,158,CG,mr
-"Patterns ABC, AAB",Question 3,मदद से,2744,All,All
-"Patterns ABC, AAB",Question 3,मदद से,812,All,hi
-"Patterns ABC, AAB",Question 3,मदद से,1932,All,mr
-"Patterns ABC, AAB",Question 3,मदद से,2744,CG,All
-"Patterns ABC, AAB",Question 3,मदद से,812,CG,hi
-"Patterns ABC, AAB",Question 3,मदद से,1932,CG,mr
-"Patterns ABC, AAB",Question 3,हाँ,6346,All,All
-"Patterns ABC, AAB",Question 3,हाँ,1762,All,hi
-"Patterns ABC, AAB",Question 3,हाँ,4584,All,mr
-"Patterns ABC, AAB",Question 3,हाँ,6346,CG,All
-"Patterns ABC, AAB",Question 3,हाँ,1762,CG,hi
-"Patterns ABC, AAB",Question 3,हाँ,4584,CG,mr
-Positions,Question 1,ख़ुद से,4970,All,All
+Patterns AB,Question 3,हाँ,5772,All,All
+Patterns AB,Question 3,हाँ,1502,All,hi
+Patterns AB,Question 3,हाँ,4270,All,mr
+Patterns AB,Question 3,हाँ,5772,CG,All
+Patterns AB,Question 3,हाँ,1502,CG,hi
+Patterns AB,Question 3,हाँ,4270,CG,mr
+"Patterns ABC, AAB",Question 1,ख़ुद से,3000,All,All
+"Patterns ABC, AAB",Question 1,ख़ुद से,830,All,hi
+"Patterns ABC, AAB",Question 1,ख़ुद से,2170,All,mr
+"Patterns ABC, AAB",Question 1,ख़ुद से,3000,CG,All
+"Patterns ABC, AAB",Question 1,ख़ुद से,830,CG,hi
+"Patterns ABC, AAB",Question 1,ख़ुद से,2170,CG,mr
+"Patterns ABC, AAB",Question 1,भाई बहन,1220,All,All
+"Patterns ABC, AAB",Question 1,भाई बहन,344,All,hi
+"Patterns ABC, AAB",Question 1,भाई बहन,876,All,mr
+"Patterns ABC, AAB",Question 1,भाई बहन,1220,CG,All
+"Patterns ABC, AAB",Question 1,भाई बहन,344,CG,hi
+"Patterns ABC, AAB",Question 1,भाई बहन,876,CG,mr
+"Patterns ABC, AAB",Question 1,माता-पिता,5808,All,All
+"Patterns ABC, AAB",Question 1,माता-पिता,1522,All,hi
+"Patterns ABC, AAB",Question 1,माता-पिता,4286,All,mr
+"Patterns ABC, AAB",Question 1,माता-पिता,5808,CG,All
+"Patterns ABC, AAB",Question 1,माता-पिता,1522,CG,hi
+"Patterns ABC, AAB",Question 1,माता-पिता,4286,CG,mr
+"Patterns ABC, AAB",Question 2,आधे,2590,All,All
+"Patterns ABC, AAB",Question 2,आधे,782,All,hi
+"Patterns ABC, AAB",Question 2,आधे,1808,All,mr
+"Patterns ABC, AAB",Question 2,आधे,2590,CG,All
+"Patterns ABC, AAB",Question 2,आधे,782,CG,hi
+"Patterns ABC, AAB",Question 2,आधे,1808,CG,mr
+"Patterns ABC, AAB",Question 2,आधे से कम,426,All,All
+"Patterns ABC, AAB",Question 2,आधे से कम,180,All,hi
+"Patterns ABC, AAB",Question 2,आधे से कम,246,All,mr
+"Patterns ABC, AAB",Question 2,आधे से कम,426,CG,All
+"Patterns ABC, AAB",Question 2,आधे से कम,180,CG,hi
+"Patterns ABC, AAB",Question 2,आधे से कम,246,CG,mr
+"Patterns ABC, AAB",Question 2,सभी,7010,All,All
+"Patterns ABC, AAB",Question 2,सभी,1734,All,hi
+"Patterns ABC, AAB",Question 2,सभी,5276,All,mr
+"Patterns ABC, AAB",Question 2,सभी,7010,CG,All
+"Patterns ABC, AAB",Question 2,सभी,1734,CG,hi
+"Patterns ABC, AAB",Question 2,सभी,5276,CG,mr
+"Patterns ABC, AAB",Question 3,नहीं,264,All,All
+"Patterns ABC, AAB",Question 3,नहीं,96,All,hi
+"Patterns ABC, AAB",Question 3,नहीं,168,All,mr
+"Patterns ABC, AAB",Question 3,नहीं,264,CG,All
+"Patterns ABC, AAB",Question 3,नहीं,96,CG,hi
+"Patterns ABC, AAB",Question 3,नहीं,168,CG,mr
+"Patterns ABC, AAB",Question 3,मदद से,2910,All,All
+"Patterns ABC, AAB",Question 3,मदद से,820,All,hi
+"Patterns ABC, AAB",Question 3,मदद से,2090,All,mr
+"Patterns ABC, AAB",Question 3,मदद से,2910,CG,All
+"Patterns ABC, AAB",Question 3,मदद से,820,CG,hi
+"Patterns ABC, AAB",Question 3,मदद से,2090,CG,mr
+"Patterns ABC, AAB",Question 3,हाँ,6850,All,All
+"Patterns ABC, AAB",Question 3,हाँ,1778,All,hi
+"Patterns ABC, AAB",Question 3,हाँ,5072,All,mr
+"Patterns ABC, AAB",Question 3,हाँ,6850,CG,All
+"Patterns ABC, AAB",Question 3,हाँ,1778,CG,hi
+"Patterns ABC, AAB",Question 3,हाँ,5072,CG,mr
+Positions,Question 1,ख़ुद से,5074,All,All
 Positions,Question 1,ख़ुद से,1514,All,hi
-Positions,Question 1,ख़ुद से,3456,All,mr
-Positions,Question 1,ख़ुद से,4970,CG,All
+Positions,Question 1,ख़ुद से,3560,All,mr
+Positions,Question 1,ख़ुद से,5074,CG,All
 Positions,Question 1,ख़ुद से,1514,CG,hi
-Positions,Question 1,ख़ुद से,3456,CG,mr
-Positions,Question 1,भाई बहन,1820,All,All
+Positions,Question 1,ख़ुद से,3560,CG,mr
+Positions,Question 1,भाई बहन,1856,All,All
 Positions,Question 1,भाई बहन,632,All,hi
-Positions,Question 1,भाई बहन,1188,All,mr
-Positions,Question 1,भाई बहन,1820,CG,All
+Positions,Question 1,भाई बहन,1224,All,mr
+Positions,Question 1,भाई बहन,1856,CG,All
 Positions,Question 1,भाई बहन,632,CG,hi
-Positions,Question 1,भाई बहन,1188,CG,mr
-Positions,Question 1,माता-पिता,7822,All,All
-Positions,Question 1,माता-पिता,1988,All,hi
-Positions,Question 1,माता-पिता,5834,All,mr
-Positions,Question 1,माता-पिता,7822,CG,All
-Positions,Question 1,माता-पिता,1988,CG,hi
-Positions,Question 1,माता-पिता,5834,CG,mr
-Positions,Question 2,आधे,2822,All,All
-Positions,Question 2,आधे,892,All,hi
-Positions,Question 2,आधे,1930,All,mr
-Positions,Question 2,आधे,2822,CG,All
-Positions,Question 2,आधे,892,CG,hi
-Positions,Question 2,आधे,1930,CG,mr
-Positions,Question 2,आधे से कम,544,All,All
+Positions,Question 1,भाई बहन,1224,CG,mr
+Positions,Question 1,माता-पिता,8072,All,All
+Positions,Question 1,माता-पिता,2012,All,hi
+Positions,Question 1,माता-पिता,6060,All,mr
+Positions,Question 1,माता-पिता,8072,CG,All
+Positions,Question 1,माता-पिता,2012,CG,hi
+Positions,Question 1,माता-पिता,6060,CG,mr
+Positions,Question 2,आधे,2886,All,All
+Positions,Question 2,आधे,894,All,hi
+Positions,Question 2,आधे,1992,All,mr
+Positions,Question 2,आधे,2886,CG,All
+Positions,Question 2,आधे,894,CG,hi
+Positions,Question 2,आधे,1992,CG,mr
+Positions,Question 2,आधे से कम,552,All,All
 Positions,Question 2,आधे से कम,200,All,hi
-Positions,Question 2,आधे से कम,344,All,mr
-Positions,Question 2,आधे से कम,544,CG,All
+Positions,Question 2,आधे से कम,352,All,mr
+Positions,Question 2,आधे से कम,552,CG,All
 Positions,Question 2,आधे से कम,200,CG,hi
-Positions,Question 2,आधे से कम,344,CG,mr
-Positions,Question 2,सभी,11246,All,All
-Positions,Question 2,सभी,3042,All,hi
-Positions,Question 2,सभी,8204,All,mr
-Positions,Question 2,सभी,11246,CG,All
-Positions,Question 2,सभी,3042,CG,hi
-Positions,Question 2,सभी,8204,CG,mr
-Positions,Question 3,नहीं,392,All,All
+Positions,Question 2,आधे से कम,352,CG,mr
+Positions,Question 2,सभी,11564,All,All
+Positions,Question 2,सभी,3064,All,hi
+Positions,Question 2,सभी,8500,All,mr
+Positions,Question 2,सभी,11564,CG,All
+Positions,Question 2,सभी,3064,CG,hi
+Positions,Question 2,सभी,8500,CG,mr
+Positions,Question 3,नहीं,400,All,All
 Positions,Question 3,नहीं,110,All,hi
-Positions,Question 3,नहीं,282,All,mr
-Positions,Question 3,नहीं,392,CG,All
+Positions,Question 3,नहीं,290,All,mr
+Positions,Question 3,नहीं,400,CG,All
 Positions,Question 3,नहीं,110,CG,hi
-Positions,Question 3,नहीं,282,CG,mr
-Positions,Question 3,मदद से,2392,All,All
-Positions,Question 3,मदद से,702,All,hi
-Positions,Question 3,मदद से,1690,All,mr
-Positions,Question 3,मदद से,2392,CG,All
-Positions,Question 3,मदद से,702,CG,hi
-Positions,Question 3,मदद से,1690,CG,mr
-Positions,Question 3,हाँ,11820,All,All
-Positions,Question 3,हाँ,3320,All,hi
-Positions,Question 3,हाँ,8500,All,mr
-Positions,Question 3,हाँ,11820,CG,All
-Positions,Question 3,हाँ,3320,CG,hi
-Positions,Question 3,हाँ,8500,CG,mr
-Primary Emotion Labelling,Question 1,ख़ुद से,320,All,All
-Primary Emotion Labelling,Question 1,ख़ुद से,164,All,hi
+Positions,Question 3,नहीं,290,CG,mr
+Positions,Question 3,मदद से,2452,All,All
+Positions,Question 3,मदद से,708,All,hi
+Positions,Question 3,मदद से,1744,All,mr
+Positions,Question 3,मदद से,2452,CG,All
+Positions,Question 3,मदद से,708,CG,hi
+Positions,Question 3,मदद से,1744,CG,mr
+Positions,Question 3,हाँ,12142,All,All
+Positions,Question 3,हाँ,3338,All,hi
+Positions,Question 3,हाँ,8804,All,mr
+Positions,Question 3,हाँ,12142,CG,All
+Positions,Question 3,हाँ,3338,CG,hi
+Positions,Question 3,हाँ,8804,CG,mr
+Primary Emotion Labelling,Question 1,ख़ुद से,324,All,All
+Primary Emotion Labelling,Question 1,ख़ुद से,168,All,hi
 Primary Emotion Labelling,Question 1,ख़ुद से,156,All,mr
-Primary Emotion Labelling,Question 1,ख़ुद से,320,SEL,All
-Primary Emotion Labelling,Question 1,ख़ुद से,164,SEL,hi
+Primary Emotion Labelling,Question 1,ख़ुद से,324,SEL,All
+Primary Emotion Labelling,Question 1,ख़ुद से,168,SEL,hi
 Primary Emotion Labelling,Question 1,ख़ुद से,156,SEL,mr
 Primary Emotion Labelling,Question 1,भाई बहन,136,All,All
 Primary Emotion Labelling,Question 1,भाई बहन,66,All,hi
@@ -1073,11 +1769,11 @@ Primary Emotion Labelling,Question 1,भाई बहन,70,All,mr
 Primary Emotion Labelling,Question 1,भाई बहन,136,SEL,All
 Primary Emotion Labelling,Question 1,भाई बहन,66,SEL,hi
 Primary Emotion Labelling,Question 1,भाई बहन,70,SEL,mr
-Primary Emotion Labelling,Question 1,माता-पिता,416,All,All
-Primary Emotion Labelling,Question 1,माता-पिता,180,All,hi
+Primary Emotion Labelling,Question 1,माता-पिता,418,All,All
+Primary Emotion Labelling,Question 1,माता-पिता,182,All,hi
 Primary Emotion Labelling,Question 1,माता-पिता,236,All,mr
-Primary Emotion Labelling,Question 1,माता-पिता,416,SEL,All
-Primary Emotion Labelling,Question 1,माता-पिता,180,SEL,hi
+Primary Emotion Labelling,Question 1,माता-पिता,418,SEL,All
+Primary Emotion Labelling,Question 1,माता-पिता,182,SEL,hi
 Primary Emotion Labelling,Question 1,माता-पिता,236,SEL,mr
 Primary Emotion Labelling,Question 2,आधे,126,All,All
 Primary Emotion Labelling,Question 2,आधे,68,All,hi
@@ -1085,23 +1781,23 @@ Primary Emotion Labelling,Question 2,आधे,58,All,mr
 Primary Emotion Labelling,Question 2,आधे,126,SEL,All
 Primary Emotion Labelling,Question 2,आधे,68,SEL,hi
 Primary Emotion Labelling,Question 2,आधे,58,SEL,mr
-Primary Emotion Labelling,Question 2,आधे से कम,16,All,All
-Primary Emotion Labelling,Question 2,आधे से कम,12,All,hi
+Primary Emotion Labelling,Question 2,आधे से कम,18,All,All
+Primary Emotion Labelling,Question 2,आधे से कम,14,All,hi
 Primary Emotion Labelling,Question 2,आधे से कम,4,All,mr
-Primary Emotion Labelling,Question 2,आधे से कम,16,SEL,All
-Primary Emotion Labelling,Question 2,आधे से कम,12,SEL,hi
+Primary Emotion Labelling,Question 2,आधे से कम,18,SEL,All
+Primary Emotion Labelling,Question 2,आधे से कम,14,SEL,hi
 Primary Emotion Labelling,Question 2,आधे से कम,4,SEL,mr
-Primary Emotion Labelling,Question 2,सभी,730,All,All
-Primary Emotion Labelling,Question 2,सभी,330,All,hi
+Primary Emotion Labelling,Question 2,सभी,734,All,All
+Primary Emotion Labelling,Question 2,सभी,334,All,hi
 Primary Emotion Labelling,Question 2,सभी,400,All,mr
-Primary Emotion Labelling,Question 2,सभी,730,SEL,All
-Primary Emotion Labelling,Question 2,सभी,330,SEL,hi
+Primary Emotion Labelling,Question 2,सभी,734,SEL,All
+Primary Emotion Labelling,Question 2,सभी,334,SEL,hi
 Primary Emotion Labelling,Question 2,सभी,400,SEL,mr
-Primary Emotion Labelling,Question 3,नहीं,18,All,All
-Primary Emotion Labelling,Question 3,नहीं,6,All,hi
+Primary Emotion Labelling,Question 3,नहीं,20,All,All
+Primary Emotion Labelling,Question 3,नहीं,8,All,hi
 Primary Emotion Labelling,Question 3,नहीं,12,All,mr
-Primary Emotion Labelling,Question 3,नहीं,18,SEL,All
-Primary Emotion Labelling,Question 3,नहीं,6,SEL,hi
+Primary Emotion Labelling,Question 3,नहीं,20,SEL,All
+Primary Emotion Labelling,Question 3,नहीं,8,SEL,hi
 Primary Emotion Labelling,Question 3,नहीं,12,SEL,mr
 Primary Emotion Labelling,Question 3,मदद से,150,All,All
 Primary Emotion Labelling,Question 3,मदद से,64,All,hi
@@ -1109,35 +1805,35 @@ Primary Emotion Labelling,Question 3,मदद से,86,All,mr
 Primary Emotion Labelling,Question 3,मदद से,150,SEL,All
 Primary Emotion Labelling,Question 3,मदद से,64,SEL,hi
 Primary Emotion Labelling,Question 3,मदद से,86,SEL,mr
-Primary Emotion Labelling,Question 3,हाँ,702,All,All
-Primary Emotion Labelling,Question 3,हाँ,338,All,hi
+Primary Emotion Labelling,Question 3,हाँ,706,All,All
+Primary Emotion Labelling,Question 3,हाँ,342,All,hi
 Primary Emotion Labelling,Question 3,हाँ,364,All,mr
-Primary Emotion Labelling,Question 3,हाँ,702,SEL,All
-Primary Emotion Labelling,Question 3,हाँ,338,SEL,hi
+Primary Emotion Labelling,Question 3,हाँ,706,SEL,All
+Primary Emotion Labelling,Question 3,हाँ,342,SEL,hi
 Primary Emotion Labelling,Question 3,हाँ,364,SEL,mr
-Primary Emotion Labelling : Anger,Question 1,ख़ुद से,1266,All,All
-Primary Emotion Labelling : Anger,Question 1,ख़ुद से,328,All,hi
-Primary Emotion Labelling : Anger,Question 1,ख़ुद से,938,All,mr
-Primary Emotion Labelling : Anger,Question 1,ख़ुद से,1266,SEL,All
-Primary Emotion Labelling : Anger,Question 1,ख़ुद से,328,SEL,hi
-Primary Emotion Labelling : Anger,Question 1,ख़ुद से,938,SEL,mr
+Primary Emotion Labelling : Anger,Question 1,ख़ुद से,1274,All,All
+Primary Emotion Labelling : Anger,Question 1,ख़ुद से,332,All,hi
+Primary Emotion Labelling : Anger,Question 1,ख़ुद से,942,All,mr
+Primary Emotion Labelling : Anger,Question 1,ख़ुद से,1274,SEL,All
+Primary Emotion Labelling : Anger,Question 1,ख़ुद से,332,SEL,hi
+Primary Emotion Labelling : Anger,Question 1,ख़ुद से,942,SEL,mr
 Primary Emotion Labelling : Anger,Question 1,भाई बहन,632,All,All
 Primary Emotion Labelling : Anger,Question 1,भाई बहन,202,All,hi
 Primary Emotion Labelling : Anger,Question 1,भाई बहन,430,All,mr
 Primary Emotion Labelling : Anger,Question 1,भाई बहन,632,SEL,All
 Primary Emotion Labelling : Anger,Question 1,भाई बहन,202,SEL,hi
 Primary Emotion Labelling : Anger,Question 1,भाई बहन,430,SEL,mr
-Primary Emotion Labelling : Anger,Question 1,माता-पिता,2526,All,All
-Primary Emotion Labelling : Anger,Question 1,माता-पिता,638,All,hi
+Primary Emotion Labelling : Anger,Question 1,माता-पिता,2530,All,All
+Primary Emotion Labelling : Anger,Question 1,माता-पिता,642,All,hi
 Primary Emotion Labelling : Anger,Question 1,माता-पिता,1888,All,mr
-Primary Emotion Labelling : Anger,Question 1,माता-पिता,2526,SEL,All
-Primary Emotion Labelling : Anger,Question 1,माता-पिता,638,SEL,hi
+Primary Emotion Labelling : Anger,Question 1,माता-पिता,2530,SEL,All
+Primary Emotion Labelling : Anger,Question 1,माता-पिता,642,SEL,hi
 Primary Emotion Labelling : Anger,Question 1,माता-पिता,1888,SEL,mr
-Primary Emotion Labelling : Anger,Question 2,आधे,1106,All,All
-Primary Emotion Labelling : Anger,Question 2,आधे,260,All,hi
+Primary Emotion Labelling : Anger,Question 2,आधे,1108,All,All
+Primary Emotion Labelling : Anger,Question 2,आधे,262,All,hi
 Primary Emotion Labelling : Anger,Question 2,आधे,846,All,mr
-Primary Emotion Labelling : Anger,Question 2,आधे,1106,SEL,All
-Primary Emotion Labelling : Anger,Question 2,आधे,260,SEL,hi
+Primary Emotion Labelling : Anger,Question 2,आधे,1108,SEL,All
+Primary Emotion Labelling : Anger,Question 2,आधे,262,SEL,hi
 Primary Emotion Labelling : Anger,Question 2,आधे,846,SEL,mr
 Primary Emotion Labelling : Anger,Question 2,आधे से कम,256,All,All
 Primary Emotion Labelling : Anger,Question 2,आधे से कम,82,All,hi
@@ -1145,138 +1841,138 @@ Primary Emotion Labelling : Anger,Question 2,आधे से कम,174,All,mr
 Primary Emotion Labelling : Anger,Question 2,आधे से कम,256,SEL,All
 Primary Emotion Labelling : Anger,Question 2,आधे से कम,82,SEL,hi
 Primary Emotion Labelling : Anger,Question 2,आधे से कम,174,SEL,mr
-Primary Emotion Labelling : Anger,Question 2,सभी,3062,All,All
-Primary Emotion Labelling : Anger,Question 2,सभी,826,All,hi
-Primary Emotion Labelling : Anger,Question 2,सभी,2236,All,mr
-Primary Emotion Labelling : Anger,Question 2,सभी,3062,SEL,All
-Primary Emotion Labelling : Anger,Question 2,सभी,826,SEL,hi
-Primary Emotion Labelling : Anger,Question 2,सभी,2236,SEL,mr
+Primary Emotion Labelling : Anger,Question 2,सभी,3072,All,All
+Primary Emotion Labelling : Anger,Question 2,सभी,832,All,hi
+Primary Emotion Labelling : Anger,Question 2,सभी,2240,All,mr
+Primary Emotion Labelling : Anger,Question 2,सभी,3072,SEL,All
+Primary Emotion Labelling : Anger,Question 2,सभी,832,SEL,hi
+Primary Emotion Labelling : Anger,Question 2,सभी,2240,SEL,mr
 Primary Emotion Labelling : Anger,Question 3,नहीं,256,All,All
 Primary Emotion Labelling : Anger,Question 3,नहीं,90,All,hi
 Primary Emotion Labelling : Anger,Question 3,नहीं,166,All,mr
 Primary Emotion Labelling : Anger,Question 3,नहीं,256,SEL,All
 Primary Emotion Labelling : Anger,Question 3,नहीं,90,SEL,hi
 Primary Emotion Labelling : Anger,Question 3,नहीं,166,SEL,mr
-Primary Emotion Labelling : Anger,Question 3,मदद से,724,All,All
-Primary Emotion Labelling : Anger,Question 3,मदद से,204,All,hi
+Primary Emotion Labelling : Anger,Question 3,मदद से,726,All,All
+Primary Emotion Labelling : Anger,Question 3,मदद से,206,All,hi
 Primary Emotion Labelling : Anger,Question 3,मदद से,520,All,mr
-Primary Emotion Labelling : Anger,Question 3,मदद से,724,SEL,All
-Primary Emotion Labelling : Anger,Question 3,मदद से,204,SEL,hi
+Primary Emotion Labelling : Anger,Question 3,मदद से,726,SEL,All
+Primary Emotion Labelling : Anger,Question 3,मदद से,206,SEL,hi
 Primary Emotion Labelling : Anger,Question 3,मदद से,520,SEL,mr
-Primary Emotion Labelling : Anger,Question 3,हाँ,3444,All,All
-Primary Emotion Labelling : Anger,Question 3,हाँ,874,All,hi
-Primary Emotion Labelling : Anger,Question 3,हाँ,2570,All,mr
-Primary Emotion Labelling : Anger,Question 3,हाँ,3444,SEL,All
-Primary Emotion Labelling : Anger,Question 3,हाँ,874,SEL,hi
-Primary Emotion Labelling : Anger,Question 3,हाँ,2570,SEL,mr
-Primary Emotion Labelling : Fear,Question 1,ख़ुद से,1148,All,All
+Primary Emotion Labelling : Anger,Question 3,हाँ,3454,All,All
+Primary Emotion Labelling : Anger,Question 3,हाँ,880,All,hi
+Primary Emotion Labelling : Anger,Question 3,हाँ,2574,All,mr
+Primary Emotion Labelling : Anger,Question 3,हाँ,3454,SEL,All
+Primary Emotion Labelling : Anger,Question 3,हाँ,880,SEL,hi
+Primary Emotion Labelling : Anger,Question 3,हाँ,2574,SEL,mr
+Primary Emotion Labelling : Fear,Question 1,ख़ुद से,1156,All,All
 Primary Emotion Labelling : Fear,Question 1,ख़ुद से,344,All,hi
-Primary Emotion Labelling : Fear,Question 1,ख़ुद से,804,All,mr
-Primary Emotion Labelling : Fear,Question 1,ख़ुद से,1148,SEL,All
+Primary Emotion Labelling : Fear,Question 1,ख़ुद से,812,All,mr
+Primary Emotion Labelling : Fear,Question 1,ख़ुद से,1156,SEL,All
 Primary Emotion Labelling : Fear,Question 1,ख़ुद से,344,SEL,hi
-Primary Emotion Labelling : Fear,Question 1,ख़ुद से,804,SEL,mr
-Primary Emotion Labelling : Fear,Question 1,भाई बहन,666,All,All
-Primary Emotion Labelling : Fear,Question 1,भाई बहन,200,All,hi
+Primary Emotion Labelling : Fear,Question 1,ख़ुद से,812,SEL,mr
+Primary Emotion Labelling : Fear,Question 1,भाई बहन,670,All,All
+Primary Emotion Labelling : Fear,Question 1,भाई बहन,204,All,hi
 Primary Emotion Labelling : Fear,Question 1,भाई बहन,466,All,mr
-Primary Emotion Labelling : Fear,Question 1,भाई बहन,666,SEL,All
-Primary Emotion Labelling : Fear,Question 1,भाई बहन,200,SEL,hi
+Primary Emotion Labelling : Fear,Question 1,भाई बहन,670,SEL,All
+Primary Emotion Labelling : Fear,Question 1,भाई बहन,204,SEL,hi
 Primary Emotion Labelling : Fear,Question 1,भाई बहन,466,SEL,mr
-Primary Emotion Labelling : Fear,Question 1,माता-पिता,2492,All,All
-Primary Emotion Labelling : Fear,Question 1,माता-पिता,604,All,hi
-Primary Emotion Labelling : Fear,Question 1,माता-पिता,1888,All,mr
-Primary Emotion Labelling : Fear,Question 1,माता-पिता,2492,SEL,All
-Primary Emotion Labelling : Fear,Question 1,माता-पिता,604,SEL,hi
-Primary Emotion Labelling : Fear,Question 1,माता-पिता,1888,SEL,mr
-Primary Emotion Labelling : Fear,Question 2,आधे,1238,All,All
+Primary Emotion Labelling : Fear,Question 1,माता-पिता,2508,All,All
+Primary Emotion Labelling : Fear,Question 1,माता-पिता,608,All,hi
+Primary Emotion Labelling : Fear,Question 1,माता-पिता,1900,All,mr
+Primary Emotion Labelling : Fear,Question 1,माता-पिता,2508,SEL,All
+Primary Emotion Labelling : Fear,Question 1,माता-पिता,608,SEL,hi
+Primary Emotion Labelling : Fear,Question 1,माता-पिता,1900,SEL,mr
+Primary Emotion Labelling : Fear,Question 2,आधे,1242,All,All
 Primary Emotion Labelling : Fear,Question 2,आधे,312,All,hi
-Primary Emotion Labelling : Fear,Question 2,आधे,926,All,mr
-Primary Emotion Labelling : Fear,Question 2,आधे,1238,SEL,All
+Primary Emotion Labelling : Fear,Question 2,आधे,930,All,mr
+Primary Emotion Labelling : Fear,Question 2,आधे,1242,SEL,All
 Primary Emotion Labelling : Fear,Question 2,आधे,312,SEL,hi
-Primary Emotion Labelling : Fear,Question 2,आधे,926,SEL,mr
-Primary Emotion Labelling : Fear,Question 2,आधे से कम,232,All,All
+Primary Emotion Labelling : Fear,Question 2,आधे,930,SEL,mr
+Primary Emotion Labelling : Fear,Question 2,आधे से कम,234,All,All
 Primary Emotion Labelling : Fear,Question 2,आधे से कम,80,All,hi
-Primary Emotion Labelling : Fear,Question 2,आधे से कम,152,All,mr
-Primary Emotion Labelling : Fear,Question 2,आधे से कम,232,SEL,All
+Primary Emotion Labelling : Fear,Question 2,आधे से कम,154,All,mr
+Primary Emotion Labelling : Fear,Question 2,आधे से कम,234,SEL,All
 Primary Emotion Labelling : Fear,Question 2,आधे से कम,80,SEL,hi
-Primary Emotion Labelling : Fear,Question 2,आधे से कम,152,SEL,mr
-Primary Emotion Labelling : Fear,Question 2,सभी,2836,All,All
-Primary Emotion Labelling : Fear,Question 2,सभी,756,All,hi
-Primary Emotion Labelling : Fear,Question 2,सभी,2080,All,mr
-Primary Emotion Labelling : Fear,Question 2,सभी,2836,SEL,All
-Primary Emotion Labelling : Fear,Question 2,सभी,756,SEL,hi
-Primary Emotion Labelling : Fear,Question 2,सभी,2080,SEL,mr
-Primary Emotion Labelling : Fear,Question 3,नहीं,218,All,All
-Primary Emotion Labelling : Fear,Question 3,नहीं,68,All,hi
-Primary Emotion Labelling : Fear,Question 3,नहीं,150,All,mr
-Primary Emotion Labelling : Fear,Question 3,नहीं,218,SEL,All
-Primary Emotion Labelling : Fear,Question 3,नहीं,68,SEL,hi
-Primary Emotion Labelling : Fear,Question 3,नहीं,150,SEL,mr
-Primary Emotion Labelling : Fear,Question 3,मदद से,880,All,All
-Primary Emotion Labelling : Fear,Question 3,मदद से,226,All,hi
+Primary Emotion Labelling : Fear,Question 2,आधे से कम,154,SEL,mr
+Primary Emotion Labelling : Fear,Question 2,सभी,2858,All,All
+Primary Emotion Labelling : Fear,Question 2,सभी,764,All,hi
+Primary Emotion Labelling : Fear,Question 2,सभी,2094,All,mr
+Primary Emotion Labelling : Fear,Question 2,सभी,2858,SEL,All
+Primary Emotion Labelling : Fear,Question 2,सभी,764,SEL,hi
+Primary Emotion Labelling : Fear,Question 2,सभी,2094,SEL,mr
+Primary Emotion Labelling : Fear,Question 3,नहीं,224,All,All
+Primary Emotion Labelling : Fear,Question 3,नहीं,70,All,hi
+Primary Emotion Labelling : Fear,Question 3,नहीं,154,All,mr
+Primary Emotion Labelling : Fear,Question 3,नहीं,224,SEL,All
+Primary Emotion Labelling : Fear,Question 3,नहीं,70,SEL,hi
+Primary Emotion Labelling : Fear,Question 3,नहीं,154,SEL,mr
+Primary Emotion Labelling : Fear,Question 3,मदद से,882,All,All
+Primary Emotion Labelling : Fear,Question 3,मदद से,228,All,hi
 Primary Emotion Labelling : Fear,Question 3,मदद से,654,All,mr
-Primary Emotion Labelling : Fear,Question 3,मदद से,880,SEL,All
-Primary Emotion Labelling : Fear,Question 3,मदद से,226,SEL,hi
+Primary Emotion Labelling : Fear,Question 3,मदद से,882,SEL,All
+Primary Emotion Labelling : Fear,Question 3,मदद से,228,SEL,hi
 Primary Emotion Labelling : Fear,Question 3,मदद से,654,SEL,mr
-Primary Emotion Labelling : Fear,Question 3,हाँ,3208,All,All
-Primary Emotion Labelling : Fear,Question 3,हाँ,854,All,hi
-Primary Emotion Labelling : Fear,Question 3,हाँ,2354,All,mr
-Primary Emotion Labelling : Fear,Question 3,हाँ,3208,SEL,All
-Primary Emotion Labelling : Fear,Question 3,हाँ,854,SEL,hi
-Primary Emotion Labelling : Fear,Question 3,हाँ,2354,SEL,mr
-Primary Emotion Labelling : Happy,Question 1,ख़ुद से,590,All,All
+Primary Emotion Labelling : Fear,Question 3,हाँ,3228,All,All
+Primary Emotion Labelling : Fear,Question 3,हाँ,858,All,hi
+Primary Emotion Labelling : Fear,Question 3,हाँ,2370,All,mr
+Primary Emotion Labelling : Fear,Question 3,हाँ,3228,SEL,All
+Primary Emotion Labelling : Fear,Question 3,हाँ,858,SEL,hi
+Primary Emotion Labelling : Fear,Question 3,हाँ,2370,SEL,mr
+Primary Emotion Labelling : Happy,Question 1,ख़ुद से,592,All,All
 Primary Emotion Labelling : Happy,Question 1,ख़ुद से,180,All,hi
-Primary Emotion Labelling : Happy,Question 1,ख़ुद से,410,All,mr
-Primary Emotion Labelling : Happy,Question 1,ख़ुद से,590,SEL,All
+Primary Emotion Labelling : Happy,Question 1,ख़ुद से,412,All,mr
+Primary Emotion Labelling : Happy,Question 1,ख़ुद से,592,SEL,All
 Primary Emotion Labelling : Happy,Question 1,ख़ुद से,180,SEL,hi
-Primary Emotion Labelling : Happy,Question 1,ख़ुद से,410,SEL,mr
+Primary Emotion Labelling : Happy,Question 1,ख़ुद से,412,SEL,mr
 Primary Emotion Labelling : Happy,Question 1,भाई बहन,278,All,All
 Primary Emotion Labelling : Happy,Question 1,भाई बहन,96,All,hi
 Primary Emotion Labelling : Happy,Question 1,भाई बहन,182,All,mr
 Primary Emotion Labelling : Happy,Question 1,भाई बहन,278,SEL,All
 Primary Emotion Labelling : Happy,Question 1,भाई बहन,96,SEL,hi
 Primary Emotion Labelling : Happy,Question 1,भाई बहन,182,SEL,mr
-Primary Emotion Labelling : Happy,Question 1,माता-पिता,1014,All,All
-Primary Emotion Labelling : Happy,Question 1,माता-पिता,244,All,hi
-Primary Emotion Labelling : Happy,Question 1,माता-पिता,770,All,mr
-Primary Emotion Labelling : Happy,Question 1,माता-पिता,1014,SEL,All
-Primary Emotion Labelling : Happy,Question 1,माता-पिता,244,SEL,hi
-Primary Emotion Labelling : Happy,Question 1,माता-पिता,770,SEL,mr
-Primary Emotion Labelling : Happy,Question 2,आधे,374,All,All
-Primary Emotion Labelling : Happy,Question 2,आधे,96,All,hi
-Primary Emotion Labelling : Happy,Question 2,आधे,278,All,mr
-Primary Emotion Labelling : Happy,Question 2,आधे,374,SEL,All
-Primary Emotion Labelling : Happy,Question 2,आधे,96,SEL,hi
-Primary Emotion Labelling : Happy,Question 2,आधे,278,SEL,mr
+Primary Emotion Labelling : Happy,Question 1,माता-पिता,1026,All,All
+Primary Emotion Labelling : Happy,Question 1,माता-पिता,246,All,hi
+Primary Emotion Labelling : Happy,Question 1,माता-पिता,780,All,mr
+Primary Emotion Labelling : Happy,Question 1,माता-पिता,1026,SEL,All
+Primary Emotion Labelling : Happy,Question 1,माता-पिता,246,SEL,hi
+Primary Emotion Labelling : Happy,Question 1,माता-पिता,780,SEL,mr
+Primary Emotion Labelling : Happy,Question 2,आधे,378,All,All
+Primary Emotion Labelling : Happy,Question 2,आधे,98,All,hi
+Primary Emotion Labelling : Happy,Question 2,आधे,280,All,mr
+Primary Emotion Labelling : Happy,Question 2,आधे,378,SEL,All
+Primary Emotion Labelling : Happy,Question 2,आधे,98,SEL,hi
+Primary Emotion Labelling : Happy,Question 2,आधे,280,SEL,mr
 Primary Emotion Labelling : Happy,Question 2,आधे से कम,106,All,All
 Primary Emotion Labelling : Happy,Question 2,आधे से कम,32,All,hi
 Primary Emotion Labelling : Happy,Question 2,आधे से कम,74,All,mr
 Primary Emotion Labelling : Happy,Question 2,आधे से कम,106,SEL,All
 Primary Emotion Labelling : Happy,Question 2,आधे से कम,32,SEL,hi
 Primary Emotion Labelling : Happy,Question 2,आधे से कम,74,SEL,mr
-Primary Emotion Labelling : Happy,Question 2,सभी,1404,All,All
+Primary Emotion Labelling : Happy,Question 2,सभी,1414,All,All
 Primary Emotion Labelling : Happy,Question 2,सभी,392,All,hi
-Primary Emotion Labelling : Happy,Question 2,सभी,1012,All,mr
-Primary Emotion Labelling : Happy,Question 2,सभी,1404,SEL,All
+Primary Emotion Labelling : Happy,Question 2,सभी,1022,All,mr
+Primary Emotion Labelling : Happy,Question 2,सभी,1414,SEL,All
 Primary Emotion Labelling : Happy,Question 2,सभी,392,SEL,hi
-Primary Emotion Labelling : Happy,Question 2,सभी,1012,SEL,mr
+Primary Emotion Labelling : Happy,Question 2,सभी,1022,SEL,mr
 Primary Emotion Labelling : Happy,Question 3,नहीं,62,All,All
 Primary Emotion Labelling : Happy,Question 3,नहीं,12,All,hi
 Primary Emotion Labelling : Happy,Question 3,नहीं,50,All,mr
 Primary Emotion Labelling : Happy,Question 3,नहीं,62,SEL,All
 Primary Emotion Labelling : Happy,Question 3,नहीं,12,SEL,hi
 Primary Emotion Labelling : Happy,Question 3,नहीं,50,SEL,mr
-Primary Emotion Labelling : Happy,Question 3,मदद से,218,All,All
+Primary Emotion Labelling : Happy,Question 3,मदद से,222,All,All
 Primary Emotion Labelling : Happy,Question 3,मदद से,64,All,hi
-Primary Emotion Labelling : Happy,Question 3,मदद से,154,All,mr
-Primary Emotion Labelling : Happy,Question 3,मदद से,218,SEL,All
+Primary Emotion Labelling : Happy,Question 3,मदद से,158,All,mr
+Primary Emotion Labelling : Happy,Question 3,मदद से,222,SEL,All
 Primary Emotion Labelling : Happy,Question 3,मदद से,64,SEL,hi
-Primary Emotion Labelling : Happy,Question 3,मदद से,154,SEL,mr
-Primary Emotion Labelling : Happy,Question 3,हाँ,1604,All,All
-Primary Emotion Labelling : Happy,Question 3,हाँ,444,All,hi
-Primary Emotion Labelling : Happy,Question 3,हाँ,1160,All,mr
-Primary Emotion Labelling : Happy,Question 3,हाँ,1604,SEL,All
-Primary Emotion Labelling : Happy,Question 3,हाँ,444,SEL,hi
-Primary Emotion Labelling : Happy,Question 3,हाँ,1160,SEL,mr
+Primary Emotion Labelling : Happy,Question 3,मदद से,158,SEL,mr
+Primary Emotion Labelling : Happy,Question 3,हाँ,1614,All,All
+Primary Emotion Labelling : Happy,Question 3,हाँ,446,All,hi
+Primary Emotion Labelling : Happy,Question 3,हाँ,1168,All,mr
+Primary Emotion Labelling : Happy,Question 3,हाँ,1614,SEL,All
+Primary Emotion Labelling : Happy,Question 3,हाँ,446,SEL,hi
+Primary Emotion Labelling : Happy,Question 3,हाँ,1168,SEL,mr
 Primary Emotion Labelling : Sad,Question 1,ख़ुद से,1278,All,All
 Primary Emotion Labelling : Sad,Question 1,ख़ुद से,362,All,hi
 Primary Emotion Labelling : Sad,Question 1,ख़ुद से,916,All,mr
@@ -1289,17 +1985,17 @@ Primary Emotion Labelling : Sad,Question 1,भाई बहन,502,All,mr
 Primary Emotion Labelling : Sad,Question 1,भाई बहन,714,SEL,All
 Primary Emotion Labelling : Sad,Question 1,भाई बहन,212,SEL,hi
 Primary Emotion Labelling : Sad,Question 1,भाई बहन,502,SEL,mr
-Primary Emotion Labelling : Sad,Question 1,माता-पिता,2876,All,All
-Primary Emotion Labelling : Sad,Question 1,माता-पिता,848,All,hi
-Primary Emotion Labelling : Sad,Question 1,माता-पिता,2028,All,mr
-Primary Emotion Labelling : Sad,Question 1,माता-पिता,2876,SEL,All
-Primary Emotion Labelling : Sad,Question 1,माता-पिता,848,SEL,hi
-Primary Emotion Labelling : Sad,Question 1,माता-पिता,2028,SEL,mr
-Primary Emotion Labelling : Sad,Question 2,आधे,1272,All,All
-Primary Emotion Labelling : Sad,Question 2,आधे,398,All,hi
+Primary Emotion Labelling : Sad,Question 1,माता-पिता,2888,All,All
+Primary Emotion Labelling : Sad,Question 1,माता-पिता,856,All,hi
+Primary Emotion Labelling : Sad,Question 1,माता-पिता,2032,All,mr
+Primary Emotion Labelling : Sad,Question 1,माता-पिता,2888,SEL,All
+Primary Emotion Labelling : Sad,Question 1,माता-पिता,856,SEL,hi
+Primary Emotion Labelling : Sad,Question 1,माता-पिता,2032,SEL,mr
+Primary Emotion Labelling : Sad,Question 2,आधे,1274,All,All
+Primary Emotion Labelling : Sad,Question 2,आधे,400,All,hi
 Primary Emotion Labelling : Sad,Question 2,आधे,874,All,mr
-Primary Emotion Labelling : Sad,Question 2,आधे,1272,SEL,All
-Primary Emotion Labelling : Sad,Question 2,आधे,398,SEL,hi
+Primary Emotion Labelling : Sad,Question 2,आधे,1274,SEL,All
+Primary Emotion Labelling : Sad,Question 2,आधे,400,SEL,hi
 Primary Emotion Labelling : Sad,Question 2,आधे,874,SEL,mr
 Primary Emotion Labelling : Sad,Question 2,आधे से कम,296,All,All
 Primary Emotion Labelling : Sad,Question 2,आधे से कम,106,All,hi
@@ -1307,89 +2003,89 @@ Primary Emotion Labelling : Sad,Question 2,आधे से कम,190,All,mr
 Primary Emotion Labelling : Sad,Question 2,आधे से कम,296,SEL,All
 Primary Emotion Labelling : Sad,Question 2,आधे से कम,106,SEL,hi
 Primary Emotion Labelling : Sad,Question 2,आधे से कम,190,SEL,mr
-Primary Emotion Labelling : Sad,Question 2,सभी,3306,All,All
-Primary Emotion Labelling : Sad,Question 2,सभी,920,All,hi
-Primary Emotion Labelling : Sad,Question 2,सभी,2386,All,mr
-Primary Emotion Labelling : Sad,Question 2,सभी,3306,SEL,All
-Primary Emotion Labelling : Sad,Question 2,सभी,920,SEL,hi
-Primary Emotion Labelling : Sad,Question 2,सभी,2386,SEL,mr
-Primary Emotion Labelling : Sad,Question 3,नहीं,344,All,All
-Primary Emotion Labelling : Sad,Question 3,नहीं,114,All,hi
-Primary Emotion Labelling : Sad,Question 3,नहीं,230,All,mr
-Primary Emotion Labelling : Sad,Question 3,नहीं,344,SEL,All
-Primary Emotion Labelling : Sad,Question 3,नहीं,114,SEL,hi
-Primary Emotion Labelling : Sad,Question 3,नहीं,230,SEL,mr
-Primary Emotion Labelling : Sad,Question 3,मदद से,1048,All,All
-Primary Emotion Labelling : Sad,Question 3,मदद से,306,All,hi
+Primary Emotion Labelling : Sad,Question 2,सभी,3316,All,All
+Primary Emotion Labelling : Sad,Question 2,सभी,926,All,hi
+Primary Emotion Labelling : Sad,Question 2,सभी,2390,All,mr
+Primary Emotion Labelling : Sad,Question 2,सभी,3316,SEL,All
+Primary Emotion Labelling : Sad,Question 2,सभी,926,SEL,hi
+Primary Emotion Labelling : Sad,Question 2,सभी,2390,SEL,mr
+Primary Emotion Labelling : Sad,Question 3,नहीं,348,All,All
+Primary Emotion Labelling : Sad,Question 3,नहीं,116,All,hi
+Primary Emotion Labelling : Sad,Question 3,नहीं,232,All,mr
+Primary Emotion Labelling : Sad,Question 3,नहीं,348,SEL,All
+Primary Emotion Labelling : Sad,Question 3,नहीं,116,SEL,hi
+Primary Emotion Labelling : Sad,Question 3,नहीं,232,SEL,mr
+Primary Emotion Labelling : Sad,Question 3,मदद से,1052,All,All
+Primary Emotion Labelling : Sad,Question 3,मदद से,310,All,hi
 Primary Emotion Labelling : Sad,Question 3,मदद से,742,All,mr
-Primary Emotion Labelling : Sad,Question 3,मदद से,1048,SEL,All
-Primary Emotion Labelling : Sad,Question 3,मदद से,306,SEL,hi
+Primary Emotion Labelling : Sad,Question 3,मदद से,1052,SEL,All
+Primary Emotion Labelling : Sad,Question 3,मदद से,310,SEL,hi
 Primary Emotion Labelling : Sad,Question 3,मदद से,742,SEL,mr
-Primary Emotion Labelling : Sad,Question 3,हाँ,3476,All,All
-Primary Emotion Labelling : Sad,Question 3,हाँ,1002,All,hi
-Primary Emotion Labelling : Sad,Question 3,हाँ,2474,All,mr
-Primary Emotion Labelling : Sad,Question 3,हाँ,3476,SEL,All
-Primary Emotion Labelling : Sad,Question 3,हाँ,1002,SEL,hi
-Primary Emotion Labelling : Sad,Question 3,हाँ,2474,SEL,mr
-Quantitative Comparison,Question 1,ख़ुद से,476,All,All
+Primary Emotion Labelling : Sad,Question 3,हाँ,3480,All,All
+Primary Emotion Labelling : Sad,Question 3,हाँ,1004,All,hi
+Primary Emotion Labelling : Sad,Question 3,हाँ,2476,All,mr
+Primary Emotion Labelling : Sad,Question 3,हाँ,3480,SEL,All
+Primary Emotion Labelling : Sad,Question 3,हाँ,1004,SEL,hi
+Primary Emotion Labelling : Sad,Question 3,हाँ,2476,SEL,mr
+Quantitative Comparison,Question 1,ख़ुद से,478,All,All
 Quantitative Comparison,Question 1,ख़ुद से,188,All,hi
-Quantitative Comparison,Question 1,ख़ुद से,288,All,mr
-Quantitative Comparison,Question 1,ख़ुद से,476,NM,All
+Quantitative Comparison,Question 1,ख़ुद से,290,All,mr
+Quantitative Comparison,Question 1,ख़ुद से,478,NM,All
 Quantitative Comparison,Question 1,ख़ुद से,188,NM,hi
-Quantitative Comparison,Question 1,ख़ुद से,288,NM,mr
-Quantitative Comparison,Question 1,भाई बहन,164,All,All
+Quantitative Comparison,Question 1,ख़ुद से,290,NM,mr
+Quantitative Comparison,Question 1,भाई बहन,166,All,All
 Quantitative Comparison,Question 1,भाई बहन,54,All,hi
-Quantitative Comparison,Question 1,भाई बहन,110,All,mr
-Quantitative Comparison,Question 1,भाई बहन,164,NM,All
+Quantitative Comparison,Question 1,भाई बहन,112,All,mr
+Quantitative Comparison,Question 1,भाई बहन,166,NM,All
 Quantitative Comparison,Question 1,भाई बहन,54,NM,hi
-Quantitative Comparison,Question 1,भाई बहन,110,NM,mr
-Quantitative Comparison,Question 1,माता-पिता,564,All,All
-Quantitative Comparison,Question 1,माता-पिता,170,All,hi
-Quantitative Comparison,Question 1,माता-पिता,394,All,mr
-Quantitative Comparison,Question 1,माता-पिता,564,NM,All
-Quantitative Comparison,Question 1,माता-पिता,170,NM,hi
-Quantitative Comparison,Question 1,माता-पिता,394,NM,mr
-Quantitative Comparison,Question 2,आधे,142,All,All
+Quantitative Comparison,Question 1,भाई बहन,112,NM,mr
+Quantitative Comparison,Question 1,माता-पिता,574,All,All
+Quantitative Comparison,Question 1,माता-पिता,176,All,hi
+Quantitative Comparison,Question 1,माता-पिता,398,All,mr
+Quantitative Comparison,Question 1,माता-पिता,574,NM,All
+Quantitative Comparison,Question 1,माता-पिता,176,NM,hi
+Quantitative Comparison,Question 1,माता-पिता,398,NM,mr
+Quantitative Comparison,Question 2,आधे,144,All,All
 Quantitative Comparison,Question 2,आधे,50,All,hi
-Quantitative Comparison,Question 2,आधे,92,All,mr
-Quantitative Comparison,Question 2,आधे,142,NM,All
+Quantitative Comparison,Question 2,आधे,94,All,mr
+Quantitative Comparison,Question 2,आधे,144,NM,All
 Quantitative Comparison,Question 2,आधे,50,NM,hi
-Quantitative Comparison,Question 2,आधे,92,NM,mr
+Quantitative Comparison,Question 2,आधे,94,NM,mr
 Quantitative Comparison,Question 2,आधे से कम,46,All,All
 Quantitative Comparison,Question 2,आधे से कम,18,All,hi
 Quantitative Comparison,Question 2,आधे से कम,28,All,mr
 Quantitative Comparison,Question 2,आधे से कम,46,NM,All
 Quantitative Comparison,Question 2,आधे से कम,18,NM,hi
 Quantitative Comparison,Question 2,आधे से कम,28,NM,mr
-Quantitative Comparison,Question 2,सभी,1016,All,All
-Quantitative Comparison,Question 2,सभी,344,All,hi
-Quantitative Comparison,Question 2,सभी,672,All,mr
-Quantitative Comparison,Question 2,सभी,1016,NM,All
-Quantitative Comparison,Question 2,सभी,344,NM,hi
-Quantitative Comparison,Question 2,सभी,672,NM,mr
+Quantitative Comparison,Question 2,सभी,1028,All,All
+Quantitative Comparison,Question 2,सभी,350,All,hi
+Quantitative Comparison,Question 2,सभी,678,All,mr
+Quantitative Comparison,Question 2,सभी,1028,NM,All
+Quantitative Comparison,Question 2,सभी,350,NM,hi
+Quantitative Comparison,Question 2,सभी,678,NM,mr
 Quantitative Comparison,Question 3,नहीं,54,All,All
 Quantitative Comparison,Question 3,नहीं,28,All,hi
 Quantitative Comparison,Question 3,नहीं,26,All,mr
 Quantitative Comparison,Question 3,नहीं,54,NM,All
 Quantitative Comparison,Question 3,नहीं,28,NM,hi
 Quantitative Comparison,Question 3,नहीं,26,NM,mr
-Quantitative Comparison,Question 3,मदद से,180,All,All
-Quantitative Comparison,Question 3,मदद से,54,All,hi
-Quantitative Comparison,Question 3,मदद से,126,All,mr
-Quantitative Comparison,Question 3,मदद से,180,NM,All
-Quantitative Comparison,Question 3,मदद से,54,NM,hi
-Quantitative Comparison,Question 3,मदद से,126,NM,mr
-Quantitative Comparison,Question 3,हाँ,970,All,All
-Quantitative Comparison,Question 3,हाँ,330,All,hi
-Quantitative Comparison,Question 3,हाँ,640,All,mr
-Quantitative Comparison,Question 3,हाँ,970,NM,All
-Quantitative Comparison,Question 3,हाँ,330,NM,hi
-Quantitative Comparison,Question 3,हाँ,640,NM,mr
-Relational Comparison,Question 1,ख़ुद से,416,All,All
-Relational Comparison,Question 1,ख़ुद से,144,All,hi
+Quantitative Comparison,Question 3,मदद से,184,All,All
+Quantitative Comparison,Question 3,मदद से,56,All,hi
+Quantitative Comparison,Question 3,मदद से,128,All,mr
+Quantitative Comparison,Question 3,मदद से,184,NM,All
+Quantitative Comparison,Question 3,मदद से,56,NM,hi
+Quantitative Comparison,Question 3,मदद से,128,NM,mr
+Quantitative Comparison,Question 3,हाँ,980,All,All
+Quantitative Comparison,Question 3,हाँ,334,All,hi
+Quantitative Comparison,Question 3,हाँ,646,All,mr
+Quantitative Comparison,Question 3,हाँ,980,NM,All
+Quantitative Comparison,Question 3,हाँ,334,NM,hi
+Quantitative Comparison,Question 3,हाँ,646,NM,mr
+Relational Comparison,Question 1,ख़ुद से,418,All,All
+Relational Comparison,Question 1,ख़ुद से,146,All,hi
 Relational Comparison,Question 1,ख़ुद से,272,All,mr
-Relational Comparison,Question 1,ख़ुद से,416,CG,All
-Relational Comparison,Question 1,ख़ुद से,144,CG,hi
+Relational Comparison,Question 1,ख़ुद से,418,CG,All
+Relational Comparison,Question 1,ख़ुद से,146,CG,hi
 Relational Comparison,Question 1,ख़ुद से,272,CG,mr
 Relational Comparison,Question 1,भाई बहन,182,All,All
 Relational Comparison,Question 1,भाई बहन,80,All,hi
@@ -1397,11 +2093,11 @@ Relational Comparison,Question 1,भाई बहन,102,All,mr
 Relational Comparison,Question 1,भाई बहन,182,CG,All
 Relational Comparison,Question 1,भाई बहन,80,CG,hi
 Relational Comparison,Question 1,भाई बहन,102,CG,mr
-Relational Comparison,Question 1,माता-पिता,406,All,All
-Relational Comparison,Question 1,माता-पिता,144,All,hi
+Relational Comparison,Question 1,माता-पिता,412,All,All
+Relational Comparison,Question 1,माता-पिता,150,All,hi
 Relational Comparison,Question 1,माता-पिता,262,All,mr
-Relational Comparison,Question 1,माता-पिता,406,CG,All
-Relational Comparison,Question 1,माता-पिता,144,CG,hi
+Relational Comparison,Question 1,माता-पिता,412,CG,All
+Relational Comparison,Question 1,माता-पिता,150,CG,hi
 Relational Comparison,Question 1,माता-पिता,262,CG,mr
 Relational Comparison,Question 2,आधे,156,All,All
 Relational Comparison,Question 2,आधे,74,All,hi
@@ -1409,17 +2105,17 @@ Relational Comparison,Question 2,आधे,82,All,mr
 Relational Comparison,Question 2,आधे,156,CG,All
 Relational Comparison,Question 2,आधे,74,CG,hi
 Relational Comparison,Question 2,आधे,82,CG,mr
-Relational Comparison,Question 2,आधे से कम,52,All,All
-Relational Comparison,Question 2,आधे से कम,12,All,hi
+Relational Comparison,Question 2,आधे से कम,54,All,All
+Relational Comparison,Question 2,आधे से कम,14,All,hi
 Relational Comparison,Question 2,आधे से कम,40,All,mr
-Relational Comparison,Question 2,आधे से कम,52,CG,All
-Relational Comparison,Question 2,आधे से कम,12,CG,hi
+Relational Comparison,Question 2,आधे से कम,54,CG,All
+Relational Comparison,Question 2,आधे से कम,14,CG,hi
 Relational Comparison,Question 2,आधे से कम,40,CG,mr
-Relational Comparison,Question 2,सभी,796,All,All
-Relational Comparison,Question 2,सभी,282,All,hi
+Relational Comparison,Question 2,सभी,802,All,All
+Relational Comparison,Question 2,सभी,288,All,hi
 Relational Comparison,Question 2,सभी,514,All,mr
-Relational Comparison,Question 2,सभी,796,CG,All
-Relational Comparison,Question 2,सभी,282,CG,hi
+Relational Comparison,Question 2,सभी,802,CG,All
+Relational Comparison,Question 2,सभी,288,CG,hi
 Relational Comparison,Question 2,सभी,514,CG,mr
 Relational Comparison,Question 3,नहीं,52,All,All
 Relational Comparison,Question 3,नहीं,10,All,hi
@@ -1427,131 +2123,131 @@ Relational Comparison,Question 3,नहीं,42,All,mr
 Relational Comparison,Question 3,नहीं,52,CG,All
 Relational Comparison,Question 3,नहीं,10,CG,hi
 Relational Comparison,Question 3,नहीं,42,CG,mr
-Relational Comparison,Question 3,मदद से,176,All,All
-Relational Comparison,Question 3,मदद से,70,All,hi
+Relational Comparison,Question 3,मदद से,178,All,All
+Relational Comparison,Question 3,मदद से,72,All,hi
 Relational Comparison,Question 3,मदद से,106,All,mr
-Relational Comparison,Question 3,मदद से,176,CG,All
-Relational Comparison,Question 3,मदद से,70,CG,hi
+Relational Comparison,Question 3,मदद से,178,CG,All
+Relational Comparison,Question 3,मदद से,72,CG,hi
 Relational Comparison,Question 3,मदद से,106,CG,mr
-Relational Comparison,Question 3,हाँ,776,All,All
-Relational Comparison,Question 3,हाँ,288,All,hi
+Relational Comparison,Question 3,हाँ,782,All,All
+Relational Comparison,Question 3,हाँ,294,All,hi
 Relational Comparison,Question 3,हाँ,488,All,mr
-Relational Comparison,Question 3,हाँ,776,CG,All
-Relational Comparison,Question 3,हाँ,288,CG,hi
+Relational Comparison,Question 3,हाँ,782,CG,All
+Relational Comparison,Question 3,हाँ,294,CG,hi
 Relational Comparison,Question 3,हाँ,488,CG,mr
-Relational Comparison II,Question 1,ख़ुद से,2172,All,All
-Relational Comparison II,Question 1,ख़ुद से,530,All,hi
-Relational Comparison II,Question 1,ख़ुद से,1642,All,mr
-Relational Comparison II,Question 1,ख़ुद से,2172,CG,All
-Relational Comparison II,Question 1,ख़ुद से,530,CG,hi
-Relational Comparison II,Question 1,ख़ुद से,1642,CG,mr
-Relational Comparison II,Question 1,भाई बहन,784,All,All
+Relational Comparison II,Question 1,ख़ुद से,2430,All,All
+Relational Comparison II,Question 1,ख़ुद से,542,All,hi
+Relational Comparison II,Question 1,ख़ुद से,1888,All,mr
+Relational Comparison II,Question 1,ख़ुद से,2430,CG,All
+Relational Comparison II,Question 1,ख़ुद से,542,CG,hi
+Relational Comparison II,Question 1,ख़ुद से,1888,CG,mr
+Relational Comparison II,Question 1,भाई बहन,872,All,All
 Relational Comparison II,Question 1,भाई बहन,192,All,hi
-Relational Comparison II,Question 1,भाई बहन,592,All,mr
-Relational Comparison II,Question 1,भाई बहन,784,CG,All
+Relational Comparison II,Question 1,भाई बहन,680,All,mr
+Relational Comparison II,Question 1,भाई बहन,872,CG,All
 Relational Comparison II,Question 1,भाई बहन,192,CG,hi
-Relational Comparison II,Question 1,भाई बहन,592,CG,mr
-Relational Comparison II,Question 1,माता-पिता,3272,All,All
-Relational Comparison II,Question 1,माता-पिता,694,All,hi
-Relational Comparison II,Question 1,माता-पिता,2578,All,mr
-Relational Comparison II,Question 1,माता-पिता,3272,CG,All
-Relational Comparison II,Question 1,माता-पिता,694,CG,hi
-Relational Comparison II,Question 1,माता-पिता,2578,CG,mr
-Relational Comparison II,Question 2,आधे,964,All,All
-Relational Comparison II,Question 2,आधे,266,All,hi
-Relational Comparison II,Question 2,आधे,698,All,mr
-Relational Comparison II,Question 2,आधे,964,CG,All
-Relational Comparison II,Question 2,आधे,266,CG,hi
-Relational Comparison II,Question 2,आधे,698,CG,mr
-Relational Comparison II,Question 2,आधे से कम,182,All,All
+Relational Comparison II,Question 1,भाई बहन,680,CG,mr
+Relational Comparison II,Question 1,माता-पिता,3828,All,All
+Relational Comparison II,Question 1,माता-पिता,714,All,hi
+Relational Comparison II,Question 1,माता-पिता,3114,All,mr
+Relational Comparison II,Question 1,माता-पिता,3828,CG,All
+Relational Comparison II,Question 1,माता-पिता,714,CG,hi
+Relational Comparison II,Question 1,माता-पिता,3114,CG,mr
+Relational Comparison II,Question 2,आधे,1090,All,All
+Relational Comparison II,Question 2,आधे,270,All,hi
+Relational Comparison II,Question 2,आधे,820,All,mr
+Relational Comparison II,Question 2,आधे,1090,CG,All
+Relational Comparison II,Question 2,आधे,270,CG,hi
+Relational Comparison II,Question 2,आधे,820,CG,mr
+Relational Comparison II,Question 2,आधे से कम,200,All,All
 Relational Comparison II,Question 2,आधे से कम,50,All,hi
-Relational Comparison II,Question 2,आधे से कम,132,All,mr
-Relational Comparison II,Question 2,आधे से कम,182,CG,All
+Relational Comparison II,Question 2,आधे से कम,150,All,mr
+Relational Comparison II,Question 2,आधे से कम,200,CG,All
 Relational Comparison II,Question 2,आधे से कम,50,CG,hi
-Relational Comparison II,Question 2,आधे से कम,132,CG,mr
-Relational Comparison II,Question 2,सभी,5086,All,All
-Relational Comparison II,Question 2,सभी,1100,All,hi
-Relational Comparison II,Question 2,सभी,3986,All,mr
-Relational Comparison II,Question 2,सभी,5086,CG,All
-Relational Comparison II,Question 2,सभी,1100,CG,hi
-Relational Comparison II,Question 2,सभी,3986,CG,mr
-Relational Comparison II,Question 3,नहीं,156,All,All
+Relational Comparison II,Question 2,आधे से कम,150,CG,mr
+Relational Comparison II,Question 2,सभी,5844,All,All
+Relational Comparison II,Question 2,सभी,1128,All,hi
+Relational Comparison II,Question 2,सभी,4716,All,mr
+Relational Comparison II,Question 2,सभी,5844,CG,All
+Relational Comparison II,Question 2,सभी,1128,CG,hi
+Relational Comparison II,Question 2,सभी,4716,CG,mr
+Relational Comparison II,Question 3,नहीं,196,All,All
 Relational Comparison II,Question 3,नहीं,20,All,hi
-Relational Comparison II,Question 3,नहीं,136,All,mr
-Relational Comparison II,Question 3,नहीं,156,CG,All
+Relational Comparison II,Question 3,नहीं,176,All,mr
+Relational Comparison II,Question 3,नहीं,196,CG,All
 Relational Comparison II,Question 3,नहीं,20,CG,hi
-Relational Comparison II,Question 3,नहीं,136,CG,mr
-Relational Comparison II,Question 3,मदद से,1010,All,All
-Relational Comparison II,Question 3,मदद से,242,All,hi
-Relational Comparison II,Question 3,मदद से,768,All,mr
-Relational Comparison II,Question 3,मदद से,1010,CG,All
-Relational Comparison II,Question 3,मदद से,242,CG,hi
-Relational Comparison II,Question 3,मदद से,768,CG,mr
-Relational Comparison II,Question 3,हाँ,5064,All,All
-Relational Comparison II,Question 3,हाँ,1154,All,hi
-Relational Comparison II,Question 3,हाँ,3910,All,mr
-Relational Comparison II,Question 3,हाँ,5064,CG,All
-Relational Comparison II,Question 3,हाँ,1154,CG,hi
-Relational Comparison II,Question 3,हाँ,3910,CG,mr
-Revision Colors,Question 1,ख़ुद से,792,All,All
-Revision Colors,Question 1,ख़ुद से,150,All,hi
-Revision Colors,Question 1,ख़ुद से,642,All,mr
-Revision Colors,Question 1,ख़ुद से,792,CG,All
-Revision Colors,Question 1,ख़ुद से,150,CG,hi
-Revision Colors,Question 1,ख़ुद से,642,CG,mr
-Revision Colors,Question 1,भाई बहन,184,All,All
+Relational Comparison II,Question 3,नहीं,176,CG,mr
+Relational Comparison II,Question 3,मदद से,1142,All,All
+Relational Comparison II,Question 3,मदद से,244,All,hi
+Relational Comparison II,Question 3,मदद से,898,All,mr
+Relational Comparison II,Question 3,मदद से,1142,CG,All
+Relational Comparison II,Question 3,मदद से,244,CG,hi
+Relational Comparison II,Question 3,मदद से,898,CG,mr
+Relational Comparison II,Question 3,हाँ,5792,All,All
+Relational Comparison II,Question 3,हाँ,1184,All,hi
+Relational Comparison II,Question 3,हाँ,4608,All,mr
+Relational Comparison II,Question 3,हाँ,5792,CG,All
+Relational Comparison II,Question 3,हाँ,1184,CG,hi
+Relational Comparison II,Question 3,हाँ,4608,CG,mr
+Revision Colors,Question 1,ख़ुद से,800,All,All
+Revision Colors,Question 1,ख़ुद से,152,All,hi
+Revision Colors,Question 1,ख़ुद से,648,All,mr
+Revision Colors,Question 1,ख़ुद से,800,CG,All
+Revision Colors,Question 1,ख़ुद से,152,CG,hi
+Revision Colors,Question 1,ख़ुद से,648,CG,mr
+Revision Colors,Question 1,भाई बहन,188,All,All
 Revision Colors,Question 1,भाई बहन,42,All,hi
-Revision Colors,Question 1,भाई बहन,142,All,mr
-Revision Colors,Question 1,भाई बहन,184,CG,All
+Revision Colors,Question 1,भाई बहन,146,All,mr
+Revision Colors,Question 1,भाई बहन,188,CG,All
 Revision Colors,Question 1,भाई बहन,42,CG,hi
-Revision Colors,Question 1,भाई बहन,142,CG,mr
-Revision Colors,Question 1,माता-पिता,922,All,All
-Revision Colors,Question 1,माता-पिता,100,All,hi
-Revision Colors,Question 1,माता-पिता,822,All,mr
-Revision Colors,Question 1,माता-पिता,922,CG,All
-Revision Colors,Question 1,माता-पिता,100,CG,hi
-Revision Colors,Question 1,माता-पिता,822,CG,mr
-Revision Colors,Question 2,आधे,210,All,All
+Revision Colors,Question 1,भाई बहन,146,CG,mr
+Revision Colors,Question 1,माता-पिता,938,All,All
+Revision Colors,Question 1,माता-पिता,104,All,hi
+Revision Colors,Question 1,माता-पिता,834,All,mr
+Revision Colors,Question 1,माता-पिता,938,CG,All
+Revision Colors,Question 1,माता-पिता,104,CG,hi
+Revision Colors,Question 1,माता-पिता,834,CG,mr
+Revision Colors,Question 2,आधे,216,All,All
 Revision Colors,Question 2,आधे,40,All,hi
-Revision Colors,Question 2,आधे,170,All,mr
-Revision Colors,Question 2,आधे,210,CG,All
+Revision Colors,Question 2,आधे,176,All,mr
+Revision Colors,Question 2,आधे,216,CG,All
 Revision Colors,Question 2,आधे,40,CG,hi
-Revision Colors,Question 2,आधे,170,CG,mr
+Revision Colors,Question 2,आधे,176,CG,mr
 Revision Colors,Question 2,आधे से कम,42,All,All
 Revision Colors,Question 2,आधे से कम,8,All,hi
 Revision Colors,Question 2,आधे से कम,34,All,mr
 Revision Colors,Question 2,आधे से कम,42,CG,All
 Revision Colors,Question 2,आधे से कम,8,CG,hi
 Revision Colors,Question 2,आधे से कम,34,CG,mr
-Revision Colors,Question 2,सभी,1646,All,All
-Revision Colors,Question 2,सभी,244,All,hi
-Revision Colors,Question 2,सभी,1402,All,mr
-Revision Colors,Question 2,सभी,1646,CG,All
-Revision Colors,Question 2,सभी,244,CG,hi
-Revision Colors,Question 2,सभी,1402,CG,mr
-Revision Colors,Question 3,नहीं,46,All,All
-Revision Colors,Question 3,नहीं,12,All,hi
+Revision Colors,Question 2,सभी,1668,All,All
+Revision Colors,Question 2,सभी,250,All,hi
+Revision Colors,Question 2,सभी,1418,All,mr
+Revision Colors,Question 2,सभी,1668,CG,All
+Revision Colors,Question 2,सभी,250,CG,hi
+Revision Colors,Question 2,सभी,1418,CG,mr
+Revision Colors,Question 3,नहीं,48,All,All
+Revision Colors,Question 3,नहीं,14,All,hi
 Revision Colors,Question 3,नहीं,34,All,mr
-Revision Colors,Question 3,नहीं,46,CG,All
-Revision Colors,Question 3,नहीं,12,CG,hi
+Revision Colors,Question 3,नहीं,48,CG,All
+Revision Colors,Question 3,नहीं,14,CG,hi
 Revision Colors,Question 3,नहीं,34,CG,mr
-Revision Colors,Question 3,मदद से,260,All,All
+Revision Colors,Question 3,मदद से,266,All,All
 Revision Colors,Question 3,मदद से,44,All,hi
-Revision Colors,Question 3,मदद से,216,All,mr
-Revision Colors,Question 3,मदद से,260,CG,All
+Revision Colors,Question 3,मदद से,222,All,mr
+Revision Colors,Question 3,मदद से,266,CG,All
 Revision Colors,Question 3,मदद से,44,CG,hi
-Revision Colors,Question 3,मदद से,216,CG,mr
-Revision Colors,Question 3,हाँ,1592,All,All
-Revision Colors,Question 3,हाँ,236,All,hi
-Revision Colors,Question 3,हाँ,1356,All,mr
-Revision Colors,Question 3,हाँ,1592,CG,All
-Revision Colors,Question 3,हाँ,236,CG,hi
-Revision Colors,Question 3,हाँ,1356,CG,mr
-Revision Shapes,Question 1,ख़ुद से,242,All,All
-Revision Shapes,Question 1,ख़ुद से,76,All,hi
+Revision Colors,Question 3,मदद से,222,CG,mr
+Revision Colors,Question 3,हाँ,1612,All,All
+Revision Colors,Question 3,हाँ,240,All,hi
+Revision Colors,Question 3,हाँ,1372,All,mr
+Revision Colors,Question 3,हाँ,1612,CG,All
+Revision Colors,Question 3,हाँ,240,CG,hi
+Revision Colors,Question 3,हाँ,1372,CG,mr
+Revision Shapes,Question 1,ख़ुद से,250,All,All
+Revision Shapes,Question 1,ख़ुद से,84,All,hi
 Revision Shapes,Question 1,ख़ुद से,166,All,mr
-Revision Shapes,Question 1,ख़ुद से,242,CG,All
-Revision Shapes,Question 1,ख़ुद से,76,CG,hi
+Revision Shapes,Question 1,ख़ुद से,250,CG,All
+Revision Shapes,Question 1,ख़ुद से,84,CG,hi
 Revision Shapes,Question 1,ख़ुद से,166,CG,mr
 Revision Shapes,Question 1,भाई बहन,58,All,All
 Revision Shapes,Question 1,भाई बहन,20,All,hi
@@ -1559,11 +2255,11 @@ Revision Shapes,Question 1,भाई बहन,38,All,mr
 Revision Shapes,Question 1,भाई बहन,58,CG,All
 Revision Shapes,Question 1,भाई बहन,20,CG,hi
 Revision Shapes,Question 1,भाई बहन,38,CG,mr
-Revision Shapes,Question 1,माता-पिता,286,All,All
-Revision Shapes,Question 1,माता-पिता,88,All,hi
+Revision Shapes,Question 1,माता-पिता,290,All,All
+Revision Shapes,Question 1,माता-पिता,92,All,hi
 Revision Shapes,Question 1,माता-पिता,198,All,mr
-Revision Shapes,Question 1,माता-पिता,286,CG,All
-Revision Shapes,Question 1,माता-पिता,88,CG,hi
+Revision Shapes,Question 1,माता-पिता,290,CG,All
+Revision Shapes,Question 1,माता-पिता,92,CG,hi
 Revision Shapes,Question 1,माता-पिता,198,CG,mr
 Revision Shapes,Question 2,आधे,64,All,All
 Revision Shapes,Question 2,आधे,30,All,hi
@@ -1577,11 +2273,11 @@ Revision Shapes,Question 2,आधे से कम,14,All,mr
 Revision Shapes,Question 2,आधे से कम,18,CG,All
 Revision Shapes,Question 2,आधे से कम,4,CG,hi
 Revision Shapes,Question 2,आधे से कम,14,CG,mr
-Revision Shapes,Question 2,सभी,504,All,All
-Revision Shapes,Question 2,सभी,150,All,hi
+Revision Shapes,Question 2,सभी,516,All,All
+Revision Shapes,Question 2,सभी,162,All,hi
 Revision Shapes,Question 2,सभी,354,All,mr
-Revision Shapes,Question 2,सभी,504,CG,All
-Revision Shapes,Question 2,सभी,150,CG,hi
+Revision Shapes,Question 2,सभी,516,CG,All
+Revision Shapes,Question 2,सभी,162,CG,hi
 Revision Shapes,Question 2,सभी,354,CG,mr
 Revision Shapes,Question 3,नहीं,16,All,All
 Revision Shapes,Question 3,नहीं,10,All,hi
@@ -1595,17 +2291,17 @@ Revision Shapes,Question 3,मदद से,68,All,mr
 Revision Shapes,Question 3,मदद से,106,CG,All
 Revision Shapes,Question 3,मदद से,38,CG,hi
 Revision Shapes,Question 3,मदद से,68,CG,mr
-Revision Shapes,Question 3,हाँ,464,All,All
-Revision Shapes,Question 3,हाँ,136,All,hi
+Revision Shapes,Question 3,हाँ,476,All,All
+Revision Shapes,Question 3,हाँ,148,All,hi
 Revision Shapes,Question 3,हाँ,328,All,mr
-Revision Shapes,Question 3,हाँ,464,CG,All
-Revision Shapes,Question 3,हाँ,136,CG,hi
+Revision Shapes,Question 3,हाँ,476,CG,All
+Revision Shapes,Question 3,हाँ,148,CG,hi
 Revision Shapes,Question 3,हाँ,328,CG,mr
-Rhyming Words,Question 1,ख़ुद से,240,All,All
-Rhyming Words,Question 1,ख़ुद से,76,All,hi
+Rhyming Words,Question 1,ख़ुद से,241,All,All
+Rhyming Words,Question 1,ख़ुद से,77,All,hi
 Rhyming Words,Question 1,ख़ुद से,164,All,mr
-Rhyming Words,Question 1,ख़ुद से,240,LL,All
-Rhyming Words,Question 1,ख़ुद से,76,LL,hi
+Rhyming Words,Question 1,ख़ुद से,241,LL,All
+Rhyming Words,Question 1,ख़ुद से,77,LL,hi
 Rhyming Words,Question 1,ख़ुद से,164,LL,mr
 Rhyming Words,Question 1,भाई बहन,130,All,All
 Rhyming Words,Question 1,भाई बहन,37,All,hi
@@ -1613,29 +2309,29 @@ Rhyming Words,Question 1,भाई बहन,93,All,mr
 Rhyming Words,Question 1,भाई बहन,130,LL,All
 Rhyming Words,Question 1,भाई बहन,37,LL,hi
 Rhyming Words,Question 1,भाई बहन,93,LL,mr
-Rhyming Words,Question 1,माता-पिता,353,All,All
-Rhyming Words,Question 1,माता-पिता,96,All,hi
-Rhyming Words,Question 1,माता-पिता,257,All,mr
-Rhyming Words,Question 1,माता-पिता,353,LL,All
-Rhyming Words,Question 1,माता-पिता,96,LL,hi
-Rhyming Words,Question 1,माता-पिता,257,LL,mr
-Rhyming Words,Question 2,आधे,151,All,All
+Rhyming Words,Question 1,माता-पिता,356,All,All
+Rhyming Words,Question 1,माता-पिता,98,All,hi
+Rhyming Words,Question 1,माता-पिता,258,All,mr
+Rhyming Words,Question 1,माता-पिता,356,LL,All
+Rhyming Words,Question 1,माता-पिता,98,LL,hi
+Rhyming Words,Question 1,माता-पिता,258,LL,mr
+Rhyming Words,Question 2,आधे,152,All,All
 Rhyming Words,Question 2,आधे,44,All,hi
-Rhyming Words,Question 2,आधे,107,All,mr
-Rhyming Words,Question 2,आधे,151,LL,All
+Rhyming Words,Question 2,आधे,108,All,mr
+Rhyming Words,Question 2,आधे,152,LL,All
 Rhyming Words,Question 2,आधे,44,LL,hi
-Rhyming Words,Question 2,आधे,107,LL,mr
-Rhyming Words,Question 2,आधे से कम,52,All,All
-Rhyming Words,Question 2,आधे से कम,18,All,hi
+Rhyming Words,Question 2,आधे,108,LL,mr
+Rhyming Words,Question 2,आधे से कम,53,All,All
+Rhyming Words,Question 2,आधे से कम,19,All,hi
 Rhyming Words,Question 2,आधे से कम,34,All,mr
-Rhyming Words,Question 2,आधे से कम,52,LL,All
-Rhyming Words,Question 2,आधे से कम,18,LL,hi
+Rhyming Words,Question 2,आधे से कम,53,LL,All
+Rhyming Words,Question 2,आधे से कम,19,LL,hi
 Rhyming Words,Question 2,आधे से कम,34,LL,mr
-Rhyming Words,Question 2,सभी,520,All,All
-Rhyming Words,Question 2,सभी,147,All,hi
+Rhyming Words,Question 2,सभी,522,All,All
+Rhyming Words,Question 2,सभी,149,All,hi
 Rhyming Words,Question 2,सभी,373,All,mr
-Rhyming Words,Question 2,सभी,520,LL,All
-Rhyming Words,Question 2,सभी,147,LL,hi
+Rhyming Words,Question 2,सभी,522,LL,All
+Rhyming Words,Question 2,सभी,149,LL,hi
 Rhyming Words,Question 2,सभी,373,LL,mr
 Rhyming Words,Question 3,नहीं,50,All,All
 Rhyming Words,Question 3,नहीं,14,All,hi
@@ -1643,191 +2339,305 @@ Rhyming Words,Question 3,नहीं,36,All,mr
 Rhyming Words,Question 3,नहीं,50,LL,All
 Rhyming Words,Question 3,नहीं,14,LL,hi
 Rhyming Words,Question 3,नहीं,36,LL,mr
-Rhyming Words,Question 3,मदद से,224,All,All
-Rhyming Words,Question 3,मदद से,66,All,hi
+Rhyming Words,Question 3,मदद से,225,All,All
+Rhyming Words,Question 3,मदद से,67,All,hi
 Rhyming Words,Question 3,मदद से,158,All,mr
-Rhyming Words,Question 3,मदद से,224,LL,All
-Rhyming Words,Question 3,मदद से,66,LL,hi
+Rhyming Words,Question 3,मदद से,225,LL,All
+Rhyming Words,Question 3,मदद से,67,LL,hi
 Rhyming Words,Question 3,मदद से,158,LL,mr
-Rhyming Words,Question 3,हाँ,449,All,All
-Rhyming Words,Question 3,हाँ,129,All,hi
-Rhyming Words,Question 3,हाँ,320,All,mr
-Rhyming Words,Question 3,हाँ,449,LL,All
-Rhyming Words,Question 3,हाँ,129,LL,hi
-Rhyming Words,Question 3,हाँ,320,LL,mr
-Shape Circle,Question 1,ख़ुद से,6866,All,All
-Shape Circle,Question 1,ख़ुद से,1842,All,hi
-Shape Circle,Question 1,ख़ुद से,5024,All,mr
-Shape Circle,Question 1,ख़ुद से,6866,CG,All
-Shape Circle,Question 1,ख़ुद से,1842,CG,hi
-Shape Circle,Question 1,ख़ुद से,5024,CG,mr
-Shape Circle,Question 1,भाई बहन,2396,All,All
+Rhyming Words,Question 3,हाँ,452,All,All
+Rhyming Words,Question 3,हाँ,131,All,hi
+Rhyming Words,Question 3,हाँ,321,All,mr
+Rhyming Words,Question 3,हाँ,452,LL,All
+Rhyming Words,Question 3,हाँ,131,LL,hi
+Rhyming Words,Question 3,हाँ,321,LL,mr
+Rhyming Words 1,Question 1,ख़ुद से,47,All,All
+Rhyming Words 1,Question 1,ख़ुद से,47,All,hi
+Rhyming Words 1,Question 1,ख़ुद से,47,LL,All
+Rhyming Words 1,Question 1,ख़ुद से,47,LL,hi
+Rhyming Words 1,Question 1,भाई बहन,30,All,All
+Rhyming Words 1,Question 1,भाई बहन,30,All,hi
+Rhyming Words 1,Question 1,भाई बहन,30,LL,All
+Rhyming Words 1,Question 1,भाई बहन,30,LL,hi
+Rhyming Words 1,Question 1,माता-पिता,111,All,All
+Rhyming Words 1,Question 1,माता-पिता,111,All,hi
+Rhyming Words 1,Question 1,माता-पिता,111,LL,All
+Rhyming Words 1,Question 1,माता-पिता,111,LL,hi
+Rhyming Words 1,Question 2,आधे,40,All,All
+Rhyming Words 1,Question 2,आधे,40,All,hi
+Rhyming Words 1,Question 2,आधे,40,LL,All
+Rhyming Words 1,Question 2,आधे,40,LL,hi
+Rhyming Words 1,Question 2,आधे से कम,13,All,All
+Rhyming Words 1,Question 2,आधे से कम,13,All,hi
+Rhyming Words 1,Question 2,आधे से कम,13,LL,All
+Rhyming Words 1,Question 2,आधे से कम,13,LL,hi
+Rhyming Words 1,Question 2,सभी,135,All,All
+Rhyming Words 1,Question 2,सभी,135,All,hi
+Rhyming Words 1,Question 2,सभी,135,LL,All
+Rhyming Words 1,Question 2,सभी,135,LL,hi
+Rhyming Words 1,Question 3,नहीं,6,All,All
+Rhyming Words 1,Question 3,नहीं,6,All,hi
+Rhyming Words 1,Question 3,नहीं,6,LL,All
+Rhyming Words 1,Question 3,नहीं,6,LL,hi
+Rhyming Words 1,Question 3,मदद से,66,All,All
+Rhyming Words 1,Question 3,मदद से,66,All,hi
+Rhyming Words 1,Question 3,मदद से,66,LL,All
+Rhyming Words 1,Question 3,मदद से,66,LL,hi
+Rhyming Words 1,Question 3,हाँ,116,All,All
+Rhyming Words 1,Question 3,हाँ,116,All,hi
+Rhyming Words 1,Question 3,हाँ,116,LL,All
+Rhyming Words 1,Question 3,हाँ,116,LL,hi
+Rhyming Words II,Question 1,ख़ुद से,93,All,All
+Rhyming Words II,Question 1,ख़ुद से,93,All,hi
+Rhyming Words II,Question 1,ख़ुद से,93,LL,All
+Rhyming Words II,Question 1,ख़ुद से,93,LL,hi
+Rhyming Words II,Question 1,भाई बहन,52,All,All
+Rhyming Words II,Question 1,भाई बहन,52,All,hi
+Rhyming Words II,Question 1,भाई बहन,52,LL,All
+Rhyming Words II,Question 1,भाई बहन,52,LL,hi
+Rhyming Words II,Question 1,माता-पिता,183,All,All
+Rhyming Words II,Question 1,माता-पिता,183,All,hi
+Rhyming Words II,Question 1,माता-पिता,183,LL,All
+Rhyming Words II,Question 1,माता-पिता,183,LL,hi
+Rhyming Words II,Question 2,आधे,78,All,All
+Rhyming Words II,Question 2,आधे,78,All,hi
+Rhyming Words II,Question 2,आधे,78,LL,All
+Rhyming Words II,Question 2,आधे,78,LL,hi
+Rhyming Words II,Question 2,आधे से कम,26,All,All
+Rhyming Words II,Question 2,आधे से कम,26,All,hi
+Rhyming Words II,Question 2,आधे से कम,26,LL,All
+Rhyming Words II,Question 2,आधे से कम,26,LL,hi
+Rhyming Words II,Question 2,सभी,224,All,All
+Rhyming Words II,Question 2,सभी,224,All,hi
+Rhyming Words II,Question 2,सभी,224,LL,All
+Rhyming Words II,Question 2,सभी,224,LL,hi
+Rhyming Words II,Question 3,नहीं,12,All,All
+Rhyming Words II,Question 3,नहीं,12,All,hi
+Rhyming Words II,Question 3,नहीं,12,LL,All
+Rhyming Words II,Question 3,नहीं,12,LL,hi
+Rhyming Words II,Question 3,मदद से,107,All,All
+Rhyming Words II,Question 3,मदद से,107,All,hi
+Rhyming Words II,Question 3,मदद से,107,LL,All
+Rhyming Words II,Question 3,मदद से,107,LL,hi
+Rhyming Words II,Question 3,हाँ,208,All,All
+Rhyming Words II,Question 3,हाँ,208,All,hi
+Rhyming Words II,Question 3,हाँ,208,LL,All
+Rhyming Words II,Question 3,हाँ,208,LL,hi
+Rhyming Words III,Question 1,ख़ुद से,68,All,All
+Rhyming Words III,Question 1,ख़ुद से,67,All,hi
+Rhyming Words III,Question 1,ख़ुद से,1,All,mr
+Rhyming Words III,Question 1,ख़ुद से,68,LL,All
+Rhyming Words III,Question 1,ख़ुद से,67,LL,hi
+Rhyming Words III,Question 1,ख़ुद से,1,LL,mr
+Rhyming Words III,Question 1,भाई बहन,32,All,All
+Rhyming Words III,Question 1,भाई बहन,32,All,hi
+Rhyming Words III,Question 1,भाई बहन,32,LL,All
+Rhyming Words III,Question 1,भाई बहन,32,LL,hi
+Rhyming Words III,Question 1,माता-पिता,125,All,All
+Rhyming Words III,Question 1,माता-पिता,125,All,hi
+Rhyming Words III,Question 1,माता-पिता,125,LL,All
+Rhyming Words III,Question 1,माता-पिता,125,LL,hi
+Rhyming Words III,Question 2,आधे,50,All,All
+Rhyming Words III,Question 2,आधे,50,All,hi
+Rhyming Words III,Question 2,आधे,50,LL,All
+Rhyming Words III,Question 2,आधे,50,LL,hi
+Rhyming Words III,Question 2,आधे से कम,12,All,All
+Rhyming Words III,Question 2,आधे से कम,12,All,hi
+Rhyming Words III,Question 2,आधे से कम,12,LL,All
+Rhyming Words III,Question 2,आधे से कम,12,LL,hi
+Rhyming Words III,Question 2,सभी,163,All,All
+Rhyming Words III,Question 2,सभी,162,All,hi
+Rhyming Words III,Question 2,सभी,1,All,mr
+Rhyming Words III,Question 2,सभी,163,LL,All
+Rhyming Words III,Question 2,सभी,162,LL,hi
+Rhyming Words III,Question 2,सभी,1,LL,mr
+Rhyming Words III,Question 3,नहीं,9,All,All
+Rhyming Words III,Question 3,नहीं,9,All,hi
+Rhyming Words III,Question 3,नहीं,9,LL,All
+Rhyming Words III,Question 3,नहीं,9,LL,hi
+Rhyming Words III,Question 3,मदद से,68,All,All
+Rhyming Words III,Question 3,मदद से,68,All,hi
+Rhyming Words III,Question 3,मदद से,68,LL,All
+Rhyming Words III,Question 3,मदद से,68,LL,hi
+Rhyming Words III,Question 3,हाँ,148,All,All
+Rhyming Words III,Question 3,हाँ,147,All,hi
+Rhyming Words III,Question 3,हाँ,1,All,mr
+Rhyming Words III,Question 3,हाँ,148,LL,All
+Rhyming Words III,Question 3,हाँ,147,LL,hi
+Rhyming Words III,Question 3,हाँ,1,LL,mr
+Shape Circle,Question 1,ख़ुद से,6932,All,All
+Shape Circle,Question 1,ख़ुद से,1846,All,hi
+Shape Circle,Question 1,ख़ुद से,5086,All,mr
+Shape Circle,Question 1,ख़ुद से,6932,CG,All
+Shape Circle,Question 1,ख़ुद से,1846,CG,hi
+Shape Circle,Question 1,ख़ुद से,5086,CG,mr
+Shape Circle,Question 1,भाई बहन,2408,All,All
 Shape Circle,Question 1,भाई बहन,580,All,hi
-Shape Circle,Question 1,भाई बहन,1816,All,mr
-Shape Circle,Question 1,भाई बहन,2396,CG,All
+Shape Circle,Question 1,भाई बहन,1828,All,mr
+Shape Circle,Question 1,भाई बहन,2408,CG,All
 Shape Circle,Question 1,भाई बहन,580,CG,hi
-Shape Circle,Question 1,भाई बहन,1816,CG,mr
-Shape Circle,Question 1,माता-पिता,10214,All,All
-Shape Circle,Question 1,माता-पिता,2452,All,hi
-Shape Circle,Question 1,माता-पिता,7762,All,mr
-Shape Circle,Question 1,माता-पिता,10214,CG,All
-Shape Circle,Question 1,माता-पिता,2452,CG,hi
-Shape Circle,Question 1,माता-पिता,7762,CG,mr
-Shape Circle,Question 2,आधे,3078,All,All
-Shape Circle,Question 2,आधे,812,All,hi
-Shape Circle,Question 2,आधे,2266,All,mr
-Shape Circle,Question 2,आधे,3078,CG,All
-Shape Circle,Question 2,आधे,812,CG,hi
-Shape Circle,Question 2,आधे,2266,CG,mr
-Shape Circle,Question 2,आधे से कम,668,All,All
+Shape Circle,Question 1,भाई बहन,1828,CG,mr
+Shape Circle,Question 1,माता-पिता,10328,All,All
+Shape Circle,Question 1,माता-पिता,2460,All,hi
+Shape Circle,Question 1,माता-पिता,7868,All,mr
+Shape Circle,Question 1,माता-पिता,10328,CG,All
+Shape Circle,Question 1,माता-पिता,2460,CG,hi
+Shape Circle,Question 1,माता-पिता,7868,CG,mr
+Shape Circle,Question 2,आधे,3104,All,All
+Shape Circle,Question 2,आधे,814,All,hi
+Shape Circle,Question 2,आधे,2290,All,mr
+Shape Circle,Question 2,आधे,3104,CG,All
+Shape Circle,Question 2,आधे,814,CG,hi
+Shape Circle,Question 2,आधे,2290,CG,mr
+Shape Circle,Question 2,आधे से कम,672,All,All
 Shape Circle,Question 2,आधे से कम,190,All,hi
-Shape Circle,Question 2,आधे से कम,478,All,mr
-Shape Circle,Question 2,आधे से कम,668,CG,All
+Shape Circle,Question 2,आधे से कम,482,All,mr
+Shape Circle,Question 2,आधे से कम,672,CG,All
 Shape Circle,Question 2,आधे से कम,190,CG,hi
-Shape Circle,Question 2,आधे से कम,478,CG,mr
-Shape Circle,Question 2,सभी,15724,All,All
-Shape Circle,Question 2,सभी,3872,All,hi
-Shape Circle,Question 2,सभी,11852,All,mr
-Shape Circle,Question 2,सभी,15724,CG,All
-Shape Circle,Question 2,सभी,3872,CG,hi
-Shape Circle,Question 2,सभी,11852,CG,mr
-Shape Circle,Question 3,नहीं,400,All,All
+Shape Circle,Question 2,आधे से कम,482,CG,mr
+Shape Circle,Question 2,सभी,15886,All,All
+Shape Circle,Question 2,सभी,3882,All,hi
+Shape Circle,Question 2,सभी,12004,All,mr
+Shape Circle,Question 2,सभी,15886,CG,All
+Shape Circle,Question 2,सभी,3882,CG,hi
+Shape Circle,Question 2,सभी,12004,CG,mr
+Shape Circle,Question 3,नहीं,404,All,All
 Shape Circle,Question 3,नहीं,136,All,hi
-Shape Circle,Question 3,नहीं,264,All,mr
-Shape Circle,Question 3,नहीं,400,CG,All
+Shape Circle,Question 3,नहीं,268,All,mr
+Shape Circle,Question 3,नहीं,404,CG,All
 Shape Circle,Question 3,नहीं,136,CG,hi
-Shape Circle,Question 3,नहीं,264,CG,mr
-Shape Circle,Question 3,मदद से,2096,All,All
+Shape Circle,Question 3,नहीं,268,CG,mr
+Shape Circle,Question 3,मदद से,2118,All,All
 Shape Circle,Question 3,मदद से,638,All,hi
-Shape Circle,Question 3,मदद से,1458,All,mr
-Shape Circle,Question 3,मदद से,2096,CG,All
+Shape Circle,Question 3,मदद से,1480,All,mr
+Shape Circle,Question 3,मदद से,2118,CG,All
 Shape Circle,Question 3,मदद से,638,CG,hi
-Shape Circle,Question 3,मदद से,1458,CG,mr
-Shape Circle,Question 3,हाँ,16970,All,All
-Shape Circle,Question 3,हाँ,4102,All,hi
-Shape Circle,Question 3,हाँ,12868,All,mr
-Shape Circle,Question 3,हाँ,16970,CG,All
-Shape Circle,Question 3,हाँ,4102,CG,hi
-Shape Circle,Question 3,हाँ,12868,CG,mr
-Shape Rectangle,Question 1,ख़ुद से,598,All,All
+Shape Circle,Question 3,मदद से,1480,CG,mr
+Shape Circle,Question 3,हाँ,17136,All,All
+Shape Circle,Question 3,हाँ,4114,All,hi
+Shape Circle,Question 3,हाँ,13022,All,mr
+Shape Circle,Question 3,हाँ,17136,CG,All
+Shape Circle,Question 3,हाँ,4114,CG,hi
+Shape Circle,Question 3,हाँ,13022,CG,mr
+Shape Rectangle,Question 1,ख़ुद से,614,All,All
 Shape Rectangle,Question 1,ख़ुद से,134,All,hi
-Shape Rectangle,Question 1,ख़ुद से,464,All,mr
-Shape Rectangle,Question 1,ख़ुद से,598,CG,All
+Shape Rectangle,Question 1,ख़ुद से,480,All,mr
+Shape Rectangle,Question 1,ख़ुद से,614,CG,All
 Shape Rectangle,Question 1,ख़ुद से,134,CG,hi
-Shape Rectangle,Question 1,ख़ुद से,464,CG,mr
-Shape Rectangle,Question 1,भाई बहन,182,All,All
+Shape Rectangle,Question 1,ख़ुद से,480,CG,mr
+Shape Rectangle,Question 1,भाई बहन,186,All,All
 Shape Rectangle,Question 1,भाई बहन,36,All,hi
-Shape Rectangle,Question 1,भाई बहन,146,All,mr
-Shape Rectangle,Question 1,भाई बहन,182,CG,All
+Shape Rectangle,Question 1,भाई बहन,150,All,mr
+Shape Rectangle,Question 1,भाई बहन,186,CG,All
 Shape Rectangle,Question 1,भाई बहन,36,CG,hi
-Shape Rectangle,Question 1,भाई बहन,146,CG,mr
-Shape Rectangle,Question 1,माता-पिता,816,All,All
-Shape Rectangle,Question 1,माता-पिता,124,All,hi
-Shape Rectangle,Question 1,माता-पिता,692,All,mr
-Shape Rectangle,Question 1,माता-पिता,816,CG,All
-Shape Rectangle,Question 1,माता-पिता,124,CG,hi
-Shape Rectangle,Question 1,माता-पिता,692,CG,mr
-Shape Rectangle,Question 2,आधे,208,All,All
+Shape Rectangle,Question 1,भाई बहन,150,CG,mr
+Shape Rectangle,Question 1,माता-पिता,868,All,All
+Shape Rectangle,Question 1,माता-पिता,132,All,hi
+Shape Rectangle,Question 1,माता-पिता,736,All,mr
+Shape Rectangle,Question 1,माता-पिता,868,CG,All
+Shape Rectangle,Question 1,माता-पिता,132,CG,hi
+Shape Rectangle,Question 1,माता-पिता,736,CG,mr
+Shape Rectangle,Question 2,आधे,218,All,All
 Shape Rectangle,Question 2,आधे,42,All,hi
-Shape Rectangle,Question 2,आधे,166,All,mr
-Shape Rectangle,Question 2,आधे,208,CG,All
+Shape Rectangle,Question 2,आधे,176,All,mr
+Shape Rectangle,Question 2,आधे,218,CG,All
 Shape Rectangle,Question 2,आधे,42,CG,hi
-Shape Rectangle,Question 2,आधे,166,CG,mr
+Shape Rectangle,Question 2,आधे,176,CG,mr
 Shape Rectangle,Question 2,आधे से कम,54,All,All
 Shape Rectangle,Question 2,आधे से कम,14,All,hi
 Shape Rectangle,Question 2,आधे से कम,40,All,mr
 Shape Rectangle,Question 2,आधे से कम,54,CG,All
 Shape Rectangle,Question 2,आधे से कम,14,CG,hi
 Shape Rectangle,Question 2,आधे से कम,40,CG,mr
-Shape Rectangle,Question 2,सभी,1334,All,All
-Shape Rectangle,Question 2,सभी,236,All,hi
-Shape Rectangle,Question 2,सभी,1098,All,mr
-Shape Rectangle,Question 2,सभी,1334,CG,All
-Shape Rectangle,Question 2,सभी,236,CG,hi
-Shape Rectangle,Question 2,सभी,1098,CG,mr
+Shape Rectangle,Question 2,सभी,1396,All,All
+Shape Rectangle,Question 2,सभी,244,All,hi
+Shape Rectangle,Question 2,सभी,1152,All,mr
+Shape Rectangle,Question 2,सभी,1396,CG,All
+Shape Rectangle,Question 2,सभी,244,CG,hi
+Shape Rectangle,Question 2,सभी,1152,CG,mr
 Shape Rectangle,Question 3,नहीं,38,All,All
 Shape Rectangle,Question 3,नहीं,8,All,hi
 Shape Rectangle,Question 3,नहीं,30,All,mr
 Shape Rectangle,Question 3,नहीं,38,CG,All
 Shape Rectangle,Question 3,नहीं,8,CG,hi
 Shape Rectangle,Question 3,नहीं,30,CG,mr
-Shape Rectangle,Question 3,मदद से,312,All,All
-Shape Rectangle,Question 3,मदद से,84,All,hi
-Shape Rectangle,Question 3,मदद से,228,All,mr
-Shape Rectangle,Question 3,मदद से,312,CG,All
-Shape Rectangle,Question 3,मदद से,84,CG,hi
-Shape Rectangle,Question 3,मदद से,228,CG,mr
-Shape Rectangle,Question 3,हाँ,1246,All,All
-Shape Rectangle,Question 3,हाँ,200,All,hi
-Shape Rectangle,Question 3,हाँ,1046,All,mr
-Shape Rectangle,Question 3,हाँ,1246,CG,All
-Shape Rectangle,Question 3,हाँ,200,CG,hi
-Shape Rectangle,Question 3,हाँ,1046,CG,mr
-Shape Square,Question 1,ख़ुद से,544,All,All
+Shape Rectangle,Question 3,मदद से,332,All,All
+Shape Rectangle,Question 3,मदद से,86,All,hi
+Shape Rectangle,Question 3,मदद से,246,All,mr
+Shape Rectangle,Question 3,मदद से,332,CG,All
+Shape Rectangle,Question 3,मदद से,86,CG,hi
+Shape Rectangle,Question 3,मदद से,246,CG,mr
+Shape Rectangle,Question 3,हाँ,1298,All,All
+Shape Rectangle,Question 3,हाँ,206,All,hi
+Shape Rectangle,Question 3,हाँ,1092,All,mr
+Shape Rectangle,Question 3,हाँ,1298,CG,All
+Shape Rectangle,Question 3,हाँ,206,CG,hi
+Shape Rectangle,Question 3,हाँ,1092,CG,mr
+Shape Square,Question 1,ख़ुद से,546,All,All
 Shape Square,Question 1,ख़ुद से,112,All,hi
-Shape Square,Question 1,ख़ुद से,432,All,mr
-Shape Square,Question 1,ख़ुद से,544,CG,All
+Shape Square,Question 1,ख़ुद से,434,All,mr
+Shape Square,Question 1,ख़ुद से,546,CG,All
 Shape Square,Question 1,ख़ुद से,112,CG,hi
-Shape Square,Question 1,ख़ुद से,432,CG,mr
-Shape Square,Question 1,भाई बहन,140,All,All
+Shape Square,Question 1,ख़ुद से,434,CG,mr
+Shape Square,Question 1,भाई बहन,142,All,All
 Shape Square,Question 1,भाई बहन,26,All,hi
-Shape Square,Question 1,भाई बहन,114,All,mr
-Shape Square,Question 1,भाई बहन,140,CG,All
+Shape Square,Question 1,भाई बहन,116,All,mr
+Shape Square,Question 1,भाई बहन,142,CG,All
 Shape Square,Question 1,भाई बहन,26,CG,hi
-Shape Square,Question 1,भाई बहन,114,CG,mr
-Shape Square,Question 1,माता-पिता,848,All,All
-Shape Square,Question 1,माता-पिता,108,All,hi
-Shape Square,Question 1,माता-पिता,740,All,mr
-Shape Square,Question 1,माता-पिता,848,CG,All
-Shape Square,Question 1,माता-पिता,108,CG,hi
-Shape Square,Question 1,माता-पिता,740,CG,mr
-Shape Square,Question 2,आधे,186,All,All
+Shape Square,Question 1,भाई बहन,116,CG,mr
+Shape Square,Question 1,माता-पिता,858,All,All
+Shape Square,Question 1,माता-पिता,114,All,hi
+Shape Square,Question 1,माता-पिता,744,All,mr
+Shape Square,Question 1,माता-पिता,858,CG,All
+Shape Square,Question 1,माता-पिता,114,CG,hi
+Shape Square,Question 1,माता-पिता,744,CG,mr
+Shape Square,Question 2,आधे,188,All,All
 Shape Square,Question 2,आधे,28,All,hi
-Shape Square,Question 2,आधे,158,All,mr
-Shape Square,Question 2,आधे,186,CG,All
+Shape Square,Question 2,आधे,160,All,mr
+Shape Square,Question 2,आधे,188,CG,All
 Shape Square,Question 2,आधे,28,CG,hi
-Shape Square,Question 2,आधे,158,CG,mr
+Shape Square,Question 2,आधे,160,CG,mr
 Shape Square,Question 2,आधे से कम,26,All,All
 Shape Square,Question 2,आधे से कम,4,All,hi
 Shape Square,Question 2,आधे से कम,22,All,mr
 Shape Square,Question 2,आधे से कम,26,CG,All
 Shape Square,Question 2,आधे से कम,4,CG,hi
 Shape Square,Question 2,आधे से कम,22,CG,mr
-Shape Square,Question 2,सभी,1320,All,All
-Shape Square,Question 2,सभी,214,All,hi
-Shape Square,Question 2,सभी,1106,All,mr
-Shape Square,Question 2,सभी,1320,CG,All
-Shape Square,Question 2,सभी,214,CG,hi
-Shape Square,Question 2,सभी,1106,CG,mr
+Shape Square,Question 2,सभी,1332,All,All
+Shape Square,Question 2,सभी,220,All,hi
+Shape Square,Question 2,सभी,1112,All,mr
+Shape Square,Question 2,सभी,1332,CG,All
+Shape Square,Question 2,सभी,220,CG,hi
+Shape Square,Question 2,सभी,1112,CG,mr
 Shape Square,Question 3,नहीं,32,All,All
 Shape Square,Question 3,नहीं,8,All,hi
 Shape Square,Question 3,नहीं,24,All,mr
 Shape Square,Question 3,नहीं,32,CG,All
 Shape Square,Question 3,नहीं,8,CG,hi
 Shape Square,Question 3,नहीं,24,CG,mr
-Shape Square,Question 3,मदद से,196,All,All
+Shape Square,Question 3,मदद से,200,All,All
 Shape Square,Question 3,मदद से,38,All,hi
-Shape Square,Question 3,मदद से,158,All,mr
-Shape Square,Question 3,मदद से,196,CG,All
+Shape Square,Question 3,मदद से,162,All,mr
+Shape Square,Question 3,मदद से,200,CG,All
 Shape Square,Question 3,मदद से,38,CG,hi
-Shape Square,Question 3,मदद से,158,CG,mr
-Shape Square,Question 3,हाँ,1304,All,All
-Shape Square,Question 3,हाँ,200,All,hi
-Shape Square,Question 3,हाँ,1104,All,mr
-Shape Square,Question 3,हाँ,1304,CG,All
-Shape Square,Question 3,हाँ,200,CG,hi
-Shape Square,Question 3,हाँ,1104,CG,mr
+Shape Square,Question 3,मदद से,162,CG,mr
+Shape Square,Question 3,हाँ,1314,All,All
+Shape Square,Question 3,हाँ,206,All,hi
+Shape Square,Question 3,हाँ,1108,All,mr
+Shape Square,Question 3,हाँ,1314,CG,All
+Shape Square,Question 3,हाँ,206,CG,hi
+Shape Square,Question 3,हाँ,1108,CG,mr
 Shape Triangle,Question 1,ख़ुद से,1104,All,All
 Shape Triangle,Question 1,ख़ुद से,244,All,hi
 Shape Triangle,Question 1,ख़ुद से,860,All,mr
 Shape Triangle,Question 1,ख़ुद से,1104,CG,All
 Shape Triangle,Question 1,ख़ुद से,244,CG,hi
 Shape Triangle,Question 1,ख़ुद से,860,CG,mr
-Shape Triangle,Question 1,भाई बहन,422,All,All
-Shape Triangle,Question 1,भाई बहन,114,All,hi
+Shape Triangle,Question 1,भाई बहन,424,All,All
+Shape Triangle,Question 1,भाई बहन,116,All,hi
 Shape Triangle,Question 1,भाई बहन,308,All,mr
-Shape Triangle,Question 1,भाई बहन,422,CG,All
-Shape Triangle,Question 1,भाई बहन,114,CG,hi
+Shape Triangle,Question 1,भाई बहन,424,CG,All
+Shape Triangle,Question 1,भाई बहन,116,CG,hi
 Shape Triangle,Question 1,भाई बहन,308,CG,mr
 Shape Triangle,Question 1,माता-पिता,1640,All,All
 Shape Triangle,Question 1,माता-पिता,300,All,hi
@@ -1841,11 +2651,11 @@ Shape Triangle,Question 2,आधे,372,All,mr
 Shape Triangle,Question 2,आधे,492,CG,All
 Shape Triangle,Question 2,आधे,120,CG,hi
 Shape Triangle,Question 2,आधे,372,CG,mr
-Shape Triangle,Question 2,आधे से कम,72,All,All
-Shape Triangle,Question 2,आधे से कम,24,All,hi
+Shape Triangle,Question 2,आधे से कम,74,All,All
+Shape Triangle,Question 2,आधे से कम,26,All,hi
 Shape Triangle,Question 2,आधे से कम,48,All,mr
-Shape Triangle,Question 2,आधे से कम,72,CG,All
-Shape Triangle,Question 2,आधे से कम,24,CG,hi
+Shape Triangle,Question 2,आधे से कम,74,CG,All
+Shape Triangle,Question 2,आधे से कम,26,CG,hi
 Shape Triangle,Question 2,आधे से कम,48,CG,mr
 Shape Triangle,Question 2,सभी,2602,All,All
 Shape Triangle,Question 2,सभी,514,All,hi
@@ -1865,117 +2675,117 @@ Shape Triangle,Question 3,मदद से,364,All,mr
 Shape Triangle,Question 3,मदद से,456,CG,All
 Shape Triangle,Question 3,मदद से,92,CG,hi
 Shape Triangle,Question 3,मदद से,364,CG,mr
-Shape Triangle,Question 3,हाँ,2624,All,All
-Shape Triangle,Question 3,हाँ,536,All,hi
+Shape Triangle,Question 3,हाँ,2626,All,All
+Shape Triangle,Question 3,हाँ,538,All,hi
 Shape Triangle,Question 3,हाँ,2088,All,mr
-Shape Triangle,Question 3,हाँ,2624,CG,All
-Shape Triangle,Question 3,हाँ,536,CG,hi
+Shape Triangle,Question 3,हाँ,2626,CG,All
+Shape Triangle,Question 3,हाँ,538,CG,hi
 Shape Triangle,Question 3,हाँ,2088,CG,mr
-Sorting Primary Colors,Question 1,ख़ुद से,1048,All,All
-Sorting Primary Colors,Question 1,ख़ुद से,318,All,hi
-Sorting Primary Colors,Question 1,ख़ुद से,730,All,mr
-Sorting Primary Colors,Question 1,ख़ुद से,1048,CG,All
-Sorting Primary Colors,Question 1,ख़ुद से,318,CG,hi
-Sorting Primary Colors,Question 1,ख़ुद से,730,CG,mr
-Sorting Primary Colors,Question 1,भाई बहन,264,All,All
+Sorting Primary Colors,Question 1,ख़ुद से,1284,All,All
+Sorting Primary Colors,Question 1,ख़ुद से,330,All,hi
+Sorting Primary Colors,Question 1,ख़ुद से,954,All,mr
+Sorting Primary Colors,Question 1,ख़ुद से,1284,CG,All
+Sorting Primary Colors,Question 1,ख़ुद से,330,CG,hi
+Sorting Primary Colors,Question 1,ख़ुद से,954,CG,mr
+Sorting Primary Colors,Question 1,भाई बहन,340,All,All
 Sorting Primary Colors,Question 1,भाई बहन,88,All,hi
-Sorting Primary Colors,Question 1,भाई बहन,176,All,mr
-Sorting Primary Colors,Question 1,भाई बहन,264,CG,All
+Sorting Primary Colors,Question 1,भाई बहन,252,All,mr
+Sorting Primary Colors,Question 1,भाई बहन,340,CG,All
 Sorting Primary Colors,Question 1,भाई बहन,88,CG,hi
-Sorting Primary Colors,Question 1,भाई बहन,176,CG,mr
-Sorting Primary Colors,Question 1,माता-पिता,912,All,All
-Sorting Primary Colors,Question 1,माता-पिता,258,All,hi
-Sorting Primary Colors,Question 1,माता-पिता,654,All,mr
-Sorting Primary Colors,Question 1,माता-पिता,912,CG,All
-Sorting Primary Colors,Question 1,माता-पिता,258,CG,hi
-Sorting Primary Colors,Question 1,माता-पिता,654,CG,mr
-Sorting Primary Colors,Question 2,आधे,152,All,All
+Sorting Primary Colors,Question 1,भाई बहन,252,CG,mr
+Sorting Primary Colors,Question 1,माता-पिता,1336,All,All
+Sorting Primary Colors,Question 1,माता-पिता,262,All,hi
+Sorting Primary Colors,Question 1,माता-पिता,1074,All,mr
+Sorting Primary Colors,Question 1,माता-पिता,1336,CG,All
+Sorting Primary Colors,Question 1,माता-पिता,262,CG,hi
+Sorting Primary Colors,Question 1,माता-पिता,1074,CG,mr
+Sorting Primary Colors,Question 2,आधे,230,All,All
 Sorting Primary Colors,Question 2,आधे,60,All,hi
-Sorting Primary Colors,Question 2,आधे,92,All,mr
-Sorting Primary Colors,Question 2,आधे,152,CG,All
+Sorting Primary Colors,Question 2,आधे,170,All,mr
+Sorting Primary Colors,Question 2,आधे,230,CG,All
 Sorting Primary Colors,Question 2,आधे,60,CG,hi
-Sorting Primary Colors,Question 2,आधे,92,CG,mr
-Sorting Primary Colors,Question 2,आधे से कम,68,All,All
-Sorting Primary Colors,Question 2,आधे से कम,30,All,hi
-Sorting Primary Colors,Question 2,आधे से कम,38,All,mr
-Sorting Primary Colors,Question 2,आधे से कम,68,CG,All
-Sorting Primary Colors,Question 2,आधे से कम,30,CG,hi
-Sorting Primary Colors,Question 2,आधे से कम,38,CG,mr
-Sorting Primary Colors,Question 2,सभी,2004,All,All
-Sorting Primary Colors,Question 2,सभी,574,All,hi
-Sorting Primary Colors,Question 2,सभी,1430,All,mr
-Sorting Primary Colors,Question 2,सभी,2004,CG,All
-Sorting Primary Colors,Question 2,सभी,574,CG,hi
-Sorting Primary Colors,Question 2,सभी,1430,CG,mr
-Sorting Primary Colors,Question 3,नहीं,114,All,All
-Sorting Primary Colors,Question 3,नहीं,36,All,hi
-Sorting Primary Colors,Question 3,नहीं,78,All,mr
-Sorting Primary Colors,Question 3,नहीं,114,CG,All
-Sorting Primary Colors,Question 3,नहीं,36,CG,hi
-Sorting Primary Colors,Question 3,नहीं,78,CG,mr
-Sorting Primary Colors,Question 3,मदद से,184,All,All
+Sorting Primary Colors,Question 2,आधे,170,CG,mr
+Sorting Primary Colors,Question 2,आधे से कम,76,All,All
+Sorting Primary Colors,Question 2,आधे से कम,32,All,hi
+Sorting Primary Colors,Question 2,आधे से कम,44,All,mr
+Sorting Primary Colors,Question 2,आधे से कम,76,CG,All
+Sorting Primary Colors,Question 2,आधे से कम,32,CG,hi
+Sorting Primary Colors,Question 2,आधे से कम,44,CG,mr
+Sorting Primary Colors,Question 2,सभी,2656,All,All
+Sorting Primary Colors,Question 2,सभी,588,All,hi
+Sorting Primary Colors,Question 2,सभी,2068,All,mr
+Sorting Primary Colors,Question 2,सभी,2656,CG,All
+Sorting Primary Colors,Question 2,सभी,588,CG,hi
+Sorting Primary Colors,Question 2,सभी,2068,CG,mr
+Sorting Primary Colors,Question 3,नहीं,124,All,All
+Sorting Primary Colors,Question 3,नहीं,38,All,hi
+Sorting Primary Colors,Question 3,नहीं,86,All,mr
+Sorting Primary Colors,Question 3,नहीं,124,CG,All
+Sorting Primary Colors,Question 3,नहीं,38,CG,hi
+Sorting Primary Colors,Question 3,नहीं,86,CG,mr
+Sorting Primary Colors,Question 3,मदद से,276,All,All
 Sorting Primary Colors,Question 3,मदद से,54,All,hi
-Sorting Primary Colors,Question 3,मदद से,130,All,mr
-Sorting Primary Colors,Question 3,मदद से,184,CG,All
+Sorting Primary Colors,Question 3,मदद से,222,All,mr
+Sorting Primary Colors,Question 3,मदद से,276,CG,All
 Sorting Primary Colors,Question 3,मदद से,54,CG,hi
-Sorting Primary Colors,Question 3,मदद से,130,CG,mr
-Sorting Primary Colors,Question 3,हाँ,1926,All,All
-Sorting Primary Colors,Question 3,हाँ,574,All,hi
-Sorting Primary Colors,Question 3,हाँ,1352,All,mr
-Sorting Primary Colors,Question 3,हाँ,1926,CG,All
-Sorting Primary Colors,Question 3,हाँ,574,CG,hi
-Sorting Primary Colors,Question 3,हाँ,1352,CG,mr
-Sorting Primary Shapes,Question 1,ख़ुद से,1330,All,All
-Sorting Primary Shapes,Question 1,ख़ुद से,460,All,hi
-Sorting Primary Shapes,Question 1,ख़ुद से,870,All,mr
-Sorting Primary Shapes,Question 1,ख़ुद से,1330,CG,All
-Sorting Primary Shapes,Question 1,ख़ुद से,460,CG,hi
-Sorting Primary Shapes,Question 1,ख़ुद से,870,CG,mr
-Sorting Primary Shapes,Question 1,भाई बहन,522,All,All
-Sorting Primary Shapes,Question 1,भाई बहन,160,All,hi
-Sorting Primary Shapes,Question 1,भाई बहन,362,All,mr
-Sorting Primary Shapes,Question 1,भाई बहन,522,CG,All
-Sorting Primary Shapes,Question 1,भाई बहन,160,CG,hi
-Sorting Primary Shapes,Question 1,भाई बहन,362,CG,mr
-Sorting Primary Shapes,Question 1,माता-पिता,2162,All,All
-Sorting Primary Shapes,Question 1,माता-पिता,594,All,hi
-Sorting Primary Shapes,Question 1,माता-पिता,1568,All,mr
-Sorting Primary Shapes,Question 1,माता-पिता,2162,CG,All
-Sorting Primary Shapes,Question 1,माता-पिता,594,CG,hi
-Sorting Primary Shapes,Question 1,माता-पिता,1568,CG,mr
-Sorting Primary Shapes,Question 2,आधे,736,All,All
-Sorting Primary Shapes,Question 2,आधे,238,All,hi
-Sorting Primary Shapes,Question 2,आधे,498,All,mr
-Sorting Primary Shapes,Question 2,आधे,736,CG,All
-Sorting Primary Shapes,Question 2,आधे,238,CG,hi
-Sorting Primary Shapes,Question 2,आधे,498,CG,mr
-Sorting Primary Shapes,Question 2,आधे से कम,100,All,All
+Sorting Primary Colors,Question 3,मदद से,222,CG,mr
+Sorting Primary Colors,Question 3,हाँ,2562,All,All
+Sorting Primary Colors,Question 3,हाँ,588,All,hi
+Sorting Primary Colors,Question 3,हाँ,1974,All,mr
+Sorting Primary Colors,Question 3,हाँ,2562,CG,All
+Sorting Primary Colors,Question 3,हाँ,588,CG,hi
+Sorting Primary Colors,Question 3,हाँ,1974,CG,mr
+Sorting Primary Shapes,Question 1,ख़ुद से,1540,All,All
+Sorting Primary Shapes,Question 1,ख़ुद से,464,All,hi
+Sorting Primary Shapes,Question 1,ख़ुद से,1076,All,mr
+Sorting Primary Shapes,Question 1,ख़ुद से,1540,CG,All
+Sorting Primary Shapes,Question 1,ख़ुद से,464,CG,hi
+Sorting Primary Shapes,Question 1,ख़ुद से,1076,CG,mr
+Sorting Primary Shapes,Question 1,भाई बहन,578,All,All
+Sorting Primary Shapes,Question 1,भाई बहन,162,All,hi
+Sorting Primary Shapes,Question 1,भाई बहन,416,All,mr
+Sorting Primary Shapes,Question 1,भाई बहन,578,CG,All
+Sorting Primary Shapes,Question 1,भाई बहन,162,CG,hi
+Sorting Primary Shapes,Question 1,भाई बहन,416,CG,mr
+Sorting Primary Shapes,Question 1,माता-पिता,2578,All,All
+Sorting Primary Shapes,Question 1,माता-पिता,602,All,hi
+Sorting Primary Shapes,Question 1,माता-पिता,1976,All,mr
+Sorting Primary Shapes,Question 1,माता-पिता,2578,CG,All
+Sorting Primary Shapes,Question 1,माता-पिता,602,CG,hi
+Sorting Primary Shapes,Question 1,माता-पिता,1976,CG,mr
+Sorting Primary Shapes,Question 2,आधे,840,All,All
+Sorting Primary Shapes,Question 2,आधे,244,All,hi
+Sorting Primary Shapes,Question 2,आधे,596,All,mr
+Sorting Primary Shapes,Question 2,आधे,840,CG,All
+Sorting Primary Shapes,Question 2,आधे,244,CG,hi
+Sorting Primary Shapes,Question 2,आधे,596,CG,mr
+Sorting Primary Shapes,Question 2,आधे से कम,122,All,All
 Sorting Primary Shapes,Question 2,आधे से कम,38,All,hi
-Sorting Primary Shapes,Question 2,आधे से कम,62,All,mr
-Sorting Primary Shapes,Question 2,आधे से कम,100,CG,All
+Sorting Primary Shapes,Question 2,आधे से कम,84,All,mr
+Sorting Primary Shapes,Question 2,आधे से कम,122,CG,All
 Sorting Primary Shapes,Question 2,आधे से कम,38,CG,hi
-Sorting Primary Shapes,Question 2,आधे से कम,62,CG,mr
-Sorting Primary Shapes,Question 2,सभी,3180,All,All
-Sorting Primary Shapes,Question 2,सभी,940,All,hi
-Sorting Primary Shapes,Question 2,सभी,2240,All,mr
-Sorting Primary Shapes,Question 2,सभी,3180,CG,All
-Sorting Primary Shapes,Question 2,सभी,940,CG,hi
-Sorting Primary Shapes,Question 2,सभी,2240,CG,mr
-Sorting Primary Shapes,Question 3,नहीं,66,All,All
-Sorting Primary Shapes,Question 3,नहीं,24,All,hi
-Sorting Primary Shapes,Question 3,नहीं,42,All,mr
-Sorting Primary Shapes,Question 3,नहीं,66,CG,All
-Sorting Primary Shapes,Question 3,नहीं,24,CG,hi
-Sorting Primary Shapes,Question 3,नहीं,42,CG,mr
-Sorting Primary Shapes,Question 3,मदद से,772,All,All
+Sorting Primary Shapes,Question 2,आधे से कम,84,CG,mr
+Sorting Primary Shapes,Question 2,सभी,3736,All,All
+Sorting Primary Shapes,Question 2,सभी,948,All,hi
+Sorting Primary Shapes,Question 2,सभी,2788,All,mr
+Sorting Primary Shapes,Question 2,सभी,3736,CG,All
+Sorting Primary Shapes,Question 2,सभी,948,CG,hi
+Sorting Primary Shapes,Question 2,सभी,2788,CG,mr
+Sorting Primary Shapes,Question 3,नहीं,78,All,All
+Sorting Primary Shapes,Question 3,नहीं,26,All,hi
+Sorting Primary Shapes,Question 3,नहीं,52,All,mr
+Sorting Primary Shapes,Question 3,नहीं,78,CG,All
+Sorting Primary Shapes,Question 3,नहीं,26,CG,hi
+Sorting Primary Shapes,Question 3,नहीं,52,CG,mr
+Sorting Primary Shapes,Question 3,मदद से,904,All,All
 Sorting Primary Shapes,Question 3,मदद से,272,All,hi
-Sorting Primary Shapes,Question 3,मदद से,500,All,mr
-Sorting Primary Shapes,Question 3,मदद से,772,CG,All
+Sorting Primary Shapes,Question 3,मदद से,632,All,mr
+Sorting Primary Shapes,Question 3,मदद से,904,CG,All
 Sorting Primary Shapes,Question 3,मदद से,272,CG,hi
-Sorting Primary Shapes,Question 3,मदद से,500,CG,mr
-Sorting Primary Shapes,Question 3,हाँ,3178,All,All
-Sorting Primary Shapes,Question 3,हाँ,920,All,hi
-Sorting Primary Shapes,Question 3,हाँ,2258,All,mr
-Sorting Primary Shapes,Question 3,हाँ,3178,CG,All
-Sorting Primary Shapes,Question 3,हाँ,920,CG,hi
-Sorting Primary Shapes,Question 3,हाँ,2258,CG,mr
+Sorting Primary Shapes,Question 3,मदद से,632,CG,mr
+Sorting Primary Shapes,Question 3,हाँ,3716,All,All
+Sorting Primary Shapes,Question 3,हाँ,932,All,hi
+Sorting Primary Shapes,Question 3,हाँ,2784,All,mr
+Sorting Primary Shapes,Question 3,हाँ,3716,CG,All
+Sorting Primary Shapes,Question 3,हाँ,932,CG,hi
+Sorting Primary Shapes,Question 3,हाँ,2784,CG,mr
