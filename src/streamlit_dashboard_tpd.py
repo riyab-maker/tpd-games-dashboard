@@ -105,7 +105,7 @@ def _parse_poll_fields(custom_dimension_1: str) -> Tuple[str, str]:
     return ("Parent Poll", val_clean)
 
 def try_refresh_poll_responses_data() -> None:
-    """Attempt to refresh poll_responses_data.csv from the live DB using provided SQL.
+    """Attempt to refresh poll_responses_data_tpd.csv from the live DB using provided SQL.
 
     Silently no-ops if DB is not available. Keeps existing structure/visuals intact.
     """
@@ -175,7 +175,7 @@ def try_refresh_poll_responses_data() -> None:
 
     # Write to CSV
     os.makedirs(DATA_DIR, exist_ok=True)
-    output_path = os.path.join(DATA_DIR, "poll_responses_data.csv")
+    output_path = os.path.join(DATA_DIR, "poll_responses_data_tpd.csv")
     try:
         result_df.to_csv(output_path, index=False)
         st.info("Parent Poll Responses data refreshed from database.")
@@ -185,12 +185,13 @@ def try_refresh_poll_responses_data() -> None:
 # Use preprocess_data.py directly instead of processed CSV files
 DATA_DIR = "data"
 REQUIRED_FILES = [
-    "summary_data.csv",
-    "time_series_data.csv",
-    "repeatability_data.csv",
-    "score_distribution_data.csv",
-    "game_conversion_numbers.csv",
-    "poll_responses_data.csv"
+    "summary_data_tpd.csv",
+    "time_series_data_tpd.csv",
+    "repeatability_data_tpd.csv",
+    "game_conversion_numbers_tpd.csv",
+    # Optional files (sections are hidden):
+    # "score_distribution_data_tpd.csv",
+    # "poll_responses_data_tpd.csv"
 ]
 
 def check_processed_data():
@@ -219,7 +220,7 @@ def load_processed_data():
     """Load all data files from data/ directory"""
     try:
         # Load game-specific conversion numbers (final numbers for individual games)
-        game_conversion_df = pd.read_csv(os.path.join(DATA_DIR, "game_conversion_numbers.csv"))
+        game_conversion_df = pd.read_csv(os.path.join(DATA_DIR, "game_conversion_numbers_tpd.csv"))
         # Ensure numeric columns are properly typed
         numeric_cols = ['started_users', 'completed_users', 'started_visits', 'completed_visits', 'started_instances', 'completed_instances']
         for col in numeric_cols:
@@ -227,7 +228,7 @@ def load_processed_data():
                 game_conversion_df[col] = pd.to_numeric(game_conversion_df[col], errors='coerce').fillna(0).astype(int)
         
         # Load processed data for date filtering (aggregated by date, game, event)
-        processed_data_path = os.path.join(DATA_DIR, "processed_data.csv")
+        processed_data_path = os.path.join(DATA_DIR, "processed_data_tpd.csv")
         if os.path.exists(processed_data_path):
             processed_data_df = pd.read_csv(processed_data_path)
             # Check if it's the new aggregated format (has 'date' column) or old format (has 'server_time')
@@ -251,7 +252,7 @@ def load_processed_data():
             st.info("ℹ️ Note: Date filtering is disabled because processed_data.csv is not available. Using summary data without date filtering.")
         
         # Load summary data for conversion funnels
-        summary_df = pd.read_csv(os.path.join(DATA_DIR, "summary_data.csv"))
+        summary_df = pd.read_csv(os.path.join(DATA_DIR, "summary_data_tpd.csv"))
         # Ensure numeric columns are properly typed
         if 'Users' in summary_df.columns:
             summary_df['Users'] = pd.to_numeric(summary_df['Users'], errors='coerce').fillna(0).astype(int)
@@ -329,7 +330,7 @@ def load_processed_data():
             conversion_funnel_path = None
         
         # Load time series data
-        time_series_df = pd.read_csv(os.path.join(DATA_DIR, "time_series_data.csv"))
+        time_series_df = pd.read_csv(os.path.join(DATA_DIR, "time_series_data_tpd.csv"))
         
         # Extract domain from game_code if available (for time series data)
         if 'game_code' in time_series_df.columns and 'domain' not in time_series_df.columns:
@@ -346,44 +347,50 @@ def load_processed_data():
             time_series_df['domain'] = time_series_df['game_code'].apply(extract_domain_from_game_code)
         
         # Load repeatability data
-        repeatability_df = pd.read_csv(os.path.join(DATA_DIR, "repeatability_data.csv"))
+        repeatability_df = pd.read_csv(os.path.join(DATA_DIR, "repeatability_data_tpd.csv"))
         
-        # Load score distribution data
-        score_distribution_df = pd.read_csv(os.path.join(DATA_DIR, "score_distribution_data.csv"))
-        
-        # Extract domain from game_code if available (similar to question_correctness_df)
-        if 'game_code' in score_distribution_df.columns and 'domain' not in score_distribution_df.columns:
-            def extract_domain_from_game_code(game_code):
-                """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
-                if pd.isna(game_code) or not isinstance(game_code, str):
+        # Load score distribution data (optional - section is hidden)
+        score_dist_path = os.path.join(DATA_DIR, "score_distribution_data_tpd.csv")
+        if os.path.exists(score_dist_path):
+            score_distribution_df = pd.read_csv(score_dist_path)
+            # Extract domain from game_code if available (similar to question_correctness_df)
+            if 'game_code' in score_distribution_df.columns and 'domain' not in score_distribution_df.columns:
+                def extract_domain_from_game_code(game_code):
+                    """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                    if pd.isna(game_code) or not isinstance(game_code, str):
+                        return None
+                    parts = game_code.split('-')
+                    # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+                    # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
+                    if len(parts) >= 3:
+                        return parts[2]
                     return None
-                parts = game_code.split('-')
-                # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
-                # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
-                if len(parts) >= 3:
-                    return parts[2]
-                return None
-            score_distribution_df['domain'] = score_distribution_df['game_code'].apply(extract_domain_from_game_code)
+                score_distribution_df['domain'] = score_distribution_df['game_code'].apply(extract_domain_from_game_code)
+        else:
+            score_distribution_df = pd.DataFrame()
         
-        # Load poll responses data
-        poll_responses_df = pd.read_csv(os.path.join(DATA_DIR, "poll_responses_data.csv"))
-        
-        # Extract domain from game_code if available
-        if 'game_code' in poll_responses_df.columns and 'domain' not in poll_responses_df.columns:
-            def extract_domain_from_game_code(game_code):
-                """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
-                if pd.isna(game_code) or not isinstance(game_code, str):
+        # Load poll responses data (optional - section is hidden)
+        poll_path = os.path.join(DATA_DIR, "poll_responses_data_tpd.csv")
+        if os.path.exists(poll_path):
+            poll_responses_df = pd.read_csv(poll_path)
+            # Extract domain from game_code if available
+            if 'game_code' in poll_responses_df.columns and 'domain' not in poll_responses_df.columns:
+                def extract_domain_from_game_code(game_code):
+                    """Extract domain from game_code (e.g., HY-29-LL-06 -> LL)"""
+                    if pd.isna(game_code) or not isinstance(game_code, str):
+                        return None
+                    parts = game_code.split('-')
+                    # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
+                    # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
+                    if len(parts) >= 3:
+                        return parts[2]
                     return None
-                parts = game_code.split('-')
-                # Pattern: HY-29-LL-06 -> domain is LL (3rd element, index 2)
-                # Split by '-': ['HY', '29', 'LL', '06'] -> parts[2] = 'LL'
-                if len(parts) >= 3:
-                    return parts[2]
-                return None
-            poll_responses_df['domain'] = poll_responses_df['game_code'].apply(extract_domain_from_game_code)
+                poll_responses_df['domain'] = poll_responses_df['game_code'].apply(extract_domain_from_game_code)
+        else:
+            poll_responses_df = pd.DataFrame()
 
         # Load per-question correctness data (optional)
-        qpath = os.path.join(DATA_DIR, "question_correctness_data.csv")
+        qpath = os.path.join(DATA_DIR, "question_correctness_data_tpd.csv")
         if os.path.exists(qpath):
             question_correctness_df = pd.read_csv(qpath)
             
@@ -404,7 +411,7 @@ def load_processed_data():
             question_correctness_df = pd.DataFrame()
         
         # Load video viewership data (optional)
-        vpath = os.path.join(DATA_DIR, "video_viewership_data.csv")
+        vpath = os.path.join(DATA_DIR, "video_viewership_data_tpd.csv")
         if os.path.exists(vpath):
             video_viewership_df = pd.read_csv(vpath)
             # Ensure numeric columns are properly typed
@@ -1128,9 +1135,9 @@ def recalculate_time_series_for_games(df_main: pd.DataFrame, time_period: str) -
     # Convert date to datetime (use the correct date column)
     df_main['datetime'] = pd.to_datetime(df_main['date'])
     
-    # Filter to July 2nd, 2025 onwards
-    july_2_2025 = pd.to_datetime('2025-07-02')
-    df_main = df_main[df_main['datetime'] >= july_2_2025]
+    # Filter to January 3rd, 2026 onwards (TPD Games Dashboard)
+    jan_3_2026 = pd.to_datetime('2026-01-03')
+    df_main = df_main[df_main['datetime'] >= jan_3_2026]
     
     time_series_data = []
     
@@ -1318,12 +1325,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Filter game-specific data (already filtered by global filters)
         game_data = filtered_ts_df[filtered_ts_df['game_name'] != 'All Games'].copy()
         
-        # Aggregate across selected games
+        # Keep individual games separate (don't aggregate into "Selected Games")
+        # Include game_name in groupby to preserve individual game data
         if not game_data.empty:
-            aggregated_game_df = game_data.groupby(['period_label', 'metric', 'event']).agg({'count': 'sum'}).reset_index()
-            aggregated_game_df['game_name'] = 'Selected Games'
+            # Group by game_name to keep individual games separate
+            aggregated_game_df = game_data.groupby(['period_label', 'game_name', 'metric', 'event']).agg({'count': 'sum'}).reset_index()
         else:
-            aggregated_game_df = pd.DataFrame(columns=['period_label', 'metric', 'event', 'count', 'game_name'])
+            aggregated_game_df = pd.DataFrame(columns=['period_label', 'game_name', 'metric', 'event', 'count'])
         
         # Combine RM data with game data
         if not rm_data.empty:
@@ -1477,51 +1485,58 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - Started vs Completed")
         
-    # Prepare chart data with RM Active Users, Started and Completed for each time period
+    # Prepare chart data with RM Active Users, Started and Completed for each time period and game
     chart_data = []
+    
+    # Get unique games (excluding "All Games" for now, we'll add it separately for RM data)
+    unique_games = [g for g in filtered_metric_df['game_name'].unique() if g != 'All Games']
+    
     for time in time_order:
-        # Add RM Active Users first if it exists
+        # Add RM Active Users first if it exists (only for "All Games")
         if rm_data_exists:
             rm_row = filtered_metric_df[
                 (filtered_metric_df['time_display'] == time) & 
                 (filtered_metric_df['metric'] == 'rm_active_users') &
-                (filtered_metric_df['event'] == 'RM Active Users')
+                (filtered_metric_df['event'] == 'RM Active Users') &
+                (filtered_metric_df['game_name'] == 'All Games')
             ]
             rm_count = rm_row['count'].iloc[0] if not rm_row.empty else 0
             chart_data.append({
                 'Time': time,
                 'Event': 'RM Active Users',
-                'Count': rm_count
+                'Count': rm_count,
+                'Game': 'All Games'
             })
         
-        # Add Started and Completed
-        for event_type in ['Started', 'Completed']:
-            event_row = filtered_metric_df[
-                (filtered_metric_df['time_display'] == time) & 
-                (filtered_metric_df['event'] == event_type)
+        # Add Started and Completed for each game
+        for game_name in unique_games:
+            for event_type in ['Started', 'Completed']:
+                event_row = filtered_metric_df[
+                    (filtered_metric_df['time_display'] == time) & 
+                    (filtered_metric_df['event'] == event_type) &
+                    (filtered_metric_df['game_name'] == game_name)
                 ]
                 
-            count = event_row['count'].iloc[0] if not event_row.empty else 0
-            chart_data.append({
-                'Time': time,
-                'Event': event_type,
-                'Count': count
-            })
+                count = event_row['count'].iloc[0] if not event_row.empty else 0
+                chart_data.append({
+                    'Time': time,
+                    'Event': event_type,
+                    'Count': count,
+                    'Game': game_name
+                })
         
     chart_df = pd.DataFrame(chart_data)
         
     # Ensure Count is numeric and handle any NaN values
     chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
-        
-    # Create grouped (side-by-side) bar chart
-    # Remove fixed width to let Altair auto-size bars based on spacing settings
-    bars = alt.Chart(chart_df).mark_bar(
-            cornerRadius=6,
-            stroke='white',
-            strokeWidth=2,
-            opacity=1.0
-        ).encode(
-            x=alt.X('Time:O',
+    
+    # Check if we have multiple games to decide whether to use column facet
+    unique_games_in_data = chart_df['Game'].unique()
+    has_multiple_games = len(unique_games_in_data) > 1
+    
+    # Create base chart encoding
+    base_encoding = {
+        'x': alt.X('Time:O',
                    title='',
                    axis=alt.Axis(
                        labelAngle=0 if time_period == "Monthly" else -45 if time_period == "Daily" else -30,
@@ -1535,7 +1550,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                    paddingInner=0.3 if time_period == "Monthly" else (0.02 if time_period == "Daily" else 0.1),
                    paddingOuter=0.1 if time_period == "Monthly" else (0.05 if time_period == "Daily" else 0.1)
                    )),
-            y=alt.Y('Count:Q',
+        'y': alt.Y('Count:Q',
                title=f'{selected_metric} Count',
                    axis=alt.Axis(
                        format='~s',
@@ -1545,13 +1560,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                        gridColor='#e0e0e0'
                    ),
                    scale=alt.Scale(zero=True)),
-        xOffset=alt.XOffset('Event:N',
+        'xOffset': alt.XOffset('Event:N',
                            sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
                            scale=alt.Scale(
                                paddingInner=0.01 if time_period == "Monthly" else (0.01 if time_period == "Daily" else 0.2),
                                paddingOuter=0.0
                            )),
-        color=alt.Color('Event:N',
+        'color': alt.Color('Event:N',
                           scale=alt.Scale(
                           domain=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
                           range=['#FF6B6B', '#4A90E2', '#50C878'] if rm_data_exists else ['#4A90E2', '#50C878']
@@ -1563,12 +1578,32 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                               orient='bottom'
                           ),
                       sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
-            tooltip=[
-                alt.Tooltip('Time:N', title='Time Period'),
+        'tooltip': [
+            alt.Tooltip('Time:N', title='Time Period'),
+            alt.Tooltip('Game:N', title='Game'),
             alt.Tooltip('Event:N', title='Event'),
-                alt.Tooltip('Count:Q', title='Count', format=',')
-            ]
-        ).properties(
+            alt.Tooltip('Count:Q', title='Count', format=',')
+        ]
+    }
+    
+    # Add column facet only if we have multiple games
+    if has_multiple_games:
+        base_encoding['column'] = alt.Column('Game:N',
+                             header=alt.Header(
+                                 title='',
+                                 labelFontSize=12,
+                                 labelAngle=0
+                             ),
+                             spacing=20)
+    
+    # Create grouped (side-by-side) bar chart
+    # Remove fixed width to let Altair auto-size bars based on spacing settings
+    bars = alt.Chart(chart_df).mark_bar(
+            cornerRadius=6,
+            stroke='white',
+            strokeWidth=2,
+            opacity=1.0
+        ).encode(**base_encoding).properties(
             width=chart_width,
             height=450,
             title=alt.TitleParams(
@@ -1580,6 +1615,28 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         )
         
     # Add data labels above bars
+    label_encoding = {
+        'x': alt.X('Time:O', sort=time_order),
+        'xOffset': alt.XOffset('Event:N',
+                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
+                           scale=alt.Scale(
+                               paddingInner=0.01 if time_period == "Monthly" else (0.01 if time_period == "Daily" else 0.2),
+                               paddingOuter=0.0
+                           )),
+        'y': alt.Y('Count:Q'),
+        'text': alt.Text('Count:Q', format=',.0f')
+    }
+    
+    # Add column facet to labels if we have multiple games
+    if has_multiple_games:
+        label_encoding['column'] = alt.Column('Game:N',
+                             header=alt.Header(
+                                 title='',
+                                 labelFontSize=12,
+                                 labelAngle=0
+                             ),
+                             spacing=20)
+    
     labels = alt.Chart(chart_df).mark_text(
         align='center',
         baseline='bottom',
@@ -1587,16 +1644,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         fontWeight='bold',
         color='#2C3E50',
         dy=-8
-    ).encode(
-        x=alt.X('Time:O', sort=time_order),
-        xOffset=alt.XOffset('Event:N',
-                           sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed'],
-                           scale=alt.Scale(
-                               paddingInner=0.01 if time_period == "Monthly" else (0.01 if time_period == "Daily" else 0.2),
-                               paddingOuter=0.0
-                           )),
-        y=alt.Y('Count:Q'),
-        text=alt.Text('Count:Q', format=',.0f')
+    ).encode(**label_encoding)
     ).transform_filter(
         alt.datum.Count > 0
     )
@@ -2255,9 +2303,39 @@ def main() -> None:
             ].copy()
         
         # For time series data, use "All" combinations similar to conversion funnel
-        # Time series data uses 'game_code' column which contains domain codes (CG, LL, etc.) or 'All'
-        # Use the same pattern as conversion funnel and parent poll responses
-        if 'game_code' in filtered_df.columns and 'language' in filtered_df.columns and 'period_type' in filtered_df.columns:
+        # TPD time series data does not have 'game_code' column (only language)
+        # Use language filtering only since TPD does not have domain/game_code information
+        if 'language' in filtered_df.columns and 'period_type' in filtered_df.columns and 'game_code' not in filtered_df.columns:
+            # TPD time series data has pre-calculated "All" language combinations
+            # Determine which combination to use based on language filters (domain filters are ignored for TPD)
+            if not selected_languages:
+                # No language filter - use overall totals (language='All')
+                filtered_df = filtered_df[
+                    filtered_df['language'] == 'All'
+                ]
+            elif selected_languages:
+                # Language filter - use specific language or aggregate multiple languages
+                if len(selected_languages) == 1:
+                    # Single language - use exact combination
+                    filtered_df = filtered_df[
+                        filtered_df['language'] == selected_languages[0]
+                    ]
+                else:
+                    # Multiple languages - aggregate language rows
+                    filtered_df = filtered_df[
+                        filtered_df['language'].isin(selected_languages)
+                    ]
+                    # Group by period, game, metric, event to aggregate counts
+                    group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type']
+                    filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
+                    # Set language to 'All' for aggregated rows
+                    filtered_df['language'] = 'All'
+            
+            # Apply game filter for time series data if games are selected
+            if has_game_filter and 'game_name' in filtered_df.columns:
+                filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
+        elif 'game_code' in filtered_df.columns and 'language' in filtered_df.columns and 'period_type' in filtered_df.columns:
+            # Hybrid dashboard time series data (has game_code) - use original logic
             # Time series data has pre-calculated "All" combinations
             # Determine which combination to use based on global filters (same logic as conversion funnel)
             if not selected_domains and not selected_languages:
@@ -2766,32 +2844,33 @@ def main() -> None:
     else:
         st.warning("No time series data available.")
     
-    # Add Score Distribution Analysis
-    st.markdown("---")
-    st.markdown("## 🎯 Score Distribution Analysis")
-    
-    if not filtered_score_distribution_df.empty:
-        render_score_distribution_chart(filtered_score_distribution_df, selected_games)
-    else:
-        st.warning("No score distribution data available.")
-    
-    # Add Question Correctness by Question Number Analysis
-    st.markdown("---")
-    st.markdown("## ✅ Question Correctness by Question Number")
-    
-    if not filtered_question_correctness_df.empty:
-        render_question_correctness_chart(filtered_question_correctness_df, selected_games)
-    else:
-        st.warning("No question correctness data available. Please run preprocess_data.py to generate the data.")
-    
-    # Add Parent Poll Responses Analysis
-    st.markdown("---")
-    st.markdown("## 📊 Parent Poll Responses Analysis")
-    
-    if not filtered_poll_responses_df.empty:
-        render_parent_poll_responses(filtered_poll_responses_df, game_conversion_df, selected_games, selected_domains, selected_languages, has_domain_filter, has_language_filter)
-    else:
-        st.warning("No parent poll responses data available.")
+    # HIDDEN SECTIONS FOR TPD DASHBOARD (temporarily disabled)
+    # # Add Score Distribution Analysis
+    # st.markdown("---")
+    # st.markdown("## 🎯 Score Distribution Analysis")
+    # 
+    # if not filtered_score_distribution_df.empty:
+    #     render_score_distribution_chart(filtered_score_distribution_df, selected_games)
+    # else:
+    #     st.warning("No score distribution data available.")
+    # 
+    # # Add Question Correctness by Question Number Analysis
+    # st.markdown("---")
+    # st.markdown("## ✅ Question Correctness by Question Number")
+    # 
+    # if not filtered_question_correctness_df.empty:
+    #     render_question_correctness_chart(filtered_question_correctness_df, selected_games)
+    # else:
+    #     st.warning("No question correctness data available. Please run preprocess_data.py to generate the data.")
+    # 
+    # # Add Parent Poll Responses Analysis
+    # st.markdown("---")
+    # st.markdown("## 📊 Parent Poll Responses Analysis")
+    # 
+    # if not filtered_poll_responses_df.empty:
+    #     render_parent_poll_responses(filtered_poll_responses_df, game_conversion_df, selected_games, selected_domains, selected_languages, has_domain_filter, has_language_filter)
+    # else:
+    #     st.warning("No parent poll responses data available.")
     
     # Add Repeatability Analysis
     st.markdown("---")
@@ -2802,17 +2881,18 @@ def main() -> None:
     else:
         st.warning("No repeatability data available.")
     
-    # Add Monthly New Users Chart
-    render_monthly_new_users()
-    
-    # Add Video Viewership Analysis
-    st.markdown("---")
-    st.markdown("## 📹 Video Viewership")
-    
-    if not filtered_video_viewership_df.empty:
-        render_video_viewership(filtered_video_viewership_df)
-    else:
-        st.warning("No video viewership data available.")
+    # HIDDEN SECTIONS FOR TPD DASHBOARD (temporarily disabled)
+    # # Add Monthly New Users Chart
+    # render_monthly_new_users()
+    # 
+    # # Add Video Viewership Analysis
+    # st.markdown("---")
+    # st.markdown("## 📹 Video Viewership")
+    # 
+    # if not filtered_video_viewership_df.empty:
+    #     render_video_viewership(filtered_video_viewership_df)
+    # else:
+    #     st.warning("No video viewership data available.")
 
 
 # Streamlit automatically runs the script, so call main() directly
