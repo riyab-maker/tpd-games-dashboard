@@ -82,9 +82,13 @@ Thumbs.db
 # Only ignore large raw data files, not processed files
 *.csv
 !data/*.csv
-# Exclude very large poll responses CSV from git; generated at runtime on Render
+# Exclude very large files from git
 data/poll_responses_data.csv
+data/poll_responses_final.csv
+data/processed_data_optimized.csv
 !processed_data/*.csv
+# Allow tpd_conversion_funnel.csv (needed for TPD dashboard)
+!tpd_conversion_funnel.csv
 # Note: processed_data.csv is now aggregated (date × game × event) and should be small enough for GitHub
 # If it becomes too large again, uncomment the line below:
 # data/processed_data.csv
