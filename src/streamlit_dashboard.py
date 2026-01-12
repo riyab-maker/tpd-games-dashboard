@@ -2314,6 +2314,10 @@ def main() -> None:
                     # Group by period, game, metric, event, game_code, and language to aggregate counts
                     group_cols = ['period_label', 'game_name', 'metric', 'event', 'period_type', 'game_code', 'language']
                     filtered_df = filtered_df.groupby(group_cols)['count'].sum().reset_index()
+            
+            # Apply game filter for time series data if games are selected
+            if has_game_filter and 'game_name' in filtered_df.columns:
+                filtered_df = filtered_df[filtered_df['game_name'].isin(selected_games)]
         else:
             # For other dataframes, use the original filtering logic
             # Apply domain filter
