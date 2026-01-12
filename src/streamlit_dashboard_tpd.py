@@ -1644,8 +1644,7 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         fontWeight='bold',
         color='#2C3E50',
         dy=-8
-    ).encode(**label_encoding)
-    ).transform_filter(
+    ).encode(**label_encoding).transform_filter(
         alt.datum.Count > 0
     )
         
