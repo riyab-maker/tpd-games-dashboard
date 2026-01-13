@@ -1357,7 +1357,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         elif period_type == "Weekly":
             parts = str(period_label).split('_')
             if len(parts) == 2:
-                return f"Week {parts[1]}"  # Just show week number without year
+                year = parts[0]
+                week = parts[1]
+                return f"Week {week} ({year})"  # Show week number with year in parentheses
             else:
                 return str(period_label)
         elif period_type == "Daily":
@@ -1416,8 +1418,13 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
         # Sort by year and week for chronological order
         try:
             time_order_df = pd.DataFrame({'time_display': aggregated_df['time_display'].unique()})
-            time_order_df['year'] = time_order_df['time_display'].str.extract(r'\((\d{4})\)').astype(int)
-            time_order_df['week'] = time_order_df['time_display'].str.extract(r'Week (\d+)').astype(int)
+            # Get period_label for each time_display to extract year and week
+            period_map = aggregated_df.groupby('time_display')['period_label'].first().to_dict()
+            time_order_df['period_label'] = time_order_df['time_display'].map(period_map)
+            # Extract year and week from period_label (format: YYYY_WW)
+            parts = time_order_df['period_label'].str.split('_', expand=True)
+            time_order_df['year'] = parts[0].astype(int)
+            time_order_df['week'] = parts[1].astype(int)
             time_order_df = time_order_df.sort_values(['year', 'week'])
             # Filter out Week 25
             time_order_df = time_order_df[time_order_df['week'] != 25]
@@ -1481,44 +1488,78 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     else:
         st.markdown(f"### 📊 Time Series Analysis: {selected_metric} - Started vs Completed")
         
-    # Prepare chart data with RM Active Users, Started and Completed for each time period and game
+    # Prepare chart data with RM Active Users, Started and Completed for each time period
     chart_data = []
     
-    # Get unique games (excluding "All Games" for now, we'll add it separately for RM data)
-    unique_games = [g for g in filtered_metric_df['game_name'].unique() if g != 'All Games']
+    # Check if we should show individual games (only when games are explicitly selected)
+    should_show_individual_games = selected_games and len(selected_games) > 0
     
-    for time in time_order:
-        # Add RM Active Users first if it exists (only for "All Games")
-        if rm_data_exists:
-            rm_row = filtered_metric_df[
-                (filtered_metric_df['time_display'] == time) & 
-                (filtered_metric_df['metric'] == 'rm_active_users') &
-                (filtered_metric_df['event'] == 'RM Active Users') &
-                (filtered_metric_df['game_name'] == 'All Games')
-            ]
-            rm_count = rm_row['count'].iloc[0] if not rm_row.empty else 0
-            chart_data.append({
-                'Time': time,
-                'Event': 'RM Active Users',
-                'Count': rm_count,
-                'Game': 'All Games'
-            })
+    if should_show_individual_games:
+        # Get unique games from filtered data (excluding "All Games" for game-specific data)
+        unique_games = [g for g in filtered_metric_df['game_name'].unique() if g != 'All Games']
         
-        # Add Started and Completed for each game
-        for game_name in unique_games:
+        for time in time_order:
+            # Add RM Active Users first if it exists (only for "All Games")
+            if rm_data_exists:
+                rm_row = filtered_metric_df[
+                    (filtered_metric_df['time_display'] == time) & 
+                    (filtered_metric_df['metric'] == 'rm_active_users') &
+                    (filtered_metric_df['event'] == 'RM Active Users') &
+                    (filtered_metric_df['game_name'] == 'All Games')
+                ]
+                rm_count = rm_row['count'].iloc[0] if not rm_row.empty else 0
+                chart_data.append({
+                    'Time': time,
+                    'Event': 'RM Active Users',
+                    'Count': rm_count,
+                    'Game': 'All Games'
+                })
+            
+            # Add Started and Completed for each game
+            for game_name in unique_games:
+                for event_type in ['Started', 'Completed']:
+                    event_row = filtered_metric_df[
+                        (filtered_metric_df['time_display'] == time) & 
+                        (filtered_metric_df['event'] == event_type) &
+                        (filtered_metric_df['game_name'] == game_name)
+                    ]
+                    
+                    count = event_row['count'].iloc[0] if not event_row.empty else 0
+                    chart_data.append({
+                        'Time': time,
+                        'Event': event_type,
+                        'Count': count,
+                        'Game': game_name
+                    })
+    else:
+        # No game filter - aggregate all games together (like Hybrid dashboard)
+        for time in time_order:
+            # Add RM Active Users first if it exists
+            if rm_data_exists:
+                rm_row = filtered_metric_df[
+                    (filtered_metric_df['time_display'] == time) & 
+                    (filtered_metric_df['metric'] == 'rm_active_users') &
+                    (filtered_metric_df['event'] == 'RM Active Users')
+                ]
+                rm_count = rm_row['count'].iloc[0] if not rm_row.empty else 0
+                chart_data.append({
+                    'Time': time,
+                    'Event': 'RM Active Users',
+                    'Count': rm_count
+                })
+            
+            # Add Started and Completed (aggregated across all games)
             for event_type in ['Started', 'Completed']:
                 event_row = filtered_metric_df[
                     (filtered_metric_df['time_display'] == time) & 
-                    (filtered_metric_df['event'] == event_type) &
-                    (filtered_metric_df['game_name'] == game_name)
+                    (filtered_metric_df['event'] == event_type)
                 ]
                 
                 count = event_row['count'].iloc[0] if not event_row.empty else 0
                 chart_data.append({
                     'Time': time,
                     'Event': event_type,
-                    'Count': count,
-                    'Game': game_name
+                    'Count': count
                 })
         
     chart_df = pd.DataFrame(chart_data)
@@ -1527,8 +1568,11 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
     chart_df['Count'] = pd.to_numeric(chart_df['Count'], errors='coerce').fillna(0)
     
     # Check if we have multiple games to decide whether to use column facet
-    unique_games_in_data = chart_df['Game'].unique()
-    has_multiple_games = len(unique_games_in_data) > 1
+    # Only use facet when showing individual games (not when showing "All Games" aggregated)
+    has_multiple_games = False
+    if should_show_individual_games and 'Game' in chart_df.columns:
+        unique_games_in_data = [g for g in chart_df['Game'].unique() if g != 'All Games']
+        has_multiple_games = len(unique_games_in_data) > 1
     
     # Create base chart encoding
     base_encoding = {
@@ -1576,10 +1620,9 @@ def render_time_series_analysis(time_series_df: pd.DataFrame, game_conversion_df
                       sort=['RM Active Users', 'Started', 'Completed'] if rm_data_exists else ['Started', 'Completed']),
         'tooltip': [
             alt.Tooltip('Time:N', title='Time Period'),
-            alt.Tooltip('Game:N', title='Game'),
             alt.Tooltip('Event:N', title='Event'),
             alt.Tooltip('Count:Q', title='Count', format=',')
-        ]
+        ] + ([alt.Tooltip('Game:N', title='Game')] if should_show_individual_games else [])
     }
     
     # Add column facet only if we have multiple games
