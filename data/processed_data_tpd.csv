@@ -1,1 +1,131 @@
-date,game_name,event,domain,language,instances,visits,users
+date,game_name,event,language,instances,visits,users
+2026-01-03,language_development_1,completed,hi,365,111,110
+2026-01-03,language_development_1,questions,hi,182,105,104
+2026-01-03,language_development_1,started,hi,591,111,110
+2026-01-03,redirected to emotional_development,completed,hi,4026,1124,1055
+2026-01-03,redirected to emotional_development,questions,hi,1739,1045,988
+2026-01-03,redirected to emotional_development,started,hi,6382,1174,1098
+2026-01-03,redirected to emotional_development,started,mr,2,1,1
+2026-01-03,significance_of_early_years_1,completed,hi,8036,1967,1847
+2026-01-03,significance_of_early_years_1,completed,mr,4,2,1
+2026-01-03,significance_of_early_years_1,questions,hi,3234,1739,1650
+2026-01-03,significance_of_early_years_1,questions,mr,2,2,1
+2026-01-03,significance_of_early_years_1,started,hi,14045,2135,2022
+2026-01-03,significance_of_early_years_1,started,mr,24,2,1
+2026-01-04,language_development_1,completed,hi,254,76,76
+2026-01-04,language_development_1,questions,hi,121,67,67
+2026-01-04,language_development_1,started,hi,425,76,76
+2026-01-04,redirected to emotional_development,completed,hi,588,186,177
+2026-01-04,redirected to emotional_development,questions,hi,259,166,160
+2026-01-04,redirected to emotional_development,started,hi,965,193,183
+2026-01-04,significance_of_early_years_1,completed,hi,1619,384,372
+2026-01-04,significance_of_early_years_1,questions,hi,674,348,337
+2026-01-04,significance_of_early_years_1,started,hi,2760,430,410
+2026-01-05,language_development_1,completed,hi,126,36,36
+2026-01-05,language_development_1,questions,hi,62,35,35
+2026-01-05,language_development_1,started,hi,201,36,36
+2026-01-05,redirected to emotional_development,completed,hi,278,84,80
+2026-01-05,redirected to emotional_development,questions,hi,129,80,76
+2026-01-05,redirected to emotional_development,started,hi,418,81,79
+2026-01-05,significance_of_early_years_1,completed,hi,523,134,131
+2026-01-05,significance_of_early_years_1,questions,hi,208,119,117
+2026-01-05,significance_of_early_years_1,started,hi,904,153,149
+2026-01-05,significance_of_early_years_2,completed,hi,2,2,2
+2026-01-05,significance_of_early_years_2,questions,hi,2,2,2
+2026-01-05,significance_of_early_years_2,started,hi,6,2,2
+2026-01-06,language_development_1,completed,hi,67,18,18
+2026-01-06,language_development_1,questions,hi,31,16,16
+2026-01-06,language_development_1,started,hi,114,18,18
+2026-01-06,redirected to emotional_development,completed,hi,144,45,45
+2026-01-06,redirected to emotional_development,questions,hi,71,44,44
+2026-01-06,redirected to emotional_development,started,hi,231,48,48
+2026-01-06,significance_of_early_years_1,completed,hi,167,49,45
+2026-01-06,significance_of_early_years_1,questions,hi,72,40,37
+2026-01-06,significance_of_early_years_1,started,hi,279,52,50
+2026-01-07,language_development_1,completed,hi,56,17,17
+2026-01-07,language_development_1,questions,hi,25,15,15
+2026-01-07,language_development_1,started,hi,99,17,17
+2026-01-07,redirected to emotional_development,completed,hi,141,48,48
+2026-01-07,redirected to emotional_development,questions,hi,58,39,39
+2026-01-07,redirected to emotional_development,started,hi,242,56,56
+2026-01-07,significance_of_early_years_1,completed,hi,181,53,50
+2026-01-07,significance_of_early_years_1,questions,hi,85,45,41
+2026-01-07,significance_of_early_years_1,started,hi,293,57,55
+2026-01-08,language_development_1,completed,hi,37,9,9
+2026-01-08,language_development_1,questions,hi,17,9,9
+2026-01-08,language_development_1,started,hi,60,9,9
+2026-01-08,redirected to emotional_development,completed,hi,64,20,20
+2026-01-08,redirected to emotional_development,questions,hi,30,19,19
+2026-01-08,redirected to emotional_development,started,hi,104,20,20
+2026-01-08,significance_of_early_years_1,completed,hi,49,21,21
+2026-01-08,significance_of_early_years_1,questions,hi,17,13,13
+2026-01-08,significance_of_early_years_1,started,hi,92,21,21
+2026-01-09,language_development_1,completed,hi,1773,536,532
+2026-01-09,language_development_1,questions,hi,865,501,497
+2026-01-09,language_development_1,started,hi,2924,534,530
+2026-01-09,redirected to emotional_development,completed,hi,3464,1099,1076
+2026-01-09,redirected to emotional_development,questions,hi,1678,1048,1030
+2026-01-09,redirected to emotional_development,started,hi,5631,1097,1076
+2026-01-09,significance_of_early_years_1,completed,hi,23594,5963,5733
+2026-01-09,significance_of_early_years_1,questions,hi,9133,5362,5194
+2026-01-09,significance_of_early_years_1,started,hi,38600,6678,6429
+2026-01-09,significance_of_early_years_1,started,mr,32,5,2
+2026-01-09,significance_of_early_years_2,completed,hi,342,92,92
+2026-01-09,significance_of_early_years_2,questions,hi,171,89,89
+2026-01-09,significance_of_early_years_2,started,hi,531,93,93
+2026-01-10,language_development_1,completed,hi,385,127,126
+2026-01-10,language_development_1,questions,hi,181,105,105
+2026-01-10,language_development_1,started,hi,668,127,126
+2026-01-10,redirected to emotional_development,completed,hi,1688,568,555
+2026-01-10,redirected to emotional_development,questions,hi,792,500,492
+2026-01-10,redirected to emotional_development,started,hi,2877,565,554
+2026-01-10,significance_of_early_years_1,completed,hi,4346,1207,1161
+2026-01-10,significance_of_early_years_1,completed,mr,2,1,1
+2026-01-10,significance_of_early_years_1,questions,hi,1785,1055,1020
+2026-01-10,significance_of_early_years_1,questions,mr,1,1,1
+2026-01-10,significance_of_early_years_1,started,hi,7512,1387,1329
+2026-01-10,significance_of_early_years_1,started,mr,11,3,1
+2026-01-10,significance_of_early_years_2,completed,hi,4720,1554,1494
+2026-01-10,significance_of_early_years_2,questions,hi,1999,1335,1290
+2026-01-10,significance_of_early_years_2,started,hi,8370,1647,1595
+2026-01-10,significance_of_early_years_2,started,mr,1,1,1
+2026-01-11,language_development_1,completed,hi,47,23,21
+2026-01-11,language_development_1,questions,hi,25,22,20
+2026-01-11,language_development_1,started,hi,81,23,21
+2026-01-11,redirected to emotional_development,completed,hi,425,148,142
+2026-01-11,redirected to emotional_development,questions,hi,209,135,130
+2026-01-11,redirected to emotional_development,started,hi,694,148,142
+2026-01-11,significance_of_early_years_1,completed,hi,705,186,185
+2026-01-11,significance_of_early_years_1,questions,hi,309,172,172
+2026-01-11,significance_of_early_years_1,started,hi,1171,207,205
+2026-01-11,significance_of_early_years_1,started,mr,4,2,1
+2026-01-11,significance_of_early_years_2,completed,hi,1669,465,447
+2026-01-11,significance_of_early_years_2,completed,mr,1,1,1
+2026-01-11,significance_of_early_years_2,questions,hi,696,421,410
+2026-01-11,significance_of_early_years_2,started,hi,2723,510,487
+2026-01-11,significance_of_early_years_2,started,mr,14,4,1
+2026-01-12,language_development_1,completed,hi,53,13,13
+2026-01-12,language_development_1,questions,hi,28,13,13
+2026-01-12,language_development_1,started,hi,82,13,13
+2026-01-12,redirected to emotional_development,completed,hi,134,48,47
+2026-01-12,redirected to emotional_development,questions,hi,66,46,45
+2026-01-12,redirected to emotional_development,started,hi,233,50,49
+2026-01-12,significance_of_early_years_1,completed,hi,340,95,91
+2026-01-12,significance_of_early_years_1,questions,hi,133,78,77
+2026-01-12,significance_of_early_years_1,started,hi,573,101,97
+2026-01-12,significance_of_early_years_2,completed,hi,507,157,150
+2026-01-12,significance_of_early_years_2,questions,hi,206,139,134
+2026-01-12,significance_of_early_years_2,started,hi,814,168,159
+2026-01-12,significance_of_early_years_2,started,mr,4,2,1
+2026-01-13,language_development_1,completed,hi,3,1,1
+2026-01-13,language_development_1,questions,hi,1,1,1
+2026-01-13,language_development_1,started,hi,6,1,1
+2026-01-13,redirected to emotional_development,completed,hi,27,9,9
+2026-01-13,redirected to emotional_development,questions,hi,13,9,9
+2026-01-13,redirected to emotional_development,started,hi,44,9,9
+2026-01-13,significance_of_early_years_1,completed,hi,35,12,12
+2026-01-13,significance_of_early_years_1,questions,hi,16,10,10
+2026-01-13,significance_of_early_years_1,started,hi,63,14,14
+2026-01-13,significance_of_early_years_2,completed,hi,67,19,19
+2026-01-13,significance_of_early_years_2,questions,hi,25,18,18
+2026-01-13,significance_of_early_years_2,started,hi,106,21,21
