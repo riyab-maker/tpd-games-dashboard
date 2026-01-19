@@ -17,6 +17,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-03,All Games,Started,All,2639,users,Day
 2026-01-03,All Games,Completed,All,2183,visits,Day
 2026-01-03,All Games,Started,All,2916,visits,Day
+2026-01-03,All Games,RM Active Users,,4639,rm_active_users,Day
 2026-01-04,All Games,Completed,hi,843,instances,Day
 2026-01-04,All Games,Started,hi,1428,instances,Day
 2026-01-04,All Games,Completed,hi,422,visits,Day
@@ -29,6 +30,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-04,All Games,Started,All,533,users,Day
 2026-01-04,All Games,Completed,All,422,visits,Day
 2026-01-04,All Games,Started,All,569,visits,Day
+2026-01-04,All Games,RM Active Users,,320,rm_active_users,Day
 2026-01-05,All Games,Completed,hi,332,instances,Day
 2026-01-05,All Games,Started,hi,527,instances,Day
 2026-01-05,All Games,Completed,hi,169,visits,Day
@@ -41,6 +43,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-05,All Games,Started,All,216,users,Day
 2026-01-05,All Games,Completed,All,169,visits,Day
 2026-01-05,All Games,Started,All,228,visits,Day
+2026-01-05,All Games,RM Active Users,,4230,rm_active_users,Day
 2026-01-06,All Games,Completed,hi,147,instances,Day
 2026-01-06,All Games,Started,hi,213,instances,Day
 2026-01-06,All Games,Completed,hi,80,visits,Day
@@ -53,6 +56,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-06,All Games,Started,All,100,users,Day
 2026-01-06,All Games,Completed,All,80,visits,Day
 2026-01-06,All Games,Started,All,102,visits,Day
+2026-01-06,All Games,RM Active Users,,3548,rm_active_users,Day
 2026-01-07,All Games,Completed,hi,131,instances,Day
 2026-01-07,All Games,Started,hi,217,instances,Day
 2026-01-07,All Games,Completed,hi,67,visits,Day
@@ -65,6 +69,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-07,All Games,Started,All,105,users,Day
 2026-01-07,All Games,Completed,All,67,visits,Day
 2026-01-07,All Games,Started,All,110,visits,Day
+2026-01-07,All Games,RM Active Users,,4410,rm_active_users,Day
 2026-01-08,All Games,Completed,hi,58,instances,Day
 2026-01-08,All Games,Started,hi,88,instances,Day
 2026-01-08,All Games,Completed,hi,32,visits,Day
@@ -77,6 +82,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-08,All Games,Started,All,39,users,Day
 2026-01-08,All Games,Completed,All,32,visits,Day
 2026-01-08,All Games,Started,All,41,visits,Day
+2026-01-08,All Games,RM Active Users,,4412,rm_active_users,Day
 2026-01-09,All Games,Completed,hi,9391,instances,Day
 2026-01-09,All Games,Started,hi,16579,instances,Day
 2026-01-09,All Games,Started,mr,16,instances,Day
@@ -92,6 +98,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-09,All Games,Started,All,6696,users,Day
 2026-01-09,All Games,Completed,All,5164,visits,Day
 2026-01-09,All Games,Started,All,7296,visits,Day
+2026-01-09,All Games,RM Active Users,,4825,rm_active_users,Day
 2026-01-10,All Games,Completed,hi,3787,instances,Day
 2026-01-10,All Games,Completed,mr,1,instances,Day
 2026-01-10,All Games,Started,hi,6730,instances,Day
@@ -110,6 +117,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-10,All Games,Started,All,3097,users,Day
 2026-01-10,All Games,Completed,All,2244,visits,Day
 2026-01-10,All Games,Started,All,3275,visits,Day
+2026-01-10,All Games,RM Active Users,,5283,rm_active_users,Day
 2026-01-11,All Games,Completed,hi,1000,instances,Day
 2026-01-11,All Games,Started,hi,1602,instances,Day
 2026-01-11,All Games,Started,mr,8,instances,Day
@@ -125,6 +133,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-11,All Games,Started,All,735,users,Day
 2026-01-11,All Games,Completed,All,578,visits,Day
 2026-01-11,All Games,Started,All,780,visits,Day
+2026-01-11,All Games,RM Active Users,,471,rm_active_users,Day
 2026-01-12,All Games,Completed,hi,356,instances,Day
 2026-01-12,All Games,Started,hi,582,instances,Day
 2026-01-12,All Games,Started,mr,2,instances,Day
@@ -140,6 +149,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-12,All Games,Started,All,284,users,Day
 2026-01-12,All Games,Completed,All,203,visits,Day
 2026-01-12,All Games,Started,All,301,visits,Day
+2026-01-12,All Games,RM Active Users,,4454,rm_active_users,Day
 2026-01-13,All Games,Completed,hi,132,instances,Day
 2026-01-13,All Games,Started,hi,187,instances,Day
 2026-01-13,All Games,Completed,hi,69,visits,Day
@@ -152,6 +162,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-13,All Games,Started,All,90,users,Day
 2026-01-13,All Games,Completed,All,69,visits,Day
 2026-01-13,All Games,Started,All,94,visits,Day
+2026-01-13,All Games,RM Active Users,,4842,rm_active_users,Day
 2026-01-14,All Games,Completed,hi,49,instances,Day
 2026-01-14,All Games,Started,hi,77,instances,Day
 2026-01-14,All Games,Completed,hi,27,visits,Day
@@ -164,6 +175,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-14,All Games,Started,All,38,users,Day
 2026-01-14,All Games,Completed,All,27,visits,Day
 2026-01-14,All Games,Started,All,38,visits,Day
+2026-01-14,All Games,RM Active Users,,3712,rm_active_users,Day
 2026-01-15,All Games,Completed,hi,50,instances,Day
 2026-01-15,All Games,Started,hi,62,instances,Day
 2026-01-15,All Games,Completed,hi,28,visits,Day
@@ -176,18 +188,56 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-15,All Games,Started,All,34,users,Day
 2026-01-15,All Games,Completed,All,28,visits,Day
 2026-01-15,All Games,Started,All,36,visits,Day
-2026-01-16,All Games,Completed,hi,2445,instances,Day
-2026-01-16,All Games,Started,hi,3127,instances,Day
-2026-01-16,All Games,Completed,hi,1371,visits,Day
-2026-01-16,All Games,Started,hi,1564,visits,Day
-2026-01-16,All Games,Completed,hi,1350,users,Day
-2026-01-16,All Games,Started,hi,1521,users,Day
-2026-01-16,All Games,Completed,All,2445,instances,Day
-2026-01-16,All Games,Started,All,3127,instances,Day
-2026-01-16,All Games,Completed,All,1350,users,Day
-2026-01-16,All Games,Started,All,1521,users,Day
-2026-01-16,All Games,Completed,All,1371,visits,Day
-2026-01-16,All Games,Started,All,1564,visits,Day
+2026-01-15,All Games,RM Active Users,,4666,rm_active_users,Day
+2026-01-16,All Games,Completed,hi,3946,instances,Day
+2026-01-16,All Games,Started,hi,5011,instances,Day
+2026-01-16,All Games,Completed,hi,2265,visits,Day
+2026-01-16,All Games,Started,hi,2574,visits,Day
+2026-01-16,All Games,Completed,hi,2203,users,Day
+2026-01-16,All Games,Started,hi,2460,users,Day
+2026-01-16,All Games,Completed,All,3946,instances,Day
+2026-01-16,All Games,Started,All,5011,instances,Day
+2026-01-16,All Games,Completed,All,2203,users,Day
+2026-01-16,All Games,Started,All,2460,users,Day
+2026-01-16,All Games,Completed,All,2265,visits,Day
+2026-01-16,All Games,Started,All,2574,visits,Day
+2026-01-16,All Games,RM Active Users,,3493,rm_active_users,Day
+2026-01-17,All Games,Completed,hi,1788,instances,Day
+2026-01-17,All Games,Started,hi,2297,instances,Day
+2026-01-17,All Games,Completed,hi,1078,visits,Day
+2026-01-17,All Games,Started,hi,1228,visits,Day
+2026-01-17,All Games,Completed,hi,1065,users,Day
+2026-01-17,All Games,Started,hi,1199,users,Day
+2026-01-17,All Games,Completed,All,1788,instances,Day
+2026-01-17,All Games,Started,All,2297,instances,Day
+2026-01-17,All Games,Completed,All,1065,users,Day
+2026-01-17,All Games,Started,All,1199,users,Day
+2026-01-17,All Games,Completed,All,1078,visits,Day
+2026-01-17,All Games,Started,All,1228,visits,Day
+2026-01-18,All Games,Completed,hi,316,instances,Day
+2026-01-18,All Games,Started,hi,421,instances,Day
+2026-01-18,All Games,Completed,hi,179,visits,Day
+2026-01-18,All Games,Started,hi,210,visits,Day
+2026-01-18,All Games,Completed,hi,175,users,Day
+2026-01-18,All Games,Started,hi,203,users,Day
+2026-01-18,All Games,Completed,All,316,instances,Day
+2026-01-18,All Games,Started,All,421,instances,Day
+2026-01-18,All Games,Completed,All,175,users,Day
+2026-01-18,All Games,Started,All,203,users,Day
+2026-01-18,All Games,Completed,All,179,visits,Day
+2026-01-18,All Games,Started,All,210,visits,Day
+2026-01-19,All Games,Completed,hi,74,instances,Day
+2026-01-19,All Games,Started,hi,104,instances,Day
+2026-01-19,All Games,Completed,hi,39,visits,Day
+2026-01-19,All Games,Started,hi,47,visits,Day
+2026-01-19,All Games,Completed,hi,39,users,Day
+2026-01-19,All Games,Started,hi,47,users,Day
+2026-01-19,All Games,Completed,All,74,instances,Day
+2026-01-19,All Games,Started,All,104,instances,Day
+2026-01-19,All Games,Completed,All,39,users,Day
+2026-01-19,All Games,Started,All,47,users,Day
+2026-01-19,All Games,Completed,All,39,visits,Day
+2026-01-19,All Games,Started,All,47,visits,Day
 2026-01-03,language_development_1,Completed,hi,168,instances,Day
 2026-01-03,language_development_1,Started,hi,197,instances,Day
 2026-01-03,language_development_1,Completed,hi,102,visits,Day
@@ -338,18 +388,54 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-15,language_development_1,Started,All,1,instances,Day
 2026-01-15,language_development_1,Started,All,1,users,Day
 2026-01-15,language_development_1,Started,All,1,visits,Day
-2026-01-16,language_development_1,Completed,hi,133,instances,Day
-2026-01-16,language_development_1,Started,hi,172,instances,Day
-2026-01-16,language_development_1,Completed,hi,77,visits,Day
-2026-01-16,language_development_1,Started,hi,95,visits,Day
-2026-01-16,language_development_1,Completed,hi,75,users,Day
-2026-01-16,language_development_1,Started,hi,92,users,Day
-2026-01-16,language_development_1,Completed,All,133,instances,Day
-2026-01-16,language_development_1,Started,All,172,instances,Day
-2026-01-16,language_development_1,Completed,All,75,users,Day
-2026-01-16,language_development_1,Started,All,92,users,Day
-2026-01-16,language_development_1,Completed,All,77,visits,Day
-2026-01-16,language_development_1,Started,All,95,visits,Day
+2026-01-16,language_development_1,Completed,hi,238,instances,Day
+2026-01-16,language_development_1,Started,hi,316,instances,Day
+2026-01-16,language_development_1,Completed,hi,130,visits,Day
+2026-01-16,language_development_1,Started,hi,166,visits,Day
+2026-01-16,language_development_1,Completed,hi,128,users,Day
+2026-01-16,language_development_1,Started,hi,163,users,Day
+2026-01-16,language_development_1,Completed,All,238,instances,Day
+2026-01-16,language_development_1,Started,All,316,instances,Day
+2026-01-16,language_development_1,Completed,All,128,users,Day
+2026-01-16,language_development_1,Started,All,163,users,Day
+2026-01-16,language_development_1,Completed,All,130,visits,Day
+2026-01-16,language_development_1,Started,All,166,visits,Day
+2026-01-17,language_development_1,Completed,hi,222,instances,Day
+2026-01-17,language_development_1,Started,hi,288,instances,Day
+2026-01-17,language_development_1,Completed,hi,146,visits,Day
+2026-01-17,language_development_1,Started,hi,178,visits,Day
+2026-01-17,language_development_1,Completed,hi,146,users,Day
+2026-01-17,language_development_1,Started,hi,177,users,Day
+2026-01-17,language_development_1,Completed,All,222,instances,Day
+2026-01-17,language_development_1,Started,All,288,instances,Day
+2026-01-17,language_development_1,Completed,All,146,users,Day
+2026-01-17,language_development_1,Started,All,177,users,Day
+2026-01-17,language_development_1,Completed,All,146,visits,Day
+2026-01-17,language_development_1,Started,All,178,visits,Day
+2026-01-18,language_development_1,Completed,hi,72,instances,Day
+2026-01-18,language_development_1,Started,hi,93,instances,Day
+2026-01-18,language_development_1,Completed,hi,43,visits,Day
+2026-01-18,language_development_1,Started,hi,49,visits,Day
+2026-01-18,language_development_1,Completed,hi,42,users,Day
+2026-01-18,language_development_1,Started,hi,47,users,Day
+2026-01-18,language_development_1,Completed,All,72,instances,Day
+2026-01-18,language_development_1,Started,All,93,instances,Day
+2026-01-18,language_development_1,Completed,All,42,users,Day
+2026-01-18,language_development_1,Started,All,47,users,Day
+2026-01-18,language_development_1,Completed,All,43,visits,Day
+2026-01-18,language_development_1,Started,All,49,visits,Day
+2026-01-19,language_development_1,Completed,hi,9,instances,Day
+2026-01-19,language_development_1,Started,hi,13,instances,Day
+2026-01-19,language_development_1,Completed,hi,5,visits,Day
+2026-01-19,language_development_1,Started,hi,6,visits,Day
+2026-01-19,language_development_1,Completed,hi,5,users,Day
+2026-01-19,language_development_1,Started,hi,6,users,Day
+2026-01-19,language_development_1,Completed,All,9,instances,Day
+2026-01-19,language_development_1,Started,All,13,instances,Day
+2026-01-19,language_development_1,Completed,All,5,users,Day
+2026-01-19,language_development_1,Started,All,6,users,Day
+2026-01-19,language_development_1,Completed,All,5,visits,Day
+2026-01-19,language_development_1,Started,All,6,visits,Day
 2026-01-03,redirected to emotional_development,Completed,hi,1603,instances,Day
 2026-01-03,redirected to emotional_development,Started,hi,2205,instances,Day
 2026-01-03,redirected to emotional_development,Started,mr,1,instances,Day
@@ -509,18 +595,54 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-15,redirected to emotional_development,Started,All,11,users,Day
 2026-01-15,redirected to emotional_development,Completed,All,12,visits,Day
 2026-01-15,redirected to emotional_development,Started,All,12,visits,Day
-2026-01-16,redirected to emotional_development,Completed,hi,1212,instances,Day
-2026-01-16,redirected to emotional_development,Started,hi,1533,instances,Day
-2026-01-16,redirected to emotional_development,Completed,hi,743,visits,Day
-2026-01-16,redirected to emotional_development,Started,hi,849,visits,Day
-2026-01-16,redirected to emotional_development,Completed,hi,733,users,Day
-2026-01-16,redirected to emotional_development,Started,hi,833,users,Day
-2026-01-16,redirected to emotional_development,Completed,All,1212,instances,Day
-2026-01-16,redirected to emotional_development,Started,All,1533,instances,Day
-2026-01-16,redirected to emotional_development,Completed,All,733,users,Day
-2026-01-16,redirected to emotional_development,Started,All,833,users,Day
-2026-01-16,redirected to emotional_development,Completed,All,743,visits,Day
-2026-01-16,redirected to emotional_development,Started,All,849,visits,Day
+2026-01-16,redirected to emotional_development,Completed,hi,1953,instances,Day
+2026-01-16,redirected to emotional_development,Started,hi,2443,instances,Day
+2026-01-16,redirected to emotional_development,Completed,hi,1201,visits,Day
+2026-01-16,redirected to emotional_development,Started,hi,1366,visits,Day
+2026-01-16,redirected to emotional_development,Completed,hi,1185,users,Day
+2026-01-16,redirected to emotional_development,Started,hi,1338,users,Day
+2026-01-16,redirected to emotional_development,Completed,All,1953,instances,Day
+2026-01-16,redirected to emotional_development,Started,All,2443,instances,Day
+2026-01-16,redirected to emotional_development,Completed,All,1185,users,Day
+2026-01-16,redirected to emotional_development,Started,All,1338,users,Day
+2026-01-16,redirected to emotional_development,Completed,All,1201,visits,Day
+2026-01-16,redirected to emotional_development,Started,All,1366,visits,Day
+2026-01-17,redirected to emotional_development,Completed,hi,583,instances,Day
+2026-01-17,redirected to emotional_development,Started,hi,715,instances,Day
+2026-01-17,redirected to emotional_development,Completed,hi,402,visits,Day
+2026-01-17,redirected to emotional_development,Started,hi,460,visits,Day
+2026-01-17,redirected to emotional_development,Completed,hi,402,users,Day
+2026-01-17,redirected to emotional_development,Started,hi,458,users,Day
+2026-01-17,redirected to emotional_development,Completed,All,583,instances,Day
+2026-01-17,redirected to emotional_development,Started,All,715,instances,Day
+2026-01-17,redirected to emotional_development,Completed,All,402,users,Day
+2026-01-17,redirected to emotional_development,Started,All,458,users,Day
+2026-01-17,redirected to emotional_development,Completed,All,402,visits,Day
+2026-01-17,redirected to emotional_development,Started,All,460,visits,Day
+2026-01-18,redirected to emotional_development,Completed,hi,62,instances,Day
+2026-01-18,redirected to emotional_development,Started,hi,76,instances,Day
+2026-01-18,redirected to emotional_development,Completed,hi,41,visits,Day
+2026-01-18,redirected to emotional_development,Started,hi,46,visits,Day
+2026-01-18,redirected to emotional_development,Completed,hi,41,users,Day
+2026-01-18,redirected to emotional_development,Started,hi,46,users,Day
+2026-01-18,redirected to emotional_development,Completed,All,62,instances,Day
+2026-01-18,redirected to emotional_development,Started,All,76,instances,Day
+2026-01-18,redirected to emotional_development,Completed,All,41,users,Day
+2026-01-18,redirected to emotional_development,Started,All,46,users,Day
+2026-01-18,redirected to emotional_development,Completed,All,41,visits,Day
+2026-01-18,redirected to emotional_development,Started,All,46,visits,Day
+2026-01-19,redirected to emotional_development,Completed,hi,15,instances,Day
+2026-01-19,redirected to emotional_development,Started,hi,18,instances,Day
+2026-01-19,redirected to emotional_development,Completed,hi,9,visits,Day
+2026-01-19,redirected to emotional_development,Started,hi,10,visits,Day
+2026-01-19,redirected to emotional_development,Completed,hi,9,users,Day
+2026-01-19,redirected to emotional_development,Started,hi,10,users,Day
+2026-01-19,redirected to emotional_development,Completed,All,15,instances,Day
+2026-01-19,redirected to emotional_development,Started,All,18,instances,Day
+2026-01-19,redirected to emotional_development,Completed,All,9,users,Day
+2026-01-19,redirected to emotional_development,Started,All,10,users,Day
+2026-01-19,redirected to emotional_development,Completed,All,9,visits,Day
+2026-01-19,redirected to emotional_development,Started,All,10,visits,Day
 2026-01-03,significance_of_early_years_1,Completed,hi,2361,instances,Day
 2026-01-03,significance_of_early_years_1,Completed,mr,1,instances,Day
 2026-01-03,significance_of_early_years_1,Started,hi,4899,instances,Day
@@ -695,18 +817,54 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-15,significance_of_early_years_1,Started,All,16,users,Day
 2026-01-15,significance_of_early_years_1,Completed,All,11,visits,Day
 2026-01-15,significance_of_early_years_1,Started,All,16,visits,Day
-2026-01-16,significance_of_early_years_1,Completed,hi,903,instances,Day
-2026-01-16,significance_of_early_years_1,Started,hi,1164,instances,Day
-2026-01-16,significance_of_early_years_1,Completed,hi,521,visits,Day
-2026-01-16,significance_of_early_years_1,Started,hi,627,visits,Day
-2026-01-16,significance_of_early_years_1,Completed,hi,518,users,Day
-2026-01-16,significance_of_early_years_1,Started,hi,617,users,Day
-2026-01-16,significance_of_early_years_1,Completed,All,903,instances,Day
-2026-01-16,significance_of_early_years_1,Started,All,1164,instances,Day
-2026-01-16,significance_of_early_years_1,Completed,All,518,users,Day
-2026-01-16,significance_of_early_years_1,Started,All,617,users,Day
-2026-01-16,significance_of_early_years_1,Completed,All,521,visits,Day
-2026-01-16,significance_of_early_years_1,Started,All,627,visits,Day
+2026-01-16,significance_of_early_years_1,Completed,hi,1381,instances,Day
+2026-01-16,significance_of_early_years_1,Started,hi,1770,instances,Day
+2026-01-16,significance_of_early_years_1,Completed,hi,824,visits,Day
+2026-01-16,significance_of_early_years_1,Started,hi,974,visits,Day
+2026-01-16,significance_of_early_years_1,Completed,hi,817,users,Day
+2026-01-16,significance_of_early_years_1,Started,hi,953,users,Day
+2026-01-16,significance_of_early_years_1,Completed,All,1381,instances,Day
+2026-01-16,significance_of_early_years_1,Started,All,1770,instances,Day
+2026-01-16,significance_of_early_years_1,Completed,All,817,users,Day
+2026-01-16,significance_of_early_years_1,Started,All,953,users,Day
+2026-01-16,significance_of_early_years_1,Completed,All,824,visits,Day
+2026-01-16,significance_of_early_years_1,Started,All,974,visits,Day
+2026-01-17,significance_of_early_years_1,Completed,hi,628,instances,Day
+2026-01-17,significance_of_early_years_1,Started,hi,862,instances,Day
+2026-01-17,significance_of_early_years_1,Completed,hi,386,visits,Day
+2026-01-17,significance_of_early_years_1,Started,hi,458,visits,Day
+2026-01-17,significance_of_early_years_1,Completed,hi,384,users,Day
+2026-01-17,significance_of_early_years_1,Started,hi,453,users,Day
+2026-01-17,significance_of_early_years_1,Completed,All,628,instances,Day
+2026-01-17,significance_of_early_years_1,Started,All,862,instances,Day
+2026-01-17,significance_of_early_years_1,Completed,All,384,users,Day
+2026-01-17,significance_of_early_years_1,Started,All,453,users,Day
+2026-01-17,significance_of_early_years_1,Completed,All,386,visits,Day
+2026-01-17,significance_of_early_years_1,Started,All,458,visits,Day
+2026-01-18,significance_of_early_years_1,Completed,hi,98,instances,Day
+2026-01-18,significance_of_early_years_1,Started,hi,153,instances,Day
+2026-01-18,significance_of_early_years_1,Completed,hi,64,visits,Day
+2026-01-18,significance_of_early_years_1,Started,hi,83,visits,Day
+2026-01-18,significance_of_early_years_1,Completed,hi,64,users,Day
+2026-01-18,significance_of_early_years_1,Started,hi,82,users,Day
+2026-01-18,significance_of_early_years_1,Completed,All,98,instances,Day
+2026-01-18,significance_of_early_years_1,Started,All,153,instances,Day
+2026-01-18,significance_of_early_years_1,Completed,All,64,users,Day
+2026-01-18,significance_of_early_years_1,Started,All,82,users,Day
+2026-01-18,significance_of_early_years_1,Completed,All,64,visits,Day
+2026-01-18,significance_of_early_years_1,Started,All,83,visits,Day
+2026-01-19,significance_of_early_years_1,Completed,hi,32,instances,Day
+2026-01-19,significance_of_early_years_1,Started,hi,45,instances,Day
+2026-01-19,significance_of_early_years_1,Completed,hi,17,visits,Day
+2026-01-19,significance_of_early_years_1,Started,hi,22,visits,Day
+2026-01-19,significance_of_early_years_1,Completed,hi,17,users,Day
+2026-01-19,significance_of_early_years_1,Started,hi,22,users,Day
+2026-01-19,significance_of_early_years_1,Completed,All,32,instances,Day
+2026-01-19,significance_of_early_years_1,Started,All,45,instances,Day
+2026-01-19,significance_of_early_years_1,Completed,All,17,users,Day
+2026-01-19,significance_of_early_years_1,Started,All,22,users,Day
+2026-01-19,significance_of_early_years_1,Completed,All,17,visits,Day
+2026-01-19,significance_of_early_years_1,Started,All,22,visits,Day
 2026-01-05,significance_of_early_years_2,Started,hi,2,instances,Day
 2026-01-05,significance_of_early_years_2,Started,hi,2,visits,Day
 2026-01-05,significance_of_early_years_2,Started,hi,2,users,Day
@@ -803,96 +961,133 @@ period_label,game_name,event,language,count,metric,period_type
 2026-01-15,significance_of_early_years_2,Started,All,11,users,Day
 2026-01-15,significance_of_early_years_2,Completed,All,12,visits,Day
 2026-01-15,significance_of_early_years_2,Started,All,11,visits,Day
-2026-01-16,significance_of_early_years_2,Completed,hi,197,instances,Day
-2026-01-16,significance_of_early_years_2,Started,hi,258,instances,Day
-2026-01-16,significance_of_early_years_2,Completed,hi,130,visits,Day
-2026-01-16,significance_of_early_years_2,Started,hi,157,visits,Day
-2026-01-16,significance_of_early_years_2,Completed,hi,129,users,Day
-2026-01-16,significance_of_early_years_2,Started,hi,156,users,Day
-2026-01-16,significance_of_early_years_2,Completed,All,197,instances,Day
-2026-01-16,significance_of_early_years_2,Started,All,258,instances,Day
-2026-01-16,significance_of_early_years_2,Completed,All,129,users,Day
-2026-01-16,significance_of_early_years_2,Started,All,156,users,Day
-2026-01-16,significance_of_early_years_2,Completed,All,130,visits,Day
-2026-01-16,significance_of_early_years_2,Started,All,157,visits,Day
-2026_01,All Games,Completed,hi,22853,instances,Month
+2026-01-16,significance_of_early_years_2,Completed,hi,374,instances,Day
+2026-01-16,significance_of_early_years_2,Started,hi,482,instances,Day
+2026-01-16,significance_of_early_years_2,Completed,hi,255,visits,Day
+2026-01-16,significance_of_early_years_2,Started,hi,298,visits,Day
+2026-01-16,significance_of_early_years_2,Completed,hi,252,users,Day
+2026-01-16,significance_of_early_years_2,Started,hi,294,users,Day
+2026-01-16,significance_of_early_years_2,Completed,All,374,instances,Day
+2026-01-16,significance_of_early_years_2,Started,All,482,instances,Day
+2026-01-16,significance_of_early_years_2,Completed,All,252,users,Day
+2026-01-16,significance_of_early_years_2,Started,All,294,users,Day
+2026-01-16,significance_of_early_years_2,Completed,All,255,visits,Day
+2026-01-16,significance_of_early_years_2,Started,All,298,visits,Day
+2026-01-17,significance_of_early_years_2,Completed,hi,355,instances,Day
+2026-01-17,significance_of_early_years_2,Started,hi,432,instances,Day
+2026-01-17,significance_of_early_years_2,Completed,hi,228,visits,Day
+2026-01-17,significance_of_early_years_2,Started,hi,251,visits,Day
+2026-01-17,significance_of_early_years_2,Completed,hi,226,users,Day
+2026-01-17,significance_of_early_years_2,Started,hi,246,users,Day
+2026-01-17,significance_of_early_years_2,Completed,All,355,instances,Day
+2026-01-17,significance_of_early_years_2,Started,All,432,instances,Day
+2026-01-17,significance_of_early_years_2,Completed,All,226,users,Day
+2026-01-17,significance_of_early_years_2,Started,All,246,users,Day
+2026-01-17,significance_of_early_years_2,Completed,All,228,visits,Day
+2026-01-17,significance_of_early_years_2,Started,All,251,visits,Day
+2026-01-18,significance_of_early_years_2,Completed,hi,84,instances,Day
+2026-01-18,significance_of_early_years_2,Started,hi,99,instances,Day
+2026-01-18,significance_of_early_years_2,Completed,hi,49,visits,Day
+2026-01-18,significance_of_early_years_2,Started,hi,55,visits,Day
+2026-01-18,significance_of_early_years_2,Completed,hi,47,users,Day
+2026-01-18,significance_of_early_years_2,Started,hi,53,users,Day
+2026-01-18,significance_of_early_years_2,Completed,All,84,instances,Day
+2026-01-18,significance_of_early_years_2,Started,All,99,instances,Day
+2026-01-18,significance_of_early_years_2,Completed,All,47,users,Day
+2026-01-18,significance_of_early_years_2,Started,All,53,users,Day
+2026-01-18,significance_of_early_years_2,Completed,All,49,visits,Day
+2026-01-18,significance_of_early_years_2,Started,All,55,visits,Day
+2026-01-19,significance_of_early_years_2,Completed,hi,18,instances,Day
+2026-01-19,significance_of_early_years_2,Started,hi,28,instances,Day
+2026-01-19,significance_of_early_years_2,Completed,hi,14,visits,Day
+2026-01-19,significance_of_early_years_2,Started,hi,16,visits,Day
+2026-01-19,significance_of_early_years_2,Completed,hi,14,users,Day
+2026-01-19,significance_of_early_years_2,Started,hi,16,users,Day
+2026-01-19,significance_of_early_years_2,Completed,All,18,instances,Day
+2026-01-19,significance_of_early_years_2,Started,All,28,instances,Day
+2026-01-19,significance_of_early_years_2,Completed,All,14,users,Day
+2026-01-19,significance_of_early_years_2,Started,All,16,users,Day
+2026-01-19,significance_of_early_years_2,Completed,All,14,visits,Day
+2026-01-19,significance_of_early_years_2,Started,All,16,visits,Day
+2026_01,All Games,Completed,hi,26532,instances,Month
 2026_01,All Games,Completed,mr,2,instances,Month
-2026_01,All Games,Started,hi,38720,instances,Month
+2026_01,All Games,Started,hi,43426,instances,Month
 2026_01,All Games,Started,mr,43,instances,Month
-2026_01,All Games,Completed,hi,12635,visits,Month
+2026_01,All Games,Completed,hi,14825,visits,Month
 2026_01,All Games,Completed,mr,2,visits,Month
-2026_01,All Games,Started,hi,17333,visits,Month
+2026_01,All Games,Started,hi,19828,visits,Month
 2026_01,All Games,Started,mr,17,visits,Month
-2026_01,All Games,Completed,hi,9204,users,Month
+2026_01,All Games,Completed,hi,10498,users,Month
 2026_01,All Games,Completed,mr,1,users,Month
-2026_01,All Games,Started,hi,12687,users,Month
+2026_01,All Games,Started,hi,13969,users,Month
 2026_01,All Games,Started,mr,1,users,Month
-2026_01,All Games,Completed,All,22855,instances,Month
-2026_01,All Games,Started,All,38763,instances,Month
-2026_01,All Games,Completed,All,9205,users,Month
-2026_01,All Games,Started,All,12688,users,Month
-2026_01,All Games,Completed,All,12637,visits,Month
-2026_01,All Games,Started,All,17350,visits,Month
-2026_01,language_development_1,Completed,hi,1546,instances,Month
-2026_01,language_development_1,Started,hi,1924,instances,Month
-2026_01,language_development_1,Completed,hi,919,visits,Month
-2026_01,language_development_1,Started,hi,1056,visits,Month
-2026_01,language_development_1,Completed,hi,819,users,Month
-2026_01,language_development_1,Started,hi,935,users,Month
-2026_01,language_development_1,Completed,All,1546,instances,Month
-2026_01,language_development_1,Started,All,1924,instances,Month
-2026_01,language_development_1,Completed,All,819,users,Month
-2026_01,language_development_1,Started,All,935,users,Month
-2026_01,language_development_1,Completed,All,919,visits,Month
-2026_01,language_development_1,Started,All,1056,visits,Month
-2026_01,redirected to emotional_development,Completed,hi,5929,instances,Month
-2026_01,redirected to emotional_development,Started,hi,7651,instances,Month
+2026_01,All Games,Completed,All,26534,instances,Month
+2026_01,All Games,Started,All,43469,instances,Month
+2026_01,All Games,Completed,All,10499,users,Month
+2026_01,All Games,Started,All,13970,users,Month
+2026_01,All Games,Completed,All,14827,visits,Month
+2026_01,All Games,Started,All,19845,visits,Month
+2026_01,All Games,RM Active Users,,9492,rm_active_users,Month
+2026_01,language_development_1,Completed,hi,1954,instances,Month
+2026_01,language_development_1,Started,hi,2462,instances,Month
+2026_01,language_development_1,Completed,hi,1166,visits,Month
+2026_01,language_development_1,Started,hi,1360,visits,Month
+2026_01,language_development_1,Completed,hi,1006,users,Month
+2026_01,language_development_1,Started,hi,1165,users,Month
+2026_01,language_development_1,Completed,All,1954,instances,Month
+2026_01,language_development_1,Started,All,2462,instances,Month
+2026_01,language_development_1,Completed,All,1006,users,Month
+2026_01,language_development_1,Started,All,1165,users,Month
+2026_01,language_development_1,Completed,All,1166,visits,Month
+2026_01,language_development_1,Started,All,1360,visits,Month
+2026_01,redirected to emotional_development,Completed,hi,7330,instances,Month
+2026_01,redirected to emotional_development,Started,hi,9370,instances,Month
 2026_01,redirected to emotional_development,Started,mr,1,instances,Month
-2026_01,redirected to emotional_development,Completed,hi,3710,visits,Month
-2026_01,redirected to emotional_development,Started,hi,4325,visits,Month
+2026_01,redirected to emotional_development,Completed,hi,4620,visits,Month
+2026_01,redirected to emotional_development,Started,hi,5358,visits,Month
 2026_01,redirected to emotional_development,Started,mr,1,visits,Month
-2026_01,redirected to emotional_development,Completed,hi,2786,users,Month
-2026_01,redirected to emotional_development,Started,hi,3195,users,Month
+2026_01,redirected to emotional_development,Completed,hi,3674,users,Month
+2026_01,redirected to emotional_development,Started,hi,4179,users,Month
 2026_01,redirected to emotional_development,Started,mr,1,users,Month
-2026_01,redirected to emotional_development,Completed,All,5929,instances,Month
-2026_01,redirected to emotional_development,Started,All,7652,instances,Month
-2026_01,redirected to emotional_development,Completed,All,2786,users,Month
-2026_01,redirected to emotional_development,Started,All,3196,users,Month
-2026_01,redirected to emotional_development,Completed,All,3710,visits,Month
-2026_01,redirected to emotional_development,Started,All,4326,visits,Month
-2026_01,significance_of_early_years_1,Completed,hi,12707,instances,Month
+2026_01,redirected to emotional_development,Completed,All,7330,instances,Month
+2026_01,redirected to emotional_development,Started,All,9371,instances,Month
+2026_01,redirected to emotional_development,Completed,All,3674,users,Month
+2026_01,redirected to emotional_development,Started,All,4180,users,Month
+2026_01,redirected to emotional_development,Completed,All,4620,visits,Month
+2026_01,redirected to emotional_development,Started,All,5359,visits,Month
+2026_01,significance_of_early_years_1,Completed,hi,13943,instances,Month
 2026_01,significance_of_early_years_1,Completed,mr,2,instances,Month
-2026_01,significance_of_early_years_1,Started,hi,24464,instances,Month
+2026_01,significance_of_early_years_1,Started,hi,26130,instances,Month
 2026_01,significance_of_early_years_1,Started,mr,34,instances,Month
-2026_01,significance_of_early_years_1,Completed,hi,8217,visits,Month
+2026_01,significance_of_early_years_1,Completed,hi,8987,visits,Month
 2026_01,significance_of_early_years_1,Completed,mr,2,visits,Month
-2026_01,significance_of_early_years_1,Started,hi,11770,visits,Month
+2026_01,significance_of_early_years_1,Started,hi,12680,visits,Month
 2026_01,significance_of_early_years_1,Started,mr,12,visits,Month
-2026_01,significance_of_early_years_1,Completed,hi,6870,users,Month
+2026_01,significance_of_early_years_1,Completed,hi,7466,users,Month
 2026_01,significance_of_early_years_1,Completed,mr,1,users,Month
-2026_01,significance_of_early_years_1,Started,hi,9890,users,Month
+2026_01,significance_of_early_years_1,Started,hi,10519,users,Month
 2026_01,significance_of_early_years_1,Started,mr,1,users,Month
-2026_01,significance_of_early_years_1,Completed,All,12709,instances,Month
-2026_01,significance_of_early_years_1,Started,All,24498,instances,Month
-2026_01,significance_of_early_years_1,Completed,All,6871,users,Month
-2026_01,significance_of_early_years_1,Started,All,9891,users,Month
-2026_01,significance_of_early_years_1,Completed,All,8219,visits,Month
-2026_01,significance_of_early_years_1,Started,All,11782,visits,Month
-2026_01,significance_of_early_years_2,Completed,hi,2671,instances,Month
-2026_01,significance_of_early_years_2,Started,hi,4681,instances,Month
+2026_01,significance_of_early_years_1,Completed,All,13945,instances,Month
+2026_01,significance_of_early_years_1,Started,All,26164,instances,Month
+2026_01,significance_of_early_years_1,Completed,All,7467,users,Month
+2026_01,significance_of_early_years_1,Started,All,10520,users,Month
+2026_01,significance_of_early_years_1,Completed,All,8989,visits,Month
+2026_01,significance_of_early_years_1,Started,All,12692,visits,Month
+2026_01,significance_of_early_years_2,Completed,hi,3305,instances,Month
+2026_01,significance_of_early_years_2,Started,hi,5464,instances,Month
 2026_01,significance_of_early_years_2,Started,mr,8,instances,Month
-2026_01,significance_of_early_years_2,Completed,hi,1847,visits,Month
-2026_01,significance_of_early_years_2,Started,hi,2624,visits,Month
+2026_01,significance_of_early_years_2,Completed,hi,2263,visits,Month
+2026_01,significance_of_early_years_2,Started,hi,3087,visits,Month
 2026_01,significance_of_early_years_2,Started,mr,5,visits,Month
-2026_01,significance_of_early_years_2,Completed,hi,1692,users,Month
-2026_01,significance_of_early_years_2,Started,hi,2404,users,Month
+2026_01,significance_of_early_years_2,Completed,hi,2007,users,Month
+2026_01,significance_of_early_years_2,Started,hi,2758,users,Month
 2026_01,significance_of_early_years_2,Started,mr,1,users,Month
-2026_01,significance_of_early_years_2,Completed,All,2671,instances,Month
-2026_01,significance_of_early_years_2,Started,All,4689,instances,Month
-2026_01,significance_of_early_years_2,Completed,All,1692,users,Month
-2026_01,significance_of_early_years_2,Started,All,2405,users,Month
-2026_01,significance_of_early_years_2,Completed,All,1847,visits,Month
-2026_01,significance_of_early_years_2,Started,All,2629,visits,Month
+2026_01,significance_of_early_years_2,Completed,All,3305,instances,Month
+2026_01,significance_of_early_years_2,Started,All,5472,instances,Month
+2026_01,significance_of_early_years_2,Completed,All,2007,users,Month
+2026_01,significance_of_early_years_2,Started,All,2759,users,Month
+2026_01,significance_of_early_years_2,Completed,All,2263,visits,Month
+2026_01,significance_of_early_years_2,Started,All,3092,visits,Month
 2026_00,All Games,Completed,hi,5454,instances,Week
 2026_00,All Games,Completed,mr,1,instances,Week
 2026_00,All Games,Started,hi,9469,instances,Week
@@ -911,6 +1106,7 @@ period_label,game_name,event,language,count,metric,period_type
 2026_00,All Games,Started,All,3219,users,Week
 2026_00,All Games,Completed,All,2854,visits,Week
 2026_00,All Games,Started,All,3815,visits,Week
+2026_00,All Games,RM Active Users,,6683,rm_active_users,Week
 2026_01,All Games,Completed,hi,14855,instances,Week
 2026_01,All Games,Completed,mr,1,instances,Week
 2026_01,All Games,Started,hi,25985,instances,Week
@@ -929,18 +1125,20 @@ period_label,game_name,event,language,count,metric,period_type
 2026_01,All Games,Started,All,10117,users,Week
 2026_01,All Games,Completed,All,8357,visits,Week
 2026_01,All Games,Started,All,11897,visits,Week
-2026_02,All Games,Completed,hi,2544,instances,Week
-2026_02,All Games,Started,hi,3266,instances,Week
-2026_02,All Games,Completed,hi,1426,visits,Week
-2026_02,All Games,Started,hi,1638,visits,Week
-2026_02,All Games,Completed,hi,1390,users,Week
-2026_02,All Games,Started,hi,1581,users,Week
-2026_02,All Games,Completed,All,2544,instances,Week
-2026_02,All Games,Started,All,3266,instances,Week
-2026_02,All Games,Completed,All,1390,users,Week
-2026_02,All Games,Started,All,1581,users,Week
-2026_02,All Games,Completed,All,1426,visits,Week
-2026_02,All Games,Started,All,1638,visits,Week
+2026_01,All Games,RM Active Users,,8329,rm_active_users,Week
+2026_02,All Games,Completed,hi,6223,instances,Week
+2026_02,All Games,Started,hi,7972,instances,Week
+2026_02,All Games,Completed,hi,3616,visits,Week
+2026_02,All Games,Started,hi,4133,visits,Week
+2026_02,All Games,Completed,hi,3339,users,Week
+2026_02,All Games,Started,hi,3736,users,Week
+2026_02,All Games,Completed,All,6223,instances,Week
+2026_02,All Games,Started,All,7972,instances,Week
+2026_02,All Games,Completed,All,3339,users,Week
+2026_02,All Games,Started,All,3736,users,Week
+2026_02,All Games,Completed,All,3616,visits,Week
+2026_02,All Games,Started,All,4133,visits,Week
+2026_02,All Games,RM Active Users,,6171,rm_active_users,Week
 2026_00,language_development_1,Completed,hi,367,instances,Week
 2026_00,language_development_1,Started,hi,444,instances,Week
 2026_00,language_development_1,Completed,hi,218,visits,Week
@@ -965,18 +1163,18 @@ period_label,game_name,event,language,count,metric,period_type
 2026_01,language_development_1,Started,All,665,users,Week
 2026_01,language_development_1,Completed,All,622,visits,Week
 2026_01,language_development_1,Started,All,717,visits,Week
-2026_02,language_development_1,Completed,hi,135,instances,Week
-2026_02,language_development_1,Started,hi,175,instances,Week
-2026_02,language_development_1,Completed,hi,79,visits,Week
-2026_02,language_development_1,Started,hi,98,visits,Week
-2026_02,language_development_1,Completed,hi,77,users,Week
-2026_02,language_development_1,Started,hi,95,users,Week
-2026_02,language_development_1,Completed,All,135,instances,Week
-2026_02,language_development_1,Started,All,175,instances,Week
-2026_02,language_development_1,Completed,All,77,users,Week
-2026_02,language_development_1,Started,All,95,users,Week
-2026_02,language_development_1,Completed,All,79,visits,Week
-2026_02,language_development_1,Started,All,98,visits,Week
+2026_02,language_development_1,Completed,hi,543,instances,Week
+2026_02,language_development_1,Started,hi,713,instances,Week
+2026_02,language_development_1,Completed,hi,326,visits,Week
+2026_02,language_development_1,Started,hi,402,visits,Week
+2026_02,language_development_1,Completed,hi,313,users,Week
+2026_02,language_development_1,Started,hi,382,users,Week
+2026_02,language_development_1,Completed,All,543,instances,Week
+2026_02,language_development_1,Started,All,713,instances,Week
+2026_02,language_development_1,Completed,All,313,users,Week
+2026_02,language_development_1,Started,All,382,users,Week
+2026_02,language_development_1,Completed,All,326,visits,Week
+2026_02,language_development_1,Started,All,402,visits,Week
 2026_00,redirected to emotional_development,Completed,hi,2009,instances,Week
 2026_00,redirected to emotional_development,Started,hi,2750,instances,Week
 2026_00,redirected to emotional_development,Started,mr,1,instances,Week
@@ -1004,18 +1202,18 @@ period_label,game_name,event,language,count,metric,period_type
 2026_01,redirected to emotional_development,Started,All,1653,users,Week
 2026_01,redirected to emotional_development,Completed,All,1697,visits,Week
 2026_01,redirected to emotional_development,Started,All,1946,visits,Week
-2026_02,redirected to emotional_development,Completed,hi,1245,instances,Week
-2026_02,redirected to emotional_development,Started,hi,1572,instances,Week
-2026_02,redirected to emotional_development,Completed,hi,765,visits,Week
-2026_02,redirected to emotional_development,Started,hi,875,visits,Week
-2026_02,redirected to emotional_development,Completed,hi,750,users,Week
-2026_02,redirected to emotional_development,Started,hi,853,users,Week
-2026_02,redirected to emotional_development,Completed,All,1245,instances,Week
-2026_02,redirected to emotional_development,Started,All,1572,instances,Week
-2026_02,redirected to emotional_development,Completed,All,750,users,Week
-2026_02,redirected to emotional_development,Started,All,853,users,Week
-2026_02,redirected to emotional_development,Completed,All,765,visits,Week
-2026_02,redirected to emotional_development,Started,All,875,visits,Week
+2026_02,redirected to emotional_development,Completed,hi,2646,instances,Week
+2026_02,redirected to emotional_development,Started,hi,3291,instances,Week
+2026_02,redirected to emotional_development,Completed,hi,1675,visits,Week
+2026_02,redirected to emotional_development,Started,hi,1908,visits,Week
+2026_02,redirected to emotional_development,Completed,hi,1651,users,Week
+2026_02,redirected to emotional_development,Started,hi,1862,users,Week
+2026_02,redirected to emotional_development,Completed,All,2646,instances,Week
+2026_02,redirected to emotional_development,Started,All,3291,instances,Week
+2026_02,redirected to emotional_development,Completed,All,1651,users,Week
+2026_02,redirected to emotional_development,Started,All,1862,users,Week
+2026_02,redirected to emotional_development,Completed,All,1675,visits,Week
+2026_02,redirected to emotional_development,Started,All,1908,visits,Week
 2026_00,significance_of_early_years_1,Completed,hi,3078,instances,Week
 2026_00,significance_of_early_years_1,Completed,mr,1,instances,Week
 2026_00,significance_of_early_years_1,Started,hi,6273,instances,Week
@@ -1052,18 +1250,18 @@ period_label,game_name,event,language,count,metric,period_type
 2026_01,significance_of_early_years_1,Started,All,7562,users,Week
 2026_01,significance_of_early_years_1,Completed,All,5721,visits,Week
 2026_01,significance_of_early_years_1,Started,All,8374,visits,Week
-2026_02,significance_of_early_years_1,Completed,hi,936,instances,Week
-2026_02,significance_of_early_years_1,Started,hi,1218,instances,Week
-2026_02,significance_of_early_years_1,Completed,hi,541,visits,Week
-2026_02,significance_of_early_years_1,Started,hi,657,visits,Week
-2026_02,significance_of_early_years_1,Completed,hi,533,users,Week
-2026_02,significance_of_early_years_1,Started,hi,644,users,Week
-2026_02,significance_of_early_years_1,Completed,All,936,instances,Week
-2026_02,significance_of_early_years_1,Started,All,1218,instances,Week
-2026_02,significance_of_early_years_1,Completed,All,533,users,Week
-2026_02,significance_of_early_years_1,Started,All,644,users,Week
-2026_02,significance_of_early_years_1,Completed,All,541,visits,Week
-2026_02,significance_of_early_years_1,Started,All,657,visits,Week
+2026_02,significance_of_early_years_1,Completed,hi,2172,instances,Week
+2026_02,significance_of_early_years_1,Started,hi,2884,instances,Week
+2026_02,significance_of_early_years_1,Completed,hi,1311,visits,Week
+2026_02,significance_of_early_years_1,Started,hi,1567,visits,Week
+2026_02,significance_of_early_years_1,Completed,hi,1286,users,Week
+2026_02,significance_of_early_years_1,Started,hi,1514,users,Week
+2026_02,significance_of_early_years_1,Completed,All,2172,instances,Week
+2026_02,significance_of_early_years_1,Started,All,2884,instances,Week
+2026_02,significance_of_early_years_1,Completed,All,1286,users,Week
+2026_02,significance_of_early_years_1,Started,All,1514,users,Week
+2026_02,significance_of_early_years_1,Completed,All,1311,visits,Week
+2026_02,significance_of_early_years_1,Started,All,1567,visits,Week
 2026_00,significance_of_early_years_2,Started,hi,2,instances,Week
 2026_00,significance_of_early_years_2,Started,hi,2,visits,Week
 2026_00,significance_of_early_years_2,Started,hi,2,users,Week
@@ -1085,15 +1283,15 @@ period_label,game_name,event,language,count,metric,period_type
 2026_01,significance_of_early_years_2,Started,All,2270,users,Week
 2026_01,significance_of_early_years_2,Completed,All,1694,visits,Week
 2026_01,significance_of_early_years_2,Started,All,2444,visits,Week
-2026_02,significance_of_early_years_2,Completed,hi,228,instances,Week
-2026_02,significance_of_early_years_2,Started,hi,301,instances,Week
-2026_02,significance_of_early_years_2,Completed,hi,153,visits,Week
-2026_02,significance_of_early_years_2,Started,hi,183,visits,Week
-2026_02,significance_of_early_years_2,Completed,hi,150,users,Week
-2026_02,significance_of_early_years_2,Started,hi,181,users,Week
-2026_02,significance_of_early_years_2,Completed,All,228,instances,Week
-2026_02,significance_of_early_years_2,Started,All,301,instances,Week
-2026_02,significance_of_early_years_2,Completed,All,150,users,Week
-2026_02,significance_of_early_years_2,Started,All,181,users,Week
-2026_02,significance_of_early_years_2,Completed,All,153,visits,Week
-2026_02,significance_of_early_years_2,Started,All,183,visits,Week
+2026_02,significance_of_early_years_2,Completed,hi,862,instances,Week
+2026_02,significance_of_early_years_2,Started,hi,1084,instances,Week
+2026_02,significance_of_early_years_2,Completed,hi,569,visits,Week
+2026_02,significance_of_early_years_2,Started,hi,646,visits,Week
+2026_02,significance_of_early_years_2,Completed,hi,536,users,Week
+2026_02,significance_of_early_years_2,Started,hi,609,users,Week
+2026_02,significance_of_early_years_2,Completed,All,862,instances,Week
+2026_02,significance_of_early_years_2,Started,All,1084,instances,Week
+2026_02,significance_of_early_years_2,Completed,All,536,users,Week
+2026_02,significance_of_early_years_2,Started,All,609,users,Week
+2026_02,significance_of_early_years_2,Completed,All,569,visits,Week
+2026_02,significance_of_early_years_2,Started,All,646,visits,Week
